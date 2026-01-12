@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyPaperFlow"
+version = "0.1.0"
+description = "Automated paper fetching and analysis platform."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [{name = "Your Name"}]
+
+dependencies = [
+  "biopython",
+  "typer",
+  "pandas",
+  "requests"
+]
+
+[project.scripts]
+paperflow = "pyPaperFlow.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pyPaperFlow"]

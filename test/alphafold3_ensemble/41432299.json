@@ -1,0 +1,313 @@
+{
+    "content": {
+        "abstract": "Proteins perform diverse functions critical to cellular processes. Transitions between functional states are often regulated by post-translational modifications (PTMs) such as phosphorylation, which dynamically influence protein structure, function, folding, and interactions. Dysregulation of PTMs can therefore contribute to diseases such as cancer and Alzheimer's. However, the structure-function relationship between proteins and their modifications remains poorly understood due to a lack of experimental structural data, the inherent diversity of PTMs, and the dynamic nature of proteins. Recent advances in deep learning, particularly AlphaFold, have transformed protein structure prediction with near-experimental accuracy. However, it remains unclear whether these models can effectively capture PTM-driven conformational changes, such as those induced by phosphorylation. Here, we systematically evaluated AlphaFold models (AF2, AF3-non phospho, and AF3-phospho) to assess their ability to predict phosphorylation-induced structural diversity. By analyzing experimentally derived conformational ensembles, we found that all models predominantly aligned with dominant structural states, often failing to capture phosphorylation-specific conformations. Despite its phosphorylation-aware design, AF3-phospho predictions provided only modest improvement over AF2 and AF3-non phospho predictions. Our findings highlight key challenges in modeling PTM-driven structural landscapes and underscore the need for more adaptable structure prediction frameworks capable of capturing modification-induced conformational variability.",
+        "keywords": [
+            "AlphaFold3",
+            "conformational diversity",
+            "phosphorylation",
+            "post-translational modifications (PTMs)",
+            "protein structures"
+        ],
+        "mesh_terms": [
+            "Phosphorylation",
+            "Protein Conformation",
+            "Protein Processing, Post-Translational",
+            "*Models, Molecular",
+            "*Proteins/chemistry/metabolism",
+            "Protein Folding",
+            "Humans",
+            "Deep Learning"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "CompOmics, VIB Center for Medical Biotechnology, VIB, Ghent, Belgium.",
+                "Department of Biomolecular Medicine, Faculty of Medicine and Health Sciences, Ghent University, Ghent, Belgium.",
+                "Interuniversity Institute of Bioinformatics in Brussels, ULB-VUB, Brussels, Belgium.",
+                "Structural Biology Brussels, Vrije Universiteit Brussel, Brussels, Belgium.",
+                "CompOmics, VIB Center for Medical Biotechnology, VIB, Ghent, Belgium.",
+                "Department of Biomolecular Medicine, Faculty of Medicine and Health Sciences, Ghent University, Ghent, Belgium.",
+                "CompOmics, VIB Center for Medical Biotechnology, VIB, Ghent, Belgium.",
+                "Department of Biomolecular Medicine, Faculty of Medicine and Health Sciences, Ghent University, Ghent, Belgium.",
+                "BioOrganic Mass Spectrometry Laboratory (LSMBO), IPHC UMR 7178, University of Strasbourg, CNRS, ProFI FR2048, Strasbourg, France.",
+                "Interuniversity Institute of Bioinformatics in Brussels, ULB-VUB, Brussels, Belgium.",
+                "Structural Biology Brussels, Vrije Universiteit Brussel, Brussels, Belgium."
+            ],
+            "auids": [
+                "ORCID: 0000-0003-4039-5230",
+                "ORCID: 0000-0001-7470-4324"
+            ],
+            "full_names": [
+                "Ramasamy, Pathmanaban",
+                "Zuallaert, Jasper",
+                "Martens, Lennart",
+                "Vranken, Wim F"
+            ],
+            "short_names": [
+                "Ramasamy P",
+                "Zuallaert J",
+                "Martens L",
+                "Vranken WF"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "CompOmics, VIB Center for Medical Biotechnology, VIB, Ghent, Belgium.",
+                    "Department of Biomolecular Medicine, Faculty of Medicine and Health Sciences, Ghent University, Ghent, Belgium.",
+                    "Interuniversity Institute of Bioinformatics in Brussels, ULB-VUB, Brussels, Belgium.",
+                    "Structural Biology Brussels, Vrije Universiteit Brussel, Brussels, Belgium."
+                ],
+                "full_name": "Ramasamy, Pathmanaban",
+                "identifiers": [
+                    "0000-0003-4039-5230"
+                ],
+                "short_name": "Ramasamy P"
+            },
+            {
+                "affiliations": [
+                    "CompOmics, VIB Center for Medical Biotechnology, VIB, Ghent, Belgium.",
+                    "Department of Biomolecular Medicine, Faculty of Medicine and Health Sciences, Ghent University, Ghent, Belgium."
+                ],
+                "full_name": "Zuallaert, Jasper",
+                "identifiers": [],
+                "short_name": "Zuallaert J"
+            },
+            {
+                "affiliations": [
+                    "CompOmics, VIB Center for Medical Biotechnology, VIB, Ghent, Belgium.",
+                    "Department of Biomolecular Medicine, Faculty of Medicine and Health Sciences, Ghent University, Ghent, Belgium.",
+                    "BioOrganic Mass Spectrometry Laboratory (LSMBO), IPHC UMR 7178, University of Strasbourg, CNRS, ProFI FR2048, Strasbourg, France."
+                ],
+                "full_name": "Martens, Lennart",
+                "identifiers": [],
+                "short_name": "Martens L"
+            },
+            {
+                "affiliations": [
+                    "Interuniversity Institute of Bioinformatics in Brussels, ULB-VUB, Brussels, Belgium.",
+                    "Structural Biology Brussels, Vrije Universiteit Brussel, Brussels, Belgium."
+                ],
+                "full_name": "Vranken, Wim F",
+                "identifiers": [
+                    "0000-0001-7470-4324"
+                ],
+                "short_name": "Vranken WF"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1002/pro.70376",
+        "pmid": "41432299",
+        "title": "Assessing the relation between protein phosphorylation, AlphaFold3 models, and conformational variability."
+    },
+    "links": {
+        "cites": [
+            "41088961"
+        ],
+        "entrez": {},
+        "external": [],
+        "pmc": [
+            "12723721"
+        ],
+        "refs": [
+            "40045015",
+            "39647695",
+            "39565312",
+            "39565202",
+            "39187507",
+            "39181864",
+            "39125995",
+            "38830621",
+            "38718835",
+            "38180828",
+            "38036854",
+            "37977115",
+            "37589710",
+            "37354790",
+            "37045837",
+            "36926275",
+            "36420884",
+            "36420166",
+            "36408920",
+            "35793420",
+            "35634782",
+            "35561203",
+            "35073311",
+            "34864046",
+            "34791371",
+            "34668287",
+            "34663920",
+            "34265844",
+            "31819260",
+            "31589781",
+            "30304492",
+            "23329690",
+            "22947645",
+            "22817900",
+            "19614568",
+            "19304878",
+            "18554899",
+            "15215436",
+            "11942415",
+            "11589691",
+            "7834742",
+            "5411867",
+            "4124164",
+            "3681970"
+        ],
+        "review": [
+            "41432299",
+            "39970826",
+            "40663654",
+            "40233800",
+            "35325356",
+            "40332289",
+            "35816597",
+            "40601266",
+            "39207896",
+            "39576578",
+            "35020020",
+            "23402885",
+            "31682116",
+            "39125995",
+            "22884395",
+            "38124369",
+            "38440918",
+            "38603560",
+            "37392556",
+            "38348781",
+            "26851279",
+            "40505455",
+            "29717537",
+            "19157855",
+            "37863385",
+            "41088961",
+            "38761500"
+        ],
+        "similar": [
+            "41432299",
+            "40851426",
+            "39970826",
+            "39181864",
+            "40320551",
+            "40166291",
+            "41066820",
+            "39684679",
+            "40062613",
+            "40820259",
+            "40663654",
+            "40792461",
+            "22947645",
+            "41136353",
+            "41502950",
+            "41170922",
+            "39543034",
+            "40912020",
+            "29322920",
+            "41454828",
+            "40976968",
+            "41005302",
+            "41313605",
+            "31183539",
+            "40785361",
+            "40130805",
+            "40233800",
+            "35325356",
+            "24888500",
+            "41142756",
+            "40332289",
+            "35816597",
+            "37937769",
+            "41478913",
+            "40601266",
+            "40225838",
+            "40166350",
+            "39952928",
+            "39207896",
+            "40563483",
+            "39576578",
+            "39574676",
+            "40671257",
+            "41147497",
+            "38995731",
+            "27534850",
+            "41014267",
+            "35020020",
+            "23402885",
+            "39941016",
+            "31682116",
+            "39125995",
+            "36350035",
+            "40859022",
+            "22884395",
+            "39337567",
+            "31840995",
+            "38124369",
+            "24857970",
+            "38440918",
+            "38603560",
+            "29548294",
+            "40735632",
+            "37392556",
+            "38348781",
+            "29077417",
+            "38484014",
+            "41053181",
+            "31161204",
+            "40585801",
+            "35696087",
+            "26851279",
+            "41261173",
+            "40505455",
+            "39643640",
+            "29717537",
+            "37686234",
+            "38958015",
+            "16381945",
+            "40045015",
+            "40595555",
+            "39163334",
+            "19157855",
+            "41084281",
+            "37863385",
+            "38830815",
+            "24574112",
+            "34588485",
+            "33321112",
+            "41088961",
+            "38260432",
+            "40502139",
+            "40452318",
+            "38761500",
+            "33979327",
+            "39484820",
+            "34788852",
+            "33268549",
+            "35238773",
+            "22174266"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2025/12/23 12:47",
+        "fetched_at": "2026-01-12 23:32:17"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Protein Sci"
+        ],
+        "journal_title": [
+            "Protein science : a publication of the Protein Society"
+        ],
+        "pub_date": "2026 Jan",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2026"
+    }
+}

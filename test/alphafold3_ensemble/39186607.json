@@ -1,0 +1,257 @@
+{
+    "content": {
+        "abstract": "Intrinsically disordered proteins are abundant in the nucleus and are prime sites for posttranslational modifications that modulate transcriptional regulation. Lacking a defined three-dimensional structure, intrinsically disordered proteins populate an ensemble of several conformational states, which are dynamic and often altered by posttranslational modifications, or by binding to interaction partners. Although there is growing appreciation for the role that intrinsically disordered regions have in regulating protein-protein interactions, we still have a poor understanding of how to determine conformational population shifts, their causes under various conditions, and how to represent and model conformational ensembles. Here, we study the effects of serine phosphorylation in the nucleosome-binding domain of an intrinsically disordered protein - HMGN1 - using NMR spectroscopy, circular dichroism and modelling of protein complexes. We show that phosphorylation induces local conformational changes in the peptide backbone and decreases the helical propensity of the nucleosome binding domain. Modelling studies using AlphaFold3 suggest that phosphorylation disrupts the interface between HMGN1 and the nucleosome acidic patch, but that the models over-predict helicity in comparison to experimental data. These studies help us to build a picture of how posttranslational modifications might shift the conformational populations of disordered regions, alter access to histones, and regulate chromatin compaction.",
+        "keywords": [
+            "Intrinsically disordered proteins",
+            "NMR spectroscopy",
+            "Phosphorylation",
+            "Posttranslational modifications",
+            "Solid phase peptide synthesis"
+        ],
+        "mesh_terms": [
+            "Phosphorylation",
+            "*Nucleosomes/metabolism/chemistry",
+            "*HMGN1 Protein/metabolism/chemistry",
+            "Humans",
+            "Protein Binding",
+            "Nuclear Magnetic Resonance, Biomolecular",
+            "Binding Sites",
+            "Models, Molecular",
+            "Protein Domains",
+            "Intrinsically Disordered Proteins/chemistry/metabolism"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Institute of Applied Synthetic Chemistry, TU Wien, Getreidemarkt 9, 1060, Vienna, Austria.",
+                "Institute of Applied Synthetic Chemistry, TU Wien, Getreidemarkt 9, 1060, Vienna, Austria.",
+                "Bijvoet Center for Biomolecular Research, Utrecht University, Padualaan 8, 3584 CH, Utrecht, The Netherlands.",
+                "Institute of Applied Synthetic Chemistry, TU Wien, Getreidemarkt 9, 1060, Vienna, Austria."
+            ],
+            "auids": [
+                "ORCID: 0009-0008-7920-1206",
+                "ORCID: 0000-0002-6048-1307",
+                "ORCID: 0000-0002-0808-3811",
+                "ORCID: 0000-0002-5482-6225"
+            ],
+            "full_names": [
+                "Iebed, Dina",
+                "Gokler, Tobias",
+                "van Ingen, Hugo",
+                "Conibear, Anne C"
+            ],
+            "short_names": [
+                "Iebed D",
+                "Gokler T",
+                "van Ingen H",
+                "Conibear AC"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Institute of Applied Synthetic Chemistry, TU Wien, Getreidemarkt 9, 1060, Vienna, Austria."
+                ],
+                "full_name": "Iebed, Dina",
+                "identifiers": [
+                    "0009-0008-7920-1206"
+                ],
+                "short_name": "Iebed D"
+            },
+            {
+                "affiliations": [
+                    "Institute of Applied Synthetic Chemistry, TU Wien, Getreidemarkt 9, 1060, Vienna, Austria."
+                ],
+                "full_name": "Gökler, Tobias",
+                "identifiers": [
+                    "0000-0002-6048-1307"
+                ],
+                "short_name": "Gökler T"
+            },
+            {
+                "affiliations": [
+                    "Bijvoet Center for Biomolecular Research, Utrecht University, Padualaan 8, 3584 CH, Utrecht, The Netherlands."
+                ],
+                "full_name": "van Ingen, Hugo",
+                "identifiers": [
+                    "0000-0002-0808-3811"
+                ],
+                "short_name": "van Ingen H"
+            },
+            {
+                "affiliations": [
+                    "Institute of Applied Synthetic Chemistry, TU Wien, Getreidemarkt 9, 1060, Vienna, Austria."
+                ],
+                "full_name": "Conibear, Anne C",
+                "identifiers": [
+                    "0000-0002-5482-6225"
+                ],
+                "short_name": "Conibear AC"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1002/cbic.202400589",
+        "pmid": "39186607",
+        "title": "Phosphorylation of the HMGN1 Nucleosome Binding Domain Decreases Helicity and Interactions with the Acidic Patch."
+    },
+    "links": {
+        "cites": [
+            "40799364"
+        ],
+        "entrez": {},
+        "external": [],
+        "pmc": [],
+        "refs": [],
+        "review": [
+            "39186607",
+            "30316104",
+            "30940742",
+            "23794453",
+            "34656332",
+            "30840442",
+            "26387101",
+            "30527137",
+            "28502465",
+            "32020911",
+            "30471705",
+            "31617035",
+            "26387102",
+            "30979035",
+            "24008243",
+            "26851279",
+            "28610839",
+            "27098855",
+            "31694155",
+            "26387099",
+            "20480043",
+            "30991239",
+            "27048167",
+            "19157855"
+        ],
+        "similar": [
+            "39186607",
+            "15327773",
+            "34458797",
+            "28973435",
+            "27844185",
+            "22393258",
+            "30471686",
+            "25533957",
+            "26195786",
+            "32933064",
+            "32356891",
+            "30316104",
+            "26742101",
+            "30940742",
+            "31340016",
+            "24769851",
+            "33310020",
+            "17154547",
+            "25017730",
+            "30414042",
+            "25207671",
+            "16484217",
+            "23794453",
+            "32553729",
+            "34181980",
+            "29719201",
+            "32696370",
+            "34656332",
+            "24449148",
+            "21173166",
+            "33617899",
+            "31297688",
+            "30840442",
+            "33096105",
+            "33125082",
+            "28857320",
+            "26387101",
+            "33945530",
+            "16253989",
+            "34681718",
+            "32696383",
+            "22575889",
+            "32696390",
+            "26735936",
+            "24086265",
+            "33876640",
+            "34576338",
+            "34320339",
+            "30527137",
+            "28502465",
+            "32020911",
+            "26994550",
+            "30471705",
+            "33177626",
+            "18289110",
+            "26242913",
+            "25367087",
+            "31617035",
+            "29276882",
+            "26387102",
+            "27288992",
+            "30979035",
+            "24008243",
+            "38181856",
+            "32654182",
+            "28355271",
+            "28912275",
+            "26910732",
+            "23708362",
+            "29666277",
+            "29262363",
+            "37093489",
+            "29925531",
+            "39370942",
+            "38365983",
+            "26851279",
+            "33269926",
+            "28610839",
+            "33877595",
+            "27098855",
+            "27179590",
+            "30471699",
+            "32323533",
+            "21730181",
+            "31487161",
+            "34473923",
+            "32840111",
+            "28934129",
+            "31694155",
+            "29573987",
+            "25286318",
+            "30471689",
+            "18287527",
+            "12215538",
+            "26387099",
+            "24178034",
+            "32696350",
+            "32696363",
+            "33984364",
+            "34992286"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2024/08/26 19:49",
+        "fetched_at": "2026-01-12 23:32:17"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Chembiochem"
+        ],
+        "journal_title": [
+            "Chembiochem : a European journal of chemical biology"
+        ],
+        "pub_date": "2024 Nov 18",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2024"
+    }
+}

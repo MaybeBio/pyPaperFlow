@@ -1,0 +1,263 @@
+{
+    "content": {
+        "abstract": "CHCHD2 is a mitochondrial protein linked to neurodegenerative diseases such as Parkinson's disease (PD), Alzheimer's disease (AD), and frontotemporal dementia (FTD). To investigate the structural effects of disease-associated mutations, we analyzed 19 pathogenic variants using AlphaFold3 and conformational ensemble modeling with AFflecto. While the radius of gyration and end-to-end distances remained largely unchanged, mutations significantly altered secondary structure elements and contact maps, particularly in local folding. Intrinsic disorder and LLPS analyses revealed that mutations modulate the protein's droplet-forming capacity and interaction flexibility. These changes may impact protein-protein interactions, phase behavior, and mitochondrial function. Our findings indicate that pathogenic CHCHD2 mutations cause subtle but functionally relevant structural perturbations rather than global destabilization. This study underscores the importance of ensemble-based modeling in understanding mutation-induced dysfunction in intrinsically disordered proteins involved in neurodegeneration.",
+        "keywords": [
+            "AlphaFold3",
+            "CHCHD2",
+            "Conformational ensembles",
+            "Genetic mutations",
+            "IDRs",
+            "Neurodegenerative diseases",
+            "Structure-function relationship"
+        ],
+        "mesh_terms": [
+            "Humans",
+            "*Mitochondrial Proteins/genetics/chemistry/metabolism",
+            "*Mutation",
+            "*Transcription Factors/genetics/chemistry",
+            "*Models, Molecular",
+            "Protein Conformation",
+            "Neurodegenerative Diseases/genetics/metabolism",
+            "DNA-Binding Proteins"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Molecular Biotechnology, Turkish-German University, Sahinkaya Caddesi No. 106, Beykoz, Istanbul, 34820, Turkey. Electronic address: e210102052@stud.tau.edu.tr.",
+                "Molecular Biotechnology, Turkish-German University, Sahinkaya Caddesi No. 106, Beykoz, Istanbul, 34820, Turkey.",
+                "Department of Molecular Medicine and USF Health Byrd Alzheimer's Research Institute, Morsani College of Medicine, University of South Florida, Tampa, FL, 33612, USA.",
+                "Case Western Reserve University, School of Medicine, Department of Pathology, 2103 Cornell Road, 5129 WRB, Cleveland, OH, 44106, USA.",
+                "Case Western Reserve University, School of Medicine, Department of Pathology, 2103 Cornell Road, 5129 WRB, Cleveland, OH, 44106, USA; Louis Stokes Cleveland VA Medical Center, 10701 East Blvd, Cleveland, OH, 44106, USA.",
+                "Molecular Biotechnology, Turkish-German University, Sahinkaya Caddesi No. 106, Beykoz, Istanbul, 34820, Turkey."
+            ],
+            "auids": [],
+            "full_names": [
+                "Ozmen, Zeyneb Azra",
+                "Cayli, Fatma Nilsu",
+                "Uversky, Vladimir N",
+                "Woo, Junga Alexa",
+                "Kang, David E",
+                "Coskuner-Weber, Orkid"
+            ],
+            "short_names": [
+                "Ozmen ZA",
+                "Cayli FN",
+                "Uversky VN",
+                "Woo JA",
+                "Kang DE",
+                "Coskuner-Weber O"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Molecular Biotechnology, Turkish-German University, Sahinkaya Caddesi No. 106, Beykoz, Istanbul, 34820, Turkey. Electronic address: e210102052@stud.tau.edu.tr."
+                ],
+                "full_name": "Özmen, Zeyneb Azra",
+                "identifiers": [],
+                "short_name": "Özmen ZA"
+            },
+            {
+                "affiliations": [
+                    "Molecular Biotechnology, Turkish-German University, Sahinkaya Caddesi No. 106, Beykoz, Istanbul, 34820, Turkey."
+                ],
+                "full_name": "Çaylı, Fatma Nilsu",
+                "identifiers": [],
+                "short_name": "Çaylı FN"
+            },
+            {
+                "affiliations": [
+                    "Department of Molecular Medicine and USF Health Byrd Alzheimer's Research Institute, Morsani College of Medicine, University of South Florida, Tampa, FL, 33612, USA."
+                ],
+                "full_name": "Uversky, Vladimir N",
+                "identifiers": [],
+                "short_name": "Uversky VN"
+            },
+            {
+                "affiliations": [
+                    "Case Western Reserve University, School of Medicine, Department of Pathology, 2103 Cornell Road, 5129 WRB, Cleveland, OH, 44106, USA."
+                ],
+                "full_name": "Woo, Junga Alexa",
+                "identifiers": [],
+                "short_name": "Woo JA"
+            },
+            {
+                "affiliations": [
+                    "Case Western Reserve University, School of Medicine, Department of Pathology, 2103 Cornell Road, 5129 WRB, Cleveland, OH, 44106, USA; Louis Stokes Cleveland VA Medical Center, 10701 East Blvd, Cleveland, OH, 44106, USA."
+                ],
+                "full_name": "Kang, David E",
+                "identifiers": [],
+                "short_name": "Kang DE"
+            },
+            {
+                "affiliations": [
+                    "Molecular Biotechnology, Turkish-German University, Sahinkaya Caddesi No. 106, Beykoz, Istanbul, 34820, Turkey."
+                ],
+                "full_name": "Coskuner-Weber, Orkid",
+                "identifiers": [],
+                "short_name": "Coskuner-Weber O"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1016/j.compbiomed.2025.110810",
+        "pmid": "40714407",
+        "title": "Effects of pathological mutations on the CHCHD2 monomer structure: A study by AlphaFold3 linked to the generation of conformational ensembles."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [],
+        "pmc": [],
+        "refs": [],
+        "review": [
+            "40714407",
+            "30791515",
+            "31526091",
+            "37021679",
+            "29364151",
+            "40963812",
+            "27631878",
+            "33812000",
+            "33967741",
+            "39914051",
+            "28733970",
+            "18568013",
+            "35791387",
+            "31986926",
+            "23958438",
+            "39798673",
+            "33314127",
+            "25738979",
+            "29556602",
+            "36061599",
+            "40806186",
+            "22143516",
+            "29028540"
+        ],
+        "similar": [
+            "40714407",
+            "40490178",
+            "40753073",
+            "30496485",
+            "29376860",
+            "35786718",
+            "30791515",
+            "29749507",
+            "31526091",
+            "26343503",
+            "35173147",
+            "29519717",
+            "30084972",
+            "30342766",
+            "26639156",
+            "30530185",
+            "28108040",
+            "27814991",
+            "25662902",
+            "29112723",
+            "30237140",
+            "37021679",
+            "40075073",
+            "34791217",
+            "38631182",
+            "26725463",
+            "29121267",
+            "39566750",
+            "32068847",
+            "27538669",
+            "27839905",
+            "27626775",
+            "41237231",
+            "38453793",
+            "28589937",
+            "36799027",
+            "26705026",
+            "29364151",
+            "35861376",
+            "27717833",
+            "41053020",
+            "31600778",
+            "38395904",
+            "40133775",
+            "27631878",
+            "39094247",
+            "38750212",
+            "27269965",
+            "33812000",
+            "40011434",
+            "27353515",
+            "36322611",
+            "27839904",
+            "37578019",
+            "41454828",
+            "37488867",
+            "40963812",
+            "27118487",
+            "35830185",
+            "28432706",
+            "32338760",
+            "33967741",
+            "39914051",
+            "39831399",
+            "38341417",
+            "40943143",
+            "39174523",
+            "26561290",
+            "33631794",
+            "33685516",
+            "28733970",
+            "18568013",
+            "38297118",
+            "29540477",
+            "35791387",
+            "28341223",
+            "39257750",
+            "31986926",
+            "32437855",
+            "40025232",
+            "23958438",
+            "39798673",
+            "33314127",
+            "25784717",
+            "33839143",
+            "25738979",
+            "29556602",
+            "31996268",
+            "20142524",
+            "35388756",
+            "36061599",
+            "31035038",
+            "40806186",
+            "22143516",
+            "33076213",
+            "38996889",
+            "23754493",
+            "29028540",
+            "32653673",
+            "27653913"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2025/07/28 08:45",
+        "fetched_at": "2026-01-12 23:32:17"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Comput Biol Med"
+        ],
+        "journal_title": [
+            "Computers in biology and medicine"
+        ],
+        "pub_date": "2025 Sep",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2025"
+    }
+}

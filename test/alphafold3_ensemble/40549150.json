@@ -1,0 +1,333 @@
+{
+    "content": {
+        "abstract": "In this report, we describe a set of structures of the engineered protein LCB2 that has been solved starting from different computer-predicted molecular replacement (MR) models. We found that AlphaFold3, AlphaFold2, MultiFOLD, Rosetta, RoseTTAFold and trRosetta all produced successful MR models for this three-helix bundle 58-residue protein, while some of the older predictors failed. To assign B factors in the MR models we used the predictor-generated confidence scores or, as a convenient alternative, the accessible surface area (ASA) values. The process of multi-start structure determination using Coot and Phenix demonstrated good convergence, leading to six structures within 0.25 A (all-atom RMSD) of each other. Of note, structural differences between the computer-predicted MR models and the final structures can be largely attributed to a single specific crystal contact. Comparing the six structural solutions, we observe that a number of surface side chains have been solved with different conformations. Interestingly, for each individual structure the electron density is consistent with a single rotameric state and offers no direct evidence of conformational heterogeneity. Strictly speaking, this behavior constitutes a case of model bias; we argue, however, that it represents a benign side of model bias. Specifically, when we use a model where the side-chain conformation corresponds to one of the actual (significantly populated) rotameric states, this leads to an enhancement of the electron density for this particular conformation. Conversely, when we use a model with an irrelevant (low-population) side-chain conformation, it fails to produce the matching electron density. We thus conclude that the six LCB2 structures obtained in this study can be grouped into a multiconformer ensemble, where structural variations are representative of protein's conformational dynamics. Indeed, using this six-member ensemble leads to a significant drop in R(work) and R(free) compared with the individual solutions. This interpretation was also supported by our MD simulations of the LCB2 crystal.",
+        "keywords": [
+            "LCB2",
+            "computer-predicted structures",
+            "molecular replacement",
+            "multiconformer ensembles",
+            "protein crystallography",
+            "rotamers",
+            "side-chain conformations"
+        ],
+        "mesh_terms": [
+            "*Models, Molecular",
+            "Protein Conformation",
+            "*Viral Proteins/chemistry"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Laboratory of Biomolecular NMR, St Petersburg State University, St Petersburg, 199034, Russian Federation.",
+                "Utrecht, The Netherlands.",
+                "Crystallography Department, Institute of Earth Sciences, St Petersburg State University, St Petersburg, 199034, Russian Federation.",
+                "Laboratory of Biomolecular NMR, St Petersburg State University, St Petersburg, 199034, Russian Federation.",
+                "Laboratory of Biomolecular NMR, St Petersburg State University, St Petersburg, 199034, Russian Federation."
+            ],
+            "auids": [
+                "ORCID: 0000-0002-2993-6748",
+                "ORCID: 0000-0003-2730-6264",
+                "ORCID: 0000-0002-5096-1278",
+                "ORCID: 0000-0002-7097-9192"
+            ],
+            "full_names": [
+                "Korban, Svetlana A",
+                "Mikhailovskii, Oleg",
+                "Gurzhiy, Vladislav V",
+                "Podkorytov, Ivan S",
+                "Skrynnikov, Nikolai R"
+            ],
+            "short_names": [
+                "Korban SA",
+                "Mikhailovskii O",
+                "Gurzhiy VV",
+                "Podkorytov IS",
+                "Skrynnikov NR"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Laboratory of Biomolecular NMR, St Petersburg State University, St Petersburg, 199034, Russian Federation."
+                ],
+                "full_name": "Korban, Svetlana A",
+                "identifiers": [],
+                "short_name": "Korban SA"
+            },
+            {
+                "affiliations": [
+                    "Utrecht, The Netherlands."
+                ],
+                "full_name": "Mikhailovskii, Oleg",
+                "identifiers": [
+                    "0000-0002-2993-6748"
+                ],
+                "short_name": "Mikhailovskii O"
+            },
+            {
+                "affiliations": [
+                    "Crystallography Department, Institute of Earth Sciences, St Petersburg State University, St Petersburg, 199034, Russian Federation."
+                ],
+                "full_name": "Gurzhiy, Vladislav V",
+                "identifiers": [
+                    "0000-0003-2730-6264"
+                ],
+                "short_name": "Gurzhiy VV"
+            },
+            {
+                "affiliations": [
+                    "Laboratory of Biomolecular NMR, St Petersburg State University, St Petersburg, 199034, Russian Federation."
+                ],
+                "full_name": "Podkorytov, Ivan S",
+                "identifiers": [
+                    "0000-0002-5096-1278"
+                ],
+                "short_name": "Podkorytov IS"
+            },
+            {
+                "affiliations": [
+                    "Laboratory of Biomolecular NMR, St Petersburg State University, St Petersburg, 199034, Russian Federation."
+                ],
+                "full_name": "Skrynnikov, Nikolai R",
+                "identifiers": [
+                    "0000-0002-7097-9192"
+                ],
+                "short_name": "Skrynnikov NR"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1107/S2052252525005123",
+        "pmid": "40549150",
+        "title": "Using multiple computer-predicted structures as molecular replacement models: application to the antiviral mini-protein LCB2."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [],
+        "pmc": [
+            "12224078"
+        ],
+        "refs": [
+            "39711199",
+            "39360967",
+            "37990496",
+            "37650367",
+            "37433327",
+            "37102670",
+            "37001856",
+            "36927031",
+            "36876433",
+            "36598499",
+            "36322415",
+            "35412328",
+            "35362474",
+            "34981757",
+            "34759384",
+            "34449113",
+            "34387010",
+            "34331351",
+            "34218458",
+            "34192518",
+            "33311634",
+            "32907861",
+            "31896580",
+            "31793899",
+            "31714766",
+            "31365160",
+            "31097662",
+            "30890608",
+            "30568301",
+            "30169622",
+            "30017920",
+            "29652254",
+            "29067766",
+            "28836357",
+            "28747759",
+            "28177311",
+            "27322406",
+            "26960124",
+            "26574392",
+            "26436197",
+            "25760609",
+            "25664744",
+            "25400877",
+            "25040949",
+            "24189240",
+            "24189232",
+            "24189227",
+            "23986568",
+            "23897468",
+            "23151627",
+            "22505256",
+            "21460457",
+            "21460448",
+            "21460447",
+            "21098306",
+            "20383002",
+            "20100451",
+            "19770508",
+            "19714776",
+            "19553204",
+            "19461840",
+            "19171972",
+            "19018106",
+            "18410248",
+            "18094461",
+            "17934447",
+            "17850744",
+            "17452785",
+            "17372348",
+            "17212484",
+            "15852307",
+            "15834850",
+            "15608379",
+            "15388931",
+            "15299926",
+            "15299480",
+            "15299347",
+            "15215461",
+            "15215460",
+            "15130475",
+            "15051877",
+            "14997555",
+            "11771964",
+            "10966800",
+            "10861930",
+            "10089455",
+            "9504803",
+            "9408940",
+            "8254673",
+            "8166633",
+            "3041007"
+        ],
+        "review": [
+            "40549150",
+            "30840442"
+        ],
+        "similar": [
+            "40549150",
+            "17080462",
+            "38904665",
+            "37425870",
+            "18816799",
+            "10373009",
+            "15154746",
+            "16729264",
+            "8589257",
+            "1318383",
+            "28107510",
+            "11746709",
+            "32152330",
+            "34342282",
+            "17567749",
+            "22418934",
+            "40976968",
+            "20499387",
+            "35312477",
+            "21645849",
+            "26506617",
+            "16155119",
+            "39711199",
+            "41147497",
+            "30840442",
+            "41284362",
+            "12021438",
+            "29533226",
+            "9514726",
+            "37748828",
+            "37205593",
+            "22544766",
+            "9698364",
+            "12761072",
+            "8746727",
+            "20621565",
+            "40663537",
+            "41014267",
+            "8464066",
+            "1920430",
+            "26610545",
+            "18547585",
+            "26032515",
+            "8445659",
+            "26422513",
+            "38865109",
+            "33625752",
+            "37760106",
+            "19224393",
+            "11327774",
+            "18179702",
+            "32744253",
+            "26355505",
+            "36769074",
+            "17975838",
+            "22417279",
+            "21162593",
+            "39684679",
+            "1637806",
+            "22809334",
+            "24121516",
+            "40586518",
+            "39976565",
+            "8170918",
+            "11580256",
+            "10913245",
+            "38996889",
+            "18361454",
+            "39337567",
+            "17876760",
+            "14744129",
+            "39588651",
+            "19441789",
+            "12596268",
+            "38190097",
+            "37330294",
+            "16984893",
+            "1318384",
+            "15959866",
+            "19492859",
+            "41028845",
+            "26406154",
+            "39360967",
+            "18831040",
+            "35059216",
+            "18662925",
+            "34579643",
+            "16157349",
+            "10223291",
+            "35362474",
+            "34469019",
+            "27599733",
+            "28940798",
+            "7507173",
+            "17096427",
+            "36051869",
+            "39485490",
+            "15754058",
+            "37732281",
+            "15342239"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2025/06/24 10:52",
+        "fetched_at": "2026-01-12 23:32:17"
+    },
+    "source": {
+        "journal_abbrev": [
+            "IUCrJ"
+        ],
+        "journal_title": [
+            "IUCrJ"
+        ],
+        "pub_date": "2025 Jul 1",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2025"
+    }
+}
