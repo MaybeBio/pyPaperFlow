@@ -1,0 +1,341 @@
+{
+    "content": {
+        "abstract": "Intrinsically disordered proteins or regions (IDPs/IDRs) adopt diverse binding modes with different partners, from coupled-folding-and-binding, to fuzzy binding, to fully-disordered binding. Characterizing IDR interfaces is challenging experimentally and computationally. The state-of-the-art AlphaFold-multimer and AlphaFold3 can be used to predict IDR binding sites, although they are less accurate at their benchmarked confidence cutoffs. Here, we developed Disobind, a deep-learning method that predicts inter-protein contact maps and interface residues for an IDR and its partner, given their sequences. It uses sequence embeddings from the ProtT5 protein language model. Disobind outperforms state-of-the-art interface predictors for IDRs. It also outperforms AlphaFold-multimer and AlphaFold3 at multiple confidence cutoffs. Combining Disobind and AlphaFold-multimer predictions further improves the performance. In contrast to current methods, Disobind considers the context of the binding partner and does not depend on structures and multiple sequence alignments. Its predictions can be used to localize IDRs in large assemblies and characterize IDR-mediated interactions.",
+        "keywords": [
+            "Intrinsically disordered proteins (IDP)",
+            "deep learning (DL)",
+            "intrinsically disordered regions (IDR)",
+            "protein language model (pLMs)",
+            "protein structure"
+        ],
+        "mesh_terms": [],
+        "pub_types": [
+            "Journal Article",
+            "Preprint"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore, India 560065.",
+                "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore, India 560065.",
+                "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore, India 560065."
+            ],
+            "auids": [
+                "ORCID: 0009-0006-3190-7977",
+                "ORCID: 0000-0002-1238-7041",
+                "ORCID: 0000-0002-9061-8407"
+            ],
+            "full_names": [
+                "Majila, Kartik",
+                "Ullanat, Varun",
+                "Viswanath, Shruthi"
+            ],
+            "short_names": [
+                "Majila K",
+                "Ullanat V",
+                "Viswanath S"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore, India 560065."
+                ],
+                "full_name": "Majila, Kartik",
+                "identifiers": [
+                    "0009-0006-3190-7977"
+                ],
+                "short_name": "Majila K"
+            },
+            {
+                "affiliations": [
+                    "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore, India 560065."
+                ],
+                "full_name": "Ullanat, Varun",
+                "identifiers": [
+                    "0000-0002-1238-7041"
+                ],
+                "short_name": "Ullanat V"
+            },
+            {
+                "affiliations": [
+                    "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore, India 560065."
+                ],
+                "full_name": "Viswanath, Shruthi",
+                "identifiers": [
+                    "0000-0002-9061-8407"
+                ],
+                "short_name": "Viswanath S"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1101/2024.12.19.629373",
+        "pmid": "39763873",
+        "title": "A deep learning method for predicting interactions for intrinsically disordered regions of proteins."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "PubMed Central",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/39763873/"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Cold Spring Harbor Laboratory",
+                "url": "https://doi.org/10.1101/2024.12.19.629373"
+            }
+        ],
+        "pmc": [
+            "11702703"
+        ],
+        "refs": [
+            "40403066",
+            "40133781",
+            "40080667",
+            "39756261",
+            "39740355",
+            "39665266",
+            "39633723",
+            "39548826",
+            "39510344",
+            "39470701",
+            "39446390",
+            "39115813",
+            "38866950",
+            "38781245",
+            "38718835",
+            "38649368",
+            "38547871",
+            "38391029",
+            "38330793",
+            "38238291",
+            "38225382",
+            "38102755",
+            "37957331",
+            "37956700",
+            "37904608",
+            "37904585",
+            "37878721",
+            "36815589",
+            "36478084",
+            "36379943",
+            "36040254",
+            "35900023",
+            "35679397",
+            "35609776",
+            "35238773",
+            "35104320",
+            "34982960",
+            "34905768",
+            "34845384",
+            "34448830",
+            "34433091",
+            "34418423",
+            "34390736",
+            "34265844",
+            "34232869",
+            "34139171",
+            "33876751",
+            "33693581",
+            "33344917",
+            "33186584",
+            "32661420",
+            "32621228",
+            "32321157",
+            "32112804",
+            "31906602",
+            "31831797",
+            "31819266",
+            "30355150",
+            "30066087",
+            "29385418",
+            "29069470",
+            "29036655",
+            "29035372",
+            "28597296",
+            "28516010",
+            "27794553",
+            "25038412",
+            "24606139",
+            "24178034",
+            "24028092",
+            "23988124",
+            "23665034",
+            "23203869",
+            "22466611",
+            "22272186",
+            "21474068",
+            "19412530",
+            "16935303",
+            "16406523",
+            "12580598",
+            "10837058",
+            "10550212"
+        ],
+        "review": [
+            "39763873",
+            "31441158",
+            "36851914",
+            "35139468",
+            "34418423",
+            "39093570",
+            "36833360",
+            "33194509",
+            "38296708",
+            "33248138",
+            "34358545",
+            "33243935",
+            "39740355",
+            "36959451",
+            "34390736",
+            "33567297",
+            "35882686",
+            "31709918",
+            "37657994",
+            "39205298",
+            "31003202",
+            "36648282"
+        ],
+        "similar": [
+            "39763873",
+            "39446390",
+            "31441158",
+            "36304335",
+            "36851914",
+            "40944448",
+            "30058229",
+            "37883249",
+            "40034137",
+            "37878721",
+            "35139468",
+            "30878482",
+            "28780862",
+            "36272675",
+            "39253485",
+            "34418423",
+            "33087759",
+            "31207240",
+            "38866950",
+            "31307006",
+            "32696395",
+            "23142703",
+            "40756902",
+            "39093570",
+            "36908253",
+            "31724233",
+            "36833360",
+            "33194509",
+            "33936509",
+            "29763584",
+            "38296708",
+            "41454828",
+            "35609776",
+            "40254833",
+            "32112084",
+            "38701796",
+            "36153968",
+            "34461937",
+            "40403066",
+            "41174305",
+            "32824743",
+            "40221640",
+            "30841624",
+            "33248138",
+            "34358545",
+            "39933697",
+            "26149687",
+            "32743159",
+            "32702119",
+            "33243935",
+            "34905768",
+            "34825861",
+            "40244295",
+            "38166858",
+            "40133775",
+            "39740355",
+            "37498545",
+            "29066345",
+            "38987470",
+            "39433443",
+            "36959451",
+            "34390736",
+            "38895487",
+            "33567297",
+            "41378882",
+            "33036302",
+            "34179096",
+            "32722039",
+            "36210722",
+            "36005688",
+            "28381244",
+            "40574713",
+            "35882686",
+            "40441416",
+            "39586094",
+            "38079339",
+            "37992088",
+            "24115198",
+            "34710113",
+            "33267376",
+            "31709918",
+            "36315580",
+            "35310482",
+            "32553192",
+            "21647374",
+            "32535960",
+            "33719450",
+            "31797594",
+            "37657994",
+            "29716994",
+            "39205298",
+            "30366362",
+            "40997106",
+            "38942776",
+            "31003202",
+            "31756456",
+            "40317235",
+            "39383002",
+            "33976270",
+            "36648282"
+        ],
+        "text_mined": [
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "https://doi.org/10.5281/zenodo.14504762"
+            },
+            {
+                "category": "GitHub",
+                "source": "full_text",
+                "url": "https://github.com/isblab/disobind"
+            }
+        ]
+    },
+    "metadata": {
+        "entrez_date": "2025/01/07 06:22",
+        "fetched_at": "2026-01-14 21:50:55"
+    },
+    "source": {
+        "journal_abbrev": [
+            "bioRxiv"
+        ],
+        "journal_title": [
+            "bioRxiv : the preprint server for biology"
+        ],
+        "pub_date": "2025 Aug 15",
+        "pub_types": [
+            "Journal Article",
+            "Preprint"
+        ],
+        "pub_year": "2025"
+    }
+}

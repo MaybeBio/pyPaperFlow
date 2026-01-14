@@ -1,0 +1,481 @@
+{
+    "content": {
+        "abstract": "A ubiquitous and reversible phosphorylation is important for molecular signaling cascades, regulated by the transient interaction of protein kinases. The coupled folding and phosphorylation determining substrate specificity re-calibrates the interactive environment of intrinsically disordered regions (IDRs). There are over 50 computational methods for predicting IDRs in the proteome, yet achieving an accurate depiction remains an ongoing challenge. In this study, we present a standardized and kinase-centric approach for IDR prediction within the human kinome, employing a long short-term memory deep learning framework that achieves a high predictive performance (AUC = 0.97). The web server is now publicly accessible at: https://ciods.in/kindisorder. Our workflow begins with proteome-wide IDR prediction and proceeds with the categorization of short and long IDR segments, followed by an in-depth analysis of their distribution relative to the kinase domain regulatory core. We evaluated the conservation of these IDRs across all 137 human kinase families, computing a trend-setting conservation index to identify both conserved and variable disorder patterns. Through this framework, we uncovered 1039 functional disorder region hotspots that correlate with dynamic conformational shifts, phosphorylation sites, functional motif enrichment, and mutation impact embedded within IDRs. To further validate their regulatory significance, we conducted biophysical profiling of conserved and variable IDRs. Finally, we developed a structural integrity framework to link these IDRs to their influence on intrinsic signaling cascades and substrate specificity. This study offers a comprehensive functional characterization of IDRs in the human kinome, providing a valuable resource for exploring kinase regulation and opportunities in drug repurposing.",
+        "keywords": [
+            "IDR conformation map",
+            "functional disorder hotspots",
+            "human kinome",
+            "long short-term memory"
+        ],
+        "mesh_terms": [
+            "Humans",
+            "*Intrinsically Disordered Proteins/chemistry/metabolism/genetics",
+            "*Protein Kinases/chemistry/metabolism/genetics",
+            "Phosphorylation",
+            "Deep Learning",
+            "Computational Biology/methods",
+            "*Proteome/metabolism/chemistry"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Department of Zoology, College of Science, King Saud University, P. O. Box 2455, Riyadh Province, Riyadh 11451, Kingdom of Saudi Arabia.",
+                "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India.",
+                "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Institute for Regeneration and Repair, University of Edinburgh, Edinburgh EH16 4UU, Scotland.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India.",
+                "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India.",
+                "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India.",
+                "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+            ],
+            "auids": [
+                "ORCID: 0000-0003-2319-121X"
+            ],
+            "full_names": [
+                "Thomas, Sonet Daniel",
+                "Rajan, Aparna",
+                "Mahin, Althaf",
+                "Ahmed, Mukthar",
+                "Pavithra, S",
+                "Vignesh, U",
+                "Joy, Naveen",
+                "John, Levin",
+                "Varghese, Lijin",
+                "Sambreena, Alimath",
+                "Codi, Jalaluddin Akbar Kandel",
+                "Prasad, Thottethodi Subrahmanya Keshava",
+                "Vijayakumar, Manavalan",
+                "Geetha, S",
+                "Parvathi, R",
+                "Ganesan, R",
+                "Raju, Rajesh"
+            ],
+            "short_names": [
+                "Thomas SD",
+                "Rajan A",
+                "Mahin A",
+                "Ahmed M",
+                "Pavithra S",
+                "Vignesh U",
+                "Joy N",
+                "John L",
+                "Varghese L",
+                "Sambreena A",
+                "Codi JAK",
+                "Prasad TSK",
+                "Vijayakumar M",
+                "Geetha S",
+                "Parvathi R",
+                "Ganesan R",
+                "Raju R"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Thomas, Sonet Daniel",
+                "identifiers": [],
+                "short_name": "Thomas SD"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Rajan, Aparna",
+                "identifiers": [],
+                "short_name": "Rajan A"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Mahin, Althaf",
+                "identifiers": [],
+                "short_name": "Mahin A"
+            },
+            {
+                "affiliations": [
+                    "Department of Zoology, College of Science, King Saud University, P. O. Box 2455, Riyadh Province, Riyadh 11451, Kingdom of Saudi Arabia."
+                ],
+                "full_name": "Ahmed, Mukthar",
+                "identifiers": [],
+                "short_name": "Ahmed M"
+            },
+            {
+                "affiliations": [
+                    "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India."
+                ],
+                "full_name": "Pavithra, S",
+                "identifiers": [],
+                "short_name": "Pavithra S"
+            },
+            {
+                "affiliations": [
+                    "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India."
+                ],
+                "full_name": "Vignesh, U",
+                "identifiers": [],
+                "short_name": "Vignesh U"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Joy, Naveen",
+                "identifiers": [],
+                "short_name": "Joy N"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India.",
+                    "Institute for Regeneration and Repair, University of Edinburgh, Edinburgh EH16 4UU, Scotland."
+                ],
+                "full_name": "John, Levin",
+                "identifiers": [],
+                "short_name": "John L"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Varghese, Lijin",
+                "identifiers": [],
+                "short_name": "Varghese L"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Sambreena, Alimath",
+                "identifiers": [],
+                "short_name": "Sambreena A"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Codi, Jalaluddin Akbar Kandel",
+                "identifiers": [],
+                "short_name": "Codi JAK"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Prasad, Thottethodi Subrahmanya Keshava",
+                "identifiers": [],
+                "short_name": "Prasad TSK"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Vijayakumar, Manavalan",
+                "identifiers": [],
+                "short_name": "Vijayakumar M"
+            },
+            {
+                "affiliations": [
+                    "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India."
+                ],
+                "full_name": "Geetha, S",
+                "identifiers": [],
+                "short_name": "Geetha S"
+            },
+            {
+                "affiliations": [
+                    "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India."
+                ],
+                "full_name": "Parvathi, R",
+                "identifiers": [],
+                "short_name": "Parvathi R"
+            },
+            {
+                "affiliations": [
+                    "School of Computer Science and Engineering, Vellore Institute of Technology, Chennai 600127, Tamil Nadu, India."
+                ],
+                "full_name": "Ganesan, R",
+                "identifiers": [],
+                "short_name": "Ganesan R"
+            },
+            {
+                "affiliations": [
+                    "Centre for Integrative Omics Data Science (CIODS), Centre for Systems Biology and Molecular Medicine, Yenepoya (Deemed to be University), Deralakatte, Manglore 575018, Karnataka, India."
+                ],
+                "full_name": "Raju, Rajesh",
+                "identifiers": [
+                    "0000-0003-2319-121X"
+                ],
+                "short_name": "Raju R"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1093/bib/bbaf662",
+        "pmid": "41378882",
+        "title": "Impact of intrinsically disordered regions and functional disorder hotspots in the human kinome."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Ovid Technologies, Inc.",
+                "url": "http://ovidsp.ovid.com/ovidweb.cgi?T=JS&PAGE=linkout&SEARCH=41378882.ui"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "PubMed Central",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/41378882/"
+            },
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Silverchair Information Systems",
+                "url": "https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bbaf662"
+            }
+        ],
+        "pmc": [
+            "12696717"
+        ],
+        "refs": [
+            "40054813",
+            "39237195",
+            "39095350",
+            "39052211",
+            "38998919",
+            "38747347",
+            "38662765",
+            "38218213",
+            "38166858",
+            "37904585",
+            "37470698",
+            "37138579",
+            "36927031",
+            "36781849",
+            "36631611",
+            "36631581",
+            "36416266",
+            "36008930",
+            "35830914",
+            "35725977",
+            "35177069",
+            "35163518",
+            "35020807",
+            "34290238",
+            "33875885",
+            "33137204",
+            "33079988",
+            "32722039",
+            "32034199",
+            "31425549",
+            "30670635",
+            "30611608",
+            "28056780",
+            "27911701",
+            "26230689",
+            "26207888",
+            "25531225",
+            "25514926",
+            "25486330",
+            "25420233",
+            "25038412",
+            "23203878",
+            "23055912",
+            "22080206",
+            "20971646",
+            "20179338",
+            "20100603",
+            "18366622",
+            "17522630",
+            "17227859",
+            "16939197",
+            "15955779",
+            "15947016",
+            "15310560",
+            "15044227",
+            "14960716",
+            "14604521",
+            "12381310",
+            "8612268",
+            "3291115"
+        ],
+        "review": [
+            "41378882",
+            "39093570",
+            "30611608",
+            "34418423",
+            "31441158",
+            "33248138",
+            "40650026",
+            "31521235",
+            "33243935",
+            "39142260",
+            "36959451",
+            "33567297",
+            "38588835",
+            "39205298",
+            "35882686",
+            "38705823",
+            "24532081",
+            "39914051",
+            "23466039",
+            "25752799",
+            "37657994",
+            "28612216"
+        ],
+        "similar": [
+            "41378882",
+            "31724233",
+            "27718363",
+            "40530859",
+            "41337585",
+            "40221640",
+            "38297118",
+            "39093570",
+            "25099472",
+            "40828855",
+            "33866372",
+            "32900925",
+            "30611608",
+            "34418423",
+            "39933697",
+            "30878482",
+            "35094056",
+            "41276815",
+            "31441158",
+            "41033554",
+            "33248138",
+            "29066345",
+            "40133781",
+            "38662765",
+            "40133791",
+            "35767567",
+            "32553192",
+            "40244295",
+            "27062995",
+            "41053908",
+            "27807972",
+            "33191750",
+            "36291695",
+            "35061901",
+            "32503351",
+            "33719450",
+            "40100159",
+            "29550429",
+            "39446390",
+            "38747347",
+            "29945970",
+            "28934129",
+            "40650026",
+            "26699268",
+            "30841624",
+            "36908253",
+            "31521235",
+            "38297184",
+            "32535960",
+            "33616531",
+            "38701796",
+            "33627133",
+            "33243935",
+            "39576583",
+            "31207240",
+            "39539017",
+            "30096183",
+            "38941236",
+            "34626492",
+            "33036302",
+            "34830151",
+            "40944448",
+            "39142260",
+            "36959451",
+            "31175370",
+            "41365991",
+            "33567297",
+            "29763584",
+            "38588835",
+            "34905768",
+            "26149687",
+            "39453744",
+            "33406091",
+            "39205298",
+            "35882686",
+            "38705823",
+            "36210722",
+            "24532081",
+            "40133775",
+            "39914051",
+            "26307970",
+            "33936509",
+            "40574713",
+            "35275927",
+            "36272675",
+            "40403066",
+            "28167781",
+            "34825861",
+            "23466039",
+            "24115198",
+            "34710113",
+            "25752799",
+            "37657994",
+            "30308971",
+            "35883444",
+            "28612216",
+            "39383002",
+            "34020549",
+            "35290420",
+            "31756456"
+        ],
+        "text_mined": [
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "https://ciods.in/kindisorder"
+            },
+            {
+                "category": "GitHub",
+                "source": "full_text",
+                "url": "https://github.com/naveen-joy-18/Impact-of-Intrinsically-Disordered-Regions-and-Functional-Disorder-Hotspots-in-the-Human-Kinome"
+            }
+        ]
+    },
+    "metadata": {
+        "entrez_date": "2025/12/11 13:04",
+        "fetched_at": "2026-01-14 21:50:55"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Brief Bioinform"
+        ],
+        "journal_title": [
+            "Briefings in bioinformatics"
+        ],
+        "pub_date": "2025 Nov 1",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2025"
+    }
+}

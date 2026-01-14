@@ -1,0 +1,258 @@
+{
+    "content": {
+        "abstract": "Despite their lack of a rigid structure, intrinsically disordered regions (IDRs) in proteins play important roles in cellular functions, including mediating protein-protein interactions. Therefore, it is important to computationally annotate IDRs with high accuracy. In this study, we present Disordered Region prediction using Bidirectional Encoder Representations from Transformers (DR-BERT), a compact protein language model. Unlike most popular tools, DR-BERT is pretrained on unannotated proteins and trained to predict IDRs without relying on explicit evolutionary or biophysical data. Despite this, DR-BERT demonstrates significant improvement over existing methods on the Critical Assessment of protein Intrinsic Disorder (CAID) evaluation dataset and outperforms competitors on two out of four test cases in the CAID 2 dataset, while maintaining competitiveness in the others. This performance is due to the information learned during pretraining and DR-BERT's ability to use contextual information.",
+        "keywords": [
+            "IDP",
+            "IDR",
+            "deep learning",
+            "disorder",
+            "machine learning",
+            "protein language model",
+            "protein structure prediction"
+        ],
+        "mesh_terms": [
+            "*Intrinsically Disordered Proteins/chemistry/metabolism",
+            "Databases, Protein",
+            "Models, Molecular",
+            "Computational Biology/methods",
+            "Protein Conformation",
+            "Molecular Sequence Annotation",
+            "Algorithms"
+        ],
+        "pub_types": [
+            "Journal Article",
+            "Research Support, Non-U.S. Gov't",
+            "Research Support, U.S. Gov't, Non-P.H.S."
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Department of Bioengineering, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA; Carl R. Woese Institute for Genomic Biology, Urbana, IL 61801, USA. Electronic address: nambiar4@illinois.edu.",
+                "Carl R. Woese Institute for Genomic Biology, Urbana, IL 61801, USA; Department of Computer Science, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA.",
+                "Carl R. Woese Institute for Genomic Biology, Urbana, IL 61801, USA; Department of Computer Science, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA.",
+                "Department of Bioengineering, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA; Carl R. Woese Institute for Genomic Biology, Urbana, IL 61801, USA; Department of Physics, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA; Computing, Environment and Life Sciences, Argonne National Laboratory, Lemont, IL 60439, USA. Electronic address: maslov@illinois.edu."
+            ],
+            "auids": [],
+            "full_names": [
+                "Nambiar, Ananthan",
+                "Forsyth, John Malcolm",
+                "Liu, Simon",
+                "Maslov, Sergei"
+            ],
+            "short_names": [
+                "Nambiar A",
+                "Forsyth JM",
+                "Liu S",
+                "Maslov S"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Department of Bioengineering, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA; Carl R. Woese Institute for Genomic Biology, Urbana, IL 61801, USA. Electronic address: nambiar4@illinois.edu."
+                ],
+                "full_name": "Nambiar, Ananthan",
+                "identifiers": [],
+                "short_name": "Nambiar A"
+            },
+            {
+                "affiliations": [
+                    "Carl R. Woese Institute for Genomic Biology, Urbana, IL 61801, USA; Department of Computer Science, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA."
+                ],
+                "full_name": "Forsyth, John Malcolm",
+                "identifiers": [],
+                "short_name": "Forsyth JM"
+            },
+            {
+                "affiliations": [
+                    "Carl R. Woese Institute for Genomic Biology, Urbana, IL 61801, USA; Department of Computer Science, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA."
+                ],
+                "full_name": "Liu, Simon",
+                "identifiers": [],
+                "short_name": "Liu S"
+            },
+            {
+                "affiliations": [
+                    "Department of Bioengineering, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA; Carl R. Woese Institute for Genomic Biology, Urbana, IL 61801, USA; Department of Physics, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA; Computing, Environment and Life Sciences, Argonne National Laboratory, Lemont, IL 60439, USA. Electronic address: maslov@illinois.edu."
+                ],
+                "full_name": "Maslov, Sergei",
+                "identifiers": [],
+                "short_name": "Maslov S"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1016/j.str.2024.04.010",
+        "pmid": "38701796",
+        "title": "DR-BERT: A protein language model to annotate disordered regions."
+    },
+    "links": {
+        "cites": [
+            "41365991",
+            "40794952",
+            "40601248",
+            "40577786",
+            "40301326",
+            "39720898",
+            "38746434",
+            "38040454"
+        ],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Elsevier Science",
+                "url": "https://linkinghub.elsevier.com/retrieve/pii/S0969-2126(24)00136-9"
+            }
+        ],
+        "pmc": [],
+        "refs": [],
+        "review": [
+            "38701796",
+            "39093570",
+            "31521235",
+            "31441158",
+            "36851914",
+            "40650026",
+            "30657889",
+            "34418423",
+            "35882686",
+            "23466039",
+            "33248138",
+            "36959451",
+            "38296708",
+            "40081192",
+            "34390736",
+            "28589442",
+            "32034199",
+            "35139468",
+            "37657994",
+            "35102880"
+        ],
+        "similar": [
+            "38701796",
+            "39576583",
+            "37992088",
+            "40465350",
+            "39576585",
+            "40254833",
+            "34830151",
+            "38166858",
+            "38079339",
+            "37883249",
+            "39093570",
+            "40859602",
+            "31521235",
+            "36210722",
+            "40944448",
+            "38812466",
+            "33875885",
+            "30135358",
+            "36272675",
+            "39571839",
+            "40133781",
+            "27115638",
+            "40854226",
+            "40054813",
+            "40662788",
+            "32112084",
+            "31441158",
+            "33866372",
+            "32535960",
+            "36908253",
+            "36851914",
+            "41378882",
+            "34290238",
+            "39246251",
+            "31207240",
+            "32702119",
+            "36315580",
+            "25391399",
+            "28394890",
+            "32696355",
+            "38728811",
+            "28934129",
+            "30657889",
+            "40828855",
+            "34418423",
+            "31797595",
+            "34626492",
+            "38987470",
+            "39586094",
+            "28369666",
+            "35882686",
+            "23466039",
+            "33248138",
+            "40577786",
+            "38297118",
+            "40133791",
+            "38747347",
+            "36008992",
+            "40493668",
+            "30878482",
+            "23946100",
+            "40441416",
+            "36959451",
+            "27787828",
+            "32723719",
+            "32696395",
+            "40221640",
+            "39446390",
+            "39688476",
+            "40440586",
+            "39032884",
+            "40244295",
+            "38296708",
+            "29791766",
+            "40867524",
+            "39910649",
+            "38781245",
+            "34048569",
+            "32599863",
+            "40081192",
+            "34905768",
+            "37498545",
+            "33936509",
+            "38435559",
+            "31724233",
+            "40138319",
+            "39708500",
+            "33719450",
+            "34383671",
+            "34390736",
+            "28589442",
+            "35094056",
+            "39761555",
+            "32173600",
+            "32034199",
+            "40133775",
+            "39718444",
+            "35139468",
+            "37657994",
+            "35102880"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2024/05/04 11:50",
+        "fetched_at": "2026-01-14 21:50:55"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Structure"
+        ],
+        "journal_title": [
+            "Structure (London, England : 1993)"
+        ],
+        "pub_date": "2024 Aug 8",
+        "pub_types": [
+            "Journal Article",
+            "Research Support, Non-U.S. Gov't",
+            "Research Support, U.S. Gov't, Non-P.H.S."
+        ],
+        "pub_year": "2024"
+    }
+}

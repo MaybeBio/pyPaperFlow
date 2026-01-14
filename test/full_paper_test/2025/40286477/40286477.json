@@ -1,0 +1,214 @@
+{
+    "content": {
+        "abstract": "Biologically traditional methods, such as the Uversky plot, which rely on hydrophobicity and net charge, have inherent limitations in accurately distinguishing intrinsically disordered regions (IDRs) from ordered protein regions. To overcome these constraints, we propose a novel ensemble framework integrating Machine Learning (ML), Deep Neural Networks (DNN), and Quantum Neural Networks (QNN) to enhance IDR classification accuracy. Notably, this study is the first to employ QNNs for IDR classification, leveraging quantum entanglement to model intricate feature interactions. Amino acid sequences were analyzed to extract biophysical features, including charge distribution, hydrophobicity, and structural properties, which served as inputs for the predictive models. ML was utilized for independent feature learning, DNN for hierarchical interaction modeling, and QNN for capturing high-order dependencies. Our meta-model demonstrated an accuracy of 0.85, surpassing individual classifiers and highlighting the importance of buried amino acids and feature interactions between scaled hydrophobicity and large, buried, and charged residues. This study advances computational protein science by demonstrating the applicability of QNNs in bioinformatics and establishing a robust framework for IDR classification.",
+        "keywords": [
+            "Deep neural network",
+            "Intrinsically disordered region",
+            "Machine learning",
+            "Quantum neural network"
+        ],
+        "mesh_terms": [
+            "*Neural Networks, Computer",
+            "*Machine Learning",
+            "*Quantum Theory",
+            "Amino Acid Sequence",
+            "*Intrinsically Disordered Proteins/chemistry/classification",
+            "Hydrophobic and Hydrophilic Interactions",
+            "Computational Biology"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Department of Biotechnology, College of Life Sciences and Biotechnology, Korea University, Seoul 02841, Republic of Korea.",
+                "Department of Biotechnology, College of Life Sciences and Biotechnology, Korea University, Seoul 02841, Republic of Korea; Department of Mechanical Engineering, Korea University, Seoul 02841, Republic of Korea. Electronic address: saekomi5@korea.ac.kr."
+            ],
+            "auids": [],
+            "full_names": [
+                "Kang, Seok-Jin",
+                "Shin, Hongchul"
+            ],
+            "short_names": [
+                "Kang SJ",
+                "Shin H"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Department of Biotechnology, College of Life Sciences and Biotechnology, Korea University, Seoul 02841, Republic of Korea."
+                ],
+                "full_name": "Kang, Seok-Jin",
+                "identifiers": [],
+                "short_name": "Kang SJ"
+            },
+            {
+                "affiliations": [
+                    "Department of Biotechnology, College of Life Sciences and Biotechnology, Korea University, Seoul 02841, Republic of Korea; Department of Mechanical Engineering, Korea University, Seoul 02841, Republic of Korea. Electronic address: saekomi5@korea.ac.kr."
+                ],
+                "full_name": "Shin, Hongchul",
+                "identifiers": [],
+                "short_name": "Shin H"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1016/j.compbiolchem.2025.108480",
+        "pmid": "40286477",
+        "title": "Amino acid sequence-based IDR classification using ensemble machine learning and quantum neural networks."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Elsevier Science",
+                "url": "https://linkinghub.elsevier.com/retrieve/pii/S1476-9271(25)00140-9"
+            }
+        ],
+        "pmc": [],
+        "refs": [],
+        "review": [
+            "40286477",
+            "36959451",
+            "40081192",
+            "39093570",
+            "34418423",
+            "36851914",
+            "30657889",
+            "36832654",
+            "34390736",
+            "33248138",
+            "35356546",
+            "31441158",
+            "35831369",
+            "40664239"
+        ],
+        "similar": [
+            "40286477",
+            "32535960",
+            "40024047",
+            "34830151",
+            "38275091",
+            "36959451",
+            "30866736",
+            "35767567",
+            "32019410",
+            "39433833",
+            "37498545",
+            "35469832",
+            "36272675",
+            "38781245",
+            "39446390",
+            "40131954",
+            "35724478",
+            "39093570",
+            "33810176",
+            "33616531",
+            "34905768",
+            "34836494",
+            "37674132",
+            "34418423",
+            "26555596",
+            "31233120",
+            "29791766",
+            "35094056",
+            "38987470",
+            "37883249",
+            "39383002",
+            "30878482",
+            "33076213",
+            "38048895",
+            "32696354",
+            "38808365",
+            "34487138",
+            "39612690",
+            "36851914",
+            "40270304",
+            "30657889",
+            "38242678",
+            "35325031",
+            "30135358",
+            "36832654",
+            "39593847",
+            "34390736",
+            "38941236",
+            "40054813",
+            "36908253",
+            "27587688",
+            "37487411",
+            "28365882",
+            "35922751",
+            "27807972",
+            "36291695",
+            "21110985",
+            "32823616",
+            "31724233",
+            "38459060",
+            "33248138",
+            "38701796",
+            "32173600",
+            "35356546",
+            "31881961",
+            "40238838",
+            "31441158",
+            "39236563",
+            "38252962",
+            "39539017",
+            "33139563",
+            "36215254",
+            "32722039",
+            "38297184",
+            "37437364",
+            "32352283",
+            "40096220",
+            "27282356",
+            "40278669",
+            "32696395",
+            "35594093",
+            "36210722",
+            "30071670",
+            "31756456",
+            "31999450",
+            "39907269",
+            "26277609",
+            "34992646",
+            "37730717",
+            "32808039",
+            "32896633",
+            "29734867",
+            "35016607",
+            "30939415",
+            "35831369",
+            "34290286",
+            "33895950",
+            "33267376",
+            "39862160",
+            "27140628"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2025/04/27 03:14",
+        "fetched_at": "2026-01-14 21:50:55"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Comput Biol Chem"
+        ],
+        "journal_title": [
+            "Computational biology and chemistry"
+        ],
+        "pub_date": "2025 Oct",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2025"
+    }
+}

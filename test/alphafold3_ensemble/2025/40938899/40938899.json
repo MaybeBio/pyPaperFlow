@@ -1,0 +1,360 @@
+{
+    "content": {
+        "abstract": "Computational enzyme design remains a powerful yet imperfect tool for optimizing biocatalysts, especially when targeting non-natural substrates. Using design tools we investigated Pseudomonas aeruginosa LipA, a lipase with a flexible lid domain crucial for substrate binding and turnover, aiming to enhance its hydrolysis of the industrially relevant substrate Roche ester. We generated an initial set of single-point mutations based on structural proximity to the active site and evaluated their effects using a computational pipeline integrating molecular dynamics (MD) simulations, density functional theory (DFT) calculations, and ensemble-based energy scoring. While we identified several active variants, attempts to rank them by activity using structural features, such as hydrogen bond formation or residue flexibility, failed. Deep learning models, applied post hoc for structural analysis via AlphaFold3, produced nearly identical active site geometries across variants, irrespective of activity. Reaction pathway analysis revealed energy barriers varying by 5-15 kcal/mol depending on substrate conformation, with the nucleophile addition step consistently rate-limiting. However, these small energetic shifts, likely critical for incremental activity changes, were indistinguishable by current computational or deep learning methods. Our results highlight the limitations of existing approaches in resolving subtle functional differences and underscore the need for improved benchmarks, reactive force fields, and more sensitive ranking metrics. Advancing these areas will be essential for designing enzymes with gradual, evolution-like activity improvements and for bridging the gap between structural prediction and catalytic function.",
+        "keywords": [],
+        "mesh_terms": [
+            "*Lipase/chemistry/genetics/metabolism",
+            "*Deep Learning",
+            "Hydrolysis",
+            "Molecular Dynamics Simulation",
+            "*Protein Engineering/methods",
+            "Pseudomonas aeruginosa/enzymology",
+            "Catalytic Domain",
+            "Substrate Specificity",
+            "*Bacterial Proteins/chemistry/genetics/metabolism"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Department of Physics and Astronomy, Brigham Young University, Provo, Utah, United States of America.",
+                "Institute of Molecular Enzyme Technology, Heinrich Heine University Dusseldorf, Julich, Germany.",
+                "Institute of Molecular Enzyme Technology, Heinrich Heine University Dusseldorf, Julich, Germany.",
+                "Department of Surgery, Massachusetts General Hospital, and Harvard Medical School, Boston, United States of America.",
+                "Institute of Bio- and Geosciences, Biotechnology (IBG-1), Forschungszentrum Julich, Julich, Germany.",
+                "Institute of Bioorganic Chemistry, Heinrich Heine University Dusseldorf Located at Forschungszentrum Julich, Julich, Germany.",
+                "Department of Chemistry and Biochemistry, Brigham Young University, Provo, Utah, United States of America.",
+                "Institute of Molecular Enzyme Technology, Heinrich Heine University Dusseldorf, Julich, Germany.",
+                "Institute of Bio- and Geosciences IBG-1: Biotechnology, Forschungszentrum Julich GmbH, Julich, Germany.",
+                "Institute of Complex Systems, Structural Biochemistry (ICS-6), Forschungszentrum Julich, Julich, Germany.",
+                "Physics Department, Heinrich-Heine-Universitat Dusseldorf, Dusseldorf, Germany.",
+                "Department of Physics and Astronomy, Brigham Young University, Provo, Utah, United States of America."
+            ],
+            "auids": [
+                "ORCID: 0000-0002-8884-9724"
+            ],
+            "full_names": [
+                "Gardiner, Spencer",
+                "Dollinger, Peter",
+                "Kovacic, Filip",
+                "Pietruszka, Jorg",
+                "Ess, Daniel H",
+                "Jaeger, Karl-Erich",
+                "Schroder, Gunnar F",
+                "Della Corte, Dennis"
+            ],
+            "short_names": [
+                "Gardiner S",
+                "Dollinger P",
+                "Kovacic F",
+                "Pietruszka J",
+                "Ess DH",
+                "Jaeger KE",
+                "Schroder GF",
+                "Della Corte D"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Department of Physics and Astronomy, Brigham Young University, Provo, Utah, United States of America."
+                ],
+                "full_name": "Gardiner, Spencer",
+                "identifiers": [],
+                "short_name": "Gardiner S"
+            },
+            {
+                "affiliations": [
+                    "Institute of Molecular Enzyme Technology, Heinrich Heine University Düsseldorf, Jülich, Germany."
+                ],
+                "full_name": "Dollinger, Peter",
+                "identifiers": [],
+                "short_name": "Dollinger P"
+            },
+            {
+                "affiliations": [
+                    "Institute of Molecular Enzyme Technology, Heinrich Heine University Düsseldorf, Jülich, Germany.",
+                    "Department of Surgery, Massachusetts General Hospital, and Harvard Medical School, Boston, United States of America."
+                ],
+                "full_name": "Kovacic, Filip",
+                "identifiers": [],
+                "short_name": "Kovacic F"
+            },
+            {
+                "affiliations": [
+                    "Institute of Bio- and Geosciences, Biotechnology (IBG-1), Forschungszentrum Jülich, Jülich, Germany.",
+                    "Institute of Bioorganic Chemistry, Heinrich Heine University Düsseldorf Located at Forschungszentrum Jülich, Jülich, Germany."
+                ],
+                "full_name": "Pietruszka, Jörg",
+                "identifiers": [],
+                "short_name": "Pietruszka J"
+            },
+            {
+                "affiliations": [
+                    "Department of Chemistry and Biochemistry, Brigham Young University, Provo, Utah, United States of America."
+                ],
+                "full_name": "Ess, Daniel H",
+                "identifiers": [],
+                "short_name": "Ess DH"
+            },
+            {
+                "affiliations": [
+                    "Institute of Molecular Enzyme Technology, Heinrich Heine University Düsseldorf, Jülich, Germany.",
+                    "Institute of Bio- and Geosciences IBG-1: Biotechnology, Forschungszentrum Jülich GmbH, Jülich, Germany."
+                ],
+                "full_name": "Jaeger, Karl-Erich",
+                "identifiers": [],
+                "short_name": "Jaeger KE"
+            },
+            {
+                "affiliations": [
+                    "Institute of Complex Systems, Structural Biochemistry (ICS-6), Forschungszentrum Jülich, Jülich, Germany.",
+                    "Physics Department, Heinrich-Heine-Universität Düsseldorf, Düsseldorf, Germany."
+                ],
+                "full_name": "Schröder, Gunnar F",
+                "identifiers": [],
+                "short_name": "Schröder GF"
+            },
+            {
+                "affiliations": [
+                    "Department of Physics and Astronomy, Brigham Young University, Provo, Utah, United States of America."
+                ],
+                "full_name": "Della Corte, Dennis",
+                "identifiers": [
+                    "0000-0002-8884-9724"
+                ],
+                "short_name": "Della Corte D"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1371/journal.pone.0332409",
+        "pmid": "40938899",
+        "title": "Resolution of physics and deep learning-based protein engineering filters: A case study with a lipase for industrial substrate hydrolysis."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Public Library of Science",
+                "url": "https://dx.plos.org/10.1371/journal.pone.0332409"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "PubMed Central",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/40938899/"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Miscellaneous",
+                "linkname": "",
+                "provider": "NCI CPTAC Assay Portal",
+                "url": "https://assays.cancer.gov/CPTAC-1548"
+            }
+        ],
+        "pmc": [
+            "12431253"
+        ],
+        "refs": [
+            "40185078",
+            "39946508",
+            "39143214",
+            "38990263",
+            "38740355",
+            "38718835",
+            "38435522",
+            "38154096",
+            "38150692",
+            "37770718",
+            "37726313",
+            "37590357",
+            "37433327",
+            "36813896",
+            "36342217",
+            "36108050",
+            "36108048",
+            "35992270",
+            "35650353",
+            "35513571",
+            "34884640",
+            "34853475",
+            "34297541",
+            "34265844",
+            "33850214",
+            "33491448",
+            "33438779",
+            "32978386",
+            "32881101",
+            "30525615",
+            "29494241",
+            "28774751",
+            "27819300",
+            "26661585",
+            "26574453",
+            "26441154",
+            "24818902",
+            "24688646",
+            "22033698",
+            "21696217",
+            "21472964",
+            "19603484",
+            "19304878",
+            "19116609",
+            "18355276",
+            "17997973",
+            "17616559",
+            "17616461",
+            "16789057",
+            "16211538",
+            "16110344",
+            "12449398",
+            "11601622",
+            "11196655",
+            "10980451",
+            "10893416",
+            "10493927",
+            "9914196",
+            "9744114",
+            "9329088",
+            "5432063",
+            "3096967"
+        ],
+        "review": [
+            "40938899",
+            "29450814",
+            "40464989",
+            "22426709",
+            "9805004",
+            "7946464"
+        ],
+        "similar": [
+            "40938899",
+            "39617119",
+            "39025068",
+            "18355276",
+            "25243583",
+            "32107397",
+            "14760743",
+            "30217852",
+            "37989487",
+            "20574696",
+            "24209933",
+            "22950599",
+            "28805665",
+            "21472964",
+            "32486240",
+            "20828637",
+            "31324776",
+            "27702479",
+            "31652673",
+            "38889604",
+            "30227364",
+            "27993564",
+            "23848942",
+            "29450814",
+            "33389775",
+            "40590090",
+            "40464989",
+            "16121163",
+            "32712552",
+            "19447113",
+            "28558229",
+            "22514720",
+            "37087743",
+            "27155582",
+            "26930469",
+            "28580552",
+            "24402332",
+            "19816890",
+            "31618459",
+            "41353964",
+            "27155580",
+            "40521868",
+            "28445031",
+            "24362426",
+            "32271820",
+            "18721749",
+            "26097135",
+            "25545678",
+            "8405431",
+            "22426709",
+            "30908847",
+            "33929832",
+            "29685354",
+            "9805004",
+            "11344447",
+            "24627048",
+            "10980451",
+            "31436959",
+            "40163623",
+            "29108624",
+            "30097767",
+            "40090439",
+            "20301160",
+            "22609754",
+            "32515491",
+            "16789057",
+            "40816388",
+            "7946464",
+            "41033017",
+            "40712940",
+            "14983082",
+            "7592706",
+            "20001926",
+            "28884626",
+            "38814729",
+            "41187397",
+            "11948859",
+            "41083092",
+            "39095391",
+            "26463643",
+            "24046870",
+            "29129140",
+            "16110344",
+            "40044005",
+            "25367042",
+            "27074770",
+            "15788423",
+            "40392250",
+            "15929154",
+            "22830585",
+            "25388475",
+            "39647728",
+            "22426728",
+            "23043134",
+            "12707799",
+            "16325466",
+            "30703686",
+            "40793770",
+            "27613682",
+            "27474867"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2025/09/12 18:28",
+        "fetched_at": "2026-01-13 09:14:42"
+    },
+    "source": {
+        "journal_abbrev": [
+            "PLoS One"
+        ],
+        "journal_title": [
+            "PloS one"
+        ],
+        "pub_date": "2025",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2025"
+    }
+}

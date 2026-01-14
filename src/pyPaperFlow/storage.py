@@ -13,13 +13,13 @@ class PaperStorage:
             storage_dir (str): The directory where the lookup table and paper data are stored.
         """
         self.storage_dir = storage_dir
-        if not os.path.exists(self.storage_dir):
-            os.makedirs(self.storage_dir)
+        # if not os.path.exists(self.storage_dir):
+        #     os.makedirs(self.storage_dir)
             
         self.lookup_file = os.path.join(self.storage_dir, "paper_lookup.csv")
         self.papers_dir = os.path.join(self.storage_dir, "papers")
-        if not os.path.exists(self.papers_dir):
-            os.makedirs(self.papers_dir)
+        # if not os.path.exists(self.papers_dir):
+        #     os.makedirs(self.papers_dir)
             
         self._load_lookup_table()
 
@@ -65,6 +65,8 @@ class PaperStorage:
 
     def _save_lookup_table(self):
         """Save the lookup table to CSV."""
+        if not os.path.exists(self.storage_dir):
+            os.makedirs(self.storage_dir)
         self.df.to_csv(self.lookup_file, index=False)
 
     def add_paper(self, paper: Paper, tags: Optional[Dict[str, int]] = None):
@@ -85,6 +87,10 @@ class PaperStorage:
         # For easier lookup, saving individually or by small groups in a hashed structure is better.
         # Here we save individually for simplicity as requested "locate paper then view metadata".
         paper_filename = f"{pmid}.json"
+        
+        if not os.path.exists(self.papers_dir):
+            os.makedirs(self.papers_dir)
+            
         paper_path = os.path.join(self.papers_dir, paper_filename)
         
         with open(paper_path, 'w', encoding='utf-8') as f:

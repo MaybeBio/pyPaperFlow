@@ -1,0 +1,344 @@
+{
+    "content": {
+        "abstract": "MOTIVATION: Sidechain rotamer libraries of the common amino acids of a protein are useful for folded protein structure determination and for generating ensembles of intrinsically disordered proteins (IDPs). However, much of protein function is modulated beyond the translated sequence through the introduction of post-translational modifications (PTMs). RESULTS: In this work, we have provided a curated set of side chain rotamers for the most common PTMs derived from the RCSB PDB database, including phosphorylated, methylated, and acetylated sidechains. Our rotamer libraries improve upon existing methods such as SIDEpro, Rosetta, and AlphaFold3 in predicting the experimental structures for PTMs in folded proteins. In addition, we showcase our PTM libraries in full use by generating ensembles with the Monte Carlo Side Chain Entropy (MCSCE) for folded proteins, and combining MCSCE with the Local Disordered Region Sampling algorithms within IDPConformerGenerator for proteins with intrinsically disordered regions. AVAILABILITY AND IMPLEMENTATION: The codes for dihedral angle computations and library creation are available at https://github.com/THGLab/ptm_sc.git.",
+        "keywords": [],
+        "mesh_terms": [
+            "*Protein Processing, Post-Translational",
+            "*Proteins/chemistry/metabolism",
+            "*Databases, Protein",
+            "*Intrinsically Disordered Proteins/chemistry/metabolism",
+            "Algorithms",
+            "Protein Folding",
+            "Monte Carlo Method",
+            "Protein Conformation",
+            "Amino Acids/chemistry/metabolism",
+            "Software"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Kenneth S. Pitzer Center for Theoretical Chemistry, University of California, Berkeley, CA 94720, United States.",
+                "Department of Chemistry, University of California, Berkeley, CA 94720, United States.",
+                "Molecular Medicine Program, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada.",
+                "Department of Biochemistry, University of Toronto, Toronto, ON M5S 1A8, Canada.",
+                "Molecular Medicine Program, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada.",
+                "Department of Biochemistry, University of Toronto, Toronto, ON M5S 1A8, Canada.",
+                "Kenneth S. Pitzer Center for Theoretical Chemistry, University of California, Berkeley, CA 94720, United States.",
+                "Department of Chemistry, University of California, Berkeley, CA 94720, United States.",
+                "Department of Bioengineering, University of California, Berkeley, CA 94720, United States.",
+                "Department of Chemical and Biomolecular Engineering, University of California, Berkeley, CA 94720, United States."
+            ],
+            "auids": [
+                "ORCID: 0000-0002-8357-8507",
+                "ORCID: 0000-0003-0025-8987"
+            ],
+            "full_names": [
+                "Zhang, Oufan",
+                "Naik, Shubhankar A",
+                "Liu, Zi Hao",
+                "Forman-Kay, Julie",
+                "Head-Gordon, Teresa"
+            ],
+            "short_names": [
+                "Zhang O",
+                "Naik SA",
+                "Liu ZH",
+                "Forman-Kay J",
+                "Head-Gordon T"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Kenneth S. Pitzer Center for Theoretical Chemistry, University of California, Berkeley, CA 94720, United States."
+                ],
+                "full_name": "Zhang, Oufan",
+                "identifiers": [],
+                "short_name": "Zhang O"
+            },
+            {
+                "affiliations": [
+                    "Department of Chemistry, University of California, Berkeley, CA 94720, United States."
+                ],
+                "full_name": "Naik, Shubhankar A",
+                "identifiers": [],
+                "short_name": "Naik SA"
+            },
+            {
+                "affiliations": [
+                    "Molecular Medicine Program, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada.",
+                    "Department of Biochemistry, University of Toronto, Toronto, ON M5S 1A8, Canada."
+                ],
+                "full_name": "Liu, Zi Hao",
+                "identifiers": [
+                    "0000-0002-8357-8507"
+                ],
+                "short_name": "Liu ZH"
+            },
+            {
+                "affiliations": [
+                    "Molecular Medicine Program, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada.",
+                    "Department of Biochemistry, University of Toronto, Toronto, ON M5S 1A8, Canada."
+                ],
+                "full_name": "Forman-Kay, Julie",
+                "identifiers": [],
+                "short_name": "Forman-Kay J"
+            },
+            {
+                "affiliations": [
+                    "Kenneth S. Pitzer Center for Theoretical Chemistry, University of California, Berkeley, CA 94720, United States.",
+                    "Department of Chemistry, University of California, Berkeley, CA 94720, United States.",
+                    "Department of Bioengineering, University of California, Berkeley, CA 94720, United States.",
+                    "Department of Chemical and Biomolecular Engineering, University of California, Berkeley, CA 94720, United States."
+                ],
+                "full_name": "Head-Gordon, Teresa",
+                "identifiers": [
+                    "0000-0003-0025-8987"
+                ],
+                "short_name": "Head-Gordon T"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1093/bioinformatics/btae444",
+        "pmid": "38995731",
+        "title": "A curated rotamer library for common post-translational modifications of proteins."
+    },
+    "links": {
+        "cites": [
+            "40799364",
+            "40789114",
+            "40093079",
+            "39279844",
+            "39062519"
+        ],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Ovid Technologies, Inc.",
+                "url": "http://ovidsp.ovid.com/ovidweb.cgi?T=JS&PAGE=linkout&SEARCH=38995731.ui"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "PubMed Central",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/38995731/"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Miscellaneous",
+                "linkname": "",
+                "provider": "NCI CPTAC Assay Portal",
+                "url": "https://assays.cancer.gov/CPTAC-1532"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "Full text from University of California eScholarship",
+                "provider": "eScholarship, University of California - Access Free Full Text",
+                "url": "https://escholarship.org/uc/item/qt4fs236m4"
+            },
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Silverchair Information Systems",
+                "url": "https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btae444"
+            }
+        ],
+        "pmc": [
+            "11254353"
+        ],
+        "refs": [
+            "38718835",
+            "38428397",
+            "38060268",
+            "37956700",
+            "37904608",
+            "37723259",
+            "37686234",
+            "37253017",
+            "37144719",
+            "36639584",
+            "36257022",
+            "36030416",
+            "35122328",
+            "34282049",
+            "34265844",
+            "33826699",
+            "33305318",
+            "32259206",
+            "31368302",
+            "30703322",
+            "30589846",
+            "30418626",
+            "28430426",
+            "27387657",
+            "26397464",
+            "25531225",
+            "25482539",
+            "24857970",
+            "24823488",
+            "24474795",
+            "22593013",
+            "22072531",
+            "21918110",
+            "21873640",
+            "21645855",
+            "21187238",
+            "18573080",
+            "16863191",
+            "15980494",
+            "10592235",
+            "9260279",
+            "9254694"
+        ],
+        "review": [
+            "38995731",
+            "26851279",
+            "26851286",
+            "29982297",
+            "25307499",
+            "12163064",
+            "26922996",
+            "34390736",
+            "29100108",
+            "24532081",
+            "31694155",
+            "37219402",
+            "24889695",
+            "31441158",
+            "25502193",
+            "19157855"
+        ],
+        "similar": [
+            "38995731",
+            "38764597",
+            "36030416",
+            "26851279",
+            "38060268",
+            "24574112",
+            "37686234",
+            "26851286",
+            "26851284",
+            "22072531",
+            "22108787",
+            "29626537",
+            "31613621",
+            "31851497",
+            "27111521",
+            "31375817",
+            "29982297",
+            "25307499",
+            "36327064",
+            "24354725",
+            "38796681",
+            "37439702",
+            "12163064",
+            "22544766",
+            "38781500",
+            "21280126",
+            "22279426",
+            "26922996",
+            "21645855",
+            "31362509",
+            "38461354",
+            "26742101",
+            "37546943",
+            "14978310",
+            "32357776",
+            "30204435",
+            "32230759",
+            "22373394",
+            "32525675",
+            "29544285",
+            "36350035",
+            "32696395",
+            "24857970",
+            "31411026",
+            "31161204",
+            "27018641",
+            "34788852",
+            "31425549",
+            "29187139",
+            "29573987",
+            "31756104",
+            "28934129",
+            "26138206",
+            "26307970",
+            "34390736",
+            "26195786",
+            "33582133",
+            "33810353",
+            "19775152",
+            "26994550",
+            "22962462",
+            "29100108",
+            "24532081",
+            "31694155",
+            "28150238",
+            "23754493",
+            "37219402",
+            "33945530",
+            "9325103",
+            "32696367",
+            "29595057",
+            "18076032",
+            "28970487",
+            "26618856",
+            "36257022",
+            "24889695",
+            "31441158",
+            "29990433",
+            "24174539",
+            "24888500",
+            "29734867",
+            "15728119",
+            "31479556",
+            "25361972",
+            "33230318",
+            "26418581",
+            "33481784",
+            "17391016",
+            "33237329",
+            "18831774",
+            "25502193",
+            "39250597",
+            "28365882",
+            "35883018",
+            "22095648",
+            "29490246",
+            "30184055",
+            "9080199",
+            "26374675",
+            "31415767",
+            "11469867"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2024/07/12 18:42",
+        "fetched_at": "2026-01-13 09:14:42"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Bioinformatics"
+        ],
+        "journal_title": [
+            "Bioinformatics (Oxford, England)"
+        ],
+        "pub_date": "2024 Jul 1",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2024"
+    }
+}

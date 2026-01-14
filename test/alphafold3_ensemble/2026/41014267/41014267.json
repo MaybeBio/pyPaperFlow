@@ -1,0 +1,297 @@
+{
+    "content": {
+        "abstract": "We report the results from the \"MIEnsembles-Server\" and \"Zheng\" groups for structure ensemble predictions in CASP16, both of which employed the EnsembleFold pipeline. Initially, multiple sequence alignments (MSAs) were generated using DeepMSA2 for proteins and rMSA for RNA targets. These MSAs were processed by newly developed deep learning methods-D-I-TASSER2 for protein monomer structure prediction, DMFold2 for protein complex structure prediction, ExFold for RNA structure prediction, and DeepProtNA for protein-nucleic acid complex structure prediction-to yield diverse structural decoys. The generated decoys were clustered into representative models corresponding to distinct conformational states using the structural clustering tool MolClust. Protein monomer targets underwent additional refinement via replica-exchange Monte Carlo (REMC) simulations with D-I-TASSER2, and these refined decoys were re-clustered with MolClust to finalize the ensemble predictions. For the 19 ensemble targets in CASP16, the final EnsembleFold models achieved an average TM-score of 0.657, representing improvements of 10.2% compared to the baseline AlphaFold3 program. Notably, EnsembleFold achieved particularly good performance for hybrid protein/nucleic-acid targets, leading to its efficacy in ensemble prediction tasks. Analysis of the resulting structural ensembles highlighted three significant insights: (i) Models derived from distinct DeepMSA2-generated MSAs typically represent different conformational states for ensemble targets; (ii) REMC simulations significantly enhance model diversity, facilitating the identification of alternative conformations; (iii) The structural clustering approach effectively identifies and selects accurate representative models for each conformational state. We further discuss potential improvements in Quality Assessment (QA) scoring methods that could further enhance the reliability and accuracy of ensemble predictions in the future.",
+        "keywords": [
+            "CASP16",
+            "EnsembleFold",
+            "alternative conformation",
+            "biomolecule's structure prediction",
+            "deep learning",
+            "multiple sequence alignment",
+            "protein complex",
+            "protein-nucleic acid complex",
+            "structural cluster"
+        ],
+        "mesh_terms": [
+            "*Deep Learning",
+            "*Computational Biology/methods",
+            "Protein Conformation",
+            "*Proteins/chemistry",
+            "Models, Molecular",
+            "Sequence Alignment/methods",
+            "*RNA/chemistry",
+            "*Software",
+            "Cluster Analysis",
+            "Nucleic Acid Conformation",
+            "Algorithms"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Department of Computer Science and Engineering, Michigan State University, East Lansing, Michigan, USA.",
+                "Gilbert S Omenn Department of Computational Medicine and Bioinformatics, University of Michigan, Ann Arbor, Michigan, USA.",
+                "NITFID, School of Statistics and Data Science, AAIS, LPMC and KLMDASR, Nankai University, Tianjin, China.",
+                "Department of Biological Chemistry, University of Michigan, Ann Arbor, Michigan, USA.",
+                "College of Information Engineering, Zhejiang University of Technology, HangZhou, Zhejiang, China.",
+                "College of Information Engineering, Zhejiang University of Technology, HangZhou, Zhejiang, China.",
+                "NITFID, School of Statistics and Data Science, AAIS, LPMC and KLMDASR, Nankai University, Tianjin, China.",
+                "Gilbert S Omenn Department of Computational Medicine and Bioinformatics, University of Michigan, Ann Arbor, Michigan, USA.",
+                "Department of Biological Chemistry, University of Michigan, Ann Arbor, Michigan, USA.",
+                "NITFID, School of Statistics and Data Science, AAIS, LPMC and KLMDASR, Nankai University, Tianjin, China."
+            ],
+            "auids": [],
+            "full_names": [
+                "Wuyun, Qiqige",
+                "Liu, Quancheng",
+                "Ni, Wentao",
+                "Peng, Chunxiang",
+                "Zhang, Ziying",
+                "Zhou, Xiaogen",
+                "Hu, Gang",
+                "Freddolino, Lydia",
+                "Zheng, Wei"
+            ],
+            "short_names": [
+                "Wuyun Q",
+                "Liu Q",
+                "Ni W",
+                "Peng C",
+                "Zhang Z",
+                "Zhou X",
+                "Hu G",
+                "Freddolino L",
+                "Zheng W"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Department of Computer Science and Engineering, Michigan State University, East Lansing, Michigan, USA."
+                ],
+                "full_name": "Wuyun, Qiqige",
+                "identifiers": [],
+                "short_name": "Wuyun Q"
+            },
+            {
+                "affiliations": [
+                    "Gilbert S Omenn Department of Computational Medicine and Bioinformatics, University of Michigan, Ann Arbor, Michigan, USA."
+                ],
+                "full_name": "Liu, Quancheng",
+                "identifiers": [],
+                "short_name": "Liu Q"
+            },
+            {
+                "affiliations": [
+                    "NITFID, School of Statistics and Data Science, AAIS, LPMC and KLMDASR, Nankai University, Tianjin, China."
+                ],
+                "full_name": "Ni, Wentao",
+                "identifiers": [],
+                "short_name": "Ni W"
+            },
+            {
+                "affiliations": [
+                    "Department of Biological Chemistry, University of Michigan, Ann Arbor, Michigan, USA."
+                ],
+                "full_name": "Peng, Chunxiang",
+                "identifiers": [],
+                "short_name": "Peng C"
+            },
+            {
+                "affiliations": [
+                    "College of Information Engineering, Zhejiang University of Technology, HangZhou, Zhejiang, China."
+                ],
+                "full_name": "Zhang, Ziying",
+                "identifiers": [],
+                "short_name": "Zhang Z"
+            },
+            {
+                "affiliations": [
+                    "College of Information Engineering, Zhejiang University of Technology, HangZhou, Zhejiang, China."
+                ],
+                "full_name": "Zhou, Xiaogen",
+                "identifiers": [],
+                "short_name": "Zhou X"
+            },
+            {
+                "affiliations": [
+                    "NITFID, School of Statistics and Data Science, AAIS, LPMC and KLMDASR, Nankai University, Tianjin, China."
+                ],
+                "full_name": "Hu, Gang",
+                "identifiers": [],
+                "short_name": "Hu G"
+            },
+            {
+                "affiliations": [
+                    "Gilbert S Omenn Department of Computational Medicine and Bioinformatics, University of Michigan, Ann Arbor, Michigan, USA.",
+                    "Department of Biological Chemistry, University of Michigan, Ann Arbor, Michigan, USA."
+                ],
+                "full_name": "Freddolino, Lydia",
+                "identifiers": [],
+                "short_name": "Freddolino L"
+            },
+            {
+                "affiliations": [
+                    "NITFID, School of Statistics and Data Science, AAIS, LPMC and KLMDASR, Nankai University, Tianjin, China."
+                ],
+                "full_name": "Zheng, Wei",
+                "identifiers": [],
+                "short_name": "Zheng W"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1002/prot.70059",
+        "pmid": "41014267",
+        "title": "Alternative Conformation Prediction Using Deep Learning With Multi-MSA Strategy and Structural Clustering in CASP16."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Wiley",
+                "url": "https://doi.org/10.1002/prot.70059"
+            }
+        ],
+        "pmc": [],
+        "refs": [],
+        "review": [
+            "41014267",
+            "39766238",
+            "38316555",
+            "39125995",
+            "38986287",
+            "41088961",
+            "39983363",
+            "24639158",
+            "40332289"
+        ],
+        "similar": [
+            "41014267",
+            "40751131",
+            "41147497",
+            "37650367",
+            "40820259",
+            "41249430",
+            "40452318",
+            "40762404",
+            "41165252",
+            "40661500",
+            "40585263",
+            "41170922",
+            "40778521",
+            "38167654",
+            "40488225",
+            "40950168",
+            "34331351",
+            "41313605",
+            "40195868",
+            "40851426",
+            "41178755",
+            "41478913",
+            "31365149",
+            "40502139",
+            "39766238",
+            "37356900",
+            "19289038",
+            "41201924",
+            "41047853",
+            "40161604",
+            "38190097",
+            "40905273",
+            "34382712",
+            "40750568",
+            "31918654",
+            "34112907",
+            "28168752",
+            "35073170",
+            "40501681",
+            "38316555",
+            "39125995",
+            "39775239",
+            "20066664",
+            "38986287",
+            "41115690",
+            "41088961",
+            "40847537",
+            "28166227",
+            "40325375",
+            "16187348",
+            "41261173",
+            "31471916",
+            "19077267",
+            "24018415",
+            "26335387",
+            "40655015",
+            "37356902",
+            "40810260",
+            "41040059",
+            "39775454",
+            "19422063",
+            "24639165",
+            "22450757",
+            "33828153",
+            "36112717",
+            "39983363",
+            "19751678",
+            "40641120",
+            "21342580",
+            "41380080",
+            "39575640",
+            "28693470",
+            "24639158",
+            "28093407",
+            "39576574",
+            "31407406",
+            "38552946",
+            "41065010",
+            "40297999",
+            "29790960",
+            "40624848",
+            "39501155",
+            "18271070",
+            "39550226",
+            "24564893",
+            "36192636",
+            "19429694",
+            "41257887",
+            "37565699",
+            "40889693",
+            "37485822",
+            "24565020",
+            "40332289",
+            "23335014",
+            "32910644",
+            "31436360",
+            "31583631",
+            "40530692",
+            "20070892",
+            "28748648"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2025/09/27 12:34",
+        "fetched_at": "2026-01-13 09:14:42"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Proteins"
+        ],
+        "journal_title": [
+            "Proteins"
+        ],
+        "pub_date": "2026 Jan",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2026"
+    }
+}

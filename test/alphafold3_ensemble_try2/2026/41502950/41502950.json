@@ -1,0 +1,219 @@
+{
+    "content": {
+        "abstract": "Cryptic pockets are binding sites that are formed or exposed upon a conformational change. They represent an important class of potentially druggable binding sites. Reliably predicting cryptic pockets capable of binding ligands, however, remains a challenge. Herein we examine the use of AlphaFold 3 (AF3) for generating realistic conformational ensembles that include known cryptic pockets. We find that AF3 is generally able to reproduce the scale of conformational change required for cryptic site formation. When given a cryptic-site ligand for the protein, AF3 predominantly predicts conformations competent to bind the ligand in the cryptic site; without the ligand, conformations lacking the cryptic pocket generally dominate. While the results may reflect a bias toward memorized structural priors, the level of detrimental memorization appears to be limited. We also show that the choice of the ligand can significantly impact the predictions, and that AF3 is able to produce models with the ligand correctly positioned. Variability in ligand position, however, suggests that generating ensembles of co-folded predictions is critical to enhancing the likelihood of obtaining a correct binding mode. Overall, AF3-generated protein-ligand structural ensembles have potential utility in cryptic-site drug discovery, and they can reveal ligands likely to bind to those sites.",
+        "keywords": [],
+        "mesh_terms": [],
+        "pub_types": [
+            "Journal Article",
+            "Preprint"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [],
+            "auids": [
+                "ORCID: 0000-0001-9685-6177"
+            ],
+            "full_names": [
+                "Lazou, Maria",
+                "Tuchscherer, Felix",
+                "Vajda, Sandor",
+                "Joseph-McCarthy, Diane"
+            ],
+            "short_names": [
+                "Lazou M",
+                "Tuchscherer F",
+                "Vajda S",
+                "Joseph-McCarthy D"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [],
+                "full_name": "Lazou, Maria",
+                "identifiers": [],
+                "short_name": "Lazou M"
+            },
+            {
+                "affiliations": [],
+                "full_name": "Tuchscherer, Felix",
+                "identifiers": [],
+                "short_name": "Tuchscherer F"
+            },
+            {
+                "affiliations": [],
+                "full_name": "Vajda, Sandor",
+                "identifiers": [],
+                "short_name": "Vajda S"
+            },
+            {
+                "affiliations": [],
+                "full_name": "Joseph-McCarthy, Diane",
+                "identifiers": [
+                    "0000-0001-9685-6177"
+                ],
+                "short_name": "Joseph-McCarthy D"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.64898/2026.01.04.697564",
+        "pmid": "41502950",
+        "title": "The Influence of Ligands on AlphaFold3 Prediction of Cryptic Pockets."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "PubMed Central",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/41502950/"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Cold Spring Harbor Laboratory",
+                "url": "https://doi.org/10.64898/2026.01.04.697564"
+            }
+        ],
+        "pmc": [
+            "12773013"
+        ],
+        "refs": [],
+        "review": [
+            "41502950",
+            "39368697",
+            "39778412",
+            "40665815",
+            "40653264",
+            "32134250",
+            "39491636",
+            "40799364"
+        ],
+        "similar": [
+            "41502950",
+            "37896786",
+            "36948209",
+            "33570386",
+            "31810712",
+            "29581267",
+            "41432299",
+            "39362060",
+            "26854760",
+            "39419500",
+            "37175495",
+            "16616932",
+            "39190764",
+            "40851426",
+            "40816097",
+            "40857166",
+            "37896850",
+            "40143071",
+            "37143823",
+            "22417279",
+            "33658550",
+            "40166350",
+            "36993233",
+            "30998331",
+            "27726386",
+            "40912020",
+            "40225838",
+            "28570708",
+            "37745525",
+            "33244830",
+            "38732174",
+            "39368697",
+            "20175916",
+            "22753506",
+            "34748701",
+            "24437606",
+            "39574676",
+            "23618839",
+            "25275445",
+            "33140952",
+            "35312477",
+            "38563746",
+            "40501681",
+            "39684679",
+            "33599485",
+            "22219723",
+            "37405652",
+            "39778412",
+            "17337005",
+            "23505360",
+            "41142756",
+            "35883418",
+            "35175753",
+            "38904218",
+            "39181864",
+            "17059826",
+            "15562988",
+            "40892042",
+            "30744991",
+            "23840299",
+            "40161846",
+            "41403459",
+            "32175736",
+            "40261926",
+            "41170922",
+            "36859488",
+            "40634710",
+            "40875922",
+            "9761470",
+            "40429853",
+            "37115636",
+            "40285358",
+            "40496892",
+            "35660160",
+            "40196532",
+            "38869513",
+            "22536870",
+            "32078861",
+            "11509344",
+            "40404166",
+            "32134250",
+            "39491636",
+            "40665815",
+            "38617283",
+            "41051642",
+            "39643640",
+            "40666967",
+            "20478076",
+            "23815589",
+            "40662794",
+            "40976968",
+            "39580516",
+            "40653264",
+            "39565312",
+            "22080553",
+            "37086438",
+            "41403059",
+            "40735632",
+            "24204237",
+            "30003468"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2026/01/08 07:13",
+        "fetched_at": "2026-01-13 09:27:16"
+    },
+    "source": {
+        "journal_abbrev": [
+            "bioRxiv"
+        ],
+        "journal_title": [
+            "bioRxiv : the preprint server for biology"
+        ],
+        "pub_date": "2026 Jan 4",
+        "pub_types": [
+            "Journal Article",
+            "Preprint"
+        ],
+        "pub_year": "2026"
+    }
+}

@@ -4,9 +4,14 @@ import time
 from typing import List, Dict, Any, Optional, Tuple, Union
 from Bio import Entrez, Medline
 import traceback
+from bs4 import BeautifulSoup
 from dataclasses import dataclass, field, asdict
 from .utils import extract_urls_from_text
 
+
+#############################################################
+#  1, Some pre-defined Data Classes for Paper Structure
+#############################################################
 
 @dataclass(frozen=True)
 class PaperIdentity:
@@ -161,7 +166,12 @@ class Paper_TextData:
     
     Args
     ----------
-        text (str): full text content of the paper
+        pub_year (str): publication year of the paper, parsed from XML <pub-date>
+        pmid (str): pubmed ID of the paper
+        pmcid (str): pmc ID of the paper
+        xml (str): raw XML content of the paper, can be exported to txt format or xml format (xml format is better here)
+        parsed_json (Dict[str, Any]): parsed JSON structure of the paper, exported to json format
+        parsed_text (str): parsed text content of the paper, can be exported to Markdown or plain text format (Md is better here, we choose Md format)
 
     Notes
     ----------
@@ -169,27 +179,40 @@ class Paper_TextData:
         - via PMC Open Access Subset (best quality, XML or PDF converted to text), we can fetch via EFetch API if we have PMC IDs
         - via publisher website (if accessible, may require subscription), we can get urls via ELink such as llinks (test successfully in some cases, but it is hard to fetch automatically due to paywalls and different formats)
         - via Other Mature Github Projects (e.g., SciHub, PaperScraper, etc.), we can integrate their APIs or methods to fetch full text given DOI or URL
+    We implement the first method here, and may consider the other two methods in future versions.
     """
-    text: str
+    pub_year: str = "" # Parsed from XML <pub-date>
+    pmid: str = ""
+    pmcid: str = ""
+    xml: str = ""
+    parsed_json: Dict[str, Any] = field(default_factory=dict)
+    parsed_text: str = ""
 
 @dataclass
 class Paper:
     Meta: Paper_MetaData
     Text: Paper_TextData
 
+
+#############################################################
+#  2, Main Class: PubmedFetcher
+#############################################################
+
+
 class PubmedFetcher:
-    def __init__(self, root_dir: str, entrez_email: str,api_key: str, batch_size: int = 50, max_retries: int = 5):
+    def __init__(self, root_dir: str, entrez_email: str,api_key: str, batch_size: int = 50, max_retries: int = 3):
         """
         Description
         -----------
         Initializes the PubmedFetcher with output directory, Entrez email, and batch size.
         It automatically sets up the internal directory structure:
-        - root_dir/
-            - papers/  (organized by PMID subfolders)
-                - {pmid}/ 
-                    - metadata.json
-                    - fulltext.txt
-                    - others
+        - root_dir/ (the main data repository, can be output directory)
+            - papers/  (or any other name you prefer)
+                - {pub_year}/
+                    - {pmid}/ 
+                        - metadata.json
+                        - fulltext.txt
+                        - others
             - LookUP tables 
             - Others
         
@@ -199,7 +222,7 @@ class PubmedFetcher:
         entrez_email (str): Email address for NCBI Entrez. It is required by NCBI and should be set to a valid email.
         api_key (str): NCBI API Key for higher rate limits (10 req/sec).
         batch_size (int): Number of articles to fetch per batch, 50~100 is recommended.
-        max_retries (int): Maximum number of retries for Entrez API calls. Default is 5.
+        max_retries (int): Maximum number of retries for Entrez API calls. Default is 3.
         
         """
         self.root_dir = root_dir # This is the ROOT of our data repository
@@ -215,11 +238,14 @@ class PubmedFetcher:
             Entrez.api_key = api_key
             print(f"✅ NCBI API Key set successfully. Rate limit increased to 10 req/s.")
         
-        # 
+        # designed for central library, but not used currently
         # make sure that root directory exists
-        if not os.path.exists(self.root_dir):
-            os.makedirs(self.root_dir)
+        # if not os.path.exists(self.root_dir):
+        #    os.makedirs(self.root_dir)
 
+    #############################################################
+    #  2.1, Query search and fetch PMIDs
+    #############################################################
 
     def query_search(self, query: str) -> Dict[str, Any]:
         """
@@ -269,7 +295,7 @@ class PubmedFetcher:
                     print(f"Search PubMed with query [{query}] failed after {self.max_retries} attempts: [{e}] at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                     traceback.print_exc()
                     return {"count": 0}
-        
+    
 
     def get_pubmedIDs_from_query(self, query_meta: Dict[str, Any], retmax: int = 500) -> List[str]:
         """
@@ -348,6 +374,12 @@ class PubmedFetcher:
         # Final count check
         print(f"Total PMIDs retrieved: {len(all_pmids)} out of {count} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
         return all_pmids
+
+
+    #############################################################
+    #  2.2, Fetch articles and parse metadata: paper_metadata only
+    #############################################################
+
 
     def fetch_from_query(self, query_meta: Dict[str, Any], output_dir: str = None) -> List[Paper_MetaData]:
         """
@@ -456,8 +488,8 @@ class PubmedFetcher:
                     # We do not save batch files anymore since it is hard to manage and update single paper
                     if parsed_articles:
                         # Change to save single paper to json for better indexing and retrieval
-                        for paper in parsed_articles:
-                            self.save_single_paper_to_json(paper, output_dir=output_dir)
+                        for paper_meta in parsed_articles:
+                            self.save_single_paper_to_json(paper_meta, output_dir=output_dir)
                         all_parsed_articles.extend(parsed_articles)
                     
                     # Polite delay to avoid overwhelming NCBI servers
@@ -495,10 +527,13 @@ class PubmedFetcher:
         - 1, This function is similar to fetch_from_query, but it fetches articles based on a provided list of PMIDs.
         - 2, It can be used to fetch batch articles or a single article by providing a list with one PMID.
         """
-        count = len(pmid_list)
+        count = len([pmid_list] if isinstance(pmid_list, str) else pmid_list)
         if count == 0:
             print("No PMIDs to fetch.")
             return []
+
+        if isinstance(pmid_list, str):
+            pmid_list = [pmid_list]
 
         print(f"Total PMIDs to fetch: {count} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
         all_parsed_articles = []
@@ -564,8 +599,8 @@ class PubmedFetcher:
                     # Save this batch as individual JSON files per paper
                     if parsed_articles:
                         # Change to save single paper to json for better indexing and retrieval
-                        for paper in parsed_articles:
-                            self.save_single_paper_to_json(paper, output_dir=output_dir)
+                        for paper_meta in parsed_articles:
+                            self.save_single_paper_to_json(paper_meta, output_dir=output_dir)
                         all_parsed_articles.extend(parsed_articles)
                     # Polite delay to avoid overwhelming NCBI servers
                     time.sleep(1)
@@ -582,7 +617,6 @@ class PubmedFetcher:
                         pass
         
         return all_parsed_articles
-
 
     def parse_medline_record(self, medline_record: Dict[str, Any]) -> Paper_MetaData:
         """
@@ -1262,230 +1296,583 @@ class PubmedFetcher:
 
         return links_map
 
-    def fetch_pmc_full_text(self, pmc_ids: Union[str, List[str]]) -> Dict[str, Dict[str, str]]:
-        """
-        Description
-        -----------
-        Fetch full text from PMC for given PMC IDs.
-        Saves both raw XML and parsed text to the output directory.
-        
-        Args
-        ----
-        pmc_ids: Union[str, List[str]]
-            A single PMC ID (e.g., "PMC8328303") or a list of PMC IDs.
-            
-        Returns
-        -------
-        Dict[str, Dict[str, str]]
-            A dictionary where keys are PMC IDs and values are dictionaries containing:
-            - 'xml_path': Path to the saved raw XML file.
-            - 'text_path': Path to the saved parsed text file.
-            - 'content': The parsed text content.
-            - 'status': 'success' or 'error'.
-            - 'error_message': Error message if failed.
-        """
-        if isinstance(pmc_ids, str):
-            pmc_ids = [pmc_ids]
-            
-        results = {}
-        
-        # Create a sub-directory for PMC data
-        # Fix: use self.root_dir instead of self.output_dir
-        pmc_dir = os.path.join(self.root_dir, "pmc_full_text")
-        if not os.path.exists(pmc_dir):
-            os.makedirs(pmc_dir)
-            
-        print(f"Fetching full text for {len(pmc_ids)} PMC articles at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
-        
-        for pmc_id in pmc_ids:
-            # Clean PMC ID (remove 'PMC' prefix if present for filename, but Entrez usually handles both)
-            clean_id = pmc_id.strip()
-            # Entrez expects just the number or PMC+number. Let's keep as is but ensure clean filename
-            safe_filename = clean_id.replace(":", "_").replace("/", "_")
-            
-            result_entry = {
-                "xml_path": "",
-                "text_path": "",
-                "content": "",
-                "status": "pending"
-            }
-            
-            for attempt in range(self.max_retries):
-                try:
-                    print(f"  -> Downloading {clean_id} (Attempt {attempt+1}/{self.max_retries})...")
-                    # 1. Fetch Raw XML
-                    # db="pmc" is crucial
-                    handle = Entrez.efetch(db="pmc", id=clean_id, retmode="xml")
-                    # Read raw bytes for saving
-                    xml_content = handle.read()
-                    handle.close()
-                    
-                    # Save Raw XML
-                    xml_filename = f"{safe_filename}.xml"
-                    xml_path = os.path.join(pmc_dir, xml_filename)
-                    with open(xml_path, "wb") as f:
-                        f.write(xml_content)
-                    result_entry["xml_path"] = xml_path
-                    
-                    # 2. Parse XML for Text
-                    # We need to re-parse the XML content using Entrez.read or similar to traverse it
-                    # Since we have bytes, we can use BytesIO
-                    from io import BytesIO
-                    handle = BytesIO(xml_content)
-                    try:
-                        xml_records = Entrez.read(handle)
-                    except Exception as e:
-                        # Fallback for some PMC XMLs that might fail strict parsing
-                        print(f"     Warning: Entrez.read failed ({e}), trying to save only XML.")
-                        result_entry["status"] = "xml_only"
-                        result_entry["error_message"] = f"XML Parsing failed: {e}"
-                        results[clean_id] = result_entry
-                        break # Exit retry loop, as this is a parsing error, not network
-
-                    if not xml_records:
-                        result_entry["status"] = "empty"
-                        results[clean_id] = result_entry
-                        break # Exit retry loop
-                        
-                    article = xml_records[0]
-                    parsed_text = self._parse_pmc_xml_to_text(article)
-                    
-                    # Save Parsed Text
-                    txt_filename = f"{safe_filename}.txt"
-                    txt_path = os.path.join(pmc_dir, txt_filename)
-                    with open(txt_path, "w", encoding="utf-8") as f:
-                        f.write(parsed_text)
-                    
-                    result_entry["text_path"] = txt_path
-                    result_entry["content"] = parsed_text
-                    result_entry["status"] = "success"
-                    
-                    break # Success, exit retry loop
-                    
-                except Exception as e:
-                    if attempt < self.max_retries - 1:
-                        print(f"     Error fetching {clean_id}: {e}. Retrying in 2s...")
-                        time.sleep(2)
-                    else:
-                        print(f"     Error fetching {clean_id} after {self.max_retries} attempts: {e}")
-                        result_entry["status"] = "error"
-                        result_entry["error_message"] = str(e)
-            
-            results[clean_id] = result_entry
-            # Be polite
-            time.sleep(0.5)
-            
-        return results
-
-    def _parse_pmc_xml_to_text(self, article: Dict[str, Any]) -> str:
-        """
-        Helper function to recursively parse PMC XML structure into readable text.
-        """
-        output_lines = []
-        
-        # Title
-        # The structure varies, sometimes it's in front -> article-meta -> title-group
-        # But Entrez.read structure is specific.
-        # Let's try to find body.
-        
-        if 'body' in article:
-            body = article['body']
-            self._recursive_section_parse(body, output_lines)
-        else:
-            output_lines.append("[No body content found in XML]")
-            
-        return "\\n".join(output_lines)
-
-    def _recursive_section_parse(self, element: Any, output_lines: List[str], level: int = 1):
-        """
-        Recursive parser for PMC XML sections.
-        """
-        # Handle 'sec' (Section)
-        # In Biopython Entrez.read, 'sec' is usually a list of dicts inside 'body' or other 'sec'
-        
-        # If we are passed the 'body' dict, it might have 'sec'
-        if isinstance(element, dict) and 'sec' in element:
-            sections = element['sec']
-            # If it's a single dict (not list), wrap it
-            if isinstance(sections, dict):
-                sections = [sections]
-                
-            for sec in sections:
-                # Title
-                title = sec.get('title', '')
-                if title:
-                    # Clean title (it might be a StringElement with attributes)
-                    title_text = str(title).strip()
-                    output_lines.append(f"\\n{'#' * level} {title_text}")
-                
-                # Paragraphs 'p'
-                if 'p' in sec:
-                    paragraphs = sec['p']
-                    if isinstance(paragraphs, dict) or isinstance(paragraphs, str):
-                        paragraphs = [paragraphs]
-                        
-                    for p in paragraphs:
-                        # p might contain mixed content. str(p) usually gets the text content in Biopython
-                        text = str(p).replace('\\n', ' ').strip()
-                        if text:
-                            output_lines.append(f"{text}")
-                
-                # Recursive call for subsections
-                self._recursive_section_parse(sec, output_lines, level + 1)
 
     # ⚠️ For batch saving, we deprecate it for now, please use single paper saving instead.
     # def save_batch_to_json(self, articles: List[Paper], start_index: int)
 
-    def save_single_paper_to_json(self, paper: Paper_MetaData, output_dir: Optional[str] = None):
+    def save_single_paper_to_json(self, paper_meta: Paper_MetaData, output_dir: Optional[str] = None):
         """
         Description
         -----------
-        Save a single paper to JSON.
-        
-        Strategy:
-        1. ALWAYS save to the Central Repository (self.root_dir) to ensure the library is up-to-date.
-           - We use a hierarchical structure in the repo: {root_dir}/{Year}/{PMID}.json
-        2. IF output_dir is provided (and different from root_dir), ALSO save a copy there.
-           - This serves as the "Project Workspace" or "Export" for specific tasks.
+        Save a single paper (metadata only) to JSON.
         
         Args
         ----
-        paper: Paper_MetaData
+        paper_meta: Paper_MetaData
             One single Paper_MetaData object to save.
         output_dir: Optional[str]
-            Directory to save the JSON file (Export). If None, only saves to Repository.
+            Directory to save the JSON file. Defaults to self.root_dir (the library).
         """
-        pmid = paper.identity.pmid if paper.identity.pmid else "unknown"
+        pmid = paper_meta.identity.pmid if paper_meta.identity.pmid else "unknown"
         filename = f"{pmid}.json"
         
-        # --- 1. Save to Central Repository (The Library) ---
-        # Hierarchy: root_dir / Year / pmid.json
-        pub_year = paper.source.pub_year if paper.source.pub_year else "Unknown_Year"
-        repo_path = os.path.join(self.root_dir, pub_year)
+        # Determine base directory: specific output_dir or default repo root_dir
+        base_dir = output_dir if output_dir else self.root_dir
         
-        if not os.path.exists(repo_path):
-            os.makedirs(repo_path, exist_ok=True)
+        # Structure: base_dir / Year / PMID / pmid.json
+        pub_year = paper_meta.source.pub_year if paper_meta.source.pub_year else "Unknown_Year"
+        
+        # Create year directory
+        year_path = os.path.join(base_dir, pub_year)
+        
+        # Create PMID directory inside year directory
+        pmid_path = os.path.join(year_path, pmid)
+
+        if not os.path.exists(pmid_path):
+            os.makedirs(pmid_path, exist_ok=True)
             
-        repo_filepath = os.path.join(repo_path, filename)
-        with open(repo_filepath, 'w', encoding='utf-8') as f:
-            json.dump(paper.to_dict(), f, ensure_ascii=False, sort_keys=True, indent=4)
+        final_filepath = os.path.join(pmid_path, filename)
+        
+        with open(final_filepath, 'w') as f:
+            json.dump(paper_meta.to_dict(), f, ensure_ascii=False, sort_keys=True, indent=4)
             
-        # --- 2. Save to Output Directory (The Project/Export) ---
-        if output_dir:
-            # If output_dir is specified, we save a copy there (usually flat, or user managed)
-            if not os.path.exists(output_dir):
-                os.makedirs(output_dir, exist_ok=True)
+        print(f"  -> Saved {pmid} metadata to {final_filepath}")
+
+
+    #############################################################
+    #  2.3, Fetch Full Text from PMC: paper_text_data only
+    #############################################################
+
+    def fetch_pmc_full_text(self, pmid_list: Union[str, List[str]], output_dir: str = None) -> List[Paper_TextData]:
+        """
+        Description
+        -----------
+        Fetch full text from PMC for given PMIDs using detailed error handling and batch processing.
+        
+        Reasons for Try-Except Blocks:
+        1. ELink/EFetch: Network calls are unstable. We use retry loops with backoff.
+        2. Parsing: XML structure is unpredictable. We wrap individual article parsing in try-except to ensures 
+           that one malformed article doesn't crash the entire batch.
+
+        Args
+        ---- 
+        pmid_list: Union[str, List[str]]
+            A single PMID (e.g., "12345678") or a list of PMIDs.
+            pmids will be mapped to PMC IDs (e.g., "PMC8328303" or "8328303")
+        output_dir: str
+            Directory to save the full text XML and parsed content (markdown and JSON). Defaults to self.root_dir. 
             
-            out_filepath = os.path.join(output_dir, filename)
+        Returns
+        -------
+        List[Paper_TextData]
+            A list of Paper_TextData objects containing the full text content for each PMID, including raw XML content, parsed json content, and parsed text content.
+        """
+
+        # 1. first check
+        count = len([pmid_list] if isinstance(pmid_list, str) else pmid_list)
+        if count == 0:
+            print("No PMIDs provided for PMC full text fetching.")
+            return []
+
+        if isinstance(pmid_list, str):
+            pmid_list = [pmid_list]
             
-            # Avoid redundant write if paths are identical
-            if os.path.abspath(out_filepath) != os.path.abspath(repo_filepath):
-                with open(out_filepath, 'w', encoding='utf-8') as f:
-                    json.dump(paper.to_dict(), f, ensure_ascii=False, sort_keys=True, indent=4)
-                print(f"  -> Saved {pmid} to Library ({pub_year}) AND Output Dir.")
+        all_paper_text_data = []
+
+        print(f"Fetching full text for {count} Pubmed articles at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+        
+        # 2. Batch Processing Loop (Outer Loop)
+        # We process PMIDs in batches to respect API limits and manage memory.
+        for start in range(0, count, self.batch_size):
+            end = min(count, start + self.batch_size)
+            batch_pmids = pmid_list[start:end]
+            print(f" -> Converting Pubmed articles {start+1} to {end} (PMID : {batch_pmids}) to PMC IDs at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+
+            # PMID -> PMCID Mapping (with Retry)
+            pmid_to_pmcid = {}
+            valid_pmcids = []
+            
+            # --- Retry Block for ELink ---
+            for attempt in range(self.max_retries):
+                try:
+                    # Map PMIDs to PMC IDs using ELink
+                    handles = Entrez.elink(dbfrom="pubmed", id=batch_pmids, db="pmc", linkname="pubmed_pmc")
+                    pmc_links = Entrez.read(handles)
+                    handles.close()
+
+                    for linkset in pmc_links:
+                        # Defensive coding: Check if IdList exists (input ID)
+                        if not linkset.get('IdList'): 
+                            continue
+                        source_id = str(linkset['IdList'][0]) 
+                        
+                        link_set_db = linkset.get('LinkSetDb', [])
+                        if link_set_db:
+                            pmc_links_list = link_set_db[0].get('Link', [])
+                            if pmc_links_list:
+                                pmc_id = str(pmc_links_list[0]['Id']) 
+                                valid_pmcids.append(pmc_id)
+                                pmid_to_pmcid[pmc_id] = source_id # Map PMC ID back to PMID for later identification
+                    
+                    break # Success: Break the retry loop immediately
+                    
+                except Exception as e:
+                    if attempt < self.max_retries - 1:
+                        print(f"     [Warning] Map PMIDs to PMC IDs failed (Attempt {attempt+1}/{self.max_retries}): {e}, Retrying in 1s...")
+                        time.sleep(1) # Backoff strategies: wait before retry
+                    else:
+                        print(f"     [Error] Map PMIDs to PMC IDs failed after {self.max_retries} attempts: {e} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                        traceback.print_exc()
+                        # skip to next batch if mapping fails completely
+                        continue
+            
+            # Reason for Continue: If mapping fails entirely, we cannot fetch anything for this batch.
+            # We skip to the next batch of PMIDs.
+            if not valid_pmcids:
+                print(f"  -> No valid PMC IDs found for current batch of PMIDs: {batch_pmids}. Skipping full text fetching for this batch at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                continue
+
+            # Fectch Full Text for valid PMC IDs only
+            print(f"  -> Mapped {len(valid_pmcids)} out of {len(batch_pmids)} PMIDs to valid PMC IDs. Downloading full text XML for these PMC IDs at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                
+            for attempt in range(self.max_retries):
+                try:
+                    # db="pmc", retmode="xml" gets the full structured text
+                    handles = Entrez.efetch(db="pmc", id=valid_pmcids, retmode="xml")
+                    pmc_full_xml = handles.read() # Read raw string
+                    handles.close()
+                    
+                    break # Success: Break the retry loop immediately
+
+                except Exception as e:
+                    if attempt < self.max_retries - 1:
+                        print(f"     [Warning] EFetch full text XML failed (Attempt {attempt+1}/{self.max_retries}): {e}, Retrying in 1s...")
+                        time.sleep(1) # Backoff strategies: wait before retry
+                    else:
+                        print(f"     [Error] EFetch full text XML failed after {self.max_retries} attempts: {e} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                        traceback.print_exc()
+                        # skip to next batch if fetching fails completely
+                        continue
+
+            # Parse Big XML using BeautifulSoup
+            # This part handles the "Big XML" containing multiple articles.
+            try:
+                soup = BeautifulSoup(pmc_full_xml, 'xml')
+                articles = soup.find_all('article')
+                
+                # Iterate over each article found in the batch XML
+                for article in articles:
+                    # Reason for Try-Except inside loop:
+                    # Isolation. If one article has malformed XML or unexpected structure, 
+                    # we log the error and CONTINUE to the next article, rather than crashing the whole batch.
+                    try:
+                        # 1. Identify the paper (Double Check)
+                        # We need to know which PMID this XML belongs to.
+                        current_pmid = None
+                        
+                        # Strategy 1: Look for explicit PMID in metadata
+                        pmid_node = article.find("article-id", {"pub-id-type": "pmid"})
+                        if pmid_node:
+                            current_pmid = pmid_node.text.strip()
+                        
+                        # Strategy 2: Look for PMC ID and map back using our pmid_to_pmcid map
+                        if not current_pmid:
+                            pmc_node = article.find("article-id", {"pub-id-type": "pmcid"})
+                            if pmc_node:
+                                found_pmc = pmc_node.text.strip()
+                                # The map keys are usually raw IDs, check compatibility
+                                if found_pmc in pmid_to_pmcid:
+                                    current_pmid = pmid_to_pmcid[found_pmc]
+                                    
+                        if not current_pmid:
+                            # If we can't identify the paper, we can't safely store it.
+                            continue
+                            
+                        # 2. Extract Full Text (Hierarchical JSON structure)
+                        # Utilizing the BeautifulSoup logic
+                        # Json file is hierarchical representation of the article structure, suitable for structured analysis
+                        # For example, we can extract the same section between different papers easily and compare them
+                        parsed_json = self._parse_soup_to_json(article)
+                        
+                        # 3. Flatten for text view (for NLP or reading)
+                        # Plain text is a flattened version suitable for reading or NLP tasks, we use markdown-like formatting
+                        # Just markdown file 
+                        # Markdown file is suitable for human reading and simple text-based NLP tasks, and easy to be used in AI models
+                        parsed_text = self._flatten_json_to_text(parsed_json)
+
+                        # 4. Create Data Object
+                        current_pmc = ""
+                        pmc_node = article.find("article-id", {"pub-id-type": "pmcid"})
+                        if pmc_node: 
+                            current_pmc = pmc_node.text.strip()
+                        
+                        # 5. Extract Publication Year from <pub-date>
+                        current_pub_year = "Unknown_Year"
+                        pub_date = article.find("pub-date").find("year")
+                        if pub_date:
+                            current_pub_year = pub_date.text.strip()
+
+                        paper_text_data = Paper_TextData(
+                            pmid=current_pmid,
+                            pmcid=current_pmc,
+                            xml=str(article), # Store just this article's XML
+                            parsed_json=parsed_json,
+                            parsed_text=parsed_text,
+                            pub_year=current_pub_year # ADDED from XML
+                        )
+                        
+                        # save this paper's text data to output directory
+                        self.save_single_paper_text(paper_text_data, output_dir=output_dir)
+
+                        all_paper_text_data.append(paper_text_data)
+                        
+                    except Exception as inner_e:
+                        print(f"     [Error] Failed to parse one article in batch: {inner_e} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                        traceback.print_exc()
+                        continue
+                        
+            except Exception as e:
+                # This catches errors if the entire XML batch is invalid (unlikely but possible)
+                print(f"     [Error] Failed to parse XML batch with BeautifulSoup: {e} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                traceback.print_exc()
+                continue
+                
+        return all_paper_text_data
+    
+
+    def _parse_soup_to_json(self, article_soup: Any) -> Dict[str, Any]:
+        """
+        Parses a single <article> soup object into hierarchical JSON.
+        Robust strategy:
+        1. Parse Title.
+        2. Parse Abstract (Handle structured <sec> or flat text).
+        3. Parse Body (Recursive <sec>).
+        4. Parse Back (Recursive <sec> for Acknowledgements, etc.).
+        """
+        paper_structure = {
+            "title": "N/A",
+            "body": []
+        }
+        
+        # 1. Title
+        title_node = article_soup.find('article-title')
+        if title_node:
+            paper_structure["title"] = title_node.get_text().strip()
+
+        # 2. Abstract
+        abstract_node = article_soup.find('abstract')
+        if abstract_node:
+            # Check for structured sections in abstract
+            # Note: recursive=False is safer to avoid finding sections inside other things erroneously
+            abs_sections = abstract_node.find_all("sec", recursive=False)
+            if abs_sections:
+                for sec in abs_sections:
+                    parsed_sec = self._parse_section_recursive(sec)
+                    if parsed_sec["title"] == "N/A":
+                        parsed_sec["title"] = "Abstract Section"
+                    paper_structure["body"].append(parsed_sec)
             else:
-                print(f"  -> Saved {pmid} to Library ({pub_year}).")
-        else:
-            print(f"  -> Saved {pmid} to Library ({pub_year}).")
+                # If no top-level sections, it might be flat paragraphs or unstructured
+                # Sometimes structured abstracts use <title> directly without <sec> (rare but possible)
+                
+                # Check for title
+                abs_title_node = abstract_node.find('title')
+                abs_title = abs_title_node.get_text().strip() if abs_title_node else "Abstract"
+                
+                # Collect paragraphs
+                ps = abstract_node.find_all('p')
+                if ps:
+                    content = [p.get_text().strip() for p in ps]
+                    paper_structure["body"].append({
+                        "title": abs_title,
+                        "content": content,
+                        "subsections": []
+                    })
+                else:
+                    # Fallback to full text if no p tags
+                    text = abstract_node.get_text(separator=' ', strip=True)
+                    if text:
+                        paper_structure["body"].append({
+                            "title": abs_title,
+                            "content": [text], 
+                            "subsections": []
+                        })
+
+        # 3. Body
+        body = article_soup.find('body')
+        if body:
+            # Standard JATS: <body > <sec> ... </sec> </body>
+            body_sections = body.find_all("sec", recursive=False)
+            if body_sections:
+                for sec in body_sections:
+                     # Prevent parsing sub-sections as top-level
+                    if sec.parent and sec.parent.name == 'sec':
+                         continue
+                    paper_structure["body"].append(self._parse_section_recursive(sec))
+            else:
+                # No sections? Look for direct paragraphs (e.g. Letters)
+                direct_paragraphs = body.find_all("p", recursive=False)
+                if direct_paragraphs:
+                    content = [p.get_text().strip() for p in direct_paragraphs]
+                    paper_structure["body"].append({
+                        "title": "Main Text", 
+                        "content": content,
+                        "subsections": []
+                    })
+
+        # 4. Back Matter (Acknowledgements, etc.)
+        back = article_soup.find('back')
+        if back:
+            # <ack> <sec> ...
+            # Process standard sections in back
+            back_sections = back.find_all("sec", recursive=False)
+            for sec in back_sections:
+                parsed = self._parse_section_recursive(sec)
+                paper_structure["body"].append(parsed)
+                
+            # Specifically check for <ack>
+            ack = back.find('ack')
+            if ack:
+                # ack usually contains title and p
+                ack_title_node = ack.find('title')
+                ack_title = ack_title_node.get_text().strip() if ack_title_node else "Acknowledgements"
+                ack_ps = ack.find_all('p')
+                if ack_ps:
+                    content = [p.get_text().strip() for p in ack_ps]
+                    paper_structure["body"].append({
+                        "title": ack_title,
+                        "content": content,
+                        "subsections": []
+                    })
+
+        return paper_structure
+
+    def _parse_section_recursive(self, sec_element: Any) -> Dict[str, Any]:
+        """
+        Description
+        -----------
+        Recursive helper for section parsing.
+        Traverses <sec> -> <title>/<p>/<sec> structure.
+        Every section is represented as a dictionary with title, content, and its subsections.
+
+        Args
+        ----
+        sec_element: Any
+            A BeautifulSoup element representing a <sec> node.
+
+        Returns
+        -------
+        Dict[str, Any]
+            A dictionary representing the section with title, content, and subsections.
+        """
+        section_data = {
+            "title": "N/A",
+            "content": [],
+            "subsections": []
+        }
+
+        # Title
+        title_node = sec_element.find("title", recursive=False)
+        if title_node:
+            section_data["title"] = title_node.get_text().strip()
+
+        # Content (Paragraphs)
+        # Only direct <p> children, not nested in subsections, so we use recursive=False here
+        direct_paragraphs = sec_element.find_all("p", recursive=False)
+        section_data["content"] = [p.get_text().strip() for p in direct_paragraphs]
+
+        # Subsections (Recursive)
+        sub_sections = sec_element.find_all("sec", recursive=False)
+        for sub in sub_sections:
+            child_data = self._parse_section_recursive(sub)
+            section_data["subsections"].append(child_data)
+
+        return section_data
+        
+    def _flatten_json_to_text(self, json_data: Dict[str, Any]) -> str:
+        """
+        Converts the hierarchical JSON into a flat text string for simple viewing (Markdown-like).
+        """
+        lines = []
+        
+        # Article Title (H1)
+        # We explicitly mark it as Title
+        article_title = json_data.get('title', 'N/A')
+        lines.append(f"# {article_title}")
+        lines.append("") # Blank line after title
+        
+        def recurse(sections, level):
+            for sec in sections:
+                # Section Title (Markdown Header)
+                header_prefix = "#" * level
+                title = sec.get('title', 'No Title')
+                
+                # Add a blank line before section title for better structure
+                lines.append("") 
+                lines.append(f"{header_prefix} {title}")
+                
+                # Content (Paragraphs)
+                if sec['content']:
+                    for para in sec['content']:
+                        # Clean up newlines: replace newlines with spaces and strip extra spaces
+                        # This fixes issues where citations like [1] cause line breaks
+                        clean_para = str(para).replace('\n', ' ').strip()
+                        
+                        # Indent paragraphs slightly (2 spaces) to visually distinguish from headers
+                        lines.append(f"  {clean_para}")
+                        lines.append("") # Add blank line after paragraph for readability
+                
+                # Subsections (Recursive)
+                recurse(sec['subsections'], level + 1)
+        
+        # Body sections start from Level 2 (##), assuming Paper Title is Level 1 (#)
+        recurse(json_data.get('body', []), level=2)
+        
+        return "\n".join(lines)
+
+    def save_single_paper_text(self, paper_text: Paper_TextData, output_dir: Optional[str] = None):
+        """      
+        Description
+        -----------
+        Save a single paper's text data (full text) to structured files (XML, Markdown, JSON).
+
+        Args
+        ----
+        paper_text: Paper_TextData
+            One single Paper_TextData object to save. It contains raw XML, parsed JSON, and parsed Markdown.
+        output_dir: Optional[str]
+            Directory to save the text files. Defaults to self.root_dir (the library).
+        
+        """
+
+        # Determine base directory: specific output_dir or default repo root_dir
+        base_dir = output_dir if output_dir else self.root_dir
+
+        # structure: base_dir / Year / PMID / files
+        pmid = paper_text.pmid if paper_text.pmid else "unknown"
+        pub_year = paper_text.pub_year if paper_text.pub_year else "Unknown_Year"
+
+        # create year directory
+        year_path = os.path.join(base_dir, pub_year)
+        # create PMID directory inside year directory
+        pmid_path = os.path.join(year_path, pmid)
+
+        if not os.path.exists(pmid_path):
+            os.makedirs(pmid_path, exist_ok=True)
+
+        # 1. Save Raw XML
+        if paper_text.xml:
+            xml_filename = f"{pmid}.xml"
+            xml_filepath = os.path.join(pmid_path, xml_filename)
+            with open(xml_filepath, 'w') as f:
+                f.write(paper_text.xml)
+            print(f"  -> Saved XML to {xml_filepath}")
+
+        # 2. Save Parsed JSON
+        if paper_text.parsed_json:
+            json_filename = f"{pmid}_parsed.json"
+            json_filepath = os.path.join(pmid_path, json_filename)
+            with open(json_filepath, 'w') as f:
+                json.dump(paper_text.parsed_json, f, ensure_ascii=False, indent=2)
+            print(f"  -> Saved parsed JSON to {json_filepath}")
+
+        # 3. Save Parsed Text (Markdown)
+        if paper_text.parsed_text:
+            md_filename = f"{pmid}_parsed.md"
+            md_filepath = os.path.join(pmid_path, md_filename)
+            with open(md_filepath, 'w') as f:
+                f.write(paper_text.parsed_text)
+            print(f"  -> Saved parsed text to {md_filepath}")
+
+
+    #############################################################
+    #  2.4, Fetch articles and parse metadata + full text together
+    #############################################################
+        
+    def fetch_and_save_full_papers(self, query: str = None, pmid_list: List[str] = None, output_dir: str = None) -> List[Paper]:
+        """
+        Description
+        -----------
+        Integrated fetching of full papers (metadata + full text) based on either a search query or a list of PMIDs.
+        we first fetch metadata, then fetch full text from PMC, and finally save both metadata (as JSON) and text (TXT, MARKDOWN, JSON) to structured directories.
 
         
+        Args
+        ----
+        query: str
+            A PubMed search query string. If provided, PMIDs will be fetched based on this query.
+        pmid_list: List[str]
+            A list of PubMed IDs to fetch. If provided, these PMIDs will be used directly.
+        output_dir: str
+            Directory to save the fetched papers. If not provided, defaults to self.root_dir.
+        
+        Returns
+        -------
+            List[Paper]: A list of Paper objects containing both metadata and text data.
+
+        Notes
+        -----
+        - 1, we store the results in following structure:
+            output_dir / Year / PMID / pmid.json (metadata)
+                                    / pmid.txt (raw xml)
+                                    / pmid_parsed.md (markdown text)
+                                    / pmid_parsed.json (parsed json)
+
+        """
+        if not query and not pmid_list:
+            raise ValueError("Must provide either query or pmid_list")
+            
+        # 1. Fetch Metadata
+        print("=== Step 1: Fetching Metadata ===")
+        meta_data_list: List[Paper_MetaData] = []
+        if query:
+            query_record = self.query_search(query)
+            meta_data_list = self.fetch_from_query(query_record, output_dir) 
+        else:
+            meta_data_list = self.fetch_from_pmid_list(pmid_list, output_dir)
+            
+        if not meta_data_list:
+            print("No papers found.")
+            return []
+
+        # Collect PMIDs for text fetching
+        found_pmids = [p.identity.pmid for p in meta_data_list if p.identity.pmid]
+        
+        # 2. Fetch Full Text (returns List[Paper_TextData])
+        # This function fetches, parses (using robust soup parser), and saves text data to Year/PMID/ code.
+        print("\n=== Step 2: Fetching Full Text ===")
+        text_data_list = self.fetch_pmc_full_text(found_pmids, output_dir=output_dir)
+        
+        # Convert list to map for easy lookup
+        text_map = {td.pmid: td for td in text_data_list if td.pmid}
+        
+        # 3. Process and Compile
+        print("\n=== Step 3: Processing and Saving Metadata ===")
+        complete_papers = []
+        
+        for meta in meta_data_list:
+            pmid = meta.identity.pmid
+            pm_text = text_map.get(pmid, Paper_TextData())
+            
+            # Combine
+            paper = Paper(Meta=meta, Text=pm_text)
+            complete_papers.append(paper)
+            
+            # 3.1 Extract URLs from full text and update metadata
+            if pm_text.parsed_text:
+                extracted_urls = extract_urls_from_text(pm_text.parsed_text, "full_text")
+                if extracted_urls:
+                    print(f"  -> Extracted {len(extracted_urls)} URLs from full text for PMID {pmid}")
+                    # Update metadata links
+                    if not meta.links:
+                        meta.links = PaperLinks()
+                    
+                    # Merge extracting URLs, avoiding duplicates if possible (though straightforward extend is okay here)
+                    meta.links.text_mined.extend(extracted_urls)
+            
+            # 3.2 Save Metadata (JSON)
+            # Text data (xml, parsed_json, parsed_md) is already saved by fetch_pmc_full_text
+            # We save metadata NOW (save twice) because it might have been updated with mined links
+            self.save_single_paper_to_json(meta, output_dir)
+                
+        return complete_papers

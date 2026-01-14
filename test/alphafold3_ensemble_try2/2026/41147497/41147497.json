@@ -1,0 +1,306 @@
+{
+    "content": {
+        "abstract": "The CASP16 Ensemble Prediction experiment assessed advances in methods for modeling proteins, nucleic acids, and their complexes in multiple conformational states. Targets included systems with experimental structures determined in two or three states, evaluated by direct comparison to experimental coordinates, as well as domain-linker-domain (D-L-D) targets assessed against statistical models generated from NMR and SAXS data. This paper focuses on the former class of multi-state targets. Ten ensembles were released as community challenges, including ligand-induced conformational changes, protein-DNA complexes, a trimeric protein, a stem-loop RNA, and multiple oligomeric states of a single RNA. For five targets, some groups produced reasonably accurate models of both reference states (best TM-score > 0.75). However, with the exception of one protein-ligand complex (T1214), where an apo structure was available as a template, predictors generally failed to capture key structural details distinguishing the states. Overall, accuracy was significantly lower than for single-state targets in other CASP experiments. The most successful approaches generated multiple AlphaFold2 models using enhanced multiple sequence alignments and sampling protocols, followed by model quality-based selection. Although the AlphaFold3 server performed well on several targets, individual groups outperformed it in specific cases. By contrast, predictions for one protein-DNA complex, three RNA targets, and multiple oligomeric RNA states consistently fell short (TM-score < 0.75). These results highlight both progress and persistent challenges in multi-state prediction. Despite recent advances, accurate modeling of conformational ensembles, particularly RNA and large multimeric assemblies, remains an important frontier for structural biology.",
+        "keywords": [
+            "AlphaFold2",
+            "CASP",
+            "conformational dynamics",
+            "deep learning",
+            "multi-state modeling prediction",
+            "nucleic acids",
+            "protein structure prediction"
+        ],
+        "mesh_terms": [
+            "*Models, Molecular",
+            "Protein Conformation",
+            "*Computational Biology/methods",
+            "*Proteins/chemistry",
+            "*RNA/chemistry",
+            "*DNA/chemistry",
+            "Nucleic Acid Conformation",
+            "*Software",
+            "Scattering, Small Angle",
+            "Ligands",
+            "Algorithms"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA.",
+                "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA.",
+                "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA.",
+                "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA.",
+                "Institute for Bioscience and Biotechnology Research, Rockville, Maryland, USA.",
+                "Department of Cell Biology and Molecular Genetics, University of Maryland, College Park, Maryland, USA.",
+                "Genome Center, University of California, Davis, California, USA.",
+                "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA."
+            ],
+            "auids": [
+                "ORCID: 0000-0002-2107-4899",
+                "ORCID: 0000-0002-0335-1573",
+                "ORCID: 0000-0002-5795-4273",
+                "ORCID: 0000-0002-3374-786X",
+                "ORCID: 0000-0002-3012-2282",
+                "ORCID: 0000-0001-5066-7178",
+                "ORCID: 0000-0002-9440-3059"
+            ],
+            "full_names": [
+                "Dube, Namita",
+                "Ramelot, Theresa A",
+                "Benavides, Tiburon L",
+                "Huang, Yuanpeng J",
+                "Moult, John",
+                "Kryshtafovych, Andriy",
+                "Montelione, Gaetano T"
+            ],
+            "short_names": [
+                "Dube N",
+                "Ramelot TA",
+                "Benavides TL",
+                "Huang YJ",
+                "Moult J",
+                "Kryshtafovych A",
+                "Montelione GT"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA."
+                ],
+                "full_name": "Dube, Namita",
+                "identifiers": [
+                    "0000-0002-2107-4899"
+                ],
+                "short_name": "Dube N"
+            },
+            {
+                "affiliations": [
+                    "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA."
+                ],
+                "full_name": "Ramelot, Theresa A",
+                "identifiers": [
+                    "0000-0002-0335-1573"
+                ],
+                "short_name": "Ramelot TA"
+            },
+            {
+                "affiliations": [
+                    "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA."
+                ],
+                "full_name": "Benavides, Tiburon L",
+                "identifiers": [
+                    "0000-0002-5795-4273"
+                ],
+                "short_name": "Benavides TL"
+            },
+            {
+                "affiliations": [
+                    "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA."
+                ],
+                "full_name": "Huang, Yuanpeng J",
+                "identifiers": [
+                    "0000-0002-3374-786X"
+                ],
+                "short_name": "Huang YJ"
+            },
+            {
+                "affiliations": [
+                    "Institute for Bioscience and Biotechnology Research, Rockville, Maryland, USA.",
+                    "Department of Cell Biology and Molecular Genetics, University of Maryland, College Park, Maryland, USA."
+                ],
+                "full_name": "Moult, John",
+                "identifiers": [
+                    "0000-0002-3012-2282"
+                ],
+                "short_name": "Moult J"
+            },
+            {
+                "affiliations": [
+                    "Genome Center, University of California, Davis, California, USA."
+                ],
+                "full_name": "Kryshtafovych, Andriy",
+                "identifiers": [
+                    "0000-0001-5066-7178"
+                ],
+                "short_name": "Kryshtafovych A"
+            },
+            {
+                "affiliations": [
+                    "Dept of Chemistry and Chemical Biology, Center for Biotechnology and Interdisciplinary Sciences, Rensselaer Polytechnic Institute, Troy, New York, USA."
+                ],
+                "full_name": "Montelione, Gaetano T",
+                "identifiers": [
+                    "0000-0002-9440-3059"
+                ],
+                "short_name": "Montelione GT"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1002/prot.70065",
+        "pmid": "41147497",
+        "title": "Modeling Alternative Conformational States in CASP16."
+    },
+    "links": {
+        "cites": [
+            "41178755",
+            "40890987",
+            "40655015"
+        ],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Wiley",
+                "url": "https://doi.org/10.1002/prot.70065"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Miscellaneous",
+                "linkname": "",
+                "provider": "NCI CPTAC Assay Portal",
+                "url": "https://assays.cancer.gov/non-CPTAC-3704"
+            }
+        ],
+        "pmc": [],
+        "refs": [],
+        "review": [
+            "41147497",
+            "39125995",
+            "39936575",
+            "41088961",
+            "30840442",
+            "25765781",
+            "38398585",
+            "18078545",
+            "40987097"
+        ],
+        "similar": [
+            "41147497",
+            "40950168",
+            "41014267",
+            "41165252",
+            "40820259",
+            "40851426",
+            "41170922",
+            "40452318",
+            "40762404",
+            "40751131",
+            "41178755",
+            "41249430",
+            "40905273",
+            "31589784",
+            "40488225",
+            "41313605",
+            "41478913",
+            "40778521",
+            "41102979",
+            "40502139",
+            "40325375",
+            "39684679",
+            "37920879",
+            "41045049",
+            "40847537",
+            "40501681",
+            "29314274",
+            "40750568",
+            "41047853",
+            "40874652",
+            "34240477",
+            "40161604",
+            "38190097",
+            "40661500",
+            "40655015",
+            "40585263",
+            "27122118",
+            "39125995",
+            "39868559",
+            "37905971",
+            "37872703",
+            "41115690",
+            "39936575",
+            "29071742",
+            "41088961",
+            "40641120",
+            "40810260",
+            "29235142",
+            "19183478",
+            "36641210",
+            "30840442",
+            "14579342",
+            "22095648",
+            "24564893",
+            "41040059",
+            "31571280",
+            "37876231",
+            "17918726",
+            "34455641",
+            "35536281",
+            "29127686",
+            "37650367",
+            "32910644",
+            "40890987",
+            "41105726",
+            "27701776",
+            "24150928",
+            "34337786",
+            "28913931",
+            "34176161",
+            "24344053",
+            "19754142",
+            "31612567",
+            "39485490",
+            "19925806",
+            "34453465",
+            "26343917",
+            "29605933",
+            "41065010",
+            "41380080",
+            "27081927",
+            "39237205",
+            "18694757",
+            "40195868",
+            "38865109",
+            "25765781",
+            "39574675",
+            "34107023",
+            "24838571",
+            "31589781",
+            "39337567",
+            "26068747",
+            "29134679",
+            "41028845",
+            "38398585",
+            "18078545",
+            "40045015",
+            "24854765",
+            "30985027",
+            "35238773"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2025/10/28 12:29",
+        "fetched_at": "2026-01-13 09:27:16"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Proteins"
+        ],
+        "journal_title": [
+            "Proteins"
+        ],
+        "pub_date": "2026 Jan",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2026"
+    }
+}

@@ -1,0 +1,219 @@
+{
+    "content": {
+        "abstract": "In recent years, a variety of three-dimensional structure prediction tools, including AlphaFold2, AlphaFold3, I-TASSER, C-I-TASSER, Phyre2, ESMFold, and RoseTTAFold, have been employed in the investigation of intrinsically disordered proteins. However, a comprehensive validation of these tools specifically for intrinsically disordered proteins has yet to be conducted. In this study, we utilize AlphaFold2, AlphaFold3, I-TASSER, C-I-TASSER, Phyre2, ESMFold, and RoseTTAFold to predict the structure of a model intrinsically disordered alpha-synuclein protein. Additionally, extensive replica exchange molecular dynamics simulations of the intrinsically disordered protein are conducted. The resulting structures from both structure prediction tools and replica exchange molecular dynamics simulations are analyzed for radius of gyration, secondary and tertiary structure properties, as well as Calpha and Halpha chemical shift values. A comparison of the obtained results with experimental data reveals that replica exchange molecular dynamics simulations provide results in excellent agreement with experimental observations. However, none of the structure prediction tools utilized in this study can fully capture the structural characteristics of the model intrinsically disordered protein. This study shows that a cluster of ensembles are required for intrinsically disordered proteins. Artificial-intelligence based structure prediction tools such as AlphaFold3 and C-I-TASSER could benefit from stochastic sampling or Monte Carlo simulations for generating an ensemble of structures for intrinsically disordered proteins.",
+        "keywords": [
+            "AlphaFold2",
+            "AlphaFold3",
+            "C-I-TASSER",
+            "ESMFold",
+            "I-TASSER",
+            "Intrinsically disordered proteins",
+            "Phyre2",
+            "REMD simulations",
+            "RoseTTAFold"
+        ],
+        "mesh_terms": [
+            "*alpha-Synuclein/chemistry",
+            "*Molecular Dynamics Simulation",
+            "*Intrinsically Disordered Proteins/chemistry",
+            "Protein Conformation",
+            "Humans"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Turkish-German University, Molecular Biotechnology, Sahinkaya Caddesi, No. 106, Beykoz, Istanbul 34820, Turkey. Electronic address: weber@tau.edu.tr."
+            ],
+            "auids": [],
+            "full_names": [
+                "Coskuner-Weber, Orkid"
+            ],
+            "short_names": [
+                "Coskuner-Weber O"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Turkish-German University, Molecular Biotechnology, Sahinkaya Caddesi, No. 106, Beykoz, Istanbul 34820, Turkey. Electronic address: weber@tau.edu.tr."
+                ],
+                "full_name": "Coskuner-Weber, Orkid",
+                "identifiers": [],
+                "short_name": "Coskuner-Weber O"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1016/j.ijbiomac.2024.133813",
+        "pmid": "38996889",
+        "title": "Structures prediction and replica exchange molecular dynamics simulations of alpha-synuclein: A case study for intrinsically disordered proteins."
+    },
+    "links": {
+        "cites": [
+            "41474770",
+            "40565227",
+            "40332289",
+            "40296445",
+            "39935356"
+        ],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Elsevier Science",
+                "url": "https://linkinghub.elsevier.com/retrieve/pii/S0141-8130(24)04618-X"
+            }
+        ],
+        "pmc": [],
+        "refs": [],
+        "review": [
+            "38996889",
+            "29364151",
+            "41022992",
+            "30840442",
+            "33167839",
+            "38124369",
+            "36463772",
+            "30979035",
+            "34680048",
+            "26387099",
+            "32828471",
+            "28003858",
+            "35976160",
+            "21530234"
+        ],
+        "similar": [
+            "38996889",
+            "31903719",
+            "30933517",
+            "32623047",
+            "29364151",
+            "35950933",
+            "25367087",
+            "36232847",
+            "33580600",
+            "31809054",
+            "30134733",
+            "35562983",
+            "30184304",
+            "38018910",
+            "30250773",
+            "36084124",
+            "33623120",
+            "38910419",
+            "19576220",
+            "24763499",
+            "35543707",
+            "22947936",
+            "36827446",
+            "32859072",
+            "30917118",
+            "30840442",
+            "27366858",
+            "33167839",
+            "28092832",
+            "38275091",
+            "32696368",
+            "31402649",
+            "26052838",
+            "37760106",
+            "33581430",
+            "31552948",
+            "24589355",
+            "27727496",
+            "38124369",
+            "36463772",
+            "30708285",
+            "31241933",
+            "25331250",
+            "35298814",
+            "31699336",
+            "35174713",
+            "37108059",
+            "31548393",
+            "27588692",
+            "28841239",
+            "38739602",
+            "31136713",
+            "31951234",
+            "39056166",
+            "30979035",
+            "21289072",
+            "34656328",
+            "36379279",
+            "25871264",
+            "37509083",
+            "39046235",
+            "37646172",
+            "29734867",
+            "23607785",
+            "31477241",
+            "23912807",
+            "34680048",
+            "25375525",
+            "32525675",
+            "29548979",
+            "32184088",
+            "35725761",
+            "32816485",
+            "29270108",
+            "36641212",
+            "23162382",
+            "30306288",
+            "32497661",
+            "23214618",
+            "29603125",
+            "29571687",
+            "31470695",
+            "26387099",
+            "23811057",
+            "39190324",
+            "34152264",
+            "32828471",
+            "34845619",
+            "35912724",
+            "36674958",
+            "30134683",
+            "25919886",
+            "29573987",
+            "34680137",
+            "27159632",
+            "28003858",
+            "37607621",
+            "31375817",
+            "24995857",
+            "26575776",
+            "36934808",
+            "38646777",
+            "37904608",
+            "35502992",
+            "39285530",
+            "38060268",
+            "38238291"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2024/07/13 07:44",
+        "fetched_at": "2026-01-13 09:27:16"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Int J Biol Macromol"
+        ],
+        "journal_title": [
+            "International journal of biological macromolecules"
+        ],
+        "pub_date": "2024 Sep",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2024"
+    }
+}

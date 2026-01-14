@@ -1,0 +1,265 @@
+{
+    "content": {
+        "abstract": "The structural characterization of protein-RNA complexes remains a major challenge in molecular biology, owing to the imbalance between the enormous number of known sequences and the limited set of experimentally determined structures. While sequence repositories now hold hundreds of millions of entries, the Protein Data Bank contains only ~250,000 resolved structures, with fewer than 7000 involving protein-RNA assemblies. Deep learning approaches have emerged as powerful solutions to bridge this gap. In particular, AlphaFold3 now enables modeling of proteins, nucleic acids, and their complexes, reaching unprecedented accuracy. Beyond its computational strengths, AlphaFold3 is transforming the way spectroscopic techniques are applied in structural biology. Indeed such spectroscopic methods greatly benefit from accurate in silico models, which provide essential frameworks to guide experimental design, interpret ambiguous data, and refine structural ensembles. Conversely, spectroscopic data can validate and improve computational predictions, creating a powerful synergy between AI-based modeling and experimental spectroscopy. In this chapter, we describe the principles and workflow of AlphaFold3 and illustrate its integration with spectroscopic methods. We also highlight current limitations, including reduced accuracy for long or flexible RNAs, insufficient representation of diverse RNA families in training datasets, and the static nature of predictions that overlook conformational heterogeneity. Looking forward, the combination of expanding structural databases, methodological advances in spectroscopy, and continuous refinement of deep learning models promises to further accelerate structural insights.",
+        "keywords": [
+            "AlphaFold3",
+            "Computational modeling",
+            "Deep learning",
+            "Protein",
+            "RNA complexes",
+            "Spectroscopy methods",
+            "Structure prediction"
+        ],
+        "mesh_terms": [
+            "*Deep Learning",
+            "*RNA/chemistry/metabolism",
+            "*Computational Biology/methods",
+            "Models, Molecular",
+            "Software",
+            "*RNA-Binding Proteins/chemistry/metabolism",
+            "Nucleic Acid Conformation",
+            "Databases, Protein",
+            "Protein Conformation"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "RNA packaging and viral assembly, UPR 9002 - ARN, IBMC - CNRS - Universite de Strasbourg, Strasbourg Cedex, France.",
+                "RNA packaging and viral assembly, UPR 9002 - ARN, IBMC - CNRS - Universite de Strasbourg, Strasbourg Cedex, France. s.bernacchi@ibmc-cnrs.unistra.fr."
+            ],
+            "auids": [],
+            "full_names": [
+                "Long, Mathieu",
+                "Bernacchi, Serena"
+            ],
+            "short_names": [
+                "Long M",
+                "Bernacchi S"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "RNA packaging and viral assembly, UPR 9002 - ARN, IBMC - CNRS - Université de Strasbourg, Strasbourg Cedex, France."
+                ],
+                "full_name": "Long, Mathieu",
+                "identifiers": [],
+                "short_name": "Long M"
+            },
+            {
+                "affiliations": [
+                    "RNA packaging and viral assembly, UPR 9002 - ARN, IBMC - CNRS - Université de Strasbourg, Strasbourg Cedex, France. s.bernacchi@ibmc-cnrs.unistra.fr."
+                ],
+                "full_name": "Bernacchi, Serena",
+                "identifiers": [],
+                "short_name": "Bernacchi S"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1007/978-1-0716-5084-4_17",
+        "pmid": "41478913",
+        "title": "Deep Learning in Modeling Tools for Structural Insights into Protein-RNA Complexes, Bridging Computational and Spectroscopic Approaches."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Springer",
+                "url": "https://doi.org/10.1007/978-1-0716-5084-4_17"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Miscellaneous",
+                "linkname": "",
+                "provider": "NCI CPTAC Assay Portal",
+                "url": "https://assays.cancer.gov/CPTAC-1548"
+            }
+        ],
+        "pmc": [],
+        "refs": [
+            "40121710",
+            "39868559",
+            "39837861",
+            "39607707",
+            "39283059",
+            "39146886",
+            "38718835",
+            "37996753",
+            "37992167",
+            "37774136",
+            "37656749",
+            "37555230",
+            "37060758",
+            "36347890",
+            "35537451",
+            "34923703",
+            "34533838",
+            "34282049",
+            "34265844",
+            "34050498",
+            "32881101",
+            "31942072",
+            "30143552",
+            "29695867",
+            "22323224",
+            "19710185",
+            "10745012",
+            "10592235"
+        ],
+        "review": [
+            "41478913",
+            "39936575",
+            "40332289",
+            "40121710",
+            "40819486",
+            "34050498",
+            "40987097",
+            "28315749",
+            "38795564",
+            "31067608",
+            "39456178",
+            "22019768",
+            "39125995",
+            "34074028",
+            "39933218",
+            "24217996",
+            "26540053",
+            "24083976",
+            "39983363",
+            "40815918",
+            "33001599",
+            "38986287",
+            "39321802",
+            "39283059"
+        ],
+        "similar": [
+            "41478913",
+            "39936575",
+            "41313605",
+            "41147497",
+            "41014267",
+            "38552946",
+            "40332289",
+            "40121710",
+            "40778521",
+            "40819486",
+            "41178755",
+            "40762404",
+            "39868559",
+            "40961942",
+            "39956358",
+            "22488669",
+            "39384035",
+            "39625988",
+            "39576589",
+            "41183118",
+            "30933978",
+            "34050498",
+            "34929730",
+            "38648189",
+            "40987097",
+            "28315749",
+            "38795564",
+            "20300450",
+            "31067608",
+            "39952928",
+            "39456178",
+            "22019768",
+            "27665602",
+            "11469858",
+            "39125995",
+            "40452318",
+            "28349426",
+            "19835626",
+            "39506080",
+            "34074028",
+            "31483777",
+            "39312142",
+            "27662342",
+            "39933218",
+            "40751131",
+            "34905768",
+            "39572716",
+            "39961524",
+            "27266516",
+            "40488225",
+            "39079742",
+            "26776208",
+            "39312137",
+            "22488990",
+            "20718048",
+            "40062613",
+            "26254826",
+            "24217996",
+            "26540053",
+            "24083976",
+            "29186336",
+            "39956833",
+            "41166421",
+            "19357098",
+            "38987471",
+            "22086767",
+            "39317944",
+            "39775239",
+            "38781245",
+            "41081541",
+            "39983363",
+            "36641210",
+            "40954298",
+            "41261173",
+            "24854765",
+            "40815918",
+            "23912807",
+            "41165252",
+            "25726460",
+            "39702717",
+            "33001599",
+            "40279361",
+            "23618839",
+            "40851426",
+            "38986287",
+            "32476596",
+            "39312140",
+            "39837861",
+            "36112717",
+            "19754142",
+            "39321802",
+            "37920879",
+            "40104673",
+            "39283059",
+            "29284541",
+            "41170922",
+            "40553326",
+            "39576578",
+            "30898165",
+            "40661027"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2026/01/02 00:33",
+        "fetched_at": "2026-01-13 09:27:16"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Methods Mol Biol"
+        ],
+        "journal_title": [
+            "Methods in molecular biology (Clifton, N.J.)"
+        ],
+        "pub_date": "2026",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2026"
+    }
+}

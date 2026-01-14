@@ -15,7 +15,9 @@ dependencies = [
   "biopython",
   "typer",
   "pandas",
-  "requests"
+  "requests",
+  "bs4",
+  "lxml"
 ]
 
 [project.scripts]

@@ -1,0 +1,642 @@
+{
+    "content": {
+        "abstract": "One of the key features of intrinsically disordered regions (IDRs) is their ability to interact with a broad range of partner molecules. Multiple types of interacting IDRs were identified including molecular recognition fragments (MoRFs), short linear sequence motifs (SLiMs), and protein-, nucleic acids- and lipid-binding regions. Prediction of binding IDRs in protein sequences is gaining momentum in recent years. We survey 38 predictors of binding IDRs that target interactions with a diverse set of partners, such as peptides, proteins, RNA, DNA and lipids. We offer a historical perspective and highlight key events that fueled efforts to develop these methods. These tools rely on a diverse range of predictive architectures that include scoring functions, regular expressions, traditional and deep machine learning and meta-models. Recent efforts focus on the development of deep neural network-based architectures and extending coverage to RNA, DNA and lipid-binding IDRs. We analyze availability of these methods and show that providing implementations and webservers results in much higher rates of citations/use. We also make several recommendations to take advantage of modern deep network architectures, develop tools that bundle predictions of multiple and different types of binding IDRs, and work on algorithms that model structures of the resulting complexes.",
+        "keywords": [
+            "CAID, Critical Assessment of Intrinsic Disorder",
+            "CASP, Critical Assessment of techniques for protein Structure Prediction",
+            "DL, deep learning",
+            "Disordered binding regions",
+            "IDP, intrinsically disordered protein",
+            "IDR, intrinsically disordered region",
+            "Intrinsic disorder",
+            "ML, machine learning",
+            "MoRF, molecular recognition fragment",
+            "Molecular recognition features",
+            "NN, neural network",
+            "Protein-lipid interactions",
+            "Protein-nucleic acids interactions",
+            "Protein-protein interactions",
+            "SLiM, short linear sequence motif",
+            "Short linear motifs"
+        ],
+        "mesh_terms": [],
+        "pub_types": [
+            "Journal Article",
+            "Review"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Department of Computer Science, Virginia Commonwealth University, USA.",
+                "Department of Biological Sciences, Purdue University, West Lafayette, IN 47907, USA.",
+                "Department of Computer Science, Purdue University, West Lafayette, IN 47907, USA.",
+                "Department of Computer Science, Virginia Commonwealth University, USA."
+            ],
+            "auids": [],
+            "full_names": [
+                "Basu, Sushmita",
+                "Kihara, Daisuke",
+                "Kurgan, Lukasz"
+            ],
+            "short_names": [
+                "Basu S",
+                "Kihara D",
+                "Kurgan L"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Department of Computer Science, Virginia Commonwealth University, USA."
+                ],
+                "full_name": "Basu, Sushmita",
+                "identifiers": [],
+                "short_name": "Basu S"
+            },
+            {
+                "affiliations": [
+                    "Department of Biological Sciences, Purdue University, West Lafayette, IN 47907, USA.",
+                    "Department of Computer Science, Purdue University, West Lafayette, IN 47907, USA."
+                ],
+                "full_name": "Kihara, Daisuke",
+                "identifiers": [],
+                "short_name": "Kihara D"
+            },
+            {
+                "affiliations": [
+                    "Department of Computer Science, Virginia Commonwealth University, USA."
+                ],
+                "full_name": "Kurgan, Lukasz",
+                "identifiers": [],
+                "short_name": "Kurgan L"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1016/j.csbj.2023.02.018",
+        "pmid": "36851914",
+        "title": "Computational prediction of disordered binding regions."
+    },
+    "links": {
+        "cites": [
+            "41023685",
+            "40756902",
+            "40728621",
+            "40728620",
+            "40728619",
+            "40427554",
+            "40325419",
+            "39833102",
+            "39819844",
+            "39811792",
+            "39576584",
+            "39576583",
+            "39576581",
+            "39243101",
+            "39202449",
+            "38213902",
+            "38146538",
+            "38067593",
+            "37933852",
+            "37892124",
+            "37740110",
+            "37140058",
+            "36979465"
+        ],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Elsevier Science",
+                "url": "https://linkinghub.elsevier.com/retrieve/pii/S2001-0370(23)00064-8"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "PubMed Central",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/36851914/"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Europe PubMed Central",
+                "url": "https://europepmc.org/abstract/MED/36851914"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Research Materials",
+                "linkname": "",
+                "provider": "NCI CPTC Antibody Characterization Program",
+                "url": "https://antibodies.cancer.gov/detail/CPTC-FHL1-1"
+            }
+        ],
+        "pmc": [
+            "9957716"
+        ],
+        "refs": [
+            "36212542",
+            "35883444",
+            "35832624",
+            "35609776",
+            "35489069",
+            "35367597",
+            "35356546",
+            "34905768",
+            "34894985",
+            "34850135",
+            "34830151",
+            "34513334",
+            "34487791",
+            "34487138",
+            "34453465",
+            "34391457",
+            "34290238",
+            "34265844",
+            "34029314",
+            "33875888",
+            "33875885",
+            "33537726",
+            "33267349",
+            "33237329",
+            "33211854",
+            "33119734",
+            "32961749",
+            "32920048",
+            "32696352",
+            "32621228",
+            "32517331",
+            "32173600",
+            "32089835",
+            "32019410",
+            "31889261",
+            "31870849",
+            "31713636",
+            "31680160",
+            "31660849",
+            "31616935",
+            "31521235",
+            "31504193",
+            "31486849",
+            "31415569",
+            "31329574",
+            "31207240",
+            "31007871",
+            "30979084",
+            "30941889",
+            "30866736",
+            "30865258",
+            "30657889",
+            "30550782",
+            "30324701",
+            "30298407",
+            "30099775",
+            "29860432",
+            "29806170",
+            "29626537",
+            "29360926",
+            "29257115",
+            "29136219",
+            "29042212",
+            "29028931",
+            "28818512",
+            "28776938",
+            "28701416",
+            "28601983",
+            "28589442",
+            "28516009",
+            "28516007",
+            "28453683",
+            "28430951",
+            "28394890",
+            "28387819",
+            "28369666",
+            "28367366",
+            "28334258",
+            "28232901",
+            "28155710",
+            "27911701",
+            "27787828",
+            "27787820",
+            "27587688",
+            "27473064",
+            "27174932",
+            "27037624",
+            "26651072",
+            "26517836",
+            "26426014",
+            "26297830",
+            "26287166",
+            "26109352",
+            "26073260",
+            "25792551",
+            "25637562",
+            "25531225",
+            "25391399",
+            "25361972",
+            "25246432",
+            "25038412",
+            "24939692",
+            "24926813",
+            "24727949",
+            "24532081",
+            "24093637",
+            "24019881",
+            "23946100",
+            "23942625",
+            "23534882",
+            "23203878",
+            "23170892",
+            "22977176",
+            "22702725",
+            "22689782",
+            "22661649",
+            "22624656",
+            "22543956",
+            "22190692",
+            "22079048",
+            "22067451",
+            "21928402",
+            "21909575",
+            "21874205",
+            "21874190",
+            "21646342",
+            "21622654",
+            "21152297",
+            "20823312",
+            "20509167",
+            "20007729",
+            "19774619",
+            "19717576",
+            "19597536",
+            "19594871",
+            "19412530",
+            "19260013",
+            "18991772",
+            "18573080",
+            "18426805",
+            "17973494",
+            "17912346",
+            "17488107",
+            "17145717",
+            "16935303",
+            "16889422",
+            "16187360",
+            "16156658",
+            "16094605",
+            "15955783",
+            "15955779",
+            "15943979",
+            "15769473",
+            "15310560",
+            "15044227",
+            "15019783",
+            "14579348",
+            "14579346",
+            "12824398",
+            "11381529",
+            "11093259",
+            "10869041",
+            "10592235",
+            "10550212",
+            "10493868",
+            "9254694",
+            "7952898"
+        ],
+        "review": [
+            "36851914",
+            "31521235",
+            "31007871",
+            "39789785",
+            "35356546",
+            "35098694",
+            "39811792",
+            "36959451",
+            "35350759",
+            "35139468",
+            "34390736",
+            "34418423",
+            "28589442",
+            "33248138",
+            "26387106",
+            "22280012",
+            "31709918",
+            "34285781",
+            "36648282",
+            "34303077",
+            "36754681",
+            "37329857",
+            "39600309",
+            "36250006",
+            "23988124",
+            "35754369",
+            "41311232"
+        ],
+        "similar": [
+            "36851914",
+            "31521235",
+            "36458437",
+            "31007871",
+            "34905768",
+            "27881680",
+            "36908253",
+            "38166858",
+            "35356546",
+            "35883444",
+            "35098694",
+            "32696395",
+            "37709009",
+            "38701796",
+            "31504193",
+            "36210722",
+            "36959451",
+            "39032884",
+            "32702119",
+            "35350759",
+            "35139468",
+            "30324701",
+            "25424537",
+            "38895487",
+            "30866736",
+            "31660849",
+            "34894985",
+            "39253485",
+            "22689782",
+            "34390736",
+            "32824743",
+            "36272675",
+            "31207240",
+            "34418423",
+            "34179096",
+            "30878482",
+            "28589442",
+            "35767567",
+            "31889261",
+            "24727949",
+            "33248138",
+            "31797595",
+            "26149687",
+            "24678734",
+            "25391399",
+            "26387106",
+            "22280012",
+            "33866372",
+            "21152297",
+            "16935303",
+            "32696352",
+            "36291695",
+            "31908009",
+            "33087759",
+            "29042212",
+            "32743159",
+            "35404090",
+            "31709918",
+            "37674132",
+            "27787828",
+            "32535960",
+            "32112084",
+            "23142703",
+            "34285781",
+            "35310482",
+            "31307006",
+            "23233352",
+            "38459060",
+            "33036302",
+            "25637562",
+            "33779503",
+            "32553192",
+            "26651072",
+            "36304335",
+            "30717652",
+            "29360926",
+            "29080786",
+            "34487138",
+            "37498545",
+            "34825861",
+            "36648282",
+            "38812466",
+            "28002650",
+            "21879107",
+            "36315580",
+            "33267376",
+            "27179590",
+            "33406091",
+            "39383002",
+            "33936509",
+            "34303077",
+            "32743208",
+            "24093637",
+            "28257525",
+            "24668165",
+            "35094056",
+            "27391701",
+            "34656333",
+            "36754681",
+            "37329857",
+            "32756939",
+            "25057855",
+            "38275292",
+            "38712287",
+            "37583961",
+            "38540707",
+            "38213902",
+            "37761851",
+            "39279844",
+            "39072126",
+            "38915510",
+            "38883712",
+            "36504386",
+            "39071356",
+            "34235484",
+            "36250006",
+            "37609146",
+            "39311135",
+            "36829461",
+            "35487971",
+            "35754369",
+            "38404711",
+            "39091826",
+            "37986812",
+            "36824878",
+            "37961106",
+            "37310199",
+            "39135888",
+            "36945496",
+            "37246642",
+            "38370681",
+            "32613009",
+            "37621223",
+            "37099901",
+            "32973187"
+        ],
+        "text_mined": [
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://biomine.cs.vcu.edu/servers/MoRFpred/316"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "https://gsponerlab.msl.ubc.ca/software/morf_chibi/75"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://bioinf.cs.ucl.ac.uk/disopred638"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "https://gsponerlab.msl.ubc.ca/software/morf_chibi/35"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://biomine.cs.vcu.edu/servers/fMoRFpred/112"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "https://gsponerlab.msl.ubc.ca/software/morf_chibi/93"
+            },
+            {
+                "category": "GitHub",
+                "source": "full_text",
+                "url": "https://github.com/roneshsharma/Predict-MoRFs23"
+            },
+            {
+                "category": "GitHub",
+                "source": "full_text",
+                "url": "https://github.com/roneshsharma/MoRFpred-plus/wiki/MoRFpred-plus41"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://www.alok-ai-lab.com/tools/opal/50"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://www.alok-ai-lab.com/tools/opal_plus/27"
+            },
+            {
+                "category": "GitHub",
+                "source": "full_text",
+                "url": "https://github.com/HHJHgithub/MoRFs_MPM6"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://sparks-lab.org/jack/server/SPOT-MoRF/index.php24"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://anchor.enzim.hu566"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://iupred2a.elte.hu754"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "https://idrbind.msl.ubc.ca/1"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://bioware.ucd.ie/∼compass/biowareweb/Server_pages/api.php173"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://www.slimsuite.unsw.edu.au/servers/slimprob.php10"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://bioware.ucd.ie/∼compass/biowareweb/77"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://bioware.ucd.ie/∼compass/biowareweb/74"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://bioware.ucd.ie/∼compass/biowareweb/84"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://rest.slimsuite.unsw.edu.au/qslimfinder17"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://slim.icr.ac.uk/slimsearch/68"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://biomine.cs.vcu.edu/servers/DisoRDPbind/118"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://biomine.cs.vcu.edu/servers/flDPnn/37"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "https://www.csuligroup.com/DeepDISOBind/6"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://biomine.cs.vcu.edu/servers/DisoLipPred/6"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "http://memdis.ttk.hu/"
+            },
+            {
+                "category": "GitHub",
+                "source": "full_text",
+                "url": "https://github.com/brgenzim/MemDis1"
+            },
+            {
+                "category": "General",
+                "source": "full_text",
+                "url": "https://idpcentral.org/caid"
+            }
+        ]
+    },
+    "metadata": {
+        "entrez_date": "2023/03/01 06:00",
+        "fetched_at": "2026-01-14 21:50:55"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Comput Struct Biotechnol J"
+        ],
+        "journal_title": [
+            "Computational and structural biotechnology journal"
+        ],
+        "pub_date": "2023",
+        "pub_types": [
+            "Journal Article",
+            "Review"
+        ],
+        "pub_year": "2023"
+    }
+}

@@ -1,0 +1,275 @@
+{
+    "content": {
+        "abstract": "AlphaFold2 and AlphaFold3 have revolutionized protein structure prediction by enabling high-accuracy structure predictions for most single-chain proteins. However, obtaining high-quality predictions for difficult targets with shallow or noisy multiple sequence alignments and complicated multi-domain architectures remains challenging. We present MULTICOM4, an integrative structure prediction system that uses diverse MSA generation, large-scale model sampling, and an ensemble model quality assessment strategy to improve model generation and ranking of AlphaFold2 and AlphaFold3. In the 16th Critical Assessment of Techniques for Protein Structure Prediction, our predictors built on MULTICOM4 ranked among the top out of 120 predictors in tertiary structure prediction and outperformed a standard AlphaFold3 predictor. Our best predictor achieved an average TM-score of 0.902 for 84 CASP16 domains, with top-1 predictions reaching high accuracy (TM-score>0.9) for 73.8% and correct folds (TM-score>0.5) for 97.6% of domains. For best-of-top-5 predictions, all domains were correctly folded. The results show that MSA engineering using different sequence databases, alignment tools, and domain segmentation along with extensive model sampling is critical to generate accurate structural models. Combining complementary QA methods with model clustering further improves ranking reliability. These advances provide practical strategies for modeling difficult single-chain proteins in structural biology and drug discovery.",
+        "keywords": [],
+        "mesh_terms": [
+            "*Computational Biology/methods",
+            "Protein Folding",
+            "Models, Molecular",
+            "*Protein Structure, Tertiary",
+            "*Proteins/chemistry",
+            "Sequence Alignment/methods",
+            "*Software",
+            "Sequence Analysis, Protein/methods",
+            "Algorithms"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Department of Electrical Engineering & Computer Science, University of Missouri, Columbia, MO, USA.",
+                "NextGen Precision Health, University of Missouri, Columbia, MO, USA.",
+                "Department of Electrical Engineering & Computer Science, University of Missouri, Columbia, MO, USA.",
+                "NextGen Precision Health, University of Missouri, Columbia, MO, USA.",
+                "Department of Electrical Engineering & Computer Science, University of Missouri, Columbia, MO, USA. chengji@missouri.edu.",
+                "NextGen Precision Health, University of Missouri, Columbia, MO, USA. chengji@missouri.edu."
+            ],
+            "auids": [
+                "ORCID: 0000-0003-0305-2853"
+            ],
+            "full_names": [
+                "Liu, Jian",
+                "Neupane, Pawan",
+                "Cheng, Jianlin"
+            ],
+            "short_names": [
+                "Liu J",
+                "Neupane P",
+                "Cheng J"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Department of Electrical Engineering & Computer Science, University of Missouri, Columbia, MO, USA.",
+                    "NextGen Precision Health, University of Missouri, Columbia, MO, USA."
+                ],
+                "full_name": "Liu, Jian",
+                "identifiers": [],
+                "short_name": "Liu J"
+            },
+            {
+                "affiliations": [
+                    "Department of Electrical Engineering & Computer Science, University of Missouri, Columbia, MO, USA.",
+                    "NextGen Precision Health, University of Missouri, Columbia, MO, USA."
+                ],
+                "full_name": "Neupane, Pawan",
+                "identifiers": [],
+                "short_name": "Neupane P"
+            },
+            {
+                "affiliations": [
+                    "Department of Electrical Engineering & Computer Science, University of Missouri, Columbia, MO, USA. chengji@missouri.edu.",
+                    "NextGen Precision Health, University of Missouri, Columbia, MO, USA. chengji@missouri.edu."
+                ],
+                "full_name": "Cheng, Jianlin",
+                "identifiers": [
+                    "0000-0003-0305-2853"
+                ],
+                "short_name": "Cheng J"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1038/s42003-025-08960-6",
+        "pmid": "41249430",
+        "title": "Boosting AlphaFold protein tertiary structure prediction through MSA engineering and extensive model sampling and ranking in CASP16."
+    },
+    "links": {
+        "cites": [
+            "41178755",
+            "40672254"
+        ],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Nature Publishing Group",
+                "url": "https://doi.org/10.1038/s42003-025-08960-6"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "PubMed Central",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/41249430/"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Research Materials",
+                "linkname": "",
+                "provider": "NCI CPTC Antibody Characterization Program",
+                "url": "https://antibodies.cancer.gov/detail/CPTC-TOP1-1"
+            }
+        ],
+        "pmc": [
+            "12623963"
+        ],
+        "refs": [
+            "40799498",
+            "40452318",
+            "39123049",
+            "38718835",
+            "38167654",
+            "37949999",
+            "37679431",
+            "36927031",
+            "36734597",
+            "34873061",
+            "34453465",
+            "34291486",
+            "34282049",
+            "34265844",
+            "31942072",
+            "31696235",
+            "31676016",
+            "31399549",
+            "31235882",
+            "30395287",
+            "29959318",
+            "29228193",
+            "29228185",
+            "27899574",
+            "25391399",
+            "24225321",
+            "23047561",
+            "22198341",
+            "20718988",
+            "18542861",
+            "11159328"
+        ],
+        "review": [
+            "41249430",
+            "38316555",
+            "38986287",
+            "40973394",
+            "39970826",
+            "40332289"
+        ],
+        "similar": [
+            "41249430",
+            "40661500",
+            "40585263",
+            "40452318",
+            "40161604",
+            "41170922",
+            "41014267",
+            "40820259",
+            "40851426",
+            "40501681",
+            "40762404",
+            "41147497",
+            "40751131",
+            "37650367",
+            "19077267",
+            "40847537",
+            "17553833",
+            "40874652",
+            "40799498",
+            "41104652",
+            "34599769",
+            "37949999",
+            "34382712",
+            "26369671",
+            "40502139",
+            "38316555",
+            "34331351",
+            "31344267",
+            "19701941",
+            "41313605",
+            "20066664",
+            "19777061",
+            "34240477",
+            "34162922",
+            "30985027",
+            "28093407",
+            "38986287",
+            "24637808",
+            "41165252",
+            "40950168",
+            "14579329",
+            "34455641",
+            "37293073",
+            "37679431",
+            "40195868",
+            "19722267",
+            "40810260",
+            "40488225",
+            "25431331",
+            "28748648",
+            "41047853",
+            "37565699",
+            "18452616",
+            "34291486",
+            "18487301",
+            "16187361",
+            "26445311",
+            "41201924",
+            "16187348",
+            "18215316",
+            "37321965",
+            "41257887",
+            "24018415",
+            "34884640",
+            "41081541",
+            "35034173",
+            "39052676",
+            "29082551",
+            "17452345",
+            "22069035",
+            "41454828",
+            "41325379",
+            "40778521",
+            "31365149",
+            "31471916",
+            "40973394",
+            "39970826",
+            "15359422",
+            "27028541",
+            "17570145",
+            "14579328",
+            "29139163",
+            "22168237",
+            "40332289",
+            "21301031",
+            "23812990",
+            "40696837",
+            "33850214",
+            "26713437",
+            "41045049",
+            "26343917",
+            "38913900",
+            "31918654",
+            "40067116",
+            "20470364",
+            "15939584",
+            "22545707",
+            "17680686",
+            "41261173",
+            "31634369"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2025/11/18 00:28",
+        "fetched_at": "2026-01-13 09:27:16"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Commun Biol"
+        ],
+        "journal_title": [
+            "Communications biology"
+        ],
+        "pub_date": "2025 Nov 17",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2025"
+    }
+}

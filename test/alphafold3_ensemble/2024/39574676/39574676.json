@@ -1,0 +1,244 @@
+{
+    "content": {
+        "abstract": "Numerous proteins perform their functions by transitioning between various structures. Understanding the conformational ensembles associated with these states is essential for uncovering crucial mechanistic aspects that regulate protein function. In this study, we utilized AlphaFold3 (AF3) to investigate the structural dynamics and mechanisms of enzymes involved in DNA homeostasis, using NAD-dependent Taq ligases and human DNA Ligase 1 as a case example. Modifying the input parameters for AF3 yielded detailed conformational states of a DNA-binding enzyme, thereby offering enhanced mechanistic insights. We applied AF3 to model the various stages of thermophilic Taq DNA ligase activity, from its ground state to substrate-bound complexes, revealing significant mobility in the N-terminal adenylation and C-terminal BRCT domains. These detailed structural ensembles provided novel insights into the enzyme's behavior during DNA repair, underscoring the potential of AF3 in elucidating mechanistic details critical for therapeutic and biotechnological targeting. Extending this approach to human LIG1, we examined its end-joining activity on double-strand breaks (DSBs) with short 3' and 5' overhangs. In alignment with published experimental data, AF3 conformational ensembles indicated LIG1 has lower catalytic efficiency for 5' overhangs due to suboptimal DNA positioning within the catalytic site, demonstrating AF3's capability to capture subtle yet functionally significant conformational differences by generating conformational ensembles capturing greater structural variance.",
+        "keywords": [],
+        "mesh_terms": [],
+        "pub_types": [
+            "Journal Article",
+            "Preprint"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Department of Immunology and Microbiology, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                "Department of Immunology and Microbiology, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                "Department of Immunology and Microbiology, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                "Center for Viral Systems Biology, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                "Multi-Omics Vaccine Evaluation Consortium, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                "Scripps Consortium for HIV/AIDS Vaccine Development, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                "San Diego Center for AIDS Research, The Scripps Research Institute, La Jolla, CA 92037 USA."
+            ],
+            "auids": [],
+            "full_names": [
+                "Mishra, Nitesh",
+                "Callaghan, Sean",
+                "Briney, Bryan"
+            ],
+            "short_names": [
+                "Mishra N",
+                "Callaghan S",
+                "Briney B"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Department of Immunology and Microbiology, The Scripps Research Institute, La Jolla, CA 92037 USA."
+                ],
+                "full_name": "Mishra, Nitesh",
+                "identifiers": [],
+                "short_name": "Mishra N"
+            },
+            {
+                "affiliations": [
+                    "Department of Immunology and Microbiology, The Scripps Research Institute, La Jolla, CA 92037 USA."
+                ],
+                "full_name": "Callaghan, Sean",
+                "identifiers": [],
+                "short_name": "Callaghan S"
+            },
+            {
+                "affiliations": [
+                    "Department of Immunology and Microbiology, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                    "Center for Viral Systems Biology, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                    "Multi-Omics Vaccine Evaluation Consortium, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                    "Scripps Consortium for HIV/AIDS Vaccine Development, The Scripps Research Institute, La Jolla, CA 92037 USA.",
+                    "San Diego Center for AIDS Research, The Scripps Research Institute, La Jolla, CA 92037 USA."
+                ],
+                "full_name": "Briney, Bryan",
+                "identifiers": [],
+                "short_name": "Briney B"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1101/2024.11.07.622521",
+        "pmid": "39574676",
+        "title": "Decoding protein dynamicity in DNA ligase activity through deep learning-based structural ensembles."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "PubMed Central",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/39574676/"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Research Materials",
+                "linkname": "",
+                "provider": "NCI CPTC Antibody Characterization Program",
+                "url": "https://antibodies.cancer.gov/detail/CPTC-LIG1-1"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Miscellaneous",
+                "linkname": "",
+                "provider": "NCI CPTAC Assay Portal",
+                "url": "https://assays.cancer.gov/CPTAC-1495"
+            },
+            {
+                "attribute": "free resource",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Cold Spring Harbor Laboratory",
+                "url": "https://doi.org/10.1101/2024.11.07.622521"
+            }
+        ],
+        "pmc": [
+            "11581005"
+        ],
+        "refs": [],
+        "review": [
+            "39574676",
+            "34056803",
+            "26110316",
+            "10946235",
+            "40402396",
+            "9539976",
+            "37714297",
+            "11983065",
+            "31630206",
+            "40264953",
+            "24656613",
+            "24013086",
+            "16381177"
+        ],
+        "similar": [
+            "39574676",
+            "34056803",
+            "26110316",
+            "29284038",
+            "15449954",
+            "30496552",
+            "36625284",
+            "38883239",
+            "18281464",
+            "23994631",
+            "38586032",
+            "38689205",
+            "33376217",
+            "28751376",
+            "10946235",
+            "9705934",
+            "14747344",
+            "39159820",
+            "26787905",
+            "15498778",
+            "23825968",
+            "39116039",
+            "9539976",
+            "37714297",
+            "28696258",
+            "39374888",
+            "39362060",
+            "11983065",
+            "38992439",
+            "39684679",
+            "38869513",
+            "25457772",
+            "39404052",
+            "31630206",
+            "32966823",
+            "38522520",
+            "18585102",
+            "26520366",
+            "19332554",
+            "26318124",
+            "34352203",
+            "38718860",
+            "39510190",
+            "38766188",
+            "40264953",
+            "15987676",
+            "40225838",
+            "23620595",
+            "37712998",
+            "40166350",
+            "21390132",
+            "40253368",
+            "10679327",
+            "33264406",
+            "11029705",
+            "23555685",
+            "17557328",
+            "38617283",
+            "24931550",
+            "19923722",
+            "16023671",
+            "11368162",
+            "27235626",
+            "21533177",
+            "23602515",
+            "12517771",
+            "24656613",
+            "16820169",
+            "11325928",
+            "38703206",
+            "17963495",
+            "10419478",
+            "16844179",
+            "30718283",
+            "9259561",
+            "21652643",
+            "40235641",
+            "33330937",
+            "24013086",
+            "15611176",
+            "10698952",
+            "38895274",
+            "18064046",
+            "25942368",
+            "26787901",
+            "24748665",
+            "22949672",
+            "15520013",
+            "15848142",
+            "8879276",
+            "22093869",
+            "38798650",
+            "17720816",
+            "35695492",
+            "22815933",
+            "23967291",
+            "39337567",
+            "36827388",
+            "16381177",
+            "16082219"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2024/11/22 11:25",
+        "fetched_at": "2026-01-13 09:14:42"
+    },
+    "source": {
+        "journal_abbrev": [
+            "bioRxiv"
+        ],
+        "journal_title": [
+            "bioRxiv : the preprint server for biology"
+        ],
+        "pub_date": "2024 Nov 7",
+        "pub_types": [
+            "Journal Article",
+            "Preprint"
+        ],
+        "pub_year": "2024"
+    }
+}
