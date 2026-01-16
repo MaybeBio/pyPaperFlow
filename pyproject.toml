@@ -8,16 +8,18 @@ name = "pyPaperFlow"
 dynamic = ["version"]
 description = "Automated paper fetching and analysis platform."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.13.5"
 license = "MIT"
-authors = [{name = "Your Name"}]
+authors = [
+    { name = "Joe Hoye Dow", email = "luxunisgod123@gmail.com" }
+]
 
 dependencies = [
-  "biopython",
-  "typer",
-  "pandas",
-  "requests",
-  "bs4>+0.0.2",
+  "biopython>=1.85",
+  "typer>=0.20.0",
+  "pandas>=2.3.1",
+  "requests>=2.32.4",
+  "bs4>=0.0.2",
   "lxml>=6.0.2",
   "pydantic>=2.12.5"
 ]
