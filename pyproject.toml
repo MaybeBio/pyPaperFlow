@@ -1,10 +1,11 @@
 [build-system]
-requires = ["hatchling>=1.25"]
+requires = ["hatchling >= 1.26"]
 build-backend = "hatchling.build"
 
 [project]
 name = "pyPaperFlow"
-version = "0.1.0"
+# version = "0.1.0"
+dynamic = ["version"]
 description = "Automated paper fetching and analysis platform."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -16,8 +17,9 @@ dependencies = [
   "typer",
   "pandas",
   "requests",
-  "bs4",
-  "lxml"
+  "bs4>+0.0.2",
+  "lxml>=6.0.2",
+  "pydantic>=2.12.5"
 ]
 
 [project.scripts]
