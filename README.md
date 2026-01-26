@@ -1,5 +1,9 @@
 # pyPaperFlow - An Automatic Paper Reading Platform
 
+ ![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg) 
+ [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) 
+
+
 [English Version](README.md) | [Chinese Version 中文版本](README_zh.md)
 
 An automated platform designed to streamline the process of scientific literature reading. From retrieval and collection to structured extraction and intelligent analysis, this tool aims to assist researchers in managing and digesting large volumes of papers efficiently.
