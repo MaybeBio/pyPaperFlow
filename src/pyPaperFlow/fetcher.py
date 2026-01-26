@@ -849,6 +849,8 @@ class PubmedFetcher:
             traceback.print_exc()
             return None
 
+    
+    '''
     def fetch_linked_data_for_single_pmid(self, pmid: str) -> Dict[str, PaperLinks]:
         """
         Description
@@ -1050,6 +1052,8 @@ class PubmedFetcher:
                     traceback.print_exc()    
 
         return links_map
+    '''
+        
 
     def fetch_linked_data_for_batch_pmid(self, pmids: List[str]) -> Dict[str, PaperLinks]:
         """
@@ -1081,6 +1085,10 @@ class PubmedFetcher:
 
         # --- Part A: Internal Entrez Links (Discovery & Fetching) ---
         # 1. Discovery (acheck)
+
+        # ⚠️1️⃣ this part is deprecated, since we always find errors in batch acheck for large pmid lists
+        # so we just directly use the default useful links below
+        '''
         # Note: acheck returns LinkSetDbHistory
         acheck_results = []
         for attempt in range(self.max_retries):
@@ -1098,7 +1106,7 @@ class PubmedFetcher:
                     print(f"    [Warning] Batch Elink acheck failed for {len(pmids)} PMIDs after {self.max_retries} attempts at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...  Skipping discovery step (using default links). Error: {e}")
                     # Continue even if acheck fails
                     acheck_results = []
-
+        '''
 
         # Collect all unique LinkNames to query
         # tuple() like (db, linkname)
@@ -1116,6 +1124,10 @@ class PubmedFetcher:
         # pmc free full text articles / PMC 免费全文
         links_to_fetch.add(("pmc", "pubmed_pmc"))
 
+
+        # ⚠️1️⃣ this part is deprecated, since we always find errors in batch acheck for large pmid lists
+        # so we just directly use the default useful links above
+        ''' 
         if acheck_results:
             for linkset in acheck_results:
                 try:
@@ -1145,6 +1157,7 @@ class PubmedFetcher:
                 except Exception as e:
                     print(f"    Warning: Failed to parse batch acheck results for {len(pmids)} PMIDs: [{e}] at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                     traceback.print_exc()
+        '''
 
         print(f"  -> Deep mining {len(links_to_fetch)} types of internal connections for {len(pmids)} PMIDs at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
 
@@ -1343,7 +1356,7 @@ class PubmedFetcher:
     #  2.3, Fetch Full Text from PMC: paper_text_data only
     #############################################################
 
-    def fetch_pmc_full_text(self, pmid_list: Union[str, List[str]], output_dir: str = None) -> List[Paper_TextData]:
+    def fetch_pmc_full_text(self, pmid_list: Union[str, List[str]], output_dir: str = None, pmid_year_map: Dict[str, str] = None) -> List[Paper_TextData]:
         """
         Description
         -----------
@@ -1360,7 +1373,11 @@ class PubmedFetcher:
             A single PMID (e.g., "12345678") or a list of PMIDs.
             pmids will be mapped to PMC IDs (e.g., "PMC8328303" or "8328303")
         output_dir: str
-            Directory to save the full text XML and parsed content (markdown and JSON). Defaults to self.root_dir. 
+            Directory to save the full text XML and parsed content (markdown and JSON). Defaults to self.root_dir.
+        pmid_year_map: Dict[str, str]
+            A dictionary mapping PMID to its publication year. 
+            If provided, this year will be used for folder organization instead of the one parsed from XML.
+            This ensures consistency with metadata saving.
             
         Returns
         -------
@@ -1507,10 +1524,17 @@ class PubmedFetcher:
                             current_pmc = pmc_node.text.strip()
                         
                         # 5. Extract Publication Year from <pub-date>
+                        # Priority: 
+                        # 1. Use passed in pmid_year_map (ensure consistency with metadata)
+                        # 2. Parse from XML
                         current_pub_year = "Unknown_Year"
-                        pub_date = article.find("pub-date").find("year")
-                        if pub_date:
-                            current_pub_year = pub_date.text.strip()
+                        
+                        if pmid_year_map and current_pmid in pmid_year_map:
+                             current_pub_year = pmid_year_map[current_pmid]
+                        else:
+                            pub_date = article.find("pub-date").find("year")
+                            if pub_date:
+                                current_pub_year = pub_date.text.strip()
 
                         paper_text_data = Paper_TextData(
                             pmid=current_pmid,
@@ -1838,10 +1862,18 @@ class PubmedFetcher:
         # Collect PMIDs for text fetching
         found_pmids = [p.identity.pmid for p in meta_data_list if p.identity.pmid]
         
+        # Prepare Year Map for consistency (PMID -> Year)
+        pmid_year_map = {
+            p.identity.pmid: (p.source.pub_year if p.source.pub_year else "Unknown_Year")
+            for p in meta_data_list 
+            if p.identity.pmid
+        }
+        
         # 2. Fetch Full Text (returns List[Paper_TextData])
         # This function fetches, parses (using robust soup parser), and saves text data to Year/PMID/ code.
         print("\n=== Step 2: Fetching Full Text ===")
-        text_data_list = self.fetch_pmc_full_text(found_pmids, output_dir=output_dir)
+        # Pass pmid_year_map to ensure text files are saved in the same year folder as metadata
+        text_data_list = self.fetch_pmc_full_text(found_pmids, output_dir=output_dir, pmid_year_map=pmid_year_map)
         
         # Convert list to map for easy lookup
         text_map = {td.pmid: td for td in text_data_list if td.pmid}

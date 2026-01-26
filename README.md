@@ -1,8 +1,11 @@
-# pyPaperFlow ———— Automatic Paper Reading Platform
+# pyPaperFlow - An Automatic Paper Reading Platform
 
 [English Version](README.md) | [Chinese Version 中文版本](README_zh.md)
 
 An automated platform designed to streamline the process of scientific literature reading. From retrieval and collection to structured extraction and intelligent analysis, this tool aims to assist researchers in managing and digesting large volumes of papers efficiently.
+
+![](./figs/1.png)
+
 
 ## 🚀 Features
 
@@ -123,10 +126,8 @@ Human-led, with AI as an augmentation tool.
 
 ## 📦 Installation
 
-Ensure you have Python 3.9+ installed.
-
 ```bash
-git clone <repository-url>
+git clone https://github.com/MaybeBio/pyPaperFlow.git
 cd pyPaperFlow
 pip install -e .
 ```
@@ -409,13 +410,16 @@ Fetching full text for 16 Pubmed articles at [2026-01-14 19:41:58] ...
 as you can see, not all pmids have a validated pmc id, you can try other tools for free full text extraction
 
 
-### 🧬 Case 4: Fetch full text data for pubmed papers from PMIDs list
+### 🧬 Case 4: Fetch full paper data (including metadata and full text data) for pubmed papers from PMIDs list
 
 Now if you want to get everything of papers you want, not just metadata or full text but BOTH!
 
 You can simply run 
 ```bash
+# from query 
 paperflow fetch-full --query "IDR AND interaction AND deep learning" --email YOUR_EMAIL --api-key YOUR_NCBI_API_KEY -o ./test/full_paper_test
+
+# from PMID list
 
 ```
 the log shows 
