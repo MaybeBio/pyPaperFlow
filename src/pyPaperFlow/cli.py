@@ -1,10 +1,18 @@
 import typer
 import os
 import json
-from typing import List, Optional
+from typing import *
 from .fetcher import PubmedFetcher
 from .storage import PaperStorage
 from .query_builder import QueryBuilder, AIQueryAssistant
+from .merger import (
+    PaperMerger,
+    MergeConfig,
+    MergeMode,
+    OutputFormat,
+    OutputProfile,
+    TextSourcePriority,
+)
 
 app = typer.Typer(help="pyPaperFlow CLI", no_args_is_help=True)
 
@@ -13,6 +21,7 @@ opt_storage = typer.Option("./Papers", "--storage-dir", "-s", help="Directory in
 opt_email = typer.Option(..., "--email", help="Entrez Email.")
 opt_api_key = typer.Option(None, "--api-key", help="NCBI API Key (recommended).")
 opt_max_retries = typer.Option(3, "--max-retries", help="Maximum number of retries for Entrez API calls.")
+opt_batch_size = typer.Option(50, "--batch-size", "-b", help="Batch size for fetching.")
 
 @app.command("search")
 def search_cmd(
@@ -65,7 +74,7 @@ def search_cmd(
 def fetch_cmd(
     query: Optional[str] = typer.Option(None, "--query", "-q", help="PubMed search query."),
     file: Optional[str] = typer.Option(None, "--file", "-f", help="Text file containing PMIDs (one per line), -q and -f are mutually exclusive."),
-    batch_size: int = typer.Option(50, "--batch-size", "-b", help="Batch size for fetching."),
+    batch_size: int = opt_batch_size,
     email: str = opt_email,
     api_key: Optional[str] = opt_api_key,
     storage_dir: str = opt_storage,
@@ -162,6 +171,8 @@ def fetch_full_cmd(
     query: Optional[str] = typer.Option(None, "--query", "-q", help="PubMed search query."),
     file: Optional[str] = typer.Option(None, "--file", "-f", help="Text file containing PMIDs (one per line), -q and -f are mutually exclusive."),
     pmid: Optional[List[str]] = typer.Option(None, "--pmid", "-p", help="Single PMID to download full text for, can be repeated."),
+    batch_size: int = opt_batch_size,
+    max_retries: int = opt_max_retries,
     email: str = opt_email,
     api_key: Optional[str] = opt_api_key,
     storage_dir: str = opt_storage,
@@ -176,7 +187,7 @@ def fetch_full_cmd(
     - 1. Fetch full papers for a query:
       paperflow fetch-full --query "machine learning" --output-dir ./MyPapers --email "YOUR_EMAIL"
     """
-    fetcher = PubmedFetcher(root_dir=storage_dir, entrez_email=email, api_key=api_key or "", max_retries=3)
+    fetcher = PubmedFetcher(root_dir=storage_dir, entrez_email=email, api_key=api_key or "", batch_size=batch_size, max_retries=max_retries)
     
     pmid_list = []
     if file:
@@ -301,9 +312,120 @@ def build_query_cmd(
     else:
         typer.secho("Warning: No OpenAI API Key provided. AI features will be disabled.", fg=typer.colors.YELLOW)
         typer.echo("You can provide it via --openai-key or OPENAI_API_KEY environment variable.")
-    
+
     builder = QueryBuilder(ai_assistant)
     builder.run()
+
+@app.command("merge")
+def merge_cmd(
+    paper_dir: str = typer.Argument(..., help="Directory containing paper data (year/pmid/ structure)."),
+    output: str = typer.Argument(..., help="Output file path for merged data."),
+    pmid_file: Optional[str] = typer.Option(None, "--pmid-file", "-p", help="File containing PMIDs to merge (one per line). If not specified, merge all papers in directory."),
+    mode: str = typer.Option("full", "--mode", "-m", help="Merge mode: 'meta' (metadata only), 'full' (metadata + content)."),
+    format: str = typer.Option("md", "--format", "-f", help="Output format: 'md' (Markdown), 'jsonl' (JSON Lines), 'txt' (plain text)."),
+    profile: str = typer.Option("analysis", "--profile", help="Output profile: 'analysis' (full metadata for modules), 'llm' (LLM-focused compact output)."),
+    include_sections: Optional[str] = typer.Option(None, "--include-sections", help="Comma-separated section names to include from parsed JSON, e.g. 'abstract,introduction,results'."),
+    metadata_fields: Optional[str] = typer.Option(None, "--metadata-fields", help="Comma-separated metadata field paths, e.g. 'identity,content.keywords,links'. Use 'all' for full metadata."),
+    include_links: Optional[bool] = typer.Option(None, "--include-links/--exclude-links", help="Whether to include links in llm profile output. Ignored in analysis profile."),
+    text_source: str = typer.Option("parsed-json-first", "--text-source", help="Text source priority: 'parsed-json-first' or 'parsed-md-first'."),
+):
+    """
+    Merge PubMed paper data into unified format for AI analysis.
+
+    This command merges paper metadata and/or full text content into a single
+    file optimized for AI processing and analysis.
+
+    Examples:
+      - Merge all papers with content to Markdown:
+        paperflow merge ./papers_dir ./merged_papers.md --mode full --format md
+
+      - Merge papers from a PMID list file:
+        paperflow merge ./papers_dir ./selected_papers.md --pmid-file pmids.txt --mode full
+    """
+    # Map mode string to enum
+    mode_map = {
+        'meta': MergeMode.METADATA_ONLY,
+                'full': MergeMode.METADATA_CONTENT,
+    }
+
+    if mode not in mode_map:
+        typer.echo(f"Error: Invalid mode '{mode}'. Use: meta, full")
+        raise typer.Exit(code=1)
+
+    merge_mode = mode_map[mode]
+
+    # Map format string to enum
+    format_map = {
+        'md': OutputFormat.MARKDOWN,
+        'jsonl': OutputFormat.JSONL,
+        'txt': OutputFormat.PLAIN_TEXT
+    }
+
+    if format not in format_map:
+        typer.echo(f"Error: Invalid format '{format}'. Use: md, jsonl, txt")
+        raise typer.Exit(code=1)
+
+    output_format = format_map[format]
+
+    # Map profile string to enum
+    profile_map = {
+        'analysis': OutputProfile.ANALYSIS,
+        'llm': OutputProfile.LLM,
+    }
+
+    if profile not in profile_map:
+        typer.echo(f"Error: Invalid profile '{profile}'. Use: analysis, llm")
+        raise typer.Exit(code=1)
+
+    output_profile = profile_map[profile]
+
+    text_source_map = {
+        'parsed-json-first': TextSourcePriority.PARSED_JSON_FIRST,
+        'parsed-md-first': TextSourcePriority.PARSED_MD_FIRST,
+    }
+
+    if text_source not in text_source_map:
+        typer.echo("Error: Invalid text-source. Use: parsed-json-first, parsed-md-first")
+        raise typer.Exit(code=1)
+
+    include_sections_list = [item.strip() for item in include_sections.split(',')] if include_sections else None
+    metadata_fields_list = [item.strip() for item in metadata_fields.split(',')] if metadata_fields else None
+
+    # Create merge config
+    config = MergeConfig(
+        mode=merge_mode,
+        output_format=output_format,
+        output_profile=output_profile,
+        include_sections=include_sections_list,
+        include_metadata_fields=metadata_fields_list,
+        include_links_in_llm=(include_links if include_links is not None else False),
+        text_source_priority=text_source_map[text_source],
+    )
+
+    # Create merger and execute
+    merger = PaperMerger(config)
+
+    typer.echo(f"Merging papers from: {paper_dir}")
+
+    try:
+        if pmid_file:
+            # Merge from PMID list file
+            stats = merger.merge_from_file_list(paper_dir, pmid_file, output)
+        else:
+            # Merge all papers in directory
+            stats = merger.merge_from_directory(paper_dir, output)
+
+        merger.print_statistics()
+
+        if stats['successful'] > 0:
+            typer.secho(f"Successfully merged {stats['successful']} papers.", fg=typer.colors.GREEN)
+
+        if stats['failed'] > 0:
+            typer.secho(f"{stats['failed']} papers failed to merge.", fg=typer.colors.YELLOW)
+
+    except Exception as e:
+        typer.echo(f"Error during merge: {e}")
+        raise typer.Exit(code=1)
 
 if __name__ == "__main__":
     app()

@@ -6,7 +6,21 @@
 
 [English Version](README.md) | [Chinese Version 中文版本](README_zh.md)
 
-An automated platform designed to streamline the process of scientific literature reading. From retrieval and collection to structured extraction and intelligent analysis, this tool aims to assist researchers in managing and digesting large volumes of papers efficiently.
+An automated literature processing platform for scientific researchers. This tool focuses on information extraction and knowledge discovery stages, enabling researchers to efficiently complete the entire workflow from literature retrieval to knowledge internalization through a 7-stage automated process.
+
+**Core Objectives**
+
+- **Rapid Domain Entry**: Batch retrieve and access all available literature in a specific field
+- **Batch Knowledge Extraction**: Utilize AI long-text processing capabilities to extract structured knowledge from massive amounts of text
+- **Research Trend Tracking**: Quickly grasp the latest research methods, conclusions, and core papers in a field
+
+**Positioning**
+
+This tool is designed to complement rather than replace reference management software like Zotero. We focus on the two key steps of "Information Extraction" and "Knowledge Discovery" to build a structured knowledge base for you, laying the foundation for subsequent semantic search, association recommendation, and review generation.
+
+**Current Implementation Scope**
+
+Stages 1-2 and parts of Stages 4/5 (tagging system) have been implemented. Stages 3, 6, and 7 involve AI model selection, prompt strategies, and knowledge base refinement, which require user configuration based on specific needs.
 
 ![](./figs/1.png)
 
@@ -17,8 +31,7 @@ An automated platform designed to streamline the process of scientific literatur
 - **Full-Text Access**: Automatically download open-access full text (XML/Text) from PMC.
 - **Structured Storage**:
   - **Metadata**: Stored as detailed JSON files.
-  - **Lookup Table**: A CSV-based hash table for fast indexing and management.
-- **Tagging System**: Manually or programmatically tag papers to create feature vectors (e.g., `relevant=1`, `reviewed=0`).
+  - **Full Text**: Saved in multiple formats (XML, parsed JSON, Markdown) for flexible use.
 - **CLI Tool**: A user-friendly command-line interface (`pyPaperFlow`) for all operations.
 
 ## 🏗️ Architecture Vision
@@ -361,8 +374,8 @@ the log shows
 Downloading full texts for 1 PMIDs from file provided PMIDs.
 Fetching full text for 1 Pubmed articles at [2026-01-14 19:08:37] ...
  -> Converting Pubmed articles 1 to 1 (PMID : ['39570595']) to PMC IDs at [2026-01-14 19:08:37] ...
-  -> Mapped 1 out of 1 PMIDs to valid PMC IDs. Downloading full text XML for these PMC IDs at [2026-01-14 19:08:39] ...
-  -> Saved XML to ./test/full_text/2024/39570595/39570595.xml
+  -> Mapped 1 out of 1 PMIDs to valid PMC IDs. Downloading full text XML for these PMC IDs at [2026-01-14 19:08:39] ... 
+  -> Saved XML to ./test/full_text/2024/39570595/39570595.xml 
   -> Saved parsed JSON to ./test/full_text/2024/39570595/39570595_parsed.json
   -> Saved parsed text to ./test/full_text/2024/39570595/39570595_parsed.md
 ```
@@ -623,3 +636,11 @@ https://github.com/iCodator/scientific_research_tool
 
 应该是每篇文献pmid，对应存储1个tag的string list，我们可以先show一下，再添加一下;
 然后再储存对应的位置
+
+
+# 我们目前建议的使用方式是直接在先获取list再用fetch-full-text
+# 然后每一篇文献的自动处理方式, 最好是使用原文来回答（也就是中文+英文）
+# 每一篇文献的处理方式，最好是和前面的fetch等分离开来，因为比较容易耗api，所以我们其实不清楚有哪些api是还有钱的，所以不能够在批量任务中
+进行处理，我们的建议是文献抓取之后，对于每一篇文献，我们再单独进行prompt提问，固定的句式；  能够抓取到文本数据的，我们在结果中直接进行query，
+抓取不到的，我们再直接外源获取文本数据用ai提问，然后将答案复制粘贴回来；
+

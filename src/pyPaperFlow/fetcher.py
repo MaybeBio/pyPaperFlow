@@ -1,7 +1,7 @@
 import json
 import os
 import time
-from typing import List, Dict, Any, Optional, Tuple, Union
+from typing import *
 from Bio import Entrez, Medline
 import traceback
 from bs4 import BeautifulSoup
