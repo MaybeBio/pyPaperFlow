@@ -3,8 +3,8 @@ import os
 import json
 from typing import *
 from .fetcher import PubmedFetcher
-from .storage import PaperStorage
-from .query_builder import QueryBuilder, AIQueryAssistant
+from .arxiv_fetcher import ArxivFetcher
+from .biorxiv_fetcher import BioRxivFetcher
 from .merger import (
     PaperMerger,
     MergeConfig,
@@ -22,6 +22,16 @@ opt_email = typer.Option(..., "--email", help="Entrez Email.")
 opt_api_key = typer.Option(None, "--api-key", help="NCBI API Key (recommended).")
 opt_max_retries = typer.Option(3, "--max-retries", help="Maximum number of retries for Entrez API calls.")
 opt_batch_size = typer.Option(50, "--batch-size", "-b", help="Batch size for fetching.")
+
+
+def _save_id_list(output_dir: str, filename: str, values: List[str]) -> str:
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    output_file = os.path.join(output_dir, filename)
+    with open(output_file, "w", encoding="utf-8") as handle:
+        for value in values:
+            handle.write(f"{value}\n")
+    return output_file
 
 @app.command("search")
 def search_cmd(
@@ -315,6 +325,96 @@ def build_query_cmd(
 
     builder = QueryBuilder(ai_assistant)
     builder.run()
+
+
+@app.command("arxiv-search")
+def arxiv_search_cmd(
+    query: str = typer.Argument(..., help="arXiv search query."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of arXiv results to return."),
+    storage_dir: str = opt_storage,
+    output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched arXiv IDs."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+):
+    """Search arXiv and write matching IDs to a text file."""
+    fetcher = ArxivFetcher(root_dir=storage_dir)
+    records = fetcher.search(query=query, max_results=max_results, start_date=start_date, end_date=end_date)
+    typer.echo(f"Found {len(records)} arXiv papers.")
+    for record in records:
+        typer.echo(record.source_id)
+
+    save_dir = output_dir if output_dir else storage_dir
+    output_file = _save_id_list(save_dir, "searched_arxiv_ids.txt", [record.source_id for record in records])
+    typer.echo(f"arXiv IDs saved to {output_file}.")
+
+
+@app.command("arxiv-fetch")
+def arxiv_fetch_cmd(
+    query: str = typer.Argument(..., help="arXiv search query."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of arXiv records to fetch."),
+    storage_dir: str = opt_storage,
+    output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save fetched arXiv papers."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+    download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
+):
+    """Fetch arXiv metadata and attempt to download PDFs."""
+    fetcher = ArxivFetcher(root_dir=storage_dir)
+    records = fetcher.fetch_from_query(
+        query=query,
+        output_dir=output_dir if output_dir else storage_dir,
+        max_results=max_results,
+        start_date=start_date,
+        end_date=end_date,
+        download_pdf=download_pdf,
+    )
+    typer.echo(f"Fetched {len(records)} arXiv papers.")
+
+
+@app.command("biorxiv-search")
+def biorxiv_search_cmd(
+    query: str = typer.Argument(..., help="bioRxiv search query."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of bioRxiv results to return."),
+    storage_dir: str = opt_storage,
+    output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched bioRxiv IDs."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+    window_days: int = typer.Option(365, "--window-days", help="Date window size for bioRxiv API paging."),
+):
+    """Search bioRxiv and write matching IDs to a text file."""
+    fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
+    records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results)
+    typer.echo(f"Found {len(records)} bioRxiv papers.")
+    for record in records:
+        typer.echo(record.source_id)
+
+    save_dir = output_dir if output_dir else storage_dir
+    output_file = _save_id_list(save_dir, "searched_biorxiv_ids.txt", [record.source_id for record in records])
+    typer.echo(f"bioRxiv IDs saved to {output_file}.")
+
+
+@app.command("biorxiv-fetch")
+def biorxiv_fetch_cmd(
+    query: str = typer.Argument(..., help="bioRxiv search query."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of bioRxiv records to fetch."),
+    storage_dir: str = opt_storage,
+    output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save fetched bioRxiv papers."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+    window_days: int = typer.Option(365, "--window-days", help="Date window size for bioRxiv API paging."),
+    download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
+):
+    """Fetch bioRxiv metadata and attempt to download PDFs."""
+    fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
+    records = fetcher.fetch_from_query(
+        query=query,
+        output_dir=output_dir if output_dir else storage_dir,
+        start_date=start_date,
+        end_date=end_date,
+        max_results=max_results,
+        download_pdf=download_pdf,
+    )
+    typer.echo(f"Fetched {len(records)} bioRxiv papers.")
 
 @app.command("merge")
 def merge_cmd(

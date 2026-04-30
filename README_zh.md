@@ -20,7 +20,7 @@
 
 ## 🚀 功能特性
 
-- **自动化检索**：从 PubMed/Medline 搜索并获取论文元数据。
+- **自动化检索**：从 PubMed/Medline、arXiv、bioRxiv 搜索并获取论文元数据。
 - **全文获取**：自动从 PMC 下载开放获取的全文（XML/文本）。
 - **结构化存储**：
   - **元数据**：存储为详细的 JSON 文件。
@@ -88,18 +88,34 @@ flowchart TD
 
 ### 阶段分析与设计理念
 
+整个流程设计我们以“人机协同”为核心，将人工操作与AI模型的智能处理相结合，实现高效、准确的文献处理。
+
+1个核心原则: 确定性的任务由Coding+人工判断决策完成, 不确定性的任务由Agent完成。
+
+对于每一阶段，可以加入AI模型来增强效率和智能的部分，我们统一称之为AI Plugin (这一部分我们统一使用🌟标注)，用户可以根据自己的需求选择性地接入这些AI Plugin来增强每个阶段的功能。  
+
+⚠️ 注意：我们仅给出AI Plugin的设计建议和接入方式，具体的AI模型选择、Prompt设计和结果处理需要用户根据自己的需求进行定制。
+
+
 #### 阶段一：检索与收集
 这是整个工作流的起点。
-- **人工流程**：在 PubMed、arXiv 等平台手动输入关键词，浏览结果并保存。
+- **人工流程**：在 PubMed、BioRxiv、arXiv 等平台手动输入关键词，浏览结果并保存。
 - **自动化切入点**：
     - **智能检索代理**：利用 API 或爬虫，根据预设关键词、期刊列表、学者追踪等进行周期性自动化检索。
     - **初筛算法**：基于规则（如标题术语、影响因子、时间范围）对结果进行初步过滤。
+- 🌟 **AI Plugin**
+    - Topic/Query builder skill：设计一个交互式的topic/query builder，在用户输入一个大致的研究主题后，AI可以在多轮brainstorm迭代中帮助用户细化和扩展这个主题，明晰用户真正的调研需求与研究方向, 然后生成多个相关的检索关键词组合，并且根据用户的反馈不断优化这些关键词组合，以覆盖更全面的相关文献。保留研究主题思考过程的可追溯性, 以及最终生成的关键词组合的多样性和相关性。
+    - 推荐参考：[Superpowers skill](https://github.com/obra/superpowers)，尤其是其中的brainstorm skill，可以参考其设计进行场景优化
+
 
 #### 阶段二：处理与解析
-将原始文件转换为计算机可处理的纯文本和元数据(整理为Markdown格式，便于后续AI处理)。
+将原始文件转换为计算机可处理的纯文本和元数据(整理为Markdown格式，便于后续AI处理)。总的来说，元数据靠API或爬虫抓取，文本内容靠人工获取pdf文件再使用统一的解析器解析。
 - **自动化切入点**：
-    - **统一解析器**：使用工具（如 pdfplumber, opendataloader-pdf）从 PDF 中高精度提取文本和图表。
-    - **元数据增强**：自动补全完整的文献元数据（标题、作者、DOI、关键词 等）并统一格式。
+    - **统一解析器**：使用工具（如 pdfplumber, opendataloader-pdf, minerU, paddleocr）从 PDF 中高精度提取文本和图表, 并将它们转换为Markdown格式。
+    - **元数据增强**：利用API 或爬虫, 自动抓取并补全完整的文献元数据（标题、作者、DOI、关键词 等）并统一格式。
+- 🌟 **AI Plugin**
+    - PDF parser skill：设计一个智能的PDF解析器，能够自动识别和提取PDF中的文本、图表、表格等元素, 并将其转换为Markdown格式。
+    - 推荐参考：[MinerU](https://github.com/opendatalab/MinerU)，参考部署相应skill，实现PDF解析功能。
 
 #### 阶段三：核心信息结构化提取
 从“文本”到“信息”的关键跃迁。
@@ -111,7 +127,9 @@ flowchart TD
   
         你可以从Lean Zulip论坛中获取更多关于本体论和形式化证明的讨论和资源![alt text](./figs/lean.png)
   
-
+- 🌟 **AI Plugin**
+    - 信息抽取与本体构建 skill：设计一个信息抽取与本体构建的skill，能够根据预设的Schema从文献文本中抽取结构化信息，并且根据领域专业术语自动构建本体论。
+    - 推荐参考：[OpenIE](
 
 #### 阶段四：深度编码与向量化
 为信息建立数学表示。
@@ -183,8 +201,53 @@ paperflow fetch --file pmids.txt
 paperflow download-fulltext --pmid 34320283
 ```
 
+### 4. 搜索并获取 arXiv 论文
+如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
 
-### 4. 获取全文数据（元数据+文本内容）
+```bash
+paperflow arxiv-search "deep learning for biology" --max-results 10
+paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+日期过滤示例：
+
+```bash
+paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers/arxiv
+```
+
+搜索结果会保存为 `searched_arxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，PDF 则按可用情况尽量下载。
+
+### 5. 搜索并获取 bioRxiv 论文
+bioRxiv 支持按日期窗口分页检索，因此适合做较大范围的增量抓取。
+
+```bash
+paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
+paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
+- `--window-days`：控制 bioRxiv API 分页时使用的日期窗口大小。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+日期窗口示例：
+
+```bash
+paperflow biorxiv-fetch "protein interaction" --window-days 180 --max-results 50 -o ./papers/biorxiv
+```
+
+搜索结果会保存为 `searched_biorxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，并在可用时下载 PDF。
+
+
+### 6. 获取全文数据（元数据+文本内容）
 
 ```bash
 paperflow fetch-full 
@@ -193,7 +256,7 @@ paperflow fetch-full
 ```
 
 
-### 5. 管理标签（特征向量）
+### 7. 管理标签（特征向量）
 通过分配标签来组织论文。这会在查找表中为每篇论文创建一个特征向量。
 
 ```bash
@@ -424,3 +487,5 @@ Merge模块用于合并所获取的pubmed文献的元数据与文本数据，
 
 
 ## 
+
+开头的query设计，建议可以留给pubmed、biorxiv等query builder的类似skill来完成

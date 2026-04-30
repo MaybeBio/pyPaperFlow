@@ -27,7 +27,7 @@ Stages 1-2 and parts of Stages 4/5 (tagging system) have been implemented. Stage
 
 ## 🚀 Features
 
-- **Automated Retrieval**: Search and fetch paper metadata from PubMed/Medline.
+- **Automated Retrieval**: Search and fetch paper metadata from PubMed/Medline, arXiv, and bioRxiv.
 - **Full-Text Access**: Automatically download open-access full text (XML/Text) from PMC.
 - **Structured Storage**:
   - **Metadata**: Stored as detailed JSON files.
@@ -181,7 +181,52 @@ Download PMC full text for fetched papers (if available).
 paperflow download-fulltext --pmid 34320283
 ```
 
-### 4. Manage Tags (Feature Vectors)
+### 4. Search and Fetch arXiv Papers
+Search arXiv first if you only want IDs, or fetch metadata and PDFs in one step.
+
+```bash
+paperflow arxiv-search "deep learning for biology" --max-results 10
+paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf
+```
+
+Useful options:
+
+- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
+- `--output-dir`: save the ID list or fetched records to a different directory.
+- `--no-download-pdf`: skip PDF download and save metadata only.
+
+Example with a date filter:
+
+```bash
+paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers/arxiv
+```
+
+Search output is saved as `searched_arxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.
+
+### 5. Search and Fetch bioRxiv Papers
+bioRxiv uses date-window paging internally, so you can search broadly and still keep the results incremental.
+
+```bash
+paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
+paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
+```
+
+Useful options:
+
+- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
+- `--window-days`: control the paging window size used for bioRxiv API queries.
+- `--output-dir`: save the ID list or fetched records to a different directory.
+- `--no-download-pdf`: skip PDF download and save metadata only.
+
+Example with a wider paging window:
+
+```bash
+paperflow biorxiv-fetch "protein interaction" --window-days 180 --max-results 50 -o ./papers/biorxiv
+```
+
+Search output is saved as `searched_biorxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.
+
+### 6. Manage Tags (Feature Vectors)
 Organize your papers by assigning tags. This creates a feature vector for each paper in the lookup table.
 
 ```bash
@@ -192,7 +237,7 @@ paperflow tag 34320283 relevant 1
 paperflow tag 34320283 read 1
 ```
 
-### 5. Query & Retrieve
+### 7. Query & Retrieve
 Find papers based on your tags or retrieve full details.
 
 **Query by Tags:**
