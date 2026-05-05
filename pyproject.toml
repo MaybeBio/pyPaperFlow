@@ -19,9 +19,16 @@ dependencies = [
   "typer>=0.20.0",
   "pandas>=2.3.1",
   "requests>=2.32.4",
+  "httpx>=0.27.0",
   "bs4>=0.0.2",
   "lxml>=6.0.2",
-  "pydantic>=2.12.5"
+  "pydantic>=2.12.5",
+  "PyYAML>=6.0.2"
+]
+
+[project.optional-dependencies]
+paperscraper = [
+  "paperscraper"
 ]
 
 [project.scripts]

@@ -1,0 +1,239 @@
+{
+  "pmid": "41534519",
+  "meta": {
+    "content": {
+      "abstract": "Intrinsically disordered proteins or regions (IDPs or IDRs) adopt diverse binding modes with different partners, ranging from coupled folding and binding to fuzzy binding and fully disordered binding. Characterizing IDR interfaces is challenging both experimentally and computationally. State-of-the-art tools such as AlphaFold multimer and AlphaFold3 can be used to predict IDR binding sites, although they are less accurate at their benchmarked confidence cutoffs. Here, we developed Disobind, a deep-learning method that predicts inter-protein contact maps and interface residues for an IDR and its partner, given their sequences. It uses sequence embeddings from the ProtT5 protein language model. Disobind outperforms state-of-the-art interface predictors for IDRs. It also outperforms AlphaFold multimer and AlphaFold3 at multiple confidence cutoffs. Combining Disobind and AlphaFold-multimer predictions further improves performance. In contrast to current methods, Disobind considers the context of the binding partner and does not depend on structures and multiple sequence alignments. Its predictions can be used to localize IDRs in large assemblies and characterize IDR-mediated interactions.",
+      "keywords": [
+        "DL",
+        "IDP",
+        "IDR",
+        "deep learning",
+        "intrinsically disordered proteins",
+        "intrinsically disordered regions",
+        "pLMs",
+        "protein language model",
+        "protein structure"
+      ],
+      "mesh_terms": [
+        "*Intrinsically Disordered Proteins/chemistry/metabolism",
+        "Protein Binding",
+        "Binding Sites",
+        "*Computational Biology/methods",
+        "Deep Learning",
+        "Protein Folding",
+        "Humans",
+        "Amino Acid Sequence"
+      ],
+      "pub_types": [
+        "Journal Article"
+      ]
+    },
+    "contributors": {
+      "medline": {
+        "affiliations": [
+          "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore 560065, Karnataka, India. Electronic address: kartikm@ncbs.res.in.",
+          "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore 560065, Karnataka, India.",
+          "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore 560065, Karnataka, India. Electronic address: shruthiv@ncbs.res.in."
+        ],
+        "auids": [],
+        "full_names": [
+          "Majila, Kartik",
+          "Ullanat, Varun",
+          "Viswanath, Shruthi"
+        ],
+        "short_names": [
+          "Majila K",
+          "Ullanat V",
+          "Viswanath S"
+        ]
+      },
+      "xml": [
+        {
+          "affiliations": [
+            "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore 560065, Karnataka, India. Electronic address: kartikm@ncbs.res.in."
+          ],
+          "full_name": "Majila, Kartik",
+          "identifiers": [],
+          "short_name": "Majila K"
+        },
+        {
+          "affiliations": [
+            "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore 560065, Karnataka, India."
+          ],
+          "full_name": "Ullanat, Varun",
+          "identifiers": [],
+          "short_name": "Ullanat V"
+        },
+        {
+          "affiliations": [
+            "National Center for Biological Sciences, Tata Institute of Fundamental Research, Bangalore 560065, Karnataka, India. Electronic address: shruthiv@ncbs.res.in."
+          ],
+          "full_name": "Viswanath, Shruthi",
+          "identifiers": [],
+          "short_name": "Viswanath S"
+        }
+      ]
+    },
+    "identity": {
+      "doi": "10.1016/j.cels.2025.101486",
+      "pmid": "41534519",
+      "title": "Disobind: A sequence-based, partner-dependent contact map and interface residue predictor for intrinsically disordered regions."
+    },
+    "links": {
+      "cites": [],
+      "entrez": {},
+      "external": [
+        {
+          "attribute": "subscription/membership/fee required",
+          "category": "Full Text Sources",
+          "linkname": "",
+          "provider": "Elsevier Science",
+          "url": "https://linkinghub.elsevier.com/retrieve/pii/S2405-4712(25)00319-9"
+        }
+      ],
+      "pmc": [],
+      "refs": [],
+      "review": [
+        "41534519",
+        "31441158",
+        "34418423",
+        "40650026",
+        "33248138",
+        "35139468",
+        "34390736",
+        "38296708",
+        "39093570",
+        "36959451",
+        "36851914",
+        "36833360",
+        "34358545",
+        "33567297",
+        "34610267",
+        "39740355",
+        "31003202",
+        "24930020"
+      ],
+      "similar": [
+        "41534519",
+        "39763873",
+        "39446390",
+        "31441158",
+        "40944448",
+        "34418423",
+        "31207240",
+        "33087759",
+        "38866950",
+        "41174305",
+        "30058229",
+        "38079339",
+        "28780862",
+        "32696395",
+        "38701796",
+        "29763584",
+        "40650026",
+        "34905768",
+        "30878482",
+        "40254833",
+        "25391399",
+        "40403066",
+        "32535960",
+        "33248138",
+        "38987470",
+        "35139468",
+        "34390736",
+        "32553192",
+        "32702119",
+        "37878721",
+        "37883249",
+        "38296708",
+        "30366362",
+        "36272675",
+        "41378882",
+        "40221640",
+        "35609776",
+        "31724233",
+        "40441416",
+        "29716994",
+        "34626492",
+        "28394890",
+        "28381244",
+        "39093570",
+        "34461937",
+        "28365882",
+        "36304335",
+        "29066345",
+        "29990433",
+        "36959451",
+        "40133775",
+        "29042212",
+        "36851914",
+        "39933697",
+        "32722039",
+        "36833360",
+        "29228892",
+        "35149212",
+        "30135358",
+        "34358545",
+        "31797594",
+        "27787828",
+        "30841624",
+        "40244295",
+        "39246251",
+        "31756456",
+        "35436286",
+        "33567297",
+        "34610267",
+        "38166858",
+        "25424537",
+        "36153968",
+        "41218076",
+        "41454828",
+        "33936509",
+        "39740355",
+        "39032884",
+        "32824743",
+        "41309611",
+        "36458437",
+        "23142703",
+        "31003202",
+        "32112804",
+        "39614773",
+        "18831774",
+        "26149687",
+        "41337585",
+        "25286318",
+        "26109352",
+        "29309620",
+        "24930020",
+        "39586094",
+        "31804089",
+        "38459060",
+        "40828855",
+        "24115198",
+        "41053908",
+        "39510344",
+        "33875885",
+        "30866736"
+      ],
+      "text_mined": []
+    },
+    "metadata": {
+      "entrez_date": "2026/01/15 16:13",
+      "fetched_at": "2026-05-02 18:19:10"
+    },
+    "source": {
+      "journal_abbrev": [
+        "Cell Syst"
+      ],
+      "journal_title": [
+        "Cell systems"
+      ],
+      "pub_date": "2026 Jan 21",
+      "pub_types": [
+        "Journal Article"
+      ],
+      "pub_year": "2026"
+    }
+  },
+  "content": {}
+}

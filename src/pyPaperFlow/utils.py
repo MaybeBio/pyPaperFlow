@@ -1,6 +1,10 @@
-from typing import List, Dict, Literal
+from typing import *
 import re
 
+
+#############################################################
+#  1, For Pubmed Parser
+#############################################################
 
 def extract_urls_from_text(text: str, source_tag: Literal["abstract", "full_text"]) -> List[Dict[str, str]]:
     """

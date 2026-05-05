@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from pyPaperFlow.merger import (
+from pyPaperFlow.pubmed.pubmed_merger import (
     MergeConfig,
     MergeMode,
     OutputFormat,

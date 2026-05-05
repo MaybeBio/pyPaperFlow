@@ -2,17 +2,12 @@ import typer
 import os
 import json
 from typing import *
-from .fetcher import PubmedFetcher
+from .pubmed.pubmed_fetcher import PubmedFetcher
 from .arxiv_fetcher import ArxivFetcher
 from .biorxiv_fetcher import BioRxivFetcher
-from .merger import (
-    PaperMerger,
-    MergeConfig,
-    MergeMode,
-    OutputFormat,
-    OutputProfile,
-    TextSourcePriority,
-)
+
+from .pubmed.pubmed_merger import PubmedMerger
+from datetime import datetime
 
 app = typer.Typer(help="pyPaperFlow CLI", no_args_is_help=True)
 
@@ -22,6 +17,7 @@ opt_email = typer.Option(..., "--email", help="Entrez Email.")
 opt_api_key = typer.Option(None, "--api-key", help="NCBI API Key (recommended).")
 opt_max_retries = typer.Option(3, "--max-retries", help="Maximum number of retries for Entrez API calls.")
 opt_batch_size = typer.Option(50, "--batch-size", "-b", help="Batch size for fetching.")
+opt_arxiv_backend = typer.Option("native", "--backend", help="arXiv backend: 'native' or 'paperscraper'.")
 
 
 def _save_id_list(output_dir: str, filename: str, values: List[str]) -> str:
@@ -33,7 +29,12 @@ def _save_id_list(output_dir: str, filename: str, values: List[str]) -> str:
             handle.write(f"{value}\n")
     return output_file
 
-@app.command("search")
+
+#############################################################
+#  1, For Pubmed Parser
+#############################################################
+
+@app.command("pubmed-search")
 def search_cmd(
     query: str = typer.Argument(..., help="PubMed search query."), # Argument means that this parameter is different from option, it must be provided and does not need flag --query like option!
     retmax: int = typer.Option(500, "--retmax", "-n", help="Max number of PMIDs to return every batch, must less than 10000."),
@@ -49,14 +50,14 @@ def search_cmd(
     \b
     Notes:
     - 1, This command only searches and returns PMIDs, it does not fetch paper metadata.
-    - 2, This command will print the found PMIDs and also save them to 'searched_pmids.txt' in the specified output directory. 
+    - 2, This command will print the found PMIDs and also save them to 'pubmed_searched_ids.txt' in the specified output directory. 
     If --output-dir is not specified, it will default to the storage directory.
     - 3, Note that storage_dir is used to initialize the fetcher for consistency, while output_dir is where the PMIDs are saved. They are different parameters!
 
     \b
     Example usage:
     - 1. Search for papers related to "machine learning" and return up to 500 PMIDs/per batch:
-    paperflow search "machine learning" --retmax 500 --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key "YOUR_NCBI_API_KEY"
+    paperflow pubmed-search "machine learning" --retmax 500 --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key "YOUR_NCBI_API_KEY"
     """
     # we initialize fetcher with storage_dir for consistency
     fetcher = PubmedFetcher(root_dir=storage_dir, entrez_email=email, api_key=api_key or "", max_retries=max_retries)
@@ -74,13 +75,17 @@ def search_cmd(
     save_dir = output_dir if output_dir else storage_dir
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
-    pmid_file = os.path.join(save_dir, "searched_pmids.txt")
+        
+    # note: search log should be saved with timestamp
+    # pmid_file = os.path.join(save_dir, "pubmed_searched_ids.txt") 
+    
+    pmid_file = f"{save_dir}/pubmed_searched_ids_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
     with open(pmid_file, 'w') as f:
         for pmid in pmids:
             f.write(f"{pmid}\n")
     typer.echo(f"PMIDs saved to {pmid_file}.")
 
-@app.command("fetch")
+@app.command("pubmed-meta")
 def fetch_cmd(
     query: Optional[str] = typer.Option(None, "--query", "-q", help="PubMed search query."),
     file: Optional[str] = typer.Option(None, "--file", "-f", help="Text file containing PMIDs (one per line), -q and -f are mutually exclusive."),
@@ -89,7 +94,7 @@ def fetch_cmd(
     api_key: Optional[str] = opt_api_key,
     storage_dir: str = opt_storage,
     max_retries: int = opt_max_retries,
-    output_dir: Optional[str] = typer.Option(".", "--output-dir", "-o", help="Directory in result-level to store output papers, default is current directory. If not specified, will be set to root directory of the repository-level which is storage_dir."),
+    output_dir: Optional[str] = typer.Option(".", "--output-dir", "-o", help="Directory in result-level to store output papers, default is current directory. If not specified, will be set to root directory of the repository-level which is storage_dir. 🌟 We will create a '/pubmed' subfolder under the output directory to save all pubmed related data"),
 ):
     """
     Fetch paper metadata from PubMed using Your customized query, pmid list file and save to storage.
@@ -102,14 +107,17 @@ def fetch_cmd(
     \b
     Example usage:
     - 1. Fetch papers for a query and save to storage:
-      paperflow fetch --query "machine learning" --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key "YOUR_NCBI_API_KEY"
+      paperflow pubmed-fetch --query "machine learning" --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key "YOUR_NCBI_API_KEY"
     - 2. Fetch papers from a list of PMIDs in a file:
-      paperflow fetch --file ./pmid_list.txt --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key "YOUR_NCBI_API_KEY" 
+      paperflow pubmed-fetch --file ./pmid_list.txt --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key "YOUR_NCBI_API_KEY" 
     """
     fetcher = PubmedFetcher(root_dir=storage_dir, entrez_email=email, api_key=api_key or "", batch_size=batch_size, max_retries=max_retries)
-    storage = PaperStorage(storage_dir)
     
     papers = []
+    
+    # for meta data or full paper data from different sources, we will save them to corresponding paper source database folders
+    output_dir = f"{output_dir}/pubmed" if output_dir else f"{storage_dir}/pubmed"
+    os.makedirs(output_dir, exist_ok=True)
     
     if query:
         typer.echo(f"Fetching papers for query: {query}")
@@ -128,21 +136,16 @@ def fetch_cmd(
     else:
         typer.echo("Error: Must provide --query or --file.")
         raise typer.Exit(code=1)
-        
-    # Save to storage
-    # typer.echo(f"Saving {len(papers)} papers to storage...")
-    # for paper in papers:
-    #    storage.add_paper(paper)
-    # typer.echo("Done.")
 
-@app.command("download-fulltext")
+
+@app.command("pubmed-content")
 def download_fulltext_cmd(
     file: Optional[str] = typer.Option(None, "--file", "-f", help="File containing PMIDs (one per line)."),
     email: str = opt_email,
     api_key: Optional[str] = opt_api_key,
     storage_dir: str = opt_storage,
     max_retries: int = opt_max_retries,
-    output_dir: Optional[str] = typer.Option(".", "--output-dir", "-o", help="Directory in result-level to store output full texts, default is current directory. If not specified, will be set to root directory of the repository-level which is storage_dir."),
+    output_dir: Optional[str] = typer.Option(".", "--output-dir", "-o", help="Directory in result-level to store output full texts, default is current directory. If not specified, will be set to root directory of the repository-level which is storage_dir. 🌟 We will create a '/pubmed' subfolder under the output directory to save all pubmed related data"),
     pmid: Optional[List[str]] = typer.Option(None, "--pmid", "-p", help="Single PMID to download full text for, can be repeated."),
 ):
     """
@@ -161,7 +164,10 @@ def download_fulltext_cmd(
       
     """
     fetcher = PubmedFetcher(root_dir=storage_dir, entrez_email=email, api_key=api_key or "", max_retries=max_retries)
-    storage = PaperStorage(storage_dir)
+    
+    # create pubmed subfolder in output directory to save full text data
+    output_dir = f"{output_dir}/pubmed" if output_dir else f"{storage_dir}/pubmed"
+    os.makedirs(output_dir, exist_ok=True)
     
     target_pmids = []
     if file:
@@ -176,7 +182,7 @@ def download_fulltext_cmd(
     typer.echo(f"Downloading full texts for {len(target_pmids)} PMIDs from file {os.path.abspath(file) if file else 'provided PMIDs'}.")
     fetcher.fetch_pmc_full_text(target_pmids, output_dir=output_dir)
 
-@app.command("fetch-full")
+@app.command("pubmed-all")
 def fetch_full_cmd(
     query: Optional[str] = typer.Option(None, "--query", "-q", help="PubMed search query."),
     file: Optional[str] = typer.Option(None, "--file", "-f", help="Text file containing PMIDs (one per line), -q and -f are mutually exclusive."),
@@ -195,9 +201,13 @@ def fetch_full_cmd(
     \b
     Example usage:
     - 1. Fetch full papers for a query:
-      paperflow fetch-full --query "machine learning" --output-dir ./MyPapers --email "YOUR_EMAIL"
+      paperflow pubmed-all --query "machine learning" --output-dir ./MyPapers --email "YOUR_EMAIL"
     """
     fetcher = PubmedFetcher(root_dir=storage_dir, entrez_email=email, api_key=api_key or "", batch_size=batch_size, max_retries=max_retries)
+    
+    # create pubmed subfolder in output directory to save all pubmed related data (metadata + full text)
+    output_dir = f"{output_dir}/pubmed" if output_dir else f"{storage_dir}/pubmed"
+    os.makedirs(output_dir, exist_ok=True)
     
     pmid_list = []
     if file:
@@ -213,76 +223,53 @@ def fetch_full_cmd(
 
     fetcher.fetch_and_save_full_papers(query=query, pmid_list=pmid_list if pmid_list else None, output_dir=output_dir)
 
-@app.command("tag")
-def tag_cmd(
-    pmid: str = typer.Argument(..., help="PMID to tag."),
-    tags: List[str] = typer.Option([], "--tag", "-t", help="Tag(s) to add. Can be repeated."),
-    remove: List[str] = typer.Option([], "--remove", "-r", help="Tag(s) to remove. Can be repeated."),
-    clear: bool = typer.Option(False, "--clear", help="Clear all existing tags before applying --tag/--remove."),
-    storage_dir: str = opt_storage,
+
+@app.command("pubmed-merge-json")
+def merge_json_cmd(
+    paper_dir: str = typer.Option(..., "--input", "-i" , help="Directory containing paper data ({INPUT_PAPER_DIR_HERE}/pubmed/year/pmid/structure)."),
+    output: str = typer.Option(..., "--output", "-o" , help="Output directory or file path. If a directory or path without extension is given, the merged file is auto-named as <input-directory-base-name>_<datetime>.json/.jsonl."),
+    pmid_file: Optional[str] = typer.Option(None, "--pmid-file", "-p", help="File containing PMIDs to merge (one per line)."),
+    jsonl: bool = typer.Option(False, "--jsonl", help="Write output as JSONL, one JSON per line."),
+    stats_path: Optional[str] = typer.Option(".", "--stats-path", "-s", help="Optional path to save merge statistics file, defaults to current directory.")
 ):
     """
-    Add/remove tags for a paper.
+    Create a merged JSON (or JSONL) file from PubMed paper directories.
 
-    Examples:
-    - Add tags:
-      paperflow tag 12345678 -t "蛋白" -t "AI"
-    - Remove tags:
-      paperflow tag 12345678 -r "ai"
-    - Replace all tags:
-      paperflow tag 12345678 --clear -t "结构" -t "protein"
+    This produces a canonical merged JSON representation per paper and is
+    intended as the first stage in a two-stage pipeline (merge-json -> export-md).
     """
-    storage = PaperStorage(storage_dir)
+    merger = PubmedMerger()
 
-    if clear:
-        # Clear everything then add desired tags.
-        storage.set_tags(pmid, [])
+    try:
+        stats = merger.merge_json_from_directory(paper_dir, output, pmid_file=pmid_file, jsonl=jsonl)
+        # Save stats if path provided
+        with open(f"{stats_path}/{os.path.basename(os.path.normpath(paper_dir))}_stats_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.json", "w") as f:
+            json.dump(stats, f, indent=2)
+        
+        typer.echo(f"✅ Please check the merged pubmed JSON/JSONL file at {output} and the merge statistics file at {stats_path}. \
+            Also, a JSON file per paper is created within the PMID subfolders.")
+    except Exception as e:
+        typer.echo(f"Error during merge-json: {e}")
+        raise typer.Exit(code=1)
 
-    if tags:
-        storage.add_tags(pmid, tags)
 
-    if remove:
-        storage.remove_tags(pmid, remove)
-
-    current = storage.list_tags(pmid)
-    typer.echo(f"PMID {pmid} tags ({len(current)}): {current}")
-
-
-@app.command("tag-set")
-def tag_set_cmd(
-    pmid: str = typer.Argument(..., help="PMID to tag."),
-    tag: str = typer.Argument(..., help="Tag name."),
-    value: int = typer.Argument(..., help="Tag value (0 or 1)."),
-    storage_dir: str = opt_storage,
+@app.command("pubmed-export-md")
+def export_md_cmd(
+    merged_json: str = typer.Argument(..., help="Path to merged JSON or JSONL produced by pubmed-merge-json."),
+    output_md: str = typer.Argument(..., help="Output Markdown file path."),
+    yaml_cfg: Optional[str] = typer.Option(None, "--yaml", "-y", help="YAML config file specifying metadata_fields and content_sections."),
+    pmid_file: Optional[str] = typer.Option(None, "--pmid-file", "-p", help="Optional PMID file to filter exported papers."),
 ):
-    """Set a tag explicitly to 0/1 (backward-compatible)."""
-    storage = PaperStorage(storage_dir)
-    storage.update_tags(pmid, {tag: value})
-    typer.echo(f"Set tag '{tag}' to {value} for PMID {pmid}.")
+    """Export a single Markdown view from a merged JSON file using optional YAML config."""
+    merger = SimplePubmedMerger()
 
-@app.command("query")
-def query_cmd(
-    tags: List[str] = typer.Option([], "--tag", "-t", help="Tags to filter by (format: name=value)."),
-    storage_dir: str = opt_storage
-):
-    """
-    Query papers by tags.
-    """
-    storage = PaperStorage(storage_dir)
-    
-    query_dict = {}
-    for t in tags:
-        try:
-            k, v = t.split("=")
-            query_dict[k] = int(v)
-        except ValueError:
-            typer.echo(f"Invalid tag format: {t}. Use name=value.")
-            raise typer.Exit(code=1)
-            
-    pmids = storage.query_papers(query_dict)
-    typer.echo(f"Found {len(pmids)} matching papers:")
-    for pmid in pmids:
-        typer.echo(pmid)
+    try:
+        stats = merger.export_md_from_merged_json(merged_json, output_md, yaml_cfg=yaml_cfg, pmid_file=pmid_file)
+        typer.secho(f"Successfully exported {stats.get('total', 0)} papers to {stats.get('output')}", fg=typer.colors.GREEN)
+    except Exception as e:
+        typer.echo(f"Error during export-md: {e}")
+        raise typer.Exit(code=1)
+
 
 @app.command("get")
 def get_cmd(
@@ -305,26 +292,11 @@ def get_cmd(
     else:
         typer.echo(f"Paper {pmid} not found.")
 
-@app.command("build-query")
-def build_query_cmd(
-    openai_api_key: Optional[str] = typer.Option(None, "--openai-key", help="OpenAI API Key for AI assistance."),
-    model: str = typer.Option("gpt-4o", "--model", help="AI Model to use (e.g., gpt-4o, gpt-3.5-turbo)."),
-    api_base: str = typer.Option("https://api.openai.com/v1", "--api-base", help="Base URL for AI API.")
-):
-    """
-    Interactive wizard to build complex PubMed queries with AI assistance.
-    """
-    ai_assistant = None
-    if openai_api_key:
-        ai_assistant = AIQueryAssistant(api_key=openai_api_key, api_base=api_base, model=model)
-    elif os.environ.get("OPENAI_API_KEY"):
-        ai_assistant = AIQueryAssistant(api_key=os.environ.get("OPENAI_API_KEY"), api_base=api_base, model=model)
-    else:
-        typer.secho("Warning: No OpenAI API Key provided. AI features will be disabled.", fg=typer.colors.YELLOW)
-        typer.echo("You can provide it via --openai-key or OPENAI_API_KEY environment variable.")
 
-    builder = QueryBuilder(ai_assistant)
-    builder.run()
+
+#############################################################
+#  2, For BioRxiv Parser
+#############################################################
 
 
 @app.command("arxiv-search")
@@ -335,9 +307,10 @@ def arxiv_search_cmd(
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched arXiv IDs."),
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+    backend: str = opt_arxiv_backend,
 ):
     """Search arXiv and write matching IDs to a text file."""
-    fetcher = ArxivFetcher(root_dir=storage_dir)
+    fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend)
     records = fetcher.search(query=query, max_results=max_results, start_date=start_date, end_date=end_date)
     typer.echo(f"Found {len(records)} arXiv papers.")
     for record in records:
@@ -357,9 +330,10 @@ def arxiv_fetch_cmd(
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
+    backend: str = opt_arxiv_backend,
 ):
     """Fetch arXiv metadata and attempt to download PDFs."""
-    fetcher = ArxivFetcher(root_dir=storage_dir)
+    fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend)
     records = fetcher.fetch_from_query(
         query=query,
         output_dir=output_dir if output_dir else storage_dir,
@@ -379,9 +353,19 @@ def biorxiv_search_cmd(
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched bioRxiv IDs."),
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
-    window_days: int = typer.Option(365, "--window-days", help="Date window size for bioRxiv API paging."),
+    window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
 ):
-    """Search bioRxiv and write matching IDs to a text file."""
+    """Search bioRxiv and write matching IDs to a text file.
+
+    The current implementation uses Crossref server-side query over openRxiv records
+    instead of date-window paging over the legacy bioRxiv details API.
+    """
+    if window_days != 365:
+        typer.secho(
+            "Note: --window-days is a compatibility-only option and is ignored by the current Crossref-backed direct query path.",
+            fg=typer.colors.YELLOW,
+        )
+
     fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
     records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results)
     typer.echo(f"Found {len(records)} bioRxiv papers.")
@@ -401,10 +385,19 @@ def biorxiv_fetch_cmd(
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save fetched bioRxiv papers."),
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
-    window_days: int = typer.Option(365, "--window-days", help="Date window size for bioRxiv API paging."),
+    window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
 ):
-    """Fetch bioRxiv metadata and attempt to download PDFs."""
+    """Fetch bioRxiv metadata and attempt to download PDFs.
+
+    Metadata retrieval uses Crossref server-side query over openRxiv records.
+    """
+    if window_days != 365:
+        typer.secho(
+            "Note: --window-days is a compatibility-only option and is ignored by the current Crossref-backed direct query path.",
+            fg=typer.colors.YELLOW,
+        )
+
     fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
     records = fetcher.fetch_from_query(
         query=query,
@@ -416,116 +409,7 @@ def biorxiv_fetch_cmd(
     )
     typer.echo(f"Fetched {len(records)} bioRxiv papers.")
 
-@app.command("merge")
-def merge_cmd(
-    paper_dir: str = typer.Argument(..., help="Directory containing paper data (year/pmid/ structure)."),
-    output: str = typer.Argument(..., help="Output file path for merged data."),
-    pmid_file: Optional[str] = typer.Option(None, "--pmid-file", "-p", help="File containing PMIDs to merge (one per line). If not specified, merge all papers in directory."),
-    mode: str = typer.Option("full", "--mode", "-m", help="Merge mode: 'meta' (metadata only), 'full' (metadata + content)."),
-    format: str = typer.Option("md", "--format", "-f", help="Output format: 'md' (Markdown), 'jsonl' (JSON Lines), 'txt' (plain text)."),
-    profile: str = typer.Option("analysis", "--profile", help="Output profile: 'analysis' (full metadata for modules), 'llm' (LLM-focused compact output)."),
-    include_sections: Optional[str] = typer.Option(None, "--include-sections", help="Comma-separated section names to include from parsed JSON, e.g. 'abstract,introduction,results'."),
-    metadata_fields: Optional[str] = typer.Option(None, "--metadata-fields", help="Comma-separated metadata field paths, e.g. 'identity,content.keywords,links'. Use 'all' for full metadata."),
-    include_links: Optional[bool] = typer.Option(None, "--include-links/--exclude-links", help="Whether to include links in llm profile output. Ignored in analysis profile."),
-    text_source: str = typer.Option("parsed-json-first", "--text-source", help="Text source priority: 'parsed-json-first' or 'parsed-md-first'."),
-):
-    """
-    Merge PubMed paper data into unified format for AI analysis.
 
-    This command merges paper metadata and/or full text content into a single
-    file optimized for AI processing and analysis.
-
-    Examples:
-      - Merge all papers with content to Markdown:
-        paperflow merge ./papers_dir ./merged_papers.md --mode full --format md
-
-      - Merge papers from a PMID list file:
-        paperflow merge ./papers_dir ./selected_papers.md --pmid-file pmids.txt --mode full
-    """
-    # Map mode string to enum
-    mode_map = {
-        'meta': MergeMode.METADATA_ONLY,
-                'full': MergeMode.METADATA_CONTENT,
-    }
-
-    if mode not in mode_map:
-        typer.echo(f"Error: Invalid mode '{mode}'. Use: meta, full")
-        raise typer.Exit(code=1)
-
-    merge_mode = mode_map[mode]
-
-    # Map format string to enum
-    format_map = {
-        'md': OutputFormat.MARKDOWN,
-        'jsonl': OutputFormat.JSONL,
-        'txt': OutputFormat.PLAIN_TEXT
-    }
-
-    if format not in format_map:
-        typer.echo(f"Error: Invalid format '{format}'. Use: md, jsonl, txt")
-        raise typer.Exit(code=1)
-
-    output_format = format_map[format]
-
-    # Map profile string to enum
-    profile_map = {
-        'analysis': OutputProfile.ANALYSIS,
-        'llm': OutputProfile.LLM,
-    }
-
-    if profile not in profile_map:
-        typer.echo(f"Error: Invalid profile '{profile}'. Use: analysis, llm")
-        raise typer.Exit(code=1)
-
-    output_profile = profile_map[profile]
-
-    text_source_map = {
-        'parsed-json-first': TextSourcePriority.PARSED_JSON_FIRST,
-        'parsed-md-first': TextSourcePriority.PARSED_MD_FIRST,
-    }
-
-    if text_source not in text_source_map:
-        typer.echo("Error: Invalid text-source. Use: parsed-json-first, parsed-md-first")
-        raise typer.Exit(code=1)
-
-    include_sections_list = [item.strip() for item in include_sections.split(',')] if include_sections else None
-    metadata_fields_list = [item.strip() for item in metadata_fields.split(',')] if metadata_fields else None
-
-    # Create merge config
-    config = MergeConfig(
-        mode=merge_mode,
-        output_format=output_format,
-        output_profile=output_profile,
-        include_sections=include_sections_list,
-        include_metadata_fields=metadata_fields_list,
-        include_links_in_llm=(include_links if include_links is not None else False),
-        text_source_priority=text_source_map[text_source],
-    )
-
-    # Create merger and execute
-    merger = PaperMerger(config)
-
-    typer.echo(f"Merging papers from: {paper_dir}")
-
-    try:
-        if pmid_file:
-            # Merge from PMID list file
-            stats = merger.merge_from_file_list(paper_dir, pmid_file, output)
-        else:
-            # Merge all papers in directory
-            stats = merger.merge_from_directory(paper_dir, output)
-
-        merger.print_statistics()
-
-        if stats['successful'] > 0:
-            typer.secho(f"Successfully merged {stats['successful']} papers.", fg=typer.colors.GREEN)
-
-        if stats['failed'] > 0:
-            typer.secho(f"{stats['failed']} papers failed to merge.", fg=typer.colors.YELLOW)
-
-    except Exception as e:
-        typer.echo(f"Error during merge: {e}")
-        raise typer.Exit(code=1)
 
 if __name__ == "__main__":
     app()

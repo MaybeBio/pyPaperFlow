@@ -1,0 +1,495 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.01.04.697577",
+  "title": "ASSESSMENT OF ALPHAFOLD PROTEIN MODELS FOR SMALL-MOLECULE LIGAND DOCKING",
+  "doi": "10.64898/2026.01.04.697577",
+  "abstract": "ABSTRACT Molecular docking is a powerful computational tool for predicting protein-ligand interactions, widely employed in drug discovery. However, its effectiveness is often constrained by the availability of experimentally resolved X-ray protein structures, a process that is both time consuming and resource-intensive. AlphaFold (AF), a deep learning method, offers an efficient alternative by predicting high-accuracy 3D protein structures directly from amino acid sequences. This study assesses the utility of AF-generated protein models for fragment and larger ligand docking with Glide, a widely used docking approach. The docking workflow is evaluated in an unbiased manner by carrying out binding site identification with FTMap, a binding hot spot prediction software. We show that fragment docking to AF models outperforms docking to the respective unbound protein crystal structures, and performs comparably to docking to the corresponding ligand bound structures when using an unbiased approach. Leveraging computational efficiency of AF model generation, we also employ ensembles of AF models to incorporate protein flexibility. Results show that docking to AF ensembles improves larger-ligand docking compared to docking to singular AF models and outperforms docking to unbound structures. The results provide insights into the effectiveness of integrating AF protein models into docking procedures, highlighting the potential for streamlining computational drug discovery processes. STATEMENT OF SIGNIFICANCE This work addresses a critical bottleneck in computational drug discovery by demonstrating that AlphaFold (AF) models can serve as an alternative or complement to experimental structures for molecular docking. Specifically, a systematic study assessing Glide docking to rigid AF protein models and ensembles of models compared to experimentally determined ligand-bound and unbound protein X-ray structures was performed. The evaluation employs an unbiased methodology using FTMap-identified binding sites, eliminating the need for prior knowledge of the native ligand binding location. Additionally, protein flexibility is incorporated through a multiseed ensemble approach that generates a conformational ensembles of AF models at minimal computational cost, improving the docking accuracy without the need for ligand-bound templates.",
+  "authors": [
+    "Hlib",
+    "Maria",
+    "Rohin",
+    "Raheel",
+    "Sandor",
+    "Diane"
+  ],
+  "published_date": "2026-01-04",
+  "updated_date": "2026-01-05T02:40:11Z",
+  "journal": "bioRxiv",
+  "category": "",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.01.04.697577",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.01.04.697577.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "AlphaFold AND structure",
+  "version": "",
+  "keywords": [],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            1,
+            6
+          ]
+        ],
+        "date-time": "2026-01-06T14:26:39Z",
+        "timestamp": 1767709599769,
+        "version": "3.48.0"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            1,
+            4
+          ]
+        ]
+      },
+      "group-title": "Bioinformatics",
+      "reference-count": 44,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                1,
+                4
+              ]
+            ],
+            "date-time": "2026-01-04T00:00:00Z",
+            "timestamp": 1767484800000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "https://www.biorxiv.org/about/FAQ#license"
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            1,
+            4
+          ]
+        ]
+      },
+      "abstract": "<jats:title>ABSTRACT</jats:title>\n                <jats:p>Molecular docking is a powerful computational tool for predicting protein-ligand interactions, widely employed in drug discovery. However, its effectiveness is often constrained by the availability of experimentally resolved X-ray protein structures, a process that is both time consuming and resource-intensive. AlphaFold (AF), a deep learning method, offers an efficient alternative by predicting high-accuracy 3D protein structures directly from amino acid sequences. This study assesses the utility of AF-generated protein models for fragment and larger ligand docking with Glide, a widely used docking approach. The docking workflow is evaluated in an unbiased manner by carrying out binding site identification with FTMap, a binding hot spot prediction software. We show that fragment docking to AF models outperforms docking to the respective unbound protein crystal structures, and performs comparably to docking to the corresponding ligand bound structures when using an unbiased approach. Leveraging computational efficiency of AF model generation, we also employ ensembles of AF models to incorporate protein flexibility. Results show that docking to AF ensembles improves larger-ligand docking compared to docking to singular AF models and outperforms docking to unbound structures. The results provide insights into the effectiveness of integrating AF protein models into docking procedures, highlighting the potential for streamlining computational drug discovery processes.</jats:p>\n                <jats:sec>\n                  <jats:title>STATEMENT OF SIGNIFICANCE</jats:title>\n                  <jats:p>This work addresses a critical bottleneck in computational drug discovery by demonstrating that AlphaFold (AF) models can serve as an alternative or complement to experimental structures for molecular docking. Specifically, a systematic study assessing Glide docking to rigid AF protein models and ensembles of models compared to experimentally determined ligand-bound and unbound protein X-ray structures was performed. The evaluation employs an unbiased methodology using FTMap-identified binding sites, eliminating the need for prior knowledge of the native ligand binding location. Additionally, protein flexibility is incorporated through a multiseed ensemble approach that generates a conformational ensembles of AF models at minimal computational cost, improving the docking accuracy without the need for ligand-bound templates.</jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.01.04.697577",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            1,
+            5
+          ]
+        ],
+        "date-time": "2026-01-05T02:40:11Z",
+        "timestamp": 1767580811000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "ASSESSMENT OF ALPHAFOLD PROTEIN MODELS FOR SMALL-MOLECULE LIGAND DOCKING"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Hlib",
+          "family": "Maidanik",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Department of Biomedical Engineering, Boston University, Boston, MA 02215"
+            }
+          ]
+        },
+        {
+          "given": "Maria",
+          "family": "Lazou",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biomedical Engineering, Boston University, Boston, MA 02215"
+            }
+          ]
+        },
+        {
+          "given": "Rohin",
+          "family": "Bajaj",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biomedical Engineering, Boston University, Boston, MA 02215"
+            }
+          ]
+        },
+        {
+          "given": "Raheel",
+          "family": "Sarwar",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biomedical Engineering, Boston University, Boston, MA 02215"
+            }
+          ]
+        },
+        {
+          "given": "Sandor",
+          "family": "Vajda",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biomedical Engineering, Boston University, Boston, MA 02215"
+            },
+            {
+              "name": "Department of Chemistry, Boston University, Boston, MA 02215"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-9685-6177",
+          "authenticated-orcid": false,
+          "given": "Diane",
+          "family": "Joseph-McCarthy",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biomedical Engineering, Boston University, Boston, MA 02215"
+            },
+            {
+              "name": "Department of Chemistry, Boston University, Boston, MA 02215"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.26434/chemrxiv-2024-gmhtx"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/S41586-021-03819-2"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41392-023-01381-z"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkab1061"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.drudis.2023.103551"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.isci.2022.105920"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.7554/eLife.89386.1"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/pro.4530"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/acs.jcim.2c01219"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/acs.jcim.2c01270"
+        },
+        {
+          "issue": "5",
+          "key": "2026010606250787000_2026.01.04.697577v1.11",
+          "doi-asserted-by": "crossref",
+          "first-page": "733",
+          "DOI": "10.1038/nprot.2015.043",
+          "article-title": "The FTMap Family of Web Servers for Determining and Characterizing Ligand-Binding Hot Spots of Proteins",
+          "volume": "10",
+          "year": "2015",
+          "journal-title": "Nature Protocols"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btp036"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/jm0306430"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/jm030644s"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/jm051256o"
+        },
+        {
+          "issue": "12",
+          "key": "2026010606250787000_2026.01.04.697577v1.16",
+          "doi-asserted-by": "crossref",
+          "first-page": "1301",
+          "DOI": "10.1517/17460441.2015.1094458",
+          "article-title": "Understanding the challenges of protein flexibility in drug design",
+          "volume": "10",
+          "year": "2015",
+          "journal-title": "Expert Opinion on Drug Discovery"
+        },
+        {
+          "issue": "3",
+          "key": "2026010606250787000_2026.01.04.697577v1.17",
+          "doi-asserted-by": "crossref",
+          "first-page": "301",
+          "DOI": "10.1017/S0033583512000066",
+          "article-title": "Protein flexibility in docking and surface mapping",
+          "volume": "45",
+          "year": "2012",
+          "journal-title": "Quarterly Reviews of Biophysics"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/(SICI)1097-0134(20000515)39:3<261::AID-PROT90>3.0.CO;2-4"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.7554/eLife.74114"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1006/jmbi.1996.0776"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.21",
+          "doi-asserted-by": "crossref",
+          "first-page": "679",
+          "DOI": "10.1038/s41592-022-01488-1",
+          "article-title": "ColabFold: making protein folding accessible to all",
+          "volume": "19",
+          "year": "2022",
+          "journal-title": "Nature Methods"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41596-024-01060-5"
+        },
+        {
+          "issue": "12",
+          "key": "2026010606250787000_2026.01.04.697577v1.23",
+          "doi-asserted-by": "crossref",
+          "first-page": "6612",
+          "DOI": "10.1021/acs.jcim.0c00877",
+          "article-title": "Benchmark Sets for Binding Hot Spot Identification in Fragment-Based Ligand Discovery",
+          "volume": "60",
+          "year": "2020",
+          "journal-title": "Journal of Chemical Information and Modeling"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/NAR/GKAD1011"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3988"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/acs.jmedchem.5b00586"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s10822-013-9644-8"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/acs.jctc.1c00136"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/jm050540c"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nchembio.155"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.0813029106"
+        },
+        {
+          "issue": "3",
+          "key": "2026010606250787000_2026.01.04.697577v1.32",
+          "doi-asserted-by": "crossref",
+          "first-page": "463",
+          "DOI": "10.3390/antibiotics12030463",
+          "article-title": "Comparative Assessment of Docking Programs for Docking and Virtual Screening of Ribosomal Oxazolidinone Antibacterial Agents",
+          "volume": "12",
+          "year": "2023",
+          "journal-title": "Antibiotics"
+        },
+        {
+          "issue": "3",
+          "key": "2026010606250787000_2026.01.04.697577v1.33",
+          "doi-asserted-by": "crossref",
+          "first-page": "960",
+          "DOI": "10.1021/acs.jcim.3c01761",
+          "article-title": "Conservation of Hot Spots and Ligand Binding Sites in Protein Models by AlphaFold2",
+          "volume": "64",
+          "year": "2024",
+          "journal-title": "Journal of Chemical Information and Modeling"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.2412719121"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13321-015-0067-5"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-023-06832-9"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3390/v16111647"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.06.14.659707"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/acs.jcim.2c00026"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0304451"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3390/molecules24183293"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.42",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Alhumaid, N.K. ; Tawfik, E.A . Reliability of AlphaFold2 Models in Virtual Drug Screening: A Focus on Selected Class A GPCRs. International Journal of Molecular Sciences, 2024, 25, 10139.",
+          "DOI": "10.3390/ijms251810139"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.43",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Ugurlu, S.Y. , McDonald, D. , Lei, H. et al. Cobdock: an accurate and practical machine learning-based consensus blind docking method. Journal of Cheminformatics 2024, 16, 5.",
+          "DOI": "10.1186/s13321-023-00793-x"
+        },
+        {
+          "key": "2026010606250787000_2026.01.04.697577v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/acs.jcim.2c01436"
+        }
+      ],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.01.04.697577",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            1,
+            6
+          ]
+        ],
+        "date-time": "2026-01-06T14:25:14Z",
+        "timestamp": 1767709514000
+      },
+      "score": 12.573426,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.01.04.697577"
+        }
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            1,
+            4
+          ]
+        ]
+      },
+      "references-count": 44,
+      "URL": "https://doi.org/10.64898/2026.01.04.697577",
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            1,
+            4
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

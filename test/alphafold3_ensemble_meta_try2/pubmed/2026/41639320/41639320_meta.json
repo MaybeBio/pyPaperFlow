@@ -1,0 +1,407 @@
+{
+    "content": {
+        "abstract": "While AlphaFold3 (AF3) extends AlphaFold2 (AF2) by predicting holo structures, it remains unclear whether its modeling process captures similar induced-fit mechanisms. In this study, we benchmarked the VS performance of ligand-induced AF3 holo structures on two datasets: a subset of DUD-E and VsNsBench designed to avoid sequence-level information leakage. On both datasets, AF3 holo structures demonstrated substantially improved enriching capability compared to AF3 apo, experimental apo, and AF2 structures. Compared to experimental holo structures, AF3 models demonstrated inferior performance on the DUD-E subset but performed slightly better on VsNsBench. Further analysis revealed that AF3's induced modeling critically depends on the bound ligand's affinity: high-affinity ligands produced conformations enabling excellent enrichment, while low-affinity or random ligands yielded poor performance. Moreover, direct VS using AF3 alone achieved satisfactory performance, but computational efficiency remains a major bottleneck for large-scale applications, even with single-round multiple sequence alignment (MSA) generation. In a DFG-motif kinase case study, AF3 successfully modeled inhibitor-specific conformations with a 75% success rate. These findings demonstrate that AF3 effectively incorporates induced-fit modeling, though improvement is needed, particularly for modeling multi-state conformational ensembles.",
+        "keywords": [
+            "AlphaFold3",
+            "VsNsBench",
+            "induced-fit mechanism",
+            "virtual screening"
+        ],
+        "mesh_terms": [],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Faculty of Applied Science, Macao Polytechnic University, Macao, China.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                "CarbonSilicon AI Technology Co., Ltd, Hangzhou, 310018, China.",
+                "Department of Clinical Pharmacy, The First Affiliated Hospital, Zhejiang University School of Medicine, Hangzhou, 310003, China.",
+                "Faculty of Applied Science, Macao Polytechnic University, Macao, China.",
+                "Faculty of Applied Science, Macao Polytechnic University, Macao, China.",
+                "Faculty of Applied Science, Macao Polytechnic University, Macao, China.",
+                "Faculty of Applied Science, Macao Polytechnic University, Macao, China.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                "CarbonSilicon AI Technology Co., Ltd, Hangzhou, 310018, China.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                "Vollum Institute, Oregon Health and Science University, Portland, OR, 97239, USA.",
+                "Faculty of Applied Science, Macao Polytechnic University, Macao, China. hxliu@mpu.edu.mo.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China. tingjunhou@zju.edu.cn.",
+                "Zhejiang Provincial Key Laboratory for Intelligent Drug Discovery and Development, Jinhua, 321016, China. tingjunhou@zju.edu.cn.",
+                "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China. yukang@zju.edu.cn.",
+                "Zhejiang Provincial Key Laboratory for Intelligent Drug Discovery and Development, Jinhua, 321016, China. yukang@zju.edu.cn."
+            ],
+            "auids": [],
+            "full_names": [
+                "Gu, Shu-Kai",
+                "Shen, Chao",
+                "Yang, Yu-Wei",
+                "Zhai, Si-Long",
+                "Li, Jing",
+                "Tian, Ya-Nan",
+                "Zhang, Xu-Jun",
+                "Du, Hong-Yan",
+                "Wu, Zhen-Xing",
+                "Wang, Xiao-Rui",
+                "Ge, Jing-Xuan",
+                "Zhao, Hui-Feng",
+                "Huang, Yuan-Sheng",
+                "Weng, Gao-Qi",
+                "Liu, Huan-Xiang",
+                "Hou, Ting-Jun",
+                "Kang, Yu"
+            ],
+            "short_names": [
+                "Gu SK",
+                "Shen C",
+                "Yang YW",
+                "Zhai SL",
+                "Li J",
+                "Tian YN",
+                "Zhang XJ",
+                "Du HY",
+                "Wu ZX",
+                "Wang XR",
+                "Ge JX",
+                "Zhao HF",
+                "Huang YS",
+                "Weng GQ",
+                "Liu HX",
+                "Hou TJ",
+                "Kang Y"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Faculty of Applied Science, Macao Polytechnic University, Macao, China.",
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                    "CarbonSilicon AI Technology Co., Ltd, Hangzhou, 310018, China."
+                ],
+                "full_name": "Gu, Shu-Kai",
+                "identifiers": [],
+                "short_name": "Gu SK"
+            },
+            {
+                "affiliations": [
+                    "Department of Clinical Pharmacy, The First Affiliated Hospital, Zhejiang University School of Medicine, Hangzhou, 310003, China."
+                ],
+                "full_name": "Shen, Chao",
+                "identifiers": [],
+                "short_name": "Shen C"
+            },
+            {
+                "affiliations": [
+                    "Faculty of Applied Science, Macao Polytechnic University, Macao, China."
+                ],
+                "full_name": "Yang, Yu-Wei",
+                "identifiers": [],
+                "short_name": "Yang YW"
+            },
+            {
+                "affiliations": [
+                    "Faculty of Applied Science, Macao Polytechnic University, Macao, China."
+                ],
+                "full_name": "Zhai, Si-Long",
+                "identifiers": [],
+                "short_name": "Zhai SL"
+            },
+            {
+                "affiliations": [
+                    "Faculty of Applied Science, Macao Polytechnic University, Macao, China."
+                ],
+                "full_name": "Li, Jing",
+                "identifiers": [],
+                "short_name": "Li J"
+            },
+            {
+                "affiliations": [
+                    "Faculty of Applied Science, Macao Polytechnic University, Macao, China."
+                ],
+                "full_name": "Tian, Ya-Nan",
+                "identifiers": [],
+                "short_name": "Tian YN"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China."
+                ],
+                "full_name": "Zhang, Xu-Jun",
+                "identifiers": [],
+                "short_name": "Zhang XJ"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China."
+                ],
+                "full_name": "Du, Hong-Yan",
+                "identifiers": [],
+                "short_name": "Du HY"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China."
+                ],
+                "full_name": "Wu, Zhen-Xing",
+                "identifiers": [],
+                "short_name": "Wu ZX"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China.",
+                    "CarbonSilicon AI Technology Co., Ltd, Hangzhou, 310018, China."
+                ],
+                "full_name": "Wang, Xiao-Rui",
+                "identifiers": [],
+                "short_name": "Wang XR"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China."
+                ],
+                "full_name": "Ge, Jing-Xuan",
+                "identifiers": [],
+                "short_name": "Ge JX"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China."
+                ],
+                "full_name": "Zhao, Hui-Feng",
+                "identifiers": [],
+                "short_name": "Zhao HF"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China."
+                ],
+                "full_name": "Huang, Yuan-Sheng",
+                "identifiers": [],
+                "short_name": "Huang YS"
+            },
+            {
+                "affiliations": [
+                    "Vollum Institute, Oregon Health and Science University, Portland, OR, 97239, USA."
+                ],
+                "full_name": "Weng, Gao-Qi",
+                "identifiers": [],
+                "short_name": "Weng GQ"
+            },
+            {
+                "affiliations": [
+                    "Faculty of Applied Science, Macao Polytechnic University, Macao, China. hxliu@mpu.edu.mo."
+                ],
+                "full_name": "Liu, Huan-Xiang",
+                "identifiers": [],
+                "short_name": "Liu HX"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China. tingjunhou@zju.edu.cn.",
+                    "Zhejiang Provincial Key Laboratory for Intelligent Drug Discovery and Development, Jinhua, 321016, China. tingjunhou@zju.edu.cn."
+                ],
+                "full_name": "Hou, Ting-Jun",
+                "identifiers": [],
+                "short_name": "Hou TJ"
+            },
+            {
+                "affiliations": [
+                    "College of Pharmaceutical Sciences, Zhejiang University, Hangzhou, 310058, China. yukang@zju.edu.cn.",
+                    "Zhejiang Provincial Key Laboratory for Intelligent Drug Discovery and Development, Jinhua, 321016, China. yukang@zju.edu.cn."
+                ],
+                "full_name": "Kang, Yu",
+                "identifiers": [],
+                "short_name": "Kang Y"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1038/s41401-025-01732-2",
+        "pmid": "41639320",
+        "title": "VsNsbench: evaluating AlphaFold3-embed induced-fit mechanism for enhanced virtual screening."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Nature Publishing Group",
+                "url": "https://doi.org/10.1038/s41401-025-01732-2"
+            }
+        ],
+        "pmc": [],
+        "refs": [
+            "38718835",
+            "38630855",
+            "38425520",
+            "38274053",
+            "38177786",
+            "36897766",
+            "36892986",
+            "36884022",
+            "36344848",
+            "35917397",
+            "34791371",
+            "34561691",
+            "34278794",
+            "34265844",
+            "33532838",
+            "30867294",
+            "30357411",
+            "29416509",
+            "26596171",
+            "26034510",
+            "25478866",
+            "25262799",
+            "23941661",
+            "23790484",
+            "23579614",
+            "22716043",
+            "21877753",
+            "20000587",
+            "19434821",
+            "17145705",
+            "16675286",
+            "16420040",
+            "15027866",
+            "12825931",
+            "12546894"
+        ],
+        "review": [
+            "41639320",
+            "41088961",
+            "39970826",
+            "40402396"
+        ],
+        "similar": [
+            "41639320",
+            "41403459",
+            "39684679",
+            "40851426",
+            "39574676",
+            "39574675",
+            "40814020",
+            "33337877",
+            "40225838",
+            "40820259",
+            "41432299",
+            "38883239",
+            "38630855",
+            "39362060",
+            "41502950",
+            "36897766",
+            "39448664",
+            "40502139",
+            "40857166",
+            "40735632",
+            "39975279",
+            "40912020",
+            "39046952",
+            "36342197",
+            "41142756",
+            "37693436",
+            "40062613",
+            "40688505",
+            "40662794",
+            "39116039",
+            "40501681",
+            "41170922",
+            "12825931",
+            "38659642",
+            "38496487",
+            "25220914",
+            "41088961",
+            "39565312",
+            "40166350",
+            "39580516",
+            "40143071",
+            "40160764",
+            "39970826",
+            "40999494",
+            "41509292",
+            "39240197",
+            "22540736",
+            "40950156",
+            "40424014",
+            "39337622",
+            "41147497",
+            "41526649",
+            "37786533",
+            "31650386",
+            "38187536",
+            "41029432",
+            "26225536",
+            "31117509",
+            "31804165",
+            "15001363",
+            "35238773",
+            "39484820",
+            "40402396",
+            "39643640",
+            "41313605",
+            "36282546",
+            "41454828",
+            "40950168",
+            "36906658",
+            "41084281",
+            "40144455",
+            "35312477",
+            "30883122",
+            "37732281",
+            "38508305",
+            "30699115",
+            "20066034",
+            "41429581",
+            "39848362",
+            "28419481",
+            "39941016",
+            "32596567",
+            "38266916",
+            "40799364",
+            "38100293",
+            "41299000",
+            "39677766",
+            "40285358",
+            "32271577",
+            "36769074",
+            "29462237",
+            "38753765",
+            "40045015",
+            "40595555",
+            "39868559",
+            "39876941",
+            "17927211",
+            "39897056",
+            "15171716",
+            "40463224"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2026/02/05 00:30",
+        "fetched_at": "2026-05-02 17:14:43"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Acta Pharmacol Sin"
+        ],
+        "journal_title": [
+            "Acta pharmacologica Sinica"
+        ],
+        "pub_date": "2026 Feb 4",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2026"
+    }
+}

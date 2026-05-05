@@ -1,0 +1,274 @@
+{
+    "content": {
+        "abstract": "In many enzymes, movement of domains from open to closed state forms the environment required for catalysis. We have studied ligand-induced domain motion in 82 enzymes by generating ensembles of AlphaFold 3 (AF3) models both with and without the presence of ligands that are known to trigger such motion. It was found that the results heavily depend on the number of apo and holo structures of each enzyme in the Protein Data Bank (PDB). For enzymes with more apo than holo structures, 64.8% of models generated without ligand are closer to the open apo than to the closed holo state. In contrast, for enzymes that have more holo than apo structures in the PDB, 75.5% of AF3 models without any ligand are in the holo conformation, revealing strong memorization. In both cases, adding the ligand has only a moderate impact. However, the impact of ligand is substantial for proteins that have only a few structures in the training set. Ligands are placed with higher accuracy if there are more holo structures with different ligands in the PDB. We have found that nonbinder ligands also generate similar domain motion, and the distributions of the predicted enzyme conformations remain close to those obtained with the native trigger ligands, but with lower ligand pLDDT values. For enzymes with more holo than apo structures in the PDB, AlphaFold2 also generates the majority of models close to the holo state, suggesting the same memorization effects seen for AF3.",
+        "keywords": [
+            "cofolding",
+            "conformational change",
+            "machine learning",
+            "memorization",
+            "protein structure prediction"
+        ],
+        "mesh_terms": [
+            "Ligands",
+            "Models, Molecular",
+            "*Enzymes/chemistry/metabolism",
+            "Databases, Protein",
+            "Protein Domains",
+            "Protein Conformation"
+        ],
+        "pub_types": [
+            "Journal Article"
+        ]
+    },
+    "contributors": {
+        "medline": {
+            "affiliations": [
+                "Department of Electrical and Computer Engineering, Boston University, Boston, MA 02215.",
+                "Department of Chemistry, Boston University, Boston, MA 02215.",
+                "Department of Biomedical Engineering, Boston University, Boston, MA 02215.",
+                "Oden Institute for Computational Engineering and Sciences, The University of Texas at Austin, Austin, TX 78712.",
+                "Department of Molecular Biosciences, The University of Texas at Austin, Austin, TX 78712.",
+                "Department of Chemistry, Boston University, Boston, MA 02215.",
+                "Department of Biomedical Engineering, Boston University, Boston, MA 02215.",
+                "Department of Chemistry, Boston University, Boston, MA 02215.",
+                "Department of Biomedical Engineering, Boston University, Boston, MA 02215."
+            ],
+            "auids": [
+                "ORCID: 0000-0001-9524-3547",
+                "ORCID: 0000-0001-9122-4955",
+                "ORCID: 0009-0003-6443-8060",
+                "ORCID: 0000-0003-0464-4500",
+                "ORCID: 0000-0001-9685-6177",
+                "ORCID: 0000-0003-1540-8220"
+            ],
+            "full_names": [
+                "Yu, Hao",
+                "Bekar-Cesaretli, Ayse A",
+                "Lazou, Maria",
+                "Kozakov, Dima",
+                "Joseph-McCarthy, Diane",
+                "Vajda, Sandor"
+            ],
+            "short_names": [
+                "Yu H",
+                "Bekar-Cesaretli AA",
+                "Lazou M",
+                "Kozakov D",
+                "Joseph-McCarthy D",
+                "Vajda S"
+            ]
+        },
+        "xml": [
+            {
+                "affiliations": [
+                    "Department of Electrical and Computer Engineering, Boston University, Boston, MA 02215."
+                ],
+                "full_name": "Yu, Hao",
+                "identifiers": [
+                    "0000-0001-9524-3547"
+                ],
+                "short_name": "Yu H"
+            },
+            {
+                "affiliations": [
+                    "Department of Chemistry, Boston University, Boston, MA 02215."
+                ],
+                "full_name": "Bekar-Cesaretli, Ayse A",
+                "identifiers": [
+                    "0000-0001-9122-4955"
+                ],
+                "short_name": "Bekar-Cesaretli AA"
+            },
+            {
+                "affiliations": [
+                    "Department of Biomedical Engineering, Boston University, Boston, MA 02215."
+                ],
+                "full_name": "Lazou, Maria",
+                "identifiers": [
+                    "0009-0003-6443-8060"
+                ],
+                "short_name": "Lazou M"
+            },
+            {
+                "affiliations": [
+                    "Oden Institute for Computational Engineering and Sciences, The University of Texas at Austin, Austin, TX 78712.",
+                    "Department of Molecular Biosciences, The University of Texas at Austin, Austin, TX 78712."
+                ],
+                "full_name": "Kozakov, Dima",
+                "identifiers": [
+                    "0000-0003-0464-4500"
+                ],
+                "short_name": "Kozakov D"
+            },
+            {
+                "affiliations": [
+                    "Department of Chemistry, Boston University, Boston, MA 02215.",
+                    "Department of Biomedical Engineering, Boston University, Boston, MA 02215."
+                ],
+                "full_name": "Joseph-McCarthy, Diane",
+                "identifiers": [
+                    "0000-0001-9685-6177"
+                ],
+                "short_name": "Joseph-McCarthy D"
+            },
+            {
+                "affiliations": [
+                    "Department of Chemistry, Boston University, Boston, MA 02215.",
+                    "Department of Biomedical Engineering, Boston University, Boston, MA 02215."
+                ],
+                "full_name": "Vajda, Sandor",
+                "identifiers": [
+                    "0000-0003-1540-8220"
+                ],
+                "short_name": "Vajda S"
+            }
+        ]
+    },
+    "identity": {
+        "doi": "10.1073/pnas.2530709123",
+        "pmid": "41779774",
+        "title": "Bias in the AlphaFold3 prediction of ligand-induced domain motion in enzymes."
+    },
+    "links": {
+        "cites": [],
+        "entrez": {},
+        "external": [
+            {
+                "attribute": "subscription/membership/fee required",
+                "category": "Full Text Sources",
+                "linkname": "",
+                "provider": "Atypon",
+                "url": "https://www.pnas.org/doi/10.1073/pnas.2530709123?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub  0pubmed"
+            }
+        ],
+        "pmc": [],
+        "refs": [],
+        "review": [
+            "41779774",
+            "18281945",
+            "16101414",
+            "24070540",
+            "41088961"
+        ],
+        "similar": [
+            "41779774",
+            "39684679",
+            "12825931",
+            "39574675",
+            "41639320",
+            "36342197",
+            "38508305",
+            "39565312",
+            "26260067",
+            "30699115",
+            "17932934",
+            "41502950",
+            "33337877",
+            "22084200",
+            "40851426",
+            "20066034",
+            "35561203",
+            "39484820",
+            "24956479",
+            "22032721",
+            "17927211",
+            "19267915",
+            "25863964",
+            "36282546",
+            "41229237",
+            "40160764",
+            "30543875",
+            "11254382",
+            "18300225",
+            "15608227",
+            "18281945",
+            "18175325",
+            "33682750",
+            "17059826",
+            "17034815",
+            "35312477",
+            "17680687",
+            "30883122",
+            "18937438",
+            "28419481",
+            "16101414",
+            "30747434",
+            "18455184",
+            "24070540",
+            "39693053",
+            "8819978",
+            "39240197",
+            "6492162",
+            "16460010",
+            "14643664",
+            "40662794",
+            "19159290",
+            "21051360",
+            "12211000",
+            "40955451",
+            "35026162",
+            "28566049",
+            "33383937",
+            "20370823",
+            "41147497",
+            "28412901",
+            "8130200",
+            "36633566",
+            "39643640",
+            "37899502",
+            "8487303",
+            "41088961",
+            "17555524",
+            "15608186",
+            "31869345",
+            "39046952",
+            "36906658",
+            "18770515",
+            "11812142",
+            "15165895",
+            "40688505",
+            "41072002",
+            "31515908",
+            "22536963",
+            "17910060",
+            "33021055",
+            "28012138",
+            "41756927",
+            "39187507",
+            "37693436",
+            "9760232",
+            "35484642",
+            "25847998",
+            "10924105",
+            "28884249",
+            "23737450",
+            "15665135",
+            "38659642",
+            "39362060",
+            "41624973",
+            "36269348",
+            "40976968",
+            "23966221",
+            "40610378",
+            "36897766"
+        ],
+        "text_mined": []
+    },
+    "metadata": {
+        "entrez_date": "2026/03/04 18:43",
+        "fetched_at": "2026-05-02 17:07:59"
+    },
+    "source": {
+        "journal_abbrev": [
+            "Proc Natl Acad Sci U S A"
+        ],
+        "journal_title": [
+            "Proceedings of the National Academy of Sciences of the United States of America"
+        ],
+        "pub_date": "2026 Mar 10",
+        "pub_types": [
+            "Journal Article"
+        ],
+        "pub_year": "2026"
+    }
+}

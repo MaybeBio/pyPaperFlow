@@ -51,41 +51,44 @@ class TestBioRxivFetcher(unittest.TestCase):
 
     def test_search_paginates_past_first_page(self):
         first_page = {
-            "messages": [{"status": "ok", "total": "31"}],
-            "collection": [
-                {
-                    "title": f"Unrelated paper {index}",
-                    "abstract": "This page does not mention the query terms.",
-                    "authors": [{"name": "Example Author"}],
-                    "date": "2026-01-05",
-                    "doi": f"10.1101/2026.01.05.{index:06d}",
-                    "version": "1",
-                    "category": ["Bioinformatics"],
-                    "server": "biorxiv",
-                }
-                for index in range(30)
-            ],
+            "message": {
+                "items": [
+                    {
+                        "DOI": f"10.1101/2025.01.01.00000{index}",
+                        "title": [f"Unrelated paper {index}"],
+                        "publisher": "openRxiv",
+                        "type": "posted-content",
+                        "prefix": "10.64898",
+                        "author": [{"given": "Example", "family": "Author"}],
+                        "issued": {"date-parts": [[2026, 1, 5]]},
+                    }
+                    for index in range(5)
+                ],
+                "next-cursor": "cursor-2",
+            }
         }
         second_page = {
-            "messages": [{"status": "ok", "total": "31"}],
-            "collection": [
-                {
-                    "title": "AlphaFold resolves structure questions",
-                    "abstract": "A structure-focused analysis of AlphaFold.",
-                    "authors": [{"name": "Alice Smith"}],
-                    "date": "2026-01-06",
-                    "doi": "10.1101/2026.01.06.123456",
-                    "version": "1",
-                    "category": ["Structural Biology"],
-                    "server": "biorxiv",
-                }
-            ],
+            "message": {
+                "items": [
+                    {
+                        "DOI": "10.1101/2026.01.06.123456",
+                        "title": ["AlphaFold resolves structure questions"],
+                        "abstract": "<jats:p>A structure-focused analysis of AlphaFold.</jats:p>",
+                        "publisher": "openRxiv",
+                        "type": "posted-content",
+                        "prefix": "10.64898",
+                        "author": [{"given": "Alice", "family": "Smith"}],
+                        "issued": {"date-parts": [[2026, 1, 6]]},
+                    }
+                ],
+                "next-cursor": "cursor-3",
+            }
         }
 
-        def fake_get(url, headers=None, timeout=None):
-            if "api.biorxiv.org" in url:
-                cursor = int(url.rsplit("/", 1)[-1])
-                return FakeResponse(json_data=first_page if cursor == 0 else second_page)
+        def fake_get(url, params=None, headers=None, timeout=None):
+            if "api.crossref.org" in url:
+                cursor = (params or {}).get("cursor")
+                return FakeResponse(json_data=first_page if cursor == "*" else second_page)
             raise AssertionError(f"Unexpected URL: {url}")
 
         with patch("pyPaperFlow.biorxiv_fetcher.requests.get", side_effect=fake_get):
@@ -101,17 +104,28 @@ class TestBioRxivFetcher(unittest.TestCase):
         self.assertEqual(records[0].title, "AlphaFold resolves structure questions")
 
     def test_fetch_and_save_query(self):
-        def fake_get(url, headers=None, timeout=None):
-            if "api.biorxiv.org" in url:
-                cursor = int(url.rsplit("/", 1)[-1])
-                if cursor == 0:
-                    return FakeResponse(
-                        json_data={
-                            **BIORXIV_PAYLOAD,
-                            "messages": [{"status": "ok", "total": "1"}],
+        def fake_get(url, params=None, headers=None, timeout=None):
+            if "api.crossref.org" in url:
+                return FakeResponse(
+                    json_data={
+                        "message": {
+                            "items": [
+                                {
+                                    "DOI": "10.1101/2026.01.05.123456",
+                                    "title": ["AlphaFold improves protein modeling"],
+                                    "abstract": "<jats:p>AlphaFold changes the landscape for structure prediction.</jats:p>",
+                                    "publisher": "openRxiv",
+                                    "type": "posted-content",
+                                    "prefix": "10.64898",
+                                    "author": [{"given": "Alice", "family": "Smith"}, {"given": "Bob", "family": "Lee"}],
+                                    "issued": {"date-parts": [[2026, 1, 5]]},
+                                    "subject": ["Bioinformatics"],
+                                }
+                            ],
+                            "next-cursor": "",
                         }
-                    )
-                return FakeResponse(json_data={"messages": [{"status": "ok", "total": "1"}], "collection": []})
+                    }
+                )
             if url.endswith(".pdf"):
                 return FakeResponse(content=b"%PDF-1.4\n% biorxiv demo pdf\n")
             if "biorxiv.org/content" in url:

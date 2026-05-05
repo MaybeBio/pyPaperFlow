@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import time
+import re
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
@@ -18,11 +19,12 @@ from .source_utils import (
     normalize_text,
     safe_filename,
     save_json,
-    iter_date_windows,
 )
 
 
 BIO_RXIV_API_BASE = "https://api.biorxiv.org/details/biorxiv"
+BIO_RXIV_CROSSREF_API = "https://api.crossref.org/works"
+BIO_RXIV_CROSSREF_PREFIX = "10.64898"
 BIO_RXIV_LANDING_BASE = "https://www.biorxiv.org/content"
 BIO_RXIV_LAUNCH_DATE = datetime(2013, 1, 1)
 
@@ -51,43 +53,49 @@ class BioRxivFetcher:
         end_date: Optional[str] = None,
         max_results: Optional[int] = None,
     ) -> List[SourcePaper]:
+        query_text = normalize_text(query)
+        if not query_text:
+            raise ValueError("query must be non-empty")
+
         records: List[SourcePaper] = []
         start_dt, end_dt = self._normalize_date_range(start_date, end_date)
 
-        for window_start, window_end in iter_date_windows(start_dt, end_dt, self.window_days):
-            cursor = 0
-            while True:
-                payload = self._request_window(window_start, window_end, cursor)
-                messages = payload.get("messages") or []
-                message = messages[0] if messages else {}
-                if normalize_text(message.get("status", "")).lower() != "ok":
-                    break
+        cursor = "*"
+        while True:
+            page_size = 1000
+            if max_results is not None:
+                remaining = max(1, int(max_results) - len(records))
+                page_size = min(page_size, remaining)
 
-                collection = payload.get("collection") or []
-                if not collection:
-                    break
+            payload = self._request_crossref_page(
+                query_text=query_text,
+                cursor=cursor,
+                page_size=page_size,
+                start_dt=start_dt,
+                end_dt=end_dt,
+            )
+            message = payload.get("message") or {}
+            items = message.get("items") or []
+            if not items:
+                break
 
-                for raw_record in collection:
-                    if not basic_boolean_text_match(self._search_text(raw_record), query):
-                        continue
-                    record = self._normalize_record(raw_record, query=query)
-                    records.append(record)
-                    if max_results is not None and len(records) >= max_results:
-                        return records
+            for raw_record in items:
+                if normalize_text(raw_record.get("publisher", "")).lower() != "openrxiv":
+                    continue
+                if not basic_boolean_text_match(self._search_text_crossref(raw_record), query_text):
+                    continue
+                record = self._normalize_crossref_record(raw_record, query=query_text)
+                records.append(record)
+                if max_results is not None and len(records) >= max_results:
+                    return records
 
-                returned_count = len(collection)
-                cursor += returned_count
+            if len(items) < page_size:
+                break
 
-                total_text = message.get("total")
-                try:
-                    total = int(total_text) if total_text not in {None, ""} else 0
-                except (TypeError, ValueError):
-                    total = 0
-
-                if returned_count == 0:
-                    break
-                if total and cursor >= total:
-                    break
+            next_cursor = normalize_text(message.get("next-cursor", ""))
+            if not next_cursor or next_cursor == cursor:
+                break
+            cursor = next_cursor
 
         return records
 
@@ -133,13 +141,36 @@ class BioRxivFetcher:
             raise ValueError("start_date cannot be later than end_date")
         return start_dt, end_dt
 
-    def _request_window(self, start_dt: datetime, end_dt: datetime, cursor: int) -> Dict[str, Any]:
-        url = f"{BIO_RXIV_API_BASE}/{start_dt.strftime('%Y-%m-%d')}/{end_dt.strftime('%Y-%m-%d')}/{cursor}"
+    def _request_crossref_page(
+        self,
+        query_text: str,
+        cursor: str,
+        page_size: int,
+        start_dt: datetime,
+        end_dt: datetime,
+    ) -> Dict[str, Any]:
+        params: Dict[str, Any] = {
+            "filter": f"prefix:{BIO_RXIV_CROSSREF_PREFIX},type:posted-content",
+            "query.bibliographic": query_text,
+            "rows": page_size,
+            "cursor": cursor,
+            "sort": "relevance",
+        }
+        if start_dt:
+            params["filter"] += f",from-pub-date:{start_dt.strftime('%Y-%m-%d')}"
+        if end_dt:
+            params["filter"] += f",until-pub-date:{end_dt.strftime('%Y-%m-%d')}"
+
         last_error: Optional[Exception] = None
 
         for attempt in range(self.max_retries):
             try:
-                response = requests.get(url, headers=self.headers, timeout=self.request_timeout)
+                response = requests.get(
+                    BIO_RXIV_CROSSREF_API,
+                    params=params,
+                    headers=self.headers,
+                    timeout=self.request_timeout,
+                )
                 response.raise_for_status()
                 return response.json()
             except Exception as exc:
@@ -149,33 +180,40 @@ class BioRxivFetcher:
 
         if last_error is not None:
             raise last_error
-        raise RuntimeError("Failed to query bioRxiv API")
+        raise RuntimeError("Failed to query bioRxiv Crossref search")
 
-    def _search_text(self, record: Dict[str, Any]) -> str:
+    def _search_text_crossref(self, record: Dict[str, Any]) -> str:
         pieces = [
             record.get("title", ""),
-            record.get("abstract", ""),
-            record.get("authors", ""),
             record.get("doi", ""),
-            record.get("category", ""),
+            record.get("publisher", ""),
+            record.get("container-title", ""),
+            record.get("subject", ""),
+            record.get("abstract", ""),
         ]
-        return " ".join(normalize_text(piece) for piece in pieces if normalize_text(piece))
+        normalized_parts: List[str] = []
+        for piece in pieces:
+            if isinstance(piece, list):
+                normalized_piece = " ".join(normalize_text(item) for item in piece if normalize_text(item))
+            else:
+                normalized_piece = normalize_text(piece)
+            if normalized_piece:
+                normalized_parts.append(normalized_piece)
+        return " ".join(normalized_parts)
 
-    def _normalize_record(self, record: Dict[str, Any], query: str) -> SourcePaper:
-        title = normalize_text(record.get("title", ""))
-        abstract = normalize_text(record.get("abstract", ""))
-        published_date = normalize_text(record.get("date", record.get("published", "")))
-        updated_date = normalize_text(record.get("date", record.get("updated", "")))
+    def _normalize_crossref_record(self, record: Dict[str, Any], query: str) -> SourcePaper:
+        title = normalize_text((record.get("title") or [""])[0])
+        abstract = self._clean_crossref_abstract(record.get("abstract", ""))
+        published_date = self._extract_crossref_date(record)
+        updated_date = normalize_text(record.get("created", {}).get("date-time", ""))
 
-        authors = self._normalize_authors(record.get("authors", []))
-        doi = self._normalize_doi(record.get("doi", ""), record.get("version", ""))
-        version = normalize_text(record.get("version", ""))
-        landing_url = self._landing_url(doi, version)
+        authors = self._normalize_crossref_authors(record.get("author", []))
+        doi = self._normalize_crossref_doi(record.get("DOI", ""))
+        landing_url = self._landing_url(doi, "")
 
         source_id = doi or safe_filename(f"biorxiv_{published_date}_{title}")
-        keywords = self._normalize_keywords(record.get("category", []))
-        pdf_candidates = self._candidate_pdf_urls(record, doi, version)
-        pdf_url = pdf_candidates[0] if pdf_candidates else ""
+        keywords = self._normalize_crossref_keywords(record.get("subject", []))
+        pdf_url = f"{BIO_RXIV_LANDING_BASE}/{doi}.full.pdf" if doi else ""
 
         return SourcePaper(
             source="biorxiv",
@@ -191,14 +229,72 @@ class BioRxivFetcher:
             landing_url=landing_url,
             pdf_url=pdf_url,
             query=query,
-            version=version,
+            version="",
             keywords=keywords,
             extra={
-                "server": record.get("server", "biorxiv"),
-                "version": version,
+                "publisher": record.get("publisher", ""),
+                "prefix": record.get("prefix", ""),
+                "type": record.get("type", ""),
                 "raw_record": record,
             },
         )
+
+    def _normalize_crossref_authors(self, authors_value: Any) -> List[str]:
+        if not isinstance(authors_value, list):
+            return []
+
+        authors: List[str] = []
+        for author in authors_value:
+            if not isinstance(author, dict):
+                continue
+            name = normalize_text(
+                author.get("name")
+                or author.get("given")
+                or " ".join(
+                    part
+                    for part in [author.get("given", ""), author.get("family", "")]
+                    if normalize_text(part)
+                )
+            )
+            if name:
+                authors.append(name)
+        return authors
+
+    def _normalize_crossref_keywords(self, keywords_value: Any) -> List[str]:
+        if isinstance(keywords_value, list):
+            return [normalize_text(item) for item in keywords_value if normalize_text(item)]
+        if isinstance(keywords_value, str) and keywords_value.strip():
+            return [part.strip() for part in keywords_value.split(",") if part.strip()]
+        return []
+
+    def _normalize_crossref_doi(self, doi: Any) -> str:
+        return normalize_text(doi)
+
+    def _extract_crossref_date(self, record: Dict[str, Any]) -> str:
+        for key in ("published-online", "published-print", "issued", "created"):
+            value = record.get(key)
+            if isinstance(value, dict):
+                date_parts = value.get("date-parts") or []
+                if date_parts and date_parts[0]:
+                    parts = date_parts[0]
+                    year = parts[0] if len(parts) > 0 else None
+                    month = parts[1] if len(parts) > 1 else 1
+                    day = parts[2] if len(parts) > 2 else 1
+                    if year:
+                        try:
+                            return datetime(int(year), int(month), int(day)).strftime("%Y-%m-%d")
+                        except Exception:
+                            return normalize_text(year)
+        return ""
+
+    def _clean_crossref_abstract(self, abstract: Any) -> str:
+        text = normalize_text(abstract)
+        if not text:
+            return ""
+        soup = BeautifulSoup(text, "html.parser")
+        cleaned = soup.get_text(separator=" ")
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        return cleaned
 
     def _normalize_authors(self, authors_value: Any) -> List[str]:
         if isinstance(authors_value, list):
