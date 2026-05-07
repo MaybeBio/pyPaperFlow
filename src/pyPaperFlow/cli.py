@@ -237,6 +237,13 @@ def merge_json_cmd(
 
     This produces a canonical merged JSON representation per paper and is
     intended as the first stage in a two-stage pipeline (merge-json -> export-md).
+
+    \b
+    Example usage:
+    - 1. Merge JSON files for all papers in a directory:
+      paperflow pubmed-merge-json --input ./MyPapers --output ./MyPapers 
+    - 2. Merge JSON files for PMIDs listed in a file:
+      paperflow pubmed-merge-json --input ./MyPapers --output ./MyPapers --pmid-file ./pmid_list.txt --jsonl --stats-path ./MyPapers/stats
     """
     merger = PubmedMerger()
 
@@ -255,13 +262,29 @@ def merge_json_cmd(
 
 @app.command("pubmed-export-md")
 def export_md_cmd(
-    merged_json: str = typer.Argument(..., help="Path to merged JSON or JSONL produced by pubmed-merge-json."),
-    output_md: str = typer.Argument(..., help="Output Markdown file path."),
-    yaml_cfg: Optional[str] = typer.Option(None, "--yaml", "-y", help="YAML config file specifying metadata_fields and content_sections."),
+    merged_json: str = typer.Option(...,"--input", "-i", help="Path to merged JSON or JSONL produced by pubmed-merge-json."),
+    output_md: str = typer.Option(...,"--output", "-o", help="Output Markdown file path."),
+    yaml_cfg: Optional[str] = typer.Option(None, "--config", "-c", help="YAML config file specifying metadata_fields and content_sections. If not provided, defaults to basic metadata and FULL content."),
     pmid_file: Optional[str] = typer.Option(None, "--pmid-file", "-p", help="Optional PMID file to filter exported papers."),
 ):
-    """Export a single Markdown view from a merged JSON file using optional YAML config."""
-    merger = SimplePubmedMerger()
+    """
+    Export a single Markdown view from a merged JSON file using optional YAML config.
+
+    \b
+    Notes:
+    - 1, The input merged JSON/JSONL should be produced by the pubmed-merge-json command, which creates a canonical representation of paper metadata and content.
+    - 2, The optional YAML config can specify which metadata fields and content sections to include in the Markdown output. If not provided, it defaults to including basic metadata and the FULL content.
+
+    \b
+    Example usage:
+    - 1. Export Markdown for all papers in a merged JSON:
+    paperflow pubmed-export-md --input ./MyPapers/merged.jsonl --output ./MyPapers/exported.md --config ./config.yaml
+    - 2. Export Markdown for PMIDs listed in a file:
+    paperflow pubmed-export-md --input ./MyPapers/merged.jsonl --output ./MyPapers/exported.md --config ./config.yaml --pmid-file ./pmid_list.txt
+    
+    
+    """
+    merger = PubmedMerger()
 
     try:
         stats = merger.export_md_from_merged_json(merged_json, output_md, yaml_cfg=yaml_cfg, pmid_file=pmid_file)
