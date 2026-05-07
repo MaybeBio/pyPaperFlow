@@ -435,7 +435,7 @@ todo
 参考其他文献库完善文献获取本身（https://github.com/RainerSeventeen/paper-tracker、https://github.com/Agents365-ai/paper-fetch/blob/main/README_CN.md）
 构建skill补充的整个workflow（https://github.com/RainerSeventeen/paper-tracker/blob/main/docs/zh/source_arxiv_api_query.md）
 
-# ⚠️ pubmed数据库部分完全是我一个人完成的，至于arxiv和biorxiv部分是合作的，请注意问题完善
+#### ⚠️ pubmed数据库部分个人完成的，至于arxiv和biorxiv部分为AI协作，请注意问题完善
 
 **Case 5 — 快速示例：使用两阶段 PubMed 合并与导出**
 
