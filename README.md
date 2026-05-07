@@ -318,9 +318,6 @@ For content extraction,
 
 ## 🔗 References & Inspiration
 
--   [PubMed Research Extractor](https://github.com/Proveer/pubmed-research-extractor)
--   [BioLitMiner](https://github.com/akshayoo/BioLitMiner)
-
 
 ## search/fetch/download/full
 
@@ -476,3 +473,67 @@ todo
 
 # how to intergrate this tool into your ResearchFlow
 # ResearchFlow Skill
+
+
+## PDF retrieval
+
+For those papers without PDF or unaccessible full text, you can use the following tool to retrieve PDF by DOI:
+[paper-fetch](https://github.com/Agents365-ai/paper-fetch)
+
+Here we 封装了 paper-fetch 工具，成为一个命令行模块，用于从DOI检索PDF文件。
+感谢 paper-fetch 工具的作者，为我们提供了这个方便的工具。
+
+处理逻辑如下
+```bash
+┌─────────────────────────────────────────┐
+│  输入：DOI / 标题 / 批量文件              │
+└─────────────────────────────────────────┘
+                   ↓
+┌─────────────────────────────────────────┐
+│  标题模式？→ Crossref → Semantic Scholar │
+│  （解析为 DOI，带置信度评分）              │
+└─────────────────────────────────────────┘
+                   ↓
+┌─────────────────────────────────────────┐
+│  1. Unpaywall（需 UNPAYWALL_EMAIL）      │
+│     → 最快 OA 链接，含元数据               │
+└─────────────────────────────────────────┘
+           失败/跳过 ↓
+┌─────────────────────────────────────────┐
+│  2. Semantic Scholar                     │
+│     → PDF URL + 外部ID（arXiv/PMCID）     │
+└─────────────────────────────────────────┘
+           失败 ↓
+┌─────────────────────────────────────────┐
+│  3. arXiv（通过 S2 的 externalIds.ArXiv） │
+│  4. Europe PMC → PMC（通过 PMCID）         │
+│  5. bioRxiv/medRxiv（DOI 前缀 10.1101/）  │
+└─────────────────────────────────────────┘
+           全部失败 ↓
+┌─────────────────────────────────────────┐
+│  6. 出版商直链（仅 institutional 模式）    │
+│     Nature/Science/Elsevier/Springer等    │
+│     需机构IP/订阅/EZproxy授权             │
+└─────────────────────────────────────────┘
+           仍失败 ↓
+┌─────────────────────────────────────────┐
+│  7. Sci-Hub 镜像回退（默认启用，可禁用）    │
+│     → 1 req/s 限速，防 CAPTCHA            │
+│     → 自动发现新镜像                      │
+└─────────────────────────────────────────┘
+
+```
+
+```bash
+解析顺序 
+
+Unpaywall — 全出版社 OA 最佳位置（命中率最高）
+Semantic Scholar — openAccessPdf 字段 + externalIds
+arXiv — 论文有 arXiv ID 时
+PubMed Central OA 子集 — 论文有 PMCID 时
+bioRxiv / medRxiv — DOI 前缀为 10.1101/
+出版商直链 — 仅机构模式（PAPER_FETCH_INSTITUTIONAL=1）下启用，由调用方的订阅 IP / Cookies / EZproxy 授权
+Sci-Hub 镜像 — 兜底来源，默认开启。优先按 PAPER_FETCH_SCIHUB_MIRRORS 设定的镜像顺序尝试（默认列表：sci-hub.ru、sci-hub.st、sci-hub.su、sci-hub.box、sci-hub.red、sci-hub.al、sci-hub.mk、sci-hub.ee）；全部失败时会从 https://www.sci-hub.pub/ 抓取最新镜像列表再试一次。设置 PAPER_FETCH_NO_SCIHUB=1 可关闭。
+都失败 → 输出元数据提示走馆际互借
+
+```

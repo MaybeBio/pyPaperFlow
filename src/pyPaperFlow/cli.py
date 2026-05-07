@@ -294,28 +294,6 @@ def export_md_cmd(
         raise typer.Exit(code=1)
 
 
-@app.command("get")
-def get_cmd(
-    pmid: str = typer.Argument(..., help="PMID to retrieve."),
-    storage_dir: str = opt_storage
-):
-    """
-    Get paper details.
-    """
-    storage = PaperStorage(storage_dir)
-    paper = storage.get_paper(pmid)
-    
-    if paper:
-        typer.echo(json.dumps(paper.to_dict(), indent=2, ensure_ascii=False))
-        
-        # Also show tags
-        tags = storage.get_feature_vector(pmid)
-        typer.echo("\nTags:")
-        typer.echo(json.dumps(tags, indent=2))
-    else:
-        typer.echo(f"Paper {pmid} not found.")
-
-
 
 #############################################################
 #  2, For BioRxiv Parser
@@ -432,6 +410,11 @@ def biorxiv_fetch_cmd(
     )
     typer.echo(f"Fetched {len(records)} bioRxiv papers.")
 
+
+
+#############################################################
+#  3, For Third-Party integrations (e.g. paper-fetch)
+#############################################################
 
 
 if __name__ == "__main__":
