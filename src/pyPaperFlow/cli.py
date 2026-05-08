@@ -1,11 +1,12 @@
+import subprocess
 import typer
 import os
 import json
+from pathlib import Path
 from typing import *
 from .pubmed.pubmed_fetcher import PubmedFetcher
 from .arxiv_fetcher import ArxivFetcher
 from .biorxiv_fetcher import BioRxivFetcher
-
 from .pubmed.pubmed_merger import PubmedMerger
 from datetime import datetime
 
@@ -415,6 +416,67 @@ def biorxiv_fetch_cmd(
 #############################################################
 #  3, For Third-Party integrations (e.g. paper-fetch)
 #############################################################
+
+@app.command(
+    "paper-fetch",
+    context_settings={"allow_extra_args": True, "ignore_unknown_options": True},
+    add_help_option=False,  # Disable typer's --help so argparse handles it
+)
+def paper_fetch_cmd(ctx: typer.Context):
+    """
+    Fetch PDFs by DOI — passes through to the paper-fetch engine.
+
+    Use ``paperflow paper-fetch --help`` to see the full parameter list.
+
+    \b
+    Quick reference:
+      paperflow paper-fetch 10.1038/s41586-020-2649-2 -o ./papers
+      paperflow paper-fetch --batch dois.txt -o ./papers --format text
+      paperflow paper-fetch --title "AlphaFold" -o ./papers
+      paperflow paper-fetch schema
+    """
+    from .integrations import pdf_fetch
+
+    try:
+        pdf_fetch.run(["paper-fetch"] + ctx.args)
+    except SystemExit as e:
+        if e.code != 0:
+            raise typer.Exit(code=e.code)
+
+
+@app.command("pdf2md")
+def pdf2md_cmd(
+    input_path: str = typer.Option(..., "--input", "-i", help="Input PDF file or directory."),
+    output_dir: str = typer.Option(..., "--output", "-o", help="Output directory for Markdown files."),
+):
+    """
+    Convert PDF to Markdown using MinerU.
+
+    \b
+    Examples:
+      paperflow pdf2md -i paper.pdf -o ./output
+      paperflow pdf2md -i ./pdf_dir -o ./output
+    """
+    input_p = Path(input_path)
+    if not input_p.exists():
+        typer.echo(f"Error: Input path not found: {input_path}")
+        raise typer.Exit(code=1)
+
+    output_p = Path(output_dir)
+    output_p.mkdir(parents=True, exist_ok=True)
+
+    cmd = ["mineru", "-p", str(input_p.resolve()), "-o", str(output_p.resolve()), "-b", "pipeline"]
+    typer.echo(f"Running: {' '.join(cmd)}")
+
+    try:
+        subprocess.run(cmd, check=True)
+        typer.secho("Done.", fg=typer.colors.GREEN)
+    except subprocess.CalledProcessError as e:
+        typer.secho(f"MinerU failed with exit code {e.returncode}", fg=typer.colors.RED)
+        raise typer.Exit(code=e.returncode)
+    except FileNotFoundError:
+        typer.secho("Error: mineru not found. Please install MinerU first.", fg=typer.colors.RED)
+        raise typer.Exit(code=1)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,24 @@
-## Test Cases
+# Test Cases
 
-### 🧬 Case 1: Get PMIDs from Query
+[Back to README](./README.md)
+
+---
+
+## Index
+
+[Case1: Get PMIDs from Query](#-case-1-get-pmids-from-query)
+
+[Case2: Fetch Metadata for pubmed papers from query or PMIDs list](#-case-2-fetch-metadata-for-pubmed-papers-from-query-or-pmids-list)
+
+[Case3: Fetch full text data for pubmed papers from PMIDs list](#-case-3-fetch-full-text-data-for-pubmed-papers-from-pmids-list)
+
+[Case4: Fetch full paper data (including metadata and full text data) for pubmed papers from PMIDs list](#-case-4-fetch-full-paper-data-including-metadata-and-full-text-data-for-pubmed-papers-from-pmids-list)
+
+[Case5: Prepare batch Markdown-formatted paper data for downstream LLMs.](#-case-5-prepare-batch-markdown-formatted-paper-data-for-downstream-llms)
+
+
+
+## 🧬 Case 1: Get PMIDs from Query
 
 run the command:
 ```bash
@@ -25,7 +43,7 @@ As you can see, we will print the PMIDs list for you and save it in a text file 
 
 ![alt text](./figs/pubmed.png)
 
-### 🧬 Case 2: Fetch Metadata for pubmed papers from query or PMIDs list
+## 🧬 Case 2: Fetch Metadata for pubmed papers from query or PMIDs list
 
 If you do not have detailed PMID list and want to fetch meta information from query, run the command:
 ```bash
@@ -401,7 +419,7 @@ One example [PMID 41249430](./test/alphafold3_ensemble_meta/pubmed/2025/41249430
 ![alt text](./figs/41249430.png)
 
 
-### 🧬 Case 3: Fetch full text data for pubmed papers from PMIDs list
+## 🧬 Case 3: Fetch full text data for pubmed papers from PMIDs list
 
 If you only need to fetch the full text from PMIDs — where the `full text refers to the main body of a paper` (the complete textual content equivalent to that parsed from PDF files) — you can simply run
 ```bash
@@ -477,7 +495,7 @@ Fetching full text for 19 Pubmed articles at [2026-05-02 18:09:34] ...
 as you can imagine, not all pmids have a validated pmc id, you can try other tools for free full text extraction. 
 
 
-### 🧬 Case 4: Fetch full paper data (including metadata and full text data) for pubmed papers from PMIDs list
+## 🧬 Case 4: Fetch full paper data (including metadata and full text data) for pubmed papers from PMIDs list
 
 Now if you want to get everything of papers you want, not just metadata or full text but BOTH!
 
@@ -541,7 +559,7 @@ Fetching full text for 6 Pubmed articles at [2026-05-02 18:19:22] ...
 As shown above, two types of files will be generated: `{PMID}_meta.*` and `{PMID}_content.*`.
 
 
-#### 🧬 Case 5: Prepare batch Markdown-formatted paper data for downstream LLMs. 
+## 🧬 Case 5: Prepare batch Markdown-formatted Pubmed paper data for downstream LLMs. 
 
 Once you have retrieved all relevant papers(meta+content) on a specific topic or theme, the next step is to aggregate them into a unified collection.
 In this step, we merge all papers with complete metadata and full content into a `paper-level JSON file` for consolidated summarization.
@@ -643,3 +661,124 @@ paperflow pubmed-extract-md -i ./test/full_test_20_test_2026-05-05_22-02-51.json
 the output markdown file is [here](./test/full_paper_test/test_with_yaml.md), where only the sections specified in the YAML file are extracted and compiled into the markdown file.
 
 And next, you can use the generated markdown file for downstream LLM-based summarization or other text-based parsing tasks (e.g. Summarize over the conclusion and discussion sections of all these papers to put forward a research question).
+
+
+## 🧬 Case 6: Fetch full text data for unaccessible papers based on DOI - fetch PDF then parsing it into markdown 
+
+For those papers that are content-missing (Pubmed papers missing PMC links, or papers with DOI in other databases but no PDF available), we provide a DOI-based PDF retrieval module, along with another module that parses PDF files into Markdown format.
+
+```python 
+❯ paperflow paper-fetch --help
+usage: paper-fetch [-h] [--title TITLE] [--batch FILE] [--out DIR] [--dry-run]
+                   [--format {json,text}] [--pretty] [--stream] [--overwrite]
+                   [--idempotency-key KEY] [--timeout SECONDS] [--version]
+                   [doi]
+
+Fetch legal open-access PDFs by DOI via Unpaywall, Semantic Scholar, arXiv, PMC, and bioRxiv/medRxiv.
+
+positional arguments:
+  doi                   DOI to fetch (e.g. 10.1038/s41586-020-2649-2). Use '-' to
+                        read from stdin.
+
+options:
+  -h, --help            show this help message and exit
+  --title TITLE         paper title; resolved to a DOI via Crossref before download.
+                        Mutually exclusive with positional DOI / --batch.
+  --batch FILE          file with one DOI per line for bulk download. Use '-' to read
+                        from stdin.
+  --out DIR             output directory (default: pdfs)
+  --dry-run             resolve sources without downloading; preview the PDF URL and
+                        filename
+  --format {json,text}  output format. json for agents, text for humans. Default:
+                        json when stdout is not a TTY, text otherwise.
+  --pretty              pretty-print JSON output (2-space indent)
+  --stream              emit one NDJSON result per line on stdout as each DOI
+                        resolves (batch mode)
+  --overwrite           re-download even if the destination file already exists
+  --idempotency-key KEY
+                        safe-retry key; re-running with the same key replays the
+                        original envelope from <out>/.paper-fetch-idem/
+  --timeout SECONDS     HTTP timeout in seconds per request (default: 30)
+  --version             show program's version number and exit
+
+exit codes:
+  0  all DOIs resolved successfully
+  1  unresolved (some DOIs had no OA copy; no transport failure)
+  3  validation error (bad arguments)
+  4  transport error (network / download / IO failure; retryable class)
+
+subcommands:
+  schema                 print the machine-readable CLI schema and exit (no network)
+
+stdin:
+  paper-fetch -          read a single DOI from stdin
+  paper-fetch --batch -  read DOIs line-by-line from stdin
+
+output:
+  stdout emits one JSON object per invocation (NDJSON with --stream).
+  stderr emits NDJSON progress events when --format json, prose when --format text.
+  stdout format auto-detects TTY: json when piped/captured, text in a terminal.
+
+examples:
+  paper-fetch 10.1038/s41586-020-2649-2
+  paper-fetch 10.1038/s41586-020-2649-2 --dry-run
+  paper-fetch --batch dois.txt --out ./papers --format text
+  echo 10.1038/s41586-020-2649-2 | paper-fetch --batch -
+  paper-fetch schema
+```
+
+We recommend you using only arguments below for pdf fetching and leave the rest arguments as default values.
+```
+--title
+--batch
+--out
+--dry-run
+--timeout
+```
+
+Here we use paper [IDPFold](https://pubmed.ncbi.nlm.nih.gov/41082321/) as an example, its DOI is `10.1002/advs.202511636`
+
+so you can run the following command to fetch its PDF file:
+```bash
+paperflow paper-fetch  --out ./test/Other_database --timeout 30  10.1002/advs.202511636
+```
+
+the log shows
+```bash
+==> 10.1002/advs.202511636
+  [unpaywall] trying…
+  [unpaywall] no PDF
+  [semantic_scholar] trying…
+  [semantic_scholar] no PDF
+  [europe_pmc] https://europepmc.org/articles/PMC12752595?pdf=render
+  [pmc] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12752595/pdf/
+  saved → /data2/pyPaperFlow/test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En.pdf
+[europe_pmc] 10.1002/advs.202511636 → /data2/pyPaperFlow/test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En.pdf  (saved)
+
+1/1 succeeded  (0 failed)
+```
+
+the output pdf file is [here](./test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En.pdf)
+
+After you get the PDF file, you can use the following command to parse it into Markdown format:
+```bash
+paperflow pdf2md 
+
+```
+
+Hi @MaybeBio 
+
+You should activate proxy when you using OpenAI API format.
+> back to main menu and press "P"
+
+If It still not work, you can type the CLI "cc-switch proxy show", and find the field
+`
+Issue #49 manual Claude setup:
+- ANTHROPIC_BASE_URL=http://127.0.0.1:15721
+- ANTHROPIC_AUTH_TOKEN=proxy-placeholder
+- Keep the real upstream base URL and API key in the selected Claude provider inside cc-switch.
+`
+
+set ANTHROPIC_BASE_URL and ANTHROPIC_AUTH_TOKEN according to the output.
+
+By the way, I recommend you use OpenAI response API instead of completion API. Because the function call has some problem in completion API. I've already fix this issue, and it should be involved in the next version.

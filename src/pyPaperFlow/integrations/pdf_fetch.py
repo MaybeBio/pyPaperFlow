@@ -1,4 +1,4 @@
-# ⚠️ This script is adapted from https://github.com/Agents365-ai/paper-fetch/blob/main/scripts/fetch.py
+# ⚠️ This script is adapted and modified from https://github.com/Agents365-ai/paper-fetch/blob/main/scripts/fetch.py
 
 #!/usr/bin/env python3
 """Fetch legal open-access PDFs by DOI.
@@ -1872,17 +1872,20 @@ def _next_hints(results: list[dict], args) -> list[str]:
         cmd += " --dry-run"
     return [cmd]
 
-
-def main():
+# ⚠️ modify here ！
+def run(argv: list[str] | None = None):
+    """Core entry point. argv is ['paper-fetch', '--doi', ...]; None means sys.argv."""
     global _format, _pretty, _stream, _request_id, _started_monotonic
 
     _started_monotonic = time.monotonic()
+    if argv is None:
+        argv = sys.argv
     _request_id = f"req_{uuid.uuid4().hex[:12]}"
 
     # Schema subcommand — handle before the main parser so we don't require a DOI.
-    if len(sys.argv) >= 2 and sys.argv[1] == "schema":
+    if len(argv) >= 2 and argv[1] == "schema":
         # Honor --pretty / --format if they follow.
-        rest = sys.argv[2:]
+        rest = argv[2:]
         _pretty = "--pretty" in rest
         if "--format" in rest:
             i = rest.index("--format")
@@ -1920,7 +1923,7 @@ def main():
     ap.add_argument("--idempotency-key", metavar="KEY", default=None, help="safe-retry key; re-running with the same key replays the original envelope from <out>/.paper-fetch-idem/")
     ap.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, metavar="SECONDS", help=f"HTTP timeout in seconds per request (default: {DEFAULT_TIMEOUT})")
     ap.add_argument("--version", action="version", version=f"paper-fetch {CLI_VERSION} (schema {SCHEMA_VERSION})")
-    args = ap.parse_args()
+    args = ap.parse_args(argv[1:])
 
     _format = args.fmt or _default_format()
     _pretty = args.pretty
@@ -2062,11 +2065,16 @@ def main():
     sys.exit(_decide_exit(results))
 
 
-if __name__ == "__main__":
+def main():
+    """CLI entry point (when run as __main__). Thin wrapper around run()."""
     try:
-        main()
+        run()
     except KeyboardInterrupt:
         sys.exit(130)
     except Exception as e:
         _emit(_envelope_err("internal_error", str(e)))
         sys.exit(EXIT_TRANSPORT)
+
+
+if __name__ == "__main__":
+    main()

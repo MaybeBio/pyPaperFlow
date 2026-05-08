@@ -537,3 +537,112 @@ Sci-Hub 镜像 — 兜底来源，默认开启。优先按 PAPER_FETCH_SCIHUB_MI
 都失败 → 输出元数据提示走馆际互借
 
 ```
+ 透传方案的核心逻辑是：`pdf_fetch.py` 已经是第三方脚本，它有自己完整的 argparse CLI。与其用 typer
+▏ 包一层重新定义参数，不如直接把参数原样喂给它。
+
+：禁用 typer 的 --help，让 argparse 接管——显示原始脚本的完整帮助
+
+```
+● 封装原理
+▏ 
+▏ 双层 CLI 的冲突
+▏ 
+▏ cli.py 中每个命令都是 typer 子命令。typer 底层是 Click，它会：
+▏ 
+▏ 1. 解析 sys.argv
+▏ 2. 匹配到对应子命令（比如 paper-fetch）
+▏ 3. 把已定义的参数填入函数签名
+▏ 4. 未知参数要么报错、要么存到 ctx.args
+▏ 
+▏ 问题在于 pdf_fetch.py 本身也有一个 argparse CLI。两个 CLI 框架处理 sys.argv
+▏ —— 谁先拿到就是谁的。
+▏ 
+▏ 三层透传机制
+▏ 
+▏   终端输入: paperflow paper-fetch --doi 10.1038/... --format json --pretty
+▏   ↓
+▏   Layer 1: Click 子命令匹配
+▏   paper-fetch → 找到 paper_fetch_cmd() 回调
+▏   ↓
+▏   Layer 2: ignore_unknown_options=True
+▏   --doi, --format, --pretty 都不是 typer 已定义的参数
+▏   → 不报错，全部收集到 ctx.args
+▏   ctx.args = ['--doi', '10.1038/...', '--format', 'json', '--pretty']
+▏   ↓
+▏   Layer 3: pdf_fetch.run(["paper-fetch"] + ctx.args)
+▏   argparse 拿到 ["paper-fetch", "--doi", "10.1038/...", "--format", "json",
+▏   "--pretty"]
+▏   像处理独立调用一样解析并执行
+▏ 
+▏ 三个关键配置
+▏ 
+▏ ┌────────────────────────────────────┬────────────────────────────────────┐
+▏ │ 配置                               │ 作用                               │
+▏ ├────────────────────────────────────┼────────────────────────────────────┤
+▏ │ ignore_unknown_options=True        │ Click 不拒绝未知参数，收进 `ctx.a… │
+▏ ├────────────────────────────────────┼────────────────────────────────────┤
+▏ │ allow_extra_args=True              │ 允许函数体内访问 ctx.args          │
+▏ ├────────────────────────────────────┼────────────────────────────────────┤
+▏ │ add_help_option=False              │ 不让 Click 注册 --help 到命令上…   │
+▏ └────────────────────────────────────┴────────────────────────────────────┘
+▏ 
+▏ 数据流全景
+▏ 
+▏   终端
+▏   │ paperflow paper-fetch --title "AlphaFold" --format json --pretty
+▏   ▼
+▏   sys.argv = ['paperflow', 'paper-fetch', '--title', 'AlphaFold',
+▏   '--format', 'json', '--pretty']
+▏   │
+▏   ▼ Click 匹配子命令
+▏   paper-fetch 命中 → 回调 paper_fetch_cmd(ctx)
+▏   │
+▏   │ ctx.args = ['--title', 'AlphaFold', '--format', 'json', '--pretty']
+▏   ▼
+▏   pdf_fetch.run(["paper-fetch"] + ctx.args)
+▏   │ argv = ['paper-fetch', '--title', 'AlphaFold', '--format', 'json',
+▏   '--pretty']
+▏   │
+▏   ├─ argv[0] = 'paper-fetch' → argparse 的程序名
+▏   ├─ argv[1:] → argparse.parse_args(argv[1:]) 解析
+▏   │
+▏   ▼
+▏   argparse 正常执行：
+▏   - args.title = "AlphaFold"
+▏   - args.fmt = "json"
+▏   - args.pretty = True
+▏   → 调用 _resolve_title() → fetch() → 输出 JSON
+▏ 
+▏ 为什么 `--help` 需要单独处理
+▏ 
+▏ 正常情况下 Click 在 Layer 1 就把 --help 拦截了——打印自己的帮助页，
+▏ sys.exit(0)，根本不进入回调。
+▏ 
+▏ add_help_option=False 告诉 Click：这个命令别注册 `--help`。 于是 --help
+▏ 像其他未知参数一样流到 ctx.args，被 argparse 消费——argparse
+▏ 的输出就是原始脚本的完整帮助页，包括退出码表、schema 子命令提示、stdin
+▏ 用法、环境变量说明等所有内容。
+▏ 
+▏ 和传统封装方式的区别
+▏ 
+▏   传统方式（你之前的代码）：
+▏   typer 定义参数 → 自己拼接到 fetch() 调用
+▏   ～50 行代码，覆盖 5/12 个参数，不支持子命令
+▏   
+▏   透传方式：
+▏   typer 不定义参数 → ctx.args 原样转给 argparse
+▏   ～15 行代码，覆盖 12/12 个参数 + schema 子命令
+▏   新增的 argparse 参数自动继承
+▏ 
+▏ 核心就是：不重新解析，只做管道。 Click 做子命令路由，argparse
+▏ 做参数解析，两者通过 ctx.args 桥接
+
+```
+
+⚠️ paper-fetch updated at 2026-05-08 
+
+
+### 5. Markdown to PDF parser
+
+here we use MinerU (Magic-PDF) to parse PDF into structured JSON, which contains the original text, the title, the section hierarchy, and the coordinates of each paragraph in the PDF. 
+
