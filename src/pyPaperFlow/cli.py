@@ -8,6 +8,7 @@ from .pubmed.pubmed_fetcher import PubmedFetcher
 from .arxiv_fetcher import ArxivFetcher
 from .biorxiv_fetcher import BioRxivFetcher
 from .pubmed.pubmed_merger import PubmedMerger
+from .integrations import pdf_fetch
 from datetime import datetime
 
 app = typer.Typer(help="pyPaperFlow CLI", no_args_is_help=True)
@@ -414,7 +415,7 @@ def biorxiv_fetch_cmd(
 
 
 #############################################################
-#  3, For Third-Party integrations (e.g. paper-fetch)
+#  3, For Third-Party integrations 
 #############################################################
 
 @app.command(
@@ -429,13 +430,16 @@ def paper_fetch_cmd(ctx: typer.Context):
     Use ``paperflow paper-fetch --help`` to see the full parameter list.
 
     \b
-    Quick reference:
+    Notes:
+    - 1, This command is a thin wrapper around the paper-fetch engine, which is a powerful tool for fetching papers by DOI, title, or batch lists. 
+    - 2, ⚠️ Remember to set Unpaywall email in environment variables for best performance when fetching by DOI.
+
+    \b
+    Example usage:
       paperflow paper-fetch 10.1038/s41586-020-2649-2 -o ./papers
       paperflow paper-fetch --batch dois.txt -o ./papers --format text
       paperflow paper-fetch --title "AlphaFold" -o ./papers
-      paperflow paper-fetch schema
     """
-    from .integrations import pdf_fetch
 
     try:
         pdf_fetch.run(["paper-fetch"] + ctx.args)
@@ -444,18 +448,60 @@ def paper_fetch_cmd(ctx: typer.Context):
             raise typer.Exit(code=e.code)
 
 
+@app.command("mineru-parse")
+def mineru_parse_cmd(
+    input_json: str = typer.Option(..., "--input", "-i",
+        help="Path to mineru content_list_v2.json."),
+    output_json: str = typer.Option(..., "--output", "-o",
+        help="Output path for the structured JSON file."),
+):
+    """
+    Parse mineru output content_list_v2.json into canonical sectioned JSON.
+
+    Extracts metadata (title, authors, year, DOI, journal),
+    and sections normalised to canonical types (abstract, introduction, results,
+    discussion, methods, etc.). Tables are preserved as HTML.
+
+    \b
+    Notes:
+    - 1, This command is designed to work ONLY with the content_list_v2.json output,
+    for more details, please refer to the official documentation https://opendatalab.github.io/MinerU/zh/reference/output_files/
+    
+    \b
+    Examples:
+      paperflow mineru-parse -i content_list_v2.json -o paper.json
+    """
+    from .integrations.mineru_parser import MinerUContentParser
+    import json as _json
+
+    parser = MinerUContentParser()
+    result = parser.parse(input_json)
+    Path(output_json).parent.mkdir(parents=True, exist_ok=True)
+    with open(output_json, "w", encoding="utf-8") as f:
+        _json.dump(result, f, ensure_ascii=False, indent=2)
+    typer.echo(
+        f"Parsed {len(result['sections'])} sections, "
+        f"{len(result['tables'])} tables -> {output_json}"
+    )
+
+
 @app.command("pdf2md")
 def pdf2md_cmd(
-    input_path: str = typer.Option(..., "--input", "-i", help="Input PDF file or directory."),
+    input_path: str = typer.Option(..., "--input", "-i", help="Input PDF file path."),
     output_dir: str = typer.Option(..., "--output", "-o", help="Output directory for Markdown files."),
+    clear: bool = typer.Option(False, "--clear", help="After conversion, keep only the .md file(s); delete all other generated artifacts (images, JSON, layout PDF, etc.)."),
 ):
     """
     Convert PDF to Markdown using MinerU.
 
     \b
-    Examples:
+    Notes:
+    - 1, MinerU generates a subfolder under --output with .md, .json, .pdf, and images/.  Use --clear to strip everything except the .md file.
+    - 2, ⚠️ Remember to switch to domestic mirror source when you can not access huggingface.
+
+    \b
+    Example usage:
       paperflow pdf2md -i paper.pdf -o ./output
-      paperflow pdf2md -i ./pdf_dir -o ./output
     """
     input_p = Path(input_path)
     if not input_p.exists():
@@ -464,6 +510,9 @@ def pdf2md_cmd(
 
     output_p = Path(output_dir)
     output_p.mkdir(parents=True, exist_ok=True)
+
+    # Snapshot existing top-level entries before mineru creates its subfolder
+    _before: set[Path] = {p for p in output_p.iterdir()} if output_p.exists() else set()
 
     cmd = ["mineru", "-p", str(input_p.resolve()), "-o", str(output_p.resolve()), "-b", "pipeline"]
     typer.echo(f"Running: {' '.join(cmd)}")
@@ -477,6 +526,31 @@ def pdf2md_cmd(
     except FileNotFoundError:
         typer.secho("Error: mineru not found. Please install MinerU first.", fg=typer.colors.RED)
         raise typer.Exit(code=1)
+
+    
+    # Clean up MinerU output: move .md files to output_dir, delete the rest
+    def _clean_mineru_dirs(dirs: list[Path]) -> None:
+        """Move .md files to output_dir and delete each source directory."""
+        import shutil
+        moved = 0
+        for top_dir in dirs:
+            for md_file in top_dir.rglob("*.md"):
+                target = output_p / md_file.name
+                if target.exists():
+                    target = output_p / f"{md_file.stem}_{top_dir.name}{md_file.suffix}"
+                shutil.move(str(md_file), str(target))
+                moved += 1
+            shutil.rmtree(top_dir)
+        if moved:
+            typer.echo(f"Extracted {moved} .md file(s) to {output_p}; source directories removed.")
+
+
+    if clear:
+        _new = [p for p in output_p.iterdir() if p not in _before and p.is_dir()]
+        _clean_mineru_dirs(_new)
+
+
+
 
 
 if __name__ == "__main__":
