@@ -1,0 +1,325 @@
+# ============================================================================
+# MinerU Parser Configuration
+# ============================================================================
+#
+# 这个文件是完全可选的 —— 代码内置了所有默认值，不提供也能正常运行：
+#     paperflow mineru-parse -i content_list_v2.json -o paper.json
+#
+# 按需修改的场景见下面每一节顶部的标注。
+# 自定义配置的用法：
+#     paperflow mineru-parse -i content_list_v2.json -o paper.json --config this_file.yaml
+
+# ╔══════════════════════════════════════════════════════════════════════════╗
+# ║  Part 1 — AI 后端设置（仅 --backend ai 时生效）                          ║
+# ╚══════════════════════════════════════════════════════════════════════════╝
+#
+# 【正常使用】不需要改，设置好环境变量即可：
+#     export ANTHROPIC_API_KEY="sk-ant-..."    # Claude
+#     export OPENAI_API_KEY="sk-..."           # GPT / DeepSeek / 代理
+#
+# 【切换到 DeepSeek 或其他兼容端点】改 model + base_url：
+#     model: deepseek-v4-pro
+#     base_url: https://api.deepseek.com
+#
+# 【切换到 GPT】改 model：
+#     model: gpt-4o-mini
+#
+# base_url 为空  → 原生 SDK（Anthropic 或 OpenAI）
+# base_url 非空  → 始终使用 OpenAI 聊天补全格式，指向该端点
+
+ai:
+  model: claude-haiku-4-5    # 模型名称
+  api_key: null              # null = 从环境变量读取（ANTHROPIC_API_KEY 或 OPENAI_API_KEY）
+  base_url: null             # 为空 = 原生 SDK；填写 = OpenAI 兼容端点
+                             #   示例: https://api.deepseek.com
+                             #   示例: https://models.sjtu.edu.cn/api/v1
+
+
+# ╔══════════════════════════════════════════════════════════════════════════╗
+# ║  Part 2 — 规范章节类型清单 + 输出顺序                                    ║
+# ╚══════════════════════════════════════════════════════════════════════════╝
+#
+# 【正常使用】不需要改，内置列表已覆盖生物医学/计算交叉领域的常见章节。
+#
+# 【新增一个章节类型】—— 比如你的某篇论文有一个 "Ethics Statement" 章节，
+#   而你不希望它被归入 "other"：
+#     1. 在这里的合适位置添加 - ethics
+#     2. 去 Part 3 display_names 添加 ethics: "Ethics Statement"
+#     3. 去 Part 4 aliases 添加 ethics 的匹配规则
+#
+# 【移除一个章节类型】—— 删除对应行，该类型的标题将被归入 "other"。
+#
+# 【调整顺序】—— 输出 JSON 中 sections 数组的顺序由此决定。
+
+canonical_order:
+  - abstract            # 摘要
+  - introduction        # 引言 / 背景
+  - results             # 结果
+  - discussion          # 讨论
+  - methods             # 方法 / 实验
+  - conclusion          # 结论
+  - supplementary       # 补充材料 / 支撑信息
+  - availability        # 数据与代码可获取性
+  - funding             # 资助
+  - acknowledgements    # 致谢
+  - author_contributions # 作者贡献
+  - keywords            # 关键词
+  - conflicts           # 利益冲突声明
+  - references          # 参考文献
+  - other               # 兜底 —— 无法匹配的章节标题都归入此处
+
+
+# ╔══════════════════════════════════════════════════════════════════════════╗
+# ║  Part 3 — 显示名称（输出 JSON 中人类可读的标题）                         ║
+# ╚══════════════════════════════════════════════════════════════════════════╝
+#
+# 【正常使用】不需要改。
+#
+# 【个性化】可以改成中文，或者调整某个期刊偏好的叫法，比如：
+#     availability: "数据和代码获取"
+#     conflicts: "利益冲突声明"
+
+display_names:
+  abstract: "Abstract"
+  introduction: "Introduction"
+  results: "Results"
+  discussion: "Discussion"
+  methods: "Methods"
+  conclusion: "Conclusion"
+  supplementary: "Supplementary Material"
+  availability: "Data & Code Availability"
+  funding: "Funding"
+  acknowledgements: "Acknowledgements"
+  author_contributions: "Author Contributions"
+  keywords: "Keywords"
+  conflicts: "Competing Interests"
+  references: "References"
+  other: "Other"
+
+
+# ╔══════════════════════════════════════════════════════════════════════════╗
+# ║  Part 4 — 章节标题匹配规则（仅 --backend regex 时生效）                  ║
+# ╚══════════════════════════════════════════════════════════════════════════╝
+#
+# 每类章节有三层匹配（按优先级）：
+#   strong:           精确字符串匹配 —— 标题的小写形式 == 列表中的某个词
+#                       速度最快，最准确。优先用这个。
+#   weak:             正则表达式匹配 —— 在标题中搜索（re.search）
+#                       用于同一短语的变体写法。
+#   context_keywords: 上下文关键词 —— 如果前两层都没匹配到，就检查标题
+#                       之后的 1-3 个段落，看有没有这些关键词。
+#                       ⚠️ 这层最容易误判，谨慎使用。
+#
+# ── 修改指南 ──
+# 【正常使用】不需要改。
+# 【正则匹配不到某个章节标题 → 被归入 "other"】
+#     找到最接近的 canonical 类型，在它的 strong 或 weak 中添加一条规则。
+#     例如：某期刊用 "Experimental Design" 代替 "Methods"，
+#     在 methods.strong 中添加 experimental design。
+# 【context_keywords 导致误判】
+#     把它注释掉或删除，这层是可选的。
+# 【新增期刊特有的缩写/变体】
+#     添加一个 strong 精确匹配项即可。weak 正则仅在模式很多变时才需要。
+
+aliases:
+  # ── 摘要 ──
+  abstract:
+    strong: [abstract, summary]               # 精确匹配：abstract 或 summary
+    weak:                                     # 正则匹配
+      - "abstract"
+      - "summary"
+    context_keywords: []                      # 上下文关键词（不需要）
+
+  # ── 引言 ──
+  introduction:
+    strong: [introduction, intro, background]
+    weak:
+      - "introduction"
+      - "intro(?:duction)?"
+      - "background"
+    context_keywords:
+      - "in this (?:paper|work|study|review)(?:,|\\s)+we"
+      - "here we (?:introduce|present|propose|describe|report)"
+
+  # ── 结果 ──
+  results:
+    strong: [results, result, findings, finding]
+    weak:
+      - "results?(?:\\s+and\\s+discussion)?"  # 匹配 "Results and Discussion"
+      - "findings?"
+    context_keywords:
+      - "we (?:observed|found|show|demonstrate|identified)"
+      - "as shown in (?:fig|figure|table)"
+
+  # ── 讨论 ──
+  discussion:
+    strong: [discussion, discussions]
+    weak:
+      - "discussions?"
+      - "conclusion(?:\\s+and\\s+(?:future\\s+)?directions?)?"  # 匹配 "Conclusion and Future Directions"
+    context_keywords:
+      - "taken together"
+      - "in summary"
+      - "our (?:results|findings) (?:suggest|indicate|demonstrate|show)"
+
+  # ── 方法 / 实验 ──
+  # Nature 论文的 Methods 在 Discussion 之后，子章节名称多样（如 Network architecture
+  # and training、Training regime、Inference regime、Metrics 等）。Cell Press 的
+  # STAR Methods 同样在文末，子章节包括 Dataset creation、Model architecture、
+  # Projection block 等。下面的规则覆盖这些常见变体。
+  methods:
+    strong:
+      - methods
+      - method
+      - materials and methods
+      - materials & methods
+      - material and methods
+      - methodology
+      - star methods
+      - experimental section
+      - computational methods
+      - computational details
+      - model architecture
+      - network architecture and training
+      - network architecture
+      - training regime
+      - inference regime
+      - full algorithm details
+      - algorithm details
+      - evaluation metrics
+      - evaluation set
+      - dataset
+      - datasets
+      - flow matching
+      - training strategy
+      - method details
+    weak:
+      - "methods?"
+      - "materials?(?:\\s*(?:and|&)\\s*methods?)?"
+      - "methodology"
+      - "experimental\\s+(?:section|procedures?|design)"
+      - "computational\\s+(?:details|methods?|approach)"
+      - "star\\s+methods"
+      - "(?:model|network)\\s+(?:architecture|design|formulation)"
+      - "training\\s+regime"
+      - "inference\\s+regime"
+      - "(?:full\\s+)?algorithm\\s+details"
+      - "evaluation\\s+(?:metrics|set)"
+      - "dataset\\s*(?:creation|preparation)?"
+      - "flow\\s+matching"
+      - "training\\s+strategy"
+      - "method\\s+details"
+      - "(?:input\\s+)?embeddings?"
+      - "(?:projection|interaction|interface|output)\\s+block"
+      - "evaluating\\s+predictions"
+      - "hyperparameter\\s+tuning"
+    context_keywords:
+      - "we (?:used|employed|performed|conducted|simulated|calculated|computed)"
+      - "(?:was|were)\\s+(?:trained|evaluated|tested|implemented)"
+      - "(?:training|evaluation|inference)\\s+(?:set|data)"
+
+  # ── 结论（独立的结论章节，不含讨论） ──
+  conclusion:
+    strong: [conclusion, conclusions, concluding remarks]
+    weak:
+      - "conclusions?"
+      - "concluding\\s+remarks?"
+    context_keywords:
+      - "in conclusion"
+      - "to conclude"
+
+  # ── 补充材料 ──
+  supplementary:
+    strong:
+      - supplementary material
+      - supplementary information
+      - supplementary data
+      - supplementary note
+      - supporting information
+      - supplemental information titles and legends
+      - reporting summary           # Nature 期刊的 "Reporting Summary"
+    weak:
+      - "supplement(?:ary|al)?\\s+(?:material|information|data|note|text)?"
+      - "supporting\\s+information"
+      - "reporting\\s+summary"
+    context_keywords: []
+
+  # ── 数据/代码获取 ──
+  availability:
+    strong:
+      - data availability
+      - data and code availability
+      - code availability
+      - software availability
+      - data availability statement
+      - availability and implementation
+    weak:
+      - "(?:data|code|software)(?:\\s+and\\s+(?:data|code|software))*\\s+availability(?:\\s+statement)?"
+      - "availability(?:\\s+and\\s+implementation)?"
+    context_keywords: []
+
+  # ── 资助 ──
+  funding:
+    strong: [funding, financial support]
+    weak:
+      - "funding"
+      - "financial\\s+support"
+    context_keywords: []
+
+  # ── 致谢 ──
+  acknowledgements:
+    strong:
+      - acknowledgements
+      - acknowledgments
+      - acknowledgement
+      - acknowledgment
+    weak:
+      - "acknowledg?e?ments?"
+    context_keywords:
+      - "we thank"
+      - "this work was supported"
+
+  # ── 作者贡献 ──
+  author_contributions:
+    strong:
+      - author contributions
+      - authors contributions
+      - author contribution
+      - author contributions statement
+      - authors contribution
+    weak:
+      - "authors?'?\\s*contributions?(?:\\s+statement)?"
+    context_keywords:
+      - "wrote the (?:paper|manuscript)"
+      - "all authors (?:discussed|contributed|reviewed)"
+
+  # ── 关键词 ──
+  keywords:
+    strong: [keywords, key words]
+    weak:
+      - "keywords?:?"
+    context_keywords: []
+
+  # ── 利益冲突 ──
+  conflicts:
+    strong:
+      - competing interests
+      - competing interests statement
+      - conflict of interest
+      - declaration of interests
+      - competing financial interests
+    weak:
+      - "competing\\s+(?:financial\\s+)?interests?"
+      - "conflict\\s+of\\s+interest"
+      - "declaration\\s+of\\s+interests?"
+    context_keywords:
+      - "the authors declare"
+      - "no (?:competing|conflict)"
+
+  # ── 参考文献 ──
+  references:
+    strong: [references, reference, bibliography]
+    weak:
+      - "references?"
+      - "bibliography"
+    context_keywords: []

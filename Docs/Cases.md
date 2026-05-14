@@ -1,6 +1,6 @@
 # Test Cases
 
-[Back to README](./README.md)
+[Back to README](../README.md)
 
 ---
 
@@ -41,7 +41,7 @@ As you can see, we will print the PMIDs list for you and save it in a text file 
 
 ⚠️ We also recommend using the `Search & Save plugin` on the PubMed webpage to obtain the PMID list for subsequent use.
 
-![alt text](./figs/pubmed.png)
+![alt text](../figs/pubmed.png)
 
 ## 🧬 Case 2: Fetch Metadata for pubmed papers from query or PMIDs list
 
@@ -86,7 +86,7 @@ Fetching articles 1 to 19 at [2026-05-02 17:07:56] ...
   -> Saved 38995731 metadata to ./test/alphafold3_ensemble_meta/pubmed/2024/38995731/38995731_meta.json
 ```
 
-you can check the result here: [alphafold3_ensemble_meta](./test/alphafold3_ensemble_meta/)
+you can check the result here: [alphafold3_ensemble_meta](../test/alphafold3_ensemble_meta/)
 
 As shown above, a `/pubmed` subfolder will be automatically created under your output directory, with all metadata JSON files saved inside this folder.
 
@@ -838,11 +838,10 @@ Done.
 
 the output is not merely a file, but a directory containing the parsed markdown file and the original PDF file, which is useful for you to check the parsing quality by comparing the markdown file with the original PDF file.
 
-you can check the output in [this directory](./test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En).
-
 Its hierarchy is as follows:
 
 ```bash
+# test history
 ./test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En
 └── auto
     ├── images
@@ -861,7 +860,317 @@ Its hierarchy is as follows:
 
 ```
 
+And we only use the `.md files and _content_list_v2.json/_content_list.json files` for further processing like structuring.
+
+So, if you only do not want to spare time dealing with the rest of the files, you can use the `--clear` argument to strip anything unnecessary.
+
+you can run the following command 
+```bash
+paperflow pdf-parse -i ./test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En.pdf  -o ./test/Other_database/  --clear
+```
+
+the log shows the same
+```bash
+Running: mineru -p /data2/pyPaperFlow/test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En.pdf -o /data2/pyPaperFlow/test/Other_database -b pipeline
+2026-05-11 14:19:36.551 | INFO     | mineru.cli.client:run_orchestrated_cli:874 - Started local mineru-api at http://127.0.0.1:51213
+2026-05-11 14:19:37.548 | INFO     | __main__:create_app:260 - Request concurrency limited to 3
+Start MinerU FastAPI Service: http://127.0.0.1:51213
+API documentation: http://127.0.0.1:51213/docs
+INFO:     Started server process [3574652]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:51213 (Press CTRL+C to quit)
+2026-05-11 14:19:38.557 | INFO     | mineru.cli.client:run_planned_task:771 - Submitting batch 1/1 | 1 document, 12 pages in this batch | 12 pages total | task#1 [Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En]
+2026-05-11 14:19:39.860 | INFO     | mineru.backend.pipeline.pipeline_analyze:doc_analyze_streaming:183 - Pipeline processing-window multi-file run. doc_count=1, total_pages=12, window_size=64, total_batches=1
+2026-05-11 14:19:41.235 | INFO     | mineru.backend.pipeline.pipeline_analyze:doc_analyze_streaming:235 - Pipeline processing window batch 1/1: 12/12 pages, batch_pages=12, doc_slices=doc0:1-12
+2026-05-11 14:19:41.236 | INFO     | mineru.backend.pipeline.pipeline_analyze:batch_image_analyze:328 - GPU Memory: 1 GB, Batch Ratio: 1. 
+2026-05-11 14:19:41.236 | INFO     | mineru.backend.pipeline.model_init:__init__:207 - DocAnalysis init, this may take some times......
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:42,150 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:43,195 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:44,141 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:44,949 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:46,272 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:47,155 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:48,168 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:48,942 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:49,836 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:50,785 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:51,640 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:19:52,685 - modelscope - INFO - Target directory already exists, skipping creation.
+2026-05-11 14:19:52.700 | INFO     | mineru.backend.pipeline.model_init:__init__:260 - DocAnalysis init done!
+2026-05-11 14:19:52.700 | INFO     | mineru.backend.pipeline.pipeline_analyze:custom_model_init:83 - model init cost: 11.464261293411255
+Layout Predict: 100%|██████████████████████████████████| 12/12 [00:03<00:00,  3.96it/s]
+MFR Predict: 100%|███████████████████████████████████| 102/102 [00:48<00:00,  2.10it/s]
+Table-ocr det: 100%|█████████████████████████████████████| 2/2 [00:00<00:00, 24.59it/s]
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:20:45,866 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:20:46,730 - modelscope - INFO - Target directory already exists, skipping creation.
+Table-ocr rec ch: 100%|███████████████████████████████| 99/99 [00:00<00:00, 102.41it/s]
+Table-wireless Predict: 100%|████████████████████████████| 2/2 [00:00<00:00, 19.19it/s]
+Table-wired Predict:   0%|                                       | 0/1 [00:00<?, ?it/s]Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:20:48,937 - modelscope - INFO - Target directory already exists, skipping creation.
+Table-wired Predict: 100%|███████████████████████████████| 1/1 [00:01<00:00,  1.11s/it]
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:20:49,964 - modelscope - INFO - Target directory already exists, skipping creation.
+Downloading Model from https://www.modelscope.cn to directory: /home/nicai_zht/.cache/modelscope/hub/models/OpenDataLab/PDF-Extract-Kit-1.0
+2026-05-11 14:20:50,892 - modelscope - INFO - Target directory already exists, skipping creation.
+OCR-det ch: 100%|██████████████████████████████████████| 42/42 [00:03<00:00, 12.27it/s]
+Seal Predict: 0it [00:00, ?it/s]
+OCR-rec Predict: 100%|█████████████████████████████████| 57/57 [00:00<00:00, 98.48it/s]
+Processing pages: 100%|████████████████████████████████| 12/12 [00:01<00:00,  8.16it/s]
+2026-05-11 14:20:57.180 | INFO     | mineru.cli.client:run_planned_task:807 - Completed batch 1/1 | Processed 12/12 pages | 1 of 1 batch finished | task#1 [Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En]
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3574652]
+Done.
+✅Removed 5 source files. Only .md and necessary .json files are kept in the output directory test/Other_database.
+
+```
+
+now the output directory is much cleaner, it will be much more disk-space-saving for you to perform batch processing on a large number of papers.
+```bash
+Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En
+└── auto
+    ├── images
+    │   ├── 108ab5199f55198dabe5235a25c47d5948d7a1f94c7f8ad21820772ea5f302e4.jpg
+    │   ├── # lots of .jpg files
+    ├── Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En_content_list.json
+    ├── Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En_content_list_v2.json
+    └── Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En.md
+
+3 directories, 40 files
+```
+
 Because the JSON file is hard to parse into a Section-based hierarchical structure markdown file, all we need is the markdown file. But you can use other original output files for analysis or debugging.
 
-If you only want the markdown file and don't want the rest of the files, we provide a simple ArgumentParser `--clear` to help you.
+Remember: 
+- We only need the structured markdown file like what we have done in PMC papers.
+Structured section like `Introduction`, `Methods`, `Results`, `Discussion`, `Conclusion`. 
+- All begin with a JSON file, we parse everything and do post-processing job only for a JSON output, which contains the metadata 
+and the content sections we mentioned above.
+- We do selection/aggregation step ONLY on the final JSON file mentioned above, and you provide a YAML configuration file to specify which sections to extract and compile into the final markdown file. 
 
+
+Because the `original JSON file generated by mineru` is hard to use directly, so we currently only use the markdown and _content_list_v2.json files for further structuring.
+
+## 🧬 Case 7: Parse MinerU content_list_v2.json into canonical sectioned JSON
+
+### Overview / 概述
+
+After running MinerU's `pdf-parse` (Case 6), you get a `content_list_v2.json` file. This JSON contains raw, page-by-page block data from the PDF — titles, paragraphs, images, tables, etc. — but with no semantic structure. Section headings like "1. Introduction" or "Experimental Section" are just text strings.
+
+The `mineru-parse` command transforms this flat JSON into a structured, canonical JSON where every section is classified into a standard academic type (abstract, introduction, methods, results, discussion, etc.). Metadata (title, authors, year, DOI, journal) and figure captions are also extracted.
+
+`mineru-parse` 将 MinerU 输出的扁平 JSON 转换为结构化的规范 JSON，每个章节被归类到标准的学术章节类型中，同时提取元数据（标题、作者、年份、DOI、期刊）和图片注释。
+
+---
+
+### Two Backends / 两种后端
+
+| Backend | How it works | API needed? | Best for |
+|---------|-------------|-------------|----------|
+| **regex** (default) | Pattern matching: exact string → regex → context keyword. Configurable via YAML. | No | Common papers, batch processing |
+| **ai** | Sends all section titles + context to an LLM in one batch API call. | Yes | Non-standard titles, multi-publisher |
+
+**Regex matching layers / Regex 匹配层级：**
+
+```
+1. strong (exact match)   → "Introduction" == "introduction"  ✓
+2. weak (regex search)    → "1. Introduction" matches r"introduction"  ✓
+3. context_keywords       → "Overview" → check text for "we used..." → methods
+4. fallback               → classify as "other"
+```
+
+A sliding cursor tracks document order to reduce false matches (a late "Methods" heading in an unusual position is still recognized).
+
+**AI workflow / AI 工作流程：**
+
+```
+content_list_v2.json
+    → extract all titles + surrounding text (~200 chars)
+    → build JSON payload: [{index, title, context_preview}, ...]
+    → one API call → AI returns {classifications: [{index, canonical_type}]}
+    → merge classifications into structured JSON
+```
+
+---
+
+### Usage / 使用方法
+
+```bash
+# Regex backend (default, no API key needed)
+paperflow mineru-parse -i content_list_v2.json -o paper.json
+
+# AI backend with Claude
+export ANTHROPIC_API_KEY="sk-ant-..."
+paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai
+
+# AI backend with DeepSeek
+export OPENAI_API_KEY="sk-..."
+paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \
+  --base-url https://api.deepseek.com --model deepseek-v4-pro
+
+# AI backend with university proxy / 大学代理
+paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \
+  --base-url https://models.sjtu.edu.cn/api/v1 --model deepseek-chat --api-key your-key
+
+# Custom config / 使用自定义配置
+paperflow mineru-parse -i content_list_v2.json -o paper.json --config my_rules.yaml
+```
+
+**CLI parameters / 命令行参数：**
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `--input` / `-i` | (required) | Path to MinerU `content_list_v2.json` |
+| `--output` / `-o` | (required) | Output JSON path |
+| `--backend` / `-b` | `regex` | `regex` or `ai` |
+| `--config` / `-c` | (built-in) | Custom YAML config file |
+| `--api-key` | (env var) | API key override for AI backend |
+| `--model` | `claude-haiku-4-5` | Model override for AI backend |
+| `--base-url` | (none) | OpenAI-compatible endpoint URL (DeepSeek, proxy, etc.) |
+
+---
+
+### Output JSON Structure / 输出 JSON 结构
+
+```json
+{
+  "source": "mineru",
+  "file": "paper_content_list_v2.json",
+  "backend": "regex",
+  "metadata": {
+    "title": "Accurate Generation of Conformational Ensembles...",
+    "authors": "Junjie Zhu, Zhengxin Li, ...",
+    "year": 2025,
+    "doi": "10.1002/advs.202511636",
+    "journal": "Advanced Science"
+  },
+  "sections": [
+    {
+      "canonical_type": "abstract",
+      "raw_title": "Abstract",
+      "display_title": "Abstract",
+      "level": 2,
+      "paragraphs": ["In this paper, we..."],
+      "subsections": []
+    },
+    {
+      "canonical_type": "introduction",
+      "raw_title": "1. Introduction",
+      "display_title": "Introduction",
+      "paragraphs": ["...", "[Figure: Figure 1. Architecture overview...]"],
+      "subsections": []
+    },
+    {
+      "canonical_type": "results",
+      "raw_title": "2. Results",
+      "display_title": "Results",
+      "subsections": [
+        {"raw_title": "2.1. Global Features", "paragraphs": ["..."]}
+      ]
+    }
+  ]
+}
+```
+
+**15 canonical section types / 15 种规范章节类型：**
+
+`abstract` `introduction` `results` `discussion` `methods` `conclusion` `supplementary` `availability` `funding` `acknowledgements` `author_contributions` `keywords` `conflicts` `references` `other`
+
+---
+
+### Customization via YAML / 通过 YAML 自定义
+
+All matching rules live in `src/pyPaperFlow/integrations/mineru_config.yaml`. This file ships with sensible defaults — you do NOT need to provide it. Edit it only when a specific journal uses unusual section names.
+
+所有匹配规则都在 `mineru_config.yaml` 中，内置了合理默认值。正常使用不需要提供。仅在需要适配特定期刊时修改。
+
+**Config file layout / 配置文件结构：**
+
+| Section | Purpose |
+|---------|---------|
+| `ai` | `model`, `api_key`, `base_url` for AI backend |
+| `canonical_order` | Which types exist + their output order |
+| `display_names` | Human-readable labels (can be Chinese, etc.) |
+| `aliases` | Matching rules: `strong` (exact), `weak` (regex), `context_keywords` |
+
+**Common customization scenarios / 常见自定义场景：**
+
+| Scenario | Where to edit |
+|----------|--------------|
+| Title misclassified as "other" / 标题被归入 other | Add to matching type's `strong` or `weak` |
+| Need a new section type / 需要新类型 | Add to `canonical_order` + `display_names` + `aliases` |
+| Switch AI model / 切换模型 | Edit `ai.model` and `ai.base_url` |
+| Chinese labels / 中文标签 | Edit `display_names` |
+
+---
+
+### Notes & Limitations / 注意事项与局限
+
+1. **Regex accuracy varies by publisher.** Nature puts Methods after Discussion; Cell Press uses "STAR Methods"; Wiley uses "Experimental Section". The default aliases cover common cases. For niche journals, add custom rules to the config YAML.
+
+   **Regex 准确度取决于出版商风格。** 默认别名已覆盖 Nature/Cell/Wiley/bioRxiv/arXiv 常见变体。小众期刊需要添加自定义规则。
+
+2. **Subsections may land in "other".** Titles like "Ensemble Generation" or "Model limitations" are sub-topics, not canonical types. This is intentional. Use the AI backend for finer classification.
+
+   **子章节可能归入 "other"。** 这是有意为之。需要更细分类时用 AI 后端。
+
+3. **Figure captions are preserved.** Image blocks → `[Figure: ...]` paragraphs at their PDF position. Table HTML is not preserved (rarely useful downstream).
+
+   **图片注释被保留。** 表格 HTML 不保留。
+
+4. **Abstract is always section #1.** If the paper lacks an explicit abstract heading, one is auto-created from the text between the title and first section.
+
+   **摘要始终是第一个章节。** 无显式标题时自动创建。
+
+5. **Year extraction: 3-pass strategy.** Page footer (journal citations) → arXiv aside text → fallback scan. Handles preprints and published papers correctly.
+
+   **年份提取：三遍策略。** 页脚 → arXiv 侧边文字 → 回退扫描。
+
+6. **Batch processing / 批量处理：**
+
+   ```bash
+   for f in /path/to/*/auto/*_content_list_v2.json; do
+     paperflow mineru-parse -i "$f" -o "${f%/*}/parsed.json"
+   done
+   ```
+
+7. **When regex fails, use AI.** The AI backend costs ~750 input tokens per paper with cheap models like `claude-haiku-4-5` or `deepseek-v4-pro`. It handles irregular titles that regex cannot match.
+
+   **Regex 不够用时用 AI。** 每篇论文约 750 input tokens，用廉价模型成本极低。
+
+
+目前建议是使用自己测试的样本不断完善结构解析的边界情况，直到你觉得大部分的论文都能被正确解析了，再进行批量处理。
+
+
+
+the following table shows
+
+
+| CLI | Log |
+| :--- | :--- |
+| `paperflow mineru-parse -i /data2/pyPaperFlow/test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En/auto/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En_content_list_v2.json -o idpfold1.json --backend regex --config /data2/pyPaperFlow/src/pyPaperFlow/integrations/mineru_config.yaml` | Using regex backend with configurable aliases<br>Parsed 10 sections -> idpfold1.json<br>Sections: abstract(Abstract), introduction(Introduction), results(Results), discussion(Discussion), methods(Methods), supplementary(Supplementary Material), availability(Data & Code Availability), acknowledgements(Acknowledgements), keywords(Keywords), conflicts(Competing Interests) |
+| `paperflow mineru-parse -i /data2/pyPaperFlow/test/Other_database/staring/auto/staring_content_list_v2.json  -o staring.json --backend regex --config /data2/pyPaperFlow/src/pyPaperFlow/integrations/mineru_config.yaml`  | Using regex backend with configurable aliases<br>Parsed 14 sections -> staring.json<br>Sections: abstract(Abstract), discussion(Discussion), methods(Methods), supplementary(Supplementary Material), availability(Data & Code Availability), other(Online content), other(Article), other(Additional information), other(Article), other(Statistics), other(Software and code), other(Data), other(Field-specific reporting), other(Plants)  |
+| `paperflow mineru-parse -i /data2/pyPaperFlow/test/Other_database/idpfold2/auto/idpfold2_content_list_v2.json  -o idpfold2.json --backend regex --config /data2/pyPaperFlow/src/pyPaperFlow/integrations/mineru_config.yaml` | Using regex backend with configurable aliases<br>Parsed 14 sections -> idpfold2.json<br>Sections: abstract(Abstract), introduction(Introduction), discussion(Discussion), methods(Methods), availability(Data & Code Availability), acknowledgements(Acknowledgements), keywords(Keywords), conflicts(Competing Interests), references(References), other(Overview), other(Predicting global compaction across the order-disorder continuum), other(Fitting global and local experimental observations), other(Modelling multiple conformations for protein assemblies), other(Prediction conformational changes in IDR-binding) |
+| `paperflow mineru-parse -i /data2/pyPaperFlow/test/Other_database/disobind/auto/disobind_content_list_v2.json  -o disobind.json --backend regex --config /data2/pyPaperFlow/src/pyPaperFlow/integrations/mineru_config.yaml`  | Using regex backend with configurable aliases<br>Parsed 36 sections -> disobind.json<br>Sections: abstract(Abstract), introduction(Introduction), discussion(Discussion), methods(Methods), supplementary(Supplementary Material), availability(Data & Code Availability), funding(Funding), acknowledgements(Acknowledgements), author_contributions(Author Contributions), conflicts(Competing Interests), references(References), other(Inter-protein contact map prediction), other(Interface residue prediction), other(Coarse-graining improves the performance), other(Comparison to AlphaFold2 and AlphaFold3), other(Using different ipTM cutoffs for AF2 and AF3), other(AF2 performs better than AF3), other(Combining Disobind and AlphaFold2 predictions), other(Performance by residue types), other(Comparison with interface predictors for IDRs), other(Protein language models allow for a shallow architecture), other(Diversity and inclusion statement), other(Declaration of generative AI and AI-assisted technologies), other(Tables), other(Key resources table), other(Gathering PDB structures of IDRs in complexes), other(Defining binary complexes containing IDRs), other(Creating merged binary complexes), other(Notations), other(Inputs and outputs for training), other(Projection dimension), other(Number of layers in the MLP), other(,  for SE loss), other(Disobind+AF2 predictions), other(Performance by residue type), other(Comparison with interface predictors for IDRs)  |
+| `paperflow mineru-parse -i /data2/pyPaperFlow/test/Other_database/alphafold3/auto/alphafold3_content_list_v2.json  -o alphafold3.json --backend regex --config /data2/pyPaperFlow/src/pyPaperFlow/integrations/mineru_config.yaml`   |  Using regex backend with configurable aliases<br>Parsed 14 sections -> alphafold3.json<br>Sections: abstract(Abstract), discussion(Discussion), methods(Methods), supplementary(Supplementary Material), availability(Data & Code Availability), other(Model limitations), other(Online content), other(Metrics), other(Nucleic acid prediction baseline), other(Model performance analysis and visualization), other(Additional information), other(Article), other(Statistics), other(Software and code)  |
+| `paperflow mineru-parse -i /data2/pyPaperFlow/test/Other_database/2409.02240v1/auto/2409.02240v1_content_list_v2.json -o 2409.02240v1.json --backend regex --config /data2/pyPaperFlow/src/pyPaperFlow/integrations/mineru_config.yaml` | Using regex backend with configurable aliases<br>Parsed 13 sections -> 2409.02240v1.json<br>Sections: abstract(Abstract), introduction(Introduction), methods(Methods), conclusion(Conclusion), acknowledgements(Acknowledgements), author_contributions(Author Contributions), conflicts(Competing Interests), references(References), other(Ensemble Generation), other(Ensemble Validation), other(Experimental Observables), other(ML Ensemble Generation and Validation), other(Software and Data Repositories for IDPs/IDRs)  |
+
+you can check all the output JSON files here : [parse](../test/Other_database/parse/)
+
+# 

@@ -5,8 +5,8 @@ import json
 from pathlib import Path
 from typing import *
 from .pubmed.pubmed_fetcher import PubmedFetcher
-from .arxiv_fetcher import ArxivFetcher
-from .biorxiv_fetcher import BioRxivFetcher
+from .preprint.arxiv_fetcher import ArxivFetcher
+from .preprint.biorxiv_fetcher import BioRxivFetcher
 from .pubmed.pubmed_merger import PubmedMerger
 from .integrations import pdf_fetch
 from datetime import datetime
@@ -418,6 +418,8 @@ def biorxiv_fetch_cmd(
 #  3, For Third-Party integrations 
 #############################################################
 
+# 3.1 paper fetch related commands
+
 @app.command(
     "paper-fetch",
     context_settings={"allow_extra_args": True, "ignore_unknown_options": True},
@@ -448,60 +450,27 @@ def paper_fetch_cmd(ctx: typer.Context):
             raise typer.Exit(code=e.code)
 
 
-@app.command("mineru-parse")
-def mineru_parse_cmd(
-    input_json: str = typer.Option(..., "--input", "-i",
-        help="Path to mineru content_list_v2.json."),
-    output_json: str = typer.Option(..., "--output", "-o",
-        help="Output path for the structured JSON file."),
-):
-    """
-    Parse mineru output content_list_v2.json into canonical sectioned JSON.
+# 3.2 mineru related commands
+# including pdf parse, post-parse structuring, and final markdown conversion
 
-    Extracts metadata (title, authors, year, DOI, journal),
-    and sections normalised to canonical types (abstract, introduction, results,
-    discussion, methods, etc.). Tables are preserved as HTML.
-
-    \b
-    Notes:
-    - 1, This command is designed to work ONLY with the content_list_v2.json output,
-    for more details, please refer to the official documentation https://opendatalab.github.io/MinerU/zh/reference/output_files/
-    
-    \b
-    Examples:
-      paperflow mineru-parse -i content_list_v2.json -o paper.json
-    """
-    from .integrations.mineru_parser import MinerUContentParser
-    import json as _json
-
-    parser = MinerUContentParser()
-    result = parser.parse(input_json)
-    Path(output_json).parent.mkdir(parents=True, exist_ok=True)
-    with open(output_json, "w", encoding="utf-8") as f:
-        _json.dump(result, f, ensure_ascii=False, indent=2)
-    typer.echo(
-        f"Parsed {len(result['sections'])} sections, "
-        f"{len(result['tables'])} tables -> {output_json}"
-    )
-
-
-@app.command("pdf2md")
-def pdf2md_cmd(
+@app.command("pdf-parse")
+def pdf_parse_cmd( 
     input_path: str = typer.Option(..., "--input", "-i", help="Input PDF file path."),
-    output_dir: str = typer.Option(..., "--output", "-o", help="Output directory for Markdown files."),
-    clear: bool = typer.Option(False, "--clear", help="After conversion, keep only the .md file(s); delete all other generated artifacts (images, JSON, layout PDF, etc.)."),
+    output_dir: str = typer.Option(..., "--output", "-o", help="Output directory for parsed output."),
+    clear: bool = typer.Option(False, "--clear", help="After conversion, keep only the .md files and necessary .json files(_content_list_v2.json/_content_list.json)."),
 ):
     """
-    Convert PDF to Markdown using MinerU.
+    Parse a PDF file using MinerU engine, and clean up the output directory.
 
     \b
     Notes:
-    - 1, MinerU generates a subfolder under --output with .md, .json, .pdf, and images/.  Use --clear to strip everything except the .md file.
-    - 2, ⚠️ Remember to switch to domestic mirror source when you can not access huggingface.
+    - 1, MinerU generates a subfolder /auto under --output with .md, .json, .pdf, and images/.  Use --clear to strip anything unnecessary, 
+    note that we only use .md files and _content_list_v2.json/_content_list.json files for further processing like structuring.
+    - 2, ⚠️  Remember to switch to domestic mirror source when you can not access huggingface.
 
     \b
     Example usage:
-      paperflow pdf2md -i paper.pdf -o ./output
+      paperflow pdf-parse -i paper.pdf -o ./output
     """
     input_p = Path(input_path)
     if not input_p.exists():
@@ -527,22 +496,27 @@ def pdf2md_cmd(
         typer.secho("Error: mineru not found. Please install MinerU first.", fg=typer.colors.RED)
         raise typer.Exit(code=1)
 
-    
-    # Clean up MinerU output: move .md files to output_dir, delete the rest
+
     def _clean_mineru_dirs(dirs: list[Path]) -> None:
-        """Move .md files to output_dir and delete each source directory."""
+        """
+        Clean up MinerU output: only keep .md files and necessary .json files(_content_list_v2.json/_content_list.json), 
+        in case memory deficient when batch processing many PDFs with MinerU. 
+        """
         import shutil
-        moved = 0
+        removed = 0
+        # subfolders under output_p are the ones created by mineru
         for top_dir in dirs:
-            for md_file in top_dir.rglob("*.md"):
-                target = output_p / md_file.name
-                if target.exists():
-                    target = output_p / f"{md_file.stem}_{top_dir.name}{md_file.suffix}"
-                shutil.move(str(md_file), str(target))
-                moved += 1
-            shutil.rmtree(top_dir)
-        if moved:
-            typer.echo(f"Extracted {moved} .md file(s) to {output_p}; source directories removed.")
+            # generally, only one subfolder is created by mineru(only one top_dir)
+            for pdf_file in top_dir.rglob("*.pdf"):
+                pdf_file.unlink()  # delete all the pdf files 
+                removed += 1
+            for target_json in top_dir.rglob("*.json"):
+                if target_json.name.endswith(("_content_list_v2.json", "_content_list.json")):
+                    continue  # keep necessary json files for further processing
+                target_json.unlink()  # delete all the unwanted json files 
+                removed += 1
+        if removed:
+            typer.echo(f"✅ Removed {removed} source files. Only .md and necessary .json files are kept in the output directory {output_p}.")
 
 
     if clear:
@@ -551,6 +525,137 @@ def pdf2md_cmd(
 
 
 
+@app.command("mineru-parse")
+def mineru_parse_cmd(
+    input_json: str = typer.Option(..., "--input", "-i",
+        help="Path to mineru content_list_v2.json."),
+    output_json: str = typer.Option(..., "--output", "-o",
+        help="Output path for the structured JSON file."),
+    backend: str = typer.Option("regex", "--backend", "-b",
+        help="Section classification backend: 'regex' (default, no API needed) or 'ai'."),
+    config: Optional[str] = typer.Option(None, "--config", "-c",
+        help="Path to YAML config file for canonical types, aliases, and AI settings."),
+    api_key: Optional[str] = typer.Option(None, "--api-key",
+        help="API key for AI backend. Overrides config file and env var."),
+    model: Optional[str] = typer.Option(None, "--model",
+        help="Override AI model (e.g. 'deepseek-v4-pro', 'claude-haiku-4-5', 'gpt-4o-mini')."),
+    base_url: Optional[str] = typer.Option(None, "--base-url",
+        help="Custom API base URL for OpenAI-compatible endpoints (e.g. 'https://api.deepseek.com')."),
+):
+    """
+    Parse mineru output content_list_v2.json into canonical sectioned JSON.
+
+    Extracts metadata (title, authors, year, DOI, journal),
+    and sections normalised to canonical types (abstract, introduction, results,
+    discussion, methods, etc.). Tables are preserved as HTML.
+
+    \b
+    Notes:
+    - 1, Two backends: 'regex' (pattern + context, no API) and 'ai' (LLM batch classification).
+    - 2, AI backend supports Anthropic native, OpenAI native, and any OpenAI-compatible
+    endpoint via --base-url (DeepSeek, university proxies, self-hosted, etc.).
+    - 3, Set the appropriate API key env var (ANTHROPIC_API_KEY, OPENAI_API_KEY,
+    DEEPSEEK_API_KEY) or pass --api-key.
+    - 4, Configure provider/model via --model, --base-url, or a YAML config file.
+
+    \b
+    Examples:
+      paperflow mineru-parse -i content_list_v2.json -o paper.json
+      paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai
+      paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \\
+          --base-url https://api.deepseek.com --model deepseek-v4-pro --api-key sk-xxx
+      paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \\
+          --base-url https://models.sjtu.edu.cn/api/v1 --model deepseek-chat
+      paperflow mineru-parse -i content_list_v2.json -o paper.json --backend regex --config custom.yaml
+    """
+    import json as _json
+    from .integrations.mineru_parser import (
+        MinerUContentParser,
+        RegexSectionClassifier,
+        AISectionClassifier,
+    )
+
+    if backend == "ai":
+        classifier = AISectionClassifier.from_config(config)
+        if api_key:
+            classifier.api_key = api_key
+        if model:
+            classifier.model = model
+        if base_url:
+            classifier.base_url = base_url
+        if base_url:
+            typer.echo(f"Using AI backend: {classifier.model} @ {classifier.base_url}")
+        else:
+            typer.echo(f"Using AI backend: {classifier.model}")
+    else:
+        classifier = RegexSectionClassifier.from_config(config)
+        typer.echo("Using regex backend with configurable aliases")
+
+    parser = MinerUContentParser(classifier)
+    result = parser.parse(input_json)
+    Path(output_json).parent.mkdir(parents=True, exist_ok=True)
+    with open(output_json, "w") as f:
+        _json.dump(result, f, ensure_ascii=False, indent=2)
+
+    section_summary = ", ".join(
+        f"{s['canonical_type']}({s.get('display_title', '?')})"
+        for s in result["sections"]
+    )
+    typer.echo(
+        f"Parsed {len(result['sections'])} sections -> {output_json}"
+    )
+    typer.echo(f"  Sections: {section_summary}")
+
+
+@app.command("mineru-export-md")
+def mineru_export_md_cmd(
+    input_json: str = typer.Option(..., "--input", "-i",
+        help="Path to structured JSON file (from mineru-parse), or a directory of such files."),
+    output_md: str = typer.Option(..., "--output", "-o",
+        help="Output Markdown file path."),
+    yaml_cfg: Optional[str] = typer.Option(None, "--config", "-c",
+        help="YAML config specifying content_sections to include. If not provided, all sections are included."),
+):
+    """
+    Export structured mineru JSON to a clean Markdown file for LLM processing.
+
+    Reads one or more JSON files produced by ``mineru-parse`` and writes a
+    single Markdown file.  Metadata (title, authors, year, DOI, journal) is
+    always included.  Content sections are included based on the optional
+    YAML config.
+
+    \b
+    YAML config format:
+      content_sections:
+        - abstract
+        - introduction
+        - methods
+        - results
+        - discussion
+        - conclusion
+
+    \b
+    Examples:
+      paperflow mineru-export-md -i paper.json -o paper.md
+      paperflow mineru-export-md -i paper.json -o paper.md --config extract.yaml
+      paperflow mineru-export-md -i ./parsed_dir -o all_papers.md
+    """
+    from .integrations.mineru_parser import export_mineru_json_to_md
+
+    try:
+        stats = export_mineru_json_to_md(input_json, output_md, yaml_cfg)
+        typer.secho(
+            f"Exported {stats['total']} papers to {stats['output']}",
+            fg=typer.colors.GREEN,
+        )
+        if stats.get("sections_exported"):
+            sec_str = ", ".join(
+                f"{k}({v})" for k, v in stats["sections_exported"].items()
+            )
+            typer.echo(f"  Sections exported: {sec_str}")
+    except Exception as e:
+        typer.echo(f"Error: {e}")
+        raise typer.Exit(code=1)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,3972 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Computational Methods to Investigate Intrinsically Disordered Proteins and their Complexes"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                153,
+                147,
+                843,
+                281
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Zi Hao Liu*,†,¶ Maria Tsanai*,‡ Oufan Zhang,‡ Julie Forman-Kay,†,¶ and Teresa"
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                318,
+                875,
+                339
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Head-Gordon∗,‡,§"
+                    }
+                ]
+            },
+            "bbox": [
+                416,
+                354,
+                578,
+                375
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "†Molecular Medicine Program, Hospital for Sick Children, Toronto, Ontario M5G 0A4,"
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                404,
+                864,
+                421
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Canada"
+                    }
+                ]
+            },
+            "bbox": [
+                465,
+                434,
+                535,
+                450
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "‡Kenneth S. Pitzer Center for Theoretical Chemistry and Department of Chemistry,"
+                    }
+                ]
+            },
+            "bbox": [
+                142,
+                463,
+                852,
+                482
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "University of California, Berkeley, Berkeley, California 94720, USA"
+                    }
+                ]
+            },
+            "bbox": [
+                210,
+                494,
+                787,
+                512
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "¶Department of Biochemistry, University of Toronto, Toronto, Ontario M5S 1A8, Canada"
+                    }
+                ]
+            },
+            "bbox": [
+                114,
+                523,
+                882,
+                542
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "§Departments of Bioengineering and Chemical and Biomolecular Engineering, University of"
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                554,
+                887,
+                573
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "California, Berkeley, Berkeley, California 94720, USA"
+                    }
+                ]
+            },
+            "bbox": [
+                267,
+                584,
+                730,
+                603
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "E-mail: thg@berkeley.edu"
+                    }
+                ]
+            },
+            "bbox": [
+                395,
+                628,
+                602,
+                647
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Abstract"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                455,
+                683,
+                540,
+                699
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "In 1999 Wright and Dyson highlighted the fact that large sections of the proteome of all organisms are comprised of protein sequences that lack globular folded structures under physiological conditions. Since then the biophysics community has made significant strides in unraveling the intricate structural and dynamic characteristics of intrinsically disordered proteins (IDPs) and intrinsically disordered regions (IDRs). Unlike crystallographic beamlines and their role in streamlining acquisition of structures for folded proteins, an integrated experimental and computational approach aimed at"
+                    }
+                ]
+            },
+            "bbox": [
+                158,
+                718,
+                838,
+                909
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "arXiv:2409.02240v1 [physics.bio-ph] 3 Sep 2024"
+                    }
+                ]
+            },
+            "bbox": [
+                21,
+                239,
+                60,
+                755
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "1"
+                    }
+                ]
+            },
+            "bbox": [
+                491,
+                934,
+                504,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "IDPs/IDRs has emerged. In this Perspective we aim to provide a robust overview of current computational tools for IDPs and IDRs, and most recently their complexes and phase separated states, including statistical models, physics-based approaches, and machine learning methods that permit structural ensemble generation and validation against many solution experimental data types."
+                    }
+                ]
+            },
+            "bbox": [
+                160,
+                93,
+                838,
+                224
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "2"
+                    }
+                ]
+            },
+            "bbox": [
+                493,
+                934,
+                504,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Introduction"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                88,
+                285,
+                109
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Despite the widely accepted protein structure-function paradigm central to folded proteins, it is increasingly appreciated that all proteomes also encode intrinsically disordered proteins and regions (IDPs/IDRs), which do not adopt a well-defined 3D structure but instead form fluctuating and heterogeneous structural ensembles. 1,2 The so-called \"Dark Proteome\" is made up of IDPs/IDRs that comprise over 60% of proteins in eukaryotes, 3 and this abundance together with growing experimental evidence challenge the assumptions that protein function and protein interactions require stable folded structures. 4"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                137,
+                885,
+                338
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Proteins with intrinsic disorder confers certain advantages over folded protein states. Plasticity of disordered protein states facilitates conformational rearrangements and extended conformations that allow them to interact simultaneously with multiple spatially separated partners, changing shape to fold upon binding or in creating dynamic complexes. 1 Disordered regions in protein complexes may control the degree of motion between domains, permit overlapping binding motifs, and enable transient binding of different binding partners, facilitating roles as signal integrators and thus explaining their prevalence in signaling pathways. 5 Disorder is also highly over-represented in disease-associated proteins, and IDPs have been shown to be involved in a variety of fundamental processes including transcription, translation and cell cycle regulation that when altered lead to cancer and neurological disorders.6"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                348,
+                885,
+                669
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Recent evidence suggests that IDPs/IDRs are enriched in biomolecular condensates. 7,8 Biomolecular condensates arise from phase separation, percolation and other related transitions9 to induce a biomacromolecule-rich phase and a dilute phase depleted of such biomacromolecules, 10,11 a phenomenon well-established by polymer physics. 12,13 IDPs/IDRs have been suggested to promote phase separation and other related transitions due to their structural plasticity, low-complexity sequence domains, and multivalency. 14 Furthermore, functional dynamic complexes of IDPs/IDRs and biomolecular condensates are known to be sensitive to post-translational modifications (PTMs). 15 Regulatory PTMs 16 often target residues within IDPs/IDRs, as they are more accessible and flexible than folded protein elements. 17 Modification of IDPs/IDRs by PTMs is well known to modulate many cellular processes, including dynamic complexes 18 and the assembly/disassembly, localization, and material properties of biomolecular condensates. 19"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                680,
+                885,
+                911
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "3"
+                    }
+                ]
+            },
+            "bbox": [
+                491,
+                934,
+                504,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                202
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "One of the primary goals in understanding disordered proteins and their roles in biology is to create, validate, and analyze IDP/IDR structural ensembles to imbue insight into the conformational substates that give rise to IDP/IDR function (Figure 1). Folded proteins have well-defined experimental approaches, mostly using X-ray crystallography, electron crystallography and microscopy, and recent computational approaches such as AlphaFold2 21 can determine their structure with high accuracy. IDPs/IDRs bring new challenges to both experiment and computer simulation and modeling, requiring an integrative biology approach of experimental and computational methods that work together to characterize their diverse and dynamic structural ensembles."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                212,
+                885,
+                473
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "In this perspective, we review the computational tools for structural ensemble creation and validation for isolated IDPs/IDRs, including those that operate by generating and evaluating structural ensembles that are consistent with the collective experimental restraints derived from Nuclear Magnetic Resonance (NMR), Small Angle X-ray Scattering (SAXS), and other available solution experimental measurements. But to fully address the biological activity of IDPs/IDRs, we must further develop computational methods to characterize dynamic complexes and biological condensates, and to account for changes due to PTMs. Here we provide a current snapshot of available computational methods, workflows, and software that are available for characterizing IDPs and IDRs and their complexes, while also identifying current gaps for future progress in their characterization."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                484,
+                887,
+                776
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "4"
+                    }
+                ]
+            },
+            "bbox": [
+                493,
+                934,
+                504,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/74b08730e35ae57d3784fa876986ae07a1e299289a43961261348d6a98046378.jpg"
+                },
+                "image_caption": [
+                    {
+                        "type": "text",
+                        "content": "Figure 1: Schematic of the IDP/IDR conformer ensemble generation pipeline. (top) Initial conformers are generated by using knowledge- and/or physics-based methods. Examples from IDPConformerGenerator are shown from left-to-right, ensembles of the Inhibitor-2 IDP (loop regions in salmon, helices in cyan), nucleosome core particle adapted from PDB ID 2PYO (histone H2A in yellow, H2B in red, H3 in blue, H4 in green), and 5-phosphroylated folded 4E-BP2 adapted from PDB ID 2MX4 (N-terminal IDR in green, C-terminal IDR in magenta). (middle) 3D schematic of an NMR 2D HSQC is shown along with an electrostatic surface model of the I-2 conformers. (bottom) A density heatmap is shown with N = 1500 conformations of the 5p 4E-BP2 ensemble with illustrations done using ELViM. 20 Figure adapted with permission from Oxford University press."
+                    }
+                ],
+                "image_footnote": []
+            },
+            "bbox": [
+                119,
+                148,
+                879,
+                656
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "5"
+                    }
+                ]
+            },
+            "bbox": [
+                491,
+                934,
+                506,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Ensemble Generation"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                87,
+                403,
+                109
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Generating a conformational ensemble can be categorized into knowledge-based approaches, physical models, and machine learning (ML)/artificial intelligence (AI) methods. Knowledgebased generation protocols are a popular choice as ensembles can be calculated in a few minutes on a workstation or laptop. 22 Although computationally more expensive, all-atom (AA) and coarse-grained (CG) physical models combined with molecular dynamics (MD) simulations are also widely used, becoming increasingly more accurate when using many-body force fields, better algorithms for sampling, and rapid quarterly developments on silicon hardware as well as parallel application-specific integrated circuits (ASICs) like the Anton 3 supercomputer. 23 Finally, ML/AI tools have exploded onto the scene with improved generative models being utilized to predict structural ensembles of disordered proteins."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                136,
+                885,
+                429
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Knowledge-Based Methods"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                464,
+                426,
+                484
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Knowledge-based ensemble generation approaches have three things in common: 1) Building protein chains using fragments of residues to retain the local information of a modeled peptide. 2) Exploiting a database of high-resolution non-redundant PDB structures as an empirical force-field. 3) Being exceptionally computationally efficient while generating free conformers without unphysical steric clashes. Since the early 2000s, there have been many software packages released for modeling disordered proteins using statistical or static methods. TraDES, introduced as FOLDTRAJ, models IDP structures 24 using a 3-residue fragment chain growth protocol, derived from a curated database of non-redundant protein structures from the RCSB PDB. 25 Flexible-meccano creates statistical ensembles by randomly sampling amino acid-specific backbone torsion (ϕ/ψ) angles from high-resolution X-ray crystallographic protein structures, and attempts to validate them with experimental NMR as well as SAXS data.26"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                507,
+                885,
+                858
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "More recently, the FastFloppyTail method allows for the prediction of disordered ensembles by exploiting the Rosetta AbInitio protein prediction model, 27 for not only isolated IDPs but also for IDRs at the termini of folded structures. The latest software platform for modeling and analyzing IDPs/IDRs, IDPConformerGenerator, can also use NMR and SAXS experimental data to bias conformer generation, but unlike the other methods allows for the generation of ensembles in different contexts such as transmembrane systems, dynamic complexes, and applications in biological condensates 22,28 (see Figure 1). IDPConformerGenerator also includes the ability to generate side chain ensembles using the Monte Carlo Side Chain Ensemble (MCSCE) method29 including with PTMs 16 for IDPs/IDRs and their complexes."
+                    }
+                ]
+            },
+            "bbox": [
+                140,
+                869,
+                883,
+                887
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "6"
+                    }
+                ]
+            },
+            "bbox": [
+                493,
+                934,
+                504,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                353
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Physics-Based Methods"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                390,
+                387,
+                410
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "MD has been extensively used to study the conformations, dynamics, and properties of biological molecules, and can reproduce and/or interpret thermodynamic and spectroscopic data, and can also provide accurate predictions for processes inaccessible to experiment. 30,31 Because most AA force fields used in MD were developed to represent folded proteins, they can lead to inaccuracies when studying disordered proteins and regions. Thus, intensive work has been dedicated to refining well-established \"fixed charge\" force fields (FFs), resulting in notable improvements. The D. E. Shaw group employed six fixed charge FFs with explicit solvent to study the structural properties of both folded and disordered proteins. 32 By modifying the torsion parameters and the protein-water interactions, the a99SB-disp FF32 was shown to provide accurate secondary structure propensities for a plethora of disordered proteins, while accurately simulating folded proteins as well. However, recent studies have reported that the a99SB-disp model is too soluble for studying the condensation of some disordered proteins. 33,34 Jephtah et al. utilized different versions of the CHARMM 35 and AMBER36 FFs with different water models 32,37 to study five peptides that exhibit a polyproline II helix (PPII) structure. 38 Interestingly, most models managed to capture, to varying extents, the ensemble averages of the radius of gyration and the PPII secondary structure, but the models differed substantially in the under- or over-sampling of different secondary structures."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                431,
+                887,
+                905
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "7"
+                    }
+                ]
+            },
+            "bbox": [
+                493,
+                934,
+                504,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                883,
+                141
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Recently, Liu and co-workers considered a new direction – the connection of FFs to configurational entropy – and how that might qualitatively change the nature of our understanding of FF development that equally well encompasses globular proteins, IDPs/IDRs, and disorder-to-order transitions. 39 Using the advanced polarizable AMOEBA FF model, these many-body FFs generate the largest statistical fluctuations consistent with the radius of gyration (Rg) and universal Lindemann values (correlated with protein melting temperature) for folded states. These larger fluctuations of folded states were shown to translate to their much greater ability to simultaneously describe IDPs and IDRs such as the Hst-5 peptide, the stronger temperature dependence in the disorder-to-order transition for (AAQAA)3, and for maintaining a folded core for the TSR4 domain while simultaneously exhibiting regions of disorder. 39 This supports the development and use of many-body FFs to described folded proteins and to create IDP/IDR ensembles, by naturally getting the energy-entropy balance right for all biomolecular systems."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                152,
+                887,
+                535
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "CG models reduce the resolution of an all-atom model in order to simulate larger systems and for longer timescales, which often is necessary when considering disordered proteins and dynamic complexes and condensates. Heesink et al. used a CG model that represents each amino-acid with a single interaction site or \"bead\" to investigate the structural compactness of α-synuclein. 40 The SIRAH model represents only the protein backbone with three beads and can be applied to both folded and disordered proteins. 41 Joseph et al. developed the Mpipi model, a residue-level CG model parameterized through a combination of atomistic simulations and bioinformatics data. 42 By focusing on pi-pi and cation-pi interactions, they successfully reproduced the experimental phase behavior of a set of IDPs and of a polyarginine/poly-lysine/RNA system. However, due to the absence of explicit protein-solvent interactions, it leads to a poor representation of protein solubility upon temperature modifications. Tesei et al. developed CALVADOS, a CG model trained using Bayesian learning of experimental data, including SAXS and Paramagnetic Resonance Enhancement (PRE) NMR data.43 CALVADOS is able to capture the phase separation of the low complexity domains of FUS, Ddx4, hnRNPA1 and LAF proteins, and has been used to calculate the ensembles of the IDRs within the human proteome.44"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                545,
+                887,
+                897
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "8"
+                    }
+                ]
+            },
+            "bbox": [
+                491,
+                934,
+                504,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                200
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Finally, CG models with a higher resolution, such as the Martini model, have been also used to study monomeric IDPs/IDRs and their ensembles. 45 Although originally developed to model folded proteins, the model accurately reproduces the phase separation of disordered regions, the partitioning of molecules and the simulation of chemical reactions within the ensembles. 46,47 Thomasen et al. demonstrated that the Martini CG model tends to underestimate the global dimensions of disordered proteins; 48 by augmenting the proteinwater interactions, they successfully reproduced SAXS and PRE data for a set of disordered and multidomain proteins. Multiscale approaches that consider a combination of AA/CG resolutions have also been proposed. 49,50"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                212,
+                885,
+                473
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Machine-learning Methods"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                510,
+                423,
+                530
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "With the advent of AlphaFold2, 21 RoseTTAFold, 51 and ESMFold, 52 it is clear that different ML models can produce high quality predicted structures of globular proteins. These methods use multiple sequence alignments (MSA) and clustering to generate different conformers of folded proteins, but caution is warranted for IDPs for which MSAs are not fully applicable.53,54 In a recent study, Alderson and co-workers suggested that when high confident predictions are made for IDRs from AlphaFold, these conformations likely reflect those in conditionally folded states. 55 However, many IDRs from AlphaFold2 seem to be built as ribbons in a way that only satisfies the steric clash restraints rather than any secondary structure, or global shape parameters and are designated as low-confidence predictions."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                551,
+                885,
+                814
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The large influx of recent ML methods to predict ensembles of disordered proteins can use pre-existing protein structure prediction algorithms or by training on CG or AA MD data. Denoising diffusion models can be used to generate coarse-grained IDP/IDR ensembles, as in the work of Taneja and Lasker. 56 Phanto-IDP, a generative model trained on MD trajectory data that uses a modified graph variational auto-encoder, can generate 50,000 conformations of a 71-residue IDP within a minute. 57 Similarly, Janson and coworkers have trained a Generative Adversarial Network (GAN) based on CG and AA simulations of IDPs (idpGAN), 58 in which the model learns the probability distribution of the conformations in the simulations to draw new samples based on sequences of IDPs. Lotthammer and coworkers have trained a Bidirectional Recurrent Neural Network with Long Short-Term Memory cells (BRNN-LSTM) on IDP ensembles generated with the Mpipi CG force field, to predict properties of disordered proteins (ALBATROSS). 59 There have also been methods to generate ensembles of protein structures using AI-augmented MD simulations with the option to use AlphaFold in the post-processing stage in a method called \"Re-weighted Autoencoded Variational Bayes for Enhanced Sampling\" (AlphaFold-RAVE). 60"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                824,
+                885,
+                904
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "9"
+                    }
+                ]
+            },
+            "bbox": [
+                491,
+                934,
+                504,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                444
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Ensemble Validation"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                488,
+                392,
+                510
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Although there are many creative solutions to generate conformer ensembles of IDPs, the ensembles must be validated against experimental data to further improve upon their utility. Extracting structural and dynamic information from IDPs and IDRs can be done using a variety of solution-based experimental procedures, although these observables tend to be highly averaged. Hence computational tools go hand-in-hand with experiments, providing structural detail while being validated against back-calculation for each experimental data type. Additionally, ensemble generation pipelines can make use of back-calculated data to enforce experimental restraints during an integrative modeling process. 61"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                537,
+                885,
+                768
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Experimental Observables"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                805,
+                415,
+                825
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "NMR spectroscopy is a powerful technique used to provide structural insights and dynamic properties of disordered proteins at close-to physiological conditions. 3,62 A key NMR observable is the chemical shift that provides structural information that is sensitive to functional groups and their environment. Hence methods for predicting secondary structure propensities from chemical shifts have been developed, such as SSP, 63 δ2D,64 and CheSPI65 used to inform local fractional secondary structure of an ensemble. Back-calculators that predict atomic chemical shift values of protein structures include ML feature-based approaches such as SPARTA+,66 ShiftX2, 67 and UCBShift. 68"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                847,
+                885,
+                897
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "10"
+                    }
+                ]
+            },
+            "bbox": [
+                488,
+                934,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                262
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "J-couplings provide essential information about the connectivity and bonding between nuclei, with 3-bond J-couplings, 3J, reporting on torsion angle distributions, and can reveal information about the timescales of molecular motions in IDPs. 69 In the case of PTM-stabilized or folding-upon-binding category of IDPs, changes in 3J-coupling patterns may indicate the presence of secondary structure elements or structural motifs. The back-calculation of Jcoupling data is relatively straight forward by using the Karplus equation 70 and the protein backbone torsion angles. An application of the Karplus equation to back-calculate 3J-coupling constants can be found in the ‘jc‘ module in SPyCi-PDB 71 as well as in optimization algorithms such as X-EISD72 described below."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                273,
+                885,
+                535
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "PRE and nuclear Overhauser effect (NOE) experiments provide distance information between pairs of residues, such as information about transient interactions and conformational changes, 73 and the presence of persistent local structures or long-ranged contacts that stabilize IDPs/IDRs and protein complexes and condensates. 74 Due to the conformational heterogeneity of IDPs/IDRs, both measured PRE and NOE data are averaged values across the conformational landscape. Furthermore, there are different interpretations of how to use PREs and NOEs in the form of distance restraints or as dynamical observables, which is a consideration for the back-calculation approach. When PRE and NOE values are interpreted as inter-atomic distances, the back-calculation is straightforward using Euclidean distance formulas as seen in SPyCi-PDB. 71 When interpreted as dynamic quantities, the NOE back-calculation is a time correlation function that can more accurately represent the experimental observable as shown by Ball and co-workers. 75 Ideally the back-calculation of"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                544,
+                887,
+                897
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "11"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                934,
+                509,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "PREs would be in the form of intensity ratios or rates, as they are native to the experimental protocol and thus subject to less error due to different interpretations of the conversion from "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "T _ { 1 } / T _ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "relaxation rates to distances using the Solomon-Bloembergen equation. 76 An example of back-calculating PRE ratios can be seen in DEER-PREdict, 77 where intensity ratios are estimated instead of distances."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                231
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "NMR relaxation experiments can describe the dynamics of disordered proteins. The transverse relaxation time "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\left( T _ { 2 } \\right)"
+                    },
+                    {
+                        "type": "text",
+                        "content": "and the associated "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "relaxation rates (i.e. "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { 2 } = 1 / T _ { 2 } )"
+                    },
+                    {
+                        "type": "text",
+                        "content": "can be obtained by from NMR experiments in which shorter "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "T _ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "values are associated with increasing protein dynamics. The "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "S ^ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "order parameter provides a measure of the amplitude of motion on a fast picosecond-nanosecond timescale which ranges from 0 (completely disordered) to 1 (folded). "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "S ^ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "values can be derived from relaxation data "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "( T _ { 1 } , T _ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": ", NOE measurements) and is useful for identifying regions of a protein that are more flexible/disordered. As seen in the work from Naullage et al., "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "and "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "S ^ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "values were used in addition to other experimental restraints to elucidate a structural ensemble for the unfolded state of the drkN SH3 domain. 78 Backbone 15N "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "values in ENSEMBLE79 are calculated as the number of heavy atoms within "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "8 \\textup { \\AA }"
+                    },
+                    {
+                        "type": "text",
+                        "content": ". The "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "restraint has also been used within the work of Marsh et al., where the authors model three nonhomologous IDPs, I-2, spinophilin, and DARPP-32. 80"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                242,
+                887,
+                594
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Double Electron-Electron Resonance (DEER), also known as pulsed electron-electron double resonance (ELDOR), is an EPR spectroscopy that uses site-directed spin labeling 81 to explore flexible regions of proteins to measure distances in the range of 18-60 "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\mathrm { ~ \\AA ~ } ^ { 8 2 }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "between two spin-labeled sites. Due to the effective distance measurements, DEER can help characterize the range of distances sampled by different regions within an IDP. Furthermore, DEER can be used to study conformational changes that occur when IDPs undergo folding upon binding to their interaction partners and provide insights into the structural transition from a disordered to ordered state. 81,83 Using a rotamer library approach, the Python software package called DEER-PREdict effectively back-calculates electron-electron distance distributions from conformational ensembles. 77 Additionally, a plugin for the PyMOL molecular graphics system84 can estimate distances between spin labels on proteins in an easy-to-use graphical user interface format. 85"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                606,
+                885,
+                896
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "12"
+                    }
+                ]
+            },
+            "bbox": [
+                488,
+                934,
+                509,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                883,
+                141
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Single-molecule Förster resonance energy transfer (smFRET) is a popular fluorescence technique used to study the conformational dynamics of disordered protein systems. 86 It is commonly referred to as a \"spectroscopic ruler\" with reported uncertainties of the FRET efficienc "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "r \\leq 0 . 0 6"
+                    },
+                    {
+                        "type": "text",
+                        "content": ", corresponding to an interdye distance precision of "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\leq 2 \\textup { \\AA }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "and accuracy of "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\leq"
+                    },
+                    {
+                        "type": "text",
+                        "content": "5 Å.87 Because of high uncertainties for distances between inter-residue donor and acceptor fluorophores, it is better to back-calculate the FRET efficiencies ⟨E⟩ instead. Prediction of FRET efficiencies can be done using a recently developed Python package FRETpredict, 88 for which the same rotamer library approach used to predict DEER and PRE values (using DEER-PREdict) is used here to obtain either a static, dynamic, or average FRET efficiency of an conformer ensemble. Calculations of FRET efficiencies can also be done through MD simulations; 89 AvTraj is an open-source program to post-predict FRET efficiencies from MD trajectories 90 of conformer ensemble models."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                151,
+                887,
+                505
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Photoinduced electron transfer (PET) coupled with fluoresence correlation spectroscopy (FCS), known as PET-FCS, identifies the contact "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "( \\leq 1 0 \\mathrm { ~ \\AA ~ } )"
+                    },
+                    {
+                        "type": "text",
+                        "content": "formation rate between a fluorophore and a quencher (an aromatic residue or another dye). 91 Furthermore, FCS measurements are not the efficiencies of energy transfer as reported for FRET but FCS measures the amplitude of the intensity of fluorescence over time as a reporter for protein diffusion and concentration. 92 Due to the time dependency of PET-FCS however, back-calculation techniques are linked to MD simulation data. For example, by exploiting the ns- "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\cdot \\mu \\mathrm { s }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "timescale of protein chain dynamics, PET-FCS is a valuable experimental protocol to study disordered protein kinetics as presented in the example of studying the disordered N-terminal TAD domain of the tumor suppressor protein p53. 93"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                515,
+                885,
+                806
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Finally, for the measurement of global structural dimensions, small angle X-ray scattering (SAXS) can determine the radius of gyration, "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { g }"
+                    },
+                    {
+                        "type": "text",
+                        "content": ", while the hydrodynamic radius "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\left( R _ { h } \\right)"
+                    },
+                    {
+                        "type": "text",
+                        "content": "can be measured by using NMR pulsed field gradient diffusion or by Size Exclusion Chromatography (SEC). SAXS is commonly reported for isolated IDPs or IDPs/IDRS in complexes under a variety of in vitro experimental conditions. 94 For disordered protein systems, SAXS scattering data can also unveil disorder-to-order transitions, and assist in ensemble modeling by restraining global dimensions. 95 The value of the obtained "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { h }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "value reflects the protein’s size in a solvent, accounting for its shape and the surrounding medium’s viscosity. SAXS measurements can also be used to derive the hydrodynamic radius "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\left( R _ { h } \\right)"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                815,
+                885,
+                896
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "13"
+                    }
+                ]
+            },
+            "bbox": [
+                488,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                262
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Although back-calculations can be performed for "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { g }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "with relative ease from structural ensembles, predicting SAXS intensity profiles requires increased biophysical rigor as presented in CRYSOL, 96 AquaSAXS, 97 Fast-SAXS-pro, 98 and FoXS. 99Back-calculations of "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { h }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "values, however, have been more ambiguous due to the various solvent effects that change the distribution of "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { h }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "values for a given protein. Popular back-calculation methods for "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "R _ { h }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "include: i) HYDROPRO, 100 by implementing a bead modeling algorithm that expands the volume of atomic spheres based on their covalent radii, ii) HullRad, 101 which uses the convex hull method to predict hydrodynamic properties of proteins, and iii) Kirkwood-Riseman equation102 by using the center of mass of each residues instead of the Cα."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                272,
+                885,
+                535
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Statistical subsetting/reweighting methods"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                570,
+                604,
+                592
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Given an \"initial\" IDP/IDR ensemble generated using one of the different ensemble generation protocols, these must be modified by imposing that the IDP/IDR structural ensembles agree with available experimental data. 103 This integrative biology step has often relied on reweighting methods such as maximum-parsimony (MaxPar) or maximum-entropy (Max-Ent) approaches to create better validated IDP/IDR structural ensembles. MaxEnt is a probabilistic method based on the principle of maximizing the degree of disorder while also satisfying a set of experimental restraints, giving conformations higher weights when they are more consistent with an experimental observable. MaxPar approaches instead focus on finding the simplest IDP/IDR ensemble by minimizing the number of conformations in the ensemble to those that satisfy the experimental constraints. Usually, MaxPar approaches are used when there is more confidence in the available experimental data, where the goal is to simplify the ensemble to a minimum set of conformations. 61,104 For a more in-depth comparison of MaxEnt and MaxPar approaches of ensemble reweighting, please refer to the review of Bonomi et al.61"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                613,
+                887,
+                905
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "14"
+                    }
+                ]
+            },
+            "bbox": [
+                488,
+                934,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                200
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Examples of software packages and methods that fall into the MaxPar umbrella include: the ’ensemble optimization method’ (EOM), 105 the ’selection tool for ensemble representations of intrinsically disordered states’ (ASTEROIDS), 106 and the ’sparse ensemble selection’ (SES) method. 107 MaxEnt approaches for ensemble reweighting include the ’ensemble-refinement of SAXS’ (EROS), 108 ’convex optimization for ensemble reweighting’ (COPER),109 and ENSEMBLE. 110 But more recent developments of the MaxEnt approach have opted to include Bayesian inference using back-calculated and experimental data. Since this statistical framework allows for combining different sources of data, it allows for independent accounting for experimental and back-calculator errors. The use of Bayesian statistics can be found in algorithms that re-weight ensembles directly from MD simulations such as the ’Bayesian energy landscape tilting’ (BELT) method, 111 ’Bayesian Maximum Entropy’ (BME), 112 and ’Bayesian inference of conformational populations’ (BICePs). 113 The Bayesian Extended Experimental Inferential Structure Determination (X-EISD) for IDP ensemble selection evaluates and optimizes candidate ensembles by accounting for different sources of uncertainties, both back-calculation and experimental, for smFRET, SAXS, and many NMR experimental data types. 114,115"
+                    }
+                ]
+            },
+            "bbox": [
+                109,
+                212,
+                887,
+                685
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "ML Ensemble Generation and Validation"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                722,
+                584,
+                742
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Creating IDP ensembles that agree with experimental data such as NMR, SAXS, and sm-FRET has typically involved operations on static structural pools, i.e. by reweighting the different sub-populations of conformations to agree with experiment. 61,114,116,117 But if important conformational states are absent, there is little that can be solved with subsetting and reweighting approaches for IDP/IDR generation and validation. Recently, Zhang and co-workers bypassed standard IDP ensemble reweighting approaches and instead directly evolved the conformations of the underlying structural pool to be consistent with experiment, using the generative recurrent-reinforcement ML model, termed DynamICE (Dynamic IDP Creator with Experimental Restraints). 118 DynamICE learns the probability of the next residue torsions "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\mathrm { X } _ { i + 1 } { = } [ \\phi _ { i + 1 } , \\psi _ { i + 1 } , \\chi 1 _ { i + 1 } , \\chi 2 _ { i + 1 } , . . . ]"
+                    },
+                    {
+                        "type": "text",
+                        "content": "from the previous residue in the sequence "
+                    },
+                    {
+                        "type": "equation_inline",
+                        "content": "\\mathrm { X } _ { i }"
+                    },
+                    {
+                        "type": "text",
+                        "content": "to generate new IDP conformations. As importantly, DynamICE is coupled with X-EISD in a reinforcement learning step that biases the probability distributions of torsions to take advantage of experimental data types. DynamICE has used J-couplings, NOE, and PRE data to bias the generation of ensembles that better agree with experimental data for α-synuclein, α−beta, Hst5, and the unfolded state of SH3. 118"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                763,
+                885,
+                905
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "15"
+                    }
+                ]
+            },
+            "bbox": [
+                488,
+                933,
+                511,
+                949
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                92,
+                885,
+                383
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Software and Data Repositories for IDPs/IDRs"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                426,
+                750,
+                450
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Table 1 presents a summary of current ensemble modeling (M), experimental validation (V), and statistical reweighting/filtering (R) approaches that are available for both users and developers. We also highlight software that has the ability to model protein-protein interactions. Emerging developments are being made to exploit the intra- and intermolecular contact data in the RCSB PDB to model dynamic complexes of disordered proteins de novo, and current docking methods exist for some disordered protein systems. An example of a docking method specifically designed for disordered proteins involved in complexes with folded proteins is IDP-LZerD. 119"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                477,
+                885,
+                708
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Coupled with software, curated databases play an immensely important role in IDP/IDR generation and validation. The Biological Magnetic Resonance Data Bank (BMRB) is an international open data repository for biomolecular NMR data, 120 and the small-angle scattering biological data bank (SASBDB) 121 have seen increases in IDP/IDR data depositions. Examples of curated sequence and structural IDP ensemble coordinates include the protein ensemble database (PED), 122 DisProt,123 the ModiDB, 124 the database of disordered protein prediction D2P2, 125 the DescribeProt database, 126 and the Eukaryotic Linear Motif Resource (ELM).127"
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                718,
+                885,
+                888
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "16"
+                    }
+                ]
+            },
+            "bbox": [
+                488,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                90,
+                883,
+                141
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/b28b3e5e73d49faab1c421fdd34a3fe9da4d340b2990eaf58de6d6b0573543b0.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "Table 1: Computational tools for studying ensembles of disordered proteins. Categorized by ensemble modeling (M), experimental validation (V), and statistical reweighting/filtering (R). *Asterisk labeled tools have the ability to model protein-protein interactions. Computational tools are sorted in chronological order from the latest published software at the time of writing (August 2024)."
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td colspan=\"1\" rowspan=\"1\">Year</td><td colspan=\"1\" rowspan=\"1\">Type|i</td><td colspan=\"1\" rowspan=\"1\">Name</td><td colspan=\"1\" rowspan=\"1\">Accessibility</td><td colspan=\"1\" rowspan=\"1\">Short Description</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2024</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">PTM-SC</td><td colspan=\"1\" rowspan=\"1\">github.com/THGLab/ptm_sc</td><td colspan=\"1\" rowspan=\"1\">Packing of AA side chains with PTMs.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2024</td><td colspan=\"1\" rowspan=\"1\">V</td><td colspan=\"1\" rowspan=\"1\">FRETpredict</td><td colspan=\"1\" rowspan=\"1\">github.com/KULL-Centre/FRETpredict</td><td colspan=\"1\" rowspan=\"1\">Calculate FRET eficiency ofensembles and MD trajectories.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2024</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">Phanto-IDP</td><td colspan=\"1\" rowspan=\"1\">github.com/HFChenLab/PhantoI] Generative ML model to reconstruct</td><td colspan=\"1\" rowspan=\"1\">github.com/HFChenLab/PhantoI] Generative ML model to reconstructIDP ensembles.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2023</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">IDPConfGen*</td><td colspan=\"1\" rowspan=\"1\">github.com/julie-forman-kay-lab/IDPConformerGenerator</td><td colspan=\"1\" rowspan=\"1\">Platform to generate AA ensembles ofIDPs, IDRs, and dynamic complexes.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2023</td><td colspan=\"1\" rowspan=\"1\">V</td><td colspan=\"1\" rowspan=\"1\">SPyCi-PDB</td><td colspan=\"1\" rowspan=\"1\">github.com/julie-forman-kay-lab/SPyCi-PDB</td><td colspan=\"1\" rowspan=\"1\">Platform to back-calculate differenttypes of experimental data from IDPensembles.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2023</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">DynamICE</td><td colspan=\"1\" rowspan=\"1\">github.com/THGLab/DynamICE</td><td colspan=\"1\" rowspan=\"1\">(Generative ML model to generate newIDP conformers biased towardsexperimental data.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2023</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">idpGAN</td><td colspan=\"1\" rowspan=\"1\">github.com/feiglab/idpgan</td><td colspan=\"1\" rowspan=\"1\">ML ensemble generator for CG modelsof IDPs.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2021</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">DIPEND</td><td colspan=\"1\" rowspan=\"1\">github.com/PPKE-Bioinf/DIPEND</td><td colspan=\"1\" rowspan=\"1\">Pipeline to generate IDP ensemblesusing existing software.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2021</td><td colspan=\"1\" rowspan=\"1\">V</td><td colspan=\"1\" rowspan=\"1\">DEER-PREdict</td><td colspan=\"1\" rowspan=\"1\">github.com/KULL-Centre/DEERpredict</td><td colspan=\"1\" rowspan=\"1\">Calculates DEER and PREpredictions from MD ensembles.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2020</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">IDP-LZerD*</td><td colspan=\"1\" rowspan=\"1\">github.com/kiharalab/idp_lzerd</td><td colspan=\"1\" rowspan=\"1\">Models bound conformation of IDP toan ordered protein.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2020</td><td colspan=\"1\" rowspan=\"1\">R</td><td colspan=\"1\" rowspan=\"1\">X-EISD</td><td colspan=\"1\" rowspan=\"1\">github.com/THGLab/X-EISDv2</td><td colspan=\"1\" rowspan=\"1\">Bayesian statistical reweightingmethod for IDP ensembles usingmaximum log likelihood.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2020</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">FastFloppyTail</td><td colspan=\"1\" rowspan=\"1\">github.com/jferrie3/AbInitioVO-and-FastFloppyTail</td><td colspan=\"1\" rowspan=\"1\">Ensemble generation of IDPs andterminal IDRs using Rosettafoundations.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2020</td><td colspan=\"1\" rowspan=\"1\">V</td><td colspan=\"1\" rowspan=\"1\">UCBShift</td><td colspan=\"1\" rowspan=\"1\">github.com/THGLab/CSpred</td><td colspan=\"1\" rowspan=\"1\">ML chemical shift predictor.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2020</td><td colspan=\"1\" rowspan=\"1\">R</td><td colspan=\"1\" rowspan=\"1\">BME</td><td colspan=\"1\" rowspan=\"1\">github.com/KULL-Centre/BME</td><td colspan=\"1\" rowspan=\"1\">Bayesian statistical reweightingmethod for IDP ensembles usingmaximum entropy.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2018</td><td colspan=\"1\" rowspan=\"1\">V</td><td colspan=\"1\" rowspan=\"1\">HullRad</td><td colspan=\"1\" rowspan=\"1\">http://52.14.70.9/</td><td colspan=\"1\" rowspan=\"1\">Calculating hydrodynamic propertiesof a macromolecule.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2017</td><td colspan=\"1\" rowspan=\"1\">VR</td><td colspan=\"1\" rowspan=\"1\">ATSAS V3</td><td colspan=\"1\" rowspan=\"1\">embl-hamburg.de/biosaxs/crysol.html</td><td colspan=\"1\" rowspan=\"1\">Collection of software.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2017</td><td colspan=\"1\" rowspan=\"1\">MVR</td><td colspan=\"1\" rowspan=\"1\">NMRbox</td><td colspan=\"1\" rowspan=\"1\">nmrbox.nmrhub.org/</td><td colspan=\"1\" rowspan=\"1\">Collection of software.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2013</td><td colspan=\"1\" rowspan=\"1\">MVR</td><td colspan=\"1\" rowspan=\"1\">ENSEMBLE</td><td colspan=\"1\" rowspan=\"1\">pound.med.utoronto.ca/~JFKlab/</td><td colspan=\"1\" rowspan=\"1\">Modeling ensembles of IDPs usingexperimental data.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2012</td><td colspan=\"1\" rowspan=\"1\">M</td><td colspan=\"1\" rowspan=\"1\">Flexible-meccano</td><td colspan=\"1\" rowspan=\"1\">ibs.fr/en/communication-outreach/scientific-output/software/Hexible-meccano-en</td><td colspan=\"1\" rowspan=\"1\">Modeling conformer ensembles of IDPsusing backbone Phi-Psi torsion angles.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2012</td><td colspan=\"1\" rowspan=\"1\">V</td><td colspan=\"1\" rowspan=\"1\">AvTraj</td><td colspan=\"1\" rowspan=\"1\">github.com/Fluorescence-Tools/avtraj</td><td colspan=\"1\" rowspan=\"1\">Calculate FRET observables from MDtrajectories.</td></tr><tr><td colspan=\"1\" rowspan=\"1\">2009</td><td colspan=\"1\" rowspan=\"1\">R</td><td colspan=\"1\" rowspan=\"1\">ASTEROIDS</td><td colspan=\"1\" rowspan=\"1\">closed source- contact authors</td><td colspan=\"1\" rowspan=\"1\"> Stochastic search of conformers thatagree with experimental data.</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                114,
+                262,
+                913,
+                892
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "17"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                509,
+                949
+            ]
+        }
+    ],
+    [
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                114,
+                103,
+                913,
+                659
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "18"
+                    }
+                ]
+            },
+            "bbox": [
+                488,
+                933,
+                511,
+                949
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Conclusion and Future Directions"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                87,
+                566,
+                109
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "For folded proteins, crystal structures provide concrete, predictive, and yet conceptually straightforward models that can make powerful connections between structure and protein function. X-ray data has informed the deep learning model AlphaFold2 such that the folded protein structure problem is in many (but not all) cases essentially solved. IDPs and IDRs require a broader framework to achieve comparable insights, requiring significantly more than the one dominant experimental tool and computational analysis approach. Instead, a rich network of interactions must occur between the experimental data and computational simulation codes, often facilitated by Bayesian analysis and statistical methods that straddle the two approaches, e.g., by constraining the simulations and/or to provide confidence levels when comparing qualitatively different structural ensembles for the free IDP and disordered complexes and condensates."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                132,
+                885,
+                348
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Given the diverse range of contexts in which disordered proteins manifest their function, the development of a comprehensive software platform capable of aiding IDP/IDR researchers holds immense promise. Crafting scientific software with a focus on best practices, modularity, and user-friendliness will not only enhance its longevity, ease of maintenance, and overall efficiency, but also contribute to its utility as a plugand-play software pipeline for the diversity of IDP/IDR studies. An inspirational example from the NMR community is the creation of NMRBox, 128 which provides software tools, documentation, and tutorials, as well as cloud-based virtual machines for executing the software."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                356,
+                885,
+                522
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "As emphasized earlier, the modeling of multiple disordered chains within a complex or condensate is the next frontier. However, many of these powerful computational tools and models have been developed for the characterization, analysis, and modeling of single chain IDPs/IDRs. More focus is needed for software that can handle disordered proteins that are part of dynamic complexes. Most often modeling dynamic complexes and condensates can be done by using CG MD simulations, and given a template, modeling of dynamic complexes could be done within the Local Disordered Region Sampling (LDRS) module within IDPConformerGenerator. 22,129 Although AlphaFold multimer 130 seems promising for multi-chain complexes of folded proteins, its core MSA protocol cannot be readily exploited for disordered proteins. The developers of HADDOCK, 131 a biophysical and biochemical driven protein-protein docking software are working on HADDOCK v3 to dock IDP/IDR conformer ensembles to other disordered or folded templates to generate ensembles of complexes. It may also be possible to model condensates this way by expanding the docking between protein chains."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                531,
+                885,
+                823
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Centralized data repositories and resources for IDPs/IDRS are important for several reasons. They help establish community standards for IDP/IDR data quality, and hence control the quality of the resulting IDP ensemble generation and validation. Because ML methods require robust training datasets, there is a great need to expand on both experimental and MD trajectory data deposition for disordered protein and proteins with disordered regions. For wet-lab scientists, we would like to have a call-to-action for authors in future publications to have clear deposition of experimental data in order to develop better in silico back-calculators and ultimately ensure better ensemble generation, validation, and reweighting protocols. For computational scientists, we would like to ask the community for a standardized method for evaluating ML/AI based tools for ensemble prediction and generation. Due to the rapid rate of silicon development, it is important to have a rigorous benchmark for new validation and ensemble generation protocols."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                830,
+                885,
+                897
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "19"
+                    }
+                ]
+            },
+            "bbox": [
+                488,
+                934,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                111,
+                94,
+                885,
+                261
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Acknowledgements"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                301,
+                369,
+                324
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "We thank the National Institutes of Health (2R01GM127627-05) for support of this work. J.D.F.-K. also acknowledges support from the Natural Sciences and Engineering Research Council of Canada (NSERC, 2016-06718) and from the Canada Research Chairs Program."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                344,
+                883,
+                411
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Author Contributions Statement"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                114,
+                453,
+                553,
+                474
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Z.H.L., M.T. and T.H.G. wrote the paper. All authors discussed the perspective topics, references, and made comments and edits to the manuscript."
+                    }
+                ]
+            },
+            "bbox": [
+                111,
+                496,
+                883,
+                537
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Competing Interests Statement"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                112,
+                579,
+                534,
+                602
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The authors declare no competing interests."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                623,
+                431,
+                638
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "References"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                114,
+                681,
+                261,
+                702
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(1) Wright, P.; Dyson, H. Intrinsically unstructured proteins: re-assessing the protein structure-function paradigm. J. Mol. Biol. 1999, 293, 321–331."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(2) Dyson, H. J.; Wright, P. E. Intrinsically unstructured proteins and their functions. Nature Reviews Molecular Cell Biology 2005, 6, 197–208."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(3) Bhowmick, A.; Brookes, D. H.; Yost, S. R.; Dyson, H. J.; Forman-Kay, J. D.; Gunter, D.; Head-Gordon, M.; Hura, G. L.; Pande, V. S.; Wemmer, D. E.; Wright, P. E.; Head-Gordon, T. Finding Our Way in the Dark Proteome. Journal of the American Chemical Society 2016, 138, 9730–9742."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                130,
+                724,
+                882,
+                765
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "20"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                934,
+                509,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(4) Tsang, B.; Pritišanac, I.; Scherer, S. W.; Moses, A. M.; Forman-Kay, J. D. Phase Separation as a Missing Mechanism for Interpretation of Disease Mutations. Cell 2020, 183, 1742–1756."
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                93,
+                885,
+                136
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(5) Forman-Kay, J. D.; Mittag, T. From sequence and forces to structure, function, and evolution of intrinsically disordered proteins. Structure 2013, 21, 1492–9."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                155,
+                887,
+                198
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(6) Iakoucheva, L. M.; Brown, C. J.; Lawson, J. D.; Obradovic, Z.; Dunker, A. K. Intrinsic disorder in cell-signaling and cancer-associated proteins. J Mol Biol 2002, 323, 573–84."
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                217,
+                885,
+                261
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(7) Brangwynne, C. P.; Mitchison, T. J.; Hyman, A. A. Active liquid-like behavior of nucleoli determines their size and shape in Xenopus laevis oocytes. Proc. Natl. Acad. Sci. USA 2011, 108, 4334–4339."
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                280,
+                885,
+                324
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(8) Lin, Y.; Protter, D. S.; Rosen, M. K.; Parker, R. Formation and Maturation of Phase-Separated Liquid Droplets by RNA-Binding Proteins. Molecular Cell 2015, 60, 208–219."
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                342,
+                883,
+                386
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(9) Mittag, T.; Pappu, R. V. A conceptual framework for understanding phase separation and addressing open questions and challenges. Molecular Cell 2022, 82, 2201–2214."
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                405,
+                885,
+                449
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(10) Hyman, A. A.; Weber, C. A.; Jülicher, F. Liquid-Liquid Phase Separation in Biology. Annual Review of Cell and Developmental Biology 2014, 30, 39–58."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                467,
+                887,
+                511
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(11) Boeynaems, S.; Alberti, S.; Fawzi, N. L.; Mittag, T.; Polymenidou, M.; Rousseau, F.; Schymkowitz, J.; Shorter, J.; Wolozin, B.; Van Den Bosch, L.; Tompa, P.; Fuxreiter, M. Protein Phase Separation: A New Phase in Cell Biology. Trends in Cell Biology 2018, 28, 420–435."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                530,
+                885,
+                598
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(12) Flory, P. J. Principles of polymer chemistry; Cornell University Press Ithaca, N.Y., 1953."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                617,
+                803,
+                637
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(13) Brangwynne, C. P.; Eckmann, C. R.; Courson, D. S.; Rybarska, A.; Hoege, C.; Gharakhani, J.; Jülicher, F.; Hyman, A. A. Germline P granules are liquid droplets that localize by controlled dissolution/condensation. Science 2009, 324, 1729–1732."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                655,
+                885,
+                723
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(14) Wright, P. E.; Dyson, H. J. a. Intrinsically disordered proteins in cellular signalling and regulation. Nat. Rev. Mol. Cell Biol. 2015, 16, 18–29."
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                742,
+                883,
+                786
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(15) Kim Tae, H.; Tsang, B.; Vernon Robert, M.; Sonenberg, N.; Kay Lewis, E.; Forman-Kay Julie, D. Phospho-dependent phase separation of FMRP and CAPRIN1 recapitulates regulation of translation and deadenylation. Science 2019, 365, 825–829."
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                805,
+                885,
+                873
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "21"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                509,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(16) Zhang, O.; Naik, S. A.; Liu, Z. H.; Forman-Kay, J.; Head-Gordon, T. A curated rotamer library for common post-translational modifications of proteins. Bioinformatics 2024, 40, btae444."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(17) Darling, A. L.; Uversky, V. N. Intrinsic Disorder and Posttranslational Modifications: The Darker Side of the Biological Dark Matter. Frontiers in Genetics 2018, 9 ."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(18) Mittag, T.; Marsh, J.; Grishaev, A.; Orlicky, S.; Lin, H.; Sicheri, F.; Tyers, M.; Forman-Kay, J. D. Structure/Function Implications in a Dynamic Complex of the Intrinsically Disordered Sic1 with the Cdc4 Subunit of an SCF Ubiquitin Ligase. Structure 2010, 18, 494–506."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(19) Snead, W. T.; Gladfelter, A. S. The Control Centers of Biomolecular Phase Separation: How Membrane Surfaces, PTMs, and Active Processes Regulate Condensation. Molecular Cell 2019, 76, 295– 305."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(20) Viegas, R. G.; Martins, I. B. S.; Sanches, M. N.; Oliveira Junior, A. B.; Camargo, J. B. d.; Paulovich, F. V.; Leite, V. B. P. ELViM: Exploring Biomolecular Energy Landscapes through Multidimensional Visualization. Journal of Chemical Information and Modeling 2024, 64, 3443–3450."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(21) Jumper, J. et al. Highly accurate protein structure prediction with AlphaFold. Nature 2021, 596, 583–589."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(22) Teixeira, J. M. C.; Liu, Z. H.; Namini, A.; Li, J.; Vernon, R. M.; Krzeminski, M.; Shamandy, A. A.; Zhang, O.; Haghighatlari, M.; Yu, L.; Head-Gordon, T.; Forman-Kay, J. D. IDPConformerGenerator: A Flexible Software Suite for Sampling the Conformational Space of Disordered Protein States. The Journal of Physical Chemistry A 2022, 126, 5985–6003."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(23) Shaw, D. E. et al. Anton 3: Twenty Microseconds of Molecular Dynamics Simulation Before Lunch. SC21: International Conference for High Performance Computing, Networking, Storage and Analysis. 2021; pp 1–11."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(24) Feldman, H. J.; Hogue, C. W. A fast method to sample real protein conformational space. Proteins: Structure, Function, and Genetics 2000, 39, 112–131."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(25) Berman, H. M. The Protein Data Bank. Nucleic Acids Research 2000, 28, 235–242."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(26) Ozenne, V.; Bauer, F.; Salmon, L.; rong Huang, J.; Jensen, M. R.; Segard, S.; Bernadó, P.; Charavay, C.; Blackledge, M. Flexible-meccano: a tool for the generation of explicit ensemble descriptions of"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                93,
+                883,
+                136
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "22"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "intrinsically disordered proteins and their associated experimental observables. Bioinformatics 2012, 28, 1463–1470."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(27) Ferrie, J. J.; Petersson, E. J. A Unified De Novo Approach for Predicting the Structures of Ordered and Disordered Proteins. The Journal of Physical Chemistry B 2020, 124, 5538–5548."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(28) Liu, Z. H.; Teixeira, J. M.; Zhang, O.; Tsangaris, T. E.; Li, J.; Gradinaru, C. C.; Head-Gordon, T.; Forman-Kay, J. D. Local Disordered Region Sampling (LDRS) for Ensemble Modeling of Proteins with Experimentally Undetermined or Low Confidence Prediction Segments. 2023,"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(29) Bhowmick, A.; Head-Gordon, T. A Monte Carlo method for generating side chain structural ensembles. Structure 2015, 23, 44–55."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(30) Fawzi, N. L.; Parekh, S. H.; Mittal, J. Biophysical studies of phase separation integrating experimental and computational methods. Current Opinion in Structural Biology 2021, 70, 78–86, Biophysical Methods."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(31) Shea, J.-E.; Best, R. B.; Mittal, J. Physics-based computational and theoretical approaches to intrinsically disordered proteins. Current Opinion in Structural Biology 2021, 67, 219–225."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(32) Robustelli, P.; Piana, S.; Shaw, D. E. Developing a molecular dynamics force field for both folded and disordered protein states. Proceedings of the National Academy of Sciences 2018, 115, E4758–E4766."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(33) Paul, A.; Samantray, S.; Anteghini, M.; Khaled, M.; Strodel, B. Thermodynamics and kinetics of the amyloid-beta peptide revealed by Markov state models based on MD data in agreement with experiment. Chem. Sci. 2021, 12, 6652–6669."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(34) Samantray, S.; Yin, F.; Kav, B.; Strodel, B. Different Force Fields Give Rise to Different Amyloid Aggregation Pathways in Molecular Dynamics Simulations. J. Chem. Inf. Model. 2020, 60, 6462–6475."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(35) Liu, H.; Song, D.; Zhang, Y.; Yang, S.; Luo, R.; Chen, H.-F. Extensive tests and evaluation of the CHARMM36IDPSFF force field for intrinsically disordered proteins and folded proteins. Phys. Chem. Chem. Phys. 2019, 21, 21918–21931."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(36) Lindorff-Larsen, K.; Piana, S.; Palmo, K.; Maragakis, P.; Klepeis, J. L.; Dror, R. O.; Shaw, D. E. Improved side-chain torsion potentials for the Amber ff99SB protein force field. Proteins: Structure, Function, and Bioinformatics 2010, 78, 1950–1958."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                156,
+                93,
+                883,
+                135
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "23"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(37) Piana, S.; Donchev, A. G.; Robustelli, P.; Shaw, D. E. Water Dispersion Interactions Strongly Influence Simulated Structural Properties of Disordered Protein States. J. Phys. Chem. B 2015, 119, 5113– 5123."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                92,
+                883,
+                159
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(38) Jephthah, S.; Pesce, F.; Lindorff-Larsen, K.; Skep/\"o, M. Force Field Effects in Simulations of Flexible Peptides with Varying Polyproline II Propensity. J. Chem. Theory Comput. 2021, 17, 6634–6646."
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                179,
+                885,
+                224
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(39) Liu, M.; Das, A. K.; Lincoff, J.; Sasmal, S.; Cheng, S. Y.; Vernon, R. M.; Forman-Kay, J. D.; Head-Gordon, T. Configurational Entropy of Folded Proteins and Its Importance for Intrinsically Disordered Proteins. International Journal of Molecular Sciences 2021, 22 ."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                242,
+                885,
+                311
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(40) Heesink, G.; Marseille, M. J.; Fakhree, M. A. A.; Driver, M. D.; van Leijenhorst-Groener, K. A.; Onck, P. R.; Blum, C.; Claessens, M. M. Exploring Intra- and Inter-Regional Interactions in the IDP α-Synuclein Using smFRET and MD Simulations. Biomacromolecules 2023, 24, 3680–3688."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                329,
+                885,
+                398
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(41) Klein, F.; Barrera, E. E.; Pantano, S. Assessing SIRAH’s Capability to Simulate Intrinsically Disordered Proteins and Peptides. J. Chem. Theory Comput. 2021, 17, 599–604."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                416,
+                883,
+                460
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(42) Joseph, J. A.; Reinhardt, A.; Aguirre, A.; Chew, P. Y.; Russell, K. O.; Espinosa, J. R.; Garaizar, A.; Collepardo-Guevara, R. Physics-driven coarse-grained model for biomolecular phase separation with near-quantitative accuracy. Nature Computational Science 2021, 1, 732–743."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                479,
+                885,
+                549
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(43) Tesei, G.; Schulze, T. K.; Crehuet, R.; Lindorff-Larsen, K. Accurate model of liquid–liquid phase behavior of intrinsically disordered proteins from optimization of single-chain properties. Proceedings of the National Academy of Sciences 2021, 118, e2111696118."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                568,
+                887,
+                637
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(44) Tesei, G.; Trolle, A. I.; Jonsson, N.; Betz, J.; Knudsen, F. E.; Pesce, F.; Johansson, K. E.; Lindorff-Larsen, K. Conformational ensembles of the human intrinsically disordered proteome. Nature 2024, 626, 897–904."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                655,
+                885,
+                723
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(45) Marrink, S. J.; Monticelli, L.; Melo, M. N.; Alessandri, R.; Tieleman, D. P.; Souza, P. C. T. Two decades of Martini: Better beads, broader scope. WIREs Computational Molecular Science 2023, 13, e1620."
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                742,
+                885,
+                810
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(46) Tsanai, M.; Frederix, P. W. J. M.; Schroer, C. F. E.; Souza, P. C. T.; Marrink, S. J. Coacervate formation studied by explicit solvent coarse-grain molecular dynamics with the Martini model. Chem. Sci. 2021, 12, 8521–8530."
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                829,
+                885,
+                897
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "24"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(47) Brasnett, C.; Kiani, A.; Sami, S.; Otto, S.; Marrink, S. J. Capturing chemical reactions inside biomolecular condensates with reactive Martini simulations. Communications Chemistry 2024, 151 ."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(48) Thomasen, F. E.; Pesce, F.; Roesgaard, M. A.; Tesei, G.; Lindorff-Larsen, K. Improving Martini 3 for Disordered and Multidomain Proteins. J. Chem. Theory Comput. 2022, 18, 2033–2041."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                93,
+                883,
+                136
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(49) Ribeiro-Filho, H. V. et al. Structural dynamics of SARS-CoV-2 nucleocapsid protein induced by RNA binding. PLOS Computational Biology 2022, 18, 1–30."
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                217,
+                885,
+                261
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(50) Ingólfsson, H. I.; Rizuan, A.; Liu, X.; Mohanty, P.; Souza, P. C.; Marrink, S. J.; Bowers, M. T.; Mittal, J.; Berry, J. Multiscale simulations reveal TDP-43 molecular-level interactions driving condensation. Biophysical Journal 2023, 122, 4370–4381."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                280,
+                885,
+                348
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(51) Baek, M. et al. Accurate prediction of protein structures and interactions using a three-track neural network. Science 2021, 373, 871–876."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(52) Lin, Z.; Akin, H.; Rao, R.; Hie, B.; Zhu, Z.; Lu, W.; Smetanin, N.; Verkuil, R.; Kabeli, O.; Shmueli, Y.; dos Santos Costa, A.; Fazel-Zarandi, M.; Sercu, T.; Candido, S.; Rives, A. Evolutionary-scale prediction of atomic-level protein structure with a language model. Science 2023, 379, 1123–1130."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                367,
+                883,
+                411
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(53) Wayment-Steele, H. K.; Ojoawo, A.; Otten, R.; Apitz, J. M.; Pitsawong, W.; Hömberger, M.; Ovchinnikov, S.; Colwell, L.; Kern, D. Predicting multiple conformations via sequence clustering and AlphaFold2. Nature 2023,"
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                517,
+                883,
+                587
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(54) Sala, D.; Engelberger, F.; Mchaourab, H.; Meiler, J. Modeling conformational states of proteins with AlphaFold. Current Opinion in Structural Biology 2023, 81, 102645."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                604,
+                883,
+                648
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(55) Alderson, T. R.; Pritišanac, I.; Kolarić, Ð.; Moses, A. M.; Forman-Kay, J. D. Systematic identification of conditionally folded intrinsically disordered regions by AlphaFold2. Proceedings of the National Academy of Sciences 2023, 120 ."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                667,
+                887,
+                736
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(56) Taneja, I.; Lasker, K. Machine-learning-based methods to generate conformational ensembles of disordered proteins. Biophysical Journal 2024, 123, 101–113."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                755,
+                883,
+                799
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(57) Zhu, J.; Li, Z.; Tong, H.; Lu, Z.; Zhang, N.; Wei, T.; Chen, H.-F. Phanto-IDP: compact model for precise intrinsically disordered protein backbone generation and enhanced sampling. Briefings in Bioinformatics 2023, 25 ."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                818,
+                887,
+                886
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "25"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                509,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(58) Janson, G.; Valdes-Garcia, G.; Heo, L.; Feig, M. Direct generation of protein conformational ensembles via machine learning. Nature Communications 2023, 14 ."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(59) Lotthammer, J. M.; Ginell, G. M.; Griffith, D.; Emenecker, R. J.; Holehouse, A. S. Direct prediction of intrinsically disordered protein conformational properties from sequence. Nature Methods 2024, 21, 465–476."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(60) Vani, B. P.; Aranganathan, A.; Wang, D.; Tiwary, P. AlphaFold2-RAVE: From Sequence to Boltzmann Ranking. Journal of Chemical Theory and Computation 2023, 19, 4351–4354."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(61) Bonomi, M.; Heller, G. T.; Camilloni, C.; Vendruscolo, M. Principles of protein structural ensemble determination. Current Opinion in Structural Biology 2017, 42, 106–116."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(62) Karamanos, T. K.; Kalverda, A. P.; Radford, S. E. Generating Ensembles of Dynamic Misfolding Proteins. Frontiers in Neuroscience 2022, 16 ."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(63) Marsh, J. A.; Singh, V. K.; Jia, Z.; Forman-Kay, J. D. Sensitivity of secondary structure propensities to sequence differences between α- and γ-synuclein: Implications for fibrillation. Protein Science 2006, 15, 2795–2804."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(64) Camilloni, C.; Simone, A. D.; Vranken, W. F.; Vendruscolo, M. Determination of Secondary Structure Populations in Disordered States of Proteins Using Nuclear Magnetic Resonance Chemical Shifts. Biochemistry 2012, 51, 2224–2231."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(65) Nielsen, J. T.; Mulder, F. A. A. CheSPI: chemical shift secondary structure population inference. Journal of Biomolecular NMR 2021, 75, 273–291."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(66) Shen, Y.; Bax, A. SPARTA+: a modest improvement in empirical NMR chemical shift prediction by means of an artificial neural network. Journal of Biomolecular NMR 2010, 48, 13–22."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(67) Han, B.; Liu, Y.; Ginzinger, S. W.; Wishart, D. S. SHIFTX2: significantly improved protein chemical shift prediction. Journal of Biomolecular NMR 2011, 50, 43–57."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(68) Li, J.; Bennett, K. C.; Liu, Y.; Martin, M. V.; Head-Gordon, T. Accurate prediction of chemical shifts for aqueous protein structure on “Real World” data. Chemical Science 2020, 11, 3180–3191."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(69) Kosol, S.; Contreras-Martos, S.; Cedeño, C.; Tompa, P. Structural Characterization of Intrinsically Disordered Proteins by NMR Spectroscopy. Molecules 2013, 18, 10802–10828."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                93,
+                883,
+                136
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "26"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(70) Karplus, M. Vicinal Proton Coupling in Nuclear Magnetic Resonance. Journal of the American Chemical Society 1963, 85, 2870–2871."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(71) Liu, Z. H.; Zhang, O.; Teixeira, J. M. C.; Li, J.; Head-Gordon, T.; Forman-Kay, J. D. SPyCi-PDB: A modular command-line interface for back-calculating experimental datatypes of protein structures. Journal of Open Source Software 2023, 8, 4861."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(72) Lincoff, J.; Haghighatlari, M.; Krzeminski, M.; Teixeira, J. M. C.; Gomes, G.-N. W.; Gradinaru, C. C.; Forman-Kay, J. D.; Head-Gordon, T. Extended experimental inferential structure determination method in determining the structural ensembles of disordered protein states. Communications Chemistry 2020, 3 ."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(73) Johnson, C. N.; Libich, D. S. Paramagnetic Relaxation Enhancement for Detecting and Characterizing Self-Associations of Intrinsically Disordered Proteins. Journal of Visualized Experiments 2021,"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(74) Anglister, J.; Srivastava, G.; Naider, F. Detection of intermolecular NOE interactions in large protein complexes. Progress in Nuclear Magnetic Resonance Spectroscopy 2016, 97, 40–56."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(75) Ball, K. A.; Wemmer, D. E.; Head-Gordon, T. Comparison of Structure Determination Methods for Intrinsically Disordered Amyloid-beta Peptides. The Journal of Physical Chemistry B 2014, 118, 6405–6416."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(76) Solomon, I. Relaxation Processes in a System of Two Spins. Physical Review 1955, 99, 559–565."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(77) Tesei, G.; Martins, J. M.; Kunze, M. B. A.; Wang, Y.; Crehuet, R.; Lindorff-Larsen, K. DEER-PREdict: Software for efficient calculation of spin-labeling EPR and NMR data from conformational ensembles. PLOS Computational Biology 2021, 17, e1008551."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(78) Naullage, P. M.; Haghighatlari, M.; Namini, A.; Teixeira, J. M. C.; Li, J.; Zhang, O.; Gradinaru, C. C.; Forman-Kay, J. D.; Head-Gordon, T. Protein Dynamics to Define and Refine Disordered Protein Ensembles. The Journal of Physical Chemistry B 2022, 126, 1885–1894."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(79) Marsh, J. A.; Forman-Kay, J. D. Ensemble modeling of protein disordered states: Experimental restraint contributions and validation. Proteins: Structure, Function, and Bioinformatics 2011, 80, 556–572."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(80) Marsh, J. A.; Dancheck, B.; Ragusa, M. J.; Allaire, M.; Forman-Kay, J. D.; Peti, W. Structural Diversity in Free and Bound States of Intrinsically Disordered Protein Phosphatase 1 Regulators. Structure 2010, 18, 1094–1103."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                93,
+                885,
+                135
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "27"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                509,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(81) Breton, N. L.; Martinho, M.; Mileo, E.; Etienne, E.; Gerbaud, G.; Guigliarelli, B.; Belle, V. Exploring intrinsically disordered proteins using site-directed spin labeling electron paramagnetic resonance spectroscopy. Frontiers in Molecular Biosciences 2015, 2 ."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                93,
+                883,
+                161
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(82) Jeschke, G. DEER Distance Measurements on Proteins. Annual Review of Physical Chemistry 2012, 63, 419–446."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                179,
+                885,
+                222
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(83) Evans, R.; Ramisetty, S.; Kulkarni, P.; Weninger, K. Illuminating Intrinsically Disordered Proteins with Integrative Structural Biology. Biomolecules 2023, 13, 124."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                239,
+                885,
+                284
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(84) Schrödinger, LLC"
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                303,
+                294,
+                320
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(85) Hagelueken, G.; Ward, R.; Naismith, J. H.; Schiemann, O. MtsslWizard: In Silico Spin-Labeling and Generation of Distance Distributions in PyMOL. Applied Magnetic Resonance 2012, 42, 377–391."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                339,
+                883,
+                382
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(86) Gomes, G.-N. W.; Krzeminski, M.; Namini, A.; Martin, E. W.; Mittag, T.; Head-Gordon, T.; Forman-Kay, J. D.; Gradinaru, C. C. Conformational Ensembles of an Intrinsically Disordered Protein Consistent with NMR, SAXS, and Single-Molecule FRET. Journal of the American Chemical Society 2020, 142, 15697–15710."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                400,
+                885,
+                493
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(87) Agam, G. et al. Reliability and accuracy of single-molecule FRET studies for characterization of structural dynamics and distances in proteins. Nature Methods 2023, 20, 523–535."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                512,
+                885,
+                556
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(88) Montepietra, D.; Tesei, G.; Martins, J. M.; Kunze, M. B. A.; Best, R. B.; Lindorff-Larsen, K. FRETpredict: A Python package for FRET efficiency predictions using rotamer libraries. 2023,"
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                574,
+                883,
+                618
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(89) Shaw, R. A.; Johnston-Wood, T.; Ambrose, B.; Craggs, T. D.; Hill, J. G. CHARMM-DYES: Parameterization of Fluorescent Dyes for Use with the CHARMM Force Field. Journal of Chemical Theory and Computation 2020, 16, 7817–7824."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                635,
+                885,
+                704
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(90) Dimura, M.; Peulen, T. O.; Hanke, C. A.; Prakash, A.; Gohlke, H.; Seidel, C. A. Quantitative FRET studies and integrative modeling unravel the structure and dynamics of biomolecular systems. Current Opinion in Structural Biology 2016, 40, 163–185."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                722,
+                887,
+                791
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(91) Abyzov, A.; Blackledge, M.; Zweckstetter, M. Conformational Dynamics of Intrinsically Disordered Proteins Regulate Biomolecular Condensate Chemistry. Chemical Reviews 2022, 122, 6719–6748."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                808,
+                885,
+                853
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(92) Cubuk, J.; Stuchell-Brereton, M. D.; Soranno, A. The biophysics of disordered proteins from the point of view of single-molecule fluorescence spectroscopy. Essays in Biochemistry 2022, 66, 875–890."
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                869,
+                883,
+                914
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "28"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(93) Lum, J. K.; Neuweiler, H.; Fersht, A. R. Long-Range Modulation of Chain Motions within the Intrinsically Disordered Transactivation Domain of Tumor Suppressor p53. Journal of the American Chemical Society 2012, 134, 1617–1622."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(94) Vela, S. D.; Svergun, D. I. Methods, development and applications of small-angle X-ray scattering to characterize biological macromolecules in solution. Current Research in Structural Biology 2020, 2, 164–170."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(95) Kikhney, A. G.; Svergun, D. I. A practical guide to small angle X-ray scattering (SAXS) of flexible and intrinsically disordered proteins. FEBS Letters 2015, 589, 2570–2577."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(96) Manalastas-Cantos, K.; Konarev, P. V.; Hajizadeh, N. R.; Kikhney, A. G.; Petoukhov, M. V.; Molodenskiy, D. S.; Panjkovich, A.; Mertens, H. D. T.; Gruzinov, A.; Borges, C.; Jeffries, C. M.; Svergun, D. I.; Franke, D. ATSAS 3.0: expanded functionality and new tools for small-angle scattering data analysis. Journal of Applied Crystallography 2021, 54, 343–355."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(97) Poitevin, F.; Orland, H.; Doniach, S.; Koehl, P.; Delarue, M. AquaSAXS: a web server for computation and fitting of SAXS profiles with non-uniformally hydrated atomic models. Nucleic Acids Research 2011, 39, W184–W189."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(98) Ravikumar, K. M.; Huang, W.; Yang, S. Fast-SAXS: A unified approach to computing SAXS profiles of DNA, RNA, protein, and their complexes. The Journal of Chemical Physics 2013, 138 ."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(99) Schneidman-Duhovny, D.; Hammel, M.; Tainer, J. A.; Sali, A. Accurate SAXS Profile Computation and its Assessment by Contrast Variation Experiments. Biophysical Journal 2013, 105, 962–974."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(100) de la Torre, J. G.; Huertas, M. L.; Carrasco, B. Calculation of Hydrodynamic Properties of Globular Proteins from Their Atomic-Level Structure. Biophysical Journal 2000, 78, 719–730."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(101) Fleming, P. J.; Fleming, K. G. HullRad: Fast Calculations of Folded and Disordered Protein and Nucleic Acid Hydrodynamic Properties. Biophysical Journal 2018, 114, 856–869."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(102) Kirkwood, J. G. The general theory of irreversible processes in solutions of macromolecules. Journal of Polymer Science 1954, 12, 1–14."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(103) Czaplewski, C.; Gong, Z.; Lubecka, E. A.; Xue, K.; Tang, C.; Liwo, A. Recent Developments in Data-Assisted Modeling of Flexible Proteins. Frontiers in Molecular Biosciences 2021, 8 ."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                120,
+                93,
+                885,
+                160
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "29"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(104) Costa, R. G. L.; Fushman, D. Reweighting methods for elucidation of conformation ensembles of proteins. Current Opinion in Structural Biology 2022, 77, 102470."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                93,
+                885,
+                136
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(105) Bernadó, P.; Mylonas, E.; Petoukhov, M. V.; Blackledge, M.; Svergun, D. I. Structural Characterization of Flexible Proteins Using Small-Angle X-ray Scattering. Journal of the American Chemical Society 2007, 129, 5656–5664."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(106) Nodet, G.; Salmon, L.; Ozenne, V.; Meier, S.; Jensen, M. R.; Blackledge, M. Quantitative Description of Backbone Conformational Sampling of Unfolded Proteins at Amino Acid Resolution from NMR Residual Dipolar Couplings. Journal of the American Chemical Society 2009, 131, 17908–17918."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(107) Berlin, K.; Castañeda, C. A.; Schneidman-Duhovny, D.; Sali, A.; Nava-Tudela, A.; Fushman, D. Recovering a Representative Conformational Ensemble from Underdetermined Macromolecular Structural Data. Journal of the American Chemical Society 2013, 135, 16595–16609."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                155,
+                887,
+                223
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(108) Różycki, B.; Kim, Y. C.; Hummer, G. SAXS Ensemble Refinement of ESCRT-III CHMP3 Conformational Transitions. Structure 2011, 19, 109–116."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                417,
+                883,
+                460
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(109) Leung, H. T. A.; Bignucolo, O.; Aregger, R.; Dames, S. A.; Mazur, A.; Bernèche, S.; Grzesiek, S. A Rigorous and Efficient Method To Reweight Very Large Conformational Ensembles Using Average Experimental Data and To Determine Their Relative Information Content. Journal of Chemical Theory and Computation 2015, 12, 383–394."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                479,
+                885,
+                574
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(110) Krzeminski, M.; Marsh, J. A.; Neale, C.; Choy, W.-Y.; Forman-Kay, J. D. Characterization of disordered proteins with ENSEMBLE. Bioinformatics 2012, 29, 398–399."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                592,
+                883,
+                636
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(111) Beauchamp, K. A.; Pande, V. S.; Das, R. Bayesian Energy Landscape Tilting: Towards Concordant Models of Molecular Ensembles. Biophysical Journal 2014, 106, 1381–1390."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                655,
+                883,
+                699
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(112) Bottaro, S.; Bengtsen, T.; Lindorff-Larsen, K. Methods in Molecular Biology; Springer US, 2020; pp 219–240."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(113) Raddi, R. M.; Ge, Y.; Voelz, V. A. BICePs v2.0: Software for Ensemble Reweighting Using Bayesian Inference of Conformational Populations. Journal of Chemical Information and Modeling 2023, 63, 2370–2381."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(114) Brookes, D. H.; Head-Gordon, T. Experimental Inferential Structure Determination of Ensembles for Intrinsically Disordered Proteins. J Am Chem Soc 2016, 138, 4530–8."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                717,
+                885,
+                758
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "30"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                511,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "list",
+            "content": {
+                "list_type": "reference_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(115) Lincoff, J.; Haghighatlari, M.; Krzeminski, M.; Teixeira, J. M. C.; Gomes, G.-N. W.; Gradinaru, C. C.; Forman-Kay, J. D.; Head-Gordon, T. Extended experimental inferential structure determination method in determining the structural ensembles of disordered protein states. Communications Chemistry 2020, 3 ."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(116) Hummer, G.; Köfinger, J. Bayesian ensemble refinement by replica simulations and reweighting. The Journal of Chemical Physics 2015, 143, 243150."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(117) Bottaro, S.; Bengtsen, T.; Lindorff-Larsen, K. Structural Bioinformatics: Methods and Protocols; Springer US: New York, NY, 2020; pp 219–240."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(118) Zhang, O.; Haghighatlari, M.; Li, J.; Liu, Z. H.; Namini, A.; Teixeira, J. M. C.; Forman-Kay, J. D.; Head-Gordon, T. Learning to evolve structural ensembles of unfolded and disordered proteins using experimental solution data. The Journal of Chemical Physics 2023, 158 ."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(119) Christoffer, C.; Kihara, D. Methods in Molecular Biology; Springer US, 2020; pp 231–244."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(120) Hoch, J. C. et al. Biological Magnetic Resonance Data Bank. Nucleic Acids Res 2023, 51, D368–d376."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(121) Kikhney, A. G.; Borges, C. R.; Molodenskiy, D. S.; Jeffries, C. M.; Svergun, D. I. SASBDB: Towards an automatically curated and validated repository for biological scattering data. Protein Science 2020, 29, 66–75."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(122) Ghafouri, H. et al. PED in 2024: improving the community deposition of structural ensembles for intrinsically disordered proteins. Nucleic Acids Research 2023,"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(123) Quaglia, F. et al. DisProt in 2022: improved quality and accessibility of protein intrinsic disorder annotation. Nucleic Acids Research 2021, 50, D480–D487."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(124) Piovesan, D.; Conte, A. D.; Clementel, D.; Monzon, A. M.; Bevilacqua, M.; Aspromonte, M. C.; Iserte, J. A.; Orti, F. E.; Marino-Buslje, C.; Tosatto, S. C. E. MobiDB: 10 years of intrinsically disordered proteins. Nucleic Acids Research 2022, 51, D438–D444."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "(125) Oates, M. E.; Romero, P.; Ishida, T.; Ghalwash, M.; Mizianty, M. J.; Xue, B.; Dosztányi, Z.; Uversky, V. N.; Obradovic, Z.; Kurgan, L.; Dunker, A. K.; Gough, J. D2P2: database of disordered protein predictions. Nucleic Acids Research 2012, 41, D508–D516."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                92,
+                885,
+                185
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "31"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                934,
+                509,
+                948
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(126) Zhao, B.; Katuwawala, A.; Oldfield, C. J.; Dunker, A. K.; Faraggi, E.; Gsponer, J.; Kloczkowski, A.; Malhis, N.; Mirdita, M.; Obradovic, Z.; Söding, J.; Steinegger, M.; Zhou, Y.; Kurgan, L. DescribePROT: database of amino acid-level protein structure and function predictions. Nucleic Acids Research 2020, 49, D298–D308."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                93,
+                885,
+                185
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(127) Kumar, M. et al. The Eukaryotic Linear Motif resource: 2022 release. Nucleic Acids Research 2021, 50, D497–D508."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                204,
+                883,
+                247
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(128) Baskaran, K.; Craft, D. L.; Eghbalnia, H. R.; Gryk, M. R.; Hoch, J. C.; Maciejewski, M. W.; Schuyler, A. D.; Wedell, J. R.; Wilburn, C. W. Merging NMR Data and Computation Facilitates Data-Centered Research. Frontiers in Molecular Biosciences 2022, 8 ."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                267,
+                885,
+                335
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(129) Liu, Z. H.; Teixeira, J. M. C.; Zhang, O.; Tsangaris, T. E.; Li, J.; Gradinaru, C. C.; Head-Gordon, T.; Forman-Kay, J. D. Local Disordered Region Sampling (LDRS) for ensemble modeling of proteins with experimentally undetermined or low confidence prediction segments. Bioinformatics 2023, 39 ."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                354,
+                883,
+                424
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(130) Evans, R. et al. Protein complex prediction with AlphaFold-Multimer. 2021,"
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                443,
+                715,
+                460
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "(131) van Zundert, G.; Rodrigues, J.; Trellet, M.; Schmitz, C.; Kastritis, P.; Karaca, E.; Melquiond, A.; van Dijk, M.; de Vries, S.; Bonvin, A. The HADDOCK2.2 Web Server: User-Friendly Integrative Modeling of Biomolecular Complexes. Journal of Molecular Biology 2016, 428, 720–725."
+                    }
+                ]
+            },
+            "bbox": [
+                112,
+                479,
+                885,
+                549
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "32"
+                    }
+                ]
+            },
+            "bbox": [
+                486,
+                933,
+                511,
+                948
+            ]
+        }
+    ]
+]

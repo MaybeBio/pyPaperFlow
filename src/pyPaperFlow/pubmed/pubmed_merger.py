@@ -28,6 +28,9 @@ import yaml
 
 # typical paper sections that we want to export 
 SECTION_CANONICAL_ORDER = [
+    # "title"
+    # "year"
+    # "authors"
     'abstract',
     'introduction',
     'results',

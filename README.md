@@ -1,12 +1,21 @@
+
+
+
+---
+
 # pyPaperFlow - An Automatic Paper Reading Platform
 
  ![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg) 
  [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) 
 
+![](./figs/logo.png)
 
-[English](README.md) | [Chinese/中文](README_zh.md)
 
-An automated literature processing platform for scientific researchers. This tool focuses on information extraction and knowledge discovery stages, enabling researchers to efficiently complete the entire workflow from literature retrieval to knowledge internalization through a 7-stage automated process.
+> 📌 **Document is here** 👉 [English](README.md) | [中文](README_zh.md)
+
+---
+
+An `automated literature processing platform` for scientific researchers. This tool focuses on `information extraction and knowledge discovery` stages, enabling researchers to efficiently complete the entire workflow from literature retrieval to knowledge internalization through a `7-stage automated process`.
 
 **Core Objectives**
 
@@ -16,25 +25,23 @@ An automated literature processing platform for scientific researchers. This too
 
 **Positioning**
 
-This tool is designed to complement rather than replace reference management software like Zotero. We focus on the two key steps of "Information Extraction" and "Knowledge Discovery" to build a structured knowledge base for you, laying the foundation for subsequent semantic search, association recommendation, and review generation.
-
-**Current Implementation Scope**
-
-Stages 1-2 and parts of Stages 4/5 (tagging system) have been implemented. Stages 3, 6, and 7 involve AI model selection, prompt strategies, and knowledge base refinement, which require user configuration based on specific needs.
-
-![](./figs/logo.png)
+This tool is designed to `complement rather than replace` reference management software like Zotero. We focus on the two key steps of "Information Extraction" and "Knowledge Discovery" to build a `structured knowledge base` for you, laying the foundation for `subsequent semantic search, content analysis, and review generation`.
 
 
 ## 🚀 Features
 
-- **Automated Retrieval**: Search and fetch paper metadata from PubMed/Medline, arXiv, and bioRxiv.
-- **Full-Text Access**: Automatically download open-access full text (XML/Text) from PMC.
+- **Automated Retrieval from Multiple Sources**: Automatically search and retrieve paper metadata and full-text records from `PubMed/Medline, arXiv, medRxiv, chemRxiv and bioRxiv`. The repository focuses primarily on biomedical research and computational interdisciplinary fields (`Biomedicine + Computational Biology`).
+- **Full-Text Access**: Enable automatic downloading of open-access full texts in XML/Text format from `PMC`. For preprints and other publications without accessible PMC full texts, alternative acquisition modules are integrated to fetch `original PDFs`, with `Sci-Hub` set as the fallback provider.
 - **Structured Storage**:
-  - **Metadata**: Stored as detailed JSON files.
-  - **Full Text**: Saved in multiple formats (XML, parsed JSON, Markdown) for flexible use.
-- **CLI Tool**: A user-friendly command-line interface (`pyPaperFlow`) for all operations.
+  - **Metadata**: Preserved in well-structured detailed JSON files.
+  - **Full Text**: Stored in multiple formats including parsed JSON and Markdown for versatile downstream usage — JSON for programmatic data analysis, and Markdown optimized for LLM comprehension and processing.
+  - **Standardized Structured Parsing**：All literatures are parsed and organized into `standardized JSON schemas`. The schema strictly classifies content into metadata fields (title, year, authors) and canonical academic sections (abstract, introduction, results, discussion, methods, conclusion, supplementary, availability, funding, acknowledgements, author contributions, references, other). `Custom section parsing is fully supported, allowing users to apply self-defined JSON schemas for semantic parsing of literature with special formatting structures`. Dedicated modules are provided to extract designated sections from bulk topic-related papers and `assemble them into source-verified Markdown literature corpora`, facilitating subsequent literature investigation and systematic review writing.
+- **LLM & Agent Empowerment**: Integrate LLM skills and intelligent Agent capabilities to streamline the entire workflow of literature investigation and in-depth reading.
+- **CLI Tool**: Provide a user-friendly command-line interface `paperflow` that supports all core operations out of the box.
 
 ## 🏗️ Architecture Vision
+
+You can check the [Design.md](Docs/Design.md) for more details about our Design Philosophy.
 
 The project is designed around a 7-stage workflow:
 
@@ -92,54 +99,6 @@ flowchart TD
         G1[Critical Reading] --> G2[Inspiration Generation] --> G3[Exp. Design &<br>Paper Writing]
     end
 ```
-
-### Stage Analysis & Design Philosophy
-
-#### Stage 1: Retrieval & Collection
-The starting point of the entire workflow.
-- **Manual Process**: Manually entering keywords on platforms like PubMed or Google Scholar, browsing results, and saving them.
-- **Automation Entry Points**:
-    - **Intelligent Retrieval Agent**: Scripts using APIs or crawlers to perform periodic automated searches based on preset keywords, journal lists, or scholar tracking.
-    - **Initial Screening Algorithms**: Rule-based filtering (e.g., title terms, impact factor, date range) to sort and filter results.
-
-#### Stage 2: Processing & Parsing
-Converting raw files into computer-processable plain text and metadata.
-- **Automation Entry Points**:
-    - **Unified Parser**: Using tools (e.g., pdfplumber, GROBID) to extract text and charts from PDFs with high precision.
-    - **Metadata Enhancement**: Automatically completing full bibliographic metadata (Title, Author, DOI, etc.) and ensuring format uniformity.
-
-#### Stage 3: Core Information Structured Extraction
-The critical leap from "Text" to "Information".
-- **Automation Entry Points** (Human-AI Collaboration Core):
-    - **Structured Information Extraction**: Using LLMs to act as domain experts, extracting information into fixed schemas (e.g., Problem Statement, Core Methods, Key Data, Conclusions).
-    - **Relation & Viewpoint Extraction**: Identifying citation intent (support/refute) and distilling core arguments.
-
-#### Stage 4: Deep Encoding & Vectorization
-Establishing mathematical representations for information.
-- **Automation Entry Points**:
-    - **Text Embedding**: Using Transformer models to generate high-dimensional vectors (Embeddings) for literature.
-    - **Vector Storage**: Storing vectors in specialized databases (e.g., ChromaDB, Pinecone) to enable semantic retrieval.
-
-#### Stage 5: Dynamic Knowledge Base Storage & Indexing
-The "Memory" of the system.
-- **Automation Entry Points**:
-    - **Multi-modal Database**: A dual-storage system combining relational databases (for structured info) and vector databases (for embeddings).
-    - **Automated Indexing & Association**: Automatically establishing potential links between papers (co-citation analysis, method similarity) to build the initial edges of a knowledge graph.
-
-#### Stage 6: Intelligent Interaction & Knowledge Discovery
-Active exploration using the built knowledge base.
-- **Automation Entry Points** (Human-AI Collaboration Core):
-    - **Semantic Search Engine**: "Ask instead of Search" - understanding query semantics to return relevant passages.
-    - **Association Recommendation & Visualization**: Recommending papers based on content similarity and visualizing the academic landscape.
-    - **Intelligent QA & Review Generation**: Generating structured mini-reviews based on all literature in the database.
-
-#### Stage 7: Final Output & Internalization
-Human-led, with AI as an augmentation tool.
-- **Automation Entry Points**:
-    - **Assisted Writing & Citation**: Real-time recommendation of relevant citations and formatting during writing.
-    - **Viewpoint Collision & Inspiration**: Presenting methodological conflicts or cross-domain associations to stimulate critical thinking.
-
-*Currently, Stages 1, 2, and parts of 4/5 (Lite version via Tagging) are implemented.*
 
 ## 📦 Installation
 
@@ -1198,3 +1157,41 @@ Anything else you want to know about the usage of MinerU, please refer to their 
 其次是一些第三方模块的api以及输出的内容格式是否会改变，这会影响到我们的模块维护
 比如说paper-fetch是封装了第三方模块
 mineru-parser是使用v2的输出json格式，但是后续可能格式会修改
+
+
+上下游是严格对应的：                        
+
+  mineru_config.yaml                    mineru_export_config.yaml                                  
+  ┌──────────────────────┐              ┌──────────────────────┐                                   
+  │ canonical_order:     │              │ content_sections:    │                                   
+  │   - abstract         │── 定义 ──→   │   - abstract         │                                   
+  │   - introduction     │   可供选择的   │   - introduction     │                                 
+  │   - results          │   类型池      │   - results          │                                  
+  │   - ...              │              │   - discussion       │                                   
+  │   - ethics  ← 自定义 │              │   - methods          │                                   
+  └──────────────────────┘              │   - ethics  ← 引用   │                                   
+                                        └──────────────────────┘                                   
+                                                                                                   
+  如果你在 mineru_config.yaml 的 canonical_order 里新增了 ethics，并配了 aliases，解析时论文里的   
+  "Ethics Statement" 标题就会被归类为 ethics，然后你在导出配置里写 - ethics                        
+  就能把它选出来。如果没有在上游定义过，导出阶段就找不到这个类型。          
+
+
+
+   if input_path.is_dir():                                            
+      json_files = sorted(input_path.glob("*.json"))   # 目录 → 批量 
+  elif input_path.is_file():                                         
+      json_files = [input_path]                        # 单文件      
+                                                                     
+  单篇：                                                             
+  paperflow mineru-export-md -i paper.json -o paper.md               
+                                                                     
+  批量：                                                             
+  paperflow mineru-export-md -i ./parsed_results/ -o all_papers.md   
+                                                                     
+  批量模式会扫描目录下所有 .json 文件，按文件名排序，每篇论文之间用  
+  --- 分隔，输出为一个合并的 Markdown 文件。                         
+                                                                     
+  唯一要注意的是：目录里如果混入了其他非解析产物的 JSON              
+  文件，也会被读进来。建议把 mineru-parse                          
+  的输出单独放一个目录，

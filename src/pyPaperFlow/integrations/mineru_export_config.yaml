@@ -1,0 +1,47 @@
+# ============================================================================
+# MinerU Export Configuration
+# ============================================================================
+#
+# 用于 mineru-export-md 命令 —— 从结构化 JSON 中抽取指定章节，输出 Markdown。
+# 这个文件和 mineru_config.yaml（解析阶段的配置）是独立的。
+#
+# 用法：
+#     paperflow mineru-export-md -i paper.json -o paper.md --config this_file.yaml
+#
+# 不提供配置文件时，默认导出所有章节。
+#
+# ⚠️ 注意：这里的章节类型必须是在 mineru_config.yaml 的 canonical_order 中
+#    定义过的。如果你在解析阶段自定义了新类型（比如 - ethics），在这里才能
+#    引用它。换句话说，上游 parse 定义了什么类型，下游 export 才能选择什么。
+
+# ── 要导出的章节（按输出顺序）────────────────────────────────
+#
+# 元数据（标题、作者、年份、期刊、DOI）始终输出，无需在此指定。
+# 只列出你希望在 Markdown 中包含的章节类型。
+# 未列出的章节将被跳过。
+#
+# 可选的章节类型取决于 mineru_config.yaml 的 canonical_order，
+# 默认支持以下 15 种：
+#   abstract, introduction, results, discussion, methods, conclusion,
+#   supplementary, availability, funding, acknowledgements,
+#   author_contributions, keywords, conflicts, references, other
+#
+# 【正常使用】保留常用的几个即可：
+# 【需要全文时】取消下面这些的注释：
+content_sections:
+  - abstract
+  - introduction
+  # - results
+  - discussion
+  # - methods
+  - conclusion
+
+#   - supplementary
+#   - availability
+#   - funding
+#   - acknowledgements
+#   - author_contributions
+#   - keywords
+#   - conflicts
+#   - references
+#   - other

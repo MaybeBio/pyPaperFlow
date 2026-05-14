@@ -1,0 +1,4532 @@
+[
+    {
+        "type": "text",
+        "text": "Accurate predictions of disordered protein ensembles with STARLING",
+        "text_level": 1,
+        "bbox": [
+            60,
+            58,
+            910,
+            127
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "https://doi.org/10.1038/s41586-026-10141-2",
+        "bbox": [
+            60,
+            181,
+            339,
+            196
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Borna Novak1,2,3,4, Jeffrey M. Lotthammer2,3,4, Ryan J. Emenecker2,3 & Alex S. Holehouse2,3 ✉",
+        "bbox": [
+            359,
+            181,
+            926,
+            196
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Received: 24 February 2025",
+        "bbox": [
+            62,
+            201,
+            245,
+            216
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Accepted: 14 January 2026",
+        "bbox": [
+            62,
+            221,
+            240,
+            236
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Published online: 18 February 2026",
+        "bbox": [
+            62,
+            241,
+            289,
+            256
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Open access",
+        "bbox": [
+            62,
+            263,
+            151,
+            277
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Check for updates",
+        "bbox": [
+            63,
+            282,
+            205,
+            298
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Intrinsically disordered proteins and regions (collectively IDRs) are found across all kingdoms of life and have critical roles in virtually every eukaryotic cellular process1 . IDRs exist in a broad ensemble of structurally distinct conformations. This structural plasticity facilitates diverse molecular recognition and function2–4 . Here we combine advances in physics-based force felds with the power of multi-modal generative deep learning to develop STARLING, a framework for rapid generation of accurate IDR ensembles and ensemble-aware representations from sequence. STARLING supports environmental conditioning across ionic strengths and demonstrates proof of concept for the interpolative ability of generative models beyond their training domain. Moreover, we enable ensemble refnement under experimental constraints using a Bayesian maximum-entropy reweighting scheme. Beyond ensemble characterization, STARLING sequence representations can be used in multiple ways. We showcase two examples: frst, STARLING lets us perform ensemble-based search for ‘biophysical look-alikes’. Second, we demonstrate how these latent representations can be used to accelerate ensemble-frst sequence design from weeks or hours per candidate to seconds, enabling library-scale designs. Together, STARLING dramatically lowers the barrier to the computational interrogation of IDR function through the lens of emergent biophysical properties, complementing bioinformatic protein sequence analysis. We evaluate the accuracy of STARLING against extant experimental data and ofer a series of vignettes illustrating how STARLING can enable rapid hypothesis generation for IDR function and aid the interpretation of experimental data.",
+        "bbox": [
+            357,
+            220,
+            946,
+            568
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "IDRs are structurally heterogeneous protein regions that are estimated to constitute approximately 30% of eukaryotic proteomes1 . Despite lacking a fixed structure, IDRs have key roles in essential cellular processes such as transcription, translation and cell signalling1 . Owing to their broad structural heterogeneity, IDRs must be described by a conformational ensemble: a large collection of structurally distinct and interchanging conformations1 . However, although IDRs cannot be represented as a single 3D structure, they do still possess sequence-encoded conformational biases, and ensembles can have essential roles in IDR function and may be perturbed in disease2–4 . Just as structural biology has been instrumental in understanding the molecular basis for folded domain function, there is a growing appreciation that the characterization of IDR ensembles may be important for understanding IDR function5,6 .",
+        "bbox": [
+            58,
+            603,
+            499,
+            793
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Various experimental techniques have been applied to interrogate sequence–ensemble relationships7–9 . Although these report on specific aspects of IDR ensembles, they fall short of providing a holistic description of the distribution of conformers (that is, the 3D coordinates of all residues in the protein across many different conformations, referred to here as a ‘full structural ensemble’). To achieve this, the integration of computational modelling with experimental data has proven an effective route10–13.",
+        "bbox": [
+            60,
+            793,
+            499,
+            891
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Conceptually, computational models and experiments can be combined in two different ways. One approach involves using physics-based models and reweighting or biasing towards experimental observables14,15. Another involves using experimental data to parameterize transferable force fields, which, in principle, do not require additional reweighting16. Although both approaches have been effective in providing insight into IDR behaviour, they require deep technical expertise to ensure reliable conclusions are drawn, and can also be computationally expensive.",
+        "bbox": [
+            507,
+            603,
+            946,
+            726
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Although recent advances in coarse-grained simulations17–19 offer a faster alternative (and both modalities described above can be applied here), even coarse-grained simulations can still take hours to obtain sufficient sampling and still require a relatively high level of technical expertise to set up, run and analyse. Recent deep learning predictors trained on coarse-grained simulations have enabled proteome-scale predictions for ensemble average values, but are limited to specific observables for which a predictor was trained (for example, radius of gyration $( R _ { g } )$ or radius of end-to-end distances $( R _ { e } ) ) ^ { 2 0 , 2 1 }$",
+        "bbox": [
+            507,
+            725,
+            947,
+            849
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Deep learning approaches have transformed protein structure prediction, significantly reducing the barrier to large-scale exploration of sequence–structure relationships22 (Fig. 1a). However, these methods are poorly suited to investigate IDRs23 owing to a reduction in alignment-based conservation in disordered proteins, a paucity of appropriate experimental training data and optimization for an inappropriate objective (predicting a single best structure from sequence, whereas IDRs should be described by a large, conformationally heterogeneous ensemble; Fig. 1b). In short, although we now possess easy-to-use tools for accurately predicting the 3D structure of folded proteins, equivalent tools for rapid and accurate IDR ensemble prediction are lacking.",
+        "bbox": [
+            509,
+            848,
+            946,
+            891
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            62,
+            31,
+            146,
+            51
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "page_footnote",
+        "text": "1 Medical Scientist Training Program, Washington University School of Medicine, St. Louis, MO, USA. 2 Department of Biochemistry and Molecular Biophysics, Washington University School of Medicine, St. Louis, MO, USA. 3 Center for Biomolecular Condensates (CBC), Washington University in St. Louis, St. Louis, MO, USA. 4 These authors contributed equally: Borna Novak, Jeffrey M. Lotthammer. ✉e-mail: alex.holehouse@wustl.edu",
+        "bbox": [
+            60,
+            907,
+            939,
+            943
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "page_number",
+        "text": "240",
+        "bbox": [
+            62,
+            964,
+            94,
+            975
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            107,
+            963,
+            302,
+            977
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/0485baf69cf99306b9b160b177e8624d800bc7388d66b960c9d3c4a5531bdabe.jpg",
+        "image_caption": [
+            "Fig. 1 | STARLING approach and model architecture. a, Deep learning has revolutionized protein structure prediction, with major advances being facilitated by large-scale evolutionary information. b, Structure prediction methods for folded domains are poorly suited for predicting the behaviour of IDRs. These limitations stem from the absence of a native-state structure and because evolutionary information is often poorly captured in multiple sequence alignments (MSAs) of IDRs. c, Generative text-to-image models enable the creation of many unique and independent images consistent with a single input prompt. d, IDR ensemble generation shares many similarities with text-to-image generation; we required many distinct, uncorrelated conformers, all of which are consistent with an input prompt (an amino acid sequence). e, STARLING was trained on approximately 50,000 amino acid sequences at 150 mM ionic strength and approximately 14,000 sequences at 20 mM and 300 mM ionic strength. The sequences performed at 20 mM and 300 mM ionic strength are a"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            132,
+            58,
+            867,
+            556
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            60,
+            765,
+            497,
+            875
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Here we addressed these challenges by developing a fast and accurate approach for predicting full coarse-grained disordered protein structural ensembles directly from the amino acid sequence. Our approach leveraged advances in generative modelling, a deep learning technique capable of creating new and original data. However, developing subset of those simulated at 150 mM ionic strength. For each sequence, hundreds of distinct conformers were generated using coarse-grained molecular dynamics simulations, and each conformer was converted into a distance map (an image). Sequences were split into training, testing and validation sets. The MARV cartoon was reproduced from ref. 61, Martin Steinegger. f, STARLING makes use of a VAE to compress distance maps to a latent space, allowing a denoising diffusion model to work in this latent space (‘latent diffusion’). g, The overall architecture of the STARLING model combines a latent-space probabilistic denoising diffusion model with a vision transformer architecture using both convolutions and transformer blocks. Latent-space maps were decoded to real space via the VAE decoder. Finally, distance maps can be reconstructed into 3D coordinates via a parallelized multidimensional scaling approach.",
+        "bbox": [
+            60,
+            875,
+            499,
+            945
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            509,
+            565,
+            942,
+            731
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "a generative model poses a key challenge: the need for large training datasets. To address this, we performed large-scale coarse-grained simulations to generate full structural ensembles across tens of thousands of natural and synthetic IDRs. The resulting method — STARLING — allowed us to generate structural ensembles directly from sequence in seconds. A major goal in developing STARLING was to avoid hardware barriers. Although STARLING is fast (approximately 35 conformers per second) on GPUs, it can still generate ensembles in minutes on Intel/AMD CPUs and seconds on Apple CPUs.",
+        "bbox": [
+            507,
+            765,
+            946,
+            889
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "STARLING-generated ensembles show good agreement with experimental data, enabling de novo exploration of uncharacterized IDRs or aiding in the biophysical interpretation of experimental data. Moreover, here we show proof of concept that STARLING can be used to (1) investigate sequence–ensemble relationships for disordered proteins; (2) explore bound-state conformational ensembles for binary disordered protein complexes; and (3) provide conformation-aware latent representations for IDR characterization, search and design. Together, we propose that the ease of use and speed of STARLING make it a powerful tool for democratizing large-scale exploration of sequence–ensemble relationships in IDRs.",
+        "bbox": [
+            507,
+            888,
+            946,
+            945
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            709,
+            963,
+            904,
+            977
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "page_number",
+        "text": "241",
+        "bbox": [
+            917,
+            964,
+            944,
+            975
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            60,
+            58,
+            497,
+            154
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Generative artificial intelligence (AI) has been transformative for text-to-image generation24,25. In text-to-image generative AI, an image is generated by passing a prompt (a short phrase describing the desired image) to a pre-trained deep learning model. The model then generates an image consistent with the prompt, a process referred to as inference. Deep learning models capable of inference must first be trained. For models used in modern text-to-image generative AI, training is not simply memorization but also learning the relationship between prompts and the features in the associated images. As a result, once a model is trained, if the same prompt is reused many times, it will generate many independent images entirely distinct from any of the individual instances observed in training. Of note, despite being different from one another, each generated image should be consistent with the prompt (Fig. 1c).",
+        "bbox": [
+            60,
+            154,
+            497,
+            345
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "The mapping of a single text prompt to a collection of different images — each of which is consistent with the input prompt — is precisely the problem that we wished to solve for IDR ensemble generation. In IDR ensemble generation, we wanted to take a text prompt (amino acid sequence) and generate a collection of many distinct and uncorrelated IDR conformations consistent with that prompt (Fig. 1d). Moreover, we wanted this generation process to be fast (seconds) and possible on commodity hardware (laptops and desktops). To achieve this goal, we combined a variational autoencoder (VAE) with a discrete-time denoising-diffusion probabilistic model (DDPM) to create a latent diffusion model25. The resulting method (STARLING) enabled the accurate and rapid prediction of coarse-grained conformational ensembles of IDRs.",
+        "bbox": [
+            60,
+            344,
+            499,
+            521
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "STARLING was trained on approximately 50,000 unique rationally designed and naturally occurring IDR sequences (10–384 residues) simulated at 150 mM ionic strength (Supplementary Table 1). Among these, approximately 14,000 were additionally simulated at 20 mM and 300 mM ionic strength (Fig. 1e, Extended Data Fig. 1a,b and Supplementary Table 2). Rationally designed sequences were designed using GOOSE26 (see Methods; Extended Data Fig. 1c–f). Although naturally occurring IDRs provide training data focused on the most relevant manifold of sequences, the inclusion of a large number of rationally designed sequences allowed us to construct training data that systematically titrates across sequence space, yielding a well-rounded training set that captures the extremes of sequence composition and patterning.",
+        "bbox": [
+            60,
+            521,
+            497,
+            686
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "A necessary decision in deep learning models is defining the limits of your training data. We focused on sequences up to 384 amino acids in length for several reasons. First, almost 95% of naturally occurring IDRs across common model organisms are shorter than 384 amino acids (Extended Data Fig. 1h,i). Second, this length enables well-sampled coarse-grained simulations to be completed on a reasonable timescale. Third, the underlying architecture of the model requires a fixed upper limit (see Methods). Finally, experimental characterization of disordered protein sequences longer than approximately 350 residues is lacking, making it difficult to assess the validity of model predictions relative to experiments for very long disordered proteins.",
+        "bbox": [
+            60,
+            684,
+            497,
+            835
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Molecular dynamics simulations were performed using the Mpipi-GG force field. Mpipi- $\\mathbf { \\cdot } \\mathbf { G } \\mathbf { G } ^ { 2 0 \\mathbf { \\cdot } }$ — a variant of the original Mpipi force fie ${ \\bf l d } ^ { 1 7 } -$ is a one-bead-per-residue coarse-grained model developed for disordered regions. Once run, conformations from simulations of a sequence of length n were converted into distance maps, n × n matrices, where each element describes the distance between the i-th and j-th residue for a specific conformation. This converts each IDR conformation into an ‘image’, allowing us to directly leverage innovations developed for conditional image generation. Overall, our training dataset comprised nearly 12 million distance maps.",
+        "bbox": [
+            60,
+            835,
+            499,
+            945
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            507,
+            58,
+            946,
+            86
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Two core limitations of DDPM models are their substantial memory requirements and the slow generative process during inference. These limitations arise from performing the reverse denoising process in a complex, high-dimensional space (for example, images of size 384 × 384 pixels). To mitigate this, we developed a VAE to compress each distance map into a lower-resolution latent space (24 × 24 pixels)27 (Fig. 1f). The denoising diffusion process can then occur in this latent space (latent diffusion), significantly reducing memory requirements and inference time. Given this, STARLING was trained in two independent stages.",
+        "bbox": [
+            507,
+            86,
+            946,
+            208
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "We first trained a highly accurate VAE that enables the compression of full-resolution distance maps into latent space (Extended Data Fig. 2a). Our VAE uses a ResNet18 architecture and learns parameters for an encoder (full resolution to latent space) and a decoder (latent space to full resolution)28. We assessed the accuracy of VAE by encoding and decoding distance maps derived from sequences substantially different from those used in the training and validation sets. We evaluated our model on a held-out test set comprising approximately 16,000 simulations, totalling nearly 2.5 million distance maps. The model achieved a root-mean-square reconstruction error (RMSE) of 1.16 Å (Extended Data Fig. 2b). Furthermore, our model accurately reconstructed bond lengths, with a root-mean-square reconstruction error of 0.18 Å (Extended Data Fig. 2c), crucial for modelling protein conformations.",
+        "bbox": [
+            507,
+            208,
+            946,
+            386
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "In the second stage of training, we developed a DDPM (Fig. 1d and Extended Data Fig. 2d–f). In brief, this model was trained to learn parameters that map random noise to individual latent-space conformer distance maps, conditioned on the associated amino acid sequence and ionic strength (see Methods). The training data came from nearly 12 million distance maps across almost 78,000 simulations. Each map was first compressed into a latent space, and then the fixed forward diffusion process was used to add noise to each latent-space distance map. The underlying vision transformer model was then trained to learn parameters that reversed this forward diffusion process, conditioned on the input amino acid sequence and ionic strength (Fig. 1g). Ultimately, ensemble generation is enabled by running many inference rounds in parallel, creating many independent distance maps.",
+        "bbox": [
+            507,
+            386,
+            946,
+            563
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Although training requires the VAE encoder to generate latent-space distance maps, only the VAE decoder is needed for inference once the model is trained. Ultimately, the fully trained model (STARLING) combines two different models (the VAE decoder and the DDPM) that work together to enable rapid ensemble prediction. Using default settings, STARLING can generate 400 independent IDR conformations in approximately 12 s on a GPU (Nvidia A4000), 20 s on a Macbook Pro M3 CPU and approximately 6 min on an Intel CPU (Intel(R) Xeon(R) Silver 4210 R CPU @ 2.40 GHz; Extended Data Fig. 3a,b). The prediction runtime and memory are roughly independent of sequence length; 400 conformations for a 50-amino-acid IDR took approximately 10 s, whereas 400 conformations for a 350-residue IDR took approximately 14 $s ,$ and prediction times were not hampered by low-memory GPUs (Extended Data Fig. 3c–e).",
+        "bbox": [
+            507,
+            563,
+            946,
+            753
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "We first checked that the STARLING-derived ensemble-averaged global dimensions agree with those obtained from the Mpipi-GG simulation of unseen sequences. In all cases, STARLING ensembles comprised 800 conformers. Using a held-out test set of approximately 10,000 sequences, we performed Mpipi-GG simulations at 150 mM ionic strength and calculated $R _ { g }$ and $R _ { e } .$ . Our STARLING-derived $R _ { g }$ (RMSE = 0.85 Å, $R ^ { 2 } = 0 . 9 9 6 )$ and $R _ { e }$ (RMSE = 3.48 Å, R2  = 0.989) values are in excellent agreement with the simulations (Fig. 2a,b).",
+        "bbox": [
+            507,
+            753,
+            946,
+            862
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "As STARLING was also trained on Mpipi-GG simulations at both 20 mM and 300 mM ionic strength, we verified that STARLING-derived ensemble-averaged global dimensions match the simulations. Using a held-out test set of approximately 3,000 unseen sequences, we performed Mpipi-GG simulations at ionic strengths of 20 mM and 300 mM. Our STARLING-derived $R _ { g }$ (Fig. 2c,d; RMSE = 0.98 Å and 1.12 Å, R2  = 0.995 and 0.992 for 20 mM and 300 mM, respectively) and Re (Extended Data Fig. 4a,b; RMSE = 4.17 Å and 4.53 Å, R2  = 0.986 and 0.978 for 20 mM and 300 mM, respectively) are again in the excellent agreement with simulations.",
+        "bbox": [
+            507,
+            862,
+            946,
+            944
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            62,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "page_number",
+        "text": "242",
+        "bbox": [
+            62,
+            964,
+            92,
+            975
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            105,
+            963,
+            300,
+            977
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "chart",
+        "img_path": "images/e74ed3b403297ef4d4014e78cb713427f1f2d729549e086e49cd3c41b046d535.jpg",
+        "content": "",
+        "chart_caption": [
+            "a"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            70,
+            60,
+            263,
+            213
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/744c39ecee1389a4d0e047cddd080d54c6b90245b0b183c63cf530be9da4c1bf.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            290,
+            60,
+            487,
+            213
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/adf58633111c1bb8d28870d24f9239b8b774d11e29f33c7dc929066d57bd9ef5.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            504,
+            62,
+            695,
+            213
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/1c0bed1a89afbd11e898ffcccd5f7ff1df6f39db282c7472e879eff61b07e0a1.jpg",
+        "content": "",
+        "chart_caption": [
+            "e"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            719,
+            60,
+            909,
+            213
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/87f2a068bd9816ad057ced97dd7289586a6d5c29b98e6c785a50c5af33ca96fe.jpg",
+        "content": "",
+        "chart_caption": [
+            "f"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            63,
+            229,
+            184,
+            372
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/c2abe4def49b7cffbf9e78cf956a1054a6f1e5768734e50df35cf429e9c8adeb.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            200,
+            245,
+            319,
+            316
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/3c32e9b66f6972d3ca462870aa8ccbfe94963d82449410c8697471d71377ca8b.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            331,
+            239,
+            922,
+            373
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/c69a3ed7bd7df4a0f3da71a66f37dcfb5123679f0de2c19b932f55ccb8adaa54.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            200,
+            313,
+            331,
+            382
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/c19fc69a12556fde8613827151182e51091d6330f3ea1099add552071477a71c.jpg",
+        "image_caption": [
+            "g"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            75,
+            413,
+            181,
+            497
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/383592ee135978b834ecce38bae0fa49e3961ebf6b8e16a0ba3c312cc2d8d2fe.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            174,
+            401,
+            351,
+            524
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/0ac9cfbfbf4432b4f88ecfd5d9abec95a9fbb73bfe33742741912d36e3b19dfa.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            366,
+            388,
+            448,
+            500
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/99283f461a168f7d45dba5605606f6e272d1b3e01413138324a36de29dc13982.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            445,
+            378,
+            635,
+            522
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/acdef008678c362d1d9d7abeb590d08a400dba67d00b4632e038510a783e0a46.jpg",
+        "content": "",
+        "chart_caption": [
+            "i"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            677,
+            410,
+            868,
+            515
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/5cba9cf587730ba145bc870ee2dcb9d3d89486c21912cf4d25cab8b3393debbf.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            62,
+            529,
+            252,
+            668
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/c80d8123c5722849ed0e46709c7082bd9de9222884430863fd4dceae51790c72.jpg",
+        "content": "",
+        "chart_caption": [
+            "H"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            255,
+            530,
+            401,
+            639
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/96986cfd3cf1396ea0fcf5d73a15cda5d59b476b1af93aa5b4ff66004aa04811.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            393,
+            535,
+            539,
+            639
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/b187655ef1fd8a6c8b8d7ebd6dbbe12e2ef0e6c959e62522f17b6a0b14b5da10.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            272,
+            639,
+            388,
+            730
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/cf3740efe2162c6a070312b7cdabdfb1503e3e12d5782b0712e1fb19d74bb108.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            411,
+            640,
+            527,
+            731
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/5a8e0482c6b3b4d76cd4148e2cfcab0c074fe7c913eb07e03e188d8447c62794.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            811,
+            535,
+            944,
+            637
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/e64cadb168c3588b43557f765ac4b1ff94321bf9159060aa50f6e30e72dcb1c5.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            529,
+            535,
+            684,
+            639
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/f657cb18460bee49a3ae70363453e7801fa369358f3162a405c82f8b53348846.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            680,
+            534,
+            820,
+            637
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/683eb8aa32088a215d7d555f1163e6766d39fdd6524133b1cb3be182726cc080.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            552,
+            639,
+            670,
+            730
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/10d143b746edc2d38e2bea7da0cc4132bba99a3a1fef977e3b2489b0e5130c38.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            690,
+            639,
+            808,
+            730
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "chart",
+        "img_path": "images/fdf81e48eafc1a2ed6e0cb4973f7f408cc64765cb460f5f09d5dbf3f605d91a7.jpg",
+        "content": "",
+        "chart_caption": [
+            "Fig. 2 | Evaluating STARLING on held-out simulation data. a, Comparison of STARLING-derived average $R _ { g } \\backslash$ values with those from Mpipi-GG (simulations) from a set of approximately 10,000 unseen sequences. b, Comparison of STARLINGderived average $R _ { e }$ values with those from Mpipi-GG (simulations) from approximately 10,000 unseen sequences. c, Comparison of STARLING-derived $R _ { g }$ values with those from Mpipi-GG (simulations) from a set of approximately 3,000 unseen sequences at an ionic strength of 20 mM. d, Comparison of STARLING-derived $R _ { g }$ values with those from Mpipi-GG (simulations) from a set of approximately 3,000 unseen sequences at an ionic strength of 300 mM. e, STARLING ensembles enable the calculation of distributions of observables. Distribution similarity can be quantified by the Hellinger distance (H), where H = 0 is perfect overlap and H = 1 is no overlap. f, Overlap of $R _ { g }$ distributions obtained from STARLING (blue bars) and Mpipi-GG (orange line), with the experimental value shown for completeness. Overlap between the STARLING",
+            "and Mpipi-GG distributions was quantified by the H value and the KS statistic (D) to assess the difference between the distributions and the effect size of the difference. A KS statistic of 0.02 means that the CDFs of the two distributions differ by at most 2%. Vertical dashed lines indicate the average STARLINGderived value. g, 3D configurations (left) can be represented as distance maps (right), where each pixel defines the distance between a pair of residues $( r _ { i j } ) .$ h, Ensembles of conformations (left) can be represented as ensembles of distance maps (right). i, Intra-residue distance distributions in STARLING ensembles can be compared with equivalent distributions from Mpipi-GG simulations. j, All possible intra-residue distances can be compared between STARLING and Mpipi-GG simulations using H to quantify overlap in distributions (top). Histograms of intra-residue H values are also shown (bottom). k, Pairwise inter-residue distance comparison across different exemplar ensembles reveals excellent overlap."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            828,
+            639,
+            942,
+            731
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            707,
+            963,
+            902,
+            977
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "page_number",
+        "text": "243",
+        "bbox": [
+            915,
+            964,
+            944,
+            975
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            60,
+            58,
+            497,
+            113
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Model accuracy depends on the balance between ensemble size and denoising steps. By comparing STARLING results to long-timescale Mpipi-GG simulations, we found that error in the $R _ { g }$ stabilizes beyond 30 denoizing steps and 400 conformations (Extended Data Fig. 4c–i). We adopted these as default parameters, although larger ensembles may be required for other order parameters.",
+        "bbox": [
+            60,
+            113,
+            497,
+            196
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "As Re and $R _ { g }$ are highly correlated with sequence length, we next assessed the accuracy of our model on a set of length-matched sequences29. This approach allowed us to determine whether the model had effectively captured the influence of sequence chemistry on the global dimensions of IDRs, or whether it had simply learned to relate sequence length to these dimensions. Using all 100-residue, 200-residue and 300-residue sequences with distinct sequence chemistries from the held-out test set, we found excellent agreement across a range of $R _ { g }$ (Extended Data Fig. 4j; RMSE = 0.78 Å, 1.18 Å and 1.20 Å, $R ^ { 2 } = 0 . 9 8 4$ , 0.990 and 0.995 for 100-residue, 200-residue and 300-residue lengths, respectively) and $R _ { e }$ (Extended Data Fig. 4k; RMSE = 3.38 Å, 4.22 Å and 5.65 Å, R2  = 0.965, 0.984 and 0.986 for 100-residue, 200-residue, 300-residue lengths, respectively). These results gave us confidence that STARLING had learned bona fide sequence-to-ensemble rules instead of simply learning polymer scaling theory.",
+        "bbox": [
+            60,
+            194,
+            497,
+            400
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "In addition to ensemble-averaged observables, full structural ensembles enabled us to calculate distributions of any observable of interest (Fig. 2e). We set out to assess how well STARLING-derived global dimension distributions match distributions from simulations. We used the Hellinger distance (H) as a similarity measure to compare distributions. H ranges from 0 to 1, where zero indicates that the distributions are identical, and one signifies that they are entirely disjoint (Fig. 2e). The STARLING-derived $R _ { g }$ distributions show excellent agreement with distributions from simulations (Fig. 2f). This overlap was quantified by a low H, confirming the high degree of similarity between the two distributions.",
+        "bbox": [
+            60,
+            400,
+            499,
+            535
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Finally, to quantify ensemble fidelity, we assessed all inter-residue distance distributions between ensembles generated using STARLING or Mpipi-GG simulations. Each 3D conformation can be represented as a single distance map (Fig. 2g), and the ensemble of conformations can be represented as an ensemble of distance maps (Fig. 2h). Therefore, every inter-residue distance distribution from a pair of residues in a STARLING ensemble can be compared against the corresponding distribution from an Mpipi-GG (Fig. 2i). For a 100-residue IDR, this yields 4,900 unique distribution comparisons. We could quantify the overlap between the distributions using H and visualize each pair using a heat map (Fig. 2j, top). Furthermore, we could use histograms for those H to provide an overall assessment of the ensemble agreement (Fig. 2j, bottom). Overall, we found excellent agreement across all distance distributions investigated (Fig. 2k). In summary, all evidence supports that STARLING can directly predict conformational ensembles of disordered proteins from sequence.",
+        "bbox": [
+            60,
+            535,
+            499,
+            753
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Having established that STARLING can recapitulate simulated ensembles, we next investigated agreement with experimental data (Fig. 3a). We used a previously curated set of 133 sequences for which high-quality small-angle X-ray scattering (SAXS) data have been assembled and computed average $R _ { g }$ values. We found excellent agreement between average $R _ { g }$ values from STARLING and SAXS-derived $R _ { g } ,$ yielding values comparable with state-of-the-art coarse-grained simulations (RMSE = 4.53, R2  = 0.90; Fig. 3b, Extended Data Fig. 5a–h and Supplementary Tables 3 and 4).",
+        "bbox": [
+            60,
+            753,
+            497,
+            875
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "To further validate STARLING, we predicted ensembles for 3,417 IDRs from $\\mathsf { D i s P r o t } ^ { 3 0 }$ , successfully replicating established sequence-conformation trends (for example, aromatic residues drive compaction, whereas proline and glutamic acid promote expansion3,20,31,32; Extended Data Fig. 5i–k and Supplementary Table 5).",
+        "bbox": [
+            60,
+            874,
+            497,
+            945
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "STARLING-generated ensembles are also sensitivity to minor sequence changes; when tested on four hnRNPA1 low complexity domain (LCD) variants, the predicted dimensions of the model quantitatively matched experimental SAXS data regarding aromatic content3 (Fig. 3c).",
+        "bbox": [
+            507,
+            59,
+            946,
+            113
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "To go beyond simple $R _ { g }$ comparisons (Fig. 3b,c), we leveraged STARLING-generated ensembles to back-calculate synthetic SAXS curves using FOXS33. This allows for a direct comparison between our model and raw experimental SAXS data (down to 5–10 Å resolution). We demonstrated that STARLING accurately captures the subtle conformational shifts in A1-LCD variants, as reflected in their specific scattering profiles3 . Next, we selected 12 unrelated IDRs for which high-quality scattering data were available and compared scattering profiles derived from STARLING ensembles with experimental data, finding excellent agreement across a wide range of sequence chemistries and sequence lengths (Fig. 3e and Supplementary Table 3). We further reanalysed 40 additional sets of scattering data, finding that the majority are in excellent agreement with STARLING-derived scattering profiles (Extended Data Fig. 6a and Supplementary Figs. 1 and 2). Together, our data suggest that our STARLING ensembles faithfully reproduce experimentally measured IDR ensemble behaviour across a range of length scales and sequence chemistries.",
+        "bbox": [
+            507,
+            113,
+            946,
+            345
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Finally, we sought to compare against an alternative experimental modality in single-molecule Förster resonance energy transfer (smFRET). Recent work has illustrated how a series of 16 length-matched sequences shows a range of end-to-end distances depending on the underlying sequence chemistry34. We compared predicted end-to-end distances (and, where available, SAXS-derived scattering data) for those 16 sequences, again finding good agreement between STARLING ensembles and experimental data (Fig. 3f, Extended Data Fig. 6b,c and Supplementary Table 3). Of note, our average error here across the 16 sequences (RMSE of 6.7 Å) is comparable with the differences obtained between different experimental groups in a recent smFRET benchmarking study35. Overall, our work suggests that STAR-LING can generate full coarse-grain ensembles of IDRs that accurately capture experimental data.",
+        "bbox": [
+            507,
+            344,
+            946,
+            535
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Having established that STARLING can reproduce extant experimental data, we applied it to investigate a set of distinct IDRs across various contexts. These vignettes illustrate the types of rapid exploration and hypothesis generation that STARLING enables.",
+        "bbox": [
+            507,
+            535,
+            946,
+            589
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The master transcriptional regulator Myc (439 residues) underlies cell growth, metabolism and proliferation, and is frequently dysregulated in many cancers36. Myc consists of a large N-terminal IDR (Myc1–361), a C-terminal HLH DNA-binding domain (Myc368–406) and a leucine zipper $( \\mathsf { M y c } ^ { 4 1 3 - 4 3 9 } )$ . The large size of its IDR, coupled with its chemical composition, has challenged biophysical characterization (Fig. 4a). Using STARLING, we generated conformational ensembles of $\\mathsf { M y c } ^ { 1 - 3 6 1 }$ to investigate sequence-encoded conformational biases in the ensemble (Fig. 4b and Extended Data Fig. 6d). In particular, we wondered whether conformational behaviour would offer insight into regions within Myc known to bind to other partners (so-called Myc boxes). Curiously, the STARLING-derived ensemble suggests that Myc1–361 can be divided into two halves (IDR1 and IDR2). IDR1 $( \\mathsf { M y c } ^ { 1 - 2 0 0 } )$ is more compact and engages in intramolecular interactions and some long-range interactions. IDR2 $( \\mathsf { M y c } ^ { 2 0 1 - 3 6 1 } )$ is more expanded with locally compact regions. Finally, conformationally distinct subregions align with established Myc-box boundaries, indicating local and long-range conformational properties can align with established functional annotations. Overall, these results predict that Myc1–361 contains strong sequence-encoded biases that may be correlated with (or even underlie) its function.",
+        "bbox": [
+            507,
+            589,
+            946,
+            862
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The C-terminal domain (CTD) of eukaryotic RNA polymerase II (RPB1) is a large IDR composed of tandem YSPTSPS heptad repeats, whose repeat number varies across species (52 in humans)37 (Fig. 4c). The CTD is believed to function as a multivalent interaction platform for transcriptional regulation. Extensive previous work has shown that low-complexity domains enriched in tyrosine (such as the CTD) are",
+        "bbox": [
+            507,
+            862,
+            946,
+            945
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            62,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "page_number",
+        "text": "244",
+        "bbox": [
+            62,
+            964,
+            94,
+            975
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            105,
+            963,
+            300,
+            977
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "chart",
+        "img_path": "images/de6839844067353f507756cf1f2fe43bc943313c9a766f9dff904397fcf286cd.jpg",
+        "content": "",
+        "chart_caption": [
+            "b"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            100,
+            60,
+            231,
+            262
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/cdba7d31fe4e8056fa55ef612551eb53ecf14afc483d396b5cfbb26cd7c23172.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            238,
+            73,
+            478,
+            258
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/c4b8219750f71b1f8c1fbb09aae5ad14910d39f328d70b7e78346724ba7f526f.jpg",
+        "content": "",
+        "chart_caption": [
+            "d"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            480,
+            56,
+            640,
+            258
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/dfa3cf9c0901d068a911c19469575a81ec59a45a21cb9370277318a18a6fa5a9.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            643,
+            108,
+            907,
+            258
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/13b7a78aa3478c777be3614d23a866b178027db23cbb5f7a319459e5fbed402d.jpg",
+        "text": "$$\nR _ { g }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            546,
+            264,
+            561,
+            277
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/6631704e7a55eb997dd94d168ab4fa61ec9e389588ae07f06e1455c47720171a.jpg",
+        "text": "$$\nR _ { g }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            737,
+            263,
+            752,
+            277
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/4d0c5ef72a96b3a786a54379445ba5176e5ad1514c8eb9b2c88d7627ec29c12b.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            102,
+            281,
+            890,
+            445
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/fa62d721fdf335766caf3416221da824890c73cccdcdacca67df0c4108b42636.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            109,
+            445,
+            746,
+            791
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/5a04fb88a8e8145817d2249079c13c5b0c15c485214edc391b15945cceefeea4.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            764,
+            462,
+            887,
+            549
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/349409ad331a86b7ecc2df68f6dc3066b5e2d3383ffcc0ce253561d38ebcaee0.jpg",
+        "content": "",
+        "chart_caption": [
+            "Fig. 3 | Experimental validation of STARLING. a, STARLING enables rapid generation of ensembles from sequence. b, STARLING shows state-of-the-art accuracy in terms of predicting the average $R _ { g }$ from sequence. IDR sequences (n = 133) comparing SAXS-derived and STARLING-derived average $R _ { g }$ values (see also Extended Data Fig. 4c–f) are shown. c, STARLING accurately captures the effect of small numbers of mutations, here illustrating how altering the number of aromatic residues changes the global dimensions of a low-complexity domain (LCD) taken from the RNA-binding protein hnRNPA1. Y/F, tyrosine/ phenylalanine. d, Full scattering curves can be back-calculated from STARLING ensembles using FOXS, illustrating how changes in conformational behaviour",
+            "alter both global dimensions (small angles and low q values) and the shape of the ensemble (intermediate and high q values). e, Comparison of 12 different SAXS profiles with scattering profiles calculated from STARLING ensembles. The insets show STARLING $R _ { g }$ distributions, with average $R _ { g } \\backslash$ alues from scattering data displayed as a solid black line. See also Extended Data Figs. 4j,k and 5a–h. f, STARLING-derived $R _ { e } ,$ distance distributions with experimental values are shown as black lines for 16 different length-matched disordered protein sequences with different sequence chemistries. See also Extended Data Fig. 5i–k. g, SAXS scattering curves for unlabelled proteins for a subset of those in panel f."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            764,
+            693,
+            882,
+            783
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            707,
+            963,
+            902,
+            977
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "page_number",
+        "text": "245",
+        "bbox": [
+            915,
+            963,
+            944,
+            975
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "image",
+        "img_path": "images/bd80b499a35ba1f1e59725e73d1264915c39330233e29d9b5905d14b15f9e384.jpg",
+        "image_caption": [
+            "a"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            62,
+            113,
+            267,
+            268
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/8e9e6b8b7857175a7ca6ea47d479e326f905f71777b5217930bb9dcbcde9f2ca.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            267,
+            60,
+            450,
+            121
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/601a5aa5b3c422c7a9ff000287c99457ccafca2c71795c6759b0b8a4d19f24da.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            268,
+            121,
+            455,
+            227
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/8e4b0701195cd42b1b7845e180b4ffe28dae5989f1f626c3fd44e43f8ca63a1f.jpg",
+        "content": "",
+        "chart_caption": [
+            "g",
+            "l"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            267,
+            229,
+            457,
+            291
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/bbc6d85c2aa109cf7f7b64072f7ab3956c10cd704f12290dfe050edc0bf9b400.jpg",
+        "content": "",
+        "chart_caption": [
+            "n",
+            "f"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            65,
+            384,
+            208,
+            481
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/a0bfd9a5b741795776b6553432ba9f83468526e11e385a78a06b0fea797b2147.jpg",
+        "content": "",
+        "chart_caption": [
+            "o"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            215,
+            311,
+            410,
+            472
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/f84795d6f97594771a03824f047c06a12b3d78a844403b3bee50b47f83817feb.jpg",
+        "content": "",
+        "chart_caption": [
+            "Fig. 4 | Biophysical characterization and design applications with STARLING. a, The transcription factor Myc is largely disordered. b, STARLING-derived $\\mathsf { M y c } ^ { 1 - 3 6 1 }$ ensembles identify distinct subregions that drive attractive and repulsive interactions. The darker colours are closer together, and the lighter colours are further apart. c, The RNA polymerase II CTD consists of a series of heptad repeats. d, STARLING ensembles show excellent agreement with SAXS and all-atom simulations (sims.), enabling polymer theory to describe CTD dimensions with a simple analytical expression. e, Comparison of predicted hydrodynamic radii (Rh) values based on STARLING-derived polymer scaling behaviour (Extended Data Fig. 6g) and $R _ { h }$ values from freely diffusing CTD-only constructs measured in nuclei. f, Histone H1.0 and ProTα form a high-affinity complex together. The H1.0 CTD and ProTα were tethered together by an inert $( G S ) _ { 8 0 }$ linker. g, The resulting ensemble shows robust H1.0–ProTα interaction. h, The H1.0 CTD and ProTα contract in the complex versus in isolation. i, Comparison of per-residue ProTα–H1.0 CTD contacts and NMR-derived chemical shift perturbations (CSPs) shows excellent agreement. Blue highlighting identifies core binding subregion. j, Nupr1 and ProTα form a"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            408,
+            302,
+            603,
+            474
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "prone to intermolecular and intramolecular interactions, meaning that these domains would be expected to be relatively compact (driven by transient but numerous intramolecular contacts)3 . Unexpectedly, previous in vitro work characterized an 81-residue fragment of the CTD with a seemingly highly extended radius of gyration, equivalent to that expected under strongly denaturing conditions (for example, 8 M urea)38 (Extended Data Fig. 6e). This raises an apparent paradox: how can the CTD be simultaneously enriched for tyrosine, poised for intermolecular and intramolecular interactions, yet also appear to behave like a non-interacting, fully denatured polypeptide chain?",
+        "bbox": [
+            60,
+            725,
+            499,
+            862
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "To answer this question, we generated STARLING ensembles across 26 different CTD lengths, complemented by all-atom Monte Carlo simulations across five lengths. All-atom and STARLING-derived ensembles are in excellent agreement with one another, and with extant SAXS data for CTD variants of length 81 and 312 residues (Fig. 4d). This analysis (see Methods; Extended Data Fig. 6f,g and Supplementary Fig. 3)",
+        "bbox": [
+            60,
+            862,
+            497,
+            945
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/3053b324debeed9c9c1b7c0b1fdd79d344a16d369ea67a7528fde7100d0dc6bd.jpg",
+        "content": "",
+        "chart_caption": [
+            "j"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            710,
+            64,
+            944,
+            283
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/fca5686be867409515910b77b75934d314a3020e3c6a470d96c46fc8d60ad835.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            465,
+            170,
+            695,
+            275
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "image",
+        "img_path": "images/761e0cb1d50a6bb0ee22f2164c324f4a0baf2e777a7321d4eb395e4025375b73.jpg",
+        "image_caption": [
+            "p"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            603,
+            313,
+            677,
+            470
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "image",
+        "img_path": "images/548481df7a856bf63eb63458786da5aa72ab621240f6c40c154286aaed4e5ff7.jpg",
+        "image_caption": [
+            "complex; we used a shorter $( \\mathbf { G } \\mathbf { S } ) _ { 5 }$ linker to enable comparison to SAXS data. k, STARLING-derived ensembles show excellent agreement with Nupr1, ProTα and the Nupr1–ProTα complex. l, The TRPV4 channel has a large N-terminal IDR that contains a basic phosphatidylinositol 4,5-bisphosphate-binding site (PBS). NTD, N-terminal domain. m, STARLING-derived ensembles show good agreement with SAXS data. n, Difference distance map showing the difference in inter-residue distance between the mutant sequence minus the wild-type sequence. Orange colours indicate that distances are further apart in the mutant while blue means that residues are closer together in the mutant than in the wild type. The PBS engages in long-range interactions with a distal acidic region, and mutation of positively charged residues reduces these interactions, in good agreement with extant experimental work. o, STARLING enables systematic prediction of disordered microprotein ensembles. p, Using an optimized latent-space design approach, STARLING enables rapid sequence design to match a desired conformational ensemble. See also Extended Data Fig. 7d–m."
+        ],
+        "image_footnote": [],
+        "bbox": [
+            690,
+            297,
+            939,
+            450
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "revealed that the CTD in fact behaves with polymer statistics of an effective Gaussian chain, meaning it is poised to engage in intramolecular and intermolecular interactions39. The seemingly extended nature of the ensemble is driven by the stiffness imparted by the size of the tyrosines and the high proline content (Extended Data Fig. 6h,i). Furthermore, comparisons of CTD dimensions calculated from in-cell single-molecule diffusion data by Ling et al. support a model in which the STARLING-derived CTD dimensions persist in live cells40 (Fig. 4e). These results reconcile previous observations and suggest that in cells, the CTD is primed for intermolecular interactions.",
+        "bbox": [
+            507,
+            725,
+            946,
+            862
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "We next wondered whether we could tether two different IDRs together with a glycine-serine (GS) linker to investigate pseudo-intermolecular interactions (Fig. 4f). Tethering the C-terminal IDR from the histone H1.0 (H1 $\\cdot 0 ^ { 9 7 - 1 9 8 } )$ to the histone chaperone prothymosin-α (ProTα) enabled the formation of an electrostatically driven complex between the two proteins (Fig. 4g), as previously reported41. Both proteins contract in the complex (Fig. 4h), consistent with experimental data and theory. Moreover, the specific residues in ProTα identified by nuclear magnetic resonance (NMR)-derived chemical shift perturbations match those residues from the STARLING complex ensemble that drive intermolecular interactions (Fig. 4i). We also investigated the complex between ProTα and the fully disordered 82-residue protein Nupr1 (ref. 42) (Fig. 4j). Here again, we saw agreement with SAXS data for the individual proteins and, using a shorter GS linker, for the disordered bimolecular complex (Fig. 4k). These results indicate that STARLING-derived binary complex ensembles can capture elements of IDR–IDR interaction ensembles.",
+        "bbox": [
+            507,
+            862,
+            946,
+            945
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            63,
+            31,
+            144,
+            50
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "page_number",
+        "text": "246",
+        "bbox": [
+            62,
+            964,
+            94,
+            975
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            105,
+            963,
+            300,
+            977
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            60,
+            58,
+            499,
+            208
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Although our analyses thus far have primarily focused on ensemble differences between very different sequences, we wondered whether STARLING could interpret relatively small amino acid changes. The N-terminal IDR from the transient receptor potential vanilloid 4 (TRPV4) ion channel has a long-range regulatory interaction between a basic phosphatidylinositol 4,5-bisphosphate-binding site and an acidic cluster43 (Fig. 4l). STARLING-derived ensembles of this region show good agreement with SAXS data (Fig. 4m). Moreover, comparing the differences in intramolecular distances between the wild type and a KRWRR-to-AAWAA mutant that reduces long-range interactions in vitro yields a commensurate reduction in long-range interactions in STARLING ensembles (Fig. 4n). These illustrate how STARLING can be used to understand biophysical mechanisms of functional regulation in proteins, even with relatively subtle changes in sequence.",
+        "bbox": [
+            60,
+            208,
+            499,
+            400
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "We were also interested in investigating the application of STAR-LING to larger-scale ensemble prediction. Recent work has characterized a large set of microproteins — non-canonical open reading frames typically under 100 amino acids in size — using a combination of mass spectrometry and Ribo-seq-based approaches44. Although these microproteins are highly disordered, they possess distinct amino acid sequence biases from ‘canonical’ open reading frame-derived IDRs (Extended Data Fig. 7a–c and Supplementary Table 6). From 1,785 microproteins in these data, we identified 1,672 IDRs and predicted ensembles for all of them. Although most short IDRs are relatively expanded, many had extensive intramolecular contacts driven primarily between aromatic and arginine residues (Fig. 4o). These results suggest that even short-disordered proteins can possess sequence-encoded conformational biases.",
+        "bbox": [
+            60,
+            398,
+            499,
+            589
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Beyond accurate, rapid ensemble prediction, STARLING addresses the inverse-design problem: generating sequences whose conformational ensembles match a chosen target. To do this, we exploited the ensemble-aware sequence representations of the model by implementing a latent-alignment objective that maximizes cosine similarity between target and candidate learned sequence representations using the sequence optimization framework in GOOSE (see Methods)26. This allowed us to quickly design in this ensemble-aware latent space, rather than generating ensembles in 3D, enabling the rapid optimization of bespoke disordered sequences with prescribed ensemble properties.",
+        "bbox": [
+            60,
+            589,
+            499,
+            726
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "As a proof of concept, we used STARLING in conjunction with our IDR design framework, GOOSE to design 100 sequences targeting a short IDR from the protein CTCF (CTCF590–629; UniProt ID: P49711) 26. Starting from length-matched GS sequences, generation averaged 0.7 s per sequence with high structural accuracy (mean absolute error of 0.94 Å; average Hamming distance of 35; Extended Data Fig. 7d). Furthermore, we found that ensemble-matching designs can be generated within tens of seconds, even for long sequences (Extended Data Fig. 7e– m and Supplementary Fig. 4). These results, alongside performance tests on longer sequences, demonstrate that STARLING enables rapid, systematic design of IDRs with specific conformational properties.",
+        "bbox": [
+            60,
+            726,
+            497,
+            877
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Predictions up until this point have focused on ensemble generation at 150 mM ionic strength. However, the STARLING sequence encoder was explicitly conditioned on ionic strength (see Methods). Consequently, STARLING can also generate ensembles at ionic strengths between 20 mM and 300 mM (Fig. 5a).",
+        "bbox": [
+            60,
+            875,
+            499,
+            944
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "To assess how well STARLING captures ionic-strength dependence — as defined by the underlying Mpipi-GG model — we analysed 30 strong polyampholytic sequences consisting solely of lysine and glutamate with distinct charge patterning (‘Das–Pappu sequences’)45. Figure 5b shows the end-to-end distance distributions from STARLING and Mpipi-GG at the three ionic strengths used during training, showing excellent agreement as measured by both the H and the KS statistic (note that these are not fitted to one another). This trend holds across the Das–Pappu sequence variants (Extended Data Fig. 8a,b).",
+        "bbox": [
+            507,
+            59,
+            946,
+            182
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "We next asked whether our ionic-strength model, conditioned with three anchor points (ionic strength of 20 mM, 150 mM and 300 mM), would generalize to new ionic strengths not seen in training. We evaluated 16 ionic strengths spanning 20–300 mM (13 never seen in training) and analysed the mean end-to-end distance of each ensemble. STARLING interpolates smoothly between the three training ionic strengths and reproduces Mpipi-GG means with high concordance (Pearson r = 0.98; Spearman ρ = 0.97; Fig. 5c). Beyond just global dimensions, normalized distance maps compared between ensembles generated via STARLING and Mpipi-GG simulations revealed that STARLING accurately learns the ionic-strength-dependent changes in the underlying conformational distributions of inter-residue distances (Fig. 5d and Extended Data Fig. 8c). Furthermore, STARLING can qualitatively reproduce ionic-strength dependence of the ProTα–H1.0CTD interaction41 (Extended Data Fig. 8d–f). Together, these results suggest STARLING can be used to investigate solution-dependent IDR interactions using a limited number of anchor points and interpolating between them.",
+        "bbox": [
+            507,
+            182,
+            946,
+            427
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Although STARLING aligns with Mpipi-GG and experimental data, it is not a substitute for rigorous biophysical measurements. Instead, experiments can complement STARLING by providing restraints to refine and integrate into IDR ensembles via two routes. The first route uses guidance during ensemble generation to push conformers towards target observables (see Methods; Extended Data Fig. 9a–c and Supplementary Fig. 5), an approach well-suited for generating ensembles far from the unbiased distribution (for example, cyclic peptides), although guided ensembles likely deviate from the canonical ensemble. The second route uses Bayesian maximum entropy (BME) reweighting — reimplemented natively within STARLING — to reweight ensembles to match experimental observables15. BME treats the STAR-LING ensemble as the prior and incorporates data (for example, SAXS and smFRET) through a likelihood-based restraint with uncertainties, yielding ensembles that better match experiment (Fig. 5e). As a proof of concept, we used BME to reweight four of the ensembles for sequences measured by Holla et al.34, treating the experimental end-to-end distance as a restraint in the BME objective. The resulting ensembles not only improve agreement with end-to-end distance but also agreement with the SAXS-derived Rg (Fig. 5f). These results suggest that STARLING provides a powerful and easy-to-use platform for integrative modelling of experimental data of IDRs.",
+        "bbox": [
+            507,
+            426,
+            946,
+            726
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Finally, beyond the strict generation of ensembles, a novel application enabled by the unique architecture of STARLING is the ability to perform fast, large-scale disordered-protein biophysical ensemble-similarity search directly from sequence (Fig. 5g). By encoding sequences into a conformationally aware latent space using the sequence encoder (Extended Data Fig. 2d), search can be performed within this embedded space, enabling the identification of conformationally similar IDRs.",
+        "bbox": [
+            507,
+            726,
+            946,
+            821
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "As a proof of principle, we created a database of all predicted IDRs in UniRef50 with fewer than 380 residues (approximately 35 million sequences). We then created STARLING ensemble-aware embeddings for each of these sequences, implementing a methodology for rapid, large-scale approximate nearest-neighbour search (see Methods). We tested this approach by querying the protein SERF (UniProt ID: O75920) against this database46 (Fig. 5g). Next, we extracted the candidate with the most similar and least similar vector embeddings and built ensemble-averaged distance maps for each construct. Normalizing a, Schematic representation of sequence-dependent changes in conformational behaviour in response to changes in ionic strength for a blocky polyampholytic sequence. b, STARLING-derived ionic-strength-dependen $R _ { e }$ distributions for a highly charged, ionic-strength-responsive sequence. Mpipi-GG simulations shown as a kernel density estimate plot. In each subpanel, we show H and the KS statistic to quantify the difference between distributions and the effect size of the difference. A KS statistic of 0.03 means the CDFs of the two distributions differ by at most 3%. c, Re correlation between the STARLING and Mpipi-GG simulations performed at various ionic strengths for the highly charged Das– Pappu sequences. Despite being trained only at three different ionic strengths, STARLING can interpolate across ionic strengths unseen during training.",
+        "bbox": [
+            507,
+            821,
+            946,
+            945
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            707,
+            963,
+            902,
+            977
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "page_number",
+        "text": "247",
+        "bbox": [
+            915,
+            964,
+            944,
+            975
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "chart",
+        "img_path": "images/a64e61b959a1cac40358615e6ba4d84b7da7487ce892cef8ca50095929f0a4f4.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            268,
+            63,
+            442,
+            200
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/0c2cbb3a1037e61d525e4507f4ee8b9c496c1fd4fee562a9caca4426eee2c0fa.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            428,
+            72,
+            589,
+            200
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/9f073a785b7f2f7578ecf710b05e6c324d68c1b084aae8b11da72d3be36fa537.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            583,
+            69,
+            731,
+            200
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/436b94050711c0865b4b825cf3f732107c7077e3ef2c5006c2dede261f5bef96.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            732,
+            67,
+            944,
+            205
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/1c812e4104a2225513acfc0e844cd4ce2e1fd2ededf6da46b5a47348b082494a.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            58,
+            55,
+            944,
+            588
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/746d4aad29340ab19232ca628bc3f2e08eeead68b577e3a07f96ccdd34d161df.jpg",
+        "content": "",
+        "chart_caption": [
+            "Fig. 5 | STARLING enables solution-dependent ensemble generation, Bayesian reweighting and ensemble-aware embedding for search."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            494,
+            339,
+            885,
+            441
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            60,
+            621,
+            497,
+            762
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "d, AFRC-normalized average inter-residue distance maps for STARLING (upper) compared with Mpipi-GG simulations (lower) across five different ionic strengths.",
+        "bbox": [
+            60,
+            760,
+            495,
+            787
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "each of these candidates by the query protein SERF reveals that the most similar length-matched candidate has a highly similar averaged pairwise distance map (Fig. 5h). By contrast, the least similar length-matched candidate has stark differences with subregions that are both overly compact and overly expanded. Together, the STARLING sequence encoder enables IDR sequences to be represented in a high-dimensional conformationally aware space, with a broad range of potential applications, from design (Fig. 4p) to search (Fig. 5g,h) to the development of new protein representations that combine IDR-specific embeddings with general protein language embeddings.",
+        "bbox": [
+            58,
+            806,
+            499,
+            945
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "e, Schematic representation of incorporating experimental data into STARLING for integrative biophysical modelling. f, Reweighting based on single-molecule Förster resonance energy transfer (smFRET) data for Re improves agreement with SAXS data $( R _ { g } ) ,$ , highlighting how ensemble reweighting through one modality can improve agreement with others. Exp., experiment. g, Schematic representation of the ensemble-aware latent embedding of STARLING as used for sequence search. h, Heatmap of the ratio (candidate:query) of average inter-residue distance maps for the fully disordered query protein SERF Saccharomyces cerevisiae (UniProt ID: Q3E7B7). The upper triangle shows the top-ranked candidate; the lower triangle shows the lowest-ranked candidate, where candidates were ranked by cosine similarity of their embedding maps to the query SERF after scanning a database of IDRs from UniRef50. The colours indicate deviation from SERF: white ≈ 1.0 (similar), purple < 1.0 (more compact) and orange > 1.0 (more expanded). Serendipitously, the most and least similar candidates are equidistant from SERF in terms of sequence changes.",
+        "bbox": [
+            509,
+            596,
+            944,
+            788
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "Overall, these vignettes demonstrate the versatile range of applications that STARLING enables. Of note, the speed and ease with which STARLING generates ensembles mean that these investigations can be accomplished in hours or even minutes.",
+        "bbox": [
+            507,
+            806,
+            946,
+            863
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "Discussion and conclusion",
+        "text_level": 2,
+        "bbox": [
+            509,
+            884,
+            724,
+            900
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "STARLING is a generative model that can produce coarse-grained IDR ensembles directly from protein sequences in seconds. Despite several caveats and limitations, one of the major features of STARLING is that it drastically reduces the barrier to obtaining conformational predictions of sequence-dependent IDR behaviour. Although IDRs are often ignored or visualized as AlphaFold ‘orange spaghetti’, STARLING makes it straightforwards for anyone to obtain realistic coarse-grained ensembles. Rather than ‘the end’ of an investigation into IDR sequence-ensemble behaviour, we view STARLING as a beginning, making it straightforwards to develop hypotheses as to how the sequence of an IDR may determine its conformational ensemble and/ or how it may influence interactions with other IDRs.",
+        "bbox": [
+            507,
+            902,
+            946,
+            945
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            62,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "page_number",
+        "text": "248",
+        "bbox": [
+            62,
+            963,
+            94,
+            975
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            105,
+            963,
+            300,
+            977
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            60,
+            58,
+            499,
+            182
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "A key feature of STARLING is its ability to generate conformational ensembles rather than just predict ensemble-average values. Although ensemble average properties (for example, average Rg or average Re) can be informative20,21,47, they do not enable a ‘structural’ investigation into the determinants of a given behaviour. With a conformational ensemble, the specific sets of residues responsible for an observed behaviour can be directly identified. Moreover, substantial effort has been placed into developing methods to back-calculate experimental observables from simulation trajectories to interpret experimental data15. STARLING ensembles are amenable to these analyses, allowing comparison with a range of experimental results. However, we note that all comparisons between STARLING predictions and experimental data rely on computational tools to predict observables from protein structures which can introduce their own approximations. As such, agreement with experiment reflects both STARLING and the accuracy of these tools and their assumptions.",
+        "bbox": [
+            60,
+            181,
+            497,
+            400
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Although STARLING generates ensembles in seconds, it has key limitations (see also Methods). Because STARLING was trained with simulations from a one-bead-per-residue coarse-grained force fields that do not include secondary structure, it cannot predict secondary structure elements. In addition, it cannot incorporate flanking folded domains. However, we view the inability to incorporate folded domains as a potential ‘feature’; discrepancies between predictions of isolated IDRs and experimental data (where flanking folded domains are present) may reveal biophysically meaningful interactions.",
+        "bbox": [
+            60,
+            400,
+            499,
+            522
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "STARLING is also poorly poised to capture many environmental effects or post-translational modifications. IDRs can act as environmental sensors, with their conformational behaviour and interactions being tuned by their local chemical environment (salt, temperature and osmolytes, and so on)48. Furthermore, charge regulation can ‘rewrite’ the charge state of a protein, up-shifting or down-shifting intrinsic pK values49. Because STARLING was trained using simulations performed under ‘standard conditions’ (infinite dilution, 298 K), it does not enable explicit incorporation of many of these physicochemical modulators. Moreover, post-translational modifications and non-canonical amino acids are currently not accounted for. Looking ahead, generalization to environmental sensitivity or non-canonical residues remains challenging, in part due to limited benchmarking data. Although our ionic strength conditional results are encouraging (Supplementary Fig. 6) — at least conceptually, see Methods for Debye–Hückel limitations — broader environmental response modelling will require expanded training sets and dedicated experimental benchmarks to establish reliability (see Methods).",
+        "bbox": [
+            60,
+            521,
+            499,
+            753
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Unlike conventional molecular dynamics, STARLING generates conformational ensembles without time-resolved trajectories. Although molecular dynamics provides explicit dynamics, it often struggles to accrue independent samples for long chains that reconfigure slowly, typically requiring advanced kinetic frameworks for robust rate estimates. By contrast, STARLING produces decorrelated samples through independent stochastic denoising, maintaining high speed regardless of sequence length. Consequently, STARLING avoids many of the challenges in generating ensembles for longer sequences seen in molecular dynamics. Furthermore, we suggest that STARLING-generated conformers could be used to seed large numbers of shorter molecular dynamics simulations, enabling more reliable kinetic analyses.",
+        "bbox": [
+            60,
+            753,
+            499,
+            917
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Several recent sequence-to-ensemble approaches have emerged, beginning with Taneja and Lasker’s two-stage DDPM, which established the feasibility of learning these mappings for heterogeneous sequences50. More recently, idpSAM utilized a latent-space DDPM trained on all-atom simulations, although its predictive power is generally limited to sequences under 60 residues51 (Extended Data Fig. 9d). Other methods, such as IDPFold and IDPForge, integrate protein language models with experimental or molecular dynamics data52,53 (Extended Data Fig. 9e–r and Supplementary Fig. 7). Unlike the coarse-grained approach of STARLING, these methods (and others) provide all-atom molecular detail and, in some cases, the ability to include folded domains, albeit at the expense of runtime performance, hardware requirements, and potentially accuracy with respect to global dimensions and long-range IDR-mediated interactions52–56. Other emerging strategies include combining deep learning with Bayesian reweighting10,54,57 or predicting Hamiltonians rather than ensembles58. Overall, however, these tools often fall short of the balance of accuracy, performance and accessibility of STARLING. Furthermore, the ability of STARLING to reweight against experimental data (Extended Data Fig. 10) and encode and search ensembles offers unique research opportunities when integrated with bioinformatics pipelines or protein language models.",
+        "bbox": [
+            60,
+            916,
+            497,
+            944
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            507,
+            59,
+            946,
+            331
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "STARLING enables systematic, library-scale design of IDRs to test the ‘ensemble–function relationship’: the hypothesis that IDR function depends directly on conformational behaviour1,2,26. Historically, designing sequences with targeted ensembles was challenging due to the astronomical sequence space and the low-throughput nature of experimental or computational ensemble characterization. Although recent exciting ensemble-based design methods have emerged, they are not practical for thousands of sequences59,60. By providing a direct optimization handle within a biophysically meaningful latent space, STARLING (integrated with GOOSE) transforms this underconstrained search into a tractable design problem, allowing for the creation of large-scale libraries to test sequence–ensemble–function hypotheses26.",
+        "bbox": [
+            507,
+            331,
+            946,
+            507
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Finally, the ensemble-aware embedding of STARLING enables sequence search and design based on conformational behaviour rather than primary structure. This provides a biophysically grounded alternative to BLAST, which often fails with poorly conserved or low-complexity IDRs. By facilitating the homology-independent discovery of ‘biophysical look-alikes’, this approach enables hypothesis transfer to uncharacterized regions and identifies natural templates for inverse design, even when traditional alignments and composition heuristics fail.",
+        "bbox": [
+            507,
+            507,
+            946,
+            630
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "In conclusion, we hope STARLING serves the disordered protein community as a highly accessible tool for biophysical investigation. Unlike many deep learning tools, STARLING is designed for ease of use; it can be installed via pip and run with a single command. By enabling ‘on-the-fly’ predictions on commodity hardware, STARLING fills a unique gap in IDR characterization. Although it does not replace existing technologies, it provides a practical way to explore conformational behaviour easily, quickly, accurately and at scale.",
+        "bbox": [
+            507,
+            630,
+            946,
+            741
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Online content",
+        "text_level": 2,
+        "bbox": [
+            509,
+            749,
+            635,
+            764
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Any methods, additional references, Nature Portfolio reporting summaries, source data, extended data, supplementary information, acknowledgements, peer review information; details of author contributions and competing interests; and statements of data and code availability are available at https://doi.org/10.1038/s41586-026-10141-2.",
+        "bbox": [
+            507,
+            765,
+            946,
+            835
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "1. Holehouse, A. S. & Kragelund, B. B. The molecular basis for cellular function of intrinsically disordered protein regions. Nat. Rev. Mol. Cell Biol. 25, 187–211 (2024).",
+            "2. González-Foutel, N. S. et al. Conformational buffering underlies functional selection in intrinsically disordered protein regions. Nat. Struct. Mol. Biol 29, 781–790 (2022).",
+            "3. Martin, E. W. et al. Valence and patterning of aromatic residues determine the phase behavior of prion-like domains. Science 367, 694–699 (2020).",
+            "4. Flores, E., Acharya, N., Castañeda, C. A. & Sukenik, S. Single-point mutations in disordered proteins: linking sequence, ensemble, and function. Curr. Opin. Struct. Biol. 91, 102987 (2025)."
+        ],
+        "bbox": [
+            509,
+            850,
+            909,
+            872
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            705,
+            963,
+            902,
+            975
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "page_number",
+        "text": "249",
+        "bbox": [
+            914,
+            964,
+            944,
+            975
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Article",
+        "text_level": 2,
+        "bbox": [
+            63,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "5. Ghafouri, H., Tosatto, S. C. E. & Monzon, A. M. Advances in the determination of disordered protein ensemble. Curr. Opin. Struct. Biol. 96, 103198 (2026).",
+            "6. Das, R. K., Ruff, K. M. & Pappu, R. V. Relating sequence encoded information to form and function of intrinsically disordered proteins. Curr. Opin. Struct. Biol. 32, 102–112 (2015).",
+            "7. Cubuk, J., Stuchell-Brereton, M. D. & Soranno, A. The biophysics of disordered proteins from the point of view of single-molecule fluorescence spectroscopy. Essays Biochem. 66, 875–890 (2022).",
+            "8. Camacho-Zarco, A. R. et al. NMR provides unique insight into the functional dynamics and interactions of intrinsically disordered proteins. Chem. Rev. 122, 9331–9356 (2022).",
+            "9. Martin, E. W., Hopkins, J. B. & Mittag, T. Small-angle X-ray scattering experiments of monodisperse intrinsically disordered protein samples close to the solubility limit. Methods Enzymol. 646, 185–222 (2021).",
+            "10. Borthakur, K., Sisk, T. R., Panei, F. P., Bonomi, M. & Robustelli, P. Determining accurate conformational ensembles of intrinsically disordered proteins at atomic resolution. Nat. Commun. 16, 9036 (2025).",
+            "11. Ozenne, V. et al. Flexible-meccano: a tool for the generation of explicit ensemble descriptions of intrinsically disordered proteins and their associated experimental observables. Bioinformatics 28, 1463–1470 (2012).",
+            "12. Bernadó, P., Mylonas, E., Petoukhov, M. V., Blackledge, M. & Svergun, D. I. Structural characterization of flexible proteins using small-angle X-ray scattering. J. Am. Chem. Soc. 129, 5656–5664 (2007).",
+            "13. Fuertes, G. et al. Decoupling of size and shape fluctuations in heteropolymeric sequences reconciles discrepancies in SAXS vs. FRET measurements. Proc. Natl Acad. Sci. USA 114, E6342–E6351 (2017).",
+            "14. Bonomi, M., Heller, G. T., Camilloni, C. & Vendruscolo, M. Principles of protein structural ensemble determination. Curr. Opin. Struct. Biol. 42, 106–116 (2017).",
+            "15. Bottaro, S., Bengtsen, T. & Lindorff-Larsen, K. Integrating molecular simulation and experimental data: a Bayesian/maximum entropy reweighting approach. Methods Mol. Biol. 2112, 219–240 (2020).",
+            "16. Shea, J.-E., Best, R. B. & Mittal, J. Physics-based computational and theoretical approaches to intrinsically disordered proteins. Curr. Opin. Struct. Biol. 67, 219–225 (2021).",
+            "17. Joseph, J. A. et al. Physics-driven coarse-grained model for biomolecular phase separation with near-quantitative accuracy. Nat. Comput. Sci. 1, 732–743 (2021).",
+            "18. Tesei, G., Schulze, T. K., Crehuet, R. & Lindorff-Larsen, K. Accurate model of liquid-liquid phase behavior of intrinsically disordered proteins from optimization of single-chain properties. Proc. Natl Acad. Sci. USA 118, e2111696118 (2021).",
+            "19. Dignon, G. L., Zheng, W., Kim, Y. C., Best, R. B. & Mittal, J. Sequence determinants of protein phase behavior from a coarse-grained model. PLoS Comput. Biol. 14, e1005941 (2018).",
+            "20. Lotthammer, J. M., Ginell, G. M., Griffith, D., Emenecker, R. J. & Holehouse, A. S. Direct prediction of intrinsically disordered protein conformational properties from sequence. Nat. Methods 21, 465–476 (2024).",
+            "21. Tesei, G. et al. Conformational ensembles of the human intrinsically disordered proteome. Nature 626, 897–904 (2024).",
+            "22. Wodak, S. J., Vajda, S., Lensink, M. F., Kozakov, D. & Bates, P. A. Critical assessment of methods for predicting the 3D structure of proteins and protein complexes. Annu. Rev. Biophys. 52, 183–206 (2023).",
+            "23. Ruff, K. M. & Pappu, R. V. AlphaFold and implications for intrinsically disordered proteins. J. Mol. Biol. 433, 167208 (2021).",
+            "24. Ho, J., Jain, A. & Abbeel, P. Denoising diffusion probabilistic models. Preprint at http:// arxiv.org/abs/2006.11239 (2020).",
+            "25. Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. High-resolution image synthesis with latent diffusion models. Preprint at https://arxiv.org/abs/2112.10752 (2021).",
+            "26. Emenecker, R. J., Guadalupe, K., Shamoon, N. M., Sukenik, S. & Holehouse, A. S. Sequence-ensemble-function relationships for disordered proteins in live cells. Preprint at bioRxiv https://doi.org/10.1101/2023.10.29.564547 (2023).",
+            "27. Kingma, D. P. & Welling, M. Auto-encoding variational bayes. Preprint at http://arxiv.org/ abs/1312.6114v11 (2013).",
+            "28. He, K., Zhang, X., Ren, S. & Sun, J. Deep residual learning for image recognition. Preprint at http://arxiv.org/abs/1512.03385 (2015).",
+            "29. Alston, J. J., Ginell, G. M., Soranno, A. & Holehouse, A. S. The analytical flory random coil is a simple-to-use reference model for unfolded and disordered proteins. J. Phys. Chem. B 127, 4746–4760 (2023).",
+            "30. Nugnes, M. V. et al. DisProt in 2026: enhancing intrinsically disordered proteins accessibility, deposition, and annotation. Nucleic Acids Res. https://doi.org/10.1093/nar/gkaf1175 (2025).",
+            "31. Marsh, J. A. & Forman-Kay, J. D. Sequence determinants of compaction in intrinsically disordered proteins. Biophys. J. 98, 2383–2390 (2010).",
+            "32. Müller-Späth, S. et al. From the cover: charge interactions can dominate the dimensions of intrinsically disordered proteins. Proc. Natl Acad. Sci. USA 107, 14609–14614 (2010).",
+            "33. Schneidman-Duhovny, D., Hammel, M., Tainer, J. A. & Sali, A. Accurate SAXS profile computation and its assessment by contrast variation experiments. Biophys. J. 105, 962–974 (2013).",
+            "34. Holla, A. et al. Identifying sequence effects on chain dimensions of disordered proteins by integrating experiments and simulations. JACS Au 4, 4729–4743 (2024).",
+            "35. Hellenkamp, B. et al. Precision and accuracy of single-molecule FRET measurements — a multi-laboratory benchmark study. Nat. Methods 15, 669–676 (2018).",
+            "36. Dhanasekaran, R. et al. The MYC oncogene — the grand orchestrator of cancer growth and immune evasion. Nat. Rev. Clin. Oncol. 19, 23–36 (2022).",
+            "37. Eick, D. & Geyer, M. The RNA polymerase II carboxy-terminal domain (CTD) code. Chem. Rev. 113, 8456–8490 (2013).",
+            "38. Gibbs, E. B. et al. Phosphorylation induces sequence-specific conformational switches in the RNA polymerase II C-terminal domain. Nat. Commun. 8, 15233 (2017).",
+            "39. Mao, A. H., Lyle, N. & Pappu, R. V. Describing sequence–ensemble relationships for intrinsically disordered proteins. Biochem. J. 449, 307–318 (2013).",
+            "40. Ling, Y. H. et al. Disordered C-terminal domain drives spatiotemporal confinement of RNAPII to enhance search for chromatin targets. Nat. Cell Biol. 26, 581–592 (2024).",
+            "41. Borgia, A. et al. Extreme disorder in an ultrahigh-affinity protein complex. Nature 555, 61–66 (2018).",
+            "42. Neira, J. L. et al. Dynamics of the intrinsically disordered protein NUPR1 in isolation and in its fuzzy complexes with DNA and prothymosin α. Biochim. Biophys. Acta Proteins Proteom. 1867, 140252 (2019).",
+            "43. Goretzki, B. et al. Crosstalk between regulatory elements in disordered TRPV4 N-terminus modulates lipid-dependent channel activity. Nat. Commun. 14, 4165 (2023).",
+            "44. Deutsch, E. W. et al. High-quality peptide evidence for annotating non-canonical open reading frames as human proteins. Preprint at bioRxiv https://doi.org/10.1101/ 2024.09.09.612016 (2024).",
+            "45. Das, R. K. & Pappu, R. V. Conformations of intrinsically disordered proteins are influenced by linear sequence distributions of oppositely charged residues. Proc. Natl Acad. Sci. USA 110, 13392–13397 (2013).",
+            "46. Mitra, R. et al. Molecular insights into the interaction between a disordered protein and a folded RNA. Proc. Natl Acad. Sci. USA 121, e2409139121 (2024).",
+            "47. Chao, T.-H., Rekhi, S., Mittal, J. & Tabor, D. P. Data-driven models for predicting intrinsically disordered protein polymer physics directly from composition or sequence. Mol. Syst. Des. Eng. 8, 1146–1155 (2023).",
+            "48. Moses, D., Ginell, G. M., Holehouse, A. S. & Sukenik, S. Intrinsically disordered regions are poised to act as sensors of cellular chemistry. Trends Biochem. Sci. 48, 1019–1034 (2023).",
+            "49. Fossat, M. J. & Pappu, R. V. Q-canonical Monte Carlo sampling for modeling the linkage between charge regulation and conformational equilibria of peptides. J. Phys. Chem. B 123, 6952–6967 (2019).",
+            "50. Taneja, I. & Lasker, K. Machine-learning-based methods to generate conformational ensembles of disordered proteins. Biophys. J. 123, 101–113 (2024).",
+            "51. Janson, G. & Feig, M. Transferable deep generative modeling of intrinsically disordered protein conformations. PLoS Comput. Biol. 20, e1012144 (2024).",
+            "52. Zhu, J. et al. Accurate generation of conformational ensembles for intrinsically disordered proteins with IDPFold. Adv. Sci. https://doi.org/10.1002/advs.202511636 (2025).",
+            "53. Zhang, O., Liu, Z. H., Forman-Kay, J. D. & Head-Gordon, T. Deep learning of proteins with local and global regions of disorder. Preprint at http://arxiv.org/abs/2502.11326 (2025).",
+            "54. Schnapka, V., Morozova, T., Sen, S. & Bonomi, M. Atomic resolution ensembles of intrinsically disordered and multi-domain proteins with Alphafold. Preprint at bioRxiv https://doi.org/10.1101/2025.06.18.660298 (2025).",
+            "55. Invernizzi, M. et al. Advancing protein ensemble predictions across the order-disorder continuum. Preprint at bioRxiv https://doi.org/10.1101/2025.10.18.680935 (2025).",
+            "56. Lewis, S. et al. Scalable emulation of protein equilibrium ensembles with generative deep learning. Science 389, eadv9817 (2025).",
+            "57. Brotzakis, Z. F., Zhang, S., Murtada, M. H. & Vendruscolo, M. AlphaFold prediction of structural ensembles of disordered proteins. Nat. Commun. 16, 1632 (2025).",
+            "58. Houston, L., Phillips, M., Torres, A., Gaalswyk, K. & Ghosh, K. Physics-based machine learning trains Hamiltonians and decodes the sequence-conformation relation in the disordered proteome. J. Chem. Theory Comput. 20, 10266–10274 (2024).",
+            "59. Pesce, F. et al. Design of intrinsically disordered protein variants with diverse structural properties. Sci. Adv. 10, eadm9926 (2024).",
+            "60. Krueger, R. K., Brenner, M. P. & Shrinivas, K. Generalized design of sequence-ensemblefunction relationships for intrinsically disordered proteins. Nat. Comput. Sci. https:// doi.org/10.1038/s43588-025-00881-y (2025).",
+            "61. Steinegger, M. et al. MMseqs2: ultra fast and sensitive search and clustering suite. GitHub https://github.com/soedinglab/MMseqs2 (2025)."
+        ],
+        "bbox": [
+            62,
+            59,
+            495,
+            79
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.",
+        "bbox": [
+            510,
+            678,
+            907,
+            698
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "image",
+        "img_path": "images/065165e41efb16765b94ecc12a81dcb20e5020c8c3d932d2e203b4916a4abb3e.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            512,
+            710,
+            584,
+            731
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Open Access This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in",
+        "bbox": [
+            586,
+            708,
+            934,
+            739
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if you modified the licensed material. You do not have permission under this licence to share adapted material derived from this article or parts of it. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by-nc-nd/4.0/.",
+        "bbox": [
+            509,
+            740,
+            941,
+            832
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "© The Author(s) 2026",
+        "bbox": [
+            510,
+            840,
+            613,
+            850
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "page_number",
+        "text": "250",
+        "bbox": [
+            62,
+            964,
+            94,
+            975
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "footer",
+        "text": "Nature | Vol 652 | 2 April 2026",
+        "bbox": [
+            105,
+            963,
+            300,
+            975
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Reporting summary",
+        "text_level": 2,
+        "bbox": [
+            62,
+            70,
+            205,
+            86
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Further information on research design is available in the Nature Portfolio Reporting Summary linked to this article.",
+        "bbox": [
+            62,
+            86,
+            495,
+            115
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Data availability",
+        "text_level": 2,
+        "bbox": [
+            62,
+            136,
+            198,
+            151
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "The code and data associated with the figures in this article are available on GitHub (https://github.com/holehouse-lab/supportingdata/ tree/master/2026/starling\\_2026). The Zenodo repository for UniRef50 IDR sequence embeddings is available62 (https://doi.org/10.5281/ zenodo.17342150). Any data missing are available from the corresponding author.",
+        "bbox": [
+            60,
+            154,
+            497,
+            236
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Code availability",
+        "text_level": 2,
+        "bbox": [
+            62,
+            259,
+            200,
+            274
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "STARLING is fully open source and available on GitHub (https://github. com/idptools/starling/). The documentation for STARLING is available (https://idptools-starling.readthedocs.io). STARLING is also provided as a Colab notebook (https://github.com/idptools/idpcolab/blob/ main/STARLING/STARLING\\_demo.ipynb).",
+        "bbox": [
+            60,
+            275,
+            497,
+            345
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "62. Holehouse, A., Lotthammer, J. & Novak, B. STARLING IDR sequence search index and metadata (v1.0.0) [data set]. Zenodo https://doi.org/10.5281/zenodo.17342150 (2025).",
+            "63. Riback, J. A. et al. Innovative scattering analysis shows that hydrophobic disordered proteins are expanded in water. Science 358, 238–241 (2017).",
+            "64. Kohn, J. E. et al. Random-coil behavior and the dimensions of chemically unfolded proteins. Proc Natl. Acad. Sci. USA 101, 12491–12496 (2004)."
+        ],
+        "bbox": [
+            63,
+            365,
+            480,
+            396
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Acknowledgements We thank J. Pelham, R. Somjee, B. Portz, S. Hoffman-Weitsman and F. Beinart for their comments on the manuscript; U. Hellmich for giving an exceptional talk that inspired our investigation of the TRPV4 IDR; our many colleagues for sharing and depositing raw experimental data (notably, SAXS data on SASDB), which has greatly facilitated comparison with experimental data; J. Sohn, S. Showalter, E. Martin, B. Schuler, M. Grazia Ortore and M. Blackledge for sharing raw SAXS scattering data; B. Kragelund and F. Stryhn Buus for sharing chemical shift data for the ProTα–H1.0 complex; the Research Infrastructure Services group at Washington University in St. Louis for providing computational resources and services required for this work; D. Stanzione for his relentless support of US high-performance scientific computing; L. Koesterke for support on Texas Advanced Computing Center (TACC) VISTA; and M. Turke and C. McCornack for the bird pictures. We are grateful to the Advanced Cyberinfrastructure Coordination Ecosystem: Services & Support program and resources, which is supported by US National Science Foundation (NSF) grants #2138259, #2138286, #2138307, #2137603 and #2138296; DeltaAI, which is supported by the US NSF (award OAC 2320345) and the State of Illinois; and the Delta advanced computing and data resource, which is supported by the NSF (award OAC 2005572) and the State of Illinois. We are indebted to the TACC administrators and staff. This work was funded by the US NSF through grant 2338129 (CAREER) to ASH and the US National Institutes of Health through CA290639 (DP2) to A.S.H. J.M.L. was supported by the NSF via grant number DGE-2139839 and by the Frontera Computational Sciences Fellowship.",
+        "bbox": [
+            509,
+            59,
+            946,
+            263
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Author contributions B.N., J.M.L. and A.S.H. conceptualized the study. B.N. and J.M.L. designed the methodology. B.N., J.M.L., R.J.E. and A.S.H. provided software and performed validation, formal analysis and the investigation. J.M.L. and A.S.H. provided resources and acquired funding. B.N., J.M.L. and A.S.H. curated the data. B.N., J.M.L., R.J.E. and A.S.H. performed visualization and wrote the manuscript.",
+        "bbox": [
+            509,
+            269,
+            927,
+            321
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Competing interests A.S.H. is on the scientific advisory board for Prose Foods. All other authors declare no competing interests.",
+        "bbox": [
+            509,
+            327,
+            910,
+            349
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Additional information",
+        "text_level": 2,
+        "bbox": [
+            510,
+            355,
+            621,
+            367
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Supplementary information The online version contains supplementary material available at https://doi.org/10.1038/s41586-026-10141-2.",
+        "bbox": [
+            509,
+            367,
+            937,
+            386
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Correspondence and requests for materials should be addressed to Alex S. Holehouse. Peer review information Nature thanks Gregory Bowman and the other, anonymous, reviewer(s) for their contribution to the peer review of this work. Peer reviewer reports are available.",
+        "bbox": [
+            509,
+            387,
+            919,
+            426
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "Reprints and permissions information is available at http://www.nature.com/reprints."
+        ],
+        "bbox": [
+            510,
+            427,
+            902,
+            437
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "chart",
+        "img_path": "images/c011583661eee203d476f819dba0505874f9a5b5ffee26e988392c5f22253be8.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            68,
+            60,
+            322,
+            232
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "chart",
+        "img_path": "images/a185f9ad66b84b75f009ce13c33bca867a8d9c636fc0db0307c1944ebf9fd576.jpg",
+        "content": "",
+        "chart_caption": [
+            "b"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            386,
+            65,
+            615,
+            234
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "image",
+        "img_path": "images/8e666ac8c63b5235884b94c998b26857c2853291f0da950df86cd9b1d032aedd.jpg",
+        "image_caption": [
+            "C."
+        ],
+        "image_footnote": [],
+        "bbox": [
+            680,
+            67,
+            941,
+            225
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "image",
+        "img_path": "images/90accdca27c62856cac02ee0bbebcf7d91974ced2e85bfe54eeed82ed45eb03c.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            70,
+            239,
+            368,
+            411
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "image",
+        "img_path": "images/a7c57c8319327f73798e5ef716204e9737a9ef249e4f54ebaa20038c4f02a855.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            371,
+            240,
+            652,
+            394
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "chart",
+        "img_path": "images/459c500abfa6ee8ae02a2a7ed5d67dee8a8bef9f9e281915913b8031dcb2b8ae.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            658,
+            239,
+            942,
+            411
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "chart",
+        "img_path": "images/06ff55c310dad85347884bb0d607325211dadca461ca592386f4f717bf57d796.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            63,
+            427,
+            411,
+            581
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "chart",
+        "img_path": "images/30ab5e9278b3d84bb917775cd4f30a27e914d110762ad5f47e0571bb13be0168.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            426,
+            429,
+            625,
+            582
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "chart",
+        "img_path": "images/7e7d77c75239a7383543ff62e7c2cba3c42c0378c991ed3267cc5e023055b5f2.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [
+            "Extended Data Fig. 1 | Sequences used in STARLING training, test, and validation. a, Our dataset of 70,563 consists of both natural sequences (N = 20,349) and synthetic sequences designed by varying sequence features known to affect IDR ensembles $( \\mathsf { N } = 5 0 , 2 1 4 ) .$ b, The sequences were clustered and split into train $( \\mathsf { N } = 4 9 , 4 2 3 ) ,$ validation $( \\mathsf { N } = 1 0 , 7 0 3 ) ,$ and test $( \\mathsf { N } = 1 0 , 4 3 7 )$ sets while maintaining the distribution of sequence lengths across the splits consistent (right). c, Residues used for STARLING training, test, and validation, represented in terms of aliphatic vs. polar content. d, Residues used for STARLING training, test, and validation, represented in terms of net charge vs. hydrophobicity. e, Residues used for STARLING training, test, and validation,",
+            "represented in terms of kappa (charge patterning) vs. fraction of charged residues. f, Residues used for STARLING training, test, and validation, represented in terms of aromatic vs. positively charged residues. g, Overall sequence complexity as a function of amino acid content. We note that the data in panels C-G mirror our prior quantification of sequences20, albeit with an expanded dataset. h, Histogram of the length distribution of naturally occurring IDRs across 12 model organisms. i, A cumulative density function of the length distribution is presented in a. 94% of the IDRs across common model organisms fall between 0 and 384 residues (the length cutoff of STARLING)."
+        ],
+        "bbox": [
+            658,
+            422,
+            853,
+            582
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            63,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "image",
+        "img_path": "images/0971e4fde59a026cdf77713f53070a4c992fc9983a63c23eb0bc46ae77c5e29d.jpg",
+        "image_caption": [
+            "where $p _ { \\theta } ( x \\mid z ) = \\mathcal { N } \\left( \\mu _ { \\theta } ( z ) , \\sigma ^ { 2 } I \\right)$ and $x ^ { \\prime } \\sim p _ { \\theta } ( x \\mid z ) = \\mathcal { N } \\left( \\mu _ { \\theta } ( z ) , \\sigma ^ { 2 } I \\right)$"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            94,
+            56,
+            754,
+            324
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/74b579268f05b49faab9e10176ecec5333d5e3637d9a0ffa5d64c7cccc70b1a3.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            92,
+            354,
+            393,
+            530
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/1b57eef9928114da6a9b9191f2a333df31a1a2b65029949ef9e5e2114ebfd7e0.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            467,
+            354,
+            768,
+            529
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/27fb926a7c560ae455a0075c01aeb212c576556a040905c29bffc6af0d3773d0.jpg",
+        "image_caption": [
+            "Extended Data Fig. 2 | See next page for caption."
+        ],
+        "image_footnote": [],
+        "bbox": [
+            92,
+            534,
+            450,
+            886
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/83d22fc13d5a280526812951f0ac1831c8238a02ba3ada11f0565f297a43c8b4.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            470,
+            545,
+            912,
+            655
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/abc69e65517af38fde3203d84e11306a93c931ab5d529a876fc9aafa8af27eae.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            472,
+            672,
+            915,
+            877
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Article",
+        "text_level": 2,
+        "bbox": [
+            62,
+            31,
+            146,
+            51
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 2 | VAE overview, performance, and overall detailed model architecture.a, Schematic representation of the variational autoencoder (VAE). The input to our variational autoencoder is a collection of 2D inter-residue distance maps that undergo feature extraction and spatial compression through a ResNet18 encoder, which learns the μ and σ parameters of a normal distribution that parameterizes the latent features. The VAE is trained using an evidence-based lower bound (ELBO) loss that comprises a reconstruction term and a Kullback–Leibler (KL) divergence term. b, The variational autoencoder (VAE) is evaluated on a held-out test set of distance maps (N = 2,422,839). The VAE encoder spatially compresses these distance maps, which the VAE decoder then reconstructs from their compressed representations. The root-meansquare error (RMSE) is computed between the input and output distance maps. The trained VAE shows a low mean RMSE across the upper triangle of each distance map (1.16 Å). c, Accurate bond reconstruction is essential for generating physically realistic conformations, and our model achieves a very low mean",
+        "bbox": [
+            60,
+            56,
+            499,
+            250
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "RMSE (0.18 Å). d, Extended schematic of the STARLING discrete-time denoising diffusion probabilistic model (DDPM). The model begins with 2D Gaussian noise (1 channel, 24×24 latent space) and is projected to 64 channels via a convolutional upsampling layer. Spatial features are then patchified into 3×3 regions (8 total) and passed through a 12-layer vision transformer (ViT). The ViT output is stitched back (depatchified) and reduced back to 1 channel by a convolutional downsampling layer. To generate sequence-specific distance maps, the ViT is conditioned on sequence features extracted by a transformerbased encoder. The input sequence is ordinally encoded, embedded into high-dimensional vectors, followed by the addition of sinusoidal positional embeddings, and processed by a 12-layer transformer. Ionic strength information is additionally incorporated through cross-attention, yielding environment-specific sequence features that are fed into the denoising module’s cross-attention layers. e, Model overview as set up during training. f, Model overview as used for inference.",
+        "bbox": [
+            509,
+            58,
+            946,
+            250
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "chart",
+        "img_path": "images/2347a34d848fb592859cd5035310dca15e644b4113e479993a57559e64f552eb.jpg",
+        "content": "",
+        "chart_caption": [
+            "b",
+            "d"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            65,
+            59,
+            494,
+            273
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "chart",
+        "img_path": "images/10b47d1f3cab9401ca3b62b629725f319460a5be10d3e8142cbf6f11b53015de.jpg",
+        "content": "",
+        "chart_caption": [
+            "C"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            73,
+            348,
+            492,
+            453
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "chart",
+        "img_path": "images/e67860bae6b77b9d75a77deaf2607a93faad5a983c6e3f690d224d23449c21b8.jpg",
+        "content": "",
+        "chart_caption": [
+            "e"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            70,
+            464,
+            490,
+            658
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 3 | Starling performance comparisons. a,b, STARLING benchmarking on different types of hardware in linear (a) and log (b) space. Runtime depends linearly on the number of conformers (although sequence length has almost no impact on runtime). Tested here using a 140-residue sequence. On GPUs and Apple Silicon (facilitated by CUDA and MPS, respectively), STARLING is highly performant, offering ensembles sufficient for detailed biophysical investigation in 10-15 s (GPU) or 30-60 s (MPS). The specific hardware tested here includes the Nvidia A4000 (GPU), MacBook Pro M3 Max CPU (MPS), and Intel(R) Xeon(R) Silver 4210 R CPU @ 2.40 GHz (CPU). We note that even on a five-year bottom-of-the-line GPU (GTX-1660 from 2019), ensemble generation takes \\~50 s for 400 conformers. c, Number of conformers generated per second on different hardware types. The specific hardware",
+        "bbox": [
+            60,
+            664,
+            499,
+            820
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "chart",
+        "img_path": "images/f70792165178b3f25397dd2f96b5a1deb722283fd6c8996c2995a00d2824526b.jpg",
+        "content": "",
+        "chart_caption": [
+            "STARLING performance benchmarks with default parameters (log scale)"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            505,
+            84,
+            941,
+            269
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "chart",
+        "img_path": "images/bf5d6c922269ffeae6a7d0914c50e12839fbd5a3db4913b13bee4667be811eb6.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            497,
+            286,
+            941,
+            468
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "tested here includes the Nvidia A4000 (GPU), MacBook Pro M3 Max CPU (MPS), and Intel(R) Xeon(R) Silver 4210 R CPU @ 2.40 GHz (CPU). d, STARLING ensemble predictions exhibit almost no runtime or memory scaling with respect to sequence length. On a GPU, generating 400 confomers takes \\~10 s for a 50-residue IDR and \\~14 s for a 350-residue IDR. e, STARLING enables users to select a batch size for concurrent ensemble prediction. A larger batch size requires more GPU-accessible memory. However, we have implemented STARLING in a manner that increasing the batch size does not materially affect the overall per-conformer prediction time. This means even GPUs with modest memory resources can work with STARLING-based predictions by selecting a reduced batch size.",
+        "bbox": [
+            509,
+            664,
+            942,
+            806
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "chart",
+        "img_path": "images/bd6bfb7f769cd66e64c784f918ab57edf8ddbe402b53d60144b92210dfa70daa.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            77,
+            55,
+            927,
+            887
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            62,
+            31,
+            147,
+            51
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 4 | Accuracy and convergence of STARLING compared to Mpipi-GG simulations. a, Comparison of STARLING-derived average endto-end distance (Re values) with those from Mpipi-GG (simulations) from a set of \\~3,000 unseen sequences at an ionic strength of 20 mM. b, Comparison of STARLING-derived Re values with those from Mpipi-GG (simulations) from a set of \\~3,000 unseen sequences at an ionic strength of 300 mM. c–f, Convergence of the radius of gyration (Rg) as a function of ensemble size for IDRs of varying lengths (50, 150, 250, and 350 residues). Dashed lines represent Mpipi-GG convergence, solid lines correspond to STARLING convergence, and the shaded area indicates the ensemble-averaged Rg from long Mpipi-GG simulations. STARLING-derived Rg values converge within the first 800 conformers, exhibiting minimal error compared to Mpipi-GG ensembles. Based on this analysis, we selected 800 STARLING conformers for Rg prediction comparisons in all benchmarking used here. g, Convergence plot depicting the relationship between Hellinger distance (H), the number of conformations sampled from STARLING, and the number of denoising steps for various an IDR of length 350. The Hellinger distance quantifies the similarity between two distributions, where a value of zero indicates identical distributions and a value of one signifies no overlap. The Hellinger distance decreases as the number of conformations and denoising steps increase, with optimal STARLING performance observed at 1000 conformers and 30 denoising steps. h, Convergence of short-range and long-range distance distributions as a function of ensemble size. A 10 µs Mpipi-GG simulation of a 250-residue disordered protein was split into two 5 µs segments, with one serving as the reference and the other for comparison. A 2,500-conformer STARLING ensemble was also compared to the reference segment. Panels show convergence of STARLING and Mpipi-GG distance",
+        "bbox": [
+            60,
+            59,
+            499,
+            389
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "distributions relative to the reference for short-range residue pair 1–10, mediumrange residue pair 1–50, long-range residue pair 1–100, and the end-to-end distance (residue pair 1–250). Error bars represent bootstrap-estimated standard deviations. Insets display the full distance distributions, along with Kolmogorov–Smirnov statistics for STARLING and Mpipi-GG (legend: blue, STARLING; orange, Mpipi-GG; black dashed line, reference). i, Convergence of radius-of-gyration from short to long sequence lengths. A 10 µs Mpipi-GG simulation of a disordered protein was split into two 5 µs segments, with one serving as the reference and the other for comparison. A 2,500-conformer STARLING ensemble was also compared to the reference segment. Panels show convergence of STARLING and Mpipi-GG radii-of-gyration distributions relative to the reference for a 50-residue-long disordered protein, a 150-residue-long disordered protein, a 250-residue-long disordered protein, and a 350-residuelong disordered protein. Error bars represent bootstrap-estimated standard deviations. Insets display the complete radii-of-gyration distributions, along with Kolmogorov–Smirnov statistics for STARLING and Mpipi-GG (legend: blue, STARLING; orange, Mpipi-GG; black dashed line, reference). j, Comparison of STARLING-derived average radii of gyration (Rg values) for length-matched sequences with a broad range of chemistries for those from Mpipi-GG (simulations) from a set of 137 unseen sequences. This is done to verify that STARLING has learned real sequence chemistry, not just that longer sequences are bigger. k, Comparison of STARLING-derived average radii of gyration (Re values) for length-matched sequences with a broad range of chemistries for those from Mpipi-GG (simulations) from a set of 137 unseen sequences. This is done to verify that STARLING has learned real sequence chemistry, not just that longer sequences are bigger.",
+        "bbox": [
+            509,
+            59,
+            947,
+            389
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "chart",
+        "img_path": "images/98b5f7ab6b71cbd4f95df94757d038948aad8030e7732b63f224ebf88d95fe60.jpg",
+        "content": "",
+        "chart_caption": [
+            "a"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            68,
+            64,
+            289,
+            230
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/e18428db07449239ced07da03187d14088fc132e55856928382b3a479e971edf.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            290,
+            63,
+            505,
+            230
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/ccc0863b6756d208f8484dd2653e3f5f8b0e47fafb1facc226ba60ed3d3c81a7.jpg",
+        "content": "",
+        "chart_caption": [
+            "d"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            507,
+            64,
+            722,
+            230
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/4d9dc0a753a9e2cb8a94eb1216cb228af467523d9d03bbb0bbc5065decbacc23.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            724,
+            67,
+            941,
+            231
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/0ef7901de7e00c1284de25bd93f87a83935599c00ea2a52e375087531ab72ad1.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            70,
+            232,
+            289,
+            403
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/a4ea68fb67af2a90ee5546c5a0bbda4e152ff94bca2d0b7cc9bafb794eef0f4d.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            289,
+            232,
+            507,
+            403
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/9e561bc7dfb97b77520e9f3a7e77ab0068cee4972846c5ee19b1a85fd27777ab.jpg",
+        "content": "",
+        "chart_caption": [
+            "g"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            507,
+            235,
+            726,
+            403
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/9993445e659694392729594f9400cf9e12a77edc9ab776953ff09b11cc498dca.jpg",
+        "content": "",
+        "chart_caption": [
+            "h"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            726,
+            234,
+            944,
+            403
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/b33e7860d2f1c34b933a96651b0b49b9b7806ca369598394bf98c75950a47193.jpg",
+        "content": "",
+        "chart_caption": [
+            ""
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            80,
+            416,
+            428,
+            577
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/bb6e09cd6443c72fa411acd16667596be90b1cf9c8d6f7812ec31da20ca830bc.jpg",
+        "content": "",
+        "chart_caption": [
+            "j"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            460,
+            417,
+            850,
+            567
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "chart",
+        "img_path": "images/1087a01fa1995d8254fb899723be341a96d2e2230b3de8b85a6e20047f459015.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [
+            "Extended Data Fig. 5 | See next page for caption."
+        ],
+        "bbox": [
+            72,
+            583,
+            487,
+            741
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            62,
+            31,
+            146,
+            51
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 5 | Benchmarking STARLING vs. other methods, and assessment of DisProt ensembles. Comparison of experimental Rg values obtained from 133 different experimental datasets with various state-of-theart tools for ensemble prediction (a) STARLING (this work), (b) Mpipi-GG, coarse-grained molecular dynamics simulations, (c) CALVADOS2, coarsegrained molecular dynamics simulations, (d) ALBATROSS, a deep-learningbased predictor that can only predict average ensemble values, (e) The Analytical Random Flory Coil (AFRC), a limiting null model that considers IDPs as Gaussian-like chains with no interactions between residues. We include this because it represents the true “lower bound” for what a model should achieve in terms of accuracy and RMSE. f, idpGAN, a Generative Adversarial Network for predicting ensembles from the sequence. g, We also compared Rg predictions on GPU vs. MPS implementations for completeness. This revealed 1:1 agreement that matched the RMSE and correlation obtained when the same dataset was analysed twice on the same hardware (h). i, Analysis of sequences from DisProt – a database of experimentally verified disordered regions – based on STARLING ensembles (sequences <380 residues). All ensembles contain 400 conformers, and the full DisProt was \\~15 h on a desktop computer with an NVIDIA A4000 GPU (i.e., 3-4 proteins per minute). Fitting ensemble dimensions vs. length",
+        "bbox": [
+            60,
+            59,
+            497,
+            301
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "reveals an apparent scaling exponent of 0.56, indicating these IDRs are relatively expanded. However, we note an unavoidable acquisition bias in experimentally characterized IDRs, meaning that highly soluble (and hence more expanded, with fewer intra- and intermolecular interactions) proteins are preferred for biophysical characterization because they do not aggregate/crash out of solution, and many techniques used to characterize IDPs (SAXS, NMR, etc.) require high protein concentrations. We also note that we underestimate the contributions of aliphatic hydrophobes in driving intramolecular interactions, as well as the effects of local helicity and the long-range consequences of intramolecular helix interactions. Finally, given that IDRs are heteropolymers, average scaling behavior, by definition, masks both attractive and repulsive intramolecular interactions. As such, we strongly caution against interpreting a value of 0.56 as indicating that all IDRs are highly expanded. j, Analysis of sequences in the most compact 10% of IDRs identified aromatic residues as being over-represented here, in line with prior work. k, An analogous analysis of sequences in the top 10% of expanded IDRs also reveals that negatively charged residues and proline are enriched in sequences that drive expansion, again in agreement with prior work.",
+        "bbox": [
+            509,
+            59,
+            946,
+            288
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "chart",
+        "img_path": "images/dcb2d1c9c14bd64910352b96e21a221fd1590c246f2d06d0dfaf6614256c58f5.jpg",
+        "content": "",
+        "chart_caption": [
+            "b"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            92,
+            62,
+            900,
+            440
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "chart",
+        "img_path": "images/360dddb2dd198aa6f728f50a57f66d991bb6f75779b42c6dab2d218468930ee8.jpg",
+        "content": "",
+        "chart_caption": [
+            ">sGrich GSGSCSGGYGSERGGGYGSERGGGYGSERGGGYGSERGGGYGSQRSGGGYGGSQRSSYGSGSCTLGPR >dKh GSGSCAMGGGPGPGTDFTSDQADFPDTLFQEFEPPAPRPGLAGGRPGDAALLSAAYGRRRLLCTLGPR >dGrich GSGSCGPRTGLEGAGMAGGSGQQKRVFDGQSGPQDLGEAYRPLNHDGGDGGNRYSVIDRIQECTLGPR >sPTBP GSGSCRPDLPSGDSQPSLDQTMAAAFGLSVPNVHGALAPLAIPSAAAAAAAAGRIAIPGLAGCTLGPR >sC GSGSCKKAQPEMNDKDDNESGNEDAEENHDDEEDENEEEDRQVDQASKNKESKRKAQNKREDCTLGPR >sNrich GSGSCLDQEDNNGPLLIKTANNLIQNNSNMLPLNALHNAPPMHLNEGGISNMRVNDSLPSNTCTLGPR >sKh GSGSCKPRRLSKLRRSKKPADEENNAASQDPTVEATQERGQASEDPENAANNAKQAKPTSDDCTLGPR >dch\\_plus GSGSCQTPLKRIKVKTPGKSGAAAREGSVVSGTDGPTQTGKPERRKRLNPPKDKLIDMDDADCTLGPR >dch\\_minus GSGSCMGLPTGMEEKEEGTDESEQKPVVQTPAQPDDSAEVDSAALDQAESAKQQGPILTKHGCTLGPR >sK1 GSGSCAPEGVFKLPAPPKEIKKSEKSEKSSDSSNDKKEVESTTKTAATTTTTKKGTDNNTQFCTLGPR >sNh\\_plus GSGSCPEEIETRKKDRKNRREMLKRTSALOPAAPKPTHKKPVPKRNVGAERKSTINEDLLPPCTLGPR >dArich GSGSCLPTGAEGRDSSKGEDSAEETEAKPAVVAPAPVVEAVSTPSAAFPSDATAEOGPILTKCTLGPR >dErich GSGSCEGEMFGVMCEENSVVLSVEQPAELKEVADVSPPPTTRNHTIEMKPPLSAQQSECNPVCTLGPR >dTRBP GSGSCLEPALEDSSSFSPLDSSLPEDIPVFTAAAAATPVPSVVLTRSPPMELQPPVSPQQSECTLGPR >dK1 GSGSCLPTGMDQKTTELMKVDEPVSTQETLPPVIKMEPEPVPITETPTDENARQQGPILTKHCTLGPR >sNh minus GSGSCKKKLQDTPSEPMEKDPAEPETVPDGETPEDENPTEEGADNSSAKMEEEEEEEEEEEECTLGPR",
+            "C"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            509,
+            448,
+            719,
+            603
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "chart",
+        "img_path": "images/258701d2633ece86b404f1f4a84b6687a4dea391ab005fd924c5dcf0bbc0f431.jpg",
+        "content": "",
+        "chart_caption": [
+            "d"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            715,
+            449,
+            914,
+            605
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "chart",
+        "img_path": "images/e3762e16d5e01f8be191f23a9790efe2e5c84f38aeb26851c0948518166fb613.jpg",
+        "content": "",
+        "chart_caption": [
+            "e"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            94,
+            611,
+            391,
+            751
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "chart",
+        "img_path": "images/4e1c88be4596c52115c9a68445eadc0bff94602fd3df6f710ab8d0163a9945ce.jpg",
+        "content": "",
+        "chart_caption": [
+            "f",
+            "g"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            396,
+            617,
+            640,
+            751
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "chart",
+        "img_path": "images/5f6479cbad2f868d0f488fb163d9ec773660df6c88e7e00d0735aa73a91c503b.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            647,
+            617,
+            910,
+            751
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "chart",
+        "img_path": "images/b16593d2e61eda6195bbcfd5f2bb4f2db975be327f3cb5c811eb36bc006b7d5b.jpg",
+        "content": "",
+        "chart_caption": [
+            "Extended Data Fig. 6 | See next page for caption."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            94,
+            755,
+            341,
+            888
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "chart",
+        "img_path": "images/bc4e7d21b21b1c0ce03fadaa3dd49406f4a0453e374119fe1f2994cdf675f3a6.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            394,
+            754,
+            705,
+            888
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            63,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 6 | Comparison of STARLING-derived ensembles with experimental data. a, Comparison of STARLING-derived $\\mathsf { R } _ { \\mathrm { g } } ^ { \\mathrm { \\Delta , \\dag } }$ values vs. SAXS for high-quality consistently reanalysed SAXS data. Comparison of SAXS-derived radii of gyration vs. STARLING-derived radii of gyration for the same 53 sequences as described in Supplementary Figs. 1 and 2. Sequences in which experimental data are represented as a red dot are those where scattering profiles were in sub-optimal agreement with STARLING-derived scattering data—overall, focusing on this high-quality dataset (each of which we re-analysed to obtain $\\mathsf { R } _ { \\mathrm { g } }$ values using the Molecular Form Factor (MFF) of ref. $^ { 6 3 ) , }$ we find even stronger agreement with STARLING-derived predictions (inset). b, Amino acid sequences for those IDRs investigated by smFRET in ref. 34. $\\mathbf { c } ,$ Correlation between STARLING-derived end-to-end distances and smFRET-derived endto-end distances. The agreement between STARLING and the experiment is assessed in various ways, including root-mean-square error (RMSE), Spearman correlation coefficient (ρ), squared Pearson correlation coefficient (r2 ), and concordance correlation coefficient (ρc). We note that STARLING appears to underestimate end-to-end distances for more expanded chains here. However, we do not take dyes into explicit consideration, and it is possible that for the expanded negatively charged sequence, a small amount of (negativelycharged) dye:protein repulsions could account for the slight underestimation here. d, $\\mathsf { R } _ { \\mathrm { g } }$ distribution for $\\mathsf { c M y c } ^ { 1 \\cdot 3 6 1 }$ obtained from STARLING ensembles. We predict an average Rg of 58 Å. We note this value may be an overestimate given cMyc1-361 is predicted to contain several regions of transient helicity, which may reduce the $\\mathsf { R } _ { \\mathrm { g } }$ , such that we suggest a value closer to 53-54 Å may be a more accurate reflection of the expected dimensions for monomeric cMyc1-361. e, The same figure is shown for Fig. 4d, with an additional polymer scaling line (black dashed) derived from fully denatured proteins measured by Kohn et al $\\cdot ^ { 6 4 }$ also superimposed. Fitting the radius of gyration vs. number of amino acids to a polymer scaling law of the form $\\mathsf { R } _ { \\mathrm { g } } = \\mathsf { B } _ { 0 } \\mathsf { N } ^ { \\mathrm { v } }$ (where $\\mathsf { R } _ { \\mathrm { g } }$ is the radius of gyration, ${ \\bf { B } } _ { 0 }$ is a prefactor term that captures a combination of chain stiffness and monomer excluded volume, and ν is the apparent Flory scaling exponent) revealed wellfit parameters of $\\mathbf { B } _ { 0 } = 3 . 0 2 \\mathring { \\mathsf { A } }$ and ν = 0.51. Black circles are STARLING average values, with grey box-plots showing the distribution of values from the ensemble. Yellow circles are results from all-atom Monte Carlo simulations. Blue squares are experimental (SAXS) data. f, Equivalent analysis to that shown in a, but with the end-to-end distance $( \\mathsf { R } _ { \\mathrm { e } } )$ fit instead of the radius of gyration. Grey box-plots show the distribution of values from the STARLING ensemble. Yellow circles are results from all-atom Monte Carlo simulations. g, Equivalent analysis to that shown in panel A, but the hydrodynamic radius $\\mathbf { \\Gamma } ( \\mathbb { R } _ { \\mathrm { h } } )$ is fit instead of the radius of gyration. Grey box-plots show the distribution of values from the STARLING ensemble. Yellow circles are results from all-atom Monte Carlo simulations. h, $\\mathbf { R } _ { \\mathrm { g } }$ values for CTD variants in which all proline residues have been converted to glycine (P2G). Grey box-plots show the distribution of values from the STARLING ensemble. i, Comparison of scaling behavior for wild-type (black), P2G (green), Y2S (yellow), and P2G, Y2S (red) variants of the CTD. The large prefactor (3.02) observed in the wild-type sequence arises from a combination of the bulky tyrosine residue and the stiff proline residue; the double Y2S, G2P variant exhibits a prefactor comparable to unfolded-state scaling behaviour (see e).",
+        "bbox": [
+            60,
+            59,
+            497,
+            377
+        ],
+        "page_idx": 21
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            509,
+            59,
+            944,
+            364
+        ],
+        "page_idx": 21
+    },
+    {
+        "type": "chart",
+        "img_path": "images/39836c3f688d0166c35a617293d6c21438440486323420537c21aafb3250de39.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            65,
+            62,
+            236,
+            205
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/091425d937ae3240e20e35118e1b24978e41390737acfb80009aec15d15f9d87.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            235,
+            58,
+            581,
+            193
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/34e466829bf3162ed4751c60abe472aa064df48a9c6f8da04a9635cdc84778aa.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            591,
+            59,
+            941,
+            193
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/3d0aa585e82a5239d409e8df316a07a2a59202d14d187dd3a3b43ed088594ac0.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            63,
+            217,
+            378,
+            378
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/997ca8688865d49f4e793ed6e1e0594eaaf7615f580582ee052d2bbf53e85c61.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            379,
+            218,
+            670,
+            377
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/79615847bf16578eb14d322f41e71a018b1afef2dc8ea7576282e20e9e2869fd.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            675,
+            218,
+            942,
+            377
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/f5ce3951434f9dd395d1f7554f85f1cbf2d0d6dd7bb9c1e4ede0cb977c2f062a.jpg",
+        "content": "",
+        "chart_caption": [
+            "g"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            72,
+            394,
+            386,
+            579
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/6e19b276e48847115d1a06324c8f40a88cd94eba9e2ce54e67a82d0d804c6413.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            403,
+            384,
+            569,
+            481
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/3dfb3e1e0bd0d2646429bea95402de9da8f5a6a0f2d87952b8c1b651b4822299.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            578,
+            383,
+            731,
+            481
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "image",
+        "img_path": "images/e57cfa4629bc81a745f3e716138f06f7e7e3cf3db4dcc3ec749ec52952d8cfdb.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            737,
+            384,
+            892,
+            481
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/207dccede597d52ef61e36ce163ef767b4abb01be153f40efde56d898ed94ff3.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            405,
+            486,
+            571,
+            582
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/4236f2811e542b564643ca07305e6978748af6c8a8cf925d3b9a1a4846ccd35c.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            579,
+            486,
+            731,
+            582
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "image",
+        "img_path": "images/89ddf59669c9c784d7ea216ba011fb08c7893acde99f1c60afd1a85a98f358b0.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            737,
+            493,
+            894,
+            583
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/04acf285a36d4db412c60c79fc2649737036c2515df15e4ce4dd765e0a8bc99d.jpg",
+        "content": "",
+        "chart_caption": [
+            "j"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            82,
+            589,
+            252,
+            687
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/27b5102d0c6b15873b5e752c71333f84494dd7136e7c13e4cb36c7d654dc01d8.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            258,
+            591,
+            411,
+            687
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/5fd3fa655b84f709d6195abc472c381b5fb1b944c78f27892fefd21ee1e17b99.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            420,
+            592,
+            574,
+            687
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/b3b87c6424790b3a20ae5388d0ac8c7644a4f42d3bb868d87094c6bcbcbe7cb1.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            589,
+            591,
+            922,
+            689
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/d0bb4684863b720a0c9252e269ca588637057a00c839fc5d15317b6753b42682.jpg",
+        "content": "",
+        "chart_caption": [
+            "k"
+        ],
+        "chart_footnote": [
+            "Extended Data Fig. 7 | See next page for caption."
+        ],
+        "bbox": [
+            85,
+            692,
+            252,
+            789
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/1d1a2ab0c5ea3912032b625f65122b650eebeaff97bd6638fa3953ef53140e04.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            258,
+            693,
+            413,
+            788
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/e57ea806f45569b8e80d43c261e648bb4129e6dee9d7c8d4ce95623bb6cda44e.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            420,
+            693,
+            574,
+            788
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "chart",
+        "img_path": "images/d11cf4d49f029d50a681c2946131714717f1ff0aa339eaea6f8747b66f3544b5.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            586,
+            692,
+            763,
+            793
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            63,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 22
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 7 | Microprotein analysis and assessment of latentspace design approach. a, Microproteins are predicted to be highly disordered. The comparison here is the fraction of amino acids in the canonical human proteome that are found in disordered regions vs. the fraction of amino acids in the Deutsch et al.44 set of microproteins (the ‘microproteome’) that are found in disordered regions. The disorder was predicted using metapredict V3. b, Statistical enrichment for each of the 20 amino acids, comparing frequency observed across all canonical proteins vs. frequency observed in microproteins. We excluded initiator methionine from both datasets, given its disproportionate influence on shorter compared to longer sequences. As observed previously for metazoan microproteins, we find enrichment for tryptophan and arginine and depletion of acidic residues. c, To establish whether the enrichment observed here reflects something specific to microproteins or the enhanced fraction of disorder, we also compared enrichment in microprotein-derived IDRs vs. canonical-proteome-derived IDRs. This revealed an even stronger signature: microprotein IDRs are highly enriched for tryptophan, cysteine, arginine, and phenylalanine. In contrast, they are highly depleted for lysine, asparagine, glutamic acid, and aspartic acid. d, Assessing designed variants of CTCF590-629 (a 40-residue IDR from CTCF, UniProt ID P49711) as a toy sequence for rational design. Hamming distance of 100 CTCF590-629 designs compared to CTCF590-629. A Hamming distance of 40 means every residue is different from the wild-type sequence. e, Average iteration time of the sequence optimizer based on sequence length using 20 replicates per length. f, Generation time based on sequence length using 20 replicates per length. Design targets are subregions of eIF4B (eIF4B158-611, Uniprot ID P23588), excised in 20-amino-acid increments, ranging from 40 to 380 amino acids. g, Ensemble accuracy versus sequence length using the same cosine similarity cutoff value of 0.97. Ensemble accuracy was assessed as the mean absolute error (MAE) between the generated and target sequences, expressed in Angstroms. The sequences were the same as those used for panel f. We note that while accuracy worsens as sequence length increases, this can be addressed by tightening the similarity cutoff. h–k, Examples of IDRs designed to match low-complexity sequences, in all cases done to optimize cosine similarity to a value of 0.97. Target IDRs are as follows: h, FUS1-285 (UniProtID P35637); i, hnRNPA184-372 (UniProtID P09651); j, EWSR11-359 (UniProtID Q01844); k, TAF151-236 (UniProtID Q92804). l, Per-sequence generation times for the four sequences. m, Per-sequence mean absolute error (MAE) comparing the distance map from the designed sequence vs. the target sequence, as measured in Angstroms.",
+        "bbox": [
+            60,
+            59,
+            499,
+            301
+        ],
+        "page_idx": 23
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            509,
+            58,
+            947,
+            301
+        ],
+        "page_idx": 23
+    },
+    {
+        "type": "chart",
+        "img_path": "images/ad7cf817ebb4f4a4602004daa91e320ef697774c14808d7d4f00eeb7c7009424.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            65,
+            55,
+            484,
+            315
+        ],
+        "page_idx": 24
+    },
+    {
+        "type": "image",
+        "img_path": "images/a8e4b35176bb8c0f690e3be3c3bbc7c47531f1451c8a3f8f20c883c4e446c164.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            63,
+            56,
+            939,
+            765
+        ],
+        "page_idx": 24
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            62,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 24
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 8 | Assessment of STARLING ionic strength effects. a, Overlap between Mpipi-GG and STARLING $\\mathsf { R } _ { \\mathrm { g } } ( \\mathsf { \\Omega }$ distributions for a subset of the Das-Pappu sequences. Rg histograms for four of the Das-Pappu sequences with distinct sequence patterning as a function of ionic strength. Blue bars represent STARLING results; the orange line represents Mpipi-GG results. Histogram overlap is quantified by the Hellinger distance (H) or the KS statistic (D). b, Overlap between Mpipi-GG and STARLING Re distributions for a subset of the Das-Pappu sequences. Re histograms for four of the Das-Pappu sequences with distinct sequence patterning as a function of ionic strength. Bars represent STARLING results; the orange line represents Mpipi-GG results. Histogram overlap is quantified by the Hellinger distance (H) or the KS statistic (D). c, Normalized distance maps for Das-Pappu sequences. Normalized distance maps for four of the Das-Pappu sequences with distinct sequence patterning as a function of ionic strength. The top-right triangle is STARLING, and the bottomleft triangle is Mpipi-GG. d, Normalized distance maps for ProTα- $( \\mathbf { G } \\mathbf { S } ) _ { 8 0 } \\mathbf { \\cdot } \\mathbf { H } \\mathbf { 1 } ^ { \\mathrm { c T D } }$",
+        "bbox": [
+            60,
+            59,
+            499,
+            250
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "text",
+        "text": "constructs as a function of ionic strength. Distances here are normalized by a length-matched GS linker sequence (e.g., $\\left( \\mathbf { G S } \\right) _ { 1 8 6 } )$ to provide a self-consistent “null model” through which we expected the central $( G S ) _ { 8 0 }$ linker to reach a normalized distance value of 1, implying the linker is behaving as if it were not tethered. While not a prerequisite for these types of pseudo-intermolecular interaction ensembles, this provides us with confidence that we are observing behavior asymptotically approaching the limit in which the central linker has no meaningful impact on the resulting biomolecular complex. e, Pseudo-intermolecular contacts between ProTα and H1CTD quantified as a function of ionic strength. Prior work (Borgia et al. 2018) has established that the ProTα:H1 interaction is highly salt dependent, consistent with our conclusions here. f, Quantification of intramolecular distances in the complex divided by the same distances for the IDR in isolation. This analysis reveals specific subregions that are more locally compact than others in the complex, and that H1CTD undergoes a greater degree of compaction than ProTα.",
+        "bbox": [
+            509,
+            59,
+            942,
+            250
+        ],
+        "page_idx": 25
+    },
+    {
+        "type": "chart",
+        "img_path": "images/01ec3d8c6b5c56165cd33037e91369386a213e254f67d3c6903ad4e9d9285ebc.jpg",
+        "content": "",
+        "chart_caption": [
+            "C."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            100,
+            63,
+            309,
+            173
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/39571b0f6c2a27026fdad99807119f96c9b676f73c9dec1a6db2bdf4c71d9208.jpg",
+        "content": "",
+        "chart_caption": [
+            "B."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            315,
+            65,
+            519,
+            173
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/46c33e77a9e03329e05531ebc3fb67b13de689bcbb0ba00b1f5363ff444a6a80.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            84,
+            177,
+            507,
+            486
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/d70de6c4c4c9527fd89e23412e52891c291700080bab2a4e17d0942e36403eba.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            515,
+            241,
+            715,
+            359
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/b404c344e75d89f9d985d7df5109a604f4d40f03f49093f977cc23cd55561bb9.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            514,
+            355,
+            715,
+            482
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/79b9725a616ed02d39ff036a4c0a7f467fd3a29770fafae319fd684ce4dd674c.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            97,
+            486,
+            287,
+            737
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/2f95f15711ef14e7bc382ea90a7b50d62141ccdbd87489940ac89ac71f9e2746.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            312,
+            487,
+            500,
+            737
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/c01c879eb0cb48b1ff5f9b89aa607ae597a31fab0a54d4000853253fc2b3434b.jpg",
+        "content": "",
+        "chart_caption": [
+            "G."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            517,
+            60,
+            714,
+            213
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/4c417e408af43802231ec47b68fe6953d064117389f4b2510e1f3e7baefb0f07.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            721,
+            60,
+            919,
+            215
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/b1b22f52941cad51f1d50027470bcc668315f97d854bb3c3456e062f9fd71855.jpg",
+        "content": "",
+        "chart_caption": [
+            "R."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            105,
+            737,
+            472,
+            881
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/1e0f8a3162c2ea3ad95f0ab72b41b4d2b7b44c82182a1ea0f0a58365030adde5.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            722,
+            356,
+            915,
+            483
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/7b653e0b5e7a146ae1f82704a484a2671d4b8698dbba84190a08be10ed22245a.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            722,
+            243,
+            917,
+            359
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/b999c1de9b7f97bca9139e4b21ebd8c84a11194b607d21fa9aafed4542b16233.jpg",
+        "content": "",
+        "chart_caption": [
+            "Extended Data Fig. 9 | See next page for caption."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            514,
+            487,
+            712,
+            737
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "chart",
+        "img_path": "images/19d2c2d0496f2fadf3b38465521343bbf773cc0454d845b3af1e41ddfe410590.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            726,
+            487,
+            915,
+            737
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            63,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 26
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 9 | Ensemble guidance and comparison with IDPFold and IDPForge. A, $\\mathsf { R } _ { \\mathrm { g } } ^ { \\phantom { \\dagger } }$ biased ensemble generation. Ensembles of an 84-residue RNA POLII CTD construct biased towards the specified ${ \\mathbb R } _ { \\mathrm { g } }$ values with different harmonic constraints $. \\mathsf { R } _ { \\mathrm { g } }$ values as a function of target $( \\mathsf { R } _ { \\mathrm { g } } )$ and guidance strength. The x-axis reports on value for harmonic constraint, while the y-axis reports the targe $\\mathsf { R } _ { \\mathrm { g } }$ value. Elements in the matrix report on the ensembleaverage Rg value under the combination of target and constraint. B, Equivalent analysis for Re values as a function of target $( \\mathsf { R } _ { \\mathrm { g } } )$ and guidance strength. Equivalent biasing using end-to-end distance as the target is shown in Supplementary Fig. 5. C, 2D histograms of $\\mathsf { R } _ { \\mathrm { g } }$ (X-axis) and Re (Y-axis) for ensembles generated under the specified guidance. For each sub-plot, the x-axis reports on the ensemble $\\mathsf { R } _ { \\mathrm { g } }$ while the y-axis reports on the ensemble $\\mathsf { R } _ { \\mathrm { e } } .$ . For the matrix of subplots, the x-axis reports on the harmonic constraint applied and the y-axis reports on the target Rg value. An equivalent matrix of plots for biasing using end-to-end distance is shown in Supplementary Fig. 5. D, Comparison of idpSAM-derived ensembles vs. STARLING compared to experimental data. Focussing on sequences less than 60 amino acids in length (except Ash1, discussed below), we compared $\\mathsf { R } _ { \\mathrm { g } }$ values obtained from idpSAM ensembles vs. $\\mathsf { R } _ { \\mathrm { g } }$ values from STARLING ensembles. For idpSAM, 1000 conformers were used (idpSAM defaults), whereas for STARLING, 400 conformers were used (STARLING defaults). We note that the Analytical Flory Random Coil (AFRC) – a null model in which IDR sequence chemistry does not influence the overall dimensions and instead IDR dimensions depend solely on chain length and (weakly) the intrinsic dimensions of each amino acid – obtains an r2 of 0.9 and an RMSE of 3.58 Å. We included Ash1 (83 amino acids) because, although it is larger than the \\~60 amino acid cutoff used for training data in idpSAM, prior work has shown that SAXS data for Ash1 are well reproduced by CAMPARI/ ABSINTH simulations. However, despite being trained on CAMPARI/ABSINTH simulations, idpSAM was unable to recapitulate this behaviour. E, Comparison of IDPFold-derived ensembles vs. STARLING compared to single-molecule FRET data reported by Holla et al.34. Correlation between experimentallyderived end-to-end distance (x-axis) and STARLING (black) or IDPFold (Blue) derived end-to-end distances. F, Comparison of SAXS scattering profile for the sNrich ensemble derived from IDPFold ensembles (red) vs. experiment (black). Inferred radii of gyration from IDPFold, STARLING, and SAXS are provided. G, Comparison of SAXS scattering profile for the dCh minus ensemble derived from IDPFold ensembles (red) vs. experiment (black). Inferred radii of gyration from IDPFold, STARLING, and SAXS are provided. H, Comparison of SAXS scattering profile for the dTRBP ensemble derived from IDPFold ensembles (red) vs. experiment (black). Inferred radii of gyration from IDPFold, STARLING, and SAXS are provided. I, Comparison of SAXS scattering profile for the sNh plus ensemble derived from IDPFold ensembles (red) vs. experiment (black). Inferred radii of gyration from IDPFold, STARLING, and SAXS are provided. J-Q, Comparison of IDPFold and IDPForge vs. other approaches compared to radii of gyration derived from experimental SAXS data. Agreement between SAXS experimental data and: J, STARLING; K, IDPFold; L, AFRC - a null model where only sequence length contributes to chain dimensions; and M, CALVADOS2 for the set of sequences that were predictable using IDPFold. IDPFold performs relatively poorly at reproducing experimental SAXS data. The sequences used here are the 104 for which IDPFold ensembles could be generated. Agreement between SAXS experimental data and: N, STARLING; O, IDPForge; P, AFRC; and Q, CALVADOS2 for the set of sequences that were predictable using IDPForge. IDPForge again does a relatively poor job of reproducing experimental SAXS data. Sequences used here are the 110 sequences for which IDPForge ensembles could be generated. R, Comparison of time per conformation for STARLING, IDFold, and IDPForge as a function of sequence length. The variability in IDPForge times comes from a stochastic relaxation step.",
+        "bbox": [
+            60,
+            59,
+            492,
+            427
+        ],
+        "page_idx": 27
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            509,
+            59,
+            946,
+            415
+        ],
+        "page_idx": 27
+    },
+    {
+        "type": "chart",
+        "img_path": "images/5611b2f82caa5f723f4df498e5525681d876b410f18c3e0a84c4d32577bde1ea.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            63,
+            56,
+            453,
+            302
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "chart",
+        "img_path": "images/dc04b890438e39446a5086c23a640281513183f85b3a9da8aaff4128730bd753.jpg",
+        "content": "",
+        "chart_caption": [
+            "C"
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            65,
+            321,
+            430,
+            520
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "chart",
+        "img_path": "images/1ee9714c2f716273a25e8f2d2df11d52701375046c7317508d890d97771ff0c5.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            478,
+            59,
+            825,
+            300
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "chart",
+        "img_path": "images/0f8ad12013c82750978762d7694580021091a1b499c2212c2264878f28b8268d.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            68,
+            520,
+            331,
+            689
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "image",
+        "img_path": "images/dff4cb1da1cedb6baa53b2384aa988ea4ed4dae4b27f3dfdfd987518a436ca66.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            478,
+            302,
+            665,
+            400
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "text",
+        "text": "Extended Data Fig. 10 | 3D reconstruction from distance maps, BME reweighting, and reanalyzed SAXS data. a, Comparison of runtimes for native sklearn Multidimensional Scaling (MDS) algorithm vs. our Torchbased implementation of the Scaling by MAjorizing a COmplicated Function (SMACOF). We note that internally, the sklearn MDS algorithm uses a SMACOF implementation by default. b, Time per conformer for sklearn MDS vs. torchbased SMACOF. c, Comparison of error distributions (3D conformer vs. reconstructed conformer) for sklearn MDS vs. Torch SMACOF. Despite being substantially faster, our torch-based SMACOF implementation shows no difference in accuracy compared to the sklearn MDS implementation. d, Example distance maps showing deviations from reconstruction in a 384- residue sequence. e, Comparison of literature-reported $\\mathsf { R } _ { \\mathrm { g } }$ values (y-axis)",
+        "bbox": [
+            60,
+            706,
+            489,
+            862
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "image",
+        "img_path": "images/188b8622c5d4dccc93411e1722b361aa8079a66ac81110200d4b3aa46c981799.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            668,
+            302,
+            794,
+            400
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "image",
+        "img_path": "images/e032f4d779475f83e7ebcf118bcd736e9fd3f1b821e5ca7868321494c4dbdf9a.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            477,
+            402,
+            665,
+            501
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "image",
+        "img_path": "images/1f9532e67232adee1f88ba87846e3aa4c4397443687e45d9f38b59ce806ca66a.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            798,
+            302,
+            926,
+            400
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "image",
+        "img_path": "images/5a372d8bfc21905ae2852ac6c03f8bfa8b16ded16ab21dad37ceca1082117df6.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            668,
+            403,
+            794,
+            501
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "image",
+        "img_path": "images/022ef6838e6de07221ccd42daed45f9bc7dac7d623a64ee7ec733bc7a9c19d21.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            798,
+            403,
+            926,
+            501
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "chart",
+        "img_path": "images/0a602f5a59c3d90cedc2fede20780a6c60c6c4a5d291c13ebdd42d7d6566da6c.jpg",
+        "content": "",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "bbox": [
+            334,
+            520,
+            648,
+            696
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "chart",
+        "img_path": "images/0fc9800019c543a0e0165de38d857408c56f2a561fbcbc7755fd209795a93df3.jpg",
+        "content": "",
+        "chart_caption": [
+            "obtained using Guiner analysis in the original publications, vs. our re-analysis of buffer-subtracted scattering data (x-axis) done using the Molecular Form Factor (MFF) approach of ref. 63, confirming the high quality of the data (very simila $\\mathsf { R } _ { \\mathrm { g } }$ values are arrived at regardless of the approach used to determine the $\\mathsf { R } _ { \\mathrm { g } }$ values). f, Theta (θ) scan for BME (Bayesian/Maximum Entropy) scan. This figure is generated automatically by STARLING’s BME implementation. X-axis reports on the effective fraction of conformers used, while the Y-axis reports on the $\\mathsf { X } ^ { 2 }$ value between experiment and ensemble (lower value means better agreement between experiment and ensemble). g, Visual representation of (ordered) conformer weights. This figure is also generated automatically by STARLING’s BME implementation."
+        ],
+        "chart_footnote": [],
+        "bbox": [
+            653,
+            524,
+            942,
+            698
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "header",
+        "text": "Article",
+        "bbox": [
+            62,
+            31,
+            146,
+            50
+        ],
+        "page_idx": 28
+    },
+    {
+        "type": "text",
+        "text": "nature portfolio",
+        "text_level": 1,
+        "bbox": [
+            32,
+            41,
+            408,
+            90
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Corresponding author(s): Alex Holehouse",
+        "bbox": [
+            501,
+            75,
+            750,
+            90
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Last updated by author(s): 01/13/2026",
+        "bbox": [
+            501,
+            97,
+            732,
+            112
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Reporting Summary",
+        "text_level": 2,
+        "bbox": [
+            37,
+            156,
+            326,
+            183
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "NaturePlwiseeeitfterkiisfprs foien ray in reporting. For further information onNature Portfolio policies, se ur Editorial Policies and the Editorial Policy Checklist.",
+        "bbox": [
+            35,
+            189,
+            901,
+            219
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Statistics",
+        "text_level": 2,
+        "bbox": [
+            37,
+            276,
+            122,
+            294
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "or alatiiaals hat tefling is preentn tefeen tbleen ain te or eths.",
+        "bbox": [
+            35,
+            297,
+            846,
+            314
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "n/a|Confirmed",
+        "bbox": [
+            37,
+            319,
+            135,
+            335
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "The exact sample size (n) for each experimental group/condition,given as a discrete number and unit of measurement",
+        "bbox": [
+            40,
+            342,
+            797,
+            358
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "□ Astatement on whether measurements were taken from distinct samples or whether the same sample was measured repeatedy",
+        "bbox": [
+            40,
+            363,
+            862,
+            378
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "□ The statistical test(s) used AND whether they are one- or two-sided Only common tests should be described solely by name; describe more complex techniques in the Methods section.",
+        "bbox": [
+            39,
+            386,
+            694,
+            411
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "□A descrition of llcovariates ested",
+        "bbox": [
+            40,
+            416,
+            312,
+            433
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "□ A description of any aumptions or corrections, such as tests of normality and adjustment for multiple comparisons",
+        "bbox": [
+            40,
+            438,
+            782,
+            454
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "A",
+        "bbox": [
+            39,
+            460,
+            910,
+            489
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            39,
+            497,
+            879,
+            525
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "□ For Bayesian analysis, information on the choice of priors and Markov chain Monte Carlo setings",
+        "bbox": [
+            39,
+            531,
+            671,
+            549
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "□For hierarchical and complex designs, identification of the appropriate level for tests and ful reporting of outcomes",
+        "bbox": [
+            40,
+            553,
+            777,
+            570
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "□ Estimates of effect sizes (e.g. Cohen's d, Pearson's ), indicating how they were calculated",
+        "bbox": [
+            40,
+            574,
+            625,
+            592
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            264,
+            595,
+            684,
+            609
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Software and code",
+        "text_level": 2,
+        "bbox": [
+            37,
+            628,
+            214,
+            646
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Policy information about availability of computer code",
+        "bbox": [
+            37,
+            654,
+            364,
+            669
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Data collection collection",
+        "bbox": [
+            49,
+            676,
+            142,
+            690
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Mpipi-G imulations were performed using LAMMP (LAMMPS (29 Sep 2021 -Udate 2). TARLING predictions were made usingSTARLING with VAE weights (STARLING\\_v2.0.0\\_ViT\\_VAE\\_2025\\_10\\_14.ckpt) nd DPM weights (STARLING\\_v2.0.0\\_ViT\\_ DDPM\\_2025\\_10\\_14.ckpt).AIl other data was taken from published sources all of which are referenced in the associated manuscript.",
+        "bbox": [
+            91,
+            675,
+            905,
+            714
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Data analysis All analysis was performed using code written for this study",
+        "bbox": [
+            49,
+            724,
+            475,
+            739
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            37,
+            744,
+            892,
+            768
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Data",
+        "text_level": 2,
+        "bbox": [
+            39,
+            791,
+            84,
+            808
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Policy information about availability of data",
+        "bbox": [
+            37,
+            815,
+            299,
+            829
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Al manusripts ust inlu a daa availailit stateent.This statement hould prvide thefling nformation hereappliable",
+        "bbox": [
+            44,
+            830,
+            841,
+            845
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "\\- Accession codes, unique identifiers, or web links for publicly available datasets",
+        "bbox": [
+            58,
+            847,
+            485,
+            859
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "\\- A description of any restrictions on data availability",
+        "bbox": [
+            60,
+            859,
+            341,
+            871
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "\\- For clinical datasets or third party data, please ensure that the statement adheres to our policy",
+        "bbox": [
+            60,
+            872,
+            571,
+            886
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "are providedahps:/ithb.com/holeouseab/supprtingata/tee/master/226/starling\\_226orhps:/ithub.com/iptools/staig",
+        "bbox": [
+            39,
+            905,
+            893,
+            931
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "page_number",
+        "text": "1",
+        "bbox": [
+            946,
+            952,
+            955,
+            965
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "aside_text",
+        "text": "",
+        "bbox": [
+            939,
+            35,
+            959,
+            247
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "aside_text",
+        "text": "",
+        "bbox": [
+            946,
+            862,
+            960,
+            905
+        ],
+        "page_idx": 29
+    },
+    {
+        "type": "text",
+        "text": "Research involving human participants, their data, or biological material",
+        "text_level": 2,
+        "bbox": [
+            37,
+            41,
+            702,
+            60
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "and sexual orientation and race, ethnicity and racism.",
+        "bbox": [
+            37,
+            66,
+            888,
+            95
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "table",
+        "img_path": "images/7f536c70e47fb7648705ca23958287e5c3dc8e307689c108cc488369f67430d5.jpg",
+        "table_caption": [],
+        "table_footnote": [
+            ""
+        ],
+        "table_body": "<table><tr><td>Reporting on sex and gender</td><td>N/A</td></tr><tr><td>Reporting on race, ethnicity, or other sociallyrelevant</td><td>N/A</td></tr><tr><td>groupings Population characteristics</td><td></td></tr><tr><td>Recruitment</td><td>N/A</td></tr><tr><td>Ethics oversight</td><td>N/A N/A</td></tr></table>",
+        "bbox": [
+            47,
+            97,
+            911,
+            248
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "Field-specific reporting",
+        "text_level": 2,
+        "bbox": [
+            35,
+            291,
+            341,
+            316
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            37,
+            321,
+            893,
+            337
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "For a reference copy of the document with allsections, see nature.com/documents/nr-reporting-summary-flat.podf",
+        "bbox": [
+            37,
+            364,
+            570,
+            378
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "Life sciences study design",
+        "text_level": 2,
+        "bbox": [
+            35,
+            393,
+            375,
+            420
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            37,
+            426,
+            503,
+            441
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "table",
+        "img_path": "images/101bfc64a53368371753efc57537ef146156869c2a36dee99076e42e772868d7.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Sample size</td><td>N/A</td></tr><tr><td>Data exclusions</td><td>N/A</td></tr><tr><td>Replication</td><td>N/A</td></tr><tr><td>Randomization</td><td>N/A</td></tr><tr><td>Blinding</td><td>N/A</td></tr></table>",
+        "bbox": [
+            47,
+            443,
+            911,
+            570
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "Reporting for specific materials, systems and methods",
+        "text_level": 2,
+        "bbox": [
+            35,
+            601,
+            750,
+            626
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            35,
+            628,
+            911,
+            656
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "table",
+        "img_path": "images/d7c0f1b0f563414045a2acaa540f2845fc1556b8b51ec96df12dc93aad6ade6d.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"2\">Materials &amp; experimental systems</td><td>Methods</td><td colspan=\"2\"></td></tr><tr><td>n/a</td><td>Involved in the study Antibodies</td><td></td><td>n/a</td><td>Involved in the study</td></tr><tr><td></td><td></td><td></td><td></td><td>ChlP-seq</td></tr><tr><td></td><td></td><td>Eukaryotic cell lines</td><td></td><td>Flow cytometry</td></tr><tr><td></td><td></td><td>Palaeontology and archaeology</td><td></td><td>MRI-based neuroimaging</td></tr><tr><td></td><td></td><td colspan=\"3\">Animals and other organisms</td></tr><tr><td></td><td></td><td colspan=\"3\">Clinical data</td></tr><tr><td></td><td></td><td colspan=\"3\">Dual use research of concern</td></tr><tr><td></td><td>Plants</td><td colspan=\"3\"></td></tr></table>",
+        "bbox": [
+            40,
+            676,
+            663,
+            835
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "aside_text",
+        "text": "",
+        "bbox": [
+            939,
+            35,
+            959,
+            247
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "aside_text",
+        "text": "",
+        "bbox": [
+            946,
+            862,
+            962,
+            906
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "page_number",
+        "text": "2",
+        "bbox": [
+            944,
+            950,
+            957,
+            965
+        ],
+        "page_idx": 30
+    },
+    {
+        "type": "text",
+        "text": "Plants",
+        "text_level": 2,
+        "bbox": [
+            39,
+            44,
+            98,
+            60
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "Seed stocks",
+        "bbox": [
+            49,
+            75,
+            122,
+            88
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "N/A",
+        "bbox": [
+            204,
+            74,
+            230,
+            88
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "Novel plant genotypes",
+        "bbox": [
+            49,
+            109,
+            186,
+            123
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "N/A",
+        "bbox": [
+            204,
+            109,
+            228,
+            122
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "Authentication",
+        "bbox": [
+            49,
+            166,
+            142,
+            179
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "text",
+        "text": "N/A",
+        "bbox": [
+            205,
+            166,
+            228,
+            179
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "aside_text",
+        "text": "",
+        "bbox": [
+            941,
+            36,
+            960,
+            247
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "aside_text",
+        "text": "",
+        "bbox": [
+            946,
+            862,
+            962,
+            906
+        ],
+        "page_idx": 31
+    },
+    {
+        "type": "page_number",
+        "text": "3",
+        "bbox": [
+            944,
+            952,
+            955,
+            965
+        ],
+        "page_idx": 31
+    }
+]

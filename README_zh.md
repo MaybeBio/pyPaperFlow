@@ -109,12 +109,12 @@ flowchart TD
 
 
 #### 阶段二：处理与解析
-将原始文件转换为计算机可处理的纯文本和元数据(整理为Markdown格式，便于后续AI处理)。总的来说，元数据靠API或爬虫抓取，文本内容靠人工获取pdf文件再使用统一的解析器解析。
+将原始文件转换为计算机可处理的纯文本和元数据(整理为Markdown或JSON格式，便于后续AI处理)。总的来说，元数据靠API或爬虫抓取，文本内容靠人工获取pdf文件再使用统一的解析器解析。
 - **自动化切入点**：
-    - **统一解析器**：使用工具（如 pdfplumber, opendataloader-pdf, minerU, paddleocr）从 PDF 中高精度提取文本和图表, 并将它们转换为Markdown格式。
+    - **统一解析器**：使用工具（如 pdfplumber, opendataloader-pdf, minerU, paddleocr）从 PDF 中高精度提取文本和图表, 并将它们转换为Markdown或JSON格式。
     - **元数据增强**：利用API 或爬虫, 自动抓取并补全完整的文献元数据（标题、作者、DOI、关键词 等）并统一格式。
 - 🌟 **AI Plugin**
-    - PDF parser skill：设计一个智能的PDF解析器，能够自动识别和提取PDF中的文本、图表、表格等元素, 并将其转换为Markdown格式。
+    - PDF parser skill：设计一个智能的PDF解析器，能够自动识别和提取PDF中的文本、图表、表格等元素, 并将其转换为Markdown或JSON格式。
     - 推荐参考：[MinerU](https://github.com/opendatalab/MinerU)，参考部署相应skill，实现PDF解析功能。
 
 #### 阶段三：核心信息结构化提取
@@ -129,7 +129,7 @@ flowchart TD
   
 - 🌟 **AI Plugin**
     - 信息抽取与本体构建 skill：设计一个信息抽取与本体构建的skill，能够根据预设的Schema从文献文本中抽取结构化信息，并且根据领域专业术语自动构建本体论。
-    - 推荐参考：[OpenIE](
+    - 推荐参考：[OpenIE] 
 
 #### 阶段四：深度编码与向量化
 为信息建立数学表示。

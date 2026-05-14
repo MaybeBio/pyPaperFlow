@@ -2696,7 +2696,7 @@
         {
             "type": "equation_interline",
             "content": {
-                "math_content": "\\begin{array} { r l r } {  { 2 { \\mathcal { I } } \\mathcal { G } _ { S O ( 3 ) } ( R _ { t } ; R _ { 0 } , \\sigma ^ { 2 } ) = f ( \\omega _ { t \\mid 0 } ) : = \\frac { 1 - \\cos ( \\omega _ { t \\mid 0 } ) } { \\pi } } } \\\\ & { } & \\\\ & { } & { \\displaystyle \\sum _ { j = 0 } ^ { \\in } f \\ d { \\mathcal { \\ : } } ( 2 I + 1 ) e ^ { - I ( I + 1 ) \\sigma ^ { 2 } \\frac { \\sin ( ( I + 0 . 5 ) \\omega _ { t \\mid 0 } ) } { \\sin ( 0 . 5 \\omega _ { t \\mid 0 } ) } } } \\end{array}\\tag{5}",
+                "math_content": "\\begin{array} { r l r } {  { 2 { \\mathcal { I } } \\mathcal { G } _ { S O ( 3 ) } ( R _ { t } ; R _ { 0 } , \\sigma ^ { 2 } ) = f ( \\omega _ { t \\mid 0 } ) : = \\frac { 1 - \\cos ( \\omega _ { t \\mid 0 } ) } { \\pi } } } \\\\ & { } & \\\\ & { } & { \\displaystyle \\sum _ { j = 0 } ^ { \\in } f \\dag \\chi ( 2 I + 1 ) e ^ { - I ( I + 1 ) \\sigma ^ { 2 } \\frac { \\sin ( ( I + 0 . 5 ) \\omega _ { t \\mid 0 } ) } { \\sin ( 0 . 5 \\omega _ { t \\mid 0 } ) } } } \\end{array}\\tag{5}",
                 "math_type": "latex",
                 "image_source": {
                     "path": "images/306d146f8f9a697d5c3605c046bf05cea85dc43b05635bf68fb3b7cec04d5700.jpg"
