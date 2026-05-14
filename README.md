@@ -103,22 +103,104 @@ flowchart TD
 ## 📦 Installation
 
 ```bash
+# 1. install from source
 git clone https://github.com/MaybeBio/pyPaperFlow.git
 cd pyPaperFlow
 pip install -e .
+
+# 2. install MinerU
+# follow the official installation guide: https://github.com/opendatalab/MinerU
+# verify installation: mineru --help
+pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple
+pip install uv -i https://mirrors.aliyun.com/pypi/simple
+uv pip install -U "mineru[all]" -i https://mirrors.aliyun.com/pypi/simple 
+
+# 3. install AI backend
+pip install openai anthropic
+
+# 4. install paperscraper backend
+# follow the official installation guide: https://github.com/jannisborn/paperscraper
+pip install paperscraper
 ```
+
+> ⚠️ For typical usage, you only need to install the repository from source and MinerU, which are steps 1 and 2.
 
 ## 🛠️ Usage
 
-We design pyPaperFlow to be a versatile tool for academic research, focusing on the workflow of paper collection, processing, and analysis.
+We designed pyPaperFlow as a versatile academic research tool built strictly around the `real‑world workflow of researchers conducting literature investigation, paper reading, literature comprehension and analysis, and corpus utilization`.
 
-So, we are going through a thorough workflow like PAPER READING, please follow me through the steps.
+Therefore, please follow our step‑by‑step operations, which mirror your full literature research process. Through this hands‑on experience, you will fully grasp the design philosophy and usage of this tool.
 
 The platform provides a CLI tool named `paperflow`.
 
-首先是文献调研，就是在我们信息不足的时候，我们需要进行文献信息的收集、整理，帮助我们清楚了解国内外研究现状。
+
+### Module Overview
+
+Current available modules include (`will be continuously updated`):
+
+```python 
+❯ paperflow --help
+                                                                                                                                                                                         
+ Usage: paperflow [OPTIONS] COMMAND [ARGS]...                                                                                                                                            
+                                                                                                                                                                                         
+ pyPaperFlow CLI                                                                                                                                                                         
+                                                                                                                                                                                         
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                                                                                                               │
+│ --show-completion             Show completion for the current shell, to copy it or customize the installation.                                                                        │
+│ --help                        Show this message and exit.                                                                                                                             │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ pubmed-search      Search PubMed using Your customized query and return PMIDs.                                                                                                        │
+│ pubmed-meta        Fetch paper metadata from PubMed using Your customized query, pmid list file and save to storage.                                                                  │
+│ pubmed-content     Download full text (PMC) for given PMIDs if the paper has a PMC ID.                                                                                                │
+│ pubmed-all         Fetch BOTH metadata and full text (if available) for papers.                                                                                                       │
+│                    Also extracts URLs from full text and updates metadata links.                                                                                                      │
+│ pubmed-merge-json  Create a merged JSON (or JSONL) file from PubMed paper directories.                                                                                                │
+│ pubmed-export-md   Export a single Markdown view from a merged JSON file using optional YAML config.                                                                                  │
+│ arxiv-search       Search arXiv and write matching IDs to a text file.                                                                                                                │
+│ arxiv-fetch        Fetch arXiv metadata and attempt to download PDFs.                                                                                                                 │
+│ biorxiv-search     Search bioRxiv and write matching IDs to a text file.                                                                                                              │
+│ biorxiv-fetch      Fetch bioRxiv metadata and attempt to download PDFs.                                                                                                               │
+│ paper-fetch        Fetch PDFs by DOI — passes through to the paper-fetch engine.                                                                                                      │
+│ pdf-parse          Parse a PDF file using MinerU engine, and clean up the output directory.                                                                                           │
+│ mineru-parse       Parse mineru output content_list_v2.json into canonical sectioned JSON.                                                                                            │
+│ mineru-export-md   Export structured mineru JSON to a clean Markdown file for LLM processing.                                                                                         │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+```
+
+Classify these modules according to the workflow stages:
+```python
+PubMed Modules:
+- pubmed-search # search papers and return PMIDs
+- pubmed-meta # fetch paper metadata from PubMed
+- pubmed-content # download full text (PMC) for given PMIDs if the paper has a PMC ID
+- pubmed-all # fetch BOTH metadata and full text (if available) for papers
+- pubmed-merge-json # Batch merge a collection of PubMed papers of the same topic 
+- pubmed-export-md # export PubMed paper collections as Markdown files, supporting batch export of specific sections (🌟 e.g., batch export of introductions as your research background)
+
+arXiv Modules:
+- arxiv-search # search arXiv and return matching IDs
+- arxiv-fetch # fetch arXiv metadata and attempt to download PDFs
+
+bioRxiv Modules:
+- biorxiv-search # search bioRxiv and return matching IDs
+- biorxiv-fetch # fetch bioRxiv metadata and attempt to download PDFs
+
+Third-party Modules:
+- paper-fetch # fetch PDFs by DOI
+- pdf-parse # parse PDF files into JSON, Markdown format using the MinerU engine
+- mineru-parse # Based on your custom section configuration, re-parse the MinerU output file into a structured JSON format clustered by standard literature sections
+- mineru-export-md # Based on your custom section configuration, export the structured mineru JSON to a clean Markdown file for LLM processing (🌟 e.g., batch export of introductions as your research background)
+```
+
+> ⚠️ `Other preprint platforms modules are under development, please stay tuned!`
 
 ### 1. Research Start Point
+
+首先是文献调研，就是在我们信息不足的时候，我们需要进行文献信息的收集、整理，帮助我们清楚了解国内外研究现状。
 
 首先需要想清楚你要做的研究是什么，这个问题也许一开始你只有一点点零散的想法，以及一些零散的文献资料、调研草稿，或者更糟（你什么都没有，只有一些关键词）。
 

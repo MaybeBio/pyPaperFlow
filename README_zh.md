@@ -2,30 +2,29 @@
 
 [English Version](README.md) | [中文版本](README_zh.md)
 
-一个面向科研工作者的文献自动化处理平台。本工具专注于信息提取与知识发现阶段，通过7阶段自动化工作流，帮助研究人员高效完成从文献检索到知识内化的全流程。
+一个面向科研工作者的自动化文献处理平台。本工具专注于“信息提取”和“知识发现”两个阶段，通过一个 7 阶段自动化流程，帮助研究人员高效完成从文献检索到知识内化的全流程。
 
 **核心目标**
 
-- 快速领域切入：批量检索并获取特定领域的全部可及文献
-- 批量知识提取：利用AI长文本处理能力，从海量文本中提取结构化知识
-- 研究动态追踪：快速掌握领域最新研究方法、结论和核心论文
+- **快速进入研究领域**：批量检索并获取某一特定领域内所有可获取的文献
+- **批量知识提取**：利用 AI 长文本处理能力，从海量文本中提取结构化知识
+- **研究趋势追踪**：快速掌握某一领域最新的研究方法、结论和核心论文
 
 **定位说明**
 
-本工具旨在补充而非替代 Zotero 等参考管理软件。我们专注于”信息提取”和”知识发现”这两个关键步骤，为你构建结构化知识库，为后续的语义搜索、关联推荐和综述生成奠定基础。
+本工具旨在**补充而非替代** Zotero 等文献参考管理软件。我们专注于“信息提取”和“知识发现”这两个关键步骤，为你构建一个**结构化知识库**，为后续的语义搜索、内容分析和综述生成奠定基础。
 
-**当前实现范围**
-
-阶段1-2及阶段4/5部分功能（标签系统）已实现。阶段3、6、7涉及AI模型选择、Prompt策略和知识库完善，需用户根据具体需求自行配置。
 
 ## 🚀 功能特性
 
-- **自动化检索**：从 PubMed/Medline、arXiv、bioRxiv 搜索并获取论文元数据。
-- **全文获取**：自动从 PMC 下载开放获取的全文（XML/文本）。
+- **多来源自动检索**：自动从 `PubMed/Medline`、`arXiv`、`medRxiv`、`chemRxiv` 和 `bioRxiv` 搜索并获取论文元数据与全文记录。项目主要聚焦于生物医学与计算交叉领域（`Biomedicine + Computational Biology`）。
+- **全文获取**：支持自动从 `PMC` 下载开放获取的 XML/Text 全文。对于预印本及其他没有 PMC 全文的文献，集成了额外的获取模块以下载 `原始 PDF`，并将 `Sci-Hub` 作为兜底来源。
 - **结构化存储**：
-  - **元数据**：存储为详细的 JSON 文件。
-  - **全文**：保存为多种格式（XML、解析后的 JSON、Markdown）以供灵活使用。
-- **命令行工具**：一个用户友好的命令行界面 (`pyPaperFlow`)，用于所有操作。
+    - **元数据**：保存为结构清晰的详细 JSON 文件。
+    - **全文**：保存为多种格式，包括解析后的 JSON 和 Markdown，方便下游使用。其中 JSON 适合程序化分析，Markdown 更适合 LLM 理解与处理。
+    - **标准化结构解析**：所有文献都会被解析并组织为 `标准化 JSON schema`。该 schema 严格区分元数据字段（标题、年份、作者）和标准学术章节（abstract、introduction、results、discussion、methods、conclusion、supplementary、availability、funding、acknowledgements、author contributions、references、other）。同时支持 `自定义章节解析`，允许用户使用自定义 JSON schema 对具有特殊结构的文献进行语义解析。项目还提供了专门模块，用于从大批量主题相关论文中提取指定章节，并将其汇总为可溯源的 Markdown 文献语料，便于后续文献调研和系统综述写作。
+- **LLM 与 Agent 增强**：集成 LLM 技能和智能 Agent 能力，帮助用户串联文献调研与深度阅读的整个工作流。
+- **CLI 工具**：提供易用的命令行工具 `paperflow`，开箱即可完成所有核心操作。
 
 ## 🏗️ 架构愿景
 
@@ -86,92 +85,135 @@ flowchart TD
     end
 ```
 
-### 阶段分析与设计理念
-
-整个流程设计我们以“人机协同”为核心，将人工操作与AI模型的智能处理相结合，实现高效、准确的文献处理。
-
-1个核心原则: 确定性的任务由Coding+人工判断决策完成, 不确定性的任务由Agent完成。
-
-对于每一阶段，可以加入AI模型来增强效率和智能的部分，我们统一称之为AI Plugin (这一部分我们统一使用🌟标注)，用户可以根据自己的需求选择性地接入这些AI Plugin来增强每个阶段的功能。  
-
-⚠️ 注意：我们仅给出AI Plugin的设计建议和接入方式，具体的AI模型选择、Prompt设计和结果处理需要用户根据自己的需求进行定制。
-
-
-#### 阶段一：检索与收集
-这是整个工作流的起点。
-- **人工流程**：在 PubMed、BioRxiv、arXiv 等平台手动输入关键词，浏览结果并保存。
-- **自动化切入点**：
-    - **智能检索代理**：利用 API 或爬虫，根据预设关键词、期刊列表、学者追踪等进行周期性自动化检索。
-    - **初筛算法**：基于规则（如标题术语、影响因子、时间范围）对结果进行初步过滤。
-- 🌟 **AI Plugin**
-    - Topic/Query builder skill：设计一个交互式的topic/query builder，在用户输入一个大致的研究主题后，AI可以在多轮brainstorm迭代中帮助用户细化和扩展这个主题，明晰用户真正的调研需求与研究方向, 然后生成多个相关的检索关键词组合，并且根据用户的反馈不断优化这些关键词组合，以覆盖更全面的相关文献。保留研究主题思考过程的可追溯性, 以及最终生成的关键词组合的多样性和相关性。
-    - 推荐参考：[Superpowers skill](https://github.com/obra/superpowers)，尤其是其中的brainstorm skill，可以参考其设计进行场景优化
-
-
-#### 阶段二：处理与解析
-将原始文件转换为计算机可处理的纯文本和元数据(整理为Markdown或JSON格式，便于后续AI处理)。总的来说，元数据靠API或爬虫抓取，文本内容靠人工获取pdf文件再使用统一的解析器解析。
-- **自动化切入点**：
-    - **统一解析器**：使用工具（如 pdfplumber, opendataloader-pdf, minerU, paddleocr）从 PDF 中高精度提取文本和图表, 并将它们转换为Markdown或JSON格式。
-    - **元数据增强**：利用API 或爬虫, 自动抓取并补全完整的文献元数据（标题、作者、DOI、关键词 等）并统一格式。
-- 🌟 **AI Plugin**
-    - PDF parser skill：设计一个智能的PDF解析器，能够自动识别和提取PDF中的文本、图表、表格等元素, 并将其转换为Markdown或JSON格式。
-    - 推荐参考：[MinerU](https://github.com/opendatalab/MinerU)，参考部署相应skill，实现PDF解析功能。
-
-#### 阶段三：核心信息结构化提取
-从“文本”到“信息”的关键跃迁。
-- **自动化切入点**（人机协同核心）：
-    - **结构化信息抽取**：利用大模型（LLM）扮演领域专家，抽取固定 Schema 的信息（如问题陈述、核心方法、关键数据、结论）。
-    - **关系与观点提取**：识别引用意图（支持/反驳），提炼核心论点。
-    - **构建本体论**：根据领域专业术语，构建本体论（Ontology），用于后续知识表示与推理，可引入逻辑推理 (🌟)。
-    - **形式化证明**：对于方法论或理论性论文，尝试将核心论点形式化为逻辑表达式，并使用自动定理证明工具验证其内部一致性。比如说LEAN prover等工具，参考：[Lean Zulip论坛](https://leanprover.zulipchat.com/#channels/395462/Natural.20sciences/general) (🌟)
-  
-        你可以从Lean Zulip论坛中获取更多关于本体论和形式化证明的讨论和资源![alt text](./figs/lean.png)
-  
-- 🌟 **AI Plugin**
-    - 信息抽取与本体构建 skill：设计一个信息抽取与本体构建的skill，能够根据预设的Schema从文献文本中抽取结构化信息，并且根据领域专业术语自动构建本体论。
-    - 推荐参考：[OpenIE] 
-
-#### 阶段四：深度编码与向量化
-为信息建立数学表示。
-- **自动化切入点**：
-    - **文本嵌入**：使用 Transformer 模型为文献生成高维向量（Embedding）。
-    - **向量存储**：将向量存入向量数据库（如 ChromaDB, Pinecone），支持语义检索。
-
-#### 阶段五：动态知识库存储与索引
-系统的“记忆体”。
-- **自动化切入点**：
-    - **多模态数据库**：结合关系型数据库（存储结构化信息）和向量数据库（存储 Embedding）。
-    - **自动化索引与关联**：自动建立文献间的潜在关联（共引分析、方法相似度），构建知识图谱的初始边。
-
-#### 阶段六：智能交互与知识发现
-利用知识库进行主动探索。
-- **自动化切入点**（人机协同核心）：
-    - **语义搜索引擎**：实现“以问代搜”，理解问题语义并返回相关段落。
-    - **关联推荐与可视化**：基于内容相似性推荐文献，可视化学术版图。
-    - **智能问答与综述生成**：基于库中所有文献生成结构化综述。
-    - **形式化证明&idea碰撞**：在知识图谱中进行逻辑推理，发现潜在的研究空白或矛盾，激发新的研究思路。尤其是借助LEAN prover等工具，可以自动验证论点的逻辑一致性，如果发现矛盾或未被证明的假设，可以提示研究者进行深入分析，从而发现新的研究方向 (🌟)。
-
-#### 阶段七：最终产出与内化
-以人为主导，AI 作为增强工具。
-- **自动化切入点**：
-    - **辅助写作与引用**：写作时实时推荐相关引用并格式化。
-    - **观点碰撞与灵感生成**：呈现方法论冲突，进行跨领域关联提示，激发批判性思考。
-
-*目前，阶段 1、2 以及阶段 4/5 的部分功能（通过标签实现的精简版）已实现。*
+详细设计理念参考 [设计文档](./Docs/Design.md)
 
 ## 📦 安装
 
-确保已安装 Python 3.9+。
-
 ```bash
-git clone <repository-url>
+# 1. 源码安装本仓库
+git clone https://github.com/MaybeBio/pyPaperFlow.git
 cd pyPaperFlow
 pip install -e .
+
+# 2. 如果你要使用 PDF 解析 / mineru-parse / pdf-parse 这一条链路，请额外安装 MinerU
+# 因为mineru安装依赖较多，且需要手动配置环境变量，不添加在pyproject.toml中
+# 参考官方文档：https://github.com/opendatalab/MinerU
+# 安装完成之后输入 `mineru --help` 来验证安装是否成功
+pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple
+pip install uv -i https://mirrors.aliyun.com/pypi/simple
+uv pip install -U "mineru[all]" -i https://mirrors.aliyun.com/pypi/simple 
+
+# 3. 如果你要使用 AI backend，再安装对应 SDK
+pip install openai anthropic
+
+# 4. 如果你要使用 paperscraper 后端，再额外安装 (⚠️ 目前还在集成中)
+# 参考官方文档：https://github.com/jannisborn/paperscraper
+pip install paperscraper
 ```
+
+> ⚠️ 正常使用情况下你只需要源码安装本仓库+MinerU即可，也就是1、2两步
 
 ## 🛠️ 使用方法
 
+本工具 pyPaperFlow 专为学术研究打造，整体设计严格贴合科研人员开展`文献调研、文献研读、文献理解分析及文献语料复用`的真实工作逻辑。
+
+因此，请跟随指引逐步完成操作 —— 该流程与您自身开展文献调研的完整过程完全一致，亲身体验后即可充分理解本工具的设计理念与使用方法。
+
 本平台提供了一个名为 `paperflow` 的命令行工具。
+
+### 模块概述
+
+目前可用模块包括(`会持续更新`)：
+
+```python
+❯ paperflow --help
+                                                                                                                                                                                         
+ Usage: paperflow [OPTIONS] COMMAND [ARGS]...                                                                                                                                            
+                                                                                                                                                                                         
+ pyPaperFlow CLI                                                                                                                                                                         
+                                                                                                                                                                                         
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                                                                                                               │
+│ --show-completion             Show completion for the current shell, to copy it or customize the installation.                                                                        │
+│ --help                        Show this message and exit.                                                                                                                             │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ pubmed-search      Search PubMed using Your customized query and return PMIDs.                                                                                                        │
+│ pubmed-meta        Fetch paper metadata from PubMed using Your customized query, pmid list file and save to storage.                                                                  │
+│ pubmed-content     Download full text (PMC) for given PMIDs if the paper has a PMC ID.                                                                                                │
+│ pubmed-all         Fetch BOTH metadata and full text (if available) for papers.                                                                                                       │
+│                    Also extracts URLs from full text and updates metadata links.                                                                                                      │
+│ pubmed-merge-json  Create a merged JSON (or JSONL) file from PubMed paper directories.                                                                                                │
+│ pubmed-export-md   Export a single Markdown view from a merged JSON file using optional YAML config.                                                                                  │
+│ arxiv-search       Search arXiv and write matching IDs to a text file.                                                                                                                │
+│ arxiv-fetch        Fetch arXiv metadata and attempt to download PDFs.                                                                                                                 │
+│ biorxiv-search     Search bioRxiv and write matching IDs to a text file.                                                                                                              │
+│ biorxiv-fetch      Fetch bioRxiv metadata and attempt to download PDFs.                                                                                                               │
+│ paper-fetch        Fetch PDFs by DOI — passes through to the paper-fetch engine.                                                                                                      │
+│ pdf-parse          Parse a PDF file using MinerU engine, and clean up the output directory.                                                                                           │
+│ mineru-parse       Parse mineru output content_list_v2.json into canonical sectioned JSON.                                                                                            │
+│ mineru-export-md   Export structured mineru JSON to a clean Markdown file for LLM processing.                                                                                         │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+```
+
+
+其中模块归属
+```python
+PubMed 相关模块：
+- pubmed-search # 用自然语言搜索 PubMed 文献并返回 PMID 列表 
+- pubmed-meta # 从 PubMed 获取论文元数据
+- pubmed-content # 从 PubMed 获取论文全文
+- pubmed-all # 从 PubMed 获取论文元数据和全文
+- pubmed-merge-json # 批量合并同主题的 PubMed 论文集合
+- pubmed-export-md # 导出 PubMed 论文集合为 Markdown 文件，支持批量导出该主题所有论文的某一核心章节（🌟如批量导出introduction作为你的研究背景）
+
+
+arXiv 相关模块：
+- arxiv-search # 搜索 arXiv 并返回 文献ID 列表
+- arxiv-fetch # 从 arXiv 获取论文元数据和 PDF 文件
+
+
+bioRxiv 相关模块：
+- biorxiv-search # 搜索 bioRxiv 并返回 文献ID 列表
+- biorxiv-fetch # 从 bioRxiv 获取论文元数据和 PDF 文件
+
+
+第3方辅助解析模块：
+- paper-fetch # 从 DOI 获取 PDF 文件
+- pdf-parse # 利用mineru引擎解析 PDF 文件为 JSON、Markdown 格式文本
+- mineru-parse # 按照自定义章节配置, 二次解析 MinerU 输出文件为文献标准章节聚类的结构化JSON 格式
+- mineru-export-md # 按照需求章节，导出 结构化JSON 格式文件为 Markdown 文件（🌟如批量导出同主题所有论文的introduction作为你的研究背景）
+
+```
+
+> ⚠️ `其他文献预印本平台模块正在开发中，敬请期待！`
+
+### 1. 研究起点
+
+开展文献调研的首要环节为文献信息的搜集与梳理。当现有信息储备不足时，需通过整合学术资料，清晰掌握国内外相关领域的研究现状。
+
+首先需明确拟开展的研究主题。研究初期，你可能仅有零散的初步构想、碎片化文献、调研草稿，甚至无任何前置资料，仅掌握若干核心关键词。
+
+本阶段需基于手头全部现有信息，初步划定研究方向与范畴。此处仅需确定宽泛的研究边界，无需在首次迭代中精准锁定最终研究目标。
+
+因此，需开展先验或后验式头脑风暴。本工具内置专属功能模块，可协助你梳理现有思路与信息，凝练出清晰的研究方向及范畴。
+
+```bash
+输入项：
+- 研究方向：计划开展研究的主题或问题领域
+- 已有信息：已掌握的相关文献、调研草稿、关键词及其他前置资料, 添加附件
+
+输出项：
+- 研究范围：包含核心主题与边界约束的明确定义。更通俗地讲，可理解为初步研究问题或整体研究方向，本文统一定义为研究起点。
+- 输出形式主要为指导后续文献检索的关键词清单，或规范化的研究问题表述，可根据研究需求在多轮迭代中补充约束条件。
+```
+
+核心要点：`该研究起点并非一次性确定，可依据新增信息与研究推进进度，通过多次迭代持续更新、完善。`
+
+你可借助前沿大语言模型，结合你目前所掌握的所有资料信息，反复核验、探讨研究起点，直至其足够清晰具体，或满足进入下一步文献检索的条件。
+
+
 
 ### 1. 搜索 PubMed
 搜索论文并获取 PMID 列表。
