@@ -12,7 +12,7 @@
 # ╔══════════════════════════════════════════════════════════════════════════╗
 # ║  Part 1 — AI 后端设置（仅 --backend ai 时生效）                          ║
 # ╚══════════════════════════════════════════════════════════════════════════╝
-#
+#   
 # 【正常使用】不需要改，设置好环境变量即可：
 #     export ANTHROPIC_API_KEY="sk-ant-..."    # Claude
 #     export OPENAI_API_KEY="sk-..."           # GPT / DeepSeek / 代理
@@ -26,7 +26,7 @@
 #
 # base_url 为空  → 原生 SDK（Anthropic 或 OpenAI）
 # base_url 非空  → 始终使用 OpenAI 聊天补全格式，指向该端点
-
+  
 ai:
   model: claude-haiku-4-5    # 模型名称
   api_key: null              # null = 从环境变量读取（ANTHROPIC_API_KEY 或 OPENAI_API_KEY）
@@ -78,7 +78,7 @@ canonical_order:
 # 【个性化】可以改成中文，或者调整某个期刊偏好的叫法，比如：
 #     availability: "数据和代码获取"
 #     conflicts: "利益冲突声明"
-
+   
 display_names:
   abstract: "Abstract"
   introduction: "Introduction"
@@ -95,7 +95,7 @@ display_names:
   conflicts: "Competing Interests"
   references: "References"
   other: "Other"
-
+  
 
 # ╔══════════════════════════════════════════════════════════════════════════╗
 # ║  Part 4 — 章节标题匹配规则（仅 --backend regex 时生效）                  ║
@@ -323,3 +323,4 @@ aliases:
       - "references?"
       - "bibliography"
     context_keywords: []
+             

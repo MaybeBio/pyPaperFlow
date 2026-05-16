@@ -975,41 +975,19 @@ After running MinerU's `pdf-parse` (Case 6), you get a `content_list_v2.json` fi
 
 The `mineru-parse` command transforms this flat JSON into a structured, canonical JSON where every section is classified into a standard academic type (abstract, introduction, methods, results, discussion, etc.). Metadata (title, authors, year, DOI, journal) and figure captions are also extracted.
 
-`mineru-parse` 将 MinerU 输出的扁平 JSON 转换为结构化的规范 JSON，每个章节被归类到标准的学术章节类型中，同时提取元数据（标题、作者、年份、DOI、期刊）和图片注释。
-
+   
 ---
 
-### Two Backends / 两种后端
+    
 
-| Backend | How it works | API needed? | Best for |
-|---------|-------------|-------------|----------|
-| **regex** (default) | Pattern matching: exact string → regex → context keyword. Configurable via YAML. | No | Common papers, batch processing |
-| **ai** | Sends all section titles + context to an LLM in one batch API call. | Yes | Non-standard titles, multi-publisher |
-
-**Regex matching layers / Regex 匹配层级：**
-
-```
-1. strong (exact match)   → "Introduction" == "introduction"  ✓
-2. weak (regex search)    → "1. Introduction" matches r"introduction"  ✓
-3. context_keywords       → "Overview" → check text for "we used..." → methods
-4. fallback               → classify as "other"
-```
 
 A sliding cursor tracks document order to reduce false matches (a late "Methods" heading in an unusual position is still recognized).
 
-**AI workflow / AI 工作流程：**
 
-```
-content_list_v2.json
-    → extract all titles + surrounding text (~200 chars)
-    → build JSON payload: [{index, title, context_preview}, ...]
-    → one API call → AI returns {classifications: [{index, canonical_type}]}
-    → merge classifications into structured JSON
-```
 
 ---
-
-### Usage / 使用方法
+   
+### Usage / 使用方法      
 
 ```bash
 # Regex backend (default, no API key needed)
@@ -1019,7 +997,7 @@ paperflow mineru-parse -i content_list_v2.json -o paper.json
 export ANTHROPIC_API_KEY="sk-ant-..."
 paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai
 
-# AI backend with DeepSeek
+# AI backend with DeepSeek    
 export OPENAI_API_KEY="sk-..."
 paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \
   --base-url https://api.deepseek.com --model deepseek-v4-pro
@@ -1032,23 +1010,17 @@ paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \
 paperflow mineru-parse -i content_list_v2.json -o paper.json --config my_rules.yaml
 ```
 
-**CLI parameters / 命令行参数：**
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `--input` / `-i` | (required) | Path to MinerU `content_list_v2.json` |
-| `--output` / `-o` | (required) | Output JSON path |
-| `--backend` / `-b` | `regex` | `regex` or `ai` |
-| `--config` / `-c` | (built-in) | Custom YAML config file |
-| `--api-key` | (env var) | API key override for AI backend |
-| `--model` | `claude-haiku-4-5` | Model override for AI backend |
-| `--base-url` | (none) | OpenAI-compatible endpoint URL (DeepSeek, proxy, etc.) |
+     
+         
+        
+    
+ 
 
 ---
-
+     
 ### Output JSON Structure / 输出 JSON 结构
 
-```json
+```json   
 {
   "source": "mineru",
   "file": "paper_content_list_v2.json",
@@ -1092,67 +1064,11 @@ paperflow mineru-parse -i content_list_v2.json -o paper.json --config my_rules.y
 
 `abstract` `introduction` `results` `discussion` `methods` `conclusion` `supplementary` `availability` `funding` `acknowledgements` `author_contributions` `keywords` `conflicts` `references` `other`
 
----
-
-### Customization via YAML / 通过 YAML 自定义
-
-All matching rules live in `src/pyPaperFlow/integrations/mineru_config.yaml`. This file ships with sensible defaults — you do NOT need to provide it. Edit it only when a specific journal uses unusual section names.
-
-所有匹配规则都在 `mineru_config.yaml` 中，内置了合理默认值。正常使用不需要提供。仅在需要适配特定期刊时修改。
-
-**Config file layout / 配置文件结构：**
-
-| Section | Purpose |
-|---------|---------|
-| `ai` | `model`, `api_key`, `base_url` for AI backend |
-| `canonical_order` | Which types exist + their output order |
-| `display_names` | Human-readable labels (can be Chinese, etc.) |
-| `aliases` | Matching rules: `strong` (exact), `weak` (regex), `context_keywords` |
-
-**Common customization scenarios / 常见自定义场景：**
-
-| Scenario | Where to edit |
-|----------|--------------|
-| Title misclassified as "other" / 标题被归入 other | Add to matching type's `strong` or `weak` |
-| Need a new section type / 需要新类型 | Add to `canonical_order` + `display_names` + `aliases` |
-| Switch AI model / 切换模型 | Edit `ai.model` and `ai.base_url` |
-| Chinese labels / 中文标签 | Edit `display_names` |
-
----
+---  
+ 
+ 
 
 ### Notes & Limitations / 注意事项与局限
-
-1. **Regex accuracy varies by publisher.** Nature puts Methods after Discussion; Cell Press uses "STAR Methods"; Wiley uses "Experimental Section". The default aliases cover common cases. For niche journals, add custom rules to the config YAML.
-
-   **Regex 准确度取决于出版商风格。** 默认别名已覆盖 Nature/Cell/Wiley/bioRxiv/arXiv 常见变体。小众期刊需要添加自定义规则。
-
-2. **Subsections may land in "other".** Titles like "Ensemble Generation" or "Model limitations" are sub-topics, not canonical types. This is intentional. Use the AI backend for finer classification.
-
-   **子章节可能归入 "other"。** 这是有意为之。需要更细分类时用 AI 后端。
-
-3. **Figure captions are preserved.** Image blocks → `[Figure: ...]` paragraphs at their PDF position. Table HTML is not preserved (rarely useful downstream).
-
-   **图片注释被保留。** 表格 HTML 不保留。
-
-4. **Abstract is always section #1.** If the paper lacks an explicit abstract heading, one is auto-created from the text between the title and first section.
-
-   **摘要始终是第一个章节。** 无显式标题时自动创建。
-
-5. **Year extraction: 3-pass strategy.** Page footer (journal citations) → arXiv aside text → fallback scan. Handles preprints and published papers correctly.
-
-   **年份提取：三遍策略。** 页脚 → arXiv 侧边文字 → 回退扫描。
-
-6. **Batch processing / 批量处理：**
-
-   ```bash
-   for f in /path/to/*/auto/*_content_list_v2.json; do
-     paperflow mineru-parse -i "$f" -o "${f%/*}/parsed.json"
-   done
-   ```
-
-7. **When regex fails, use AI.** The AI backend costs ~750 input tokens per paper with cheap models like `claude-haiku-4-5` or `deepseek-v4-pro`. It handles irregular titles that regex cannot match.
-
-   **Regex 不够用时用 AI。** 每篇论文约 750 input tokens，用廉价模型成本极低。
 
 
 目前建议是使用自己测试的样本不断完善结构解析的边界情况，直到你觉得大部分的论文都能被正确解析了，再进行批量处理。

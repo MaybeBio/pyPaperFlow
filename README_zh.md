@@ -209,39 +209,894 @@ bioRxiv 相关模块：
 - 输出形式主要为指导后续文献检索的关键词清单，或规范化的研究问题表述，可根据研究需求在多轮迭代中补充约束条件。
 ```
 
-核心要点：`该研究起点并非一次性确定，可依据新增信息与研究推进进度，通过多次迭代持续更新、完善。`
+> 核心要点：`该研究起点并非一次性确定，可依据新增信息与研究推进进度，通过多次迭代持续更新、完善。`
 
 你可借助前沿大语言模型，结合你目前所掌握的所有资料信息，反复核验、探讨研究起点，直至其足够清晰具体，或满足进入下一步文献检索的条件。
 
 
+> 🌟 这里我们为你提供几个用于文献调研的brainstorm skill: [Research brainstorm skill](./Docs/Skills.md)
 
-### 1. 搜索 PubMed
-搜索论文并获取 PMID 列表。
 
-```bash
-paperflow search "COVID-19 vaccine" --retmax 5
+### 2. 文献检索（及元数据抓取）
+
+当我们确定了研究起点（或者任何研究中途中需要进行文献调研的前置头脑风暴阶段），我们可以开始进行文献检索了。
+
+这里我们不会帮你设计文献调研的query，但是我们建议你在使用我们的搜索工具前，一定要精确使用符合语法格式、高命中的query语句，以确保检索到相关文献。
+
+我们工具囊括的文献数据库主要集中于生物医学以及计算交叉领域，包括但不限于：
+
+- PubMed/Medline
+- arXiv
+- bioRxiv，medRxiv，chemRxiv 等预印本平台
+
+建议用户提前学习并熟练掌握上述数据库的检索语法，本工具内置搜索模块的运行逻辑与数据库网页端搜索框基本一致。
+
+> ✨ 这里我们为你提供了几个特定文献数据库构建搜索query的skill，[Paper query skill](./Docs/Skills.md)
+
+以 PubMed 为例，以下为一组典型且结构较复杂的检索式示例：
+
+```python
+"""
+(
+  "Intrinsically Disordered Proteins"[Mesh] OR
+  "Intrinsically Disordered Protein"[Title/Abstract] OR
+  "Intrinsically Disordered Proteins"[Title/Abstract] OR
+  "Intrinsically Disordered Region"[Title/Abstract] OR 
+  "Intrinsically Disordered Regions"[Title/Abstract] OR 
+  "Natively Unfolded Protein"[Title/Abstract] OR
+  "Natively Unfolded Proteins"[Title/Abstract] OR
+  "Unstructured Protein"[Title/Abstract] OR
+  "Unstructured Proteins"[Title/Abstract] OR
+  "IDR"[Title/Abstract] OR 
+  "IDP"[Title/Abstract]
+)
+AND 
+(
+  "Protein Interaction Maps"[Mesh] OR
+  "Protein Interaction Maps"[Title/Abstract] OR
+  "Protein Interaction Networks"[Title/Abstract] OR
+  "Protein-Protein Interaction Map"[Title/Abstract] OR
+  "Protein-Protein Interaction Network"[Title/Abstract] OR
+
+  "Protein Interaction Mapping"[Mesh] OR
+  "Protein Interaction Mapping"[Title/Abstract] OR
+  "Binding Sites"[Title/Abstract] OR
+  "Protein Binding"[Title/Abstract] OR
+  "Protein Interaction Domains and Motifs"[Title/Abstract] OR
+  "Protein Interaction Maps"[Title/Abstract] OR   
+
+  "Protein Interaction Domains and Motifs"[Mesh] OR
+  
+  "Protein Interaction"[Title/Abstract] OR
+  "Protein-Protein Interaction"[Title/Abstract] OR
+  "PPI"[Title/Abstract] OR
+  "Interaction"[Title/Abstract] OR
+  "Binding"[Title/Abstract] OR
+  "Interface"[Title/Abstract] OR
+  "Complex"[Title/Abstract]
+) 
+AND 
+(
+  "Artificial Intelligence"[Mesh] OR
+  "Deep Learning"[Mesh] OR
+  "Machine Learning"[Mesh] OR
+  "Neural Networks, Computer"[Mesh] OR
+  "Artificial Intelligence"[Title/Abstract] OR
+  "Deep Learning"[Title/Abstract] OR
+  "Machine Learning"[Title/Abstract] OR
+  "Neural Network"[Title/Abstract] 
+)
+AND (
+  "2023/01/01"[Date - Publication] : "2026/12/31"[Date - Publication]
+)
+"""
 ```
 
-### 2. 获取论文
-获取论文元数据并保存到本地存储。
+完成检索query构建后，即可开始检索文献，我们将以PubMed相关 API 为例进演示。
 
-**通过查询：**
-```bash
-paperflow fetch --query "COVID-19 vaccine" --batch-size 10
+```python
+❯ paperflow pubmed-search --help
+                                                                                                                              
+ Usage: paperflow pubmed-search [OPTIONS] QUERY                                                                               
+                                                                                                                              
+ Search PubMed using Your customized query and return PMIDs.                                                                  
+                                                                                                                              
+                                                                                                                              
+ Notes:                                                                                                                       
+ - 1, This command only searches and returns PMIDs, it does not fetch paper metadata.                                         
+ - 2, This command will print the found PMIDs and also save them to 'pubmed_searched_ids.txt' in the specified output         
+ directory.                                                                                                                   
+ If --output-dir is not specified, it will default to the storage directory.                                                  
+ - 3, Note that storage_dir is used to initialize the fetcher for consistency, while output_dir is where the PMIDs are saved. 
+ They are different parameters!                                                                                               
+                                                                                                                              
+                                                                                                                              
+ Example usage:                                                                                                               
+ - 1. Search for papers related to "machine learning" and return up to 500 PMIDs/per batch:                                   
+ paperflow pubmed-search "machine learning" --retmax 500 --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key   
+ "YOUR_NCBI_API_KEY"                                                                                                          
+                                                                                                                              
+╭─ Arguments ────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *    query      TEXT  PubMed search query. [required]                                                                      │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│    --retmax       -n      INTEGER  Max number of PMIDs to return every batch, must less than 10000. [default: 500]         │
+│ *  --email                TEXT     Entrez Email. [required]                                                                │
+│    --api-key              TEXT     NCBI API Key (recommended).                                                             │
+│    --storage-dir  -s      TEXT     Directory in Repository-level to store paper data for Initialization.                   │
+│                                    [default: ./Papers]                                                                     │
+│    --output-dir   -o      TEXT     Directory in result-level to store output IDs.                                          │
+│    --max-retries          INTEGER  Maximum number of retries for Entrez API calls. [default: 3]                            │
+│    --help                          Show this message and exit.                                                             │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-**通过 PMID 列表：**
-创建一个包含 PMID 的文件 `pmids.txt`（每行一个），然后运行：
-```bash
-paperflow fetch --file pmids.txt
+在本阶段，我们建议通过文献检索获取论文元数据（以摘要为主）。
+
+文献收集本质是一个迭代优化的过程：通常仅通过摘要即可筛选出目标文献，随后在下一步针对性下载所需论文；特殊情况下也可下载全部检索结果。
+
+需要重点强调：`你可以在任意阶段重新开展头脑风暴。每个阶段的输出结果，均可作为后续文献调研的输入依据`。基于本阶段的产出，你可进一步完善研究起点，精准定义研究问题。
+
+```python
+❯ paperflow pubmed-meta --help
+                                                                                                                                                             
+ Usage: paperflow pubmed-meta [OPTIONS]                                                                                                                      
+                                                                                                                                                             
+ Fetch paper metadata from PubMed using Your customized query, pmid list file and save to storage.                                                           
+                                                                                                                                                             
+                                                                                                                                                             
+ Notes:                                                                                                                                                      
+ - 1, You must provide one of --query, or --file to specify which papers to fetch. Note that they are mutually exclusive.                                    
+ - 2, -f can be used to fetch one or more PMIDs listed in a text file (one PMID per line).                                                                   
+                                                                                                                                                             
+                                                                                                                                                             
+ Example usage:                                                                                                                                              
+ - 1. Fetch papers for a query and save to storage:                                                                                                          
+   paperflow pubmed-fetch --query "machine learning" --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key "YOUR_NCBI_API_KEY"                  
+ - 2. Fetch papers from a list of PMIDs in a file:                                                                                                           
+   paperflow pubmed-fetch --file ./pmid_list.txt --output-dir ./MyPapers --email "YOUR_EMAIL@example.com" --api-key "YOUR_NCBI_API_KEY"                      
+                                                                                                                                                             
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│    --query        -q      TEXT     PubMed search query.                                                                                                   │
+│    --file         -f      TEXT     Text file containing PMIDs (one per line), -q and -f are mutually exclusive.                                           │
+│    --batch-size   -b      INTEGER  Batch size for fetching. [default: 50]                                                                                 │
+│ *  --email                TEXT     Entrez Email. [required]                                                                                               │
+│    --api-key              TEXT     NCBI API Key (recommended).                                                                                            │
+│    --storage-dir  -s      TEXT     Directory in Repository-level to store paper data for Initialization. [default: ./Papers]                              │
+│    --max-retries          INTEGER  Maximum number of retries for Entrez API calls. [default: 3]                                                           │
+│    --output-dir   -o      TEXT     Directory in result-level to store output papers, default is current directory. If not specified, will be set to root  │
+│                                    directory of the repository-level which is storage_dir. 🌟 We will create a '/pubmed' subfolder under the output       │
+│                                    directory to save all pubmed related data                                                                              │
+│                                    [default: .]                                                                                                           │
+│    --help                          Show this message and exit.                                                                                            │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-### 3. 下载全文
-下载已获取论文的 PMC 全文（如果可用, 如果有PMC全文）。
+
+### 3. 文献获取（及全文下载）
+
+一旦确定目标文献，或因检索阶段获取的元数据不足以支撑进一步筛选、需批量下载全文时，即可启动文献下载流程。
+
+以 PubMed 数据库为例：针对 PubMed 收录文献，优先下载 PMC 开放获取全文（若存在）；若无 PMC 全文资源，则仅抓取 PubMed 平台的元数据（以摘要为主）及基础文献信息。此外，我们还提供了一个文献 pdf 文件抓取模块作为文献获取兜底策略。只有上述手段获取 PubMed文献数据都失败了，我们才建议你通过人工手段去搜索并获取文献pdf 文本数据。
+
+pubmed 数据库输出文件支持 JSON 格式与 Markdown 格式两种，推荐采用JSON格式后续分析，markdown 格式为大语言模型（LLM）的输入数据，我们的工具会同时生成两类文件供选择。
+
+
+```python
+❯ paperflow pubmed-content --help
+                                                                                                                                                                  
+ Usage: paperflow pubmed-content [OPTIONS]                                                                                                                        
+                                                                                                                                                                  
+ Download full text (PMC) for given PMIDs if the paper has a PMC ID.                                                                                              
+                                                                                                                                                                  
+                                                                                                                                                                  
+ Notes:                                                                                                                                                           
+ - 1, This currently only supports PMC full text fetching if the paper has a PMC ID.                                                                              
+                                                                                                                                                                  
+                                                                                                                                                                  
+                                                                                                                                                                  
+ Example usage:                                                                                                                                                   
+ - 1. Download full text for PMIDs listed in a file:                                                                                                              
+   paperflow download-fulltext --file ./pmid_list.txt --email "YOUR_EMAIL@example" --api-key "YOUR_NCBI_API_KEY" --output-dir ./MyPapers                          
+                                                                                                                                                                  
+                                                                                                                                                                  
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│    --file         -f      TEXT     File containing PMIDs (one per line).                                                                                       │
+│ *  --email                TEXT     Entrez Email. [required]                                                                                                    │
+│    --api-key              TEXT     NCBI API Key (recommended).                                                                                                 │
+│    --storage-dir  -s      TEXT     Directory in Repository-level to store paper data for Initialization. [default: ./Papers]                                   │
+│    --max-retries          INTEGER  Maximum number of retries for Entrez API calls. [default: 3]                                                                │
+│    --output-dir   -o      TEXT     Directory in result-level to store output full texts, default is current directory. If not specified, will be set to root   │
+│                                    directory of the repository-level which is storage_dir. 🌟 We will create a '/pubmed' subfolder under the output directory  │
+│                                    to save all pubmed related data                                                                                             │
+│                                    [default: .]                                                                                                                │
+│    --pmid         -p      TEXT     Single PMID to download full text for, can be repeated.                                                                     │
+│    --help                          Show this message and exit.                                                                                                 │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+```
+
+
+此外，可采用元数据获取 + 全文下载的分步执行模式，建议两类操作分开处理。
+
+```python
+❯ paperflow pubmed-all --help
+                                                                                                                                                                  
+ Usage: paperflow pubmed-all [OPTIONS]                                                                                                                            
+                                                                                                                                                                  
+ Fetch BOTH metadata and full text (if available) for papers. Also extracts URLs from full text and updates metadata links.                                       
+                                                                                                                                                                  
+                                                                                                                                                                  
+ Example usage:                                                                                                                                                   
+ - 1. Fetch full papers for a query:                                                                                                                              
+   paperflow pubmed-all --query "machine learning" --output-dir ./MyPapers --email "YOUR_EMAIL"                                                                   
+                                                                                                                                                                  
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│    --query        -q      TEXT     PubMed search query.                                                                                                        │
+│    --file         -f      TEXT     Text file containing PMIDs (one per line), -q and -f are mutually exclusive.                                                │
+│    --pmid         -p      TEXT     Single PMID to download full text for, can be repeated.                                                                     │
+│    --batch-size   -b      INTEGER  Batch size for fetching. [default: 50]                                                                                      │
+│    --max-retries          INTEGER  Maximum number of retries for Entrez API calls. [default: 3]                                                                │
+│ *  --email                TEXT     Entrez Email. [required]                                                                                                    │
+│    --api-key              TEXT     NCBI API Key (recommended).                                                                                                 │
+│    --storage-dir  -s      TEXT     Directory in Repository-level to store paper data for Initialization. [default: ./Papers]                                   │
+│    --output-dir   -o      TEXT     Directory in result-level to store output papers. If not specified, defaults to storage-dir.                                │
+│    --help                          Show this message and exit.                                                                                                 │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+``` 
+
+
+对于无 PMC 全文的 PubMed 文献，或其他数据库来源的文献，若仅持有 DOI（pubmed‑meta 模块可确保获取 DOI 信息），可直接通过 DOI 下载开放获取全文。
+
+```python 
+❯ paperflow paper-fetch --help
+usage: paper-fetch [-h] [--title TITLE] [--batch FILE] [--out DIR] [--dry-run] [--format {json,text}] [--pretty] [--stream] [--overwrite]
+                   [--idempotency-key KEY] [--timeout SECONDS] [--version]
+                   [doi]
+
+Fetch legal open-access PDFs by DOI via Unpaywall, Semantic Scholar, arXiv, PMC, and bioRxiv/medRxiv.
+
+positional arguments:
+  doi                   DOI to fetch (e.g. 10.1038/s41586-020-2649-2). Use '-' to read from stdin.
+
+options:
+  -h, --help            show this help message and exit
+  --title TITLE         paper title; resolved to a DOI via Crossref before download. Mutually exclusive with positional DOI / --batch.
+  --batch FILE          file with one DOI per line for bulk download. Use '-' to read from stdin.
+  --out DIR             output directory (default: pdfs)
+  --dry-run             resolve sources without downloading; preview the PDF URL and filename
+  --format {json,text}  output format. json for agents, text for humans. Default: json when stdout is not a TTY, text otherwise.
+  --pretty              pretty-print JSON output (2-space indent)
+  --stream              emit one NDJSON result per line on stdout as each DOI resolves (batch mode)
+  --overwrite           re-download even if the destination file already exists
+  --idempotency-key KEY
+                        safe-retry key; re-running with the same key replays the original envelope from <out>/.paper-fetch-idem/
+  --timeout SECONDS     HTTP timeout in seconds per request (default: 30)
+  --version             show program's version number and exit
+
+exit codes:
+  0  all DOIs resolved successfully
+  1  unresolved (some DOIs had no OA copy; no transport failure)
+  3  validation error (bad arguments)
+  4  transport error (network / download / IO failure; retryable class)
+
+subcommands:
+  schema                 print the machine-readable CLI schema and exit (no network)
+
+stdin:
+  paper-fetch -          read a single DOI from stdin
+  paper-fetch --batch -  read DOIs line-by-line from stdin
+
+output:
+  stdout emits one JSON object per invocation (NDJSON with --stream).
+  stderr emits NDJSON progress events when --format json, prose when --format text.
+  stdout format auto-detects TTY: json when piped/captured, text in a terminal.
+
+examples:
+  paper-fetch 10.1038/s41586-020-2649-2
+  paper-fetch 10.1038/s41586-020-2649-2 --dry-run
+  paper-fetch --batch dois.txt --out ./papers --format text
+  echo 10.1038/s41586-020-2649-2 | paper-fetch --batch -
+  paper-fetch schema
+
+```
+
+
+感谢[paper-fetch](https://github.com/Agents365-ai/paper-fetch)的工作！我们魔改并封装了其中的一个脚本。
+
+目前我们的文献获取模块处理逻辑如下：
 
 ```bash
-paperflow download-fulltext --pmid 34320283
+┌─────────────────────────────────────────┐
+│  输入：DOI / 标题 / 批量文件              │
+└─────────────────────────────────────────┘
+                   ↓
+┌─────────────────────────────────────────┐
+│  标题模式？→ Crossref → Semantic Scholar │
+│  （解析为 DOI，带置信度评分）              │
+└─────────────────────────────────────────┘
+                   ↓
+┌─────────────────────────────────────────┐
+│  1. Unpaywall（需 UNPAYWALL_EMAIL）      │
+│     → 最快 OA 链接，含元数据               │
+└─────────────────────────────────────────┘
+           失败/跳过 ↓
+┌─────────────────────────────────────────┐
+│  2. Semantic Scholar                     │
+│     → PDF URL + 外部ID（arXiv/PMCID）     │
+└─────────────────────────────────────────┘
+           失败 ↓
+┌─────────────────────────────────────────┐
+│  3. arXiv（通过 S2 的 externalIds.ArXiv） │
+│  4. Europe PMC → PMC（通过 PMCID）         │
+│  5. bioRxiv/medRxiv（DOI 前缀 10.1101/）  │
+└─────────────────────────────────────────┘
+           全部失败 ↓
+┌─────────────────────────────────────────┐
+│  6. 出版商直链（仅 institutional 模式）    │
+│     Nature/Science/Elsevier/Springer等    │
+│     需机构IP/订阅/EZproxy授权             │
+└─────────────────────────────────────────┘
+           仍失败 ↓
+┌─────────────────────────────────────────┐
+│  7. Sci-Hub 镜像回退（默认启用，可禁用）    │
+│     → 1 req/s 限速，防 CAPTCHA            │
+│     → 自动发现新镜像                      │
+└─────────────────────────────────────────┘
+
 ```
+
+```bash
+解析顺序 
+
+Unpaywall — 全出版社 OA 最佳位置（命中率最高）
+Semantic Scholar — openAccessPdf 字段 + externalIds
+arXiv — 论文有 arXiv ID 时
+PubMed Central OA 子集 — 论文有 PMCID 时
+bioRxiv / medRxiv — DOI 前缀为 10.1101/
+出版商直链 — 仅机构模式（PAPER_FETCH_INSTITUTIONAL=1）下启用，由调用方的订阅 IP / Cookies / EZproxy 授权
+Sci-Hub 镜像 — 兜底来源，默认开启。优先按 PAPER_FETCH_SCIHUB_MIRRORS 设定的镜像顺序尝试（默认列表：sci-hub.ru、sci-hub.st、sci-hub.su、sci-hub.box、sci-hub.red、sci-hub.al、sci-hub.mk、sci-hub.ee）；全部失败时会从 https://www.sci-hub.pub/ 抓取最新镜像列表再试一次。设置 PAPER_FETCH_NO_SCIHUB=1 可关闭。
+都失败 → 输出元数据提示走馆际互借
+
+```
+
+> ⚠️ 在使用 `paper-fetch` 模块前，建议先设置 unpaywall联系邮箱
+```bash
+export UNPAYWALL_EMAIL=you@example.com
+```
+
+
+与 PMC 全文解析逻辑不同，非 PubMed 来源文献仅可通过 paper‑fetch 模块获取 PDF 格式原文。
+
+建议统一将所有文献信息标准化为 Markdown 格式或 JSON 格式。
+
+鉴于后续需开展语段分割与信息提取，从编程调用便捷性角度，优先选用 JSON 格式作为中间转换载体。
+
+工具内置 pdf‑parser 模块，依托 MinerU 解析引擎将 PDF 文件解析为基础 Markdown 文件与结构化 JSON 文件。
+
+具体规范参考 MinerU 官方文档。考虑到普通用户通常无 GPU 算力用于加速解析，本工具默认启用基础解析模式（即 pipeline 后端）。
+
+```python
+❯ paperflow pdf-parse --help
+                                          
+ Usage: paperflow pdf-parse [OPTIONS]     
+                                          
+ Parse a PDF file using MinerU engine,    
+ and clean up the output directory.       
+                                          
+                                          
+ Notes:                                   
+ - 1, MinerU generates a subfolder /auto  
+ under --output with .md, .json, .pdf,    
+ and images/.  Use --clear to strip       
+ anything unnecessary,                    
+ note that we only use .md files and      
+ _content_list_v2.json/_content_list.json 
+ files for further processing like        
+ structuring.                             
+ - 2, ⚠️  Remember to switch to domestic  
+ mirror source when you can not access    
+ huggingface.                             
+                                          
+                                          
+ Example usage:                           
+   paperflow pdf-parse -i paper.pdf -o    
+ ./output                                 
+                                          
+╭─ Options ──────────────────────────────╮
+│ *  --input   -i      TEXT  Input PDF   │
+│                            file path.  │
+│                            [required]  │
+│ *  --output  -o      TEXT  Output      │
+│                            directory   │
+│                            for parsed  │
+│                            output.     │
+│                            [required]  │
+│    --clear                 After       │
+│                            conversion, │
+│                            keep only   │
+│                            the .md     │
+│                            files and   │
+│                            necessary   │
+│                            .json       │
+│                            files(_con… │
+│    --help                  Show this   │
+│                            message and │
+│                            exit.       │
+╰────────────────────────────────────────╯
+
+
+```
+
+
+
+> 🌟 关于pdf文献获取模块，我们也提供了一系列脚本参考，你可以将其整合到 skill 中或独立实现: [Paper pdf fetch](./Docs/Skills.md)
+
+
+### 4. 文献内容提取与结构化处理
+
+在上一个阶段，我们获取了文献的元数据+文本内容：
+- 对于 pubmed文献：我们获取了元数据，并通过PMC下载了全文文本内容（如果有的话）, 然后解析输出为 markdown 和 json 格式
+- 对于非 pubmed 文献：我们通过 doi 获取了 pdf 文件，使用 mineru 解析引擎将其解析，输出格式也是统一到 markdown 和 json 格式
+  
+这两者输出的 markdown 文件都可以作为全文文本内容替代，可以作为文献本体阅读使用，但是难以进行章节提取和规范化处理。
+
+而json 文件则是包含复杂结构的原始解析结果，包含了丰富的文本内容和位置信息，但不够规范化，难以直接使用。
+
+我们这一步从 json 文件出发，将原始 json 文件依据语段内容解析与分类，划分整理为规范化的/章节化的 json 文件，
+
+即尽可能按照下列文献经典章节进行划分提取(具体章节划分配置上会有些差异)：
+
+```bash
+metadata(title,year,authors)
+abstract
+introduction
+results
+discussion
+methods
+conclusion
+supplementary
+availability
+funding
+acknowledgements
+author contributions
+references
+other
+
+```
+
+我们的目的就是能够依据不同文献本身章节划分的标准规范，考虑到科研人员下游阅读解析文献的核心需求，从目的论上将文献根本性地划分为固定的 section，让科研人员在固定的思考框架下去巡视/使用文献知识。
+
+其中，对于 pubmed 文献，因为我们的文本数据是从 PMC 数据库获取的，所以我们解析的出发点是PMC 解析响应之后的 json 文件，
+
+为了后续数据资料的完整性（因为有些pubmed 文献没有 pmc 全文），我们设计了两个模块来结构化提取和表征一篇 pubmed 文献。
+
+首先是合并元数据和文本数据（如果有 pmc 的话），生成一个包含完整信息的 json 文件：
+
+```python
+❯ paperflow pubmed-merge-json --help
+                                                                                                                    
+ Usage: paperflow pubmed-merge-json [OPTIONS]                                                                       
+                                                                                                                    
+ Create a merged JSON (or JSONL) file from PubMed paper directories.                                                
+                                                                                                                    
+ This produces a canonical merged JSON representation per paper and is                                              
+ intended as the first stage in a two-stage pipeline (merge-json -> export-md).                                     
+                                                                                                                    
+                                                                                                                    
+ Example usage:                                                                                                     
+ - 1. Merge JSON files for all papers in a directory:                                                               
+   paperflow pubmed-merge-json --input ./MyPapers --output ./MyPapers                                               
+ - 2. Merge JSON files for PMIDs listed in a file:                                                                  
+   paperflow pubmed-merge-json --input ./MyPapers --output ./MyPapers --pmid-file ./pmid_list.txt --jsonl           
+ --stats-path ./MyPapers/stats                                                                                      
+                                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input       -i      TEXT  Directory containing paper data                                                   │
+│                                ({INPUT_PAPER_DIR_HERE}/pubmed/year/pmid/structure).                              │
+│                                [required]                                                                        │
+│ *  --output      -o      TEXT  Output directory or file path. If a directory or path without extension is given, │
+│                                the merged file is auto-named as                                                  │
+│                                <input-directory-base-name>_<datetime>.json/.jsonl.                               │
+│                                [required]                                                                        │
+│    --pmid-file   -p      TEXT  File containing PMIDs to merge (one per line).                                    │
+│    --jsonl                     Write output as JSONL, one JSON per line.                                         │
+│    --stats-path  -s      TEXT  Optional path to save merge statistics file, defaults to current directory.       │
+│                                [default: .]                                                                      │
+│    --help                      Show this message and exit.                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+因为我们结构化文献的目的是为了能够从统一章节设置中进行批量内容提取，所以我们的上述模块设计优先应用于批量文献场景，当然你可以通过文件指定某一篇文献进行单独处理。
+
+我们默认会对你所提供的输入文件夹下的所有 pubmed 文献进行独立的文献合并，并汇总你所指定清单范围内的 json 文件，进行二次合并为 1 个汇总的 json 文件（这通常发生在你希望将同一个研究主题的文献进行汇总/构造初步文献知识库的情况下）。
+
+而这个汇总的 json 文件，是我们下一步进行结构化归类提取的起点：
+
+```python
+❯ paperflow pubmed-export-md --help
+                                                                                                 
+ Usage: paperflow pubmed-export-md [OPTIONS]                                                     
+                                                                                                 
+ Export a single Markdown view from a merged JSON file using optional YAML config.               
+                                                                                                 
+                                                                                                 
+ Notes:                                                                                          
+ - 1, The input merged JSON/JSONL should be produced by the pubmed-merge-json command, which     
+ creates a canonical representation of paper metadata and content.                               
+ - 2, The optional YAML config can specify which metadata fields and content sections to include 
+ in the Markdown output. If not provided, it defaults to including basic metadata and the FULL   
+ content.                                                                                        
+                                                                                                 
+                                                                                                 
+ Example usage:                                                                                  
+ - 1. Export Markdown for all papers in a merged JSON:                                           
+ paperflow pubmed-export-md --input ./MyPapers/merged.jsonl --output ./MyPapers/exported.md      
+ --config ./config.yaml                                                                          
+ - 2. Export Markdown for PMIDs listed in a file:                                                
+ paperflow pubmed-export-md --input ./MyPapers/merged.jsonl --output ./MyPapers/exported.md      
+ --config ./config.yaml --pmid-file ./pmid_list.txt                                              
+                                                                                                 
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input      -i      TEXT  Path to merged JSON or JSONL produced by pubmed-merge-json.     │
+│                               [required]                                                      │
+│ *  --output     -o      TEXT  Output Markdown file path. [required]                           │
+│    --config     -c      TEXT  YAML config file specifying metadata_fields and                 │
+│                               content_sections. If not provided, defaults to basic metadata   │
+│                               and FULL content.                                               │
+│    --pmid-file  -p      TEXT  Optional PMID file to filter exported papers.                   │
+│    --help                     Show this message and exit.                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────────╯
+
+```
+
+对于每一篇文献，其元数据的键值对是固定的：
+```bash
+content
+    abstract  # abstract text, 🌟 important
+    keywords  # keywords, 🌟 important
+    mesh_terms  # mesh terms, 🌟 important
+    pub_types # article or review, can be used for filtering, 🌟 important
+contributors
+    medline # contributors parsed from medline format, MIXED PERSONS PER DICT, LESS DETAILED
+        affiliations # affiliations of contributors
+        auids # ORCID 
+        full_names # full names of contributors
+        short_names # short names of contributors, 🌟 important for citation
+    xml  # contributors parsed from xml format, ONE PERSON PER DICT, MORE DETAILED
+        affiliations # same as above
+        full_name
+        identifiers
+        short_name
+identity
+    doi # DOI of the paper, 🌟 important, can be used for DOI-based fetching module
+    pmid # PubMed ID, 🌟 important
+    title # title of the paper, 🌟 important
+links
+    cites # cite this paper, 🌟 important
+    entrez # other entrez links
+    external # other external database links, ONE LINK PER DICT, MORE DETAILED (⚠️ there may be Full text source)
+        attribute
+        category
+        linkname
+        provider
+        url # URL of the external database link, 🌟 important
+    pmc # PMC ID used to download full text, 🌟 important
+    refs # (pmid) cited by this paper, 🌟 important
+    review # (pmid) All review articles highly relevant to the theme of this paper , 🌟 important
+    similar # (pmid) topic-similar papers, 🌟 important
+    text_mined # links mined from PMC full text(if available), 🌟 important (there may be github links or other sources)
+metadata
+    entrez_date # date when the paper was added to PubMed
+    fetched_at # date when the paper was fetched by our tool
+source
+    journal_abbrev # abbreviation abbreviation of the journal
+    journal_title # full name of the journal
+    pub_date # publication date
+    pub_types # publication types, similar to pub_types in content above 
+    pub_year # publication year, 🌟 important for citation
+```
+
+需要进行语义分类划分处理的是其文本数据。    
+ 
+我们在批量文献导出模块`pubmed-export-md`中为`-c`参数提供了章节提取yaml配置文件[pubmed export yaml](./config/pubmed_export_config.yaml)，可以依据配置文件中的设置批量提取对应文献的指定章节内容，比如说批量提取引言作为背景调研。
+
+> ⚠️ 这个yaml配置文件的键值是固定的，你只能注释掉部分键值以获取指定章节，或者默认全部章节提取
+ 
+```yaml
+metadata_fields:
+  - identity.title
+  - identity.pmid
+  - identity.doi
+  - content.keywords
+  - content.mesh_terms
+  - content.pub_types
+  - content.abstract # abstract in metadata first, fall back in content sections(deprecated)
+  - contributors.medline
+  - contributors.xml
+  - links.cites
+  - links.entrez
+  - links.external
+  - links.pmc
+  - links.refs
+  - links.review
+  - links.similar
+  - links.text_mined
+  - metadata.entrez_date
+  - metadata.fetched_at
+  - source.journal_abbrev
+  - source.journal_title
+  - source.pub_date
+  - source.pub_types
+  - source.pub_year
+
+content_sections:
+  - abstract
+  - introduction
+  - methods
+  - results
+  - discussion
+  - conclusion
+  - supplementary
+  - availability
+  - funding
+  - acknowledgements
+  - author_contributions
+
+```
+
+具体解析逻辑如下
+
+```mermaid
+flowchart TD
+    A[开始导出 Markdown] --> B{是否提供 YAML?}
+
+    B -- 是 --> C[读取 yaml_cfg]
+    C --> D[加载 metadata_fields / content_sections]
+    D --> E[写入文献级标题与元信息]
+    E --> F[提取 content.body 章节树]
+    F --> G[_extract_section_records: 原始章节 -> record]
+    G --> H[_normalize_section_title: 映射为 canonical_type]
+    H --> I[_order_section_records: 按 content_sections 排序]
+    I --> J[_aggregate_section_records: 合并同 canonical_type]
+    J --> K{canonical_type 是否在 content_sections?}
+    K -- 否 --> L[跳过]
+    K -- 是 --> M[_render_section_records: 渲染为 Markdown 标题]
+    M --> N[输出文献间分隔符]
+    L --> N
+
+    B -- 否 --> O[不做章节映射]
+    O --> P[写入文献级标题与元信息]
+    P --> Q{该文献是否有 content.body?}
+    Q -- 有 --> R[按原始树递归展开]
+    R --> S[render_raw_content_tree: 直接输出 title/content/subsections]
+    Q -- 无 --> T[从 meta 中补 abstract]
+    T --> U[输出 meta 字段 + abstract]
+    S --> N
+    U --> N
+
+    N --> V[下一篇文献]
+    V --> W[结束] 
+
+```
+
+
+以上是对pubmed 文献进行的结构化提取操作，但是对于非 pubmed 数据库，我们能够解析的起点是 mineru 解析引擎解析获取的初步 json 文件（`content_list_v2.json`）。
+
+这个文件相比 pmc 输出的 json 格式会更加复杂和难以解析。
+
+和 pubmed 文献处理类似，我们同样提供了两个串行的模块合作来处理 json 结构化提取解析工作。  
+
+`mineru-parse + mineru-export-md` 可以看作是复杂版的 `pubmed-merge-json + pubmed-export-md` 功能组合。
+  
+```python
+❯ paperflow mineru-parse --help
+                                                                                                                      
+ Usage: paperflow mineru-parse [OPTIONS]                                                                              
+                                                                                                                       
+ Parse mineru output content_list_v2.json into canonical sectioned JSON.                                              
+                                                                                                                      
+ Extracts metadata (title, authors, year, DOI, journal),                                                              
+ and sections normalised to canonical types (abstract, introduction, results,                                         
+ discussion, methods, etc.). Tables are preserved as HTML.                                                            
+                                                                                                                       
+                                                                                                                      
+ Notes:                                                                                                               
+ - 1, Two backends: 'regex' (pattern + context, no API) and 'ai' (LLM batch classification).                          
+ - 2, AI backend supports Anthropic native, OpenAI native, and any OpenAI-compatible                                  
+ endpoint via --base-url (DeepSeek, university proxies, self-hosted, etc.).                                           
+ - 3, Set the appropriate API key env var (ANTHROPIC_API_KEY, OPENAI_API_KEY,                                         
+ DEEPSEEK_API_KEY) or pass --api-key.                                                                                 
+ - 4, Configure provider/model via --model, --base-url, or a YAML config file.                                        
+                                                                                                                      
+                                                                                                                      
+ Examples:                                                                                                            
+   paperflow mineru-parse -i content_list_v2.json -o paper.json                                                       
+   paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai                                          
+   paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \                                        
+       --base-url https://api.deepseek.com --model deepseek-v4-pro --api-key sk-xxx                                   
+   paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \                                        
+       --base-url https://models.sjtu.edu.cn/api/v1 --model deepseek-chat                                             
+   paperflow mineru-parse -i content_list_v2.json -o paper.json --backend regex --config custom.yaml                  
+                                                                                                                      
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input     -i      TEXT  Path to mineru content_list_v2.json. [required]                                       │
+│ *  --output    -o      TEXT  Output path for the structured JSON file. [required]                                  │
+│    --backend   -b      TEXT  Section classification backend: 'regex' (default, no API needed) or 'ai'.             │
+│                              [default: regex]                                                                      │
+│    --config    -c      TEXT  Path to YAML config file for canonical types, aliases, and AI settings.               │
+│    --api-key           TEXT  API key for AI backend. Overrides config file and env var.                            │
+│    --model             TEXT  Override AI model (e.g. 'deepseek-v4-pro', 'claude-haiku-4-5', 'gpt-4o-mini').        │
+│    --base-url          TEXT  Custom API base URL for OpenAI-compatible endpoints (e.g.                             │
+│                              'https://api.deepseek.com').                                                          │
+│    --help                    Show this message and exit.                                                           │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+``` 
+
+`mineru-parse` 将 MinerU 输出的扁平 JSON 转换为结构化的规范 JSON，每个章节被归类到标准的学术章节类型中，同时提取元数据（标题、作者、年份、DOI、期刊）和图片注释。
+
+在这里我们提供了两种后端用于语段解析， 
+
+>  Two Backends / 两种后端   
+
+| Backend | How it works | API needed? | Best for |
+|---------|-------------|-------------|----------|
+| **regex** (default) | Pattern matching: exact string → regex → context keyword. Configurable via YAML. | No | Common papers, batch processing |
+| **ai** | Sends all section titles + context to an LLM in one batch API call. | Yes | Non-standard titles, multi-publisher |
+---
+ 
+**1. Regex matching layers / Regex 匹配层级：**
+
+```
+1. strong (exact match)   → "Introduction" == "introduction"  ✓
+2. weak (regex search)    → "1. Introduction" matches r"introduction"  ✓
+3. context_keywords       → "Overview" → check text for "we used..." → methods
+4. fallback               → classify as "other"
+```
+
+系统采用滑动游标追踪文档行文顺序，以降低章节误匹配概率；即前一个章节匹配成功之后，下一个章节不从头开始匹配，而是从前一个章节匹配的位置开始。
+
+**2. AI workflow / AI 工作流程：**
+
+```
+content_list_v2.json
+    → extract all titles + surrounding text (~200 chars)
+    → build JSON payload: [{index, title, context_preview}, ...]
+    → one API call → AI returns {classifications: [{index, canonical_type}]}
+    → merge classifications into structured JSON
+```
+ 
+> ⚠️ 目前默认使用正则表达式后端，`ai 后端正在维护开发中`
+                    
+> 🌟 对于当前模块`mineru-parse`的`-c`参数输入 yaml 配置文件，请参考使用我们提供的模板文件[mineru config file](./config/mineru_config.yaml)，正常使用情况下我们不需要修改配置文件，全部使用默认项即可。这份配置文件就是按照兼容两个后端设计的，regex后端以及 ai后端。相关的说明以及具体修改注意事项都可以在文件中进行查看。
+
+再次强调，所有匹配规则都在上面的[mineru_config.yaml](./config/mineru_config.yaml)中，内置了合理默认值，正常使用不需要提供，仅在需要适配特定期刊时修改。     
+
+**Config file layout / 配置文件结构：**
+
+| Section | Purpose |
+|---------|---------|
+| `ai` | `model`, `api_key`, `base_url` for AI backend |
+| `canonical_order` | Which types exist + their output order |
+| `display_names` | Human-readable labels (can be Chinese, etc.) |
+| `aliases` | Matching rules: `strong` (exact), `weak` (regex), `context_keywords` |
+--- 
+
+**Common customization scenarios / 常见自定义场景：**
+
+| Scenario | Where to edit |
+|----------|--------------|
+| Title misclassified as "other" / 标题被归入 other | Add to matching type's `strong` or `weak` |
+| Need a new section type / 需要新类型 | Add to `canonical_order` + `display_names` + `aliases` |
+| Switch AI model / 切换模型 | Edit `ai.model` and `ai.base_url` |
+| Chinese labels / 中文标签 | Edit `display_names` |
+
+---
+
+
+ 比如说输出的 1 个典型的 json 文件如下：
+ ```json
+{
+  "source": "mineru",
+  "file": "paper_content_list_v2.json",
+  "backend": "regex",
+  "metadata": {
+    "title": "Accurate Generation of Conformational Ensembles...",
+    "authors": "Junjie Zhu, Zhengxin Li, ...",
+    "year": 2025,
+    "doi": "10.1002/advs.202511636",
+    "journal": "Advanced Science"
+  },
+  "sections": [
+    {
+      "canonical_type": "abstract",
+      "raw_title": "Abstract",
+      "display_title": "Abstract",
+      "level": 2,
+      "paragraphs": ["In this paper, we..."],
+      "subsections": []
+    },
+    {
+      "canonical_type": "introduction",
+      "raw_title": "1. Introduction",
+      "display_title": "Introduction",
+      "paragraphs": ["...", "[Figure: Figure 1. Architecture overview...]"],
+      "subsections": []
+    },
+    {
+      "canonical_type": "results",
+      "raw_title": "2. Results",
+      "display_title": "Results",
+      "subsections": [
+        {"raw_title": "2.1. Global Features", "paragraphs": ["..."]}
+      ]
+    }
+  ]
+}
+```
+
+基本上都是按照我们平时阅读文献的规范章节类型，大约在 15 种左右：
+`abstract` `introduction` `results` `discussion` `methods` `conclusion` `supplementary` `availability` `funding` `acknowledgements` `author_contributions` `keywords` `conflicts` `references` `other`
+            
+
+在整理输出结构化的 json 文件之后，我们就可以按需求进行批量章节选择并导出了。
+
+可以说，pubmed-export-md 模块对 pubmed 文献做的任务实际上就是 mineru-parse和 mineru-export-md 的组合。
+
+```python
+❯ paperflow mineru-export-md --help
+                                                                    
+ Usage: paperflow mineru-export-md [OPTIONS]                        
+                                                                    
+ Export structured mineru JSON to a clean Markdown file for LLM     
+ processing.                                                        
+                                                                    
+ Reads one or more JSON files produced by ``mineru-parse`` and      
+ writes a                                                           
+ single Markdown file.  Metadata (title, authors, year, DOI,        
+ journal) is                                                        
+ always included.  Content sections are included based on the       
+ optional                                                           
+ YAML config.                                                       
+                                                                    
+                                                                    
+ YAML config format:                                                
+   content_sections:                                                
+     - abstract                                                     
+     - introduction                                                 
+     - methods                                                      
+     - results                                                      
+     - discussion                                                   
+     - conclusion                                                   
+                                                                    
+                                                                    
+ Examples:                                                          
+   paperflow mineru-export-md -i paper.json -o paper.md             
+   paperflow mineru-export-md -i paper.json -o paper.md --config    
+ extract.yaml                                                       
+   paperflow mineru-export-md -i ./parsed_dir -o all_papers.md      
+                                                                    
+╭─ Options ────────────────────────────────────────────────────────╮
+│ *  --input   -i      TEXT  Path to structured JSON file (from    │
+│                            mineru-parse), or a directory of such │
+│                            files.                                │
+│                            [required]                            │
+│ *  --output  -o      TEXT  Output Markdown file path. [required] │
+│    --config  -c      TEXT  YAML config specifying                │
+│                            content_sections to include. If not   │
+│                            provided, all sections are included.  │
+│    --help                  Show this message and exit.           │
+╰──────────────────────────────────────────────────────────────────╯
+
+```
+
+
+
+
+
+
 
 ### 4. 搜索并获取 arXiv 论文
 如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
@@ -278,7 +1133,7 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
     paperflow arxiv-search "protein folding" --max-results 50 --start-date 2024-01-01 --end-date 2024-12-31
     # 将会在默认存储目录下生成 searched_arxiv_ids.txt，或使用 --output-dir 指定保存位置
     ```
-
+    
 - **arxiv-fetch**: 检索并保存每篇论文的标准化元数据（JSON），可选地下载 PDF 文件（默认开启）。
 
     常用选项：
@@ -324,7 +1179,7 @@ paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-
 
 - `--window-days` 作为 CLI 兼容参数保留，但当前 Crossref 检索路径不会使用该参数。
 
-示例：
+示例：  
 
 ```bash
 paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorxiv
@@ -332,61 +1187,18 @@ paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorx
 
 搜索结果会保存为 `searched_biorxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，并在可用时下载 PDF。
 
-
-### 6. 获取全文数据（元数据+文本内容）
-
-```bash
-paperflow fetch-full 
-
-
-```
-
-
-### 7. 管理标签（特征向量）
-通过分配标签来组织论文。这会在查找表中为每篇论文创建一个特征向量。
-
-```bash
-# 将论文标记为相关
-paperflow tag 34320283 relevant 1
-
-# 将论文标记为已读
-paperflow tag 34320283 read 1
-```
-
-### 6. 查询与检索
-根据标签查找论文或检索完整详情。
-
-**按标签查询：**
-```bash
-# 查找所有相关论文
-paperflow query --tag relevant=1
-```
-
-**获取论文详情：**
-```bash
-paperflow get 34320283
-```
-
-## 📂 数据结构
-
-本平台采用“精简版”存储方案：
-
--   **`paper_data/paper_lookup.csv`**：作为本地数据库的查找表。
-    -   行：PMID。
-    -   列：`json_path` 以及动态标签（如 `relevant`, `topic_A`）。
--   **`paper_data/papers/{pmid}.json`**：每篇论文的详细元数据和内容。
-
-## 📝 关于 Medline 格式的说明
-
-获取器解析 Medline 格式以提取丰富的元数据，包括：
--   **PMID**: PubMed ID
--   **DP**: 出版日期
--   **TI**: 标题
--   **AB**: 摘要
--   **FAU/AU**: 作者
--   **AD**: 所属机构
--   **PT**: 出版类型（如期刊文章、综述）
   
+
+
+ 
+ 
+
+
+## todo维护
+
+- 一者是 paper-fetch 封装模块，⚠️ paper-fetch updated at 2026-05-08 
+- mineru-parse 解析模块的 ai 后端，如何接入 ai 模型进行处理，目前正在维护开发中
+- mineru 复杂配置的封装，gpu 等参数 
 
 
 ## 📌 局限性
@@ -580,3 +1392,5 @@ Merge模块用于合并所获取的pubmed文献的元数据与文本数据，
 # 3个文献数据库，pubmed、arxiv、biorxiv，1个数据库单独1个文件夹
 # 每个数据库的文件夹下按照年份进行划分，年份下按照source_id进行划分（pmid、arxiv_id、biorxiv_id）
 接口全部改过，改为v 1.0.0
+
+ 
