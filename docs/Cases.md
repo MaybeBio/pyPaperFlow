@@ -1010,62 +1010,12 @@ paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \
 paperflow mineru-parse -i content_list_v2.json -o paper.json --config my_rules.yaml
 ```
 
-     
-         
-        
-    
- 
-
----
-     
-### Output JSON Structure / 输出 JSON 结构
-
-```json   
-{
-  "source": "mineru",
-  "file": "paper_content_list_v2.json",
-  "backend": "regex",
-  "metadata": {
-    "title": "Accurate Generation of Conformational Ensembles...",
-    "authors": "Junjie Zhu, Zhengxin Li, ...",
-    "year": 2025,
-    "doi": "10.1002/advs.202511636",
-    "journal": "Advanced Science"
-  },
-  "sections": [
-    {
-      "canonical_type": "abstract",
-      "raw_title": "Abstract",
-      "display_title": "Abstract",
-      "level": 2,
-      "paragraphs": ["In this paper, we..."],
-      "subsections": []
-    },
-    {
-      "canonical_type": "introduction",
-      "raw_title": "1. Introduction",
-      "display_title": "Introduction",
-      "paragraphs": ["...", "[Figure: Figure 1. Architecture overview...]"],
-      "subsections": []
-    },
-    {
-      "canonical_type": "results",
-      "raw_title": "2. Results",
-      "display_title": "Results",
-      "subsections": [
-        {"raw_title": "2.1. Global Features", "paragraphs": ["..."]}
-      ]
-    }
-  ]
-}
-```
 
 **15 canonical section types / 15 种规范章节类型：**
 
 `abstract` `introduction` `results` `discussion` `methods` `conclusion` `supplementary` `availability` `funding` `acknowledgements` `author_contributions` `keywords` `conflicts` `references` `other`
 
 ---  
- 
  
 
 ### Notes & Limitations / 注意事项与局限
@@ -1089,7 +1039,6 @@ the following table shows
 
 you can check all the output JSON files here : [parse](../test/Other_database/parse/)
 
-# 
 
 
 ### 4. 搜索并获取 arXiv 论文
@@ -1179,3 +1128,56 @@ paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorx
 ```
 
 搜索结果会保存为 `searched_biorxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，并在可用时下载 PDF。
+
+
+
+
+### 4. Search and Fetch arXiv Papers
+Search arXiv first if you only want IDs, or fetch metadata and PDFs in one step.
+
+```bash
+paperflow arxiv-search "deep learning for biology" --max-results 10
+paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf
+paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf --backend paperscraper
+```
+
+Useful options:
+
+- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
+- `--backend`: choose `native` for the built-in httpx-backed arXiv API path, or `paperscraper` to use the optional third-party adapter when installed.
+- `--output-dir`: save the ID list or fetched records to a different directory.
+- `--no-download-pdf`: skip PDF download and save metadata only.
+
+Example with a date filter:
+
+```bash
+paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers/arxiv
+```
+
+Search output is saved as `searched_arxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.
+
+### 5. Search and Fetch bioRxiv Papers
+bioRxiv now uses direct server-side query via Crossref (openRxiv records), rather than pulling large date windows first and filtering locally.
+
+```bash
+paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
+paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
+```
+
+Useful options:
+
+- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
+- `--output-dir`: save the ID list or fetched records to a different directory.
+- `--no-download-pdf`: skip PDF download and save metadata only.
+
+Compatibility note:
+
+- `--window-days` is kept for CLI compatibility but is not used by the current Crossref-backed bioRxiv search path.
+
+Example:
+
+```bash
+paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorxiv
+```
+
+Search output is saved as `searched_biorxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.

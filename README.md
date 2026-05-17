@@ -15,6 +15,31 @@
 
 ---
 
+## Index
+
+- [](#pypaperflow---an-automatic-paper-reading-platform)
+  - [Index](#index)
+  - [📖 Overview](#-overview)
+  - [🚀 Features](#-features)
+  - [🏗️ Architecture Vision](#️-architecture-vision)
+  - [📦 Installation](#-installation)
+  - [🛠️ Usage](#-usage)
+      - [Module overview](#module-overview)
+      - [1. Research Start Point](#1-research-start-point)
+      - [2. Search Papers (and Fetch Metadata)](#2-search-papers-and-fetch-metadata)
+      - [3. Fetch Papers (and Download Full Text)](#3-fetch-papers-and-download-full-text)
+      - [4. Literature content extraction and structured processing](#4-literature-content-extraction-and-structured-processing)
+      - [5. Processing for other literature](#5-processing-for-other-literature-databases)
+      - [6. Critical reading and knowledge graph analysis downstream : end-use](#6-critical-reading-and-knowledge-graph-analysis-downstream-enduse)
+  - [🔍 Test cases](#-test-cases)
+  - [📌 Future maintenance & Todo list](#-future-maintenance--todo-list)
+
+
+
+---
+
+## 📖 Overview 
+
 An `automated literature processing platform` for scientific researchers. This tool focuses on `information extraction and knowledge discovery` stages, enabling researchers to efficiently complete the entire workflow from literature retrieval to knowledge internalization through a `7-stage automated process`.
 
 **Core Objectives**
@@ -592,52 +617,30 @@ Refer to official documentation for details. Since typical users lack sufficient
 
 ```python
 ❯ paperflow pdf-parse --help
-                                          
- Usage: paperflow pdf-parse [OPTIONS]     
-                                          
- Parse a PDF file using MinerU engine,    
- and clean up the output directory.       
-                                          
-                                          
- Notes:                                   
- - 1, MinerU generates a subfolder /auto  
- under --output with .md, .json, .pdf,    
- and images/.  Use --clear to strip       
- anything unnecessary,                    
- note that we only use .md files and      
- _content_list_v2.json/_content_list.json 
- files for further processing like        
- structuring.                             
- - 2, ⚠️  Remember to switch to domestic  
- mirror source when you can not access    
- huggingface.                             
-                                          
-                                          
- Example usage:                           
-   paperflow pdf-parse -i paper.pdf -o    
- ./output                                 
-                                          
-╭─ Options ──────────────────────────────╮
-│ *  --input   -i      TEXT  Input PDF   │
-│                            file path.  │
-│                            [required]  │
-│ *  --output  -o      TEXT  Output      │
-│                            directory   │
-│                            for parsed  │
-│                            output.     │
-│                            [required]  │
-│    --clear                 After       │
-│                            conversion, │
-│                            keep only   │
-│                            the .md     │
-│                            files and   │
-│                            necessary   │
-│                            .json       │
-│                            files(_con… │
-│    --help                  Show this   │
-│                            message and │
-│                            exit.       │
-╰────────────────────────────────────────╯
+                                                                                                                                   
+ Usage: paperflow pdf-parse [OPTIONS]                                                                                              
+                                                                                                                                   
+ Parse a PDF file using MinerU engine, and clean up the output directory.                                                          
+                                                                                                                                   
+                                                                                                                                   
+ Notes:                                                                                                                            
+ - 1, MinerU generates a subfolder /auto under --output with .md, .json, .pdf, and images/.  Use --clear to strip anything         
+ unnecessary,                                                                                                                      
+ note that we only use .md files and _content_list_v2.json/_content_list.json files for further processing like structuring.       
+ - 2, ⚠️  Remember to switch to domestic mirror source when you can not access huggingface.                                        
+                                                                                                                                   
+                                                                                                                                   
+ Example usage:                                                                                                                    
+   paperflow pdf-parse -i paper.pdf -o ./output                                                                                    
+                                                                                                                                   
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input   -i      TEXT  Input PDF file path. [required]                                                                      │
+│ *  --output  -o      TEXT  Output directory for parsed output. [required]                                                       │
+│    --clear                 After conversion, keep only the .md files and necessary .json                                        │
+│                            files(_content_list_v2.json/_content_list.json).                                                     │
+│    --help                  Show this message and exit.                                                                          │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
 
 ```
 
@@ -646,158 +649,260 @@ Refer to official documentation for details. Since typical users lack sufficient
 > 🌟 Regarding the PDF paper retrieval module, we also provide a suite of reference scripts, which can be integrated into existing skills or implemented independently:  [Paper pdf fetch](./docs/Skills.md)
 
 
-### 4. 
+### 4. Literature Content Extraction and Structured Processing
 
+In the preceding stage, we acquired metadata and textual content of academic papers:
+- For PubMed papers: Metadata is retrieved, and full‑text content is downloaded from the PubMed Central (PMC) database (when available), then parsed into Markdown and JSON formats.
+- For non‑PubMed papers: PDF files are obtained via Digital Object Identifiers (DOIs) and parsed using the MinerU parsing engine, with outputs standardised to Markdown and JSON formats.
 
-### 4. Search and Fetch arXiv Papers
-Search arXiv first if you only want IDs, or fetch metadata and PDFs in one step.
+The generated Markdown files from both sources serve as viable full‑text alternatives for direct literature reading, yet they are not amenable to chapter‑level extraction and standardised processing.
 
-```bash
-paperflow arxiv-search "deep learning for biology" --max-results 10
-paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf
-paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf --backend paperscraper
-```
+By contrast, JSON files retain raw parsed outputs with intricate structures, containing comprehensive textual content and positional metadata, but lack standardisation for direct downstream utilisation.
 
-Useful options:
+This stage processes raw JSON files by parsing and classifying textual segments to produce standardised, chapter‑organised JSON outputs.
 
-- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
-- `--backend`: choose `native` for the built-in httpx-backed arXiv API path, or `paperscraper` to use the optional third-party adapter when installed.
-- `--output-dir`: save the ID list or fetched records to a different directory.
-- `--no-download-pdf`: skip PDF download and save metadata only.
-
-Example with a date filter:
+Specifically, content is extracted and partitioned into canonical academic sections as listed below (with minor configurable variations in section delineation):
 
 ```bash
-paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers/arxiv
+metadata(title,year,authors)
+abstract
+introduction
+results
+discussion
+methods
+conclusion
+supplementary
+availability
+funding
+acknowledgements
+author contributions
+references
+other
+
 ```
 
-Search output is saved as `searched_arxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.
+Our objective is to fundamentally segment papers into fixed canonical sections aligned with the internal structural conventions of individual publications and the core downstream analytical demands of researchers. Teleologically, this standardised partitioning enables scholars to review and utilise literature knowledge within a consistent cognitive framework.
 
-### 5. Search and Fetch bioRxiv Papers
-bioRxiv now uses direct server-side query via Crossref (openRxiv records), rather than pulling large date windows first and filtering locally.
+For PubMed papers, textual data is sourced from the PMC database; accordingly, our parsing workflow commences with JSON outputs generated from PMC parsing responses.
+
+To preserve complete data provenance (not all PubMed papers have PMC full‑text access), we implement two modular components for structured extraction and representation of PubMed literature.
+
+First, metadata and textual content (where PMC full‑text exists) are merged to generate a single JSON file encapsulating complete paper information:
+
+```python
+❯ paperflow pubmed-merge-json --help
+                                                                                                                    
+ Usage: paperflow pubmed-merge-json [OPTIONS]                                                                       
+                                                                                                                    
+ Create a merged JSON (or JSONL) file from PubMed paper directories.                                                
+                                                                                                                    
+ This produces a canonical merged JSON representation per paper and is                                              
+ intended as the first stage in a two-stage pipeline (merge-json -> export-md).                                     
+                                                                                                                    
+                                                                                                                    
+ Example usage:                                                                                                     
+ - 1. Merge JSON files for all papers in a directory:                                                               
+   paperflow pubmed-merge-json --input ./MyPapers --output ./MyPapers                                               
+ - 2. Merge JSON files for PMIDs listed in a file:                                                                  
+   paperflow pubmed-merge-json --input ./MyPapers --output ./MyPapers --pmid-file ./pmid_list.txt --jsonl           
+ --stats-path ./MyPapers/stats                                                                                      
+                                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input       -i      TEXT  Directory containing paper data                                                   │
+│                                ({INPUT_PAPER_DIR_HERE}/pubmed/year/pmid/structure).                              │
+│                                [required]                                                                        │
+│ *  --output      -o      TEXT  Output directory or file path. If a directory or path without extension is given, │
+│                                the merged file is auto-named as                                                  │
+│                                <input-directory-base-name>_<datetime>.json/.jsonl.                               │
+│                                [required]                                                                        │
+│    --pmid-file   -p      TEXT  File containing PMIDs to merge (one per line).                                    │
+│    --jsonl                     Write output as JSONL, one JSON per line.                                         │
+│    --stats-path  -s      TEXT  Optional path to save merge statistics file, defaults to current directory.       │
+│                                [default: .]                                                                      │
+│    --help                      Show this message and exit.                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+Designed primarily for batch‑processing workflows to enable bulk content extraction from standardised section schemas, this module also supports single‑paper processing via file‑level specification.
+
+By default, independent merging is executed for all PubMed papers within the input directory, and JSON files corresponding to specified PMID inventories are further aggregated into a single consolidated JSON file. This workflow is particularly suited for compiling papers on a unified research topic to construct preliminary literature knowledge bases.
+
+This aggregated JSON file serves as the input for subsequent structured classification and extraction:
+
+```python
+❯ paperflow pubmed-export-md --help
+                                                                                                 
+ Usage: paperflow pubmed-export-md [OPTIONS]                                                     
+                                                                                                 
+ Export a single Markdown view from a merged JSON file using optional YAML config.               
+                                                                                                 
+                                                                                                 
+ Notes:                                                                                          
+ - 1, The input merged JSON/JSONL should be produced by the pubmed-merge-json command, which     
+ creates a canonical representation of paper metadata and content.                               
+ - 2, The optional YAML config can specify which metadata fields and content sections to include 
+ in the Markdown output. If not provided, it defaults to including basic metadata and the FULL   
+ content.                                                                                        
+                                                                                                 
+                                                                                                 
+ Example usage:                                                                                  
+ - 1. Export Markdown for all papers in a merged JSON:                                           
+ paperflow pubmed-export-md --input ./MyPapers/merged.jsonl --output ./MyPapers/exported.md      
+ --config ./config.yaml                                                                          
+ - 2. Export Markdown for PMIDs listed in a file:                                                
+ paperflow pubmed-export-md --input ./MyPapers/merged.jsonl --output ./MyPapers/exported.md      
+ --config ./config.yaml --pmid-file ./pmid_list.txt                                              
+                                                                                                 
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input      -i      TEXT  Path to merged JSON or JSONL produced by pubmed-merge-json.     │
+│                               [required]                                                      │
+│ *  --output     -o      TEXT  Output Markdown file path. [required]                           │
+│    --config     -c      TEXT  YAML config file specifying metadata_fields and                 │
+│                               content_sections. If not provided, defaults to basic metadata   │
+│                               and FULL content.                                               │
+│    --pmid-file  -p      TEXT  Optional PMID file to filter exported papers.                   │
+│    --help                     Show this message and exit.                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────────╯
+
+```
+
+Metadata key‑value pairs for each paper follow a fixed schema:
 
 ```bash
-paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
-paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
+content
+    abstract  # abstract text, 🌟 important
+    keywords  # keywords, 🌟 important
+    mesh_terms  # mesh terms, 🌟 important
+    pub_types # article or review, can be used for filtering, 🌟 important
+contributors
+    medline # contributors parsed from medline format, MIXED PERSONS PER DICT, LESS DETAILED
+        affiliations # affiliations of contributors
+        auids # ORCID 
+        full_names # full names of contributors
+        short_names # short names of contributors, 🌟 important for citation
+    xml  # contributors parsed from xml format, ONE PERSON PER DICT, MORE DETAILED
+        affiliations # same as above
+        full_name
+        identifiers
+        short_name
+identity
+    doi # DOI of the paper, 🌟 important, can be used for DOI-based fetching module
+    pmid # PubMed ID, 🌟 important
+    title # title of the paper, 🌟 important
+links
+    cites # cite this paper, 🌟 important
+    entrez # other entrez links
+    external # other external database links, ONE LINK PER DICT, MORE DETAILED (⚠️ there may be Full text source)
+        attribute
+        category
+        linkname
+        provider
+        url # URL of the external database link, 🌟 important
+    pmc # PMC ID used to download full text, 🌟 important
+    refs # (pmid) cited by this paper, 🌟 important
+    review # (pmid) All review articles highly relevant to the theme of this paper , 🌟 important
+    similar # (pmid) topic-similar papers, 🌟 important
+    text_mined # links mined from PMC full text(if available), 🌟 important (there may be github links or other sources)
+metadata
+    entrez_date # date when the paper was added to PubMed
+    fetched_at # date when the paper was fetched by our tool
+source
+    journal_abbrev # abbreviation abbreviation of the journal
+    journal_title # full name of the journal
+    pub_date # publication date
+    pub_types # publication types, similar to pub_types in content above 
+    pub_year # publication year, 🌟 important for citation
 ```
 
-Useful options:
+Semantic segmentation and classification are applied exclusively to textual content.
 
-- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
-- `--output-dir`: save the ID list or fetched records to a different directory.
-- `--no-download-pdf`: skip PDF download and save metadata only.
+Within the batch‑export module `pubmed-export-md`, the `-c` parameter accepts a YAML configuration file for section extraction [pubmed export yaml](./config/pubmed_export_config.yaml), enabling bulk extraction of designated sections—for instance, batch retrieval of introduction sections for background research.
 
-Compatibility note:
+> ⚠️ Keys within this YAML file are fixed; users may only comment out specific keys to extract targeted sections, or retain default settings to export all sections.
 
-- `--window-days` is kept for CLI compatibility but is not used by the current Crossref-backed bioRxiv search path.
+```yaml
+metadata_fields:
+  - identity.title
+  - identity.pmid
+  - identity.doi
+  - content.keywords
+  - content.mesh_terms
+  - content.pub_types
+  - content.abstract # abstract in metadata first, fall back in content sections(deprecated)
+  - contributors.medline
+  - contributors.xml
+  - links.cites
+  - links.entrez
+  - links.external
+  - links.pmc
+  - links.refs
+  - links.review
+  - links.similar
+  - links.text_mined
+  - metadata.entrez_date
+  - metadata.fetched_at
+  - source.journal_abbrev
+  - source.journal_title
+  - source.pub_date
+  - source.pub_types
+  - source.pub_year
 
-Example:
+content_sections:
+  - abstract
+  - introduction
+  - methods
+  - results
+  - discussion
+  - conclusion
+  - supplementary
+  - availability
+  - funding
+  - acknowledgements
+  - author_contributions
 
-```bash
-paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorxiv
 ```
 
-Search output is saved as `searched_biorxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.
+The core parsing logic is illustrated below:
 
+```mermaid
+flowchart TD
+    A[Initiate Markdown Export] --> B{YAML Config Provided?}
 
-## 📂 Data Structure
+    B -- Yes --> C[Load yaml_cfg]
+    C --> D[Parse metadata_fields / content_sections]
+    D --> E[Write paper‑level title and metadata]
+    E --> F[Extract section tree from content.body]
+    F --> G[_extract_section_records: raw sections → structured records]
+    G --> H[_normalize_section_title: map to canonical_type]
+    H --> I[_order_section_records: sort per content_sections]
+    I --> J[_aggregate_section_records: merge identical canonical_type entries]
+    J --> K{canonical_type in content_sections?}
+    K -- No --> L[Skip section]
+    K -- Yes --> M[_render_section_records: format as Markdown headings]
+    M --> N[Insert paper separator]
+    L --> N
 
-The platform uses a "Lite" storage approach:
+    B -- No --> O[Omit section mapping]
+    O --> P[Write paper‑level title and metadata]
+    P --> Q{content.body Exists?}
+    Q -- Yes --> R[Recursively expand raw section tree]
+    R --> S[render_raw_content_tree: output title/content/subsections directly]
+    Q -- No --> T[Supplement abstract from metadata]
+    T --> U[Output metadata fields + abstract]
+    S --> N
+    U --> N
 
--   **`paper_data/paper_lookup.csv`**: A lookup table acting as a local database.
-    -   Rows: PMIDs.
-    -   Columns: `json_path`, and dynamic tags (e.g., `relevant`, `topic_A`).
--   **`paper_data/papers/{pmid}.json`**: Detailed metadata and content for each paper.
+    N --> V[Process Next Paper]
+    V --> W[Terminate Export]
+```
 
-We will store all datas in structures like:
+The above workflow describes structured extraction for PubMed papers. For non‑PubMed publications, parsing commences with preliminary JSON outputs（`content_list_v2.json`）generated by the MinerU parsing engine.
 
-output dir/year/pmid/your files
+The `content_list_v2.json` file generated by processing PDFs with MinerU organizes data on a page-by-page basis: an outer array represents all pages, and each element is a list of rendered blocks for that page. These blocks include diverse types such as paper titles, paragraphs, interline equations, images/charts, tables, page headers, footers, and footnotes, which are mixed together and cannot be directly used for downstream semantic analysis or LLM input.
 
+Our goal is to convert this raw JSON into a unified, structured JSON organized by standard sections in the literature domain.
 
-## 📝 Notes on Medline Format
-
-The fetcher parses Medline format to extract rich metadata including:
--   **PMID**: PubMed ID
--   **DP**: Date of Publication
--   **TI**: Title
--   **AB**: Abstract
--   **FAU/AU**: Authors
--   **AD**: Affiliations
--   **PT**: Publication Type (e.g., Journal Article, Review)
--   
-
-## ⚠️ Cautionary Notes
-
-
-
----
-
-For content extraction
-
-
-## 🔗 References & Inspiration
-
-
-## search/fetch/download/full
-
-search是搜索id
-fetch是获取元数据
-download是获取文本数据（pdf解析为md，或直接拿到md数据）
-full是 元数据+文本数据一起获取 
-
-
-
-## Test Cases
-
-Seen in [Cases.md](Cases.md)
-
-
-## Usage
-
-merge markdown yourself (content is enough), or use our analysis module to merge both metadata and content(major in title+abstract+keywords+mesh_terms+introduction+discussion+conclusions+methods),
-
-ther are both suitable for downstream LLM tasks.
-
-Add them into your Claude Code Project Workflow!
-
-⚠️ 关于export md部分内容
-
-
- 
- 
-
-## 📝 TODOs 
-
-<details>
-<summary><b>Stage 1: 检索与收集</b></summary>
-
-> - [ ] 目前文献数据库仅仅只覆盖了pubmed, 对于其他预印本平台的文献数据库并不支持, 但是一个人写解析太麻烦了, 看到有一个非常棒的仓库, 可以借助其对于除了pubmed之外其他数据解析的部分，可以整个库都import进来, 作为整个依赖的一部分,就是可以完全独立, ——》声明是外部依赖库[paperscraper](https://github.com/jannisborn/paperscraper)
-
-</details>      
-
-
-
-
-
-#### ⚠️ pubmed数据库部分个人完成的，至于arxiv和biorxiv部分为AI协作，请注意问题完善
-
- 
-
-
-
-
-## MinerU JSON 结构化解析模块 (`mineru-parse`)
-
-### 动机
-
-PDF 经 MinerU 处理后生成的 `content_list_v2.json` 以页面为单位组织数据——一个外层数组代表所有页面，
-每个元素是该页面的渲染块列表。这些块包含论文标题、段落、行间公式、图片/图表、表格、页眉、页脚、脚注等多种类型，
-混杂在一起，无法直接用于下游的语义分析或 LLM 输入。
-
-`MinerUContentParser` 的目标是将这个原始的 JSON 转换成统一的、按文献领域规范章节归并的结构化 JSON。
-
-### 输入 JSON 结构（MinerU 官方格式）
-
+Input JSON structure:
 ```json
 [
   [                        // page 0
@@ -805,8 +910,8 @@ PDF 经 MinerU 处理后生成的 `content_list_v2.json` 以页面为单位组�
     {"type": "paragraph",  "content": {"paragraph_content": [...]}},
     {"type": "title",      "content": {"title_content": [...], "level": 2}},
     {"type": "paragraph",  "content": {"paragraph_content": [...]}},
-    {"type": "page_header", ...},     // 噪声
-    {"type": "page_footnote", ...},   // 噪声
+    {"type": "page_header", ...},     // noise
+    {"type": "page_footnote", ...},   // noise
     ...
   ],
   [                        // page 1
@@ -815,112 +920,193 @@ PDF 经 MinerU 处理后生成的 `content_list_v2.json` 以页面为单位组�
 ]
 ```
 
-常见的块类型（按内容价值归类）：
+Common block types (categorized by content values):
 
-| 类型 | 是否正文 | 文本提取路径 |
-|------|----------|-------------|
-| `title` | 是（章节锚点） | `content.title_content[*].content` + `level`（1=文章标题，2=一级章节） |
-| `paragraph` | 是（主文本） | `content.paragraph_content[*].content`，支持 `equation_inline` 子项 |
-| `equation_interline` | 是（行间公式） | `content.math_content`（LaTeX） |
-| `table` | 部分 | `content.html`（HTML 表格） + `content.table_caption` |
-| `image` / `chart` | 否（保留 caption） | `content.image_caption[*].content` / `content.chart_caption` |
-| `page_header` / `page_footer` / `page_footnote` | **噪声（丢弃）** | 用于元数据扫描（年份/DOI/期刊名） |
+| Type | Is Main Content | Text Extraction Path |
+|------|-----------------|---------------------|
+| `title` | Yes (Section Anchor) | `content.title_content[*].content` + `level` (1 = Paper Title, 2 = Primary Section) |
+| `paragraph` | Yes (Main Text) | `content.paragraph_content[*].content`, supports `equation_inline` sub-items |
+| `equation_interline` | Yes (Interline Equation) | `content.math_content` (LaTeX) |
+| `table` | Partial | `content.html` (HTML Table) + `content.table_caption` |
+| `image` / `chart` | No (Caption Preserved) | `content.image_caption[*].content` / `content.chart_caption` |
+| `page_header` / `page_footer` / `page_footnote` | **Noise (Discarded)** | Used for metadata scanning (year/DOI/journal name) |
 
-### 解析流水线
+Our parsing pipeline is as follows:
 
 ```
                    content_list_v2.json
                            │
-  ───────────────── Step 1: 扁平化 ─────────────────
+  ───────────────── Step 1: Flattening ─────────────────
                            │
-              _flatten() — 去掉噪声块
+              _flatten() — Remove noise blocks
              (page_header/footer/footnote)
-              保留 title / paragraph / table 等
+              Preserve title / paragraph / table, etc.
                            │
-  ────────────── Step 2: 元数据提取 ────────────────
+  ────────────── Step 2: Metadata Extraction ────────────────
                            │
-              ┌─ title    ← 第一个 level=1 的 title 块
-              ├─ authors  ← title 后第一个短行（含逗号、<400 字符）
-              ├─ year     ← 从 page_footer 中提取 "2025"
-              ├─ doi      ← 从 page_footnote 中匹配 "10.1002/..."
-              └─ journal  ← 从 page_header 中选取全大写短名称
+              ┌─ title    ← First level=1 title block
+              ├─ authors  ← First short line after title (contains commas, <400 characters)
+              ├─ year     ← Extract "2025" from page_footer
+              ├─ doi      ← Match "10.1002/..." from page_footnote
+              └─ journal  ← Select all-uppercase short name from page_header
                            │
-  ────────────── Step 3: 抽象提取 ──────────────────
+  ────────────── Step 3: Abstract Extraction ──────────────────
                            │
              _extract_abstract()
-             跳过作者行 → 收集第一个 section 前所有段落
+             Skip author lines → Collect all paragraphs before the first section
                            │
-  ─────────┐ Step 4: 章节分割 ─────────────────────
+  ─────────┐ Step 4: Section Segmentation ─────────────────────
            │
-           │  以 title 块为界切分段落：
-           │    level=1 → 跳过（论文标题）
-           │    level=2 → 新主节
-           │    level>=3 或编号 "2.1." → 子节，归入父节
+           │  Split paragraphs by title blocks:
+           │    level=1 → Skip (Paper Title)
+           │    level=2 → New Primary Section
+           │    level>=3 or numbered "2.1." → Subsection, grouped under parent section
            │
-  ─────────┤ Step 5: 标题归一化 ─────────────────────
+  ─────────┤ Step 5: Title Normalization ─────────────────────
            │
            │  normalize_section_title()
-           │    去除数字前缀 "2.2. IDPFold..." → "IDPFold..."
-           │    匹配 CANONICAL_TYPES 表 → "results"
+           │    Remove numeric prefixes "2.2. IDPFold..." → "IDPFold..."
+           │    Match CANONICAL_TYPES table → "results"
            │
-  ─────────┤ Step 6: 节归并 ───────────────────────
+  ─────────┤ Step 6: Section Aggregation ───────────────────────
            │
            │  _aggregate_sections()
-           │    同一 canonical_type 的内容合并
-           │    保持 subsections 列表
+           │    Merge content with the same canonical_type
+           │    Preserve subsections list
            │
-  ─────────┘ Step 7: 表格提取 ─────────────────────
+  ─────────┘ Step 7: Table Extraction ─────────────────────
                            │
              _extract_tables()
-             收集所有 table 块的 html + caption
+             Collect html + caption of all table blocks
                            │
                            ▼
-                   结构化输出 JSON
+                   Structured Output JSON
 ```
 
-### 章节归一化映射表
 
-解析器维护一套 `CANONICAL_ORDER` 和 `_SECTION_PATTERNS`，将论文中的原始章节标题映射到标准的 12 种类型：
+This JSON schema is more complex and less straightforward to parse than PMC‑derived JSON files.
+
+Analogous to the PubMed processing pipeline, two sequential modules are deployed for structured extraction of non‑PubMed JSON outputs.
+
+The combination `mineru‑parse + mineru‑export‑md` serves as an enhanced counterpart to `pubmed‑merge‑json + pubmed‑export‑md`.
 
 ```python
-CANONICAL_ORDER = [
-    "abstract", "introduction", "results", "discussion",
-    "methods", "conclusion", "supplementary", "availability",
-    "funding", "acknowledgements", "author_contributions",
-    "references", "other",
-]
+❯ paperflow mineru-parse --help
+                                                                                                                      
+ Usage: paperflow mineru-parse [OPTIONS]                                                                              
+                                                                                                                       
+ Parse mineru output content_list_v2.json into canonical sectioned JSON.                                              
+                                                                                                                      
+ Extracts metadata (title, authors, year, DOI, journal),                                                              
+ and sections normalised to canonical types (abstract, introduction, results,                                         
+ discussion, methods, etc.). Tables are preserved as HTML.                                                            
+                                                                                                                       
+                                                                                                                      
+ Notes:                                                                                                               
+ - 1, Two backends: 'regex' (pattern + context, no API) and 'ai' (LLM batch classification).                          
+ - 2, AI backend supports Anthropic native, OpenAI native, and any OpenAI-compatible                                  
+ endpoint via --base-url (DeepSeek, university proxies, self-hosted, etc.).                                           
+ - 3, Set the appropriate API key env var (ANTHROPIC_API_KEY, OPENAI_API_KEY,                                         
+ DEEPSEEK_API_KEY) or pass --api-key.                                                                                 
+ - 4, Configure provider/model via --model, --base-url, or a YAML config file.                                        
+                                                                                                                      
+                                                                                                                      
+ Examples:                                                                                                            
+   paperflow mineru-parse -i content_list_v2.json -o paper.json                                                       
+   paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai                                          
+   paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \                                        
+       --base-url https://api.deepseek.com --model deepseek-v4-pro --api-key sk-xxx                                   
+   paperflow mineru-parse -i content_list_v2.json -o paper.json --backend ai \                                        
+       --base-url https://models.sjtu.edu.cn/api/v1 --model deepseek-chat                                             
+   paperflow mineru-parse -i content_list_v2.json -o paper.json --backend regex --config custom.yaml                  
+                                                                                                                      
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input     -i      TEXT  Path to mineru content_list_v2.json. [required]                                       │
+│ *  --output    -o      TEXT  Output path for the structured JSON file. [required]                                  │
+│    --backend   -b      TEXT  Section classification backend: 'regex' (default, no API needed) or 'ai'.             │
+│                              [default: regex]                                                                      │
+│    --config    -c      TEXT  Path to YAML config file for canonical types, aliases, and AI settings.               │
+│    --api-key           TEXT  API key for AI backend. Overrides config file and env var.                            │
+│    --model             TEXT  Override AI model (e.g. 'deepseek-v4-pro', 'claude-haiku-4-5', 'gpt-4o-mini').        │
+│    --base-url          TEXT  Custom API base URL for OpenAI-compatible endpoints (e.g.                             │
+│                              'https://api.deepseek.com').                                                          │
+│    --help                    Show this message and exit.                                                           │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+``` 
+
+`mineru-parse` transforms flat JSON outputs from MinerU into standardised structured JSON, classifying each segment into canonical academic sections while extracting metadata (title, authors, year, DOI, journal) and figure captions.
+
+Two backends are provided for textual segment parsing:
+
+>  Two Backends 
+
+| Backend | How it works | API needed? | Best for |
+|---------|-------------|-------------|----------|
+| **regex** (default) | Pattern matching: exact string → regex → context keyword. Configurable via YAML. | No | Common papers, batch processing |
+| **ai** | Sends all section titles + context to an LLM in one batch API call. | Yes | Non-standard titles, multi-publisher |
+---
+
+**1. Regex matching layers ：**
+
+```
+1. strong (exact match)   → "Introduction" == "introduction"  ✓
+2. weak (regex search)    → "1. Introduction" matches r"introduction"  ✓
+3. context_keywords       → "Overview" → check text for "we used..." → methods
+4. fallback               → classify as "other"
 ```
 
-映射过程分为两步：
+A sliding positional pointer tracks document sequence to minimise misclassification: subsequent section matching initiates from the endpoint of the preceding matched segment rather than the document start.
 
-1. **去除数字前缀**：`re.compile(r"^\s*(?:\d+[\.\)]\s*)+(.*)$")` 将 `"2.1. IDPFold Reproduces..."` 转换为 `"IDPFold Reproduces..."`，再匹配纯关键词。
-2. **关键词匹配**：按 `CANONICAL_ORDER` 的顺序依次尝试正则匹配。
+**2. AI workflow ：**
 
-典型映射示例：
+```
+content_list_v2.json
+    → extract all titles + surrounding text (~200 chars)
+    → build JSON payload: [{index, title, context_preview}, ...]
+    → one API call → AI returns {classifications: [{index, canonical_type}]}
+    → merge classifications into structured JSON
+```
 
-| 原始标题 | 去除前缀后 | 命中 pattern | 结果 |
-|----------|-----------|-------------|------|
-| `"1. Introduction"` | `"Introduction"` | `r"^\s*introduction\s*$"` | `introduction` |
-| `"2. Results"` | `"Results"` | `r"^\s*results?\s*$"` | `results` |
-| `"3. Discussion"` | `"Discussion"` | `r"^\s*discussions?\s*$"` | `discussion` |
-| `"4. Experimental Section"` | `"Experimental Section"` | `r"^\s*experimental\s+section\s*$"` | `methods` |
-| `"Materials and Methods"` | `"Materials and Methods"` | `r"^\s*materials?\s*(?:and\|&)\s*methods?\s*$"` | `methods` |
-| `"Data Availability Statement"` | `"Data Availability Statement"` | `r"^\s*(?:data\|...)\s+availability\s*$"` | `availability` |
+> ⚠️ The regex backend is enabled by default; the AI backend is under active development.
+> 🌟 For the `-c` parameter of `mineru‑parse`, please refer to the provided template configuration file [mineru config file](./config/mineru_config.yaml). Default settings suffice for general usage without modification. This configuration file is engineered for compatibility with both regex and AI backends, with documentation and revision guidelines embedded within the file.
 
-### 子节处理
+All matching rules are encapsulated within [mineru_config.yaml](./config/mineru_config.yaml), with sensible defaults preconfigured. Modifications are only required for journal‑specific adaptation.
 
-对于具有多级编号的章节如 `"2.1."`、`"2.2."` 等，解析器将其识别为子节：
+Users may globally customise section categorisation and individually classify arbitrary textual segments according to personal reading and downstream analytical requirements.
 
-- `_build_sections` 中的 `is_sub` 判定：`level >= 3` 或匹配 `r"^\s*(?:\d+[\.\)]\s*){2,}"`（两个以上数字段，如 `2.1.`、`3.2.5.`）
-- 子节的段落写入父节的 `subsections` 列表
-- 子节继承父节的 `canonical_type`，不创建独立条目
+> 🌟 This enables highly personalised section parsing: theoretically, custom section schemas and parsing logic can be tailored for any paper type.
 
-### 输出 JSON 格式
+---
+**Config file layout ：**
 
-```json
+| Section | Purpose |
+|---------|---------|
+| `ai` | `model`, `api_key`, `base_url` for AI backend |
+| `canonical_order` | Which types exist + their output order |
+| `display_names` | Human-readable labels (can be Chinese, etc.) |
+| `aliases` | Matching rules: `strong` (exact), `weak` (regex), `context_keywords` |
+--- 
+
+**Common customization scenarios ：**
+
+| Scenario | Where to edit |
+|----------|--------------|
+| Title misclassified as "other"  | Add to matching type's `strong` or `weak` |
+| Need a new section type  | Add to `canonical_order` + `display_names` + `aliases` |
+| Switch AI model  | Edit `ai.model` and `ai.base_url` |
+| Chinese labels  | Edit `display_names` |
+
+---
+
+A representative structured JSON output is provided below:
+
+ ```json
 {
   "source": "mineru",
-  "file": "xxx_content_list_v2.json",
+  "file": "paper_content_list_v2.json",
+  "backend": "regex",
   "metadata": {
     "title": "Accurate Generation of Conformational Ensembles...",
     "authors": "Junjie Zhu, Zhengxin Li, ...",
@@ -928,89 +1114,190 @@ CANONICAL_ORDER = [
     "doi": "10.1002/advs.202511636",
     "journal": "Advanced Science"
   },
-  "abstract": "Intrinsically disordered proteins (IDPs) play pivotal roles...",
   "sections": [
+    {
+      "canonical_type": "abstract",
+      "raw_title": "Abstract",
+      "display_title": "Abstract",
+      "level": 2,
+      "paragraphs": ["In this paper, we..."],
+      "subsections": []
+    },
     {
       "canonical_type": "introduction",
       "raw_title": "1. Introduction",
       "display_title": "Introduction",
-      "level": 2,
-      "paragraphs": ["Intrinsically disordered proteins...", "..."]
+      "paragraphs": ["...", "[Figure: Figure 1. Architecture overview...]"],
+      "subsections": []
     },
     {
       "canonical_type": "results",
       "raw_title": "2. Results",
       "display_title": "Results",
-      "level": 2,
-      "paragraphs": ["IDPFold employs a conditional diffusion..."],
       "subsections": [
-        {
-          "raw_title": "2.1. IDPFold Reproduces Global Features of IDPs",
-          "display_title": "2.1. IDPFold Reproduces Global Features of IDPs",
-          "level": 2,
-          "paragraphs": ["We first evaluated...", "..."]
-        }
+        {"raw_title": "2.1. Global Features", "paragraphs": ["..."]}
       ]
-    },
-    {
-      "canonical_type": "discussion",
-      "raw_title": "3. Discussion",
-      "display_title": "Discussion",
-      "level": 2,
-      "paragraphs": ["In this study..."]
-    },
-    {
-      "canonical_type": "methods",
-      "raw_title": "4. Experimental Section",
-      "display_title": "Methods",
-      "level": 2,
-      "paragraphs": ["Datasets: The data for training...", "..."]
     }
-  ],
-  "tables": [
-    {"caption": "Table 1. Benchmark on IDPFold...", "html": "<table>..."}
   ]
 }
 ```
 
-### CLI 使用
+Approximately 15 standard section types are supported, consistent with conventional academic paper structure:
+`abstract` `introduction` `results` `discussion` `methods` `conclusion` `supplementary` `availability` `funding` `acknowledgements` `author_contributions` `keywords` `conflicts` `references` `other`
 
-```bash
-# 解析单个 JSON
-paperflow mineru-parse -i content_list_v2.json -o paper.json
+Following generation of structured JSON files, targeted bulk section export can be performed on demand.
 
-# 完整流水线：PDF → Markdown → 结构化 JSON
-paperflow pdf2md -i paper.pdf -o ./output --clear
-paperflow mineru-parse \
-  -i ./output/paper_content_list_v2.json \
-  -o ./output/paper_structured.json
+Functionally, the `pubmed‑export‑md` module for PubMed papers integrates the capabilities of `mineru‑parse` and `mineru‑export‑md`.
+
+```python
+❯ paperflow mineru-export-md --help
+                                                                    
+ Usage: paperflow mineru-export-md [OPTIONS]                        
+                                                                    
+ Export structured mineru JSON to a clean Markdown file for LLM     
+ processing.                                                        
+                                                                    
+ Reads one or more JSON files produced by ``mineru-parse`` and      
+ writes a                                                           
+ single Markdown file.  Metadata (title, authors, year, DOI,        
+ journal) is                                                        
+ always included.  Content sections are included based on the       
+ optional                                                           
+ YAML config.                                                       
+                                                                    
+                                                                    
+ YAML config format:                                                
+   content_sections:                                                
+     - abstract                                                     
+     - introduction                                                 
+     - methods                                                      
+     - results                                                      
+     - discussion                                                   
+     - conclusion                                                   
+                                                                    
+                                                                    
+ Examples:                                                          
+   paperflow mineru-export-md -i paper.json -o paper.md             
+   paperflow mineru-export-md -i paper.json -o paper.md --config    
+ extract.yaml                                                       
+   paperflow mineru-export-md -i ./parsed_dir -o all_papers.md      
+                                                                    
+╭─ Options ────────────────────────────────────────────────────────╮
+│ *  --input   -i      TEXT  Path to structured JSON file (from    │
+│                            mineru-parse), or a directory of such │
+│                            files.                                │
+│                            [required]                            │
+│ *  --output  -o      TEXT  Output Markdown file path. [required] │
+│    --config  -c      TEXT  YAML config specifying                │
+│                            content_sections to include. If not   │
+│                            provided, all sections are included.  │
+│    --help                  Show this message and exit.           │
+╰──────────────────────────────────────────────────────────────────╯
+
 ```
 
+> 🌟 Similarly, the `-c` parameter of `mineru‑export‑md` accepts a dedicated YAML configuration file [mineru export config file](./config/mineru_export_config.yaml) for bulk section export configuration, with embedded documentation and revision guidelines.
+> ⚠️ Section types defined in this export configuration file must be pre‑declared in canonical_order within mineru_config.yaml. Custom section types (e.g., ethics) defined during parsing may only be invoked in the export phase if pre‑registered upstream. In short, [mineru export config file](./config/mineru_export_config.yaml) and [mineru config file](./config/mineru_config.yaml) must be mutually consistent.
 
-没辙了，总之这里的语段分割/语义解析比较困难，我们目前做的尝试比较困难。
-现在有几个解决方案：
-* mineru换更好的模型后端
-* mineru目前的输出json/markdown中尝试去做进一步更加精细的边界处理以及语义分割
-* 换其他的pdf parser引擎
-* 直接把mineru的输出markdown当作一个整体，丢给LLM做进一步的解析和结构化（不太建议，毕竟markdown里有很多噪声），做1个纯文本分割的skill
-* 只是提取markdown的层级标题，然后让它分类，但是执行完全由python脚本执行合并
+```python
+mineru_config.yaml                mineru_export_config.yaml
 
-### 与 PubmedMerger 的协同
+┌──────────────────────┐          ┌──────────────────────┐
+│ canonical_order:     │          │ content_sections:    │
+│   - abstract         │── 定义 → │   - abstract         │
+│   - introduction     │  类型池  │   - introduction     │
+│   - results          │          │   - results          │
+│   - ...              │          │   - discussion       │
+│   - ethics  ← 自定义 │          │   - methods          │
+└──────────────────────┘          │   - ethics  ← 引用   │
+                                   └──────────────────────┘
 
-输出中的 `sections[*].canonical_type` 字段复用 `pubmed_merger.py` 中定义的 `SECTION_CANONICAL_ORDER`。
-这意味着后续可以将 mineru 解析结果直接导入 `PubmedMerger.export_md_from_merged_json()` 的导出管线，
-生成统一的 Markdown 文献评阅文档。
+```
+
+For instance, if ethics is added to canonical_order with corresponding aliases in mineru_config.yaml, the heading "Ethics Statement" within papers will be classified under the ethics section type during parsing. This type may then be selected in the export configuration file to extract relevant content. Unregistered section types cannot be recognised in the export phase.
+
+Engineered for batch processing workflows, `mineru‑export‑md` scans all .json files within a specified non‑PubMed paper directory (it is recommended to store only mineru‑parse outputs in an isolated directory to avoid extraneous JSON files). Files are sorted by name, with individual papers separated by `---`, and consolidated into a single merged Markdown file.
+
+### 5. Processing for Other Literature Databases
+
+The preceding Steps 1‑4 are illustrated using PubMed as a representative literature database. The same processing logic applies to other academic platforms, such as arXiv, bioRxiv, medRxiv, chemRxiv, and more.
+
+In theory, all DOI‑driven literature workflows can be standardised following the pipeline described above:
+
+`Retrieve PDF via DOI → Preliminary PDF Parsing → Content Extraction and Structured Processing`
+
+> Modules dedicated to the aforementioned preprint platforms are still under development and refinement. Preprint‑related subcommands are provided for testing purposes only. For detailed test cases, refer to [Cases](./docs/Cases.md)
+
+### 6. Critical Reading and Knowledge Graph Analysis: Downstream End‑Use
+
+Upon completing literature retrieval, parsing, and structured processing as outlined above, users obtain chapter‑organised Markdown files and structured JSON files, which serve as the fundamental inputs for subsequent critical reading and knowledge graph analysis.
+
+Whether conducting continuous parsing of cutting‑edge individual papers or batch‑processing literature for thematic research, Markdown files form the unified starting point. State‑of‑the‑art (SOTA) text‑processing and logical‑analysis models can be leveraged to assist knowledge graph construction or straightforward real‑time literature reading.
+
+> 🌟 As the most subjective downstream task, literature reading can still be transformed into quantifiable, repeatable workflows. Highly customised reading skills are commonly adopted to facilitate paper analysis. Relevant references are provided at [paper reading skill](./docs/Skills.md)
 
 
-⚠️ paper-fetch updated at 2026-05-08 
+## 🔍 Test Cases
+
+We provide a set of test cases in [Test Documentation](./docs/Cases.md), covering multiple types of literature data including PubMed, arXiv, bioRxiv, and more.
+
+It also contains `highly detailed step‑by‑step execution logs of script workflows arranged in the logical order of literature research`.
+
+You may directly run the test scripts to verify the correctness and completeness of all functionalities.
+
+> 🌟 By combining the aforementioned `usage instructions` with these `test cases`, users can quickly get started with our tool.
+
+## 📌 Future Maintenance & To‑Do List
+
+<details>
+<summary><b>1. Starting Point for Research</b></summary>
+
+> - [ ] Extend the BrainStorm skill and explore programmable integration of background prior knowledge.
+
+</details>
+
+<details>
+<summary><b>2. Literature Search (and Metadata Scraping)</b></summary>
+
+> - [ ] Supplement query syntax for various literature databases and implement skill‑based support. Currently only partial MeSH‑aware syntax priors for PubMed are integrated.
+> - [ ] Maintain and update the BioPython library (E‑utilities API) for PubMed parsing from this stage onward. Current version: BioPython 1.87; see [biopython Repository](https://github.com/biopython/biopython) for details.
+
+</details>
+
+<details>
+<summary><b>3. Literature Acquisition (and Full‑Text Download)</b></summary>
+
+> - [ ] Refine and encapsulate the `paper‑fetch` module. Refer to [2026‑05‑08 paper‑fetch Encapsulation](https://github.com/Agents365‑ai/paper‑fetch); evaluate integration or replacement with more robust modules offering higher hit rates.
+> - [ ] The `pdf‑parse` module currently wraps basic MinerU parsing commands with the CPU backend (`‑b pipeline`). Future integration of GPU‑accelerated features; see [MinerU Repository](https://github.com/opendatalab/MinerU) for details.
+
+</details>
+
+<details>
+<summary><b>4. Literature Content Extraction and Structured Processing</b></summary>
+
+> - [ ] Improve JSON‑structured parsing of PMC plain‑text content within the `pubmed‑export‑md` module: enhance semantic boundary validation by expanding regular‑expression matching ranges, or introduce an AI backend analogous to the `mineru‑export‑md` module.
+> - [ ] The `mineru‑parse` module parses `content_list_v2.json`. Official documentation indicates this output format is still evolving; ongoing tracking and maintenance are required. See [MinerU Output File Documentation](https://opendatalab.github.io/MinerU/zh/reference/output_files/).
+> - [ ] Enhance semantic boundary validation for the regex backend of `mineru‑parse` by expanding regular‑expression matching ranges.
+> - [ ] Deepen integration of the AI backend within the `mineru‑parse` module.
+> - [ ] Optimize coordination between YAML configuration files for the `mineru‑parse` and `mineru‑export‑md` modules to achieve efficient mapping.
+> - [ ] Design a standalone skill for segment extraction and structured processing of raw parsed Markdown content. Current workflows default to JSON files and underutilize Markdown outputs.
+
+</details>
+
+<details>
+<summary><b>5. Processing for Other Literature Databases</b></summary>
+
+> - [ ] Develop a unified `search‑fetch‑parse` pipeline for non‑PubMed databases and complete corresponding modules. Refer to open‑source implementations such as [paperscraper](https://github.com/jannisborn/paperscraper) and [paper‑tracker](https://github.com/RainerSeventeen/paper‑tracker).
+
+</details>
+
+<details>
+<summary><b>6. Critical Reading and Knowledge Graph Analysis: Downstream End‑Use</b></summary>
+
+> - [ ] Develop highly customized skills for in‑depth literature analysis, preferably integrated into downstream workflows.
+> - [ ] Introduce persistent databases to scale and deepen functionality beyond a pure Python‑based project.
+
+</details>
 
 
-
-# todo（warning）
-
-首先是我们的biopython api会不会修改，pubmed部分需要跟进
-
-其次是一些第三方模块的api以及输出的内容格式是否会改变，这会影响到我们的模块维护
-比如说paper-fetch是封装了第三方模块
-mineru-parser是使用v2的输出json格式，但是后续可能格式会修改
 

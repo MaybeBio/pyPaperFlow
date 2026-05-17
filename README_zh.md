@@ -22,7 +22,7 @@
     - [6. 批判性阅读与知识图谱分析：下游终点](#6-批判性阅读与知识图谱分析下游终点)
   - [🔍 测试示例](#-测试示例)
   - [📌 后续维护待办](#-后续维护待办)
-  - [📌 局限性](#-局限性)
+
 
 
 ## 📖 简介
@@ -39,6 +39,7 @@
 
 本工具旨在**补充而非替代** Zotero 等文献参考管理软件。我们专注于“信息提取”和“知识发现”这两个关键步骤，为你构建一个**结构化知识库**，为后续的语义搜索、内容分析和综述生成奠定基础。
 
+> `如果该项目对你有帮助, 请麻烦点一个 Star ⭐, 谢谢!`
 
 ## 🚀 功能特性
 
@@ -883,7 +884,95 @@ flowchart TD
 
 以上是对pubmed 文献进行的结构化提取操作，但是对于非 pubmed 数据库，我们能够解析的起点是 mineru 解析引擎解析获取的初步 json 文件（`content_list_v2.json`）。
 
-这个文件相比 pmc 输出的 json 格式会更加复杂和难以解析。
+PDF 经 MinerU 处理后生成的 `content_list_v2.json` 以页面为单位组织数据——一个外层数组代表所有页面，
+每个元素是该页面的渲染块列表。这些块包含论文标题、段落、行间公式、图片/图表、表格、页眉、页脚、脚注等多种类型，
+混杂在一起，无法直接用于下游的语义分析或 LLM 输入。
+
+我们的目标就是将这个原始的json转换为统一的、按文献领域规范章节归并的结构化json。
+
+输入的json结构：
+```json
+[
+  [                        // page 0
+    {"type": "title",      "content": {"title_content": [...], "level": 1}},
+    {"type": "paragraph",  "content": {"paragraph_content": [...]}},
+    {"type": "title",      "content": {"title_content": [...], "level": 2}},
+    {"type": "paragraph",  "content": {"paragraph_content": [...]}},
+    {"type": "page_header", ...},     // 噪声
+    {"type": "page_footnote", ...},   // 噪声
+    ...
+  ],
+  [                        // page 1
+    ...
+  ]
+]
+```
+
+常见的块类型（按内容取值归类）：
+
+| 类型 | 是否正文 | 文本提取路径 |
+|------|----------|-------------|
+| `title` | 是（章节锚点） | `content.title_content[*].content` + `level`（1=文章标题，2=一级章节） |
+| `paragraph` | 是（主文本） | `content.paragraph_content[*].content`，支持 `equation_inline` 子项 |
+| `equation_interline` | 是（行间公式） | `content.math_content`（LaTeX） |
+| `table` | 部分 | `content.html`（HTML 表格） + `content.table_caption` |
+| `image` / `chart` | 否（保留 caption） | `content.image_caption[*].content` / `content.chart_caption` |
+| `page_header` / `page_footer` / `page_footnote` | **噪声（丢弃）** | 用于元数据扫描（年份/DOI/期刊名） |
+
+我们的解析流水线如下：
+
+```
+                   content_list_v2.json
+                           │
+  ───────────────── Step 1: 扁平化 ─────────────────
+                           │
+              _flatten() — 去掉噪声块
+             (page_header/footer/footnote)
+              保留 title / paragraph / table 等
+                           │
+  ────────────── Step 2: 元数据提取 ────────────────
+                           │
+              ┌─ title    ← 第一个 level=1 的 title 块
+              ├─ authors  ← title 后第一个短行（含逗号、<400 字符）
+              ├─ year     ← 从 page_footer 中提取 "2025"
+              ├─ doi      ← 从 page_footnote 中匹配 "10.1002/..."
+              └─ journal  ← 从 page_header 中选取全大写短名称
+                           │
+  ────────────── Step 3: 抽象提取 ──────────────────
+                           │
+             _extract_abstract()
+             跳过作者行 → 收集第一个 section 前所有段落
+                           │
+  ─────────┐ Step 4: 章节分割 ─────────────────────
+           │
+           │  以 title 块为界切分段落：
+           │    level=1 → 跳过（论文标题）
+           │    level=2 → 新主节
+           │    level>=3 或编号 "2.1." → 子节，归入父节
+           │
+  ─────────┤ Step 5: 标题归一化 ─────────────────────
+           │
+           │  normalize_section_title()
+           │    去除数字前缀 "2.2. IDPFold..." → "IDPFold..."
+           │    匹配 CANONICAL_TYPES 表 → "results"
+           │
+  ─────────┤ Step 6: 节归并 ───────────────────────
+           │
+           │  _aggregate_sections()
+           │    同一 canonical_type 的内容合并
+           │    保持 subsections 列表
+           │
+  ─────────┘ Step 7: 表格提取 ─────────────────────
+                           │
+             _extract_tables()
+             收集所有 table 块的 html + caption
+                           │
+                           ▼
+                   结构化输出 JSON
+```
+
+
+总之，这个文件相比 pmc 输出的 json 格式会更加复杂和难以解析。
 
 和 pubmed 文献处理类似，我们同样提供了两个串行的模块合作来处理 json 结构化提取解析工作。  
 
@@ -936,7 +1025,7 @@ flowchart TD
 ``` 
 
 `mineru-parse` 将 MinerU 输出的扁平 JSON 转换为结构化的规范 JSON，每个章节被归类到标准的学术章节类型中，同时提取元数据（标题、作者、年份、DOI、期刊）和图片注释。
-
+ 
 在这里我们提供了两种后端用于语段解析， 
 
 >  Two Backends / 两种后端   
@@ -1179,24 +1268,33 @@ mineru_config.yaml                mineru_export_config.yaml
 <details>
 <summary><b>4. 文献内容提取与结构化处理</b></summary>
 
-> - [ ] PMC文本内容的json结构化解析，尝试加强语义边界规范检测（即扩大正则匹配边界范围），或者尝试像mineru-export-md模块一样引入AI后端
+> - [ ] PMC文本内容的json结构化解析（pubmed-export-md模块），尝试加强语义边界规范检测（即扩大正则匹配边界范围），或者尝试像mineru-export-md模块一样引入AI后端
 > - [ ] mineru-parse模块是针对 content_list_v2.json 文件进行解析的，但官网显示该文件解析格式仍在更新中，后续追踪维护，详情参考[mineru 输出文件说明](https://opendatalab.github.io/MinerU/zh/reference/output_files/)
+> - [ ] mineru-parse模块，regex正则后端，尝试加强语义边界规范检测（即扩大正则匹配边界范围）
+> - [ ] mineru-parse模块，ai后端，深入集成ai模块，比如说只是提取markdown的层级标题，然后让它分类，但是执行完全由python脚本执行合并
+> - [ ] mineru-parse/mineru-export-md 模块的yaml配置文件进行协同优化，如何高效对应起来     
+> - [ ] 考虑设计1个纯skill，用于原始解析markdown内容的语段提取和结构化处理，因为我们默认行为都是使用json文件，并没有用上markdown文件
+
+</details>
+
+<details>
+<summary><b>5. 其他文献数据平台的处理</b></summary>
+
+> - [ ] 对于其他非pubmed数据库，也需要做一套`search-fetch-parse`解析方案，完善相应模块，可以参考一些开源实现[paperscraper](https://github.com/jannisborn/paperscraper)、[paper-tracker](https://github.com/RainerSeventeen/paper-tracker)
+
+
+</details>
+
+<details>
+<summary><b>6. 批判性阅读与知识图谱分析：下游终点</b></summary>
+
+> - [ ] 文献深度解析，考虑加入几个高度定制化的skill，最好是可以借下游流程
+> - [ ] 考虑加入数据库，考虑做大做深，不局限于纯python项目
+
 
 </details>
 
 
-
-
-
-
-
-
-
-- mineru-parse 解析模块的 ai 后端，如何接入 ai 模型进行处理，目前正在维护开发中
-- mineru 复杂配置的封装，gpu 等参数 
-
-
-## 📌 局限性
 
 
  
