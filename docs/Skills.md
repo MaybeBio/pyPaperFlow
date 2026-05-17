@@ -32,6 +32,3 @@ https://github.com/Dictation354/paper-fetch-skill
 
 https://github.com/Agents365-ai/paper-fetch
 
-
-
-paper-tracker

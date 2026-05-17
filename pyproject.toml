@@ -4,27 +4,44 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyPaperFlow"
-version = "0.1.0"
-# dynamic = ["version"]
-description = "Automated paper fetching and analysis platform."
-readme = "README.md"
-requires-python = ">=3.13.5"
-license = "MIT"
+dynamic = ["version"] # v0.2.0
 authors = [
     { name = "Joe Hoye Dow", email = "luxunisgod123@gmail.com" }
 ]
+description = "Automated paper fetching and analysis platform."
+readme = "README.md"
+requires-python = ">=3.13.5"
+license = { file = "LICENSE" }
+license-files = ["LICENSE"]
+keywords = ["pypaperflow", "literature-processing", "paper-fetch", "pypaperflow", "pypaperflow", 
+"pdf-parse", "text-mining", "nlp", "knowledge-extraction", "automated-literature", "pubmed", "arxiv", 
+"bioRxiv", "mineru", "mineru", "llm", "research-workflow", "bioinformatics", "scientific-corpus", 
+"citation-extraction", "structured-parsing"]
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14"
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
+]
 
 dependencies = [
-  "biopython>=1.85",
-  "typer>=0.20.0",
-  "pandas>=2.3.1",
-  "requests>=2.32.4",
-  "httpx>=0.27.0",
+  "biopython>=1.87",
+  "typer>=0.25.0",
+  "pandas>=2.3.3",
+  "requests>=2.33.1",
+  "httpx>=0.28.1",
   "bs4>=0.0.2",
-  "lxml>=6.0.2",
-  "pydantic>=2.12.5",
-  "PyYAML>=6.0.2"
+  "lxml>=6.1.0",
+  "pydantic>=2.13.3",
+  "PyYAML>=6.0.3"
 ]
+
+[project.urls]
+Homepage = "https://github.com/MaybeBio/pyPaperFlow"
+Issues = "https://github.com/MaybeBio/pyPaperFlow/issues"
+
 
 [project.optional-dependencies]
 paperscraper = [
@@ -36,3 +53,7 @@ paperflow = "pyPaperFlow.cli:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pyPaperFlow"]
+
+[tool.hatch.version]
+# modify version information here
+path = "src/pyPaperFlow/__init__.py"
