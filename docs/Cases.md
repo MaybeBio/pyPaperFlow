@@ -1090,3 +1090,92 @@ the following table shows
 you can check all the output JSON files here : [parse](../test/Other_database/parse/)
 
 # 
+
+
+### 4. 搜索并获取 arXiv 论文
+如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
+
+```bash
+paperflow arxiv-search "deep learning for biology" --max-results 10
+paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf
+paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf --backend paperscraper
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
+- `--backend`：可选 `native`（内置的 httpx 方案）或 `paperscraper`（安装了第三方包时可用）。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+日期过滤示例：
+
+```bash
+paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers/arxiv
+```
+
+搜索结果会保存为 `searched_arxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，PDF 则按可用情况尽量下载。
+
+# 🌟🌟🌟
+#### arXiv 命令变体与使用示例
+
+- **arxiv-search**: 仅检索匹配的 arXiv 记录并输出 ID 列表（不下载内容）。
+
+    用法示例：
+
+    ```bash
+    paperflow arxiv-search "protein folding" --max-results 50 --start-date 2024-01-01 --end-date 2024-12-31
+    # 将会在默认存储目录下生成 searched_arxiv_ids.txt，或使用 --output-dir 指定保存位置
+    ```
+    
+- **arxiv-fetch**: 检索并保存每篇论文的标准化元数据（JSON），可选地下载 PDF 文件（默认开启）。
+
+    常用选项：
+    - `--download-pdf/--no-download-pdf`：是否下载 PDF（默认 `--download-pdf`）。
+    - `--backend`：`native`（默认，使用 arXiv Atom API）或 `paperscraper`（需安装 `paperscraper` 包）。
+    - `--output-dir`：指定保存结果的目录（默认使用全局存储目录）。
+    - `--start-date` / `--end-date`：按 `YYYY-MM-DD` 限制提交时间范围。
+
+    用法示例：
+
+    ```bash
+    # 仅保存元数据（不下载 PDF）
+    paperflow arxiv-fetch "deep learning for biology" --max-results 20 --no-download-pdf -o ./papers/arxiv
+
+    # 使用 paperscraper 后端并下载 PDF
+    paperflow arxiv-fetch "deep learning for biology" --max-results 20 --download-pdf --backend paperscraper -o ./papers/arxiv
+    ```
+
+- **输出与存储**：
+    - 元数据：每篇论文保存为 `{source_id}.json`，包含 `title`, `authors`, `abstract`, `published_date`, `landing_url`, `pdf_url` 等字段（存储路径示例：`{output_dir}/arxiv/2024/2301.01234v1/2301.01234v1.json`）。
+    - PDF：如果可用且下载成功，则保存为 `{source_id}.pdf`，并在对应 JSON 中更新 `pdf_downloaded` 和 `pdf_path` 字段。
+
+- **注意事项**：
+    - arXiv 的抓取流程只负责元数据标准化与 PDF 下载；当前仓库没有内建将 arXiv PDF 自动解析为 Markdown/结构化全文的步骤。若需后续文本解析，请在下载后接入 PDF 解析器（例如 `pdfplumber`、`minerU`、或 OCR/布局解析管线），并将解析结果保存为 `*_parsed.md` 或结构化 JSON，以便 `merge` 等下游工具使用。
+
+
+### 5. 搜索并获取 bioRxiv 论文
+bioRxiv 目前走 Crossref（openRxiv）服务端直接检索，不再先拉取大范围日期窗口再在本地做匹配。
+
+```bash
+paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
+paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+兼容性说明：
+
+- `--window-days` 作为 CLI 兼容参数保留，但当前 Crossref 检索路径不会使用该参数。
+
+示例：  
+
+```bash
+paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorxiv
+```
+
+搜索结果会保存为 `searched_biorxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，并在可用时下载 PDF。

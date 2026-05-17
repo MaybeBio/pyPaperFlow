@@ -1,6 +1,31 @@
-# 文献阅读自动化平台 (Automatic Paper Reading Platform) — pyPaperFlow
+# pyPaperFlow - 文献阅读自动化 🔬
 
 [English Version](README.md) | [中文版本](README_zh.md)
+
+![](./figs/logo.png)
+
+## 目录
+
+- [pyPaperFlow - 文献阅读自动化 🔬](#pypaperflow---文献阅读自动化-)
+  - [目录](#目录)
+  - [📖 简介](#-简介)
+  - [🚀 功能特性](#-功能特性)
+  - [🏗️ 架构设计哲学](#️-架构设计哲学)
+  - [📦 安装](#-安装)
+  - [🛠️ 使用方法](#️-使用方法)
+    - [模块概述](#模块概述)
+    - [1. 研究起点](#1-研究起点)
+    - [2. 文献检索（及元数据抓取）](#2-文献检索及元数据抓取)
+    - [3. 文献获取（及全文下载）](#3-文献获取及全文下载)
+    - [4. 文献内容提取与结构化处理](#4-文献内容提取与结构化处理)
+    - [5. 其他文献数据平台的处理](#5-其他文献数据平台的处理)
+    - [6. 批判性阅读与知识图谱分析：下游终点](#6-批判性阅读与知识图谱分析下游终点)
+  - [🔍 测试示例](#-测试示例)
+  - [📌 后续维护待办](#-后续维护待办)
+  - [📌 局限性](#-局限性)
+
+
+## 📖 简介
 
 一个面向科研工作者的自动化文献处理平台。本工具专注于“信息提取”和“知识发现”两个阶段，通过一个 7 阶段自动化流程，帮助研究人员高效完成从文献检索到知识内化的全流程。
 
@@ -26,7 +51,7 @@
 - **LLM 与 Agent 增强**：集成 LLM 技能和智能 Agent 能力，帮助用户串联文献调研与深度阅读的整个工作流。
 - **CLI 工具**：提供易用的命令行工具 `paperflow`，开箱即可完成所有核心操作。
 
-## 🏗️ 架构愿景
+## 🏗️ 架构设计哲学
 
 本项目围绕一个 7 阶段的工作流进行设计：
 
@@ -85,7 +110,7 @@ flowchart TD
     end
 ```
 
-详细设计理念参考 [设计文档](./Docs/Design.md)
+详细设计理念参考 [设计文档](./docs/Design.md)
 
 ## 📦 安装
 
@@ -214,7 +239,7 @@ bioRxiv 相关模块：
 你可借助前沿大语言模型，结合你目前所掌握的所有资料信息，反复核验、探讨研究起点，直至其足够清晰具体，或满足进入下一步文献检索的条件。
 
 
-> 🌟 这里我们为你提供几个用于文献调研的brainstorm skill: [Research brainstorm skill](./Docs/Skills.md)
+> 🌟 这里我们为你提供几个用于文献调研的brainstorm skill: [Research brainstorm skill](./docs/Skills.md)
 
 
 ### 2. 文献检索（及元数据抓取）
@@ -231,7 +256,7 @@ bioRxiv 相关模块：
 
 建议用户提前学习并熟练掌握上述数据库的检索语法，本工具内置搜索模块的运行逻辑与数据库网页端搜索框基本一致。
 
-> ✨ 这里我们为你提供了几个特定文献数据库构建搜索query的skill，[Paper query skill](./Docs/Skills.md)
+> ✨ 这里我们为你提供了几个特定文献数据库构建搜索query的skill，[Paper query skill](./docs/Skills.md)
 
 以 PubMed 为例，以下为一组典型且结构较复杂的检索式示例：
 
@@ -578,59 +603,34 @@ export UNPAYWALL_EMAIL=you@example.com
 
 ```python
 ❯ paperflow pdf-parse --help
-                                          
- Usage: paperflow pdf-parse [OPTIONS]     
-                                          
- Parse a PDF file using MinerU engine,    
- and clean up the output directory.       
-                                          
-                                          
- Notes:                                   
- - 1, MinerU generates a subfolder /auto  
- under --output with .md, .json, .pdf,    
- and images/.  Use --clear to strip       
- anything unnecessary,                    
- note that we only use .md files and      
- _content_list_v2.json/_content_list.json 
- files for further processing like        
- structuring.                             
- - 2, ⚠️  Remember to switch to domestic  
- mirror source when you can not access    
- huggingface.                             
-                                          
-                                          
- Example usage:                           
-   paperflow pdf-parse -i paper.pdf -o    
- ./output                                 
-                                          
-╭─ Options ──────────────────────────────╮
-│ *  --input   -i      TEXT  Input PDF   │
-│                            file path.  │
-│                            [required]  │
-│ *  --output  -o      TEXT  Output      │
-│                            directory   │
-│                            for parsed  │
-│                            output.     │
-│                            [required]  │
-│    --clear                 After       │
-│                            conversion, │
-│                            keep only   │
-│                            the .md     │
-│                            files and   │
-│                            necessary   │
-│                            .json       │
-│                            files(_con… │
-│    --help                  Show this   │
-│                            message and │
-│                            exit.       │
-╰────────────────────────────────────────╯
+                                                                                                                                                                   
+ Usage: paperflow pdf-parse [OPTIONS]                                                                                                                              
+                                                                                                                                                                   
+ Parse a PDF file using MinerU engine, and clean up the output directory.                                                                                          
+                                                                                                                                                                   
+                                                                                                                                                                   
+ Notes:                                                                                                                                                            
+ - 1, MinerU generates a subfolder /auto under --output with .md, .json, .pdf, and images/.  Use --clear to strip anything unnecessary,                            
+ note that we only use .md files and _content_list_v2.json/_content_list.json files for further processing like structuring.                                       
+ - 2, ⚠️  Remember to switch to domestic mirror source when you can not access huggingface.                                                                        
+                                                                                                                                                                   
+                                                                                                                                                                   
+ Example usage:                                                                                                                                                    
+   paperflow pdf-parse -i paper.pdf -o ./output                                                                                                                    
+                                                                                                                                                                   
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input   -i      TEXT  Input PDF file path. [required]                                                                                                      │
+│ *  --output  -o      TEXT  Output directory for parsed output. [required]                                                                                       │
+│    --clear                 After conversion, keep only the .md files and necessary .json files(_content_list_v2.json/_content_list.json).                       │
+│    --help                  Show this message and exit.                                                                                                          │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 
 ```
 
 
 
-> 🌟 关于pdf文献获取模块，我们也提供了一系列脚本参考，你可以将其整合到 skill 中或独立实现: [Paper pdf fetch](./Docs/Skills.md)
+> 🌟 关于pdf文献获取模块，我们也提供了一系列脚本参考，你可以将其整合到 skill 中或独立实现: [Paper pdf fetch](./docs/Skills.md)
 
 
 ### 4. 文献内容提取与结构化处理
@@ -972,8 +972,12 @@ content_list_v2.json
                     
 > 🌟 对于当前模块`mineru-parse`的`-c`参数输入 yaml 配置文件，请参考使用我们提供的模板文件[mineru config file](./config/mineru_config.yaml)，正常使用情况下我们不需要修改配置文件，全部使用默认项即可。这份配置文件就是按照兼容两个后端设计的，regex后端以及 ai后端。相关的说明以及具体修改注意事项都可以在文件中进行查看。
 
-再次强调，所有匹配规则都在上面的[mineru_config.yaml](./config/mineru_config.yaml)中，内置了合理默认值，正常使用不需要提供，仅在需要适配特定期刊时修改。     
+再次强调，所有匹配规则都在上面的[mineru_config.yaml](./config/mineru_config.yaml)中，内置了合理默认值，正常使用不需要提供，仅在需要适配特定期刊时修改。 
 
+而修改时你可以全局定制你自己想要的章节模块分类，按照你自己实际文献阅读、下游分析处理的需求去对文章的任意语段内容进行个性化归类。
+
+> 🌟 所以这意味着我们的章节解析是高度个性化 的，理论上你可以依据你手头上的任意类型的文献定制任意章节类别以及解析逻辑
+---
 **Config file layout / 配置文件结构：**
 
 | Section | Purpose |
@@ -1092,305 +1096,107 @@ content_list_v2.json
 
 ```
 
+> 🌟 同样的，`mineru-export-md`模块也可以指定`-c`配置文件，请参考使用我们提供的模板文件[mineru export config file](./config/mineru_export_config.yaml)，按照你需要批量导出的章节进行设置，相关说明以及具体修改注意事项都可以在文件中进行查看。
+> ⚠️ 另外注意，该配置文件中的章节类型必须是在 mineru_config.yaml 的 canonical_order 中定义过的。如果你在解析阶段自定义了新类型（比如 - ethics），在这里才能引用它。换句话说，上游 parse 定义了什么类型，下游 export 才能选择什么。总之[mineru export config file](./config/mineru_export_config.yaml)和 [mineru config file](./config/mineru_config.yaml) 得对应。
 
 
+```python
+mineru_config.yaml                mineru_export_config.yaml
 
+┌──────────────────────┐          ┌──────────────────────┐
+│ canonical_order:     │          │ content_sections:    │
+│   - abstract         │── 定义 → │   - abstract         │
+│   - introduction     │  类型池  │   - introduction     │
+│   - results          │          │   - results          │
+│   - ...              │          │   - discussion       │
+│   - ethics  ← 自定义 │          │   - methods          │
+└──────────────────────┘          │   - ethics  ← 引用   │
+                                   └──────────────────────┘
 
-
-
-### 4. 搜索并获取 arXiv 论文
-如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
-
-```bash
-paperflow arxiv-search "deep learning for biology" --max-results 10
-paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf
-paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf --backend paperscraper
 ```
 
-常用参数：
+如果你在 mineru_config.yaml 的 canonical_order 里新增了ethics，并配了 aliases，解析时论文里的"Ethics Statement" 标题就会被归类为 ethics，然后你在导出配置里写 - ethics，就能把它选出来。如果没有在上游定义过，导出阶段就找不到这个类型。
 
-- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
-- `--backend`：可选 `native`（内置的 httpx 方案）或 `paperscraper`（安装了第三方包时可用）。
-- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
-- `--no-download-pdf`：只保存元数据，不下载 PDF。
-
-日期过滤示例：
-
-```bash
-paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers/arxiv
-```
-
-搜索结果会保存为 `searched_arxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，PDF 则按可用情况尽量下载。
-
-# 🌟🌟🌟
-#### arXiv 命令变体与使用示例
-
-- **arxiv-search**: 仅检索匹配的 arXiv 记录并输出 ID 列表（不下载内容）。
-
-    用法示例：
-
-    ```bash
-    paperflow arxiv-search "protein folding" --max-results 50 --start-date 2024-01-01 --end-date 2024-12-31
-    # 将会在默认存储目录下生成 searched_arxiv_ids.txt，或使用 --output-dir 指定保存位置
-    ```
-    
-- **arxiv-fetch**: 检索并保存每篇论文的标准化元数据（JSON），可选地下载 PDF 文件（默认开启）。
-
-    常用选项：
-    - `--download-pdf/--no-download-pdf`：是否下载 PDF（默认 `--download-pdf`）。
-    - `--backend`：`native`（默认，使用 arXiv Atom API）或 `paperscraper`（需安装 `paperscraper` 包）。
-    - `--output-dir`：指定保存结果的目录（默认使用全局存储目录）。
-    - `--start-date` / `--end-date`：按 `YYYY-MM-DD` 限制提交时间范围。
-
-    用法示例：
-
-    ```bash
-    # 仅保存元数据（不下载 PDF）
-    paperflow arxiv-fetch "deep learning for biology" --max-results 20 --no-download-pdf -o ./papers/arxiv
-
-    # 使用 paperscraper 后端并下载 PDF
-    paperflow arxiv-fetch "deep learning for biology" --max-results 20 --download-pdf --backend paperscraper -o ./papers/arxiv
-    ```
-
-- **输出与存储**：
-    - 元数据：每篇论文保存为 `{source_id}.json`，包含 `title`, `authors`, `abstract`, `published_date`, `landing_url`, `pdf_url` 等字段（存储路径示例：`{output_dir}/arxiv/2024/2301.01234v1/2301.01234v1.json`）。
-    - PDF：如果可用且下载成功，则保存为 `{source_id}.pdf`，并在对应 JSON 中更新 `pdf_downloaded` 和 `pdf_path` 字段。
-
-- **注意事项**：
-    - arXiv 的抓取流程只负责元数据标准化与 PDF 下载；当前仓库没有内建将 arXiv PDF 自动解析为 Markdown/结构化全文的步骤。若需后续文本解析，请在下载后接入 PDF 解析器（例如 `pdfplumber`、`minerU`、或 OCR/布局解析管线），并将解析结果保存为 `*_parsed.md` 或结构化 JSON，以便 `merge` 等下游工具使用。
-
-如果需要，我可以继续为你实现一个简单的 PDF -> Markdown 解析示例脚本，并把使用说明也追加到 README 中。
-
-### 5. 搜索并获取 bioRxiv 论文
-bioRxiv 目前走 Crossref（openRxiv）服务端直接检索，不再先拉取大范围日期窗口再在本地做匹配。
-
-```bash
-paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
-paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
-```
-
-常用参数：
-
-- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
-- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
-- `--no-download-pdf`：只保存元数据，不下载 PDF。
-
-兼容性说明：
-
-- `--window-days` 作为 CLI 兼容参数保留，但当前 Crossref 检索路径不会使用该参数。
-
-示例：  
-
-```bash
-paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorxiv
-```
-
-搜索结果会保存为 `searched_biorxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，并在可用时下载 PDF。
-
-  
+同样的，`mineru-export-md`功能也是为了批量处理而设计的，批量模式下提供非pubmed文献解析的文件夹，我们会扫描目录下所有.json文件（建议把mineru-parse的输出放单独1个目录，确保没有其他非解析产物的json文件），按文件名排序，每篇论文之间用`---`分隔，输出为1个合并的Markdown文件
 
 
- 
- 
+### 5. 其他文献数据平台的处理
+
+上述步骤1-4我们都是以pubmed文献平台为例进行的介绍，对于其他文献数据平台，
+比如说arXiv、bioRxiv、medRxiv、chemRxiv等，处理逻辑同理。
+
+理论上一切基于DOI出发的文献处理流程，都可以按照上文我们提到的处理逻辑进行统一：
+`基于doi获取pdf -> pdf初步解析 -> 内容提取与结构化处理`。
+
+> ⚠️ `针对上述预印本平台的模块还在开发完善中，目前提供的预印本相关子命令仅测试使用`, 相关测试细节详情见[Cases](./docs/Cases.md)
 
 
-## todo维护
+### 6. 批判性阅读与知识图谱分析：下游终点
 
-- 一者是 paper-fetch 封装模块，⚠️ paper-fetch updated at 2026-05-08 
+在完成了上述的文献获取、解析、结构化处理之后，我们就可以得到一个个章节化的Markdown文件或者结构化的JSON文件，这些都是我们后续开展批判性阅读和知识图谱分析的基础输入。
+
+无论是追踪最前沿持续更新的单篇文献解析，还是文献调研同一主题的批量文献解析，现在我们的起点都是markdown文件，你完全可以使用最前沿的SOTA文本处理和逻辑分析模型来辅助你进行知识图谱的构建，或者是简单的即时文献阅读。
+
+> 🌟 文献阅读作为下游最主观的一一环，我们依然可以将其纳入到可定量的重复性工作中，最常见的形式是使用高度个性化的skill来辅助文献解析，这里我们依然为你提供了一些参考[paper reading skill](./docs/Skills.md)
+
+
+## 🔍 测试示例
+
+我们在[测试文档](./docs/Cases.md)中提供了一些测试示例，包含了不同类型的文献数据（pubmed、arxiv、biorxiv等），以及`非常详细的、按照文献调研逻辑顺序展开的逐步脚本执行示例记录`，你可以直接运行测试脚本来验证功能的正确性和完整性。
+
+> 🌟 结合前面的`使用方法`和此处的`测试示例`, 用户能够很快上手我们的工具
+
+## 📌 后续维护待办
+
+<details>
+<summary><b>1. 研究起点</b></summary>
+
+> - [ ] BrainStorm skill的补充，考虑如何可编程地融合背景先验知识
+
+</details>
+
+
+<details>
+<summary><b>2. 文献检索（及元数据抓取）</b></summary>
+
+> - [ ] 各文献数据库Query搜索语法的补充，尝试skill化，目前仅实现pubmed mesh部分语法先验结合
+> - [ ] 从这一步开始，关于pubmed数据库解析部分，考虑BioPython库的更新与维护(E-utility的接口)。目前biopython version 1.87，详情参考[biopython仓库](https://github.com/biopython/biopython)
+
+</details>
+
+
+<details>
+<summary><b>3. 文献获取（及全文下载）</b></summary>
+
+> - [ ] paper-fetch 模块的完善封装，目前参考[2026-05-08 封装paper-fetch](https://github.com/Agents365-ai/paper-fetch)，考虑加入或替换为更鲁棒、命中率更高的模块
+> - [ ] pdf-parse 模块目前封装了mineru的简单解析指令，默认使用cpu后端（-b pipeline），后续考虑gpu等进行深入功能集成，详情参考[mineru仓库](https://github.com/opendatalab/MinerU)
+
+
+
+</details>
+
+
+<details>
+<summary><b>4. 文献内容提取与结构化处理</b></summary>
+
+> - [ ] PMC文本内容的json结构化解析，尝试加强语义边界规范检测（即扩大正则匹配边界范围），或者尝试像mineru-export-md模块一样引入AI后端
+> - [ ] mineru-parse模块是针对 content_list_v2.json 文件进行解析的，但官网显示该文件解析格式仍在更新中，后续追踪维护，详情参考[mineru 输出文件说明](https://opendatalab.github.io/MinerU/zh/reference/output_files/)
+
+</details>
+
+
+
+
+
+
+
+
+
 - mineru-parse 解析模块的 ai 后端，如何接入 ai 模型进行处理，目前正在维护开发中
 - mineru 复杂配置的封装，gpu 等参数 
 
 
 ## 📌 局限性
 
-本工具旨在为科研工作者提供基础的文献检索和数据处理能力，但在实际应用中存在以下局限：
-
-### 1. 工具定位与功能边界
-
-**基础数据层 vs 应用层分离**
-- 本工具专注于**数据获取与预处理**阶段，即构建原始的知识语料库
-- 文献的深度解读、知识提取、智能分析等**应用层功能**不在当前实现范围内
-- 用户需要根据自身需求，结合其他工具或AI模型来完成后续的知识内化工作
-
-**工作流完整性限制**
-- 完整的7阶段工作流中，目前仅实现了阶段1-2的基础功能
-- 阶段3（核心信息提取）、阶段6（智能交互）、阶段7（最终产出）需要大量的人工干预和策略设计
-- 这意味着用户无法一键完成从检索到内化的全流程，需要在各个环节进行人工决策
-
-### 2. 知识库构建的基础性
-
-**原始数据提供**
-- 我们提供的是未经深度处理的"原始"知识库，包含元数据和全文文本
-- 知识库的质量取决于：原始文献的质量、检索策略的合理性、数据清洗的完善程度
-- 不保证知识库的准确性、时效性和完整性，用户需要进行二次验证
-
-**缺乏语义增强**
-- 当前版本不包含实体识别、关系抽取、知识图谱构建等语义处理
-- 存储的是平面化的文本数据，而非结构化的知识表示
-- 用户需要自行处理语义层面的信息提取和组织
-
-### 3. 文献解读与知识提取的用户依赖
-
-**策略定制必要性**
-- 不同研究领域有不同的信息提取重点（方法创新、实验设计、结论验证等）
-- 不同研究方向需要不同的知识组织方式（按时间、按方法、按应用场景等）
-- 用户必须根据自身研究需求，设计专属的文献解读策略
-
-**AI模型选择自由**
-- 工具不绑定任何特定的AI模型或框架
-- 用户需要根据任务特点选择合适的模型（GPT、Claude、开源模型等）
-- 需要用户自行设计Prompt工程策略，优化提取效果
-
-**技术门槛要求**
-- 需要用户具备一定的AI/LLM使用经验
-- 需要理解如何与大型语言模型进行有效交互
-- 需要掌握基本的文本处理和数据分析技能
-
-### 4. 知识库优化的用户责任
-
-**持续维护需求**
-- 随着新论文的发表，知识库需要定期更新
-- 过时的信息需要被标记或移除
-- 冲突的结论需要人工判断和协调
-
-**质量控制机制**
-- 缺乏自动化的质量评估机制
-- 用户需要建立自己的评价体系来判断文献质量
-- 需要手动处理重复、错误、不完整的数据
-
-**个性化适配**
-- 通用工具无法满足所有用户的特殊需求
-- 用户需要根据自己的研究偏好进行个性化定制
-- 可能需要编写额外的脚本或工具来补充功能
-
-### 5. 高级功能的复杂性与专业门槛
-
-**本体论构建**
-- 本体论（Ontology）构建是知识工程中的高级任务
-- 涉及复杂的概念建模、关系定义、逻辑推理
-- 需要领域专家的深度参与和持续的迭代优化
-- **建议**：此功能留给数学、逻辑学、知识工程相关专业人员探索
-
-**形式化证明**
-- 将自然语言论点转化为数学逻辑表达式具有极高的技术难度
-- 需要使用专门的定理证明工具（如LEAN、Coq、Isabelle）
-- 需要深厚的数学基础和形式化方法的训练
-- **建议**：此功能面向形式化验证领域的专业研究人员，社区探索为主
-- 参考资源：[Lean Zulip论坛](https://leanprover.zulipchat.com/#channels/395462/Natural.20sciences/general)
-
-**知识图谱构建**
-- 自动构建高质量知识图谱需要复杂的实体对齐、关系抽取算法
-- 需要处理歧义消解、多源数据融合等技术挑战
-- 目前缺乏自动化的图谱构建工具
-- **建议**：用户需要使用专业的知识图谱工具（如Neo4j、Protégé）进行后续处理
-
-### 6. 技术实现的现实限制
-
-**数据源限制**
-- 目前主要支持PubMed/Medline数据库
-- 对其他预印本平台（如arXiv、bioRxiv）的支持有限
-- 非开放获取的全文无法自动获取
-- **建议**：结合其他工具或手动补充数据源
-
-**性能与扩展性**
-- 大规模文献检索和下载可能遇到API限流
-- 本地存储和管理大量文件需要充足的磁盘空间
-- 未针对百万级文献库进行性能优化
-- **建议**：合理规划检索策略，分批次处理数据
-
-**错误处理与恢复**
-- 网络不稳定时可能导致数据下载失败
-- 部分失败后缺乏完善的断点续传机制
-- 用户需要监控日志并手动处理失败项
-
-### 7. 使用建议
-
-为了更好地使用本工具，建议遵循以下原则：
-
-1. **循序渐进**：先熟悉基础的检索和下载功能，再尝试高级功能
-2. **合理期望**：理解工具的边界，将其作为工作流中的一个环节而非完整解决方案
-3. **主动定制**：根据自己的需求设计提示词和分析策略
-4. **社区参与**：关注工具更新，参与讨论，贡献改进建议
-5. **组合使用**：与其他工具（如Zotero、Obsidian、Notion）配合使用，构建完整的研究工作流
-
-`核心原则：一切皆token，一切皆text，我们将获取的一切数据都转换为text，喂给LLM`
-
-
-## 🔗 模块更新说明
-
-### 1. 模块功能设计调整
-
-原始版本模块功能设计如下:
-
-```python
-
-! paperflow --help                                                                                                                                                                                           
-  ⎿   Usage: paperflow [OPTIONS] COMMAND [ARGS]...
-                                                                                                                                                                                                             
-      pyPaperFlow CLI                                                                                                                                                                                        
-   
-     ╭─ Options ────────────────────────────────────────────────────────────────────╮                                                                                                                        
-     │ --install-completion          Install completion for the current shell.      │
-     │ --show-completion             Show completion for the current shell, to copy │
-     │                               it or customize the installation.              │
-     │ --help                        Show this message and exit.                    │
-     ╰──────────────────────────────────────────────────────────────────────────────╯
-     ╭─ Commands ───────────────────────────────────────────────────────────────────╮
-     │ search              Search PubMed using Your customized query and return     │
-     │                     PMIDs.                                                   │
-     │ fetch               Fetch paper metadata from PubMed using Your customized   │
-     │                     query, pmid list file and save to storage.               │
-     │ download-fulltext   Download full text (PMC) for given PMIDs if the paper    │
-     │                     has a PMC ID.                                            │
-     │ fetch-full          Fetch BOTH metadata and full text (if available) for     │
-     │                     papers. Also extracts URLs from full text and updates    │
-     │                     metadata links.                                          │
-     │ tag                 Add/remove tags for a paper.                             │
-     │ tag-set             Set a tag explicitly to 0/1 (backward-compatible).       │
-     │ query               Query papers by tags.                                    │
-     │ get                 Get paper details.                                       │
-     │ build-query         Interactive wizard to build complex PubMed queries with  │
-     │                     AI assistance.                                           │
-     ╰──────────────────────────────────────────────────────────────────────────────╯
-
-```
-
-我们将依然保留原始模块：`search`, `fetch`, `download-fulltext`, `fetch-full`, `get`，因为这些模块与我们最初的设计初衷依然兼容，而对于模块：`tag`, `query`, `tag-set`, `build-query`，这些模块原本的设计初衷是为了替代部分文献管理工具，但是鉴于我们已经更改了整体的设计理念以及逻辑执行流程，我们依然建议正式的文献管理、标记功能由专业的Zotero等工具来完成，因此我们将不再维护这些模块，并且在后续的版本中将会被移除。
-
-### 2. 新增Merge模块以及后续下游分析模块
-
-Merge模块用于合并所获取的pubmed文献的元数据与文本数据，
-
-其主要职责在于规范化原始文献内容的模块化整理，并且后续分析模块设计为直接衔接merge的标准化结果，而不是再回头从原始目录和元数据再提取一遍。
-
-此处的设计规划有三点考虑：
-* 所有分析模块共享同一份规范化输入，减少重复解析和字段不一致
-* Merge模块可以承担起`数据规范层`的职责，把pubmed原始结构统一成我们的分析有好格式
-* 后续的AI分析和流程化分析可以分流，比如说输出的Markdown给LLM进行语义分析、文本分析，而JSON给代码模块
-* 
-
-### 2. 下游AI模块接入建议
-
-* 终端交互：比如说Claude Code @ 
-* Agent 框架：借助文献阅读、科研助手相关的MCP、Skill工具
-
-
-### 3. 主题文献抓取更新需求
-
-* 原始模块中，使用同1个组合式topic query语句抓取所有相关文献，后续进行更新时，对于已经抓取过的PMID文献的文件夹，如果存在则跳过，抓取新的文献。
-
-* 修改之后：但是考虑到已抓取的文献存在元数据（比如说引用数据）更新的问题，我们原本设计为详细比对引用数据列表是否一致，只有不一致才进行更新。但是考虑到工作量上与全量更新一致，所以我们建议在文献更新中，每次抓取都进行全量更新，或者只在乎文献抓取到与否、而不在于文献引用数据更新与否的，可以直接在query中设置1个具体时间限制，比如说第一次抓取是在 2024-01-01 到 2026-01-20，那么后续更新时，可以设置时间限制为2026-01-01到 now，这样就可以保证只抓取到新的文献，而不在乎已抓取文献的引用数据是否更新了。
-
-
-
-
-## 
-
-开头的query设计，建议可以留给pubmed、biorxiv等query builder的类似skill来完成
-
-
-# 3个文献数据库，pubmed、arxiv、biorxiv，1个数据库单独1个文件夹
-# 每个数据库的文件夹下按照年份进行划分，年份下按照source_id进行划分（pmid、arxiv_id、biorxiv_id）
-接口全部改过，改为v 1.0.0
 
  

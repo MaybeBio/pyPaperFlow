@@ -41,7 +41,7 @@ This tool is designed to `complement rather than replace` reference management s
 
 ## 🏗️ Architecture Vision
 
-You can check the [Design.md](Docs/Design.md) for more details about our Design Philosophy.
+You can check the [Design.md](docs/Design.md) for more details about our Design Philosophy.
 
 The project is designed around a 7-stage workflow:
 
@@ -223,7 +223,7 @@ Outputs:
 
 You may leverage state‑of‑the‑art large language models, combined with all materials and information at hand, to repeatedly verify and refine the Starting Point of Research until it is sufficiently clear and specific, or meets the criteria to proceed to the next step of literature retrieval.
 
-> 🌟 Here we provide a few brainstorming skills for literature review: [Skills List](./Docs/Skills.md)
+> 🌟 Here we provide a few brainstorming skills for literature review: [Skills List](./docs/Skills.md)
 
 ### 2. Search Papers (and Fetch Metadata)
 
@@ -643,7 +643,7 @@ Refer to official documentation for details. Since typical users lack sufficient
 
 
 
-> 🌟 Regarding the PDF paper retrieval module, we also provide a suite of reference scripts, which can be integrated into existing skills or implemented independently:  [Paper pdf fetch](./Docs/Skills.md)
+> 🌟 Regarding the PDF paper retrieval module, we also provide a suite of reference scripts, which can be integrated into existing skills or implemented independently:  [Paper pdf fetch](./docs/Skills.md)
 
 
 ### 4. 
@@ -1005,28 +1005,6 @@ paperflow mineru-parse \
 ⚠️ paper-fetch updated at 2026-05-08 
 
 
-注意导入unpaywall的email环境变量
-
-### 5. Markdown to PDF parser
-
-Here we use MinerU (Magic-PDF) to parse PDF into structured JSON, which contains the original text, the title, the section hierarchy, and the coordinates of each paragraph in the PDF. 
-
-And remember to `switch to domestic mirror source` when you can not access huggingface.
-```bash
-export MINERU_MODEL_SOURCE=modelscope
-```
-
-We assume that your device does not meet the GPU acceleration requirements, so we set the default backend to `pipeline` to run in a pure CPU environment:
-```bash
-mineru -p <input_path> -o <output_path> -b pipeline
-```
-
-You can create a pull request to add more backends if you have access to GPU resources and want to speed up the parsing process.
-
-Anything else you want to know about the usage of MinerU, please refer to their official documentation: [MinerU](https://github.com/opendatalab/MinerU).
-
-
-
 
 # todo（warning）
 
@@ -1036,40 +1014,3 @@ Anything else you want to know about the usage of MinerU, please refer to their 
 比如说paper-fetch是封装了第三方模块
 mineru-parser是使用v2的输出json格式，但是后续可能格式会修改
 
-
-上下游是严格对应的：                        
-
-  mineru_config.yaml                    mineru_export_config.yaml                                  
-  ┌──────────────────────┐              ┌──────────────────────┐                                   
-  │ canonical_order:     │              │ content_sections:    │                                   
-  │   - abstract         │── 定义 ──→   │   - abstract         │                                   
-  │   - introduction     │   可供选择的   │   - introduction     │                                 
-  │   - results          │   类型池      │   - results          │                                  
-  │   - ...              │              │   - discussion       │                                   
-  │   - ethics  ← 自定义 │              │   - methods          │                                   
-  └──────────────────────┘              │   - ethics  ← 引用   │                                   
-                                        └──────────────────────┘                                   
-                                                                                                   
-  如果你在 mineru_config.yaml 的 canonical_order 里新增了 ethics，并配了 aliases，解析时论文里的   
-  "Ethics Statement" 标题就会被归类为 ethics，然后你在导出配置里写 - ethics                        
-  就能把它选出来。如果没有在上游定义过，导出阶段就找不到这个类型。          
-
-
-
-   if input_path.is_dir():                                            
-      json_files = sorted(input_path.glob("*.json"))   # 目录 → 批量 
-  elif input_path.is_file():                                         
-      json_files = [input_path]                        # 单文件      
-                                                                     
-  单篇：                                                             
-  paperflow mineru-export-md -i paper.json -o paper.md               
-                                                                     
-  批量：                                                             
-  paperflow mineru-export-md -i ./parsed_results/ -o all_papers.md   
-                                                                     
-  批量模式会扫描目录下所有 .json 文件，按文件名排序，每篇论文之间用  
-  --- 分隔，输出为一个合并的 Markdown 文件。                         
-                                                                     
-  唯一要注意的是：目录里如果混入了其他非解析产物的 JSON              
-  文件，也会被读进来。建议把 mineru-parse                          
-  的输出单独放一个目录，
