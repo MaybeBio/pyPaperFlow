@@ -1,8 +1,38 @@
+<div align="center">
+
 # pyPaperFlow - 文献阅读自动化 🔬
 
-[English Version](README.md) | [中文版本](README_zh.md)
+<img src="./figs/logo.png" alt="pyPaperFlow Logo" width="180" />
 
-![](./figs/logo.png)
+<p><strong>面向科研工作者的自动化文献处理与知识发现平台</strong></p>
+
+<p>批量检索、批量获取、批量解析、批量结构化，把文献真正变成可计算、可复用、可追踪的研究资产。</p>
+
+<p>从文献检索到知识内化，把重复劳动交给流程，把关键判断留给你。</p>
+
+![](./figs/main.png)
+
+![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![Workflow](https://img.shields.io/badge/Workflow-7%20Stages-0366d6)](./docs/Design.md)
+[![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv-f59e0b)](#功能特性)
+
+<p>
+  文档阅读👉
+  <a href="README.md">English</a> |
+  <a href="README_zh.md">中文</a> 
+</p>
+
+<p>
+  <a href="./docs/Design.md">设计文档</a> |
+  <a href="./docs/Cases.md">测试示例</a>
+</p>
+
+</div>
+
+> **如果该项目对你有帮助, 请麻烦点一个 Star ⭐, 谢谢!**
+
+---
 
 ## 目录
 
@@ -39,7 +69,6 @@
 
 本工具旨在**补充而非替代** Zotero 等文献参考管理软件。我们专注于“信息提取”和“知识发现”这两个关键步骤，为你构建一个**结构化知识库**，为后续的语义搜索、内容分析和综述生成奠定基础。
 
-> `如果该项目对你有帮助, 请麻烦点一个 Star ⭐, 谢谢!`
 
 ## 🚀 功能特性
 

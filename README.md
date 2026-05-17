@@ -1,23 +1,43 @@
+<div align="center">
+
+# pyPaperFlow
+
+<img src="./figs/logo.png" alt="pyPaperFlow Logo" width="180" />
+
+<p><strong>An automated literature processing platform for scientific researchers.</strong></p>
+
+<p>Batch retrieve, fetch, parse, and structure papers from PubMed, arXiv, bioRxiv, and DOI-based sources.</p>
+
+<p>From paper retrieval to knowledge internalization, automate the heavy lifting and keep the judgment human.</p>
+
+![](./figs/main.png)
+
+![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![Workflow](https://img.shields.io/badge/Workflow-7%20Stages-0366d6)](docs/Design.md)
+[![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv-f59e0b)](#features)
+
+<p>
+  Document here 👉
+  <a href="README.md">English</a> |
+  <a href="README_zh.md">中文</a> 
+</p>
+
+<p>
+  <a href="./docs/Design.md">Design</a> |
+  <a href="./docs/Cases.md">Cases</a>
+</p>
 
 
+</div>
 
----
-
-# pyPaperFlow - An Automatic Paper Reading Platform
-
- ![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg) 
- [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) 
-
-![](./figs/logo.png)
-
-
-> 📌 **Document is here** 👉 [English](README.md) | [中文](README_zh.md)
+> **If this project helps you, please consider giving it a Star ⭐. Thank you!** 
 
 ---
 
 ## Index
 
-- [](#pypaperflow---an-automatic-paper-reading-platform)
+- [pyPaperFlow](#pypaperflow)
   - [Index](#index)
   - [📖 Overview](#-overview)
   - [🚀 Features](#-features)
