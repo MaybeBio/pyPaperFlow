@@ -12,10 +12,13 @@
 
 ![](./figs/main.png)
 
-![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![Workflow](https://img.shields.io/badge/Workflow-7%20Stages-0366d6)](./docs/Design.md)
 [![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv-f59e0b)](#功能特性)
+[![PyPI version](https://img.shields.io/pypi/v/pyPaperFlow.svg?logo=pypi&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pyPaperFlow.svg?logo=python&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
+[![Downloads](https://static.pepy.tech/badge/pyPaperFlow)](https://pepy.tech/project/pyPaperFlow)
 
 <p>
   文档阅读👉
@@ -145,10 +148,16 @@ flowchart TD
 ## 📦 安装
 
 ```bash
-# 1. 源码安装本仓库
+# 1. 安装本仓库工具
+## ✏️1️⃣ 方案1：通过pip（推荐）
+pip install pyPaperFlow
+
+## ✏️2️⃣ 方案2：从源码安装
 git clone https://github.com/MaybeBio/pyPaperFlow.git
 cd pyPaperFlow
 pip install -e .
+
+--------------------------------------------------------
 
 # 2. 如果你要使用 PDF 解析 / mineru-parse / pdf-parse 这一条链路，请额外安装 MinerU
 # 因为mineru安装依赖较多，且需要手动配置环境变量，不添加在pyproject.toml中
@@ -158,8 +167,12 @@ pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple
 pip install uv -i https://mirrors.aliyun.com/pypi/simple
 uv pip install -U "mineru[all]" -i https://mirrors.aliyun.com/pypi/simple 
 
+--------------------------------------------------------
+
 # 3. 如果你要使用 AI backend，再安装对应 SDK
 pip install openai anthropic
+
+--------------------------------------------------------
 
 # 4. 如果你要使用 paperscraper 后端，再额外安装 (⚠️ 目前还在集成中)
 # 参考官方文档：https://github.com/jannisborn/paperscraper

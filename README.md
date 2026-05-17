@@ -12,10 +12,13 @@
 
 ![](./figs/main.png)
 
-![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![Workflow](https://img.shields.io/badge/Workflow-7%20Stages-0366d6)](docs/Design.md)
 [![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv-f59e0b)](#features)
+[![PyPI version](https://img.shields.io/pypi/v/pyPaperFlow.svg?logo=pypi&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pyPaperFlow.svg?logo=python&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
+[![Downloads](https://static.pepy.tech/badge/pyPaperFlow)](https://pepy.tech/project/pyPaperFlow)
 
 <p>
   Document here 👉
@@ -148,10 +151,16 @@ flowchart TD
 ## 📦 Installation
 
 ```bash
-# 1. install from source
+# 1. install our tool
+## ✏️1️⃣ option1: Install via pip (Recommended)
+pip install pyPaperFlow
+
+## ✏️2️⃣ option2: Install from source
 git clone https://github.com/MaybeBio/pyPaperFlow.git
 cd pyPaperFlow
 pip install -e .
+
+--------------------------------------------------------
 
 # 2. install MinerU
 # follow the official installation guide: https://github.com/opendatalab/MinerU
@@ -160,8 +169,12 @@ pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple
 pip install uv -i https://mirrors.aliyun.com/pypi/simple
 uv pip install -U "mineru[all]" -i https://mirrors.aliyun.com/pypi/simple 
 
+--------------------------------------------------------
+
 # 3. install AI backend
 pip install openai anthropic
+
+--------------------------------------------------------
 
 # 4. install paperscraper backend
 # follow the official installation guide: https://github.com/jannisborn/paperscraper
