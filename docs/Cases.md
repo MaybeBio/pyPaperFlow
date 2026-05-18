@@ -14,8 +14,13 @@
 
 [Case4: Fetch full paper data (including metadata and full text data) for pubmed papers from PMIDs list](#-case-4-fetch-full-paper-data-including-metadata-and-full-text-data-for-pubmed-papers-from-pmids-list)
 
-[Case5: Prepare batch Markdown-formatted paper data for downstream LLMs.](#-case-5-prepare-batch-markdown-formatted-paper-data-for-downstream-llms)
+[Case5: Prepare batch Markdown-formatted paper data for downstream LLMs.](#-case-5-prepare-batch-markdown-formatted-pubmed-paper-data-for-downstream-llms)
 
+[Case6: Fetch full text data for unaccessible papers based on DOI - fetch PDF then parsing it into markdown](#-case-6-fetch-full-text-data-for-unaccessible-papers-based-on-doi---fetch-pdf-then-parsing-it-into-markdown)
+
+[Case7: Parse MinerU content_list_v2.json into canonical sectioned JSON](#-case-7-parse-mineru-content_list_v2json-into-canonical-sectioned-json)
+
+[Case8: Search and fetch papers on other databases](#-case-8-search-and-fetch-papers-on-other-databases)
 
 
 ## 🧬 Case 1: Get PMIDs from Query
@@ -135,7 +140,7 @@ Fetching articles 1 to 19 (PMID: ['41914502', '41779774', '41639320', '41502950'
 
 We store the meta data of the paper in a json file.
  
-One example [PMID 41249430](./test/alphafold3_ensemble_meta/pubmed/2025/41249430/41249430_meta.json) listed as below:
+One example [PMID 41249430](../test/alphafold3_ensemble_meta/pubmed/2025/41249430/41249430_meta.json) listed as below:
 
 ```python
 {
@@ -416,7 +421,7 @@ One example [PMID 41249430](./test/alphafold3_ensemble_meta/pubmed/2025/41249430
 
 ```
 
-![alt text](./figs/41249430.png)
+![alt text](../figs/41249430.png)
 
 
 ## 🧬 Case 3: Fetch full text data for pubmed papers from PMIDs list
@@ -575,7 +580,7 @@ the log shows
 ✅ Please check the merged pubmed JSON/JSONL file at /data2/pyPaperFlow/test/full_paper_test and the merge statistics file at /data2/pyPaperFlow/test/full_paper_test. Also, a JSON file per paper is created within the PMID subfolders.
 ```
 
-You can access the merged JSONL file [here](./test/full_paper_test/full_paper_test_2026-05-05_22-02-51.jsonl), where each line corresponds to one paper in JSON format. The statistical results are also available [here](./test/full_paper_test/full_paper_test_stats_2026-05-05_22-02-51.json).
+You can access the merged JSONL file [here](../test/full_paper_test/full_paper_test_2026-05-05_22-02-51.jsonl), where each line corresponds to one paper in JSON format. The statistical results are also available [here](../test/full_paper_test/full_paper_test_stats_2026-05-05_22-02-51.json).
 
 In statistical JSON file, you can see PMID `"38701796","40286477","41534519"` paper is content-missing. 
 
@@ -649,16 +654,16 @@ the log shows
 Successfully exported 6 papers to /data2/pyPaperFlow/test/full_paper_test/test_no_yaml.md
 ```
 
-the output markdown file is [here](./test/full_paper_test/test_no_yaml.md)
+the output markdown file is [here](../test/full_paper_test/test_no_yaml.md)
 
 Each paper is separated by `---` in the markdown file, which is suitable for downstream LLM text-based parsing tasks.
 
-If you want to use a custom YAML configuration file(an example is in [test.yaml](./test/full_paper_test/test.yaml)), you can run the following command:
+If you want to use a custom YAML configuration file(an example is in [test.yaml](../test/full_paper_test/test.yaml)), you can run the following command:
 ```bash
 paperflow pubmed-extract-md -i ./test/full_test_20_test_2026-05-05_22-02-51.jsonl -o ./test/full_paper_test/test_with_yaml.md -c ./test.yaml
 ```
 
-the output markdown file is [here](./test/full_paper_test/test_with_yaml.md), where only the sections specified in the YAML file are extracted and compiled into the markdown file.
+the output markdown file is [here](../test/full_paper_test/test_with_yaml.md), where only the sections specified in the YAML file are extracted and compiled into the markdown file.
 
 And next, you can use the generated markdown file for downstream LLM-based summarization or other text-based parsing tasks (e.g. Summarize over the conclusion and discussion sections of all these papers to put forward a research question).
 
@@ -758,7 +763,7 @@ the log shows
 1/1 succeeded  (0 failed)
 ```
 
-the output pdf file is [here](./test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En.pdf)
+the output pdf file is [here](../test/Other_database/Zhu_2025_AdvancedScience_Accurate_Generation_of_Conformational_En.pdf)
 
 After you get the PDF file, you can use the following command to parse it into Markdown format:
 ```bash
@@ -978,14 +983,6 @@ The `mineru-parse` command transforms this flat JSON into a structured, canonica
    
 ---
 
-    
-
-
-A sliding cursor tracks document order to reduce false matches (a late "Methods" heading in an unusual position is still recognized).
-
-
-
----
    
 ### Usage / 使用方法      
 
@@ -1039,9 +1036,9 @@ the following table shows
 
 you can check all the output JSON files here : [parse](../test/Other_database/parse/)
 
+## 🧬 Case 8: Search and fetch papers on other databases
 
-
-### 4. 搜索并获取 arXiv 论文
+### 1. 搜索并获取 arXiv 论文
 如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
 
 ```bash
@@ -1065,7 +1062,7 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
 
 搜索结果会保存为 `searched_arxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，PDF 则按可用情况尽量下载。
 
-# 🌟🌟🌟
+
 #### arXiv 命令变体与使用示例
 
 - **arxiv-search**: 仅检索匹配的 arXiv 记录并输出 ID 列表（不下载内容）。
@@ -1103,7 +1100,7 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
     - arXiv 的抓取流程只负责元数据标准化与 PDF 下载；当前仓库没有内建将 arXiv PDF 自动解析为 Markdown/结构化全文的步骤。若需后续文本解析，请在下载后接入 PDF 解析器（例如 `pdfplumber`、`minerU`、或 OCR/布局解析管线），并将解析结果保存为 `*_parsed.md` 或结构化 JSON，以便 `merge` 等下游工具使用。
 
 
-### 5. 搜索并获取 bioRxiv 论文
+### 2. 搜索并获取 bioRxiv 论文
 bioRxiv 目前走 Crossref（openRxiv）服务端直接检索，不再先拉取大范围日期窗口再在本地做匹配。
 
 ```bash
@@ -1132,7 +1129,7 @@ paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorx
 
 
 
-### 4. Search and Fetch arXiv Papers
+### 1. Search and Fetch arXiv Papers
 Search arXiv first if you only want IDs, or fetch metadata and PDFs in one step.
 
 ```bash
@@ -1156,7 +1153,7 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
 
 Search output is saved as `searched_arxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.
 
-### 5. Search and Fetch bioRxiv Papers
+### 2. Search and Fetch bioRxiv Papers
 bioRxiv now uses direct server-side query via Crossref (openRxiv records), rather than pulling large date windows first and filtering locally.
 
 ```bash

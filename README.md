@@ -183,7 +183,7 @@ pip install paperscraper
 
 > ⚠️ For typical usage, you only need to install the repository from source and MinerU, which are steps 1 and 2.
 
-## 🛠️ Usage
+## 🛠️ Usage 
 
 We designed pyPaperFlow as a versatile academic research tool built strictly around the `real‑world workflow of researchers conducting literature investigation, paper reading, literature comprehension and analysis, and corpus utilization`.
 
@@ -225,7 +225,6 @@ Current available modules include (`will be continuously updated`):
 │ mineru-parse       Parse mineru output content_list_v2.json into canonical sectioned JSON.                                                                                            │
 │ mineru-export-md   Export structured mineru JSON to a clean Markdown file for LLM processing.                                                                                         │
 ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
 
 ```
 
