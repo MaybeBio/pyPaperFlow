@@ -1271,6 +1271,78 @@ mineru_config.yaml                mineru_export_config.yaml
 > 🌟 文献阅读作为下游最主观的一一环，我们依然可以将其纳入到可定量的重复性工作中，最常见的形式是使用高度个性化的skill来辅助文献解析，这里我们依然为你提供了一些参考[paper reading skill](./docs/Skills.md)
 
 
+## 🌰 全维度文献章节模块组合利用方案
+
+关于我们为何强调对文献章节的模块化提取和归类, 不是像传统`RAG(Retrieval-Augmented Generation)`那样直接把全文输入LLM进行处理, 而是先进行章节化的结构化处理, 主要是基于以下考虑:
+
+`学术论文本质上是一个"提出问题→解决问题→验证问题→讨论价值"的闭环，每个章节都有不可替代的专属信息密度.`
+
+### 1. 文献快速初筛阶段（过滤80%无关文献）
+✅ **提取组合**：`abstract + keywords`
+- **为什么这么组合**：这是信息密度最高的两个章节，10秒就能判断一篇文献是否值得深入阅读
+- **批量处理技巧**：
+  - 用keywords做初步主题聚类，快速排除跨领域文献
+  - 用LLM批量给abstract打分（1-5分），过滤掉评分<3的文献
+  - 提取abstract中的"研究对象+核心方法+主要结论"三元组，生成文献速览表
+
+### 2. 研究背景与现状梳理阶段（写综述第一章）
+✅ **提取组合**：`abstract + introduction + keywords + references`
+- **原始逻辑**：introduction是唯一系统梳理领域历史和现状的章节，abstract是其浓缩版
+- **深度扩展用法**：
+  - **历史背景**：提取introduction中"早期研究→里程碑工作→近期进展"的时间线句子
+  - **研究现状**：提取introduction中"已有研究主要分为三类/目前存在两大主流方向"的分类总结
+  - **研究缺口**：重点提取introduction最后一段（通常是"however/nevertheless/despite these advances"开头），这是作者明确指出的领域空白
+  - **隐藏价值**：利用references做文献溯源，找到introduction中引用最多的奠基性论文，快速构建领域知识图谱
+
+### 3. 创新点挖掘与核心贡献分析阶段（写论文创新点部分）
+✅ **提取组合**：`abstract + discussion + conclusion`
+- **原始逻辑**：这三个章节是作者"自我宣传"创新点的唯一地方
+- **深度扩展用法**：
+  - **一级创新点**：从abstract中提取"we propose/novel/first time"开头的句子，这是作者最核心的贡献
+  - **二级创新点**：从discussion中提取"compared with previous work/our method outperforms"开头的句子，这是作者与前人的具体对比
+  - **三级创新点**：从conclusion中提取"this work provides a new perspective/opens up a new avenue"开头的句子，这是作者对工作价值的拔高
+- **批量处理技巧**：用正则表达式批量匹配上述关键词，提取所有创新相关句子，再用LLM聚合去重，生成领域创新点全景图
+
+### 4. 方法创新出发点阶段（一般是我们最关心的核心模块）
+✅ **提取组合**：`introduction（研究缺口） + methods（现有方法） + discussion（方法局限）`
+- **这是整个方案最有价值的组合**：绝大多数博士生的创新都来自于"改进现有方法的缺陷"，而这三个章节刚好构成了一个完整的"问题-方法-缺陷"闭环
+- **三维创新挖掘模型**：
+  1. **从introduction找"问题"**：作者在introduction中指出的"现有方法无法解决XX问题"
+  2. **从methods找"方法"**：作者为了解决这个问题，具体用了什么技术、什么模型、什么参数
+  3. **从discussion找"缺陷"**：作者在discussion中自我批判的"our method has the following limitations"
+- **创新点生成公式**：
+  > 针对[introduction中提到的问题]，现有[methods中提到的方法]存在[discussion中提到的缺陷]，我们提出[你的改进方法]，解决了上述缺陷。
+- **例子**：
+  - introduction："现有蛋白质结构预测方法在处理长序列时精度显著下降"
+  - methods："我们使用了Transformer模型，窗口大小为512"
+  - discussion："我们的方法在序列长度超过1024时性能会下降"
+  - 你的创新点："提出一种基于滑动窗口注意力的长序列蛋白质结构预测方法，将有效窗口大小扩展到2048，解决了长序列处理精度不足的问题"
+
+### 5. 研究不足与未来方向阶段（写论文展望部分）
+✅ **提取组合**：`discussion + conclusion + references`
+- **深度扩展用法**：
+  - **自我批判**：提取discussion中"limitation/shortcoming/we acknowledge that"开头的句子，这是最真实的研究不足
+  - **未来方向**：提取conclusion中"future work/we plan to/it would be interesting to"开头的句子，这是作者自己想做但没做的工作
+  - **隐藏价值**：查看references中最新发表的论文（近1-2年），看看有没有人已经在做这些未来方向，避免撞车
+
+### 6. 方法调研与复现阶段（做实验前的准备）
+✅ **提取组合**：`methods + results + supplementary + availability`
+- **深度扩展用法**：
+  - **方法细节**：methods是唯一详细描述实验步骤的章节，提取"we used/we implemented/we trained"开头的句子
+  - **实验配置**：从supplementary中提取超参数、数据集划分、评估指标等细节（这些通常不会出现在正文中）
+  - **可复现性**：从availability中提取代码、数据集、预训练模型的链接，优先选择有公开代码的工作进行复现
+  - **结果对比**：从results中提取所有表格和图的数值，建立自己的实验基准线
+
+总结来说就是：
+* 文献初筛：abstract + keywords
+* 研究背景：abstract + introduction
+* 创新点挖掘/我们的研究方向：discussion + conclusion
+* 方法细节/我们的研究方案：methods + supplementary + availability
+
+> 按照这4个层级去配套设置YAML提取文件，每个配置文件对应1个组合，这就是我们为什么强调章节模块化提取的原因了。
+
+
+
 ## 🔍 测试示例
 
 我们在[测试文档](./docs/Cases.md)中提供了一些测试示例，包含了不同类型的文献数据（pubmed、arxiv、biorxiv等），以及`非常详细的、按照文献调研逻辑顺序展开的逐步脚本执行示例记录`，你可以直接运行测试脚本来验证功能的正确性和完整性。
