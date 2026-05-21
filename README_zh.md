@@ -1339,7 +1339,7 @@ mineru_config.yaml                mineru_export_config.yaml
 * 创新点挖掘/我们的研究方向：discussion + conclusion
 * 方法细节/我们的研究方案：methods + supplementary + availability
 
-> 按照这4个层级去配套设置YAML提取文件，每个配置文件对应1个组合，这就是我们为什么强调章节模块化提取的原因了。
+> 按照这4个层级去配套设置YAML提取文件，每个配置文件对应1个组合，这就是我们为什么强调章节模块化提取的原因了, YAML配置文件请参考[提取文件示例](./config/)
 
 
 

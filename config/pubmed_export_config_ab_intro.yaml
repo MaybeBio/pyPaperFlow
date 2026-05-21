@@ -1,0 +1,22 @@
+metadata_fields:
+  - identity.title
+  - identity.pmid
+  - identity.doi
+  # - content.keywords
+  # - content.mesh_terms
+  # - content.pub_types
+  - content.abstract # abstract in metadata first, fall back in content sections(deprecated)
+ 
+content_sections:
+  - abstract
+  - introduction
+  # - methods
+  # - results
+  # - discussion
+  # - conclusion
+  # - supplementary
+  # - availability
+  # - funding
+  # - acknowledgements
+  # - author_contributions
+
