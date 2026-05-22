@@ -2,6 +2,8 @@ metadata_fields:
   - identity.title
   - identity.pmid
   - identity.doi
+  - source.pub_year
+  - contributors.medline.short_names
   - content.keywords
   - content.mesh_terms
   # - content.pub_types
