@@ -9,6 +9,7 @@ from .preprint.arxiv_fetcher import ArxivFetcher
 from .preprint.biorxiv_fetcher import BioRxivFetcher
 from .pubmed.pubmed_merger import PubmedMerger
 from .integrations import pdf_fetch
+from .integrations.github_export import run_github_export
 from datetime import datetime
 
 app = typer.Typer(help="pyPaperFlow CLI", no_args_is_help=True)
@@ -656,6 +657,57 @@ def mineru_export_md_cmd(
     except Exception as e:
         typer.echo(f"Error: {e}")
         raise typer.Exit(code=1)
+
+
+@app.command("github-export")
+def github_export_cmd(
+    input_json: str = typer.Option(..., "--input", "-i", help="Merged JSON/JSONL file produced by pubmed-merge-json."),
+    output_md: str = typer.Option(..., "--output", "-o", help="Output markdown file for aggregated ghresearcher parse results."),
+    report: Optional[str] = typer.Option(None, "--report", help="CSV report path for URL audit table. Defaults to <output>_github_report.csv."),
+    separator: str = typer.Option("<<<PY_PAPERFLOW_REPO_BOUNDARY>>>", "--separator", help="Separator inserted between repository sections."),
+    timeout: float = typer.Option(10.0, "--timeout", help="URL request timeout in seconds."),
+    retries: int = typer.Option(1, "--retries", help="URL request retries for accessibility checks."),
+    sleep_sec: float = typer.Option(0.2, "--sleep", help="Sleep seconds between ghresearcher calls."),
+    max_repos: Optional[int] = typer.Option(None, "--max-repos", help="Optional cap on number of repositories to parse."),
+    strict_ghresearcher: bool = typer.Option(False, "--strict-ghresearcher", help="Fail fast when ghresearcher is missing or a parse call fails."),
+    overwrite: bool = typer.Option(False, "--overwrite", help="Overwrite output markdown instead of appending."),
+):
+    """
+    Export GitHub links from merged PubMed JSON, validate accessibility,
+    and aggregate `ghresearcher parse <owner/repo> --view` outputs into one markdown.
+    """
+    try:
+        summary = run_github_export(
+            input_json=input_json,
+            output_md=output_md,
+            report=report,
+            separator=separator,
+            timeout=timeout,
+            retries=retries,
+            sleep_sec=sleep_sec,
+            max_repos=max_repos,
+            strict_ghresearcher=strict_ghresearcher,
+            overwrite=overwrite,
+            echo=typer.echo,
+        )
+    except Exception as e:
+        typer.echo(f"Error during github-export: {e}")
+        raise typer.Exit(code=1)
+
+    typer.echo("\nGitHub URL Audit Summary")
+    typer.echo(f"- total_url_entries: {summary.get('total_url_entries', 0)}")
+    typer.echo(f"- unique_urls: {summary.get('unique_urls', 0)}")
+    typer.echo(f"- accessible_entries: {summary.get('accessible_entries', 0)}")
+    typer.echo(f"- accessible_ratio: {summary.get('accessible_ratio', 0.0):.2%}")
+    typer.echo(f"- report: {summary.get('report', '')}")
+
+    typer.echo("\nRepository Export Summary")
+    typer.echo(f"- selected_repos: {summary.get('selected_repos', 0)}")
+    typer.echo(f"- exported: {summary.get('exported', 0)}")
+    typer.echo(f"- failed: {summary.get('failed', 0)}")
+    typer.echo(f"- output: {summary.get('output', output_md)}")
+    if summary.get("ghresearcher_skipped"):
+        typer.secho("- ghresearcher: skipped (command missing or no repos)", fg=typer.colors.YELLOW)
 
 
 if __name__ == "__main__":

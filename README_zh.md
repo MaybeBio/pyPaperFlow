@@ -53,7 +53,9 @@
     - [4. 文献内容提取与结构化处理](#4-文献内容提取与结构化处理)
     - [5. 其他文献数据平台的处理](#5-其他文献数据平台的处理)
     - [6. 批判性阅读与知识图谱分析：下游终点](#6-批判性阅读与知识图谱分析下游终点)
+  - [🌰 全维度文献章节模块组合利用方案](#-全维度文献章节模块组合利用方案)
   - [🔍 测试示例](#-测试示例)
+  - [👨‍🏫 一个完整的文献调研示例](#-一个完整的文献调研示例)
   - [📌 后续维护待办](#-后续维护待办)
 
 
@@ -1271,6 +1273,40 @@ mineru_config.yaml                mineru_export_config.yaml
 > 🌟 文献阅读作为下游最主观的一一环，我们依然可以将其纳入到可定量的重复性工作中，最常见的形式是使用高度个性化的skill来辅助文献解析，这里我们依然为你提供了一些参考[paper reading skill](./docs/Skills.md)
 
 
+### 7. Reading与Coding的交点
+
+在我们整个文献处理的流程中，Reading和Coding并不是完全割裂的两个阶段，而是存在大量交集和反馈循环的。
+
+文献是理论，代码项目是实践，两者相辅相成。
+
+对于github的CLI科研使用场景，参考[GhResearcher](https://github.com/MaybeBio/GhResearcher)
+
+目前暂时提供从pubmed文献元数据中提取github链接的功能模块
+```python
+❯ paperflow github-export --help
+                                                                                                                                                  
+ Usage: paperflow github-export [OPTIONS]                                                                                                         
+                                                                                                                                                  
+ Export GitHub links from merged PubMed JSON, validate accessibility, and aggregate `ghresearcher parse <owner/repo> --view` outputs into one     
+ markdown.                                                                                                                                        
+                                                                                                                                                  
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input                -i      TEXT     Merged JSON/JSONL file produced by pubmed-merge-json. [required]                                    │
+│ *  --output               -o      TEXT     Output markdown file for aggregated ghresearcher parse results. [required]                          │
+│    --report                       TEXT     CSV report path for URL audit table. Defaults to <output>_github_report.csv.                        │
+│    --separator                    TEXT     Separator inserted between repository sections. [default: <<<PY_PAPERFLOW_REPO_BOUNDARY>>>]         │
+│    --timeout                      FLOAT    URL request timeout in seconds. [default: 10.0]                                                     │
+│    --retries                      INTEGER  URL request retries for accessibility checks. [default: 1]                                          │
+│    --sleep                        FLOAT    Sleep seconds between ghresearcher calls. [default: 0.2]                                            │
+│    --max-repos                    INTEGER  Optional cap on number of repositories to parse.                                                    │
+│    --strict-ghresearcher                   Fail fast when ghresearcher is missing or a parse call fails.                                       │
+│    --overwrite                             Overwrite output markdown instead of appending.                                                     │
+│    --help                                  Show this message and exit.                                                                         │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+```
+
+
 ## 🌰 全维度文献章节模块组合利用方案
 
 关于我们为何强调对文献章节的模块化提取和归类, 不是像传统`RAG(Retrieval-Augmented Generation)`那样直接把全文输入LLM进行处理, 而是先进行章节化的结构化处理, 主要是基于以下考虑:
@@ -1342,12 +1378,134 @@ mineru_config.yaml                mineru_export_config.yaml
 > 按照这4个层级去配套设置YAML提取文件，每个配置文件对应1个组合，这就是我们为什么强调章节模块化提取的原因了, YAML配置文件请参考[提取文件示例](./config/)
 
 
-
 ## 🔍 测试示例
 
 我们在[测试文档](./docs/Cases.md)中提供了一些测试示例，包含了不同类型的文献数据（pubmed、arxiv、biorxiv等），以及`非常详细的、按照文献调研逻辑顺序展开的逐步脚本执行示例记录`，你可以直接运行测试脚本来验证功能的正确性和完整性。
 
 > 🌟 结合前面的`使用方法`和此处的`测试示例`, 用户能够很快上手我们的工具
+
+
+## 👨‍🏫 一个完整的文献调研示例
+
+1️⃣ 文献调研的起点：2个来源获取文献
+- 先验文献：预先提供作为起点的文献，而非query检索获取的文献
+  
+```python
+paperflow paper-fetch  该文献的doi
+paperflow pdf-parse -i 该文献pdf -o .  --clear
+```
+
+
+- Query检索获取：利用本仓库的pubmed-query-builder skill来优化
+
+```python 
+# ⚠️ 3年研究，截止2026年5月20日，后续每周更新
+Query_all_20260520 = """(
+  "Intrinsically Disordered Proteins"[Mesh] OR
+  "Intrinsically Disordered Protein"[tiab]  OR
+  "Intrinsically Disordered Proteins"[tiab]  OR
+  "Intrinsically Disordered Region"[tiab]  OR 
+  "Intrinsically Disordered Regions"[tiab]  OR 
+  "Natively Unfolded Protein"[tiab] OR
+  "Natively Unfolded Proteins"[tiab] OR
+  "Unstructured Protein"[tiab] OR
+  "Unstructured Proteins"[tiab] OR
+  "IDR"[tiab] OR 
+  "IDP"[tiab]
+)
+AND 
+(
+  "Protein Interaction Maps"[Mesh] OR
+  "Protein Interaction Maps"[tiab]  OR
+  "Protein Interaction Networks"[tiab]  OR
+  "Protein-Protein Interaction Map"[tiab] OR
+  "Protein-Protein Interaction Network"[tiab] OR
+
+  "Protein Interaction Mapping"[Mesh] OR
+  "Protein Interaction Mapping"[tiab]  OR
+  "Binding Sites"[tiab] OR
+  "Protein Binding"[tiab] OR
+  "Protein Interaction Domains and Motifs"[tiab] OR
+  "Protein Interaction Maps"[tiab] OR   
+
+  "Protein Interaction Domains and Motifs"[Mesh] OR
+  
+  "Protein Interaction"[tiab] OR
+  "Protein-Protein Interaction"[tiab] OR
+  "PPI"[tiab] OR
+  "Interaction"[tiab] OR
+  "Binding"[tiab] OR
+  "Interface"[tiab] OR
+  "Complex"[tiab]
+) 
+AND 
+(
+  "Artificial Intelligence"[Mesh] OR
+  "Deep Learning"[Mesh] OR
+  "Machine Learning"[Mesh] OR
+  "Neural Networks, Computer"[Mesh] OR
+  "Artificial Intelligence"[tiab] OR
+  "Deep Learning"[tiab] OR
+  "Machine Learning"[tiab] OR
+  "Neural Network"[tiab] 
+)                                                                                                                                                                       
+  AND 2023/01/01:2026/5/20[dp]
+"""
+Query_all_20260520 = Query_all_20260520.replace('\n', ' ')
+```
+
+开始检索文献
+```python
+paperflow pubmed-search '{Query_all_20260520}' --email xxx --api-key xxx -o /paper/IDR_all_20260520 
+```
+
+在多次比较之后固定检索query(可以使用comm检查不同query获取的pmid清单)
+
+确定名单之后开始获取文献
+```python
+paperflow pubmed-all -f /paper/IDR_all_20260520/pubmed_searched_ids_2026-05-20_17-45-45.txt --email xxx --api-key xxx  -o /paper/IDR_all_20260520
+```
+
+2️⃣提取结构化章节
+
+先合并pubmed获取的文献，统一为1个汇总的json/jsonl文件
+```python
+# 先merge
+paperflow pubmed-merge-json -i /paper/IDR_all_20260520   -o /paper/IDR_all_20260520
+```
+
+这个命令同时会输出PMC全文文本抓取不到的PMID清单(*_stats_*.json),
+
+对于这一部分文献我们可以走doi-based路线。
+
+我们主要目的就是为了提取三部分章节
+```python
+# 再导出
+# 对于pubmed，我提供了4个yaml配置文件，分别用于导出不同部分的内容，满足不同的需求
+
+# 1️⃣ 首先是导出引言部分，用于背景调研(ab_intro)
+paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR_all_ab_intro_20260520.md -c ./config/pubmed_export_config_ab_intro.yaml
+
+# 2️⃣ 其次是结语与讨论部分，用于总结研究结果与未来方向(dis_con)
+paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR_all_dis_con_20260520.md -c ./config/pubmed_export_config_dis_con.yaml
+
+# 3️⃣ 最后是方法部分，用于了解具体的技术细节和实现方法
+paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR_all_method_20260520.md -c ./config/pubmed_export_config_method.yaml
+
+```
+
+3️⃣文献提取内容解析
+
+对于先验文献，走doi-based或pubmed路线，对于获取的markdown文本内容，使用前面提到的ai4s-skill，单篇补充。
+
+对于批量提取文献，使用[pyResearch-ReadingSkill](https://github.com/MaybeBio/pyResearch-ReadingSkill)：
+- 1. 分析批量introduction: 输入pubmed-export-md导出的批量introduction md文件，使用intro-analysis skill，进行分析，确定领域内主题，有intro输出报告md文件
+- 2. 分析批量discussion+conclusion：输入pubmed-export-md导出的批量discussion+conclusion md文件，辅助输入intro输出报告md文件，以及用户自定义的研究主题(可以是intro中总结出来的主题选一，或杂糅主题)，使用dc-analysis skill，进行分析，确定领域内真正问题+潜在对应的创新点，有dc输出报告md文件
+- 3. 分析批量method：输入pubmed-export-md到处的批量method md文件，辅助输入dc输出报告md文件，以及从批量文献中提取的github仓库链接的说明文档md文件(目前github仓库两个来源: 文献元数据提取+gh repo search相关主题词, 导出为readme文档+浅层脚本文件组织结构，使用工具[GhResearcher](https://github.com/MaybeBio/GhResearcher))，以及用户自定义的研究问题(可以是dc中总结归纳出来的问题之一，或杂糅问题)，使用method-analysis skill，进行分析，确定当前研究问题的完整研究方案
+
+> github仓库链接导出，参考新模块功能：`github-export`
+  
+
 
 ## 📌 后续维护待办
 
