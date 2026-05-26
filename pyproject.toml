@@ -11,7 +11,7 @@ authors = [
 description = "Automated paper fetching and analysis platform."
 readme = "README.md"
 requires-python = ">=3.13.5"
-license = { file = "LICENSE" }
+license = "GPL-3.0"
 license-files = ["LICENSE"]
 keywords = ["pypaperflow", "literature-processing", "paper-fetch", "pypaperflow", "pypaperflow", 
 "pdf-parse", "text-mining", "nlp", "knowledge-extraction", "automated-literature", "pubmed", "arxiv", 

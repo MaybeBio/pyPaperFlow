@@ -5,12 +5,11 @@ import re
 import shutil
 import subprocess
 import time
-from datetime import datetime
 from pathlib import Path
 from typing import *
 from urllib.parse import urlsplit, urlunsplit
 
-import requests
+import httpx
 
 
 def _load_merged_papers_any(input_path: str) -> List[Dict[str, Any]]:
@@ -71,15 +70,40 @@ def _extract_github_entries(papers: List[Dict[str, Any]]) -> List[Dict[str, str]
     return rows
 
 
+def _ensure_https(url: str) -> str:
+    """Prepend ``https://`` to protocol-less GitHub URLs."""
+    url = url.strip()
+    if url.startswith("github.com/"):
+        url = "https://" + url
+    return url
+
+
 def _normalize_url(url: str) -> str:
+    # Strip wrapping punctuation first so _ensure_https can match bare
+    # hostnames like '"github.com/a/b"'.
     url = url.strip().strip("\"'[]()<>{}")
+    url = _ensure_https(url)
     while url and url[-1] in ".,;:!?":
         url = url[:-1]
+    if " " in url:
+        return url
+    try:
+        parsed = urlsplit(url)
+    except Exception:
+        return url
+    host = parsed.netloc.lower()
+    # Unicode dashes / curly quotes in the hostname signal data corruption.
+    if host and any(ch in host for ch in "‐‑‒–—―‘’“”"):
+        return url
     return url
 
 
 def _remove_trailing_number_noise(url: str) -> str:
-    """Remove terminal numeric noise from last path segment (fallback candidate)."""
+    """Remove terminal numeric noise from last path segment.
+
+    Strips trailing digits and any preceding ``_`` / ``-`` separator.
+    Used as a fallback -- the original URL is always tried first.
+    """
     try:
         parsed = urlsplit(url)
     except Exception:
@@ -94,7 +118,13 @@ def _remove_trailing_number_noise(url: str) -> str:
     if not m:
         return url
 
-    segments[-1] = m.group(1)
+    cleaned = m.group(1).rstrip("_-")
+    if not cleaned:
+        segments.pop()
+    else:
+        segments[-1] = cleaned
+    if not segments:
+        return url
     new_path = "/" + "/".join(segments)
     return urlunsplit((parsed.scheme, parsed.netloc, new_path, parsed.query, parsed.fragment))
 
@@ -108,12 +138,12 @@ def _is_accessible_url(url: str, timeout: float = 10.0, retries: int = 1) -> Tup
     last_effective = url
     for _ in range(max(1, retries + 1)):
         try:
-            resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+            resp = httpx.head(url, headers=headers, timeout=timeout, follow_redirects=True)
             last_status = resp.status_code
-            last_effective = resp.url or url
+            last_effective = str(resp.url) or url
             if resp.status_code < 400:
                 return True, resp.status_code, last_effective
-        except requests.RequestException:
+        except Exception:
             continue
     return False, last_status, last_effective
 
@@ -176,11 +206,12 @@ def run_github_export(
     report: Optional[str] = None,
     separator: str = "<<<PY_PAPERFLOW_REPO_BOUNDARY>>>",
     timeout: float = 10.0,
-    retries: int = 1,
+    retries: int = 3,
     sleep_sec: float = 0.2,
     max_repos: Optional[int] = None,
     strict_ghresearcher: bool = False,
     overwrite: bool = False,
+    include_tree: bool = True,
     echo: Optional[Callable[[str], None]] = None,
 ) -> Dict[str, Any]:
     log = echo or (lambda msg: None)
@@ -273,56 +304,110 @@ def run_github_export(
 
     ghresearcher_skipped = False
     if slugs:
-        ghresearcher_path = shutil.which("ghresearcher")
-        if not ghresearcher_path:
-            if strict_ghresearcher:
-                raise RuntimeError("ghresearcher command not found in PATH")
-            ghresearcher_skipped = True
-            slugs = []
+        if include_tree:
+            # ---- ghresearcher path (with file tree) ----
+            ghresearcher_path = shutil.which("ghresearcher")
+            if not ghresearcher_path:
+                if strict_ghresearcher:
+                    raise RuntimeError("ghresearcher command not found in PATH")
+                ghresearcher_skipped = True
+                slugs = []
+            else:
+                if overwrite:
+                    Path(output_md).parent.mkdir(parents=True, exist_ok=True)
+                    with open(output_md, "w", encoding="utf-8") as fh:
+                        fh.write("")
+
+                success = 0
+                failed = 0
+                for idx, slug in enumerate(slugs, start=1):
+                    log(f"[{idx}/{len(slugs)}] ghresearcher parse {slug} --view --clear")
+                    proc = subprocess.run(
+                        [ghresearcher_path, "parse", slug, "--view", "--clear"],
+                        capture_output=True,
+                        text=True,
+                    )
+                    if proc.returncode != 0:
+                        failed += 1
+                        if strict_ghresearcher:
+                            err = proc.stderr.strip() or "unknown error"
+                            raise RuntimeError(f"ghresearcher failed for {slug}: {err}")
+                        continue
+                    _append_repo_section(
+                        output_md=output_md,
+                        separator=separator,
+                        slug=slug,
+                        source_url=slug_to_source.get(slug, ""),
+                        content=proc.stdout,
+                    )
+                    success += 1
+                    if sleep_sec > 0:
+                        time.sleep(sleep_sec)
+
+                return {
+                    "total_url_entries": total,
+                    "unique_urls": len(unique_urls),
+                    "accessible_entries": accessible_count,
+                    "accessible_ratio": ratio,
+                    "report": report_path,
+                    "selected_repos": len(slugs),
+                    "exported": success,
+                    "failed": failed,
+                    "output": output_md,
+                    "ghresearcher_skipped": False,
+                }
         else:
-            if overwrite:
-                Path(output_md).parent.mkdir(parents=True, exist_ok=True)
-                with open(output_md, "w", encoding="utf-8") as fh:
-                    fh.write("")
+            # ---- gh repo view path (no file tree) ----
+            gh_path = shutil.which("gh")
+            if not gh_path:
+                if strict_ghresearcher:
+                    raise RuntimeError("gh (GitHub CLI) command not found in PATH")
+                ghresearcher_skipped = True
+                slugs = []
+            else:
+                if overwrite:
+                    Path(output_md).parent.mkdir(parents=True, exist_ok=True)
+                    with open(output_md, "w", encoding="utf-8") as fh:
+                        fh.write("")
 
-            success = 0
-            failed = 0
-            for idx, slug in enumerate(slugs, start=1):
-                log(f"[{idx}/{len(slugs)}] ghresearcher parse {slug} --view")
-                proc = subprocess.run(
-                    [ghresearcher_path, "parse", slug, "--view"],
-                    capture_output=True,
-                    text=True,
-                )
-                if proc.returncode != 0:
-                    failed += 1
-                    if strict_ghresearcher:
-                        err = proc.stderr.strip() or "unknown error"
-                        raise RuntimeError(f"ghresearcher failed for {slug}: {err}")
-                    continue
-                _append_repo_section(
-                    output_md=output_md,
-                    separator=separator,
-                    slug=slug,
-                    source_url=slug_to_source.get(slug, ""),
-                    content=proc.stdout,
-                )
-                success += 1
-                if sleep_sec > 0:
-                    time.sleep(sleep_sec)
+                success = 0
+                failed = 0
+                for idx, slug in enumerate(slugs, start=1):
+                    log(f"[{idx}/{len(slugs)}] gh repo view {slug}")
+                    proc = subprocess.run(
+                        [gh_path, "repo", "view", slug],
+                        capture_output=True,
+                        text=True,
+                    )
+                    if proc.returncode != 0:
+                        failed += 1
+                        if strict_ghresearcher:
+                            err = proc.stderr.strip() or "unknown error"
+                            raise RuntimeError(f"gh repo view failed for {slug}: {err}")
+                        continue
+                    _append_repo_section(
+                        output_md=output_md,
+                        separator=separator,
+                        slug=slug,
+                        source_url=slug_to_source.get(slug, ""),
+                        content=proc.stdout,
+                    )
+                    success += 1
+                    if sleep_sec > 0:
+                        time.sleep(sleep_sec)
 
-            return {
-                "total_url_entries": total,
-                "unique_urls": len(unique_urls),
-                "accessible_entries": accessible_count,
-                "accessible_ratio": ratio,
-                "report": report_path,
-                "selected_repos": len(slugs),
-                "exported": success,
-                "failed": failed,
-                "output": output_md,
-                "ghresearcher_skipped": False,
-            }
+                return {
+                    "total_url_entries": total,
+                    "unique_urls": len(unique_urls),
+                    "accessible_entries": accessible_count,
+                    "accessible_ratio": ratio,
+                    "report": report_path,
+                    "selected_repos": len(slugs),
+                    "exported": success,
+                    "failed": failed,
+                    "output": output_md,
+                    "ghresearcher_skipped": False,
+                }
 
     return {
         "total_url_entries": total,

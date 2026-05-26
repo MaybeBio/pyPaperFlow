@@ -1284,28 +1284,120 @@ mineru_config.yaml                mineru_export_config.yaml
 目前暂时提供从pubmed文献元数据中提取github链接的功能模块
 ```python
 ❯ paperflow github-export --help
-                                                                                                                                                  
- Usage: paperflow github-export [OPTIONS]                                                                                                         
-                                                                                                                                                  
- Export GitHub links from merged PubMed JSON, validate accessibility, and aggregate `ghresearcher parse <owner/repo> --view` outputs into one     
- markdown.                                                                                                                                        
-                                                                                                                                                  
-╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ *  --input                -i      TEXT     Merged JSON/JSONL file produced by pubmed-merge-json. [required]                                    │
-│ *  --output               -o      TEXT     Output markdown file for aggregated ghresearcher parse results. [required]                          │
-│    --report                       TEXT     CSV report path for URL audit table. Defaults to <output>_github_report.csv.                        │
-│    --separator                    TEXT     Separator inserted between repository sections. [default: <<<PY_PAPERFLOW_REPO_BOUNDARY>>>]         │
-│    --timeout                      FLOAT    URL request timeout in seconds. [default: 10.0]                                                     │
-│    --retries                      INTEGER  URL request retries for accessibility checks. [default: 1]                                          │
-│    --sleep                        FLOAT    Sleep seconds between ghresearcher calls. [default: 0.2]                                            │
-│    --max-repos                    INTEGER  Optional cap on number of repositories to parse.                                                    │
-│    --strict-ghresearcher                   Fail fast when ghresearcher is missing or a parse call fails.                                       │
-│    --overwrite                             Overwrite output markdown instead of appending.                                                     │
-│    --help                                  Show this message and exit.                                                                         │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                                                                                        
+ Usage: paperflow github-export [OPTIONS]                                                                               
+                                                                                                                        
+ Export GitHub links from merged PubMed JSON, validate accessibility, and aggregate `ghresearcher parse <owner/repo>    
+ --view` outputs into one markdown.                                                                                     
+                                                                                                                        
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input                -i                       TEXT     Merged JSON/JSONL file produced by pubmed-merge-json.    │
+│                                                             [required]                                               │
+│ *  --output               -o                       TEXT     Output markdown file for aggregated ghresearcher parse   │
+│                                                             results.                                                 │
+│                                                             [required]                                               │
+│    --report                                        TEXT     CSV report path for URL audit table. Defaults to         │
+│                                                             <output>_github_report.csv.                              │
+│    --separator                                     TEXT     Separator inserted between repository sections.          │
+│                                                             [default: <<<PY_PAPERFLOW_REPO_BOUNDARY>>>]              │
+│    --timeout                                       FLOAT    URL request timeout in seconds. [default: 10.0]          │
+│    --retries                                       INTEGER  URL request retries for accessibility checks.            │
+│                                                             [default: 1]                                             │
+│    --sleep                                         FLOAT    Sleep seconds between ghresearcher calls. [default: 0.2] │
+│    --max-repos                                     INTEGER  Optional cap on number of repositories to parse.         │
+│    --strict-ghresearcher                                    Fail fast when ghresearcher is missing or a parse call   │
+│                                                             fails.                                                   │
+│    --overwrite                                              Overwrite output markdown instead of appending.          │
+│    --include-tree             --no-include-tree             Include file tree via ghresearcher (default). Use        │
+│                                                             --no-include-tree to fetch repo info via gh repo view    │
+│                                                             instead.                                                 │
+│                                                             [default: include-tree]                                  │
+│    --help                                                   Show this message and exit.                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
 
 ```
 
+我们提供了一个输出的统计报告，包含了每个github链接的可访问性检查结果，以及对应的ghresearcher解析状态（成功/失败/跳过）。对于成功解析的链接，我们会将ghresearcher的输出markdown按照文献进行分隔，合并成一个总的markdown文件，方便后续阅读和分析。
+
+输出统计报告有终端查看和csv文件两种形式，csv文件默认命名为`<output>_github_report.csv`，你也可以通过`--report`参数自定义命名和路径。
+
+```python
+paperflow github-export -i /IDR_all_20260520/analysis/IDR_all_20260520_2026-05-20_18-33-54.json   -o /IDR_all_20260520/analysis/method/github_parse_all_20260526.md  --report /IDR_all_20260520/analysis/method/github_url_audit_20260526.csv --no-include-tree
+```
+
+```bash
+Found 66 GitHub URL entries from 109 papers.
+[1/44] gh repo view BioComputingUP/AlphaFold-disorder
+[2/44] gh repo view BioComputingUP/caid2-reference
+[3/44] gh repo view G4REP/G4REPmodel
+[4/44] gh repo view GuyAllard/markov_clustering
+[5/44] gh repo view HFChenLab/PhantoIDP
+[6/44] gh repo view HHJHgithub/MoRFs_MPM
+[7/44] gh repo view IDRIDP/IDPFunNet
+[8/44] gh repo view JMLab-tifrh/Protein_Ligand_Variational_Autoencoder
+[9/44] gh repo view LabWolfrum/Fritze_et_al.2023
+[10/44] gh repo view LiZhaoLab/DmelPPI
+[11/44] gh repo view ModicLab/smOOPs_project
+[12/44] gh repo view amchakra/tosca
+[13/44] gh repo view andrewbkleist/chemokine_gpcr_encoding
+[14/44] gh repo view benhid/pyMSA
+[15/44] gh repo view binhe-lab/E013-Pho4-evolution
+[16/44] gh repo view brgenzim/MemDis
+[17/44] gh repo view desiro/SClow
+[18/44] gh repo view emerson106/SGPPI
+[19/44] gh repo view facebookresearch/esm
+[20/44] gh repo view feiglab/idpgan_ped
+[21/44] gh repo view gcollet/MstatX
+[22/44] gh repo view gjoni/mylddt
+[23/44] gh repo view holehouse-lab/shephard-data
+[24/44] gh repo view idptools/goose
+[25/44] gh repo view idptools/sparrow
+[26/44] gh repo view ingolia-lab/post-transcriptional-idrs
+[27/44] gh repo view isblab/disobind
+[28/44] gh repo view jahnl/binding_in_disorder
+[29/44] gh repo view julie-forman-kay-lab/IDPConformerGenerator
+[30/44] gh repo view melppi/melppi.github.io
+[31/44] gh repo view microsoft/LoRA
+[32/44] gh repo view mmb-irb/MDDB-workflow
+[33/44] gh repo view molML/14-3-3-bindsite
+[34/44] gh repo view nadavbra/protein_bert
+[35/44] gh repo view naveen-joy-18/Impact-of-Intrinsically-Disordered-Regions-and-Functional-Disorder-Hotspots-in-the-Human-Kinome
+[36/44] gh repo view nofundamental/lncRNAnet
+[37/44] gh repo view paulrobustelli/Sisk_NTAIL_DeepMSM_2023
+[38/44] gh repo view qczhang/icSHAPE
+[39/44] gh repo view roneshsharma/MoRFpred-plus
+[40/44] gh repo view roneshsharma/Predict-MoRFs
+[41/44] gh repo view rwnull/insitu_probe_generator
+[42/44] gh repo view ulelab/icount-mini
+[43/44] gh repo view ulelab/ultraplex
+[44/44] gh repo view wulab-github/IDBSpred
+
+GitHub URL Audit Summary
+- total_url_entries: 66
+- unique_urls: 61
+- accessible_entries: 50
+- accessible_ratio: 75.76%
+- report: /data2/Project_Paper/IDR_Inter/IDR_all_20260520/analysis/method/github_url_audit_20260526.csv
+
+Repository Export Summary
+- selected_repos: 44
+- exported: 44
+- failed: 0
+- output: /data2/Project_Paper/IDR_Inter/IDR_all_20260520/analysis/method/github_parse_all_20260526.md
+```
+
+考虑到部分github仓库的目录树结构比较复杂、繁冗，我们提供了是否跳过解析目录树的选项，`--include-tree/--no-include-tree`，默认是包含目录树的，如果你觉得目录树信息过于冗余，你可以选择跳过目录树的解析，这样就只会保留仓库的基本信息，而不会展开每个文件的目录结构。
+
+一些未正常提取的github链接可以从报告csv文件中手动修改
+```bash
+awk -F "," '$6 == "False"' /IDR_all_20260520/analysis/github_url_audit.csv
+```
+
+修改的结果手动追加到总的markdown文件中
+```python
+gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_all_20260526.md
+```
 
 ## 🌰 全维度文献章节模块组合利用方案
 

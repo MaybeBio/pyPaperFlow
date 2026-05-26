@@ -666,11 +666,12 @@ def github_export_cmd(
     report: Optional[str] = typer.Option(None, "--report", help="CSV report path for URL audit table. Defaults to <output>_github_report.csv."),
     separator: str = typer.Option("<<<PY_PAPERFLOW_REPO_BOUNDARY>>>", "--separator", help="Separator inserted between repository sections."),
     timeout: float = typer.Option(10.0, "--timeout", help="URL request timeout in seconds."),
-    retries: int = typer.Option(1, "--retries", help="URL request retries for accessibility checks."),
+    retries: int = typer.Option(3, "--retries", help="URL request retries for accessibility checks."),
     sleep_sec: float = typer.Option(0.2, "--sleep", help="Sleep seconds between ghresearcher calls."),
     max_repos: Optional[int] = typer.Option(None, "--max-repos", help="Optional cap on number of repositories to parse."),
     strict_ghresearcher: bool = typer.Option(False, "--strict-ghresearcher", help="Fail fast when ghresearcher is missing or a parse call fails."),
     overwrite: bool = typer.Option(False, "--overwrite", help="Overwrite output markdown instead of appending."),
+    include_tree: bool = typer.Option(True, "--include-tree/--no-include-tree", help="Include file tree via ghresearcher (default). Use --no-include-tree to fetch repo info via gh repo view instead."),
 ):
     """
     Export GitHub links from merged PubMed JSON, validate accessibility,
@@ -688,6 +689,7 @@ def github_export_cmd(
             max_repos=max_repos,
             strict_ghresearcher=strict_ghresearcher,
             overwrite=overwrite,
+            include_tree=include_tree,
             echo=typer.echo,
         )
     except Exception as e:
