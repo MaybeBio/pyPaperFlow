@@ -54,6 +54,16 @@ paperflow = "pyPaperFlow.cli:app"
 [tool.hatch.build.targets.wheel]
 packages = ["src/pyPaperFlow"]
 
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/test",
+  "/Papers",
+  "/figs",
+  "/docs",
+  "/skills",
+  "/config",
+]
+
 [tool.hatch.version]
 # modify version information here
 path = "src/pyPaperFlow/__init__.py"
