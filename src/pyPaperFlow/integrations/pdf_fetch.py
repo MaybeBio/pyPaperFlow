@@ -1,6 +1,6 @@
-# ⚠️ This script is adapted and modified from https://github.com/Agents365-ai/paper-fetch/blob/main/scripts/fetch.py
-
 #!/usr/bin/env python3
+
+# ⚠️ This script is adapted and modified from https://github.com/Agents365-ai/paper-fetch/blob/main/skills/paper-fetch/scripts/fetch.py
 """Fetch legal open-access PDFs by DOI.
 
 Resolution order: Unpaywall -> Semantic Scholar openAccessPdf ->
@@ -27,25 +27,31 @@ agents that cache schema should compare against it to detect drift.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html.parser
 import ipaddress
 import json
 import os
 import re
 import shlex
+import shutil
+import socket
+import subprocess
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import uuid
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
 # Versioning
 # ---------------------------------------------------------------------------
 
-CLI_VERSION = "0.13.1"
-SCHEMA_VERSION = "1.9.0"
+CLI_VERSION = "0.15.1"
+SCHEMA_VERSION = "1.11.0"
 
 # ---------------------------------------------------------------------------
 # Config
@@ -83,6 +89,7 @@ EXIT_TRANSPORT = 4
 # ignores them and retries sooner will at worst re-hit the same failure.
 RETRY_AFTER_HOURS = {
     "not_found": 168,              # OA availability changes on embargo / preprint timescale
+    "resolve_network_error": 1,    # resolver APIs unreachable; availability unknown
     "download_network_error": 1,   # transient network / upstream hiccup
     "download_size_exceeded": 24,  # publisher posted a >50 MB PDF; revisit in a day
     "download_io_error": 1,        # local disk full / permission blip
@@ -136,10 +143,14 @@ _last_scihub_request_monotonic: float = 0.0
 #     check (the ip literal check only fires when the URL host IS an IP)
 #   - cloud metadata endpoints that can leak IAM credentials if an SSRF
 #     target pivoted into fetching from them
-# This does not defend against DNS rebinding — a hostname pointing at a
-# public IP at validation time but a private IP at connection time slips
-# through. Mitigating that requires pin-after-resolve and is out of scope
-# for v0.8.0.
+# A hostname that resolves into private space (whether by intent or DNS
+# rebinding) is caught separately by _host_addrs_safe(), which getaddrinfo()s
+# every fetch target and rejects private/loopback/link-local/reserved/
+# unspecified answers. This set only short-circuits the well-known aliases.
+#
+# KEEP IN SYNC with the identical _BLOCKED_HOSTS set in cloak_pdf.py — the cloak
+# companion runs as its own process and re-implements the SSRF gate rather than
+# importing it, so a host added here must be added there too.
 _BLOCKED_HOSTS = {
     # Loopback aliases
     "localhost",
@@ -162,6 +173,92 @@ def _auth_mode() -> str:
     return "institutional" if _is_institutional() else "public"
 
 
+# ---------------------------------------------------------------------------
+# CloakBrowser fallback (operator-controlled, off by default)
+# ---------------------------------------------------------------------------
+
+# When PAPER_FETCH_CLOAK is set, a download blocked by Cloudflare (HTTP 403/429
+# or an HTML interstitial served in place of the PDF) is retried through
+# CloakBrowser — a stealth Chromium that can pass the JS challenge. fetch.py
+# shells out to the companion `cloak_pdf.py` via a cloakbrowser-importable
+# Python, so this file keeps its stdlib-only footprint. Bytes returned by the
+# helper are re-validated through the same %PDF + size checks as any other
+# download; the agent cannot opt in (env var is an operator action).
+
+# URLs that were ultimately downloaded via CloakBrowser, so the result envelope
+# can flag `via: cloak` for orchestrator visibility.
+_CLOAK_DOWNLOADS: set[str] = set()
+
+
+def _is_cloak_enabled() -> bool:
+    """True iff the operator opted into the CloakBrowser fallback."""
+    return bool(os.environ.get("PAPER_FETCH_CLOAK"))
+
+
+def _resolve_cloak_python() -> str | None:
+    """Locate a Python interpreter that can import cloakbrowser.
+
+    Order: CLOAKBROWSER_PYTHON env → ~/github/CloakBrowser/.venv/bin/python →
+    the current interpreter. Mirrors cloakFetch's cloak_fetch.sh resolution.
+    Returns None when no candidate can import cloakbrowser.
+    """
+    candidates = [
+        os.environ.get("CLOAKBROWSER_PYTHON", "").strip(),
+        str(Path.home() / "github" / "CloakBrowser" / ".venv" / "bin" / "python"),
+        sys.executable,
+    ]
+    for c in candidates:
+        if not c:
+            continue
+        if not (os.path.isfile(c) or shutil.which(c)):
+            continue
+        try:
+            r = subprocess.run(
+                [c, "-c", "import cloakbrowser"],
+                capture_output=True,
+                timeout=30,
+            )
+            if r.returncode == 0:
+                return c
+        except Exception:
+            continue
+    return None
+
+
+def _cloak_fetch_pdf(url: str, *, timeout: int) -> bytes | None:
+    """Fetch PDF bytes through CloakBrowser. Returns bytes, or None on failure.
+
+    Shells out to the companion cloak_pdf.py via a cloakbrowser-importable
+    Python. Fails closed: a missing dependency or any error returns None so the
+    caller falls through to the next source.
+    """
+    py = _resolve_cloak_python()
+    if not py:
+        _progress("download_cloak_skip", url=url, reason="no_cloakbrowser_python")
+        return None
+    helper = Path(__file__).with_name("cloak_pdf.py")
+    if not helper.exists():
+        _progress("download_cloak_skip", url=url, reason="helper_missing")
+        return None
+    _progress("download_cloak_try", url=url)
+    try:
+        # Browser launch + challenge solve is slow; give it headroom over the
+        # per-request timeout.
+        r = subprocess.run(
+            [py, str(helper), url, str(timeout)],
+            capture_output=True,
+            timeout=timeout + 90,
+        )
+    except Exception as e:
+        _progress("download_cloak_error", url=url, error=str(e))
+        return None
+    if r.returncode != 0 or not r.stdout:
+        tail = r.stderr.decode("utf-8", "replace")[-200:] if r.stderr else ""
+        _progress("download_cloak_error", url=url, reason="helper_failed", stderr=tail)
+        return None
+    return r.stdout
+
+
 def _is_safe_url(url: str) -> tuple[bool, str]:
     """Universal URL safety check — applied in every mode.
 
@@ -169,7 +266,8 @@ def _is_safe_url(url: str) -> tuple[bool, str]:
     hostname would pass the allowlist check:
       - non-http(s) schemes (file://, ftp://, gopher://, etc.)
       - non-80/443 ports
-      - IP literals in private / loopback / link-local / reserved space
+      - IP literals in private / loopback / link-local / reserved /
+        unspecified space
       - known cloud metadata hostnames
     """
     try:
@@ -185,13 +283,67 @@ def _is_safe_url(url: str) -> tuple[bool, str]:
         return False, "empty_host"
     try:
         ip = ipaddress.ip_address(host)
-        if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved or ip.is_multicast:
+        # Keep this address-class set in sync with _host_addrs_safe(); is_unspecified
+        # blocks the 0.0.0.0 / :: literals, which route to localhost on many stacks.
+        if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved or ip.is_multicast or ip.is_unspecified:
             return False, "private_ip"
     except ValueError:
         pass  # hostname is a name, not a literal — fine
     if host in _BLOCKED_HOSTS:
         return False, "blocked_host"
     return True, ""
+
+
+def _host_addrs_safe(host: str) -> tuple[bool, str]:
+    """Resolve `host` and reject if any address is in private space.
+
+    `_is_safe_url` only inspects the literal host, so a public-looking
+    hostname that resolves to a loopback / private / link-local / reserved
+    address (the classic DNS-based SSRF vector) slips through. This closes
+    that gap by checking every address the name resolves to. Fails closed:
+    a name we cannot resolve is treated as not allowed.
+    """
+    try:
+        infos = socket.getaddrinfo(host, None)
+    except OSError:
+        return False, "dns_error"
+    for info in infos:
+        try:
+            ip = ipaddress.ip_address(info[4][0])
+        except ValueError:
+            continue
+        if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved or ip.is_multicast or ip.is_unspecified:
+            return False, "private_ip"
+    return True, ""
+
+
+def _url_fetch_allowed(url: str) -> tuple[bool, str]:
+    """Full pre-fetch gate: syntactic SSRF check + DNS-resolution check."""
+    ok, reason = _is_safe_url(url)
+    if not ok:
+        return False, reason
+    return _host_addrs_safe(urllib.parse.urlparse(url).hostname or "")
+
+
+class _SafeRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Re-run the SSRF gate on every redirect target.
+
+    urllib follows 3xx redirects transparently, so a download URL that passes
+    the initial check can still be bounced to loopback / a private host / cloud
+    metadata. Validate each hop and refuse to follow an unsafe one.
+    """
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        ok, reason = _url_fetch_allowed(newurl)
+        if not ok:
+            raise urllib.error.HTTPError(newurl, code, f"unsafe_redirect:{reason}", headers, fp)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+# Install process-wide so every urllib.request.urlopen() — PDF downloads and
+# API calls alike — validates redirect hops. Tests patch urlopen directly, so
+# this opener is bypassed there and stays inert in hermetic runs.
+urllib.request.install_opener(urllib.request.build_opener(_SafeRedirectHandler()))
 
 
 # Simple per-process token bucket. Single-threaded, so no locking needed.
@@ -404,9 +556,41 @@ def _is_allowed_host(url: str) -> bool:
 
 def _download(url: str, dest: Path, *, timeout: int) -> str | None:
     """Download a PDF. Returns None on success, or an error slug on failure."""
-    if not _is_allowed_host(url):
-        _progress("download_error", reason="host_not_allowed", url=url)
+    allowed, deny_reason = _url_fetch_allowed(url)
+    if not allowed:
+        _progress("download_error", reason="host_not_allowed", url=url, detail=deny_reason)
         return "host_not_allowed"
+
+    def _finalize(data: bytes) -> str | None:
+        """Validate (%PDF magic + size cap) and write. Shared by both the
+        urllib path and the CloakBrowser fallback so safety checks live in one
+        place regardless of how the bytes were obtained."""
+        if len(data) > MAX_PDF_SIZE:
+            _progress("download_error", reason="size_exceeded", bytes=len(data), limit=MAX_PDF_SIZE)
+            return "size_exceeded"
+        if not data[:5].startswith(b"%PDF"):
+            _progress("download_error", reason="not_a_pdf")
+            return "not_a_pdf"
+        try:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(data)
+        except OSError as e:
+            _progress("download_error", reason="io_error", error=str(e))
+            return "io_error"
+        return None
+
+    def _try_cloak() -> bool:
+        """Retry this URL through CloakBrowser. Returns True iff a valid PDF was
+        fetched and written. No-op (False) when the operator hasn't opted in."""
+        if not _is_cloak_enabled():
+            return False
+        data = _cloak_fetch_pdf(url, timeout=timeout)
+        if not data or _finalize(data) is not None:
+            return False
+        _CLOAK_DOWNLOADS.add(url)
+        _progress("download_cloak_ok", url=url, bytes=len(data))
+        return True
+
     _rate_limit_gate()
     req = urllib.request.Request(
         url,
@@ -423,24 +607,23 @@ def _download(url: str, dest: Path, *, timeout: int) -> str | None:
         # Lets agents distinguish a 403 publisher block (try a VPN / different
         # source) from a generic timeout (just retry).
         http_status = getattr(e, "code", None)
+        # Cloudflare answers non-browser clients with 403/429. If the operator
+        # opted into the CloakBrowser fallback, retry through it before failing.
+        if isinstance(http_status, int) and http_status in (403, 429) and _try_cloak():
+            return None
         fields: dict = {"reason": "network_error", "error": str(e)}
         if isinstance(http_status, int):
             fields["http_status"] = http_status
         _progress("download_error", **fields)
         return "network_error"
-    if len(data) > MAX_PDF_SIZE:
-        _progress("download_error", reason="size_exceeded", bytes=len(data), limit=MAX_PDF_SIZE)
-        return "size_exceeded"
-    if not data[:5].startswith(b"%PDF"):
-        _progress("download_error", reason="not_a_pdf")
-        return "not_a_pdf"
-    try:
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_bytes(data)
-    except OSError as e:
-        _progress("download_error", reason="io_error", error=str(e))
-        return "io_error"
-    return None
+    # A 200 whose body is not a PDF is often a Cloudflare "Just a moment..."
+    # interstitial served in place of the file — give the CloakBrowser fallback
+    # first crack before recording a hard failure. Then validate + write through
+    # the shared path so the size/%PDF/IO checks stay identical to the cloak
+    # fallback (no divergent second copy to drift).
+    if not data[:5].startswith(b"%PDF") and _try_cloak():
+        return None
+    return _finalize(data)
 
 
 # ---------------------------------------------------------------------------
@@ -485,12 +668,29 @@ def _filename(meta: dict) -> str:
 # ---------------------------------------------------------------------------
 
 
-def try_unpaywall(doi: str, *, timeout: int) -> tuple[str | None, dict]:
+def _is_transport_exc(exc: Exception) -> bool:
+    """True if `exc` is a retryable transport failure rather than a genuine miss.
+
+    A 404/410 from a resolver means the paper isn't indexed at that source — a
+    real miss a retry won't fix. Anything else (timeout, connection reset, 5xx,
+    403, malformed JSON) is a transport-class failure: the source might well
+    have the paper, we just couldn't reach it, so it should not be reported as a
+    permanent ``not_found``.
+    """
+    code = getattr(exc, "code", None)
+    if isinstance(code, int) and code in (404, 410):
+        return False
+    return True
+
+
+def try_unpaywall(doi: str, *, timeout: int, errors: list | None = None) -> tuple[str | None, dict]:
     url = f"https://api.unpaywall.org/v2/{urllib.parse.quote(doi)}?email={EMAIL}"
     try:
         d = _get_json(url, timeout=timeout)
     except Exception as e:
         _progress("source_miss", source="unpaywall", reason=str(e))
+        if errors is not None and _is_transport_exc(e):
+            errors.append({"source": "unpaywall", "detail": str(e)})
         return None, {}
     meta = {
         "title": d.get("title"),
@@ -502,7 +702,7 @@ def try_unpaywall(doi: str, *, timeout: int) -> tuple[str | None, dict]:
     return loc.get("url_for_pdf"), meta
 
 
-def try_semantic_scholar(doi: str, *, timeout: int) -> tuple[str | None, dict, dict]:
+def try_semantic_scholar(doi: str, *, timeout: int, errors: list | None = None) -> tuple[str | None, dict, dict]:
     url = (
         f"https://api.semanticscholar.org/graph/v1/paper/DOI:{urllib.parse.quote(doi)}"
         "?fields=title,year,authors,openAccessPdf,externalIds,venue"
@@ -511,6 +711,8 @@ def try_semantic_scholar(doi: str, *, timeout: int) -> tuple[str | None, dict, d
         d = _get_json(url, timeout=timeout)
     except Exception as e:
         _progress("source_miss", source="semantic_scholar", reason=str(e))
+        if errors is not None and _is_transport_exc(e):
+            errors.append({"source": "semantic_scholar", "detail": str(e)})
         return None, {}, {}
     meta = {
         "title": d.get("title"),
@@ -524,6 +726,38 @@ def try_semantic_scholar(doi: str, *, timeout: int) -> tuple[str | None, dict, d
 
 def try_arxiv(arxiv_id: str) -> str:
     return f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+
+
+def try_arxiv_metadata(arxiv_id: str, *, timeout: int) -> dict:
+    """Fetch title / year / first-author from arXiv's Atom API.
+
+    Used when neither Unpaywall nor S2 returned metadata — typical for
+    arXiv-only papers reached via the synthesized 10.48550/arXiv.<id> DOI
+    form, which S2's by-DOI endpoint does not index. Without this, the
+    deterministic filename falls back to encoding the DOI literal.
+
+    Best-effort: returns an empty dict on any failure (offline, malformed
+    response, paper not found).
+    """
+    bare = re.sub(r"v\d+$", "", arxiv_id)
+    try:
+        body = _get(
+            f"http://export.arxiv.org/api/query?id_list={bare}",
+            accept="application/atom+xml",
+            timeout=timeout,
+        )
+        ns = {"atom": "http://www.w3.org/2005/Atom"}
+        root = ET.fromstring(body)
+        entry = root.find("atom:entry", ns)
+        if entry is None:
+            return {}
+        title = (entry.findtext("atom:title", default="", namespaces=ns) or "").strip()
+        published = entry.findtext("atom:published", default="", namespaces=ns) or ""
+        year = int(published[:4]) if published[:4].isdigit() else None
+        author = entry.findtext("atom:author/atom:name", default=None, namespaces=ns)
+        return {"title": title or None, "year": year, "author": author}
+    except Exception:
+        return {}
 
 
 def try_pmc(pmcid: str) -> str:
@@ -819,7 +1053,7 @@ def _try_publisher_direct(doi: str, *, timeout: int) -> list[tuple[str, str]]:
     if doi.startswith("10.1016/"):
         # Elsevier: resolve DOI -> PII via Crossref, then build sciencedirect URL.
         try:
-            data = _get_json(f"https://api.crossref.org/works/{doi}", timeout=timeout)
+            data = _get_json(f"https://api.crossref.org/works/{urllib.parse.quote(doi)}", timeout=timeout)
         except Exception:
             return []
         ids = (data.get("message") or {}).get("alternative-id") or []
@@ -1187,6 +1421,11 @@ def fetch(
     sources_tried: list[str] = []
     meta: dict = {}
     download_errors: list[dict] = []
+    # Transport-class failures from the metadata resolvers (timeout / 5xx / 403),
+    # as opposed to genuine 404 misses. Used so that an outage during resolution
+    # is reported as a retryable transport error rather than a permanent
+    # not_found when no candidates could be built.
+    resolver_errors: list[dict] = []
 
     # Fatal download errors that abort the fallback loop. Only host-independent
     # local failures qualify (e.g., disk write failed). ``size_exceeded`` is per-URL,
@@ -1214,7 +1453,7 @@ def fetch(
         if "semantic_scholar" not in sources_tried:
             sources_tried.append("semantic_scholar")
         _progress("source_try", doi=doi, source="semantic_scholar")
-        pdf, s2_meta, ext = try_semantic_scholar(doi, timeout=timeout)
+        pdf, s2_meta, ext = try_semantic_scholar(doi, timeout=timeout, errors=resolver_errors)
         _s2_cache = {"pdf": pdf, "meta": s2_meta, "ext": ext}
         return pdf, s2_meta, ext
 
@@ -1223,7 +1462,7 @@ def fetch(
     if EMAIL:
         _progress("source_try", doi=doi, source="unpaywall")
         sources_tried.append("unpaywall")
-        up_url, up_meta = try_unpaywall(doi, timeout=timeout)
+        up_url, up_meta = try_unpaywall(doi, timeout=timeout, errors=resolver_errors)
         _merge_meta(up_meta)
         if up_url:
             _progress("source_hit", doi=doi, source="unpaywall", pdf_url=up_url)
@@ -1261,6 +1500,8 @@ def fetch(
         }
         if src in source_details:
             out["source_detail"] = source_details[src]
+        if url in _CLOAK_DOWNLOADS:
+            out["via"] = "cloak"
         if extra:
             out.update(extra)
         return out
@@ -1310,6 +1551,27 @@ def fetch(
         _add("semantic_scholar", s2_pdf)
     elif not up_url:
         _progress("source_miss", doi=doi, source="semantic_scholar")
+
+    # Synthesized arXiv DOIs (10.48550/arXiv.<id>) encode the arxiv id directly.
+    # S2 doesn't index by this DOI form, so a S2-by-DOI lookup returns 404 and
+    # externalIds stays empty — recover the id from the DOI literal so the
+    # arxiv source still gets tried.
+    if not ext.get("ArXiv") and doi.lower().startswith("10.48550/arxiv."):
+        ext["ArXiv"] = doi[len("10.48550/arxiv."):]
+        # Backfill metadata from arXiv's API only when our other sources
+        # missed — keeps the filename meaningful (Vaswani_2017_… instead of
+        # unknown_nd_10_48550_arXiv_…) without burning a round-trip when
+        # Unpaywall or S2 already gave us a title.
+        if not meta.get("title"):
+            ax_meta = try_arxiv_metadata(ext["ArXiv"], timeout=timeout)
+            if ax_meta:
+                added = _merge_meta(ax_meta)
+                if added:
+                    _progress("source_enrich", doi=doi, source="arxiv", fields=added)
+                    fname = _filename(meta or {"title": doi})
+                    dest = out_dir / fname
+            else:
+                _progress("source_enrich_failed", doi=doi, source="arxiv")
 
     if ext.get("ArXiv"):
         sources_tried.append("arxiv")
@@ -1389,8 +1651,31 @@ def fetch(
         if sh_url:
             _add("scihub", sh_url)
 
-    # --- Exhausted all sources with no candidates and no prior attempts → not_found ---
+    # --- Exhausted all sources with no candidates and no prior attempts ---
     if not candidates and not download_errors:
+        # If every resolver that ran failed with a transport error (timeout /
+        # 5xx / 403), we don't actually know whether an OA copy exists — report
+        # a retryable transport error instead of a permanent not_found so the
+        # caller retries rather than treating the paper as unavailable.
+        if resolver_errors:
+            _progress("resolve_error", doi=doi, sources=[e["source"] for e in resolver_errors])
+            return {
+                "doi": doi,
+                "success": False,
+                "source": None,
+                "pdf_url": None,
+                "file": None,
+                "meta": meta or {},
+                "sources_tried": sources_tried,
+                "resolver_errors": resolver_errors,
+                "error": {
+                    "code": "resolve_network_error",
+                    "message": "Metadata resolvers failed with transport errors; OA availability is unknown",
+                    "retryable": True,
+                    "retry_after_hours": RETRY_AFTER_HOURS["resolve_network_error"],
+                    "reason": "resolver API unreachable (timeout / 5xx / 403), not a confirmed absence of OA",
+                },
+            }
         _progress("not_found", doi=doi)
         err = {
             "code": "not_found",
@@ -1467,7 +1752,9 @@ def fetch(
 
 
 def _idem_path(out_dir: Path, key: str) -> Path:
-    safe = _slug(key, 80) or "default"
+    # Hash the raw key so distinct long keys that share an 80-char prefix don't
+    # collide onto the same sidecar and replay each other's envelope.
+    safe = hashlib.sha256(key.encode("utf-8")).hexdigest()
     return out_dir / ".paper-fetch-idem" / f"{safe}.json"
 
 
@@ -1582,6 +1869,7 @@ def build_schema() -> dict:
         "error_codes": {
             "validation_error": {"retryable": False, "message": "Bad arguments or empty input"},
             "not_found": {"retryable": True, "retry_after_hours": RETRY_AFTER_HOURS["not_found"], "message": "No OA PDF found anywhere; OA availability changes over time"},
+            "resolve_network_error": {"retryable": True, "retry_after_hours": RETRY_AFTER_HOURS["resolve_network_error"], "message": "Metadata resolvers failed with transport errors (timeout / 5xx / 403); OA availability is unknown, retry rather than treating as not_found"},
             "title_resolve_failed": {"retryable": False, "message": "Crossref returned no items for the given title; provide a DOI directly or refine the title"},
             "download_network_error": {"retryable": True, "retry_after_hours": RETRY_AFTER_HOURS["download_network_error"], "message": "Network failure during download"},
             "download_not_a_pdf": {"retryable": False, "message": "Response was not a PDF (HTML landing page)"},
@@ -1597,6 +1885,8 @@ def build_schema() -> dict:
         },
         "result_fields": {
             "source_detail": "Optional per-source diagnostics (e.g. {'mirror': 'sci-hub.ru'} when source='scihub'). Present only when the resolving source has additional context worth surfacing for orchestrator routing.",
+            "via": "Optional. Set to 'cloak' when the PDF was fetched through the CloakBrowser fallback (a Cloudflare-blocked URL retried via stealth Chromium). Absent for ordinary downloads. Requires PAPER_FETCH_CLOAK.",
+            "resolver_errors": "Optional. Present on a resolve_network_error result; lists the metadata resolvers that failed with a transport error (timeout / 5xx / 403) rather than a genuine 404 miss, as [{source, detail}].",
         },
         "deprecations": [],
         "meta_fields": {
@@ -1613,6 +1903,9 @@ def build_schema() -> dict:
             "PAPER_FETCH_INSTITUTIONAL": "Optional. Set to any value to opt into institutional mode: activates a 1 req/s rate limiter and enables the publisher-direct fallback. Intended for callers whose IP / cookies / EZproxy already grant subscription access. SSRF defense applies in every mode.",
             "PAPER_FETCH_NO_SCIHUB": "Optional. Set to any value to disable the Sci-Hub fallback (enabled by default).",
             "PAPER_FETCH_SCIHUB_MIRRORS": "Optional. Comma-separated list of Sci-Hub mirror hostnames to try, in priority order, overriding the built-in defaults (e.g. 'sci-hub.ru,sci-hub.st,sci-hub.su').",
+            "PAPER_FETCH_CLOAK": "Optional. Set to any value to enable the CloakBrowser fallback: when a download is blocked by Cloudflare (HTTP 403/429 or a non-PDF interstitial), the URL is retried through a stealth Chromium that can pass the JS challenge. Off by default; requires the cloak_pdf.py companion and a cloakbrowser-importable Python (see CLOAKBROWSER_PYTHON). Bytes are re-validated through the same %PDF + 50 MB checks. Operator action only — the agent cannot opt in.",
+            "CLOAKBROWSER_PYTHON": "Optional. Path to a Python interpreter that can import cloakbrowser, used by the PAPER_FETCH_CLOAK fallback. If unset, falls back to ~/github/CloakBrowser/.venv/bin/python then the current interpreter.",
+            "PAPER_FETCH_CLOAK_HEADED": "Optional. Set to any value to make the cloak fallback launch a headed (visible) browser instead of headless. Harder Cloudflare challenges (e.g. science.org) defeat headless mode; the headed window clears them. Requires a display. Read by the cloak_pdf.py companion.",
         },
     }
 
@@ -1833,15 +2126,16 @@ def _decide_exit(results: list[dict]) -> int:
             any_validation = True
         elif code == "not_found":
             any_unresolved = True
-        elif code.startswith("download_"):
+        elif code.startswith("download_") or code == "resolve_network_error":
             any_transport = True
         else:
             any_unresolved = True
     if not any_failure:
         return EXIT_SUCCESS
-    # Validation errors win over transport/unresolved: a malformed DOI is a
-    # caller bug, not a transient network issue.
-    if any_validation and not (any_transport or any_unresolved):
+    # Validation errors win: a malformed DOI is a caller bug that won't fix
+    # itself on retry, so surface it even when the batch also has transient
+    # network or not-found failures the caller might otherwise blindly retry.
+    if any_validation:
         return EXIT_VALIDATION
     if any_transport:
         return EXIT_TRANSPORT
@@ -1872,14 +2166,16 @@ def _next_hints(results: list[dict], args) -> list[str]:
         cmd += " --dry-run"
     return [cmd]
 
+
 # ⚠️ modify here ！
 def run(argv: list[str] | None = None):
     """Core entry point. argv is ['paper-fetch', '--doi', ...]; None means sys.argv."""
     global _format, _pretty, _stream, _request_id, _started_monotonic
 
-    _started_monotonic = time.monotonic()
     if argv is None:
         argv = sys.argv
+
+    _started_monotonic = time.monotonic()
     _request_id = f"req_{uuid.uuid4().hex[:12]}"
 
     # Schema subcommand — handle before the main parser so we don't require a DOI.
