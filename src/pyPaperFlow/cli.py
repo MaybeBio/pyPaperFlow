@@ -436,6 +436,7 @@ def paper_fetch_cmd(ctx: typer.Context):
     Notes:
     - 1, This command is a thin wrapper around the paper-fetch engine, which is a powerful tool for fetching papers by DOI, title, or batch lists. 
     - 2, ⚠️ Remember to set Unpaywall email in environment variables for best performance when fetching by DOI.
+    - 3, Key env vars: PAPER_FETCH_NO_SCIHUB=1 (disable the Sci-Hub fallback), PAPER_FETCH_INSTITUTIONAL=1 (publisher direct links), PAPER_FETCH_CLOAK=1 + CLOAKBROWSER_PYTHON (optional Cloudflare fallback via CloakBrowser).
 
     \b
     Example usage:
