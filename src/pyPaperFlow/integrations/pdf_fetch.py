@@ -683,7 +683,7 @@ def _is_transport_exc(exc: Exception) -> bool:
     return True
 
 
-def try_unpaywall(doi: str, *, timeout: int, errors: list | None = None) -> tuple[str | None, dict]:
+def try_unpaywall(doi: str, *, timeout: int, errors: list | None = None) -> tuple[str | None, dict, dict]:
     url = f"https://api.unpaywall.org/v2/{urllib.parse.quote(doi)}?email={EMAIL}"
     try:
         d = _get_json(url, timeout=timeout)
@@ -691,7 +691,7 @@ def try_unpaywall(doi: str, *, timeout: int, errors: list | None = None) -> tupl
         _progress("source_miss", source="unpaywall", reason=str(e))
         if errors is not None and _is_transport_exc(e):
             errors.append({"source": "unpaywall", "detail": str(e)})
-        return None, {}
+        return None, {}, {}
     meta = {
         "title": d.get("title"),
         "year": d.get("year"),
@@ -699,7 +699,18 @@ def try_unpaywall(doi: str, *, timeout: int, errors: list | None = None) -> tupl
         "journal": d.get("journal_name"),
     }
     loc = d.get("best_oa_location") or {}
-    return loc.get("url_for_pdf"), meta
+    # Recover a PMCID from any OA location: best_oa_location's landing page is
+    # often just the publisher DOI (no PDF, no PMCID), but a PMC copy — when it
+    # exists — shows up in oa_locations with a pmc.ncbi.nlm.nih.gov URL. The
+    # caller uses the recovered id to build Europe PMC / PMC download candidates
+    # for papers whose only OA copy is a PMC article.
+    pmcid = None
+    for loc2 in [loc, *(d.get("oa_locations") or [])]:
+        c = _pmcid_from_url(loc2.get("url_for_landing_page") or loc2.get("url"))
+        if c:
+            pmcid = c
+            break
+    return loc.get("url_for_pdf"), meta, pmcid
 
 
 def try_semantic_scholar(doi: str, *, timeout: int, errors: list | None = None) -> tuple[str | None, dict, dict]:
@@ -776,11 +787,14 @@ def try_europe_pmc(pmcid: str) -> str:
     return f"https://europepmc.org/articles/{pmcid}?pdf=render"
 
 
-_PMCID_URL_RE = re.compile(r"/pmc/articles/(PMC\d+)", re.IGNORECASE)
+# NCBI served PMC as www.ncbi.nlm.nih.gov/pmc/articles/<id> historically and
+# moved to the pmc.ncbi.nlm.nih.gov/articles/<id> domain; matching the shared
+# /articles/PMC\d+ path segment covers both.
+_PMCID_URL_RE = re.compile(r"/articles/(PMC\d+)", re.IGNORECASE)
 
 
 def _pmcid_from_url(url: str | None) -> str | None:
-    """Extract a PMCID from a URL like https://www.ncbi.nlm.nih.gov/pmc/articles/PMC123/...
+    """Extract a PMCID from a PMC article URL (old or new NCBI domain).
 
     S2's openAccessPdf.url often points to a PMC article without also
     populating externalIds.PubMedCentral; parsing the URL recovers the id
@@ -1462,7 +1476,7 @@ def fetch(
     if EMAIL:
         _progress("source_try", doi=doi, source="unpaywall")
         sources_tried.append("unpaywall")
-        up_url, up_meta = try_unpaywall(doi, timeout=timeout, errors=resolver_errors)
+        up_url, up_meta, up_pmcid = try_unpaywall(doi, timeout=timeout, errors=resolver_errors)
         _merge_meta(up_meta)
         if up_url:
             _progress("source_hit", doi=doi, source="unpaywall", pdf_url=up_url)
@@ -1579,14 +1593,18 @@ def fetch(
         _progress("source_hit", doi=doi, source="arxiv", pdf_url=arxiv_url)
         _add("arxiv", arxiv_url)
 
-    # Recover PMCID from any PMC-style URL we've seen (S2 openAccessPdf often
-    # points to a PMC landing page without populating externalIds.PubMedCentral).
+    # Recover PMCID from any PMC-style URL we've seen (Unpaywall's oa_locations
+    # or S2's openAccessPdf often point to a PMC landing page without a direct
+    # url_for_pdf or externalIds.PubMedCentral).
     if not ext.get("PubMedCentral"):
-        for url_src in (up_url, s2_pdf):
-            pmcid_from_url = _pmcid_from_url(url_src)
-            if pmcid_from_url:
-                ext["PubMedCentral"] = pmcid_from_url
-                break
+        if up_pmcid:
+            ext["PubMedCentral"] = up_pmcid
+        else:
+            for url_src in (up_url, s2_pdf):
+                pmcid_from_url = _pmcid_from_url(url_src)
+                if pmcid_from_url:
+                    ext["PubMedCentral"] = pmcid_from_url
+                    break
 
     if ext.get("PubMedCentral"):
         # Europe PMC tried first — bypasses NCBI PMC's cloudpmc-viewer JS challenge.
