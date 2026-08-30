@@ -570,6 +570,8 @@ examples:
 
 We acknowledge the work of [paper-fetch](https://github.com/Agents365-ai/paper-fetch)！We have modified, refactored, and encapsulated one of its core scripts for tailored integration into our pipeline.
 
+> 🔙 Rollback boundary for the paper-fetch module: commit `bc8394c` (`update paper-fetch module according to upstream repo`) contains the **original upstream script**. Commit `89eda06bac1f853254b04aee9e8916109c7771a1` is the first local **modification** to it. To restore the original module, use `89eda06` as the boundary — e.g. `git show 89eda06^:src/pyPaperFlow/integrations/pdf_fetch.py` (identical to `bc8394c`).
+
 The workflow of our paper acquisition module is outlined below:
 
 ```bash

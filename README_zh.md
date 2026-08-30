@@ -576,6 +576,8 @@ examples:
 
 感谢[paper-fetch](https://github.com/Agents365-ai/paper-fetch)的工作！我们魔改并封装了其中的一个脚本。
 
+> 🔙 paper-fetch 模块的回滚边界：commit `bc8394c`（`update paper-fetch module according to upstream repo`）是**原始上游脚本**；commit `89eda06bac1f853254b04aee9e8916109c7771a1` 是对它的第一次本地**修改**。以后需要回滚到原始模块时，以 `89eda06` 为边界即可——例如 `git show 89eda06^:src/pyPaperFlow/integrations/pdf_fetch.py`（内容与 `bc8394c` 一致）。
+
 目前我们的文献获取模块处理逻辑如下：
 
 ```bash
