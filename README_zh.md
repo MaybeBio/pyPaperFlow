@@ -637,6 +637,98 @@ Sci-Hub 镜像 — 兜底来源，默认开启。优先按 PAPER_FETCH_SCIHUB_MI
 export UNPAYWALL_EMAIL=you@example.com
 ```
 
+> 以下参考  https://github.com/Agents365-ai/paper-fetch/blob/main/README_CN.md
+
+**被 Cloudflare 拦截的 PDF（可选）**
+
+部分出版商（如 `science.org`）位于 Cloudflare 之后，普通 HTTP 客户端会收到 `403`/`429` 或 "Just a moment…" JS 挑战页而非 PDF。设置 `PAPER_FETCH_CLOAK=1` 可将这些链接改用 [CloakBrowser](https://github.com/CloakHQ/CloakBrowser)（可通过挑战的隐身 Chromium）重试。该回退位于下载层（覆盖所有来源），CloakBrowser 不可用时静默回退，仅由操作者控制（Agent 无法自行启用），返回字节仍经过相同的 `%PDF` + 50 MB 校验；成功的 cloak 下载结果带 `via:"cloak"` 标记。
+
+配置——装一次，然后把 `PAPER_FETCH_CLOAK` 当作常开安全网：
+
+```bash
+# 一次性安装：把 cloakbrowser 装进运行 paperflow 的同一 Python（自动识别），
+# 或装进独立 venv 并用 CLOAKBROWSER_PYTHON 指向它。
+pip install cloakbrowser
+
+# 推荐：常开安全网（仅在下载被拦时触发，正常 OA 下载不受影响）。
+export PAPER_FETCH_CLOAK=1
+
+# 更干净的按需单次写法（偶尔遇到被拦 URL 时）：
+PAPER_FETCH_CLOAK=1 paperflow paper-fetch 10.1126/sciadv.aee6105 --out ./pdfs
+
+# ⚠️ PAPER_FETCH_CLOAK_HEADED=1 不是默认项——仅在强挑战（如 science.org）
+# 且机器有显示环境时才设：
+# export PAPER_FETCH_CLOAK_HEADED=1
+```
+
+> **实践要点（实测经验）**
+> - Cloak **不是**付费墙绕过工具：只在"OA 论文下载被 Cloudflare 拦截"时触发。付费墙论文（无 OA 副本，如 `10.1016/j.cels.2025.101486`）根本到不了下载层，Cloak 永远不会被调用。
+> - `science.org` 属于"强挑战"，**headless 过不去**（会卡在 "Just a moment…"）——必须 `PAPER_FETCH_CLOAK_HEADED=1` + 真实显示环境（桌面；无桌面服务器可用 `xvfb-run` 包一层）。
+> - Cloak 只有在来源返回了直接 `url_for_pdf` 时才有 URL 可重试。仅有 PMC 副本（Unpaywall 只给落地页、无 `url_for_pdf`）的论文，上游原版脚本不会去尝试。
+> - `PAPER_FETCH_CLOAK=1` 常开对正常下载无影响，但装了 cloakbrowser 后，每个被拦 URL 会先花 ~30–90s 做浏览器尝试才放弃；不想等就改用按需内联写法。
+> - Sci-Hub 发现阶段会访问 `www.sci-hub.pub`——网络若屏蔽该域名 DNS，会看到 `scihub_discover_failed`，最后一个兜底随之失效。确实拿不到的论文，请用机构模式（`PAPER_FETCH_INSTITUTIONAL=1`）或浏览器手动下载 / 文献传递。
+
+
+**机构访问（可选）**
+
+有些付费墙论文恰好是你所在机构的订阅范围——只是普通 OA 来源拿不到。设置 `PAPER_FETCH_INSTITUTIONAL=1` 会启用第 6 步的「出版商直链」来源：脚本按 DOI 为对应出版商构造直链 PDF 并下载。
+
+```bash
+export PAPER_FETCH_INSTITUTIONAL=1   # 只有在机构网络内才有效
+```
+
+> **关键前提（实测验证）：** 授权靠的是*调用方所处的网络*，不是脚本本身。只有机器位于**校园网或机构 VPN 内**，出版商直链才能成功——出版商识别的是你机构的 IP 段（或 Cookies / EZproxy）。若从机构外 IP（数据中心或家用网络）运行，URL 仍会正确构造，但出版商会回 `HTTP 403 Forbidden`，最终报 `download_network_error`（可重试）而不是 `not_found`——凭这个错误类型变化就能判断机构模式确实生效了。
+> - 结果信封的 `auth_mode` 字段会显示 `"institutional"`（vs `"public"`）。
+> - 直链模板按 DOI 前缀匹配；Elsevier（`10.1016/`）还需经 Crossref 查询 PII 并落到 `sciencedirect.com/.../pdfft`——实测可用。支持的出版商：Nature、Science、Wiley、Springer、ACS、PNAS、NEJM、SAGE、Taylor & Francis、Elsevier、MDPI。
+> - 自动 **1 req/s** 限速以遵守出版商 ToS（保护你机构 IP 不被出版商限流）。
+> - 公开模式下，论文疑似付费墙时错误负载会带 `suggest_institutional: true`，提示设置该变量并在校园网 / VPN 内重跑。
+
+
+**推荐配置（最佳实践）**
+
+面对混合任务——OA 论文、被 Cloudflare 拦截的 OA 论文、以及偶尔一两篇机构有订阅的付费墙论文——常开三个开关即可：
+
+```bash
+export UNPAYWALL_EMAIL=you@example.com   # 最快、覆盖面最广的 OA 来源
+export PAPER_FETCH_CLOAK=1               # 被 Cloudflare 拦截的 OA PDF 安全网（其余场景无副作用）
+# 下面这一行只在校园网 / 机构 VPN 内执行：
+export PAPER_FETCH_INSTITUTIONAL=1       # 付费墙论文的出版商直链
+```
+
+单篇论文的决策逻辑：
+
+- **OA 论文** → Unpaywall / Semantic Scholar / arXiv / PMC 即可；`PAPER_FETCH_CLOAK` 只在下载被 Cloudflare 拦截时多一次重试。
+- **被 Cloudflare 拦截的 OA**（如 `science.org`）→ Cloak 重试（headless 可能卡住，需在有显示环境的机器上设 `PAPER_FETCH_CLOAK_HEADED=1`）。
+- **付费墙论文**（如 `10.1016/j.cels.2025.101486`）→ 只有机构链路能取到，且必须在校内 / VPN：Unpaywall → Semantic Scholar → 出版商直链（Elsevier 经 PII 查询落到 `sciencedirect.com/.../pdfft`）→ Sci-Hub 兜底。从机构外 IP 出版商会回 `403`，没有任何自动化路径可走——请用图书馆门户 / EZproxy 或馆际互借。
+
+
+**注意事项与环境变量**
+
+所有设置均通过环境变量在进程启动时读取——无配置文件。下列变量可自由组合。
+
+| 环境变量 | 作用 | 默认 | 何时设置 |
+| --- | --- | --- | --- |
+| `UNPAYWALL_EMAIL` | Unpaywall API 联系邮箱（写入 User-Agent）；不设则跳过 Unpaywall 来源 | 空 | 建议设置——Unpaywall 是最快、覆盖面最广的来源 |
+| `PAPER_FETCH_NO_SCIHUB` | 设为 `1` 关闭 Sci-Hub 镜像兜底 | Sci-Hub 开 | 机构 / 合规不允许 Sci-Hub 时 |
+| `PAPER_FETCH_SCIHUB_MIRRORS` | 逗号分隔的镜像列表，按优先级尝试（仅主机名） | 内置默认列表 | 默认镜像失效时 |
+| `PAPER_FETCH_INSTITUTIONAL` | 设为 `1` 启用出版商直链（由机构 IP / Cookies / EZproxy 授权），自动 1 req/s 限速以遵守出版商 ToS | 关 | 有机构订阅时 |
+| `PAPER_FETCH_CLOAK` | 设为 `1` 对被 Cloudflare 拦截的 PDF 改用 CloakBrowser 重试 | 关 | 出版商在 Cloudflare 之后（如 science.org） |
+| `CLOAKBROWSER_PYTHON` | 可 `import cloakbrowser` 的 Python 解释器 | 自动探测 | 仅未自动识别时 |
+| `PAPER_FETCH_CLOAK_HEADED` | 设为 `1` 用有头浏览器（需显示环境） | headless | 强挑战 headless 过不了时（如 science.org） |
+
+> ⚠️ **布尔变量是「存在即真」，不认值。** 代码用 `os.environ.get(...)` 判断，任何非空值都会启用该特性。设 `PAPER_FETCH_CLOAK=0` 或 `=false` 依然会**启用** Cloak；设 `PAPER_FETCH_NO_SCIHUB=0` 依然会**禁用** Sci-Hub。要关闭请用 `unset`，切勿写 `=0`/`=false`。
+
+
+**已知限制**
+
+- 部分出版商重定向会落到 HTML 落地页而非 PDF——`%PDF` 魔数校验会拒绝。
+- 默认不做浏览器自动化（不解 CAPTCHA）——仅可选的 `PAPER_FETCH_CLOAK` CloakBrowser 兜底。
+- SSRF 防护拒绝私网 IP、非 `http(s)` 协议、非 80/443 端口、云元数据主机。
+- 单个 PDF 上限 50 MB。
+
+---
+
+
 
 与 PMC 全文解析逻辑不同，非 PubMed 来源文献仅可通过 paper‑fetch 模块获取 PDF 格式原文。
 

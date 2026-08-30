@@ -636,6 +636,102 @@ export UNPAYWALL_EMAIL=you@example.com
 ```
 
 
+**Cloudflare-blocked PDFs (optional)**
+
+Some publishers (e.g. `science.org`) sit behind Cloudflare and return `403`/`429` or a "Just a moment…" JS challenge page instead of the PDF. Set `PAPER_FETCH_CLOAK=1` to retry those URLs through [CloakBrowser](https://github.com/CloakHQ/CloakBrowser) (a stealth Chromium that can pass the challenge). This fallback lives at the download layer (covers all sources), fails silently when CloakBrowser is unavailable, is operator-controlled (agents cannot enable it), and re-validates returned bytes through the same `%PDF` + 50 MB checks. Successful cloak downloads carry `via:"cloak"`.
+
+Setup — install once, then treat `PAPER_FETCH_CLOAK` as an always-on safety net:
+
+```bash
+# One-time install: put cloakbrowser into the same Python that runs paperflow
+# (auto-detected), or into a separate venv and point CLOAKBROWSER_PYTHON at it.
+pip install cloakbrowser
+
+# Recommended: keep as a safety net (fires ONLY when a download is blocked;
+# normal OA downloads are unaffected).
+export PAPER_FETCH_CLOAK=1
+
+# Cleaner per-command alternative, when you only occasionally hit a blocked URL:
+PAPER_FETCH_CLOAK=1 paperflow paper-fetch 10.1126/sciadv.aee6105 --out ./pdfs
+
+# ⚠️ PAPER_FETCH_CLOAK_HEADED=1 is NOT a default. Set it only for strong
+# challenges (e.g. science.org) AND only on a machine with a display:
+# export PAPER_FETCH_CLOAK_HEADED=1
+```
+
+> **Practical notes (from testing)**
+> - Cloak is **not** a paywall bypass. It only fires when an *OA* download is Cloudflare-blocked; a paywalled paper (no OA copy, e.g. `10.1016/j.cels.2025.101486`) never reaches the download layer, so Cloak is never invoked.
+> - `science.org` is a "strong" challenge that **headless cannot pass** (it stalls on "Just a moment…") — it requires `PAPER_FETCH_CLOAK_HEADED=1` on a real display (a desktop, or a headless server wrapped with `xvfb-run`).
+> - Cloak only has a URL to retry when a source returned a direct `url_for_pdf`. Papers whose only OA copy is in PMC (Unpaywall reports a landing page with no `url_for_pdf`) are **not** attempted by the stock script.
+> - Keeping `PAPER_FETCH_CLOAK=1` always on has no effect on normal downloads, but once `cloakbrowser` is installed, each blocked URL adds a ~30–90 s browser attempt before falling through; use the inline form if you'd rather not wait.
+> - Sci-Hub discovery contacts `www.sci-hub.pub` — on networks where that DNS is blocked you'll see `scihub_discover_failed`, which removes the last fallback. For genuinely unavailable papers, use institutional mode (`PAPER_FETCH_INSTITUTIONAL=1`) or download via a browser / interlibrary loan.
+
+
+**Institutional access (optional)**
+
+Some paywalled papers are exactly what your institution's subscription covers — a generic OA source just can't see them. Set `PAPER_FETCH_INSTITUTIONAL=1` to enable the publisher-direct-link source (step 6 of the chain): the script builds a direct PDF URL for the DOI's publisher and downloads it.
+
+```bash
+export PAPER_FETCH_INSTITUTIONAL=1   # only effective while on the institutional network
+```
+
+> **Key requirement (verified by testing):** authorization comes from the *caller's network*, not the script. Publisher-direct downloads succeed only when the machine runs **on-campus or on the institutional VPN** — the publisher recognizes your institution's IP range (or cookies / EZproxy). From an off-network IP (a datacenter or home machine) the URL is still built correctly but the publisher answers `HTTP 403 Forbidden`, and the run ends with `download_network_error` (retryable) instead of `not_found` — that error-type change is how you can tell institutional mode actually fired.
+> - The result envelope's `auth_mode` field reports `"institutional"` (vs `"public"`).
+> - Direct-link templates are matched by DOI prefix; Elsevier (`10.1016/`) needs an extra PII lookup via Crossref and `sciencedirect.com/.../pdfft` — verified working. Supported publishers: Nature, Science, Wiley, Springer, ACS, PNAS, NEJM, SAGE, Taylor & Francis, Elsevier, MDPI.
+> - Auto rate-limits to **1 req/s** to respect publisher ToS (protects your institution's IP from throttling).
+> - In public mode, when a paper looks paywalled the error payload sets `suggest_institutional: true` and hints to set this variable and re-run from on-campus / VPN.
+
+
+**Recommended setup (best practice)**
+
+For a mixed workload — OA papers, Cloudflare-gated OA papers, and the occasional paywalled paper your institution subscribes to — keep three things on:
+
+```bash
+export UNPAYWALL_EMAIL=you@example.com   # fastest / broadest OA source
+export PAPER_FETCH_CLOAK=1               # safety net for Cloudflare-gated OA PDFs (harmless otherwise)
+# Run the line below only while on campus / the institutional VPN:
+export PAPER_FETCH_INSTITUTIONAL=1       # publisher-direct links for paywalled papers
+```
+
+Decision logic for a single paper:
+
+- **OA paper** → Unpaywall / Semantic Scholar / arXiv / PMC handle it; `PAPER_FETCH_CLOAK` only adds a retry when the download is Cloudflare-blocked.
+- **Cloudflare-blocked OA** (e.g. `science.org`) → Cloak retries it (headless may stall; use `PAPER_FETCH_CLOAK_HEADED=1` on a machine with a display).
+- **Paywalled paper** (e.g. `10.1016/j.cels.2025.101486`) → only the institutional chain can fetch it, and only from on-campus / VPN: Unpaywall → Semantic Scholar → publisher-direct (Elsevier via PII lookup → `sciencedirect.com/.../pdfft`) → Sci-Hub fallback. From an off-network IP the publisher answers `403` and no automated path remains — use your library portal / EZproxy or interlibrary loan.
+
+
+**Notes & Environment Variables**
+
+All settings are read from environment variables when the process starts — there is no config file. Every var above can be combined freely.
+
+| Env var | Effect | Default | When to set |
+| --- | --- | --- | --- |
+| `UNPAYWALL_EMAIL` | Contact email for the Unpaywall API (sent in the User-Agent); without it the Unpaywall source is skipped. | empty | Recommended — Unpaywall is the fastest / broadest source |
+| `PAPER_FETCH_NO_SCIHUB` | Set to `1` to disable the Sci-Hub mirror fallback. | Sci-Hub ON | If your institution / compliance forbids Sci-Hub |
+| `PAPER_FETCH_SCIHUB_MIRRORS` | Comma-separated mirror list, tried in priority order (hostnames only). | built-in default list | When the default mirrors stop working |
+| `PAPER_FETCH_INSTITUTIONAL` | Set to `1` to enable publisher direct links (authorized by your institutional IP / cookies / EZproxy). Auto rate-limits to 1 req/s to respect publisher ToS. | off | If you have an institutional subscription |
+| `PAPER_FETCH_CLOAK` | Set to `1` to retry Cloudflare-blocked PDFs through CloakBrowser. | off | For publishers behind Cloudflare (e.g. `science.org`) |
+| `CLOAKBROWSER_PYTHON` | Python interpreter that can `import cloakbrowser`. | auto-detected | Only if not auto-detected |
+| `PAPER_FETCH_CLOAK_HEADED` | Set to `1` for a headed browser (needs a display). | headless | For strong challenges that fail headless (e.g. `science.org`) |
+
+> ⚠️ **Boolean flags are presence-based, not value-based.** The code checks `os.environ.get(...)`, so *any* non-empty value enables the feature. Setting `PAPER_FETCH_CLOAK=0` or `=false` still **enables** Cloak; setting `PAPER_FETCH_NO_SCIHUB=0` still **disables** Sci-Hub. To turn a feature off, `unset` the variable — never write `=0`/`=false`.
+
+**Usage notes**
+
+- The output directory flag is `--out` — there is **no `-o` short option** (the `paperflow paper-fetch` passthrough does not rewrite args).
+- One DOI as a positional arg; `-` reads a single DOI from stdin; `--batch FILE` (or `--batch -`) reads DOIs line-by-line.
+- Files already downloaded are skipped by default; pass `--overwrite` to force a re-download.
+- stdout carries the machine-readable JSON envelope, stderr carries progress; `--format json|text` plus TTY auto-detection control the shape. Exit codes: `0` all resolved, `1` some unresolved, `3` bad arguments, `4` transport error (retryable).
+- `paperflow paper-fetch schema` prints the machine-readable CLI schema (no network).
+- `--idempotency-key KEY` replays the original result envelope on retry, with no network I/O.
+
+**Known limitations**
+
+- Some publisher redirects land on HTML pages instead of PDFs — the `%PDF` magic-byte check rejects them.
+- No browser automation by default (no CAPTCHA solving) — only the optional `PAPER_FETCH_CLOAK` CloakBrowser fallback.
+- SSRF protection rejects private IPs, non-`http(s)` schemes, non-80/443 ports, and cloud metadata hosts.
+- Each PDF is capped at 50 MB.
+
 Unlike PMC parsing, non‑PubMed papers can only be obtained as PDF files via the paper‑fetch module.
 
 We recommend standardizing all paper information into Markdown or JSON formats.
