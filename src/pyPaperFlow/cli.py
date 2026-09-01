@@ -374,7 +374,7 @@ def arxiv_fetch_cmd(
 @app.command("biorxiv-search")
 def biorxiv_search_cmd(
     query: str = typer.Argument(..., help="bioRxiv search query."),
-    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of bioRxiv results to return."),
+    max_results: Optional[int] = typer.Option(None, "--max-results", "-n", help="Maximum number of bioRxiv results to return. Default: no limit (return all matches)."),
     storage_dir: str = opt_storage,
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched bioRxiv IDs."),
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
@@ -459,7 +459,7 @@ def biorxiv_fetch_cmd(
 @app.command("medrxiv-search")
 def medrxiv_search_cmd(
     query: str = typer.Argument(..., help="medRxiv search query."),
-    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of medRxiv results to return."),
+    max_results: Optional[int] = typer.Option(None, "--max-results", "-n", help="Maximum number of medRxiv results to return. Default: no limit (return all matches)."),
     storage_dir: str = opt_storage,
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched medRxiv IDs."),
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
