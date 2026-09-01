@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sys
 import time
 import re
 from datetime import datetime, timedelta
@@ -16,6 +17,7 @@ from .source_models import SourcePaper
 from .source_utils import (
     basic_boolean_text_match,
     build_source_record_dir,
+    detect_platform_from_doi,
     download_binary,
     ensure_directory,
     extract_year,
@@ -97,6 +99,7 @@ class BioRxivFetcher:
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
         max_results: Optional[int] = None,
+        use_europepmc: bool = True,
     ) -> List[SourcePaper]:
         query_text = normalize_text(query)
         if not query_text:
@@ -105,6 +108,33 @@ class BioRxivFetcher:
         if DOI_RE.match(query_text):
             return self._search_by_doi(query_text)
 
+        records = self._search_crossref(
+            query_text=query_text,
+            start_date=start_date,
+            end_date=end_date,
+            max_results=max_results,
+        )
+
+        if use_europepmc:
+            europepmc_records = self._search_europepmc(
+                query_text=query_text,
+                start_date=start_date,
+                end_date=end_date,
+                max_results=max_results,
+            )
+            records = self._union_records(records, europepmc_records)
+            if max_results is not None:
+                records = records[: int(max_results)]
+
+        return records
+
+    def _search_crossref(
+        self,
+        query_text: str,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        max_results: Optional[int] = None,
+    ) -> List[SourcePaper]:
         records: List[SourcePaper] = []
         start_dt, end_dt = self._normalize_date_range(start_date, end_date)
 
@@ -149,6 +179,138 @@ class BioRxivFetcher:
 
         return records
 
+    def _search_europepmc(
+        self,
+        query_text: str,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        max_results: Optional[int] = None,
+    ) -> List[SourcePaper]:
+        try:
+            from .europepmc_fetcher import EuropePMCSearch
+        except Exception:
+            return []
+
+        start_dt, end_dt = self._normalize_date_range(start_date, end_date)
+        start_str = start_dt.strftime("%Y-%m-%d")
+        end_str = end_dt.strftime("%Y-%m-%d")
+
+        searcher = EuropePMCSearch(
+            request_timeout=self.request_timeout,
+            max_retries=self.max_retries,
+        )
+        try:
+            raw_records = searcher.search(
+                query=query_text,
+                start_date=start_str,
+                end_date=end_str,
+                max_results=max_results,
+            )
+        except Exception as exc:
+            print(
+                f"[biorxiv] Europe PMC search failed ({exc}); returning Crossref-only results.",
+                file=sys.stderr,
+            )
+            return []
+        finally:
+            searcher.close()
+
+        results: List[SourcePaper] = []
+        for raw_record in raw_records:
+            doi = normalize_text(raw_record.get("doi", ""))
+            if not doi:
+                continue
+            if detect_platform_from_doi(doi) != self.platform:
+                continue
+            results.append(self._normalize_europepmc_record(raw_record, query=query_text))
+        return results
+
+    def _union_records(
+        self,
+        crossref_records: List[SourcePaper],
+        europepmc_records: List[SourcePaper],
+    ) -> List[SourcePaper]:
+        merged: List[SourcePaper] = []
+        seen: set = set()
+        for record in list(crossref_records) + list(europepmc_records):
+            key = normalize_text(record.doi or record.source_id).lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(record)
+        return merged
+
+    def _normalize_europepmc_record(self, record: Dict[str, Any], query: str) -> SourcePaper:
+        title = self._clean_html_text(record.get("title", ""))
+        doi = normalize_text(record.get("doi", ""))
+        abstract = normalize_text(record.get("abstractText", ""))
+        published_date = (
+            normalize_text(record.get("firstPublicationDate", ""))
+            or normalize_text(record.get("firstIndexDate", ""))
+        )
+        authors = self._normalize_europepmc_authors(
+            record.get("authorList"), record.get("authorString", "")
+        )
+        landing_url = f"{self.landing_base}/{doi}" if doi else ""
+        pdf_url = f"{self.landing_base}/{doi}.full.pdf" if doi else ""
+
+        return SourcePaper(
+            source=self.platform,
+            source_id=doi or safe_filename(f"{self.platform}_{published_date}_{title}"),
+            title=title,
+            doi=doi,
+            abstract=abstract,
+            authors=authors,
+            published_date=published_date,
+            updated_date="",
+            journal=self.journal_name,
+            category="",
+            landing_url=landing_url,
+            pdf_url=pdf_url,
+            query=query,
+            version="",
+            keywords=[],
+            extra={
+                "provider": "europepmc",
+                "epmc_id": record.get("id", ""),
+                "raw_record": record,
+            },
+        )
+
+    def _normalize_europepmc_authors(self, author_list: Any, author_string: Any) -> List[str]:
+        if isinstance(author_list, dict):
+            authors = author_list.get("author") or []
+            if isinstance(authors, list):
+                names: List[str] = []
+                for author in authors:
+                    if not isinstance(author, dict):
+                        continue
+                    full = normalize_text(author.get("fullName", ""))
+                    if full:
+                        names.append(full)
+                        continue
+                    given = normalize_text(author.get("firstName", ""))
+                    family = normalize_text(author.get("lastName", ""))
+                    name = " ".join(part for part in [given, family] if part)
+                    if name:
+                        names.append(name)
+                if names:
+                    return names
+
+        text = normalize_text(author_string)
+        if text:
+            return [part.strip() for part in re.split(r"[,;]\s*", text) if part.strip()]
+        return []
+
+    def _clean_html_text(self, text: Any) -> str:
+        cleaned = normalize_text(text)
+        if not cleaned:
+            return ""
+        soup = BeautifulSoup(cleaned, "html.parser")
+        cleaned = soup.get_text(separator=" ")
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        return cleaned
+
     def _search_by_doi(self, doi: str) -> List[SourcePaper]:
         record = self._fetch_crossref_work(doi)
         if not record:
@@ -185,12 +347,14 @@ class BioRxivFetcher:
         end_date: Optional[str] = None,
         max_results: Optional[int] = None,
         download_pdf: bool = True,
+        use_europepmc: bool = True,
     ) -> List[SourcePaper]:
         records = self.search(
             query=query,
             start_date=start_date,
             end_date=end_date,
             max_results=max_results,
+            use_europepmc=use_europepmc,
         )
 
         for record in records:
@@ -283,17 +447,7 @@ class BioRxivFetcher:
             return "biorxiv"
 
         # Fallback: medRxiv accessions are 8 digits, bioRxiv accessions are 6.
-        doi = normalize_text(record.get("DOI", ""))
-        if doi:
-            suffix = doi.split("/", 1)[-1]
-            match = re.search(r"(?:\d{4}\.\d{2}\.\d{2}\.)?(\d+)$", suffix)
-            if match:
-                digits = match.group(1)
-                if len(digits) == 8:
-                    return "medrxiv"
-                if len(digits) == 6:
-                    return "biorxiv"
-        return ""
+        return detect_platform_from_doi(record.get("DOI", ""))
 
     def _search_text_crossref(self, record: Dict[str, Any]) -> str:
         pieces = [

@@ -33,6 +33,27 @@ def safe_filename(value: Any, fallback: str = "record") -> str:
     return text or fallback
 
 
+def detect_platform_from_doi(doi: Any) -> str:
+    """Infer 'biorxiv' vs 'medrxiv' from a bioRxiv/medRxiv DOI accession.
+
+    medRxiv accessions are 8 digits; bioRxiv accessions are 6 digits.
+    Returns '' when the DOI does not look like a bioRxiv/medRxiv accession.
+    """
+    doi_text = normalize_text(doi)
+    if not doi_text:
+        return ""
+    suffix = doi_text.split("/", 1)[-1]
+    match = re.search(r"(?:\d{4}\.\d{2}\.\d{2}\.)?(\d+)$", suffix)
+    if not match:
+        return ""
+    digits = match.group(1)
+    if len(digits) == 8:
+        return "medrxiv"
+    if len(digits) == 6:
+        return "biorxiv"
+    return ""
+
+
 def extract_year(date_text: Any) -> str:
     text = normalize_text(date_text)
     if not text:

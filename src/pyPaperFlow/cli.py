@@ -392,11 +392,12 @@ def biorxiv_search_cmd(
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
+    use_europepmc: bool = typer.Option(True, "--europepmc/--no-europepmc", help="Also search Europe PMC full text (boolean AND) and union with Crossref results. Default: enabled."),
 ):
     """Search bioRxiv and write matching IDs to a text file.
 
-    The current implementation uses Crossref server-side query over openRxiv records
-    instead of date-window paging over the legacy bioRxiv details API.
+    Results are the union of two backends: Crossref (metadata relevance search)
+    and Europe PMC (preprint full-text boolean search), deduplicated by DOI.
     """
     if window_days != 365:
         typer.secho(
@@ -405,7 +406,7 @@ def biorxiv_search_cmd(
         )
 
     fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
-    records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results)
+    records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results, use_europepmc=use_europepmc)
     typer.echo(f"Found {len(records)} bioRxiv papers.")
     for record in records:
         typer.echo(record.source_id)
@@ -427,11 +428,13 @@ def biorxiv_fetch_cmd(
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD (query mode only)."),
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
+    use_europepmc: bool = typer.Option(True, "--europepmc/--no-europepmc", help="In query mode, also search Europe PMC full text and union with Crossref results. Default: enabled."),
 ):
     """Fetch bioRxiv metadata and attempt to download PDFs.
 
-    Metadata retrieval uses Crossref over openRxiv records. Provide one of: a
-    positional query, --file, or one or more --doi values.
+    Metadata retrieval uses Crossref over openRxiv records (unioned with Europe
+    PMC full text in query mode). Provide one of: a positional query, --file, or
+    one or more --doi values.
     """
     if window_days != 365:
         typer.secho(
@@ -450,6 +453,7 @@ def biorxiv_fetch_cmd(
             end_date=end_date,
             max_results=max_results,
             download_pdf=download_pdf,
+            use_europepmc=use_europepmc,
         )
     elif file:
         if not os.path.exists(file):
@@ -478,11 +482,12 @@ def medrxiv_search_cmd(
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
+    use_europepmc: bool = typer.Option(True, "--europepmc/--no-europepmc", help="Also search Europe PMC full text (boolean AND) and union with Crossref results. Default: enabled."),
 ):
     """Search medRxiv and write matching IDs to a text file.
 
-    The current implementation uses Crossref server-side query over openRxiv records
-    instead of date-window paging over the legacy medRxiv details API.
+    Results are the union of two backends: Crossref (metadata relevance search)
+    and Europe PMC (preprint full-text boolean search), deduplicated by DOI.
     """
     if window_days != 365:
         typer.secho(
@@ -491,7 +496,7 @@ def medrxiv_search_cmd(
         )
 
     fetcher = BioRxivFetcher(root_dir=storage_dir, platform="medrxiv", window_days=window_days)
-    records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results)
+    records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results, use_europepmc=use_europepmc)
     typer.echo(f"Found {len(records)} medRxiv papers.")
     for record in records:
         typer.echo(record.source_id)
@@ -513,11 +518,13 @@ def medrxiv_fetch_cmd(
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD (query mode only)."),
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
+    use_europepmc: bool = typer.Option(True, "--europepmc/--no-europepmc", help="In query mode, also search Europe PMC full text and union with Crossref results. Default: enabled."),
 ):
     """Fetch medRxiv metadata and attempt to download PDFs.
 
-    Metadata retrieval uses Crossref over openRxiv records. Provide one of: a
-    positional query, --file, or one or more --doi values.
+    Metadata retrieval uses Crossref over openRxiv records (unioned with Europe
+    PMC full text in query mode). Provide one of: a positional query, --file, or
+    one or more --doi values.
     """
     if window_days != 365:
         typer.secho(
@@ -536,6 +543,7 @@ def medrxiv_fetch_cmd(
             end_date=end_date,
             max_results=max_results,
             download_pdf=download_pdf,
+            use_europepmc=use_europepmc,
         )
     elif file:
         if not os.path.exists(file):
