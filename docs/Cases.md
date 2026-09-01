@@ -1103,12 +1103,23 @@ paperflow medrxiv-fetch --doi 10.1101/2020.03.20.20039555 --no-download-pdf -o .
 paperflow medrxiv-fetch --file ./papers/searched_medrxiv_ids.txt --download-pdf -o ./papers
 ```
 
+**检索并集(bioRxiv / medRxiv,默认开启)**
+
+`*-search` 与 `*-fetch` 的 **query 模式**现在默认 = Crossref(元数据相关性)∪ Europe PMC(预印本全文布尔 AND),按 DOI 去重。要点:
+
+1. **只有 query 模式走并集**:`--file` / `--doi` 是按 DOI 直接抓,不涉及搜索,行为不变。
+2. **裸词 = AND**:`zinc finger 263` → `zinc AND finger AND 263`;你写 `AND/OR/NOT` 就原样透传给 Europe PMC。Crossref 侧仍按原有相关性 + 本地 AND。
+3. **日期依然生效**:`--start-date/--end-date` 同时约束两个后端;若某个日期窗口内 Europe PMC 全文无命中,结果就是 0(不是没生效)。
+4. 用 `--no-europepmc` 可回退到纯 Crossref。
+
+Europe PMC 走的是预印本全文,能补上 Crossref 只看标题摘要而漏掉的「基因缩写写法」(例:`Zfp263` vs `zinc finger 263`)。
+
 **注意点**
 
 1. **bioRxiv/medRxiv 的 DOI 都是 `10.1101/...`**,靠 6 位(bioRxiv) vs 8 位(medRxiv)accession 区分,所以 `--doi` 直接给 `10.1101/...` 即可,平台由命令本身决定。
 2. **PDF 403 反爬**:bioRxiv/medRxiv 对非浏览器客户端常返回 403,直连失败会自动走 CloakBrowser 回退——前提是设置 `PAPER_FETCH_CLOAK=1`(可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`)。arXiv 无此问题。
 3. **推荐工作流**:先 `*-search`(不限量拿全量清单)→ 人工筛选 → `*-fetch --file`(精确抓取元数据 + 下载 PDF),避免一次抓取过多。
-4. **排序说明**:bioRxiv/medRxiv 结果按 Crossref 相关性排序(`sort=relevance`),日期只能做过滤(`--start-date/--end-date`),不能"按日期排序+返回全部"(Crossref 限制日期排序不能配合 cursor 深度分页)。arXiv 按提交时间倒序。
+4. **排序说明**:并集结果中,Crossref 命中(相关性排序,`sort=relevance`)在前,Europe PMC 新增命中按其后端顺序追加。日期只能做过滤(`--start-date/--end-date`),不能"按日期排序+返回全部"(Crossref 限制日期排序不能配合 cursor 深度分页)。arXiv 按提交时间倒序。
 
 ### 1. 搜索并获取 arXiv 论文
 如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
@@ -1186,23 +1197,26 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
 
 
 ### 2. 搜索并获取 bioRxiv 论文
-bioRxiv 目前走 Crossref（openRxiv）服务端直接检索，不再先拉取大范围日期窗口再在本地做匹配。若 query 本身是一个 DOI（如 `10.1101/2023.06.22.546069`），会直接走 `/works/{doi}` 精确取回该论文，不再做书目检索。
+bioRxiv 的 query 检索默认是**双后端并集**：Crossref（openRxiv，元数据相关性检索 + 本地 AND）∪ Europe PMC（预印本全文布尔 AND），按 DOI 去重。Europe PMC 走全文，能补上 Crossref 只看标题摘要而漏掉的「基因缩写写法」。用 `--no-europepmc` 可回退到纯 Crossref。若 query 本身是一个 DOI（如 `10.1101/2023.06.22.546069`），会直接走 `/works/{doi}` 精确取回该论文，不再做书目检索。
 
 ```bash
 paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
 paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
+# 回退到纯 Crossref（不用 Europe PMC 全文）
+paperflow biorxiv-search "AlphaFold AND structure" --no-europepmc -o ./papers
 ```
 
 常用参数：
 
-- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（对两个后端都生效）。
 - `--max-results`：限制返回条数；**缺省为不限量（返回该 query 全部命中）**。
+- `--europepmc` / `--no-europepmc`：是否并入 Europe PMC 全文检索（默认 `--europepmc`，开启并集）。
 - `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
 - `--no-download-pdf`：只保存元数据，不下载 PDF。
 
 兼容性说明：
 
-- `--window-days` 作为 CLI 兼容参数保留，但当前 Crossref 检索路径不会使用该参数。
+- `--window-days` 作为 CLI 兼容参数保留，但当前检索路径不会使用该参数。
 
 示例：  
 
@@ -1224,17 +1238,20 @@ paperflow biorxiv-fetch --file ./searched_biorxiv_ids.txt --no-download-pdf -o .
 
 
 ### 3. 搜索并获取 medRxiv 论文
-medRxiv 与 bioRxiv 共用 Crossref（openRxiv）服务端检索，通过记录中的 `resource.primary.URL`（`medrxiv.org` vs `biorxiv.org`）区分平台。query 为 DOI 时直接精确取回该论文。
+medRxiv 与 bioRxiv 共用同一套检索：默认是 Crossref（openRxiv，元数据相关性检索）∪ Europe PMC（预印本全文布尔 AND）的并集，按 DOI 去重；通过 DOI accession 位数（medRxiv 8 位 vs bioRxiv 6 位）区分平台，欧洲 PMC 结果同样按此过滤。query 为 DOI 时直接精确取回该论文。
 
 ```bash
 paperflow medrxiv-search "vaccine AND efficacy" --max-results 10
 paperflow medrxiv-fetch "vaccine AND efficacy" --start-date 2024-01-01 --end-date 2024-12-31 --download-pdf
+# 回退到纯 Crossref（不用 Europe PMC 全文）
+paperflow medrxiv-search "vaccine AND efficacy" --no-europepmc -o ./papers
 ```
 
 常用参数：
 
-- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（medRxiv 最早日期为 2019-06-01）。
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（medRxiv 最早日期为 2019-06-01；对两个后端都生效）。
 - `--max-results`：限制返回条数；**缺省为不限量（返回该 query 全部命中）**。
+- `--europepmc` / `--no-europepmc`：是否并入 Europe PMC 全文检索（默认 `--europepmc`，开启并集）。
 - `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
 - `--no-download-pdf`：只保存元数据，不下载 PDF。
 
@@ -1294,22 +1311,25 @@ paperflow arxiv-fetch --file ./searched_arxiv_ids.txt --no-download-pdf -o ./pap
 ```
 
 ### 2. Search and Fetch bioRxiv Papers
-bioRxiv now uses direct server-side query via Crossref (openRxiv records), rather than pulling large date windows first and filtering locally. When the query is itself a DOI (e.g. `10.1101/2023.06.22.546069`), it resolves the paper directly via `/works/{doi}` instead of a bibliographic search.
+bioRxiv query search is by default a **two-backend union**: Crossref (openRxiv, metadata relevance search + local AND) ∪ Europe PMC (preprint full-text boolean AND), deduplicated by DOI. Europe PMC's full-text search catches papers Crossref misses because it only indexes titles/abstracts (e.g. a gene written as `Zfp263` instead of `zinc finger 263`). Use `--no-europepmc` to fall back to Crossref only. When the query is itself a DOI (e.g. `10.1101/2023.06.22.546069`), it resolves the paper directly via `/works/{doi}` instead of a bibliographic search.
 
 ```bash
 paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
 paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
+# Crossref only (no Europe PMC full text)
+paperflow biorxiv-search "AlphaFold AND structure" --no-europepmc -o ./papers
 ```
 
 Useful options:
 
-- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
+- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format (applies to both backends).
+- `--europepmc` / `--no-europepmc`: whether to union Europe PMC full-text results (default `--europepmc`).
 - `--output-dir`: save the ID list or fetched records to a different directory.
 - `--no-download-pdf`: skip PDF download and save metadata only.
 
 Compatibility note:
 
-- `--window-days` is kept for CLI compatibility but is not used by the current Crossref-backed bioRxiv search path.
+- `--window-days` is kept for CLI compatibility but is not used by the current bioRxiv search path.
 
 Example:
 
@@ -1327,16 +1347,20 @@ paperflow biorxiv-fetch --file ./searched_biorxiv_ids.txt --no-download-pdf -o .
 ```
 
 ### 3. Search and Fetch medRxiv Papers
-medRxiv shares the Crossref (openRxiv) server-side search with bioRxiv; the two are distinguished by the record's `resource.primary.URL` (`medrxiv.org` vs `biorxiv.org`). A DOI query resolves the paper directly.
+medRxiv query search is by default the same **two-backend union** as bioRxiv: Crossref (openRxiv, metadata relevance search + local AND) ∪ Europe PMC (preprint full-text boolean AND), deduplicated by DOI. The two platforms are distinguished by DOI accession digit count (medRxiv 8 digits vs bioRxiv 6 digits), and Europe PMC results are filtered the same way. Use `--no-europepmc` to fall back to Crossref only. When the query is itself a DOI, it resolves the paper directly.
 
 ```bash
 paperflow medrxiv-search "vaccine AND efficacy" --max-results 10
 paperflow medrxiv-fetch "vaccine AND efficacy" --start-date 2024-01-01 --end-date 2024-12-31 --download-pdf
+# Crossref only (no Europe PMC full text)
+paperflow medrxiv-search "vaccine AND efficacy" --no-europepmc -o ./papers
 ```
 
 Useful options:
 
-- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format (medRxiv dates back to 2019-06-01).
+- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format (medRxiv dates back to 2019-06-01; applies to both backends).
+- `--max-results`: cap the number of results. Default is **no limit** (return all matches for the query).
+- `--europepmc` / `--no-europepmc`: whether to union Europe PMC full-text results (default `--europepmc`).
 - `--output-dir`: save the ID list or fetched records to a different directory.
 - `--no-download-pdf`: skip PDF download and save metadata only.
 
