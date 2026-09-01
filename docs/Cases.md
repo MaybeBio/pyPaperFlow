@@ -1038,6 +1038,78 @@ you can check all the output JSON files here : [parse](../test/Other_database/pa
 
 ## 🧬 Case 8: Search and fetch papers on other databases
 
+### 0. 命令速查 (TL;DR)
+
+三个平台统一:搜索命令产出 ID 清单(txt),抓取命令既能按 query 搜,也能用 `--file` 承接清单或 `--id`/`--doi` 单个抓。
+
+**通用约定**
+
+- **query 写法**:空格 = AND(所有词都命中);`OR` 显式或;引号 `"..."` 短语。例:`zinc finger` = zinc 且 finger;`zinc OR finger` = 任一。
+- **搜索 vs 抓取**:`*-search` 只产出 ID 清单 txt;`*-fetch` 抓元数据(JSON)+ 可选 PDF。
+- **输出结构**:`{输出目录}/{source}/{year}/{source_id}/`(例:`./papers/biorxiv/2023/10.1101_2023.06.22.546069/`)。
+- **搜索默认不限量**;`--max-results` 限量;`--start-date/--end-date` 限日期;三者可叠加。
+- **抓取的 query 模式默认上限 100**(避免一次狂下 PDF);`--file`/`--id`/`--doi` 天然不限量。
+- **PDF 默认开启下载**(`--download-pdf`);只想拿元数据用 `--no-download-pdf`。
+
+**arXiv**
+
+```bash
+# 搜索:返回全部命中
+paperflow arxiv-search "protein folding" -o ./papers
+# 限量 / 限日期
+paperflow arxiv-search "protein folding" --max-results 50 -o ./papers
+paperflow arxiv-search "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers
+# → ./papers/searched_arxiv_ids.txt
+
+# 抓取:按 query(默认最多 100 条)
+paperflow arxiv-fetch "protein folding" --max-results 50 -o ./papers
+# 单个 ID(可重复 --id)
+paperflow arxiv-fetch --id 1706.03762 --no-download-pdf -o ./papers
+paperflow arxiv-fetch --id 1706.03762 --id 1602.02644 -o ./papers
+# 承接搜索输出的清单文件(全部下载 PDF)
+paperflow arxiv-fetch --file ./papers/searched_arxiv_ids.txt --download-pdf -o ./papers
+```
+
+**bioRxiv**
+
+```bash
+# 搜索:返回全部命中
+paperflow biorxiv-search "zinc finger" -o ./papers
+paperflow biorxiv-search "zinc finger" --max-results 20 -o ./papers
+paperflow biorxiv-search "zinc finger" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers
+# → ./papers/searched_biorxiv_ids.txt   (内容是 DOI)
+
+# 抓取:按 query
+paperflow biorxiv-fetch "zinc finger" --max-results 50 -o ./papers
+# 单个 DOI(可重复 --doi)
+paperflow biorxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./papers
+# 承接搜索输出的 DOI 清单
+paperflow biorxiv-fetch --file ./papers/searched_biorxiv_ids.txt --download-pdf -o ./papers
+```
+
+**medRxiv**
+
+```bash
+# 搜索:返回全部命中
+paperflow medrxiv-search "vaccine efficacy" -o ./papers
+paperflow medrxiv-search "vaccine efficacy" --start-date 2020-01-01 --end-date 2024-12-31 -o ./papers
+# → ./papers/searched_medrxiv_ids.txt
+
+# 抓取:按 query
+paperflow medrxiv-fetch "vaccine efficacy" --max-results 50 -o ./papers
+# 单个 DOI
+paperflow medrxiv-fetch --doi 10.1101/2020.03.20.20039555 --no-download-pdf -o ./papers
+# 承接搜索输出的 DOI 清单
+paperflow medrxiv-fetch --file ./papers/searched_medrxiv_ids.txt --download-pdf -o ./papers
+```
+
+**注意点**
+
+1. **bioRxiv/medRxiv 的 DOI 都是 `10.1101/...`**,靠 6 位(bioRxiv) vs 8 位(medRxiv)accession 区分,所以 `--doi` 直接给 `10.1101/...` 即可,平台由命令本身决定。
+2. **PDF 403 反爬**:bioRxiv/medRxiv 对非浏览器客户端常返回 403,直连失败会自动走 CloakBrowser 回退——前提是设置 `PAPER_FETCH_CLOAK=1`(可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`)。arXiv 无此问题。
+3. **推荐工作流**:先 `*-search`(不限量拿全量清单)→ 人工筛选 → `*-fetch --file`(精确抓取元数据 + 下载 PDF),避免一次抓取过多。
+4. **排序说明**:bioRxiv/medRxiv 结果按 Crossref 相关性排序(`sort=relevance`),日期只能做过滤(`--start-date/--end-date`),不能"按日期排序+返回全部"(Crossref 限制日期排序不能配合 cursor 深度分页)。arXiv 按提交时间倒序。
+
 ### 1. 搜索并获取 arXiv 论文
 如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
 
@@ -1073,6 +1145,8 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
     paperflow arxiv-search "protein folding" --max-results 50 --start-date 2024-01-01 --end-date 2024-12-31
     # 将会在默认存储目录下生成 searched_arxiv_ids.txt，或使用 --output-dir 指定保存位置
     ```
+
+    说明：`--max-results` 缺省为**不限量（返回该 query 全部命中）**，只有 `native` 后端支持不限量；`--backend paperscraper` 需要显式指定 `--max-results`。`--start-date` / `--end-date` 按 `YYYY-MM-DD` 限制提交时间范围。
     
 - **arxiv-fetch**: 检索并保存每篇论文的标准化元数据（JSON），可选地下载 PDF 文件（默认开启）。
 
@@ -1122,6 +1196,7 @@ paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-
 常用参数：
 
 - `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
+- `--max-results`：限制返回条数；**缺省为不限量（返回该 query 全部命中）**。
 - `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
 - `--no-download-pdf`：只保存元数据，不下载 PDF。
 
@@ -1159,6 +1234,7 @@ paperflow medrxiv-fetch "vaccine AND efficacy" --start-date 2024-01-01 --end-dat
 常用参数：
 
 - `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（medRxiv 最早日期为 2019-06-01）。
+- `--max-results`：限制返回条数；**缺省为不限量（返回该 query 全部命中）**。
 - `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
 - `--no-download-pdf`：只保存元数据，不下载 PDF。
 
@@ -1196,6 +1272,7 @@ paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pd
 
 Useful options:
 
+- `--max-results`: cap the number of results. Default is **no limit** (return all matches). Unlimited retrieval is supported by the `native` backend only; `--backend paperscraper` requires an explicit `--max-results`.
 - `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
 - `--backend`: choose `native` for the built-in httpx-backed arXiv API path, or `paperscraper` to use the optional third-party adapter when installed.
 - `--output-dir`: save the ID list or fetched records to a different directory.
