@@ -154,20 +154,25 @@ class ArxivFetcher:
         output_dir: Optional[str] = None,
         download_pdf: bool = True,
     ) -> List[SourcePaper]:
-        records: List[SourcePaper] = []
+        clean_ids: List[str] = []
         for raw_id in ids:
             arxiv_id = normalize_text(raw_id)
             if not arxiv_id:
                 continue
             # id_list does not accept a version suffix; drop a trailing vN.
-            clean_id = re.sub(r"v\d+$", "", arxiv_id)
-            feed = self._request_id_feed(clean_id)
-            entries = feed.findall("atom:entry", ARXIV_ATOM_NS)
-            if not entries:
-                continue
-            record = self._normalize_entry(entries[0], query=arxiv_id)
-            self._save_record(record, output_dir=output_dir, download_pdf=download_pdf)
-            records.append(record)
+            clean_ids.append(re.sub(r"v\d+$", "", arxiv_id))
+
+        records: List[SourcePaper] = []
+        for offset in range(0, len(clean_ids), self.batch_size):
+            chunk = clean_ids[offset : offset + self.batch_size]
+            if offset:
+                # arXiv asks clients to space out sequential API calls.
+                time.sleep(3.0)
+            feed = self._request_id_feed(chunk)
+            for entry in feed.findall("atom:entry", ARXIV_ATOM_NS):
+                record = self._normalize_entry(entry, query="")
+                self._save_record(record, output_dir=output_dir, download_pdf=download_pdf)
+                records.append(record)
         return records
 
     def close(self) -> None:
@@ -192,56 +197,28 @@ class ArxivFetcher:
         results: List[SourcePaper] = []
         start = 0
         remaining = None if max_results is None else max(1, int(max_results))
+        active_query = search_query
         tried_fallback = False
 
         while remaining is None or remaining > 0:
             page_size = self.batch_size if remaining is None else min(self.batch_size, remaining)
-            feed = self._request_feed(search_query, start=start, max_results=page_size)
+            feed = self._request_feed(active_query, start=start, max_results=page_size)
             entries = feed.findall("atom:entry", ARXIV_ATOM_NS)
-            # If there are no entries on the first page, try some fallback query forms
+
+            # If the strict fielded query returns nothing on the first page, retry
+            # with looser forms so a plain multi-word query (e.g. "zinc finger 263")
+            # still resolves. The chosen fallback becomes the pagination query so we
+            # don't silently truncate to one page.
             if not entries and start == 0 and not tried_fallback:
                 tried_fallback = True
-                raw_query = normalize_text(query)
-                date_filter = ""
-                if ") AND " in search_query and "submittedDate:" in search_query:
-                    try:
-                        _, date_filter = search_query.split(") AND ", 1)
-                        date_filter = " AND " + date_filter
-                    except Exception:
-                        date_filter = ""
-
-                stopwords = {"a", "an", "the", "for", "of", "in", "on", "and", "or", "to", "from", "by", "with"}
-                tokens = [t for t in re.findall(r'"[^"]+"|\'[^\']+\'|\S+', raw_query) if t]
-
-                alt_queries = []
-                alt_queries.append(raw_query)
-                alt_queries.append(f'all:"{raw_query}"')
-                # remove common stopwords and re-build tokenized form
-                cleaned = []
-                for t in tokens:
-                    tclean = t.strip('"\'')
-                    if not tclean:
-                        continue
-                    low = tclean.lower()
-                    if low in stopwords:
-                        continue
-                    if " " in tclean:
-                        cleaned.append(f'all:"{tclean}"')
-                    else:
-                        cleaned.append(f'all:{tclean}')
-                if cleaned:
-                    alt_queries.append(" AND ".join(cleaned))
-
-                found = False
-                for alt in alt_queries:
-                    try_query = alt + date_filter
-                    feed = self._request_feed(try_query, start=0, max_results=page_size)
-                    entries = feed.findall("atom:entry", ARXIV_ATOM_NS)
-                    if entries:
-                        found = True
-                        break
-                if not found:
+                active_query = self._fallback_query(search_query, query)
+                if not active_query:
                     break
+                feed = self._request_feed(active_query, start=0, max_results=page_size)
+                entries = feed.findall("atom:entry", ARXIV_ATOM_NS)
+
+            if not entries:
+                break
 
             for entry in entries:
                 results.append(self._normalize_entry(entry, query=query))
@@ -258,6 +235,42 @@ class ArxivFetcher:
             start += len(entries)
 
         return results
+
+    def _fallback_query(self, search_query: str, query: str) -> str:
+        raw_query = normalize_text(query)
+        if not raw_query:
+            return ""
+
+        date_match = re.search(r"submittedDate:\[[^\]]+\]", search_query)
+        date_filter = f" AND {date_match.group(0)}" if date_match else ""
+
+        stopwords = {"a", "an", "the", "for", "of", "in", "on", "and", "or", "to", "from", "by", "with"}
+        tokens = [t for t in re.findall(r'"[^"]+"|\'[^\']+\'|\S+', raw_query) if t]
+
+        cleaned = []
+        for t in tokens:
+            tclean = t.strip('"\'')
+            if not tclean or tclean.lower() in stopwords:
+                continue
+            if " " in tclean:
+                cleaned.append(f'all:"{tclean}"')
+            else:
+                cleaned.append(f'all:{tclean}')
+
+        # Fallback forms keep all of the user's terms; only match strictness
+        # changes (phrase vs AND). We never emit a bare multi-word query (arXiv
+        # parses unfielded space-separated terms as OR) and never drop terms,
+        # since dropping a token silently changes what was asked for.
+        alt_queries = [f'all:"{raw_query}"']
+        if cleaned:
+            alt_queries.append(" AND ".join(cleaned))
+
+        for alt in alt_queries:
+            try_query = alt + date_filter
+            feed = self._request_feed(try_query, start=0, max_results=self.batch_size)
+            if feed.findall("atom:entry", ARXIV_ATOM_NS):
+                return try_query
+        return ""
 
     def _search_with_paperscraper(self, search_query: str, query: str, max_results: Optional[int]) -> List[SourcePaper]:
         if max_results is None:
@@ -307,13 +320,14 @@ class ArxivFetcher:
             description=f"query={search_query!r} start={start} max_results={max_results}",
         )
 
-    def _request_id_feed(self, arxiv_id: str) -> ET.Element:
+    def _request_id_feed(self, arxiv_ids: Iterable[str]) -> ET.Element:
+        id_list = [normalize_text(i) for i in arxiv_ids if normalize_text(i)]
         params = {
-            "id_list": arxiv_id,
+            "id_list": ",".join(id_list),
             "start": 0,
-            "max_results": 1,
+            "max_results": len(id_list),
         }
-        return self._request_feed_params(params, description=f"id={arxiv_id!r}")
+        return self._request_feed_params(params, description=f"ids={id_list!r}")
 
     def _request_feed_params(self, params: Dict[str, Any], description: str) -> ET.Element:
         last_error: Optional[Exception] = None
