@@ -1092,6 +1092,17 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
     paperflow arxiv-fetch "deep learning for biology" --max-results 20 --download-pdf --backend paperscraper -o ./papers/arxiv
     ```
 
+- **按 ID / 文件抓取**：`arxiv-search` 输出的是 `searched_arxiv_ids.txt`（每行一个 arXiv ID），`arxiv-fetch` 支持直接消费这些 ID，无需重新搜索。query、`--file`、`--id` 三者互斥，取其一即可。
+
+    ```bash
+    # 单个 ID（可重复 --id）
+    paperflow arxiv-fetch --id 1706.03762 --no-download-pdf -o ./papers/arxiv
+    paperflow arxiv-fetch --id 1706.03762 --id 1602.02644 --no-download-pdf -o ./papers/arxiv
+
+    # 从 arxiv-search 生成的 ID 文件抓取
+    paperflow arxiv-fetch --file ./searched_arxiv_ids.txt --no-download-pdf -o ./papers/arxiv
+    ```
+
 - **输出与存储**：
     - 元数据：每篇论文保存为 `{source_id}.json`，包含 `title`, `authors`, `abstract`, `published_date`, `landing_url`, `pdf_url` 等字段（存储路径示例：`{output_dir}/arxiv/2024/2301.01234v1/2301.01234v1.json`）。
     - PDF：如果可用且下载成功，则保存为 `{source_id}.pdf`，并在对应 JSON 中更新 `pdf_downloaded` 和 `pdf_path` 字段。
@@ -1101,7 +1112,7 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
 
 
 ### 2. 搜索并获取 bioRxiv 论文
-bioRxiv 目前走 Crossref（openRxiv）服务端直接检索，不再先拉取大范围日期窗口再在本地做匹配。
+bioRxiv 目前走 Crossref（openRxiv）服务端直接检索，不再先拉取大范围日期窗口再在本地做匹配。若 query 本身是一个 DOI（如 `10.1101/2023.06.22.546069`），会直接走 `/works/{doi}` 精确取回该论文，不再做书目检索。
 
 ```bash
 paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
@@ -1125,6 +1136,51 @@ paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorx
 ```
 
 搜索结果会保存为 `searched_biorxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，并在可用时下载 PDF。
+
+按 DOI / 文件抓取：`biorxiv-search` 输出的是 `searched_biorxiv_ids.txt`（每行一个 DOI），`biorxiv-fetch` 支持直接消费这些 DOI。query、`--file`、`--doi` 三者互斥，取其一即可。
+
+```bash
+# 单个 DOI（可重复 --doi）
+paperflow biorxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./papers/biorxiv
+
+# 从 biorxiv-search 生成的 DOI 文件抓取
+paperflow biorxiv-fetch --file ./searched_biorxiv_ids.txt --no-download-pdf -o ./papers/biorxiv
+```
+
+
+### 3. 搜索并获取 medRxiv 论文
+medRxiv 与 bioRxiv 共用 Crossref（openRxiv）服务端检索，通过记录中的 `resource.primary.URL`（`medrxiv.org` vs `biorxiv.org`）区分平台。query 为 DOI 时直接精确取回该论文。
+
+```bash
+paperflow medrxiv-search "vaccine AND efficacy" --max-results 10
+paperflow medrxiv-fetch "vaccine AND efficacy" --start-date 2024-01-01 --end-date 2024-12-31 --download-pdf
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（medRxiv 最早日期为 2019-06-01）。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+示例：
+
+```bash
+paperflow medrxiv-fetch "long covid" --max-results 50 -o ./papers/medrxiv
+```
+
+搜索结果会保存为 `searched_medrxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存（`source` 为 `medrxiv`），包含 JSON 元数据，并在可用时下载 PDF。
+
+按 DOI / 文件抓取：`medrxiv-search` 输出的是 `searched_medrxiv_ids.txt`（每行一个 DOI），`medrxiv-fetch` 支持直接消费这些 DOI。query、`--file`、`--doi` 三者互斥，取其一即可。
+
+```bash
+# 单个 DOI（可重复 --doi）
+paperflow medrxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./papers/medrxiv
+
+# 从 medrxiv-search 生成的 DOI 文件抓取
+paperflow medrxiv-fetch --file ./searched_medrxiv_ids.txt --no-download-pdf -o ./papers/medrxiv
+```
+
+注意：bioRxiv / medRxiv 的 PDF 由 `www.biorxiv.org` / `www.medrxiv.org` 提供，对非浏览器客户端和部分数据中心 IP 会返回 403（反爬）。下载会先尝试直连（含通过 `api.biorxiv.org` 获取精确版本号的 `{doi}v{version}.full.pdf` 地址），若仍失败且设置了 `PAPER_FETCH_CLOAK=1`，会自动改用 CloakBrowser 回退重试（需可用 `cloakbrowser` 环境，可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`）。
 
 
 
@@ -1153,8 +1209,15 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
 
 Search output is saved as `searched_arxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.
 
+Fetch by ID or file: `arxiv-fetch` accepts one or more `--id` values or a `--file` of arXiv IDs (one per line) in place of a query, so you can consume `arxiv-search` output directly.
+
+```bash
+paperflow arxiv-fetch --id 1706.03762 --no-download-pdf -o ./papers/arxiv
+paperflow arxiv-fetch --file ./searched_arxiv_ids.txt --no-download-pdf -o ./papers/arxiv
+```
+
 ### 2. Search and Fetch bioRxiv Papers
-bioRxiv now uses direct server-side query via Crossref (openRxiv records), rather than pulling large date windows first and filtering locally.
+bioRxiv now uses direct server-side query via Crossref (openRxiv records), rather than pulling large date windows first and filtering locally. When the query is itself a DOI (e.g. `10.1101/2023.06.22.546069`), it resolves the paper directly via `/works/{doi}` instead of a bibliographic search.
 
 ```bash
 paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
@@ -1178,3 +1241,41 @@ paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorx
 ```
 
 Search output is saved as `searched_biorxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` with JSON metadata and, when available, a PDF copy.
+
+Fetch by DOI or file: `biorxiv-fetch` accepts one or more `--doi` values or a `--file` of DOIs (one per line) in place of a query, so you can consume `biorxiv-search` output directly.
+
+```bash
+paperflow biorxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./papers/biorxiv
+paperflow biorxiv-fetch --file ./searched_biorxiv_ids.txt --no-download-pdf -o ./papers/biorxiv
+```
+
+### 3. Search and Fetch medRxiv Papers
+medRxiv shares the Crossref (openRxiv) server-side search with bioRxiv; the two are distinguished by the record's `resource.primary.URL` (`medrxiv.org` vs `biorxiv.org`). A DOI query resolves the paper directly.
+
+```bash
+paperflow medrxiv-search "vaccine AND efficacy" --max-results 10
+paperflow medrxiv-fetch "vaccine AND efficacy" --start-date 2024-01-01 --end-date 2024-12-31 --download-pdf
+```
+
+Useful options:
+
+- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format (medRxiv dates back to 2019-06-01).
+- `--output-dir`: save the ID list or fetched records to a different directory.
+- `--no-download-pdf`: skip PDF download and save metadata only.
+
+Example:
+
+```bash
+paperflow medrxiv-fetch "long covid" --max-results 50 -o ./papers/medrxiv
+```
+
+Search output is saved as `searched_medrxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` (with `source` set to `medrxiv`) with JSON metadata and, when available, a PDF copy.
+
+Fetch by DOI or file: `medrxiv-fetch` accepts one or more `--doi` values or a `--file` of DOIs (one per line) in place of a query, so you can consume `medrxiv-search` output directly.
+
+```bash
+paperflow medrxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./papers/medrxiv
+paperflow medrxiv-fetch --file ./searched_medrxiv_ids.txt --no-download-pdf -o ./papers/medrxiv
+```
+
+Note: bioRxiv/medRxiv PDFs are served by `www.biorxiv.org` / `www.medrxiv.org`, which return 403 to non-browser clients and some data-center IPs (bot protection). Download first tries direct routes (including the exact-version `{doi}v{version}.full.pdf` resolved via `api.biorxiv.org`); if those still fail and `PAPER_FETCH_CLOAK=1` is set, it falls back to CloakBrowser automatically (requires a working `cloakbrowser` env; optional `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`).
