@@ -306,7 +306,7 @@ def export_md_cmd(
 @app.command("arxiv-search")
 def arxiv_search_cmd(
     query: str = typer.Argument(..., help="arXiv search query."),
-    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of arXiv results to return."),
+    max_results: Optional[int] = typer.Option(None, "--max-results", "-n", help="Maximum number of arXiv results to return. Default: no limit (return all matches)."),
     storage_dir: str = opt_storage,
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched arXiv IDs."),
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
