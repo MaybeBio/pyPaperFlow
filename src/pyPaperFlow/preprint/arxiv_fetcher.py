@@ -108,7 +108,7 @@ class ArxivFetcher:
     def search(
         self,
         query: str,
-        max_results: int = 100,
+        max_results: Optional[int] = None,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> List[SourcePaper]:
@@ -185,17 +185,17 @@ class ArxivFetcher:
         self,
         search_query: str,
         query: str,
-        max_results: int,
+        max_results: Optional[int],
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> List[SourcePaper]:
         results: List[SourcePaper] = []
         start = 0
-        remaining = max(1, int(max_results))
+        remaining = None if max_results is None else max(1, int(max_results))
         tried_fallback = False
 
-        while remaining > 0:
-            page_size = min(self.batch_size, remaining)
+        while remaining is None or remaining > 0:
+            page_size = self.batch_size if remaining is None else min(self.batch_size, remaining)
             feed = self._request_feed(search_query, start=start, max_results=page_size)
             entries = feed.findall("atom:entry", ARXIV_ATOM_NS)
             # If there are no entries on the first page, try some fallback query forms
@@ -245,29 +245,38 @@ class ArxivFetcher:
 
             for entry in entries:
                 results.append(self._normalize_entry(entry, query=query))
-                remaining -= 1
-                if remaining <= 0:
-                    break
+                if remaining is not None:
+                    remaining -= 1
+                    if remaining <= 0:
+                        break
 
-            if len(entries) < page_size or remaining <= 0:
+            if len(entries) < page_size:
+                break
+            if remaining is not None and remaining <= 0:
                 break
 
             start += len(entries)
 
         return results
 
-    def _search_with_paperscraper(self, search_query: str, query: str, max_results: int) -> List[SourcePaper]:
+    def _search_with_paperscraper(self, search_query: str, query: str, max_results: Optional[int]) -> List[SourcePaper]:
+        if max_results is None:
+            raise ValueError(
+                "The 'paperscraper' backend requires an explicit --max-results; "
+                "unlimited retrieval is only supported by the 'native' backend."
+            )
+        limit = max(1, int(max_results))
         api = self._load_paperscraper_api()
         result = api(
             search_query,
             fields=PAPERSCRAPER_FIELDS,
-            max_results=max(1, int(max_results)),
+            max_results=limit,
             verbose=False,
         )
         rows = self._records_from_paperscraper_result(result)
 
         records: List[SourcePaper] = []
-        for row in rows[: max(1, int(max_results))]:
+        for row in rows[:limit]:
             records.append(self._normalize_paperscraper_row(row, query=query))
         return records
 
