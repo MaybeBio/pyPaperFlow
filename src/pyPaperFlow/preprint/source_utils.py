@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
-import requests
+import httpx
 
 
 BOOLEAN_OR_SPLIT_RE = re.compile(r"\s+OR\s+", re.IGNORECASE)
@@ -70,7 +70,7 @@ def save_json(path: Path | str, payload: Dict[str, Any]) -> None:
 
 def download_binary(url: str, output_path: Path | str, headers: Optional[Dict[str, str]] = None, timeout: float = 60.0) -> bool:
     try:
-        response = requests.get(url, headers=headers, timeout=timeout)
+        response = httpx.get(url, headers=headers, timeout=timeout, follow_redirects=True)
         response.raise_for_status()
         content = response.content or b""
         if not content.startswith(b"%PDF"):

@@ -5,9 +5,12 @@ import re
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
+from urllib.parse import quote
 
-import requests
+import httpx
 from bs4 import BeautifulSoup
+
+from ..integrations.cloak_fallback import cloak_fetch_pdf, is_cloak_enabled
 
 from .source_models import SourcePaper
 from .source_utils import (
@@ -22,22 +25,43 @@ from .source_utils import (
 )
 
 
-BIO_RXIV_API_BASE = "https://api.biorxiv.org/details/biorxiv"
 BIO_RXIV_CROSSREF_API = "https://api.crossref.org/works"
 BIO_RXIV_CROSSREF_PREFIX = "10.64898"
-BIO_RXIV_LANDING_BASE = "https://www.biorxiv.org/content"
 BIO_RXIV_LAUNCH_DATE = datetime(2013, 1, 1)
+MED_RXIV_LAUNCH_DATE = datetime(2019, 6, 1)
+
+DOI_RE = re.compile(r"^10\.\d{4,9}/[^\s]+$")
+
+PLATFORM_CONFIG = {
+    "biorxiv": {
+        "journal": "bioRxiv",
+        "landing_base": "https://www.biorxiv.org/content",
+        "launch_date": BIO_RXIV_LAUNCH_DATE,
+    },
+    "medrxiv": {
+        "journal": "medRxiv",
+        "landing_base": "https://www.medrxiv.org/content",
+        "launch_date": MED_RXIV_LAUNCH_DATE,
+    },
+}
 
 
 class BioRxivFetcher:
     def __init__(
         self,
         root_dir: str,
+        platform: str = "biorxiv",
         window_days: int = 365,
         max_retries: int = 3,
         request_timeout: float = 60.0,
     ):
+        if platform not in PLATFORM_CONFIG:
+            raise ValueError(f"platform must be one of {sorted(PLATFORM_CONFIG)}, got {platform!r}")
         self.root_dir = root_dir
+        self.platform = platform
+        self.journal_name = PLATFORM_CONFIG[platform]["journal"]
+        self.landing_base = PLATFORM_CONFIG[platform]["landing_base"]
+        self.launch_date = PLATFORM_CONFIG[platform]["launch_date"]
         self.window_days = max(1, int(window_days))
         self.max_retries = max(1, int(max_retries))
         self.request_timeout = float(request_timeout)
@@ -45,6 +69,27 @@ class BioRxivFetcher:
             "User-Agent": "pyPaperFlow/0.1.0 (+https://github.com/MaybeBio/pyPaperFlow)",
             "Accept": "application/json,text/html;q=0.9,*/*;q=0.8",
         }
+        self._http_client: Optional[httpx.Client] = None
+
+    def close(self) -> None:
+        if self._http_client is not None:
+            self._http_client.close()
+            self._http_client = None
+
+    def __del__(self) -> None:
+        try:
+            self.close()
+        except Exception:
+            pass
+
+    def _get_http_client(self) -> httpx.Client:
+        if self._http_client is None:
+            self._http_client = httpx.Client(
+                headers=self.headers,
+                timeout=self.request_timeout,
+                follow_redirects=True,
+            )
+        return self._http_client
 
     def search(
         self,
@@ -56,6 +101,9 @@ class BioRxivFetcher:
         query_text = normalize_text(query)
         if not query_text:
             raise ValueError("query must be non-empty")
+
+        if DOI_RE.match(query_text):
+            return self._search_by_doi(query_text)
 
         records: List[SourcePaper] = []
         start_dt, end_dt = self._normalize_date_range(start_date, end_date)
@@ -82,6 +130,8 @@ class BioRxivFetcher:
             for raw_record in items:
                 if normalize_text(raw_record.get("publisher", "")).lower() != "openrxiv":
                     continue
+                if self._platform_from_record(raw_record) != self.platform:
+                    continue
                 if not basic_boolean_text_match(self._search_text_crossref(raw_record), query_text):
                     continue
                 record = self._normalize_crossref_record(raw_record, query=query_text)
@@ -98,6 +148,34 @@ class BioRxivFetcher:
             cursor = next_cursor
 
         return records
+
+    def _search_by_doi(self, doi: str) -> List[SourcePaper]:
+        record = self._fetch_crossref_work(doi)
+        if not record:
+            return []
+        if normalize_text(record.get("publisher", "")).lower() != "openrxiv":
+            return []
+        if self._platform_from_record(record) != self.platform:
+            return []
+        return [self._normalize_crossref_record(record, query=doi)]
+
+    def _fetch_crossref_work(self, doi: str) -> Dict[str, Any]:
+        url = f"{BIO_RXIV_CROSSREF_API}/{quote(doi, safe='')}"
+        last_error: Optional[Exception] = None
+        for attempt in range(self.max_retries):
+            try:
+                response = self._get_http_client().get(url)
+                if response.status_code == 404:
+                    return {}
+                response.raise_for_status()
+                return response.json().get("message") or {}
+            except Exception as exc:
+                last_error = exc
+                if attempt + 1 < self.max_retries:
+                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+        if last_error is not None:
+            raise last_error
+        raise RuntimeError(f"Failed to fetch Crossref work for DOI {doi}")
 
     def fetch_from_query(
         self,
@@ -120,6 +198,25 @@ class BioRxivFetcher:
 
         return records
 
+    def fetch_from_dois(
+        self,
+        dois: Iterable[str],
+        output_dir: Optional[str] = None,
+        download_pdf: bool = True,
+    ) -> List[SourcePaper]:
+        records: List[SourcePaper] = []
+        for raw_doi in dois:
+            doi = normalize_text(raw_doi)
+            if not doi:
+                continue
+            matched = self._search_by_doi(doi)
+            if not matched:
+                continue
+            record = matched[0]
+            self._save_record(record, output_dir=output_dir, download_pdf=download_pdf)
+            records.append(record)
+        return records
+
     def _normalize_date_range(
         self,
         start_date: Optional[str],
@@ -128,15 +225,15 @@ class BioRxivFetcher:
         if start_date:
             start_dt = datetime.strptime(start_date, "%Y-%m-%d")
         else:
-            start_dt = BIO_RXIV_LAUNCH_DATE
+            start_dt = self.launch_date
 
         if end_date:
             end_dt = datetime.strptime(end_date, "%Y-%m-%d")
         else:
             end_dt = datetime.utcnow()
 
-        if start_dt < BIO_RXIV_LAUNCH_DATE:
-            start_dt = BIO_RXIV_LAUNCH_DATE
+        if start_dt < self.launch_date:
+            start_dt = self.launch_date
         if start_dt > end_dt:
             raise ValueError("start_date cannot be later than end_date")
         return start_dt, end_dt
@@ -165,12 +262,7 @@ class BioRxivFetcher:
 
         for attempt in range(self.max_retries):
             try:
-                response = requests.get(
-                    BIO_RXIV_CROSSREF_API,
-                    params=params,
-                    headers=self.headers,
-                    timeout=self.request_timeout,
-                )
+                response = self._get_http_client().get(BIO_RXIV_CROSSREF_API, params=params)
                 response.raise_for_status()
                 return response.json()
             except Exception as exc:
@@ -181,6 +273,27 @@ class BioRxivFetcher:
         if last_error is not None:
             raise last_error
         raise RuntimeError("Failed to query bioRxiv Crossref search")
+
+    def _platform_from_record(self, record: Dict[str, Any]) -> str:
+        # The authoritative signal: openRxiv deposits a per-server primary URL.
+        primary_url = normalize_text((record.get("resource") or {}).get("primary", {}).get("URL", ""))
+        if "medrxiv.org" in primary_url:
+            return "medrxiv"
+        if "biorxiv.org" in primary_url:
+            return "biorxiv"
+
+        # Fallback: medRxiv accessions are 8 digits, bioRxiv accessions are 6.
+        doi = normalize_text(record.get("DOI", ""))
+        if doi:
+            suffix = doi.split("/", 1)[-1]
+            match = re.search(r"(?:\d{4}\.\d{2}\.\d{2}\.)?(\d+)$", suffix)
+            if match:
+                digits = match.group(1)
+                if len(digits) == 8:
+                    return "medrxiv"
+                if len(digits) == 6:
+                    return "biorxiv"
+        return ""
 
     def _search_text_crossref(self, record: Dict[str, Any]) -> str:
         pieces = [
@@ -208,15 +321,18 @@ class BioRxivFetcher:
         updated_date = normalize_text(record.get("created", {}).get("date-time", ""))
 
         authors = self._normalize_crossref_authors(record.get("author", []))
-        doi = self._normalize_crossref_doi(record.get("DOI", ""))
-        landing_url = self._landing_url(doi, "")
+        doi = normalize_text(record.get("DOI", ""))
+        landing_url = f"{self.landing_base}/{doi}" if doi else ""
 
-        source_id = doi or safe_filename(f"biorxiv_{published_date}_{title}")
+        source_id = doi or safe_filename(f"{self.platform}_{published_date}_{title}")
         keywords = self._normalize_crossref_keywords(record.get("subject", []))
-        pdf_url = f"{BIO_RXIV_LANDING_BASE}/{doi}.full.pdf" if doi else ""
+        if not keywords:
+            group_title = normalize_text(record.get("group-title", ""))
+            keywords = [group_title] if group_title else []
+        pdf_url = f"{self.landing_base}/{doi}.full.pdf" if doi else ""
 
         return SourcePaper(
-            source="biorxiv",
+            source=self.platform,
             source_id=source_id,
             title=title,
             doi=doi,
@@ -224,7 +340,7 @@ class BioRxivFetcher:
             authors=authors,
             published_date=published_date,
             updated_date=updated_date,
-            journal="bioRxiv",
+            journal=self.journal_name,
             category=", ".join(keywords),
             landing_url=landing_url,
             pdf_url=pdf_url,
@@ -235,6 +351,7 @@ class BioRxivFetcher:
                 "publisher": record.get("publisher", ""),
                 "prefix": record.get("prefix", ""),
                 "type": record.get("type", ""),
+                "group_title": record.get("group-title", ""),
                 "raw_record": record,
             },
         )
@@ -247,15 +364,10 @@ class BioRxivFetcher:
         for author in authors_value:
             if not isinstance(author, dict):
                 continue
-            name = normalize_text(
-                author.get("name")
-                or author.get("given")
-                or " ".join(
-                    part
-                    for part in [author.get("given", ""), author.get("family", "")]
-                    if normalize_text(part)
-                )
-            )
+            given = normalize_text(author.get("given", ""))
+            family = normalize_text(author.get("family", ""))
+            full_name = " ".join(part for part in [given, family] if part)
+            name = normalize_text(author.get("name") or full_name or given)
             if name:
                 authors.append(name)
         return authors
@@ -266,9 +378,6 @@ class BioRxivFetcher:
         if isinstance(keywords_value, str) and keywords_value.strip():
             return [part.strip() for part in keywords_value.split(",") if part.strip()]
         return []
-
-    def _normalize_crossref_doi(self, doi: Any) -> str:
-        return normalize_text(doi)
 
     def _extract_crossref_date(self, record: Dict[str, Any]) -> str:
         for key in ("published-online", "published-print", "issued", "created"):
@@ -294,77 +403,8 @@ class BioRxivFetcher:
         soup = BeautifulSoup(text, "html.parser")
         cleaned = soup.get_text(separator=" ")
         cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        cleaned = re.sub(r"^(?:Abstract|Summary)\b[\s:：\-–—]*", "", cleaned, flags=re.IGNORECASE)
         return cleaned
-
-    def _normalize_authors(self, authors_value: Any) -> List[str]:
-        if isinstance(authors_value, list):
-            authors: List[str] = []
-            for author in authors_value:
-                if isinstance(author, dict):
-                    name = normalize_text(
-                        author.get("name")
-                        or author.get("author_name")
-                        or author.get("full_name")
-                        or " ".join(
-                            part
-                            for part in [author.get("given", ""), author.get("family", "")]
-                            if normalize_text(part)
-                        )
-                    )
-                else:
-                    name = normalize_text(author)
-                if name:
-                    authors.append(name)
-            return authors
-
-        if isinstance(authors_value, str):
-            parts = [part.strip() for part in authors_value.split(";") if part.strip()]
-            return parts or [authors_value]
-
-        return []
-
-    def _normalize_keywords(self, category_value: Any) -> List[str]:
-        if isinstance(category_value, list):
-            return [normalize_text(item) for item in category_value if normalize_text(item)]
-        if isinstance(category_value, str) and category_value.strip():
-            return [part.strip() for part in category_value.split(",") if part.strip()]
-        return []
-
-    def _normalize_doi(self, doi: Any, version: Any) -> str:
-        doi_text = normalize_text(doi)
-        version_text = normalize_text(version)
-        if doi_text and version_text and not doi_text.lower().endswith(f"v{version_text.lower()}"):
-            return f"{doi_text}v{version_text}"
-        return doi_text
-
-    def _landing_url(self, doi: str, version: str) -> str:
-        if not doi:
-            return ""
-        return f"{BIO_RXIV_LANDING_BASE}/{doi}"
-
-    def _candidate_pdf_urls(self, record: Dict[str, Any], doi: str, version: str) -> List[str]:
-        candidates: List[str] = []
-        for key in ("pdf_url", "full_text_url", "fulltext_url", "pdf"):
-            value = normalize_text(record.get(key, ""))
-            if value:
-                candidates.append(value)
-
-        if doi:
-            candidates.append(f"{BIO_RXIV_LANDING_BASE}/{doi}.full.pdf")
-            if version and not doi.lower().endswith(f"v{version.lower()}"):
-                candidates.insert(0, f"{BIO_RXIV_LANDING_BASE}/{doi}v{version}.full.pdf")
-
-        landing_url = self._landing_url(doi, version)
-        if landing_url:
-            candidates.append(landing_url)
-
-        deduped: List[str] = []
-        seen = set()
-        for candidate in candidates:
-            if candidate not in seen:
-                seen.add(candidate)
-                deduped.append(candidate)
-        return deduped
 
     def _save_record(self, record: SourcePaper, output_dir: Optional[str], download_pdf: bool) -> None:
         base_dir = output_dir or self.root_dir
@@ -381,24 +421,79 @@ class BioRxivFetcher:
         save_json(record_dir / f"{file_stem}.json", record.to_dict())
 
     def _download_pdf(self, record: SourcePaper, pdf_path: Path) -> bool:
-        candidates = [candidate for candidate in [record.pdf_url, record.landing_url] if candidate]
+        pdf_candidates = [
+            candidate
+            for candidate in [record.pdf_url, self._api_pdf_url(record), self._early_pdf_url(record)]
+            if candidate
+        ]
 
-        for candidate in candidates:
-            if candidate.lower().endswith(".pdf"):
-                if download_binary(candidate, pdf_path, headers=self.headers, timeout=self.request_timeout):
+        for candidate in pdf_candidates:
+            if download_binary(candidate, pdf_path, headers=self.headers, timeout=self.request_timeout):
+                return True
+
+        citation_pdf = self._scrape_citation_pdf(record.landing_url)
+        if citation_pdf and download_binary(citation_pdf, pdf_path, headers=self.headers, timeout=self.request_timeout):
+            return True
+
+        if not is_cloak_enabled():
+            return False
+
+        # bioRxiv/medRxiv serve a Cloudflare challenge to non-browser clients
+        # (HTTP 403). When the operator opted in via PAPER_FETCH_CLOAK, retry
+        # each PDF candidate through CloakBrowser before giving up.
+        for candidate in pdf_candidates:
+            data = cloak_fetch_pdf(candidate, timeout=int(self.request_timeout))
+            if data and data[:5].startswith(b"%PDF"):
+                try:
+                    pdf_path.parent.mkdir(parents=True, exist_ok=True)
+                    pdf_path.write_bytes(data)
                     return True
-                continue
-
-            try:
-                response = requests.get(candidate, headers=self.headers, timeout=self.request_timeout)
-                response.raise_for_status()
-                soup = BeautifulSoup(response.text, "html.parser")
-                meta = soup.find("meta", {"name": "citation_pdf_url"})
-                if meta and meta.get("content"):
-                    pdf_url = normalize_text(meta.get("content"))
-                    if download_binary(pdf_url, pdf_path, headers=self.headers, timeout=self.request_timeout):
-                        return True
-            except Exception:
-                continue
+                except OSError:
+                    return False
 
         return False
+
+    def _scrape_citation_pdf(self, landing_url: str) -> str:
+        if not landing_url:
+            return ""
+        try:
+            response = self._get_http_client().get(landing_url)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+            meta = soup.find("meta", {"name": "citation_pdf_url"})
+            if meta and meta.get("content"):
+                return normalize_text(meta.get("content"))
+        except Exception:
+            return ""
+        return ""
+
+    def _api_pdf_url(self, record: SourcePaper) -> str:
+        # The bioRxiv/medRxiv details API returns the exact latest version, which
+        # lets us build the versioned {doi}v{version}.full.pdf URL instead of
+        # guessing. This endpoint is not behind the Cloudflare bot wall.
+        if not record.doi:
+            return ""
+        try:
+            response = self._get_http_client().get(
+                f"https://api.biorxiv.org/details/{self.platform}/{record.doi}"
+            )
+            response.raise_for_status()
+            collection = response.json().get("collection") or []
+            if not collection:
+                return ""
+            latest = collection[-1]
+            version = normalize_text(latest.get("version", "")) or "1"
+            return f"{self.landing_base}/{record.doi}v{version}.full.pdf"
+        except Exception:
+            return ""
+
+    def _early_pdf_url(self, record: SourcePaper) -> str:
+        # bioRxiv/medRxiv serve preprints under a HighWire "early" path as an
+        # alternative to the versioned {doi}.full.pdf route.
+        published_date = normalize_text(record.published_date)
+        match = re.search(r"(\d{4})-(\d{2})-(\d{2})", published_date)
+        if not match or not record.doi:
+            return ""
+        year, month, day = match.groups()
+        accession = record.doi.split("/", 1)[-1]
+        return f"{self.landing_base}/{self.platform}/early/{year}/{month}/{day}/{accession}.full.pdf"

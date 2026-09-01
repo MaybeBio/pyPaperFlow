@@ -148,6 +148,28 @@ class ArxivFetcher:
 
         return records
 
+    def fetch_from_ids(
+        self,
+        ids: Iterable[str],
+        output_dir: Optional[str] = None,
+        download_pdf: bool = True,
+    ) -> List[SourcePaper]:
+        records: List[SourcePaper] = []
+        for raw_id in ids:
+            arxiv_id = normalize_text(raw_id)
+            if not arxiv_id:
+                continue
+            # id_list does not accept a version suffix; drop a trailing vN.
+            clean_id = re.sub(r"v\d+$", "", arxiv_id)
+            feed = self._request_id_feed(clean_id)
+            entries = feed.findall("atom:entry", ARXIV_ATOM_NS)
+            if not entries:
+                continue
+            record = self._normalize_entry(entries[0], query=arxiv_id)
+            self._save_record(record, output_dir=output_dir, download_pdf=download_pdf)
+            records.append(record)
+        return records
+
     def close(self) -> None:
         if self._http_client is not None:
             self._http_client.close()
@@ -264,7 +286,6 @@ class ArxivFetcher:
         return []
 
     def _request_feed(self, search_query: str, start: int, max_results: int) -> ET.Element:
-        last_error: Optional[Exception] = None
         params = {
             "search_query": search_query,
             "start": start,
@@ -272,6 +293,21 @@ class ArxivFetcher:
             "sortBy": "submittedDate",
             "sortOrder": "descending",
         }
+        return self._request_feed_params(
+            params,
+            description=f"query={search_query!r} start={start} max_results={max_results}",
+        )
+
+    def _request_id_feed(self, arxiv_id: str) -> ET.Element:
+        params = {
+            "id_list": arxiv_id,
+            "start": 0,
+            "max_results": 1,
+        }
+        return self._request_feed_params(params, description=f"id={arxiv_id!r}")
+
+    def _request_feed_params(self, params: Dict[str, Any], description: str) -> ET.Element:
+        last_error: Optional[Exception] = None
 
         for attempt in range(self.max_retries):
             response: Optional[httpx.Response] = None
@@ -283,9 +319,7 @@ class ArxivFetcher:
                     timeout=self.request_timeout,
                 )
                 if response.status_code == 429:
-                    last_error = RuntimeError(
-                        f"arXiv API rate limited request for query={search_query!r} start={start} max_results={max_results}"
-                    )
+                    last_error = RuntimeError(f"arXiv API rate limited request for {description}")
                     if attempt + 1 < self.max_retries:
                         self._sleep_before_retry(response, attempt)
                         continue
