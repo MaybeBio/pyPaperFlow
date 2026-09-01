@@ -369,6 +369,7 @@ def arxiv_fetch_cmd(
         raise typer.Exit(code=1)
 
     typer.echo(f"Fetched {len(records)} arXiv papers.")
+    typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'arxiv'))}", fg=typer.colors.GREEN)
 
 
 @app.command("biorxiv-search")
@@ -454,6 +455,7 @@ def biorxiv_fetch_cmd(
         raise typer.Exit(code=1)
 
     typer.echo(f"Fetched {len(records)} bioRxiv papers.")
+    typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'biorxiv'))}", fg=typer.colors.GREEN)
 
 
 @app.command("medrxiv-search")
@@ -539,6 +541,7 @@ def medrxiv_fetch_cmd(
         raise typer.Exit(code=1)
 
     typer.echo(f"Fetched {len(records)} medRxiv papers.")
+    typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'medrxiv'))}", fg=typer.colors.GREEN)
 
 
 
