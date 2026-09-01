@@ -317,6 +317,17 @@ def arxiv_search_cmd(
     fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend)
     records = fetcher.search(query=query, max_results=max_results, start_date=start_date, end_date=end_date)
     typer.echo(f"Found {len(records)} arXiv papers.")
+    if not records:
+        if any(ch.isdigit() for ch in query):
+            hint = (
+                "No arXiv matches. Standalone numbers (e.g. '263') often over-restrict "
+                "arXiv full-text search — try removing them or broadening the query."
+            )
+        elif start_date or end_date:
+            hint = "No arXiv matches in the chosen date window — try widening the range."
+        else:
+            hint = "No arXiv matches — try broadening the query."
+        typer.secho(hint, fg=typer.colors.YELLOW)
     for record in records:
         typer.echo(record.source_id)
 
