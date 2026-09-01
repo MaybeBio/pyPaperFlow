@@ -327,25 +327,47 @@ def arxiv_search_cmd(
 
 @app.command("arxiv-fetch")
 def arxiv_fetch_cmd(
-    query: str = typer.Argument(..., help="arXiv search query."),
-    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of arXiv records to fetch."),
+    query: Optional[str] = typer.Argument(None, help="arXiv search query."),
+    file: Optional[str] = typer.Option(None, "--file", "-f", help="Text file containing arXiv IDs (one per line)."),
+    arxiv_id: Optional[List[str]] = typer.Option(None, "--id", help="Single arXiv ID to fetch, can be repeated."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of arXiv records to fetch (query mode only)."),
     storage_dir: str = opt_storage,
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save fetched arXiv papers."),
-    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
-    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD (query mode only)."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD (query mode only)."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
     backend: str = opt_arxiv_backend,
 ):
-    """Fetch arXiv metadata and attempt to download PDFs."""
+    """Fetch arXiv metadata and attempt to download PDFs.
+
+    Provide one of: a positional query, --file, or one or more --id values.
+    """
     fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend)
-    records = fetcher.fetch_from_query(
-        query=query,
-        output_dir=output_dir if output_dir else storage_dir,
-        max_results=max_results,
-        start_date=start_date,
-        end_date=end_date,
-        download_pdf=download_pdf,
-    )
+    output = output_dir if output_dir else storage_dir
+
+    if query:
+        records = fetcher.fetch_from_query(
+            query=query,
+            output_dir=output,
+            max_results=max_results,
+            start_date=start_date,
+            end_date=end_date,
+            download_pdf=download_pdf,
+        )
+    elif file:
+        if not os.path.exists(file):
+            typer.echo(f"Error: File {file} not found.")
+            raise typer.Exit(code=1)
+        with open(file, "r") as handle:
+            ids = [line.strip() for line in handle if line.strip()]
+        typer.echo(f"Fetching {len(ids)} arXiv IDs from file {os.path.abspath(file)}.")
+        records = fetcher.fetch_from_ids(ids, output_dir=output, download_pdf=download_pdf)
+    elif arxiv_id:
+        records = fetcher.fetch_from_ids(arxiv_id, output_dir=output, download_pdf=download_pdf)
+    else:
+        typer.echo("Error: Must provide a query, --file, or --id.")
+        raise typer.Exit(code=1)
+
     typer.echo(f"Fetched {len(records)} arXiv papers.")
 
 
@@ -383,18 +405,21 @@ def biorxiv_search_cmd(
 
 @app.command("biorxiv-fetch")
 def biorxiv_fetch_cmd(
-    query: str = typer.Argument(..., help="bioRxiv search query."),
-    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of bioRxiv records to fetch."),
+    query: Optional[str] = typer.Argument(None, help="bioRxiv search query."),
+    file: Optional[str] = typer.Option(None, "--file", "-f", help="Text file containing bioRxiv DOIs (one per line)."),
+    doi: Optional[List[str]] = typer.Option(None, "--doi", "-d", help="Single bioRxiv DOI to fetch, can be repeated."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of bioRxiv records to fetch (query mode only)."),
     storage_dir: str = opt_storage,
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save fetched bioRxiv papers."),
-    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
-    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD (query mode only)."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD (query mode only)."),
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
 ):
     """Fetch bioRxiv metadata and attempt to download PDFs.
 
-    Metadata retrieval uses Crossref server-side query over openRxiv records.
+    Metadata retrieval uses Crossref over openRxiv records. Provide one of: a
+    positional query, --file, or one or more --doi values.
     """
     if window_days != 365:
         typer.secho(
@@ -403,20 +428,122 @@ def biorxiv_fetch_cmd(
         )
 
     fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
-    records = fetcher.fetch_from_query(
-        query=query,
-        output_dir=output_dir if output_dir else storage_dir,
-        start_date=start_date,
-        end_date=end_date,
-        max_results=max_results,
-        download_pdf=download_pdf,
-    )
+    output = output_dir if output_dir else storage_dir
+
+    if query:
+        records = fetcher.fetch_from_query(
+            query=query,
+            output_dir=output,
+            start_date=start_date,
+            end_date=end_date,
+            max_results=max_results,
+            download_pdf=download_pdf,
+        )
+    elif file:
+        if not os.path.exists(file):
+            typer.echo(f"Error: File {file} not found.")
+            raise typer.Exit(code=1)
+        with open(file, "r") as handle:
+            dois = [line.strip() for line in handle if line.strip()]
+        typer.echo(f"Fetching {len(dois)} bioRxiv DOIs from file {os.path.abspath(file)}.")
+        records = fetcher.fetch_from_dois(dois, output_dir=output, download_pdf=download_pdf)
+    elif doi:
+        records = fetcher.fetch_from_dois(doi, output_dir=output, download_pdf=download_pdf)
+    else:
+        typer.echo("Error: Must provide a query, --file, or --doi.")
+        raise typer.Exit(code=1)
+
     typer.echo(f"Fetched {len(records)} bioRxiv papers.")
+
+
+@app.command("medrxiv-search")
+def medrxiv_search_cmd(
+    query: str = typer.Argument(..., help="medRxiv search query."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of medRxiv results to return."),
+    storage_dir: str = opt_storage,
+    output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched medRxiv IDs."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+    window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
+):
+    """Search medRxiv and write matching IDs to a text file.
+
+    The current implementation uses Crossref server-side query over openRxiv records
+    instead of date-window paging over the legacy medRxiv details API.
+    """
+    if window_days != 365:
+        typer.secho(
+            "Note: --window-days is a compatibility-only option and is ignored by the current Crossref-backed direct query path.",
+            fg=typer.colors.YELLOW,
+        )
+
+    fetcher = BioRxivFetcher(root_dir=storage_dir, platform="medrxiv", window_days=window_days)
+    records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results)
+    typer.echo(f"Found {len(records)} medRxiv papers.")
+    for record in records:
+        typer.echo(record.source_id)
+
+    save_dir = output_dir if output_dir else storage_dir
+    output_file = _save_id_list(save_dir, "searched_medrxiv_ids.txt", [record.source_id for record in records])
+    typer.echo(f"medRxiv IDs saved to {output_file}.")
+
+
+@app.command("medrxiv-fetch")
+def medrxiv_fetch_cmd(
+    query: Optional[str] = typer.Argument(None, help="medRxiv search query."),
+    file: Optional[str] = typer.Option(None, "--file", "-f", help="Text file containing medRxiv DOIs (one per line)."),
+    doi: Optional[List[str]] = typer.Option(None, "--doi", "-d", help="Single medRxiv DOI to fetch, can be repeated."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of medRxiv records to fetch (query mode only)."),
+    storage_dir: str = opt_storage,
+    output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save fetched medRxiv papers."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD (query mode only)."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD (query mode only)."),
+    window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
+    download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
+):
+    """Fetch medRxiv metadata and attempt to download PDFs.
+
+    Metadata retrieval uses Crossref over openRxiv records. Provide one of: a
+    positional query, --file, or one or more --doi values.
+    """
+    if window_days != 365:
+        typer.secho(
+            "Note: --window-days is a compatibility-only option and is ignored by the current Crossref-backed direct query path.",
+            fg=typer.colors.YELLOW,
+        )
+
+    fetcher = BioRxivFetcher(root_dir=storage_dir, platform="medrxiv", window_days=window_days)
+    output = output_dir if output_dir else storage_dir
+
+    if query:
+        records = fetcher.fetch_from_query(
+            query=query,
+            output_dir=output,
+            start_date=start_date,
+            end_date=end_date,
+            max_results=max_results,
+            download_pdf=download_pdf,
+        )
+    elif file:
+        if not os.path.exists(file):
+            typer.echo(f"Error: File {file} not found.")
+            raise typer.Exit(code=1)
+        with open(file, "r") as handle:
+            dois = [line.strip() for line in handle if line.strip()]
+        typer.echo(f"Fetching {len(dois)} medRxiv DOIs from file {os.path.abspath(file)}.")
+        records = fetcher.fetch_from_dois(dois, output_dir=output, download_pdf=download_pdf)
+    elif doi:
+        records = fetcher.fetch_from_dois(doi, output_dir=output, download_pdf=download_pdf)
+    else:
+        typer.echo("Error: Must provide a query, --file, or --doi.")
+        raise typer.Exit(code=1)
+
+    typer.echo(f"Fetched {len(records)} medRxiv papers.")
 
 
 
 #############################################################
-#  3, For Third-Party integrations 
+#  3, For Third-Party integrations
 #############################################################
 
 # 3.1 paper fetch related commands
