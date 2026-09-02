@@ -1,0 +1,445 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.19.745795",
+  "title": "Cell-Based Sensor for Extracellular DNA",
+  "doi": "10.64898/2026.08.19.745795",
+  "abstract": "Detection of molecules with cell-based sensors allows for conversion of binding events into gene expression outputs. Here, we present a cell-based sensor that can detect extracellular double-stranded DNA. This sensor is based on an engineered receptor which we call Luminescent Ultrasensitive Nucleic Acid Reporter, or LUNAR. LUNAR is based on a recently developed Programmable Antigen-gated G-protein-coupled Engineered Receptor (PAGER). PAGERs are a genetic fusion of an auto-inhibitory peptide, a protein-binding domain, and a modified kappa opioid receptor. PAGERs are gated by two binding events. First, a protein ligand displaces an intramolecular inhibitor, Arodyn, then a second ligand activates the receptor. By replacing the protein-binding domain with a DNA binding zinc finger protein (ZFP) we could detect extracellular DNA in a dose-dependent fashion. Here, we show that first-generation LUNAR constructs can detect both oligonucleotides and plasmid double-stranded DNA with nanomolar sensitivity in mammalian cells. Future work will focus on improving sensitivity, fold-change, and multiplexing capabilities for sequence-specific DNA detection.",
+  "authors": [
+    "Boao Xia",
+    "Nicholas A. Kalogriopoulos",
+    "Ruoxin Wen",
+    "Zachary M. Lane",
+    "Honghao Li",
+    "Nicolas Buitrago",
+    "Sangsin Lee",
+    "Richard D. Gao",
+    "Isaac Ive",
+    "Yerim Kim",
+    "Alice Y. Ting",
+    "Jerzy O. Szablowski"
+  ],
+  "published_date": "2026-08-20",
+  "updated_date": "2026-08-20T18:30:35Z",
+  "journal": "bioRxiv",
+  "category": "Synthetic Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.19.745795",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.19.745795.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "10.64898/2026.08.19.745795",
+  "version": "",
+  "keywords": [
+    "Synthetic Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Synthetic Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ],
+        "date-time": "2026-08-20T19:25:00Z",
+        "timestamp": 1787253900491,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ]
+      },
+      "group-title": "Synthetic Biology",
+      "reference-count": 0,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                20
+              ]
+            ],
+            "date-time": "2026-08-20T00:00:00Z",
+            "timestamp": 1787184000000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "https://www.biorxiv.org/about/FAQ#license"
+        }
+      ],
+      "funder": [
+        {
+          "award": [
+            "R01MH135934"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "R01MH135934"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/04xeg9z08",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "F32CA257159"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "F32CA257159"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/040gcmg81",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "2021-73005"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "2021-73005"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/032atxq54",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ]
+      },
+      "abstract": "<jats:p>Detection of molecules with cell-based sensors allows for conversion of binding events into gene expression outputs. Here, we present a cell-based sensor that can detect extracellular double-stranded DNA. This sensor is based on an engineered receptor which we call Luminescent Ultrasensitive Nucleic Acid Reporter, or LUNAR. LUNAR is based on a recently developed Programmable Antigen-gated G-protein-coupled Engineered Receptor (PAGER). PAGERs are a genetic fusion of an auto-inhibitory peptide, a protein-binding domain, and a modified kappa opioid receptor. PAGERs are gated by two binding events. First, a protein ligand displaces an intramolecular inhibitor, Arodyn, then a second ligand activates the receptor. By replacing the protein-binding domain with a DNA binding zinc finger protein (ZFP) we could detect extracellular DNA in a dose-dependent fashion. Here, we show that first-generation LUNAR constructs can detect both oligonucleotides and plasmid double-stranded DNA with nanomolar sensitivity in mammalian cells. Future work will focus on improving sensitivity, fold-change, and multiplexing capabilities for sequence-specific DNA detection.</jats:p>",
+      "DOI": "10.64898/2026.08.19.745795",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ],
+        "date-time": "2026-08-20T18:30:35Z",
+        "timestamp": 1787250635000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Cell-Based Sensor for Extracellular DNA"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-4967-5389",
+          "authenticated-orcid": false,
+          "given": "Boao",
+          "family": "Xia",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-8319-2444",
+          "authenticated-orcid": false,
+          "given": "Nicholas A.",
+          "family": "Kalogriopoulos",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stanford University"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-9821-4933",
+          "authenticated-orcid": false,
+          "given": "Ruoxin",
+          "family": "Wen",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4878-1961",
+          "authenticated-orcid": false,
+          "given": "Zachary M.",
+          "family": "Lane",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Honghao",
+          "family": "Li",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7876-1078",
+          "authenticated-orcid": false,
+          "given": "Nicolas",
+          "family": "Buitrago",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1306-2206",
+          "authenticated-orcid": false,
+          "given": "Sangsin",
+          "family": "Lee",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Richard D.",
+          "family": "Gao",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Isaac",
+          "family": "Ive",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Yerim",
+          "family": "Kim",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-8277-5226",
+          "authenticated-orcid": false,
+          "given": "Alice Y.",
+          "family": "Ting",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stanford University"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7851-5408",
+          "authenticated-orcid": false,
+          "given": "Jerzy O.",
+          "family": "Szablowski",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rice University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.19.745795",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ],
+        "date-time": "2026-08-20T18:30:35Z",
+        "timestamp": 1787250635000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.19.745795"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ]
+      },
+      "references-count": 0,
+      "URL": "https://doi.org/10.64898/2026.08.19.745795",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

@@ -1,0 +1,422 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.29.747956",
+  "title": "S-Palmitoylation stabilizes OGT and the OGT-PPP1CC complex",
+  "doi": "10.64898/2026.08.29.747956",
+  "abstract": "O-linked β-N-acetylglucosamine (O-GlcNAc) transferase (OGT) is the sole writer for intracellular O-GlcNAcylation. It catalyzes O-GlcNAcylation of thousands of protein substrates, but relatively less is known about the post-translational modifications that occur on OGT itself. Herein, we demonstrate that OGT is S-palmitoylated at Cys-472 and Cys-477, which is mediated by the S-acyltransferase Zinc Finger DHHC-Type Palmitoyl transferase 14 (zDHHC14) and removed by acyl protein thioesterase 2 (APT2). S-Palmitoylation stabilizes OGT by shunting it away from the lysosomal chaperone-mediated autophagy (CMA) pathway, as S-palmitoylation decreases the interaction between OGT and heat shock cognate 70 kDa protein (HSC70), the CMA chaperone. Via label-free quantitative mass spectrometry, we find that S- palmitoylation elevates the affinity between OGT and protein phosphatase 1 catalytic subunit gamma (PPP1CC), but not PPP1CB. We further demonstrate that S-palmitoylation of OGT augments binding with Yes-associated protein-1 (YAP), a protein that associates with PPP1CC, and subsequently enhances YAP O-GlcNAcylation. Our work unearths S-palmitoylation of OGT and CMA-mediated degradation of lysosomal OGT, the orchestration of which finetunes the activity of key OGT complexes, such as OGT-PPP1CC, and contributes to OGT substrate selectivity.",
+  "authors": [
+    "Xiaoxuan Lu",
+    "Ting Xu",
+    "Jie Li",
+    "Yihan Liu",
+    "Wen Zhou",
+    "Kai Wang",
+    "Chang Niu",
+    "Ni Tang",
+    "Leiliang Zhang",
+    "Jing Li"
+  ],
+  "published_date": "2026-08-31",
+  "updated_date": "2026-08-31T18:10:22Z",
+  "journal": "bioRxiv",
+  "category": "Biochemistry",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.29.747956",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.29.747956.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "10.64898/2026.08.29.747956",
+  "version": "",
+  "keywords": [
+    "Biochemistry"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Biochemistry",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            31
+          ]
+        ],
+        "date-time": "2026-08-31T18:38:29Z",
+        "timestamp": 1788201509176,
+        "version": "build-2803163510"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            31
+          ]
+        ]
+      },
+      "group-title": "Biochemistry",
+      "reference-count": 0,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                31
+              ]
+            ],
+            "date-time": "2026-08-31T00:00:00Z",
+            "timestamp": 1788134400000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "name": "the National Natural Science Foundation of China",
+          "award": [
+            "92478113"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "92478113"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "the National Natural Science Foundation of China",
+          "award": [
+            "32271285"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "32271285"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "the National Natural Science Foundation of China",
+          "award": [
+            "82272306"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "82272306"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "the National Natural Science Foundation of China",
+          "award": [
+            "82072270"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "82072270"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "the Yunnan Province Academician Expert Workstation Project",
+          "award": [
+            "202605AF350042"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "202605AF350042"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Taishan Scholars Program",
+          "award": [
+            "TSTP20221142"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "TSTP20221142"
+              ]
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            31
+          ]
+        ]
+      },
+      "abstract": "<jats:p>O-linked β-N-acetylglucosamine (O-GlcNAc) transferase (OGT) is the sole writer for intracellular O-GlcNAcylation. It catalyzes O-GlcNAcylation of thousands of protein substrates, but relatively less is known about the post-translational modifications that occur on OGT itself. Herein, we demonstrate that OGT is S-palmitoylated at Cys-472 and Cys-477, which is mediated by the S-acyltransferase Zinc Finger DHHC-Type Palmitoyl transferase 14 (zDHHC14) and removed by acyl protein thioesterase 2 (APT2). S-Palmitoylation stabilizes OGT by shunting it away from the lysosomal chaperone-mediated autophagy (CMA) pathway, as S-palmitoylation decreases the interaction between OGT and heat shock cognate 70 kDa protein (HSC70), the CMA chaperone. Via label-free quantitative mass spectrometry, we find that S- palmitoylation elevates the affinity between OGT and protein phosphatase 1 catalytic subunit gamma (PPP1CC), but not PPP1CB. We further demonstrate that S-palmitoylation of OGT augments binding with Yes-associated protein-1 (YAP), a protein that associates with PPP1CC, and subsequently enhances YAP O-GlcNAcylation. Our work unearths S-palmitoylation of OGT and CMA-mediated degradation of lysosomal OGT, the orchestration of which finetunes the activity of key OGT complexes, such as OGT-PPP1CC, and contributes to OGT substrate selectivity.</jats:p>",
+      "DOI": "10.64898/2026.08.29.747956",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            31
+          ]
+        ],
+        "date-time": "2026-08-31T18:10:22Z",
+        "timestamp": 1788199822000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "S-Palmitoylation stabilizes OGT and the OGT-PPP1CC complex"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Xiaoxuan",
+          "family": "Lu",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Beijing Key Laboratory of DNA damage response, College of Life Sciences, Capital Normal University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ting",
+          "family": "Xu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Clinical and Basic Medical Sciences, Shandong First Medical University & Shandong Academy of Medical Sciences;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jie",
+          "family": "Li",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Beijing Key Laboratory of DNA damage response, College of Life Sciences, Capital Normal University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Yihan",
+          "family": "Liu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Clinical and Basic Medical Sciences, Shandong First Medical University & Shandong Academy of Medical Sciences;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Wen",
+          "family": "Zhou",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "College of Chemistry and Molecular Engineering, Peking University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-0137-1247",
+          "authenticated-orcid": false,
+          "given": "Kai",
+          "family": "Wang",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Chongqing Medical University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Chang",
+          "family": "Niu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Beijing Key Laboratory of DNA Damage Response, College of Life Sciences, Capital Normal University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ni",
+          "family": "Tang",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Chongqing Medical University;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-7015-9661",
+          "authenticated-orcid": false,
+          "given": "Leiliang",
+          "family": "Zhang",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Shandong First Medical University & Shandong Academy of Medical Sciences;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-3977-1641",
+          "authenticated-orcid": false,
+          "given": "Jing",
+          "family": "Li",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Capital Normal University"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.29.747956",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            31
+          ]
+        ],
+        "date-time": "2026-08-31T18:10:22Z",
+        "timestamp": 1788199822000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.29.747956"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            31
+          ]
+        ]
+      },
+      "references-count": 0,
+      "URL": "https://doi.org/10.64898/2026.08.29.747956",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            31
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "source": "arxiv",
+  "source_id": "2502.09135v1",
+  "title": "Interpreting and Steering Protein Language Models through Sparse Autoencoders",
+  "doi": "",
+  "abstract": "The rapid advancements in transformer-based language models have revolutionized natural language processing, yet understanding the internal mechanisms of these models remains a significant challenge. This paper explores the application of sparse autoencoders (SAE) to interpret the internal representations of protein language models, specifically focusing on the ESM-2 8M parameter model. By performing a statistical analysis on each latent component's relevance to distinct protein annotations, we identify potential interpretations linked to various protein characteristics, including transmembrane regions, binding sites, and specialized motifs. We then leverage these insights to guide sequence generation, shortlisting the relevant latent components that can steer the model towards desired targets such as zinc finger domains. This work contributes to the emerging field of mechanistic interpretability in biological sequence models, offering new perspectives on model steering for sequence design.",
+  "authors": [
+    "Edith Natalia Villegas Garcia",
+    "Alessio Ansuini"
+  ],
+  "published_date": "2025-02-13T10:11:36Z",
+  "updated_date": "2025-02-13T10:11:36Z",
+  "journal": "",
+  "category": "cs.LG, q-bio.BM",
+  "landing_url": "https://arxiv.org/abs/2502.09135v1",
+  "pdf_url": "https://arxiv.org/pdf/2502.09135v1",
+  "pdf_path": "test/arxiv/2025/2502.09135v1/2502.09135v1.pdf",
+  "pdf_downloaded": true,
+  "query": "",
+  "version": "1",
+  "keywords": [
+    "cs.LG",
+    "q-bio.BM"
+  ],
+  "extra": {
+    "entry_id": "http://arxiv.org/abs/2502.09135v1",
+    "raw_categories": [
+      "cs.LG",
+      "q-bio.BM"
+    ],
+    "journal_ref": ""
+  }
+}

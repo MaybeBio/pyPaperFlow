@@ -1,0 +1,678 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.13.744713",
+  "title": "VEZF1 facilitates pluripotency exit by regulating developmental transcriptional programs and CTCF occupancy",
+  "doi": "10.64898/2026.08.13.744713",
+  "abstract": "Vascular Endothelial Zinc Finger 1 (VEZF1) is essential for embryonic development, but its role in pluripotent state transitions remains unclear. Previous work showed that Vezf1 -/- ESCs exhibit impaired differentiation, reduced Dnmt3b expression, and genome-wide hypomethylation. Here, our systematic investigation shows that VEZF1 is required for pluripotency exit during ESC differentiation. Vezf1 -/- ESCs fail to efficiently repress the pluripotency transcriptional program during differentiation, a defect that persists despite ectopic Dnmt3b expression. Genome-wide analysis revealed VEZF1 occupancy at regulatory regions of genes involved in several signaling pathways, including MAPK, as well as at some pluripotency-associated genes. Many VEZF1- bound MAPK genes showed reduced expression in undifferentiated Vezf1 -/- ESCs, suggesting that VEZF1 activity contributes to the transcriptional competence required for efficient differentiation. VEZF1 loss also led to widespread acquisition of new CTCF sites associated with developmental signaling, a subset of which overlapped VEZF1-bound regulatory regions. CTCF depletion partially rescued the expression of several tested MAPK pathway genes, indicating that altered CTCF occupancy contributes to their reduced expression in Vezf1 -/- ESCs. Together, our findings identify a novel function for VEZF1 in coordinating pluripotency exit with expression of pro- differentiation signaling genes and reveal a functional interplay between VEZF1 and CTCF during cell state transitions.",
+  "authors": [
+    "Isaiah K. Mensah",
+    "Ming He",
+    "Mudasir Zahoor",
+    "Sameer U. Khan",
+    "Martin L. Emerson",
+    "Hern J. Tan",
+    "Geordan D. Bolden",
+    "Sagar M. Utturkar",
+    "Humaira Gowher"
+  ],
+  "published_date": "2026-08-18",
+  "updated_date": "2026-08-18T18:05:18Z",
+  "journal": "bioRxiv",
+  "category": "Developmental Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.13.744713",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.13.744713.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "10.64898/2026.08.13.744713",
+  "version": "",
+  "keywords": [
+    "Developmental Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Developmental Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ],
+        "date-time": "2026-08-21T18:31:55Z",
+        "timestamp": 1787337115729,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "group-title": "Developmental Biology",
+      "reference-count": 59,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                18
+              ]
+            ],
+            "date-time": "2026-08-18T00:00:00Z",
+            "timestamp": 1787011200000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "https://www.biorxiv.org/about/FAQ#license"
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  Vascular Endothelial Zinc Finger 1 (VEZF1) is essential for embryonic development, but its role in pluripotent state transitions remains unclear. Previous work showed that\n                  <jats:italic>\n                    Vezf1\n                    <jats:sup>-/-</jats:sup>\n                  </jats:italic>\n                  ESCs exhibit impaired differentiation, reduced Dnmt3b expression, and genome-wide hypomethylation. Here, our systematic investigation shows that VEZF1 is required for pluripotency exit during ESC differentiation.\n                  <jats:italic>\n                    Vezf1\n                    <jats:sup>-/-</jats:sup>\n                  </jats:italic>\n                  ESCs fail to efficiently repress the pluripotency transcriptional program during differentiation, a defect that persists despite ectopic Dnmt3b expression. Genome-wide analysis revealed VEZF1 occupancy at regulatory regions of genes involved in several signaling pathways, including MAPK, as well as at some pluripotency-associated genes. Many VEZF1- bound MAPK genes showed reduced expression in undifferentiated\n                  <jats:italic>\n                    Vezf1\n                    <jats:sup>-/-</jats:sup>\n                  </jats:italic>\n                  ESCs, suggesting that VEZF1 activity contributes to the transcriptional competence required for efficient differentiation. VEZF1 loss also led to widespread acquisition of new CTCF sites associated with developmental signaling, a subset of which overlapped VEZF1-bound regulatory regions. CTCF depletion partially rescued the expression of several tested MAPK pathway genes, indicating that altered CTCF occupancy contributes to their reduced expression in\n                  <jats:italic>\n                    Vezf1\n                    <jats:sup>-/-</jats:sup>\n                  </jats:italic>\n                  ESCs. Together, our findings identify a novel function for VEZF1 in coordinating pluripotency exit with expression of pro- differentiation signaling genes and reveal a functional interplay between VEZF1 and CTCF during cell state transitions.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.13.744713",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T18:05:18Z",
+        "timestamp": 1787076318000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "VEZF1 facilitates pluripotency exit by regulating developmental transcriptional programs and CTCF occupancy"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Isaiah K.",
+          "family": "Mensah",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, Purdue University. West Lafayette, Indiana 47907, USA"
+            },
+            {
+              "name": "Department of Pathology and Laboratory Medicine, Indiana University School of Medicine, Indianapolis, IN, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ming",
+          "family": "He",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, Purdue University. West Lafayette, Indiana 47907, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mudasir",
+          "family": "Zahoor",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, Purdue University. West Lafayette, Indiana 47907, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sameer U.",
+          "family": "Khan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, Purdue University. West Lafayette, Indiana 47907, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Martin L.",
+          "family": "Emerson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, Purdue University. West Lafayette, Indiana 47907, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hern J.",
+          "family": "Tan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, Purdue University. West Lafayette, Indiana 47907, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Geordan D.",
+          "family": "Bolden",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, Purdue University. West Lafayette, Indiana 47907, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sagar M.",
+          "family": "Utturkar",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Purdue Institute for Cancer Research, West Lafayette, Indiana 47907, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1250-9571",
+          "authenticated-orcid": false,
+          "given": "Humaira",
+          "family": "Gowher",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, Purdue University. West Lafayette, Indiana 47907, USA"
+            },
+            {
+              "name": "Purdue Institute for Cancer Research, West Lafayette, Indiana 47907, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1074/jbc.M311721200"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1074/jbc.RA118.002911"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.3",
+          "doi-asserted-by": "crossref",
+          "first-page": "1478",
+          "DOI": "10.1016/j.celrep.2019.11.040",
+          "article-title": "Oct4-Mediated Inhibition of Lsd1 Activity Promotes the Active and Primed State of Pluripotency Enhancers",
+          "volume": "30",
+          "year": "2020",
+          "journal-title": "Cell reports"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1023/B:RUDO.0000049615.27090.21"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0378-1119(00)00271-7"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/j.1432-0436.2005.00043.x"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2017.09.043"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.8",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Calderon L , Weiss FD , Beagan JA , Oliveira MS , Georgieva R , Wang YF , Carroll TS , Dharmalingam G , Gong W , Tossell K et al. 2022. Cohesin-dependence of neuronal gene expression relates to chromatin loop length. Elife 11.",
+          "DOI": "10.7554/eLife.76539"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkv370"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.15252/embr.202255146"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.11",
+          "doi-asserted-by": "crossref",
+          "first-page": "e1000804",
+          "DOI": "10.1371/journal.pgen.1000804",
+          "article-title": "VEZF1 elements mediate protection from DNA methylation",
+          "volume": "6",
+          "year": "2010",
+          "journal-title": "PLoS genetics"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.12",
+          "doi-asserted-by": "crossref",
+          "first-page": "371",
+          "DOI": "10.1016/j.stemcr.2013.09.002",
+          "article-title": "Multiple structural maintenance of chromosome complexes at transcriptional regulatory elements",
+          "volume": "1",
+          "year": "2013",
+          "journal-title": "Stem Cell Reports"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1248882"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.14",
+          "doi-asserted-by": "crossref",
+          "first-page": "7258",
+          "DOI": "10.1038/s41467-024-51602-4",
+          "article-title": "Cooperative insulation of regulatory domains by CTCF-dependent physical insulation and promoter competition",
+          "volume": "15",
+          "year": "2024",
+          "journal-title": "Nature communications"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/MCB.16.6.2802"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nrg1925"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.17",
+          "doi-asserted-by": "crossref",
+          "first-page": "2824",
+          "DOI": "10.1038/ncomms3824",
+          "article-title": "RhoB controls coordination of adult angiogenesis and lymphangiogenesis following injury by regulating VEZF1-mediated transcription",
+          "volume": "4",
+          "year": "2013",
+          "journal-title": "Nature communications"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/sqb.2010.75.006"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1121538109"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gad.1658408"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng.857"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1074/jbc.M309002200"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.stem.2008.07.027"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1042/BJ20102152"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-021-00863-6"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.2057"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/s0016-5085(03)80453-5"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.28",
+          "first-page": "405",
+          "article-title": "Transcriptional regulation of the Oct4 gene, a master gene for pluripotency",
+          "volume": "25",
+          "year": "2010",
+          "journal-title": "Histol Histopathol"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1074/jbc.M110.217083"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ydbio.2005.04.003"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1242/dev.02880"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/MCB.01380-07"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkaa1092"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/wsbm.1464"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2025.02.019"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1181369"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.37",
+          "doi-asserted-by": "crossref",
+          "first-page": "51",
+          "DOI": "10.1016/j.ejphar.2019.03.003",
+          "article-title": "New insight into NANOG: A novel therapeutic target for ovarian cancer (OC)",
+          "volume": "852",
+          "year": "2019",
+          "journal-title": "Eur J Pharmacol"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.scr.2012.09.002"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1182/blood-2005-05-1916"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1146/annurev-genom-083115-022339"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.41",
+          "first-page": "4387",
+          "article-title": "A variant F9 embryonal carcinoma cell line which undergoes incomplete differentiation in retinoic acid",
+          "volume": "45",
+          "year": "1985",
+          "journal-title": "Cancer Res"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/0922-3371(90)90139-N"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng.3922"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2017.05.004"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nrg3663"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.46",
+          "doi-asserted-by": "crossref",
+          "first-page": "945",
+          "DOI": "10.2174/1568009618666180430143055",
+          "article-title": "PRDM14: A Potential Target for Cancer Therapy",
+          "volume": "18",
+          "year": "2018",
+          "journal-title": "Curr Cancer Drug Targets"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ab.2017.06.006"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.48",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Saha D , Norvil AB , Lanman NA , Gowher H. 2020. Simplified MethylRAD Sequencing to Detect Changes in DNA Methylation at Enhancer Elements in Differentiating Embryonic Stem Cells. Epigenomes 4.",
+          "DOI": "10.3390/epigenomes4040024"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.49",
+          "doi-asserted-by": "crossref",
+          "first-page": "145",
+          "DOI": "10.1016/j.ydbio.2020.06.001",
+          "article-title": "DNA methylation and the core pluripotency network",
+          "volume": "464",
+          "year": "2020",
+          "journal-title": "Dev Biol"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.50",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1158/0008-5472.CAN-17-0570"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2008.02.006"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2007.11.019"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.53",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2006.07.024"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.54",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Vega-Sendino M , Olbrich T , Tillo D , Tran AD , Domingo CN , Franco M , FitzGerald PC , Kruhlak MJ , Ruiz S . 2021. The ETS transcription factor ERF controls the exit from the naïve pluripotent state in a MAPK-dependent manner. Sci Adv 7: eabg8306.",
+          "DOI": "10.1126/sciadv.abg8306"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.55",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature10805"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.56",
+          "doi-asserted-by": "crossref",
+          "first-page": "e1012081",
+          "DOI": "10.1371/journal.pgen.1012081",
+          "article-title": "ADNP regulates chromatin architecture and lineage fidelity during neural differentiation",
+          "volume": "22",
+          "year": "2026",
+          "journal-title": "PLOS Genetics"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2011.01.032"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.58",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.biocel.2012.08.022"
+        },
+        {
+          "key": "2026082110451702000_2026.08.13.744713v2.59",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.pharmthera.2016.02.008"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.13.744713",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ],
+        "date-time": "2026-08-21T17:45:23Z",
+        "timestamp": 1787334323000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.13.744713"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "references-count": 59,
+      "URL": "https://doi.org/10.64898/2026.08.13.744713",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

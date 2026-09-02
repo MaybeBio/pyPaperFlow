@@ -1,0 +1,966 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.19.745709",
+  "title": "MYC-MIZ1 Complexes at Enhancers Tune Neuroendocrine Identity of Small Cell Lung Cancer",
+  "doi": "10.64898/2026.08.19.745709",
+  "abstract": "MYC family members have been extensively studied as undruggable transcription factors regulating oncogenic signaling in highly aggressive tumors such as small cell lung cancer (SCLC), via promoter binding. Here, leveraging the previously described Myc-driven SCLC mouse model (RPM), we generated RPM-Miz1 ΔPOZ (RPMM) mice to uncover a Myc-dependent regulation of neuroendocrine (NE) differentiation, via enhancers. Our functional and genomic analyses reveal that Miz1 facilitates Myc binding to low-affinity E-boxes at distal chromosomal regions, thereby enabling Myc occupancy at sites with otherwise limited intrinsic affinity. We further show that SCLC patients and cellular models share an enrichment of low-affinity E-Box Myc binding motifs at enhancer regions that loop to genes of classic neuroendocrine differentiation. Integrated epigenetic and genomic analyses with AI-modeling implicate Myc/Miz1 binding at enhancers as the determinant for the expression of bona-fide neuroendocrine genes. In RPMM tumors, the suppression of neuroendocrine identity is paralleled by a redistribution of Myc protein towards promoter-proximal regions, hyper-activation of Myc transcriptional programs, apoptotic priming and enhanced sensitivity to etoposide. Together, these findings uncover Miz1/Myc-engaged enhancers as a central hub for neuroendocrine lineage programs and provide a mechanistic basis for a targeted inhibition of Miz1 to boost chemosensitivity in SCLC.",
+  "authors": [
+    "Lisa M. Froehlich",
+    "Hannah L. Tumbrink",
+    "Bikash Adhikari",
+    "Margarita Rempe",
+    "Jenny Ostendorp",
+    "Paula Zickler",
+    "Michaela Hoehne-Wiechmann",
+    "Alena Heimsoeth",
+    "Yichun Tang",
+    "Stefanie Lennartz",
+    "Ayla Schwaebe",
+    "Lisa Werr",
+    "Matthias Fischer",
+    "Alexander Quaas",
+    "Holger Gruell",
+    "Katia Garbert",
+    "Daniela Morgenthaler",
+    "Marian Touet",
+    "Johannes A. Hildebrand",
+    "Oliver Weigert",
+    "Filippo Beleggia",
+    "Dimitrios Papadopoulos",
+    "Elmar Wolf",
+    "Johannes Braegelmann",
+    "Julia Frede",
+    "Robert Haensel-Hertsch",
+    "Martin L. Sos"
+  ],
+  "published_date": "2026-08-20",
+  "updated_date": "2026-08-20T21:25:20Z",
+  "journal": "bioRxiv",
+  "category": "Cancer Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.19.745709",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.19.745709.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "10.64898/2026.08.19.745709",
+  "version": "",
+  "keywords": [
+    "Cancer Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Cancer Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ],
+        "date-time": "2026-08-20T22:23:27Z",
+        "timestamp": 1787264607984,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ]
+      },
+      "group-title": "Cancer Biology",
+      "reference-count": 0,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                20
+              ]
+            ],
+            "date-time": "2026-08-20T00:00:00Z",
+            "timestamp": 1787184000000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "https://www.biorxiv.org/about/FAQ#license"
+        }
+      ],
+      "funder": [
+        {
+          "award": [
+            "413326622"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "413326622"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/018mejw64",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "SO 1155/5"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "SO 1155/5"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/018mejw64",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "GRK2338 (P13)"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "GRK2338 (P13)"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/018mejw64",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "493872418"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "493872418"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/018mejw64",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "325931972"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "325931972"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/018mejw64",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "BR 6949/2-1"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "BR 6949/2-1"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/018mejw64",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "10.19.2.025MN"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "10.19.2.025MN"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/00f3sc705",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "name": "Bayerisches Zentrum für Krebsforschung",
+          "award": [
+            "BGF/25/05/LMU/Sos"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "BGF/25/05/LMU/Sos"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bayerisches Zentrum für Krebsforschung",
+          "award": [
+            "BGF/24/08/LMU/Sos"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "BGF/24/08/LMU/Sos"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Ministry of Culture and Science of the State of North Rhine-Westphalia",
+          "award": [
+            "NW21-062B"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "NW21-062B"
+              ]
+            }
+          ]
+        },
+        {
+          "award": [
+            "70113307"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "70113307"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/01wxdd722",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "70116929"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "70116929"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/01wxdd722",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "70116707"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "70116707"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/01wxdd722",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "DEFEAT-PDAC-70117118"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "DEFEAT-PDAC-70117118"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/01wxdd722",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "name": "Bundesministerium für Bildung und Forschung",
+          "award": [
+            "01ZX1303"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "01ZX1303"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bundesministerium für Bildung und Forschung",
+          "award": [
+            "01ZX1603"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "01ZX1603"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bundesministerium für Bildung und Forschung",
+          "award": [
+            "01ZX1307"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "01ZX1307"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bundesministerium für Bildung und Forschung",
+          "award": [
+            "01ZX1607"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "01ZX1607"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Wilhelm Sander Stiftung",
+          "award": [
+            "2022.093.1"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "2022.093.1"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "European Research Council",
+          "award": [
+            "101164889"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "101164889"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "European Research Council",
+          "award": [
+            "101087045"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "101087045"
+              ]
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ]
+      },
+      "abstract": "<jats:p>\n                  MYC family members have been extensively studied as undruggable transcription factors regulating oncogenic signaling in highly aggressive tumors such as small cell lung cancer (SCLC), via promoter binding. Here, leveraging the previously described Myc-driven SCLC mouse model (RPM), we generated RPM-Miz1\n                  <jats:sup>ΔPOZ</jats:sup>\n                  (RPMM) mice to uncover a Myc-dependent regulation of neuroendocrine (NE) differentiation, via enhancers. Our functional and genomic analyses reveal that Miz1 facilitates Myc binding to low-affinity E-boxes at distal chromosomal regions, thereby enabling Myc occupancy at sites with otherwise limited intrinsic affinity. We further show that SCLC patients and cellular models share an enrichment of low-affinity E-Box Myc binding motifs at enhancer regions that loop to genes of classic neuroendocrine differentiation. Integrated epigenetic and genomic analyses with AI-modeling implicate Myc/Miz1 binding at enhancers as the determinant for the expression of bona-fide neuroendocrine genes. In RPMM tumors, the suppression of neuroendocrine identity is paralleled by a redistribution of Myc protein towards promoter-proximal regions, hyper-activation of Myc transcriptional programs, apoptotic priming and enhanced sensitivity to etoposide. Together, these findings uncover Miz1/Myc-engaged enhancers as a central hub for neuroendocrine lineage programs and provide a mechanistic basis for a targeted inhibition of Miz1 to boost chemosensitivity in SCLC.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.19.745709",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ],
+        "date-time": "2026-08-20T21:25:20Z",
+        "timestamp": 1787261120000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "MYC-MIZ1 Complexes at Enhancers Tune Neuroendocrine Identity of Small Cell Lung Cancer"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Lisa M.",
+          "family": "Froehlich",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Department of Translational Oncology, German Cancer Research Center (DKFZ), LMU;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hannah L.",
+          "family": "Tumbrink",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Bikash",
+          "family": "Adhikari",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Department of Translational Oncology, German Cancer Research Center (DKFZ), LMU;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Margarita",
+          "family": "Rempe",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Department of Translational Oncology, German Cancer Research Center (DKFZ), LMU;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jenny",
+          "family": "Ostendorp",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany / Center for Molecular Medicine Cologne (CMMC), University of Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Paula",
+          "family": "Zickler",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Department of Translational Oncology, German Cancer Research Center (DKFZ), LMU;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Michaela",
+          "family": "Hoehne-Wiechmann",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alena",
+          "family": "Heimsoeth",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Yichun",
+          "family": "Tang",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Department of Translational Oncology, German Cancer Research Center (DKFZ), LMU;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Stefanie",
+          "family": "Lennartz",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ayla",
+          "family": "Schwaebe",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Lisa",
+          "family": "Werr",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany / Center for Molecular Medicine Cologne (CMMC), University of Cologne, Cologne, Germany / Department of Experimental Pediatr;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Matthias",
+          "family": "Fischer",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Molecular Medicine Cologne (CMMC), University of Cologne, Cologne, Germany / Department of Experimental Pediatric Oncology, University Childrens Hospital of Cologne, Faculty of Medicine and University Hospital of Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alexander",
+          "family": "Quaas",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "University of Cologne, Institute of Pathology, Faculty of Medicine and University Hospital Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Holger",
+          "family": "Gruell",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "University of Cologne, Department of Radiology, Faculty of Medicine and University Hospital Cologne, Cologne, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Katia",
+          "family": "Garbert",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Deans Office, Medical Faculty and University Hospital Duesseldorf, Heinrich-Heine-University Duesseldorf, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Daniela",
+          "family": "Morgenthaler",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Department of Translational Oncology, German Cancer Research Center (DKFZ), LMU;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Marian",
+          "family": "Touet",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department I of Internal Medicine, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany / Department of Hematology and Stem Cell Transplantation, University Hospital Essen, Essen, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Johannes A.",
+          "family": "Hildebrand",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Laboratory for Experimental Leukemia and Lymphoma Research (ELLF), LMU Universi;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Oliver",
+          "family": "Weigert",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Laboratory for Experimental Leukemia and Lymphoma Research (ELLF), LMU Universi;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Filippo",
+          "family": "Beleggia",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany / Department I of Internal Medicine, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Ge;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Dimitrios",
+          "family": "Papadopoulos",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Mildred Scheel Nachwuchszentrum, University of Wuerzburg, Am Hubland, Wuerzburg, Germany / Theodor Boveri Institute, Department of Biochemistry and Molecular Biology, Biocenter, University of Wuerzburg, Am Hubland, Wuerzburg, German;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Elmar",
+          "family": "Wolf",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Biochemistry, University of Kiel, Kiel, Germany;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Johannes",
+          "family": "Braegelmann",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany / Mildred Scheel School of Oncology Aachen Bonn Cologne Duesseldorf (MSSO ABCD), Faculty of Medicine and University Hospital;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Julia",
+          "family": "Frede",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Technical University of Munich, School of Medicine and Health, Institute of Laboratory Medicine, TUM University Hospital;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Robert",
+          "family": "Haensel-Hertsch",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Translational Genomics, Faculty of Medicine and University Hospital Cologne, University of Cologne, Cologne, Germany / Center for Molecular Medicine Cologne (CMMC), University of Cologne, Cologne, Germany / Cologne Excellence Cluster on Cell"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Martin L.",
+          "family": "Sos",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "German Cancer Consortium (DKTK), German Cancer Research Center (DKFZ), Heidelberg, Germany / Department of Medicine III, LMU University Hospital, LMU Munich, Munich, Germany / Department of Translational Oncology, German Cancer Research Center (DKFZ), LMU;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.19.745709",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ],
+        "date-time": "2026-08-20T21:25:20Z",
+        "timestamp": 1787261120000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.19.745709"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ]
+      },
+      "references-count": 0,
+      "URL": "https://doi.org/10.64898/2026.08.19.745709",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

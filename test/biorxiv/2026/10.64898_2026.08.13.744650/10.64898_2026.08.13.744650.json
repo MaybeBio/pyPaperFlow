@@ -1,0 +1,485 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.13.744650",
+  "title": "Molecular arms race in WHO elements, a category of homing genetic elements distinct from inteins and introns",
+  "doi": "10.64898/2026.08.13.744650",
+  "abstract": "Homing genetic elements are selfish elements that insert themselves into a specific site in a host gene without disrupting its function. They spread through the population because the element codes for an endonuclease that cleaves alleles of the host gene that do not contain the element, leading to DNA repair by gene conversion that increases the element’s frequency. Most homing genetic elements in eukaryotes are either self-splicing introns or inteins but we recently discovered a third category, called WHO elements, in the budding yeast genus Torulaspora . WHO elements code for endonuclease proteins with LAGLIDADG motifs and a zinc finger domain, and are related to the mating-type switching endonuclease HO. Their host gene is the aldolase gene FBA1 , which is essential. Clusters of up to 9 diverse WHO endonuclease genes are found downstream of FBA1 in different isolates of Torulaspora . Here, we show that there is a genetic conflict between WHO endonucleases and their target site in FBA1. Different alleles of FBA1 vary in their sensitivity or resistance to cleavage by individual WHO endonucleases. We show that a WHO endonuclease recognizes a 28-bp sequence in FBA1 and does not tolerate much sequence variation, but also that this region of FBA1 has experienced positive selection for sequence diversification to evade cleavage. WHO endonucleases and their target site in FBA1 are therefore engaged in an arms race in which each WHO element is under selection to home into other elements, while avoiding being homed into. Significance Statement WHO elements are a recently discovered type of homing genetic element in yeasts, targeting the aldolase gene FBA1 . Rather than disrupting FBA1 when they integrate, WHO elements instead replace the 3’ half of the gene with an alternative FBA1 3’ half. Each WHO element consists of an endonuclease gene and a version of the 3’ half of FBA1 , and there is high sequence diversity in both genes. We show that there is an evolutionary arms race between WHO endonucleases and their target site in FBA1 , which has resulted in rapid evolution of both genes and the formation of clusters of WHO elements at the FBA1 locus.",
+  "authors": [
+    "Matthieu Osborne",
+    "Ludovic Monnin",
+    "Kenneth H. Wolfe"
+  ],
+  "published_date": "2026-08-14",
+  "updated_date": "2026-08-15T04:25:21Z",
+  "journal": "bioRxiv",
+  "category": "Evolutionary Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.13.744650",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.13.744650.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "10.64898/2026.08.13.744650",
+  "version": "",
+  "keywords": [
+    "Evolutionary Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Evolutionary Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T16:51:53Z",
+        "timestamp": 1787071913362,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ]
+      },
+      "group-title": "Evolutionary Biology",
+      "reference-count": 38,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                14
+              ]
+            ],
+            "date-time": "2026-08-14T00:00:00Z",
+            "timestamp": 1786665600000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by-nc/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "DOI": "10.13039/501100025294",
+          "name": "Taighde Éireann - Research Ireland",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "20/FFP-A/8795"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "20/FFP-A/8795"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/501100025294",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  Homing genetic elements are selfish elements that insert themselves into a specific site in a host gene without disrupting its function. They spread through the population because the element codes for an endonuclease that cleaves alleles of the host gene that do not contain the element, leading to DNA repair by gene conversion that increases the element’s frequency. Most homing genetic elements in eukaryotes are either self-splicing introns or inteins but we recently discovered a third category, called WHO elements, in the budding yeast genus\n                  <jats:italic>Torulaspora</jats:italic>\n                  . WHO elements code for endonuclease proteins with LAGLIDADG motifs and a zinc finger domain, and are related to the mating-type switching endonuclease HO. Their host gene is the aldolase gene\n                  <jats:italic>FBA1</jats:italic>\n                  , which is essential. Clusters of up to 9 diverse\n                  <jats:italic>WHO</jats:italic>\n                  endonuclease genes are found downstream of\n                  <jats:italic>FBA1</jats:italic>\n                  in different isolates of\n                  <jats:italic>Torulaspora</jats:italic>\n                  . Here, we show that there is a genetic conflict between WHO endonucleases and their target site in\n                  <jats:italic>FBA1.</jats:italic>\n                  Different alleles of\n                  <jats:italic>FBA1</jats:italic>\n                  vary in their sensitivity or resistance to cleavage by individual WHO endonucleases. We show that a WHO endonuclease recognizes a 28-bp sequence in\n                  <jats:italic>FBA1</jats:italic>\n                  and does not tolerate much sequence variation, but also that this region of\n                  <jats:italic>FBA1</jats:italic>\n                  has experienced positive selection for sequence diversification to evade cleavage. WHO endonucleases and their target site in\n                  <jats:italic>FBA1</jats:italic>\n                  are therefore engaged in an arms race in which each WHO element is under selection to home into other elements, while avoiding being homed into.\n                </jats:p>\n                <jats:sec>\n                  <jats:title>Significance Statement</jats:title>\n                  <jats:p>\n                    WHO elements are a recently discovered type of homing genetic element in yeasts, targeting the aldolase gene\n                    <jats:italic>FBA1</jats:italic>\n                    . Rather than disrupting\n                    <jats:italic>FBA1</jats:italic>\n                    when they integrate, WHO elements instead replace the 3’ half of the gene with an alternative\n                    <jats:italic>FBA1</jats:italic>\n                    3’ half. Each WHO element consists of an endonuclease gene and a version of the 3’ half of\n                    <jats:italic>FBA1</jats:italic>\n                    , and there is high sequence diversity in both genes. We show that there is an evolutionary arms race between WHO endonucleases and their target site in\n                    <jats:italic>FBA1</jats:italic>\n                    , which has resulted in rapid evolution of both genes and the formation of clusters of\n                    <jats:italic>WHO</jats:italic>\n                    elements at the\n                    <jats:italic>FBA1</jats:italic>\n                    locus.\n                  </jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.08.13.744650",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            15
+          ]
+        ],
+        "date-time": "2026-08-15T04:25:21Z",
+        "timestamp": 1786767921000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Molecular arms race in WHO elements, a category of homing genetic elements distinct from inteins and introns"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Matthieu",
+          "family": "Osborne",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Conway Institute and School of Medicine, University College Dublin, Dublin 4, Ireland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ludovic",
+          "family": "Monnin",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Conway Institute and School of Medicine, University College Dublin, Dublin 4, Ireland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4992-4979",
+          "authenticated-orcid": false,
+          "given": "Kenneth H.",
+          "family": "Wolfe",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Conway Institute and School of Medicine, University College Dublin, Dublin 4, Ireland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.1",
+          "doi-asserted-by": "crossref",
+          "unstructured": "A. Burt , R. Trivers , Genes in conflict: The biology of selfish genetic elements (Harvard University Press, 2006).",
+          "DOI": "10.4159/9780674029118"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.2",
+          "doi-asserted-by": "crossref",
+          "unstructured": "M. Belfort , B. L. Stoddard , D. W. Wood , V. Derbyshire , Eds., Homing Endonucleases and Inteins (Springer-Verlag, Berlin, 2005).",
+          "DOI": "10.1007/3-540-29474-0"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0092-8674(85)80011-8"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/357301a0"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.str.2010.12.003"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.6",
+          "doi-asserted-by": "crossref",
+          "unstructured": "C. M. Green , O. Novikova , M. Belfort , The dynamic intein landscape of eukaryotes. Mobile DNA 9, 4 (2018).",
+          "DOI": "10.1186/s13100-018-0111-x"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1112808108"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.8",
+          "doi-asserted-by": "crossref",
+          "unstructured": "C. S. Lee , J. E. Haber , Mating-type gene switching in Saccharomyces cerevisiae . Microbiology Spectrum 3, MDNA3-0013-2014 (2015).",
+          "DOI": "10.1128/microbiolspec.MDNA3-0013-2014"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.9",
+          "doi-asserted-by": "crossref",
+          "first-page": "e55336",
+          "DOI": "10.7554/eLife.55336",
+          "article-title": "The yeast mating-type switching endonuclease HO is a domesticated member of an unorthodox homing genetic element family",
+          "volume": "9",
+          "year": "2020",
+          "journal-title": "Elife"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.10",
+          "doi-asserted-by": "crossref",
+          "first-page": "265",
+          "DOI": "10.3114/persoonia.2025.54.08",
+          "article-title": "A taxogenomic view of the genus Torulaspora: an expansion from ten to twenty-two species",
+          "volume": "54",
+          "year": "2025",
+          "journal-title": "Persoonia"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.11",
+          "doi-asserted-by": "crossref",
+          "first-page": "2",
+          "DOI": "10.1016/j.semcdb.2024.04.001",
+          "article-title": "WHO elements - A new category of selfish genetic elements at the borderline between homing elements and transposable elements",
+          "volume": "163",
+          "year": "2024",
+          "journal-title": "Seminars in cell & developmental biology"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.gde.2004.09.010"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/molbev/msi149"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1102343108"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.15",
+          "doi-asserted-by": "crossref",
+          "first-page": "31",
+          "DOI": "10.1016/j.semcdb.2024.04.002",
+          "article-title": "Genetic conflicts in budding yeast: The 2μ plasmid as a model selfish element",
+          "volume": "161-162",
+          "year": "2024",
+          "journal-title": "Seminars in cell & developmental biology"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gku616"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkaa833"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/MCB.16.5.2164"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s000180050372"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/MCB.10.3.1174"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1006/jmbi.1996.0567"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.22",
+          "doi-asserted-by": "crossref",
+          "first-page": "2396",
+          "DOI": "10.1111/mec.16428",
+          "article-title": "A glimpse at an early stage of microbe domestication revealed in the variable genome of Torulaspora delbrueckii, an emergent industrial yeast",
+          "volume": "32",
+          "year": "2023",
+          "journal-title": "Mol. Ecol"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/molbev/msi097"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/molbev/msm088"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/oxfordjournals.molbev.a004077"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/1471-2148-9-303"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.27",
+          "doi-asserted-by": "crossref",
+          "first-page": "301",
+          "DOI": "10.1111/j.1432-1033.1989.tb14648.x",
+          "article-title": "Molecular cloning, primary structure and disruption of the structural gene of aldolase from Saccharomyces cerevisiae",
+          "volume": "180",
+          "year": "1989",
+          "journal-title": "Eur. J. Biochem"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.28",
+          "doi-asserted-by": "crossref",
+          "first-page": "97",
+          "DOI": "10.1016/0014-5793(91)81160-A",
+          "article-title": "The promoter of Saccharomyces cerevisiae FBA1 gene contains a single positive upstream regulatory element",
+          "volume": "293",
+          "year": "1991",
+          "journal-title": "FEBS Lett"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0969-2126(96)00138-4"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1006/jmbi.1998.2376"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.jmb.2007.07.052"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.32",
+          "doi-asserted-by": "crossref",
+          "unstructured": "L. N. Rusche , Mobile DNAs and switching mating types in yeast. Elife 9 (2020).",
+          "DOI": "10.7554/eLife.58403"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.2419860122"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.34",
+          "doi-asserted-by": "crossref",
+          "first-page": "31",
+          "DOI": "10.1038/nprot.2007.13",
+          "article-title": "High-efficiency yeast transformation using the LiAc/SS carrier DNA/PEG method",
+          "volume": "2",
+          "year": "2007",
+          "journal-title": "Nature Protocols"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/978-1-0716-1036-7_15"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/molbev/msu300"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkw256"
+        },
+        {
+          "key": "2026081809050856000_2026.08.13.744650v1.38",
+          "doi-asserted-by": "crossref",
+          "first-page": "587",
+          "DOI": "10.1038/nmeth.4285",
+          "article-title": "ModelFinder: fast model selection for accurate phylogenetic estimates",
+          "volume": "14",
+          "year": "2017",
+          "journal-title": "Nature Methods"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.13.744650",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T16:05:24Z",
+        "timestamp": 1787069124000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.13.744650"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ]
+      },
+      "references-count": 38,
+      "URL": "https://doi.org/10.64898/2026.08.13.744650",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

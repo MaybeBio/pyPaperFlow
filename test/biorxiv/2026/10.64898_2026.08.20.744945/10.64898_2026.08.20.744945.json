@@ -1,0 +1,847 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.20.744945",
+  "title": "Cell-type-specific regulatory variation shapes maize heterosis",
+  "doi": "10.64898/2026.08.20.744945",
+  "abstract": "Heterosis, the superior performance of hybrids over their parents, has been widely exploited to enhance crop productivity, but its underlying regulatory mechanisms remain incompletely understood. In particular, how cis -regulatory elements (CREs) vary between parents and hybrids, and how this variation is organized across cell types, remains largely unresolved. Here we profiled chromatin accessibility in 131,890 nuclei derived from seedlings of three Zea mays (maize) inbred lines and their reciprocal hybrids, resolving 14 major cell types. Parental haplotype comparisons showed that most accessible chromatin regions (ACRs) were sequence-conserved and have similar binarized chromatin accessibility status. At cellular resolution, hybridization broadly attenuated chromatin accessibility cell-type specificity, weakening parental cell-type bias and yielding a more even chromatin accessibility profile across cellular contexts. Chromatin inheritance was strongly cell-type dependent, with non-additive inheritance preferentially concentrated at cell-type-specific ACRs. Although cis effects were most prevalent overall, ACRs with attenuated cell-type specificity in hybrids were enriched for non-additive inheritance and trans effects. Attenuated ACRs were more prone to transcription factor (TF) footprint gains than loci retaining high cell-type specificity, with DNA-BINDING WITH ONE FINGER (DOF) and VASCULAR PLANT ONE ZINC FINGER (VOZ) among the motif families most enriched in high-confidence footprint-gaining events. ACRs with footprint gains were preferentially linked to genes involved in development, hormone responses and growth, including DOF-family gains at GOLDEN2-like ( GLK2 ), where both the motif family and the locus have been implicated in bundle-sheath development and C4 photosynthetic specialization. Together, our findings reveal that parental chromatin accessibility patterns are reconfigured across cell types in maize hybrids, with attenuation of cell-type specificity offering a potential cellular mechanism underlying heterosis.",
+  "authors": [
+    "Luguang Jiang",
+    "Fabio Gomez-Cano",
+    "Juncheng Luo",
+    "Mark A.A. Minow",
+    "Alexandre P. Marand"
+  ],
+  "published_date": "2026-08-21",
+  "updated_date": "2026-08-21T16:35:26Z",
+  "journal": "bioRxiv",
+  "category": "Plant Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.20.744945",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.20.744945.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "10.64898/2026.08.20.744945",
+  "version": "",
+  "keywords": [
+    "Plant Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Plant Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            25
+          ]
+        ],
+        "date-time": "2026-08-25T14:23:47Z",
+        "timestamp": 1787667827381,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ]
+      },
+      "group-title": "Plant Biology",
+      "reference-count": 93,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                21
+              ]
+            ],
+            "date-time": "2026-08-21T00:00:00Z",
+            "timestamp": 1787270400000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "DOI": "10.13039/100000002",
+          "name": "National Institutes of Health",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "R00GM144742"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "R00GM144742"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100000002",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ]
+      },
+      "abstract": "<jats:title>ABSTRACT</jats:title>\n                <jats:p>\n                  Heterosis, the superior performance of hybrids over their parents, has been widely exploited to enhance crop productivity, but its underlying regulatory mechanisms remain incompletely understood. In particular, how\n                  <jats:italic>cis</jats:italic>\n                  -regulatory elements (CREs) vary between parents and hybrids, and how this variation is organized across cell types, remains largely unresolved. Here we profiled chromatin accessibility in 131,890 nuclei derived from seedlings of three\n                  <jats:italic>Zea mays</jats:italic>\n                  (maize) inbred lines and their reciprocal hybrids, resolving 14 major cell types. Parental haplotype comparisons showed that most accessible chromatin regions (ACRs) were sequence-conserved and have similar binarized chromatin accessibility status. At cellular resolution, hybridization broadly attenuated chromatin accessibility cell-type specificity, weakening parental cell-type bias and yielding a more even chromatin accessibility profile across cellular contexts. Chromatin inheritance was strongly cell-type dependent, with non-additive inheritance preferentially concentrated at cell-type-specific ACRs. Although\n                  <jats:italic>cis</jats:italic>\n                  effects were most prevalent overall, ACRs with attenuated cell-type specificity in hybrids were enriched for non-additive inheritance and\n                  <jats:italic>trans</jats:italic>\n                  effects. Attenuated ACRs were more prone to transcription factor (TF) footprint gains than loci retaining high cell-type specificity, with DNA-BINDING WITH ONE FINGER (DOF) and VASCULAR PLANT ONE ZINC FINGER (VOZ) among the motif families most enriched in high-confidence footprint-gaining events. ACRs with footprint gains were preferentially linked to genes involved in development, hormone responses and growth, including DOF-family gains at\n                  <jats:italic>GOLDEN2-like</jats:italic>\n                  (\n                  <jats:italic>GLK2</jats:italic>\n                  ), where both the motif family and the locus have been implicated in bundle-sheath development and C4 photosynthetic specialization. Together, our findings reveal that parental chromatin accessibility patterns are reconfigured across cell types in maize hybrids, with attenuation of cell-type specificity offering a potential cellular mechanism underlying heterosis.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.20.744945",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ],
+        "date-time": "2026-08-21T16:35:26Z",
+        "timestamp": 1787330126000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Cell-type-specific regulatory variation shapes maize heterosis"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-7155-5471",
+          "authenticated-orcid": false,
+          "given": "Luguang",
+          "family": "Jiang",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Department of Molecular, Cellular, and Developmental Biology, University of Michigan, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-2624-0112",
+          "authenticated-orcid": false,
+          "given": "Fabio",
+          "family": "Gomez-Cano",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Molecular, Cellular, and Developmental Biology, University of Michigan, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Juncheng",
+          "family": "Luo",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Molecular, Cellular, and Developmental Biology, University of Michigan, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-0791-9621",
+          "authenticated-orcid": false,
+          "given": "Mark A.A.",
+          "family": "Minow",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Genetics, University of Georgia, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-9100-8320",
+          "authenticated-orcid": false,
+          "given": "Alexandre P.",
+          "family": "Marand",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Molecular, Cellular, and Developmental Biology, University of Michigan, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nrg3503"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cub.2018.06.041"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.3",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Yu, D. et al. Molecular basis of heterosis and related breeding strategies reveal its importance in vegetable breeding. Hortic Res 8, 120 (2021).",
+          "DOI": "10.1038/s41438-021-00552-9"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.4",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Liu, W. , Zhang, Y. , He, H. , He, G. & Deng, X. W . From hybrid genomes to heterotic trait output: Challenges and opportunities. Current Opinion in Plant Biology 66, 102193 (2022).",
+          "DOI": "10.1016/j.pbi.2022.102193"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.tplants.2024.07.018"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1105/tpc.110.076133"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1214141109"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1534/genetics.108.091942"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/plphys/kiae385"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.tig.2006.12.006"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1534/genetics.106.064493"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1270/jsbbs.17155"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.13",
+          "doi-asserted-by": "crossref",
+          "first-page": "1194",
+          "DOI": "10.1111/tpj.16004",
+          "article-title": "Allele-specific expression and chromatin accessibility contribute to heterosis in tea plants (Camellia sinensis)",
+          "volume": "112",
+          "year": "2022",
+          "journal-title": "The Plant Journal"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/tpj.16920"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.10.09.681407"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.16",
+          "doi-asserted-by": "crossref",
+          "first-page": "5659",
+          "DOI": "10.1038/s41467-026-72353-4",
+          "article-title": "Chromatin accessibility landscape and its association with heterosis in maize hybrids",
+          "volume": "17",
+          "year": "2026",
+          "journal-title": "Nat Commun"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.17",
+          "doi-asserted-by": "crossref",
+          "first-page": "404",
+          "DOI": "10.1111/nph.70908",
+          "article-title": "Haplotype-resolved genome reveals allele-aware epigenetic and 3D chromatin regulation of heterosis in the tea hybrid",
+          "volume": "250",
+          "year": "2026",
+          "journal-title": "New Phytologist"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1202073109"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.19",
+          "doi-asserted-by": "crossref",
+          "unstructured": "He, G. et al. Conservation and divergence of transcriptomic and epigenomic variation in maize hybrids. Genome Biol 14, R57 (2013).",
+          "DOI": "10.1186/gb-2013-14-6-r57"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1613372113"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.21",
+          "doi-asserted-by": "crossref",
+          "first-page": "466",
+          "DOI": "10.1111/jipb.12443",
+          "article-title": "Natural variation of H3K27me3 modification in two Arabidopsis accessions and their hybrid",
+          "volume": "58",
+          "year": "2016",
+          "journal-title": "Journal of Integrative Plant Biology"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/tpj.14143"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/plphys/kiab088"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.24",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Zhu, W. et al. Altered chromatin compaction and histone methylation drive non-additive gene expression in an interspecific Arabidopsis hybrid. Genome Biol 18, 157 (2017).",
+          "DOI": "10.1186/s13059-017-1281-4"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.25",
+          "doi-asserted-by": "crossref",
+          "first-page": "289",
+          "DOI": "10.1016/j.jare.2022.01.001",
+          "article-title": "Comparison of dynamic 3D chromatin architecture uncovers heterosis for leaf size in Brassica napus",
+          "volume": "42",
+          "year": "2022",
+          "journal-title": "Journal of Advanced Research"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.26",
+          "doi-asserted-by": "crossref",
+          "first-page": "2568",
+          "DOI": "10.3390/ijms25052568",
+          "article-title": "Integrating Dynamic 3D Chromatin Architecture and Gene Expression Alterations Reveal Heterosis in Brassica rapa",
+          "volume": "25",
+          "year": "2024",
+          "journal-title": "International Journal of Molecular Sciences"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-57932-1"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.28",
+          "doi-asserted-by": "crossref",
+          "first-page": "601",
+          "DOI": "10.1016/j.tig.2025.01.001",
+          "article-title": "Chromatin accessibility provides a window into the genetic etiology of human brain disease",
+          "volume": "41",
+          "year": "2025",
+          "journal-title": "Trends in Genetics"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.2688"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-021-23675-y"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molp.2021.01.001"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2021.04.014"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.33",
+          "doi-asserted-by": "crossref",
+          "first-page": "eads6601",
+          "DOI": "10.1126/science.ads6601",
+          "article-title": "The genetic architecture of cell type–specific cis regulation in maize",
+          "volume": "388",
+          "year": "2025",
+          "journal-title": "Science"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.34",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Feng, D. et al. Chromatin accessibility illuminates single-cell regulatory dynamics of rice root tips. BMC Biol 20, 274 (2022).",
+          "DOI": "10.1186/s12915-022-01473-2"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.35",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Tu, X. , Marand, A. P. , Schmitz, R. J. & Zhong, S . A combinatorial indexing strategy for low-cost epigenomic profiling of plant single cells. Plant Communications 3, 100308 (2022).",
+          "DOI": "10.1016/j.xplc.2022.100308"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.36",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Wang, D. et al. Cell-specific clock-controlled gene expression program regulates rhythmic fiber cell growth in cotton. Genome Biol 24, 49 (2023).",
+          "DOI": "10.1186/s13059-023-02886-0"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-025-09251-0"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.38",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Zhang, L. et al. Asymmetric gene expression and cell-type-specific regulatory networks in the root of bread wheat revealed by single-cell multiomics analysis. Genome Biol 24, 65 (2023).",
+          "DOI": "10.1186/s13059-023-02908-x"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2024.11.016"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.2402781121"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-024-08204-3"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.42",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Bang, S. et al. WUSCHEL-dependent chromatin regulation in maize inflorescence development at single-cell resolution. Genome Biol 26, 329 (2025).",
+          "DOI": "10.1186/s13059-025-03791-4"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-024-08383-z"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.44",
+          "doi-asserted-by": "crossref",
+          "first-page": "2050",
+          "DOI": "10.1038/s41477-025-02106-6",
+          "article-title": "A single-cell rice atlas integrates multi-species data to reveal cis-regulatory evolution",
+          "volume": "11",
+          "year": "2025",
+          "journal-title": "Nat. Plants"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.45",
+          "doi-asserted-by": "crossref",
+          "first-page": "kiag094",
+          "DOI": "10.1093/plphys/kiag094",
+          "article-title": "scRNA-seq and scATAC-seq reveal dual transcriptional and translational regulation of fiber cells in Upland and Pima cotton",
+          "volume": "201",
+          "year": "2026",
+          "journal-title": "Plant Physiol"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.46",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Zhang, X. , Marand, A. P. , Yan, H. & Schmitz, R . J. scifi-ATAC-seq: massive-scale single-cell chromatin accessibility sequencing using combinatorial fluidic indexing. Genome Biol 25, 90 (2024).",
+          "DOI": "10.1186/s13059-024-03235-5"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.abg5289"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-020-18832-8"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.3582"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.50",
+          "doi-asserted-by": "crossref",
+          "first-page": "e1004845",
+          "DOI": "10.1371/journal.pgen.1004845",
+          "article-title": "Association Mapping across Numerous Traits Reveals Patterns of Functional Variation in Maize",
+          "volume": "10",
+          "year": "2014",
+          "journal-title": "PLOS Genetics"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature25966"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.52",
+          "doi-asserted-by": "crossref",
+          "first-page": "5762",
+          "DOI": "10.3390/ijms24065762",
+          "article-title": "Genome-Wide Identification and Expression Analysis of Cysteine-Rich Polycomb-like Protein (CPP) Gene Family in Tomato",
+          "volume": "24",
+          "year": "2023",
+          "journal-title": "International Journal of Molecular Sciences"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.53",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Zheng, W. , Yang, C. , Li, W. , Bu, W. & Bu, F . Genome-wide identification, evolution and expression of the CPP gene family in six Theaceae species. Front. Plant Sci. 16, (2025).",
+          "DOI": "10.3389/fpls.2025.1700390"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.5220/0005189301020108"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.55",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Li, Z. , Li, M. & Wang, J . Asymmetric subgenomic chromatin architecture impacts on gene expression in resynthesized and natural allopolyploid Brassica napus. Commun Biol 5, 762 (2022).",
+          "DOI": "10.1038/s42003-022-03729-7"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.56",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molp.2018.12.015"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/gbe/evx035"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.58",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gr.142281.112"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.59",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0109382"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.60",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s00425-012-1754-3"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.61",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1525244113"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.62",
+          "doi-asserted-by": "crossref",
+          "first-page": "1237",
+          "DOI": "10.1038/s41477-019-0547-0",
+          "article-title": "Widespread Long-range Cis-Regulatory Elements in the Maize Genome",
+          "volume": "5",
+          "year": "2019",
+          "journal-title": "Nat Plants"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.63",
+          "doi-asserted-by": "crossref",
+          "first-page": "1205",
+          "DOI": "10.1038/s41477-025-02007-8",
+          "article-title": "Transcription factor binding divergence drives transcriptional and phenotypic variation in maize",
+          "volume": "11",
+          "year": "2025",
+          "journal-title": "Nat Plants"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.64",
+          "doi-asserted-by": "crossref",
+          "first-page": "3709",
+          "DOI": "10.1093/plcell/koae180",
+          "article-title": "Molecular mechanisms underlying gene regulatory variation of maize metabolic traits",
+          "volume": "36",
+          "year": "2024",
+          "journal-title": "Plant Cell"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.65",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gr.209601.116"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.66",
+          "doi-asserted-by": "crossref",
+          "first-page": "10",
+          "DOI": "10.14806/ej.17.1.200",
+          "article-title": "Cutadapt removes adapter sequences from high-throughput sequencing reads",
+          "volume": "17",
+          "year": "2011",
+          "journal-title": "EMBnet.journal"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.67",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.48550/arXiv.1303.3997"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.68",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btp352"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.69",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.2113075119"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.70",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btm308"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.71",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gr.107524.110"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.72",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-018-0182-0"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.73",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.4042"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.74",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.48550/arXiv.1207.3907"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.75",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btx100"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.76",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Zhang, Y. et al. Model-based Analysis of ChIP-Seq (MACS). Genome Biol 9, R137 (2008).",
+          "DOI": "10.1186/gb-2008-9-9-r137"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.77",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btp616"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.78",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aav6428"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.79",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/BF01068419"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.80",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/060012"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.81",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/bts277"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.82",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2021.10.024"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.83",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/bty191"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.84",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkj144"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.85",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bib/bbw008"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.86",
+          "first-page": "1017",
+          "volume": "27",
+          "year": "2011",
+          "journal-title": "FIMO: scanning for occurrences of a given motif. Bioinformatics"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.87",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Love, M. I. , Huber, W. & Anders, S . Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. Genome Biol 15, 550 (2014).",
+          "DOI": "10.1186/s13059-014-0550-8"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.88",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Anders, S. & Huber, W . Differential expression analysis for sequence count data. Genome Biol 11, R106 (2010).",
+          "DOI": "10.1186/gb-2010-11-10-r106"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.89",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.4555"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.90",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btp554"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.91",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-024-08443-4"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.92",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41592-023-02139-9"
+        },
+        {
+          "key": "2026082506351195000_2026.08.20.744945v1.93",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkx382"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.20.744945",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            25
+          ]
+        ],
+        "date-time": "2026-08-25T13:35:29Z",
+        "timestamp": 1787664929000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.20.744945"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ]
+      },
+      "references-count": 93,
+      "URL": "https://doi.org/10.64898/2026.08.20.744945",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "source": "arxiv",
+  "source_id": "2507.06458v1",
+  "title": "Automated Neuron Labelling Enables Generative Steering and Interpretability in Protein Language Models",
+  "doi": "",
+  "abstract": "Protein language models (PLMs) encode rich biological information, yet their internal neuron representations are poorly understood. We introduce the first automated framework for labeling every neuron in a PLM with biologically grounded natural language descriptions. Unlike prior approaches relying on sparse autoencoders or manual annotation, our method scales to hundreds of thousands of neurons, revealing individual neurons are selectively sensitive to diverse biochemical and structural properties. We then develop a novel neuron activation-guided steering method to generate proteins with desired traits, enabling convergence to target biochemical properties like molecular weight and instability index as well as secondary and tertiary structural motifs, including alpha helices and canonical Zinc Fingers. We finally show that analysis of labeled neurons in different model sizes reveals PLM scaling laws and a structured neuron space distribution.",
+  "authors": [
+    "Arjun Banerjee",
+    "David Martinez",
+    "Camille Dang",
+    "Ethan Tam"
+  ],
+  "published_date": "2025-07-08T23:59:13Z",
+  "updated_date": "2025-07-08T23:59:13Z",
+  "journal": "",
+  "category": "cs.LG, q-bio.BM",
+  "landing_url": "https://arxiv.org/abs/2507.06458v1",
+  "pdf_url": "https://arxiv.org/pdf/2507.06458v1",
+  "pdf_path": "test/arxiv/2025/2507.06458v1/2507.06458v1.pdf",
+  "pdf_downloaded": true,
+  "query": "",
+  "version": "1",
+  "keywords": [
+    "cs.LG",
+    "q-bio.BM"
+  ],
+  "extra": {
+    "entry_id": "http://arxiv.org/abs/2507.06458v1",
+    "raw_categories": [
+      "cs.LG",
+      "q-bio.BM"
+    ],
+    "journal_ref": ""
+  }
+}

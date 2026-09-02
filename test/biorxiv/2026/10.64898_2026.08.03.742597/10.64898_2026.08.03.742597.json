@@ -1,0 +1,942 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.03.742597",
+  "title": "ZNF768 regulates expression of E2F1 protein to drive G0/G1 transition and cell cycle progression",
+  "doi": "10.64898/2026.08.03.742597",
+  "abstract": "Accurate and tightly coordinated cell cycle progression and cell proliferation are critical for development, growth and homeostasis of an organism. Recently, Zinc finger protein 768 (ZNF768) was identified as a transcription factor driving cellular proliferation, in both a p53-dependent and independent manner. ZNF768 interacts with and represses p53 functions to limit cell cycle delay. Independently, ZNF768 promotes the transcription of key regulators of the cell cycle machinery, although the mechanisms through which this occurs remain unknown. Here, we report that ZNF768 protein levels are tightly regulated during the cell cycle, and its depletion leads to cell cycle exit and induction of quiescence. We found that ZNF768 modulates the cell cycle, at least in part, by controlling expression of the major pro-proliferative transcription factor E2F1 independently of p53 activation. Consequently, depletion of ZNF768, which also represses expression of the key mitotic transcription factor and E2F1 target FOXM1, leads to numerous mitotic errors. Supporting these findings, cancer genomics analyses reveal that ZNF768 expression levels are positively associated with E2F1 and FOXM1 expression levels in human tumors, suggesting that cancer cells might use ZNF768 to override cell cycle arrest, sustain proliferation, and promote cancer progression. Altogether, our results reveal that ZNF768 modulates cell cycle entry and proliferation, at least in part by regulating E2F1 expression.",
+  "authors": [
+    "Romain Devillers",
+    "Benjamin Brisebois",
+    "Suparba Roy",
+    "Emeline I. J. Lelong",
+    "Audrey Poirier",
+    "Alona Kolonohuz",
+    "Danielle Caron",
+    "Christophe Tav",
+    "Romain Villot",
+    "Frédéric Lessard",
+    "Laura Tribouillard",
+    "Chantal Garand",
+    "Arnaud Droit",
+    "Samer Hussein",
+    "Philippe Joubert",
+    "Mathieu Laplante",
+    "Sabine Elowe"
+  ],
+  "published_date": "2026-08-04",
+  "updated_date": "2026-08-04T16:56:14Z",
+  "journal": "bioRxiv",
+  "category": "Cell Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.03.742597",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.03.742597.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "10.64898/2026.08.03.742597",
+  "version": "",
+  "keywords": [
+    "Cell Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Cell Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            7
+          ]
+        ],
+        "date-time": "2026-08-07T15:16:02Z",
+        "timestamp": 1786115762074,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "group-title": "Cell Biology",
+      "reference-count": 65,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                4
+              ]
+            ],
+            "date-time": "2026-08-04T00:00:00Z",
+            "timestamp": 1785801600000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "https://www.biorxiv.org/about/FAQ#license"
+        }
+      ],
+      "funder": [
+        {
+          "name": "Cancer research Society",
+          "award": [
+            "1161192"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "1161192"
+              ]
+            }
+          ]
+        },
+        {
+          "id": [
+            {
+              "id": "https://ror.org/01gavpb45",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "id": [
+            {
+              "id": "https://ror.org/01h531d29",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  Accurate and tightly coordinated cell cycle progression and cell proliferation are critical for development, growth and homeostasis of an organism. Recently, Zinc finger protein 768 (ZNF768) was identified as a transcription factor driving cellular proliferation, in both a p53-dependent and independent manner. ZNF768 interacts with and represses p53 functions to limit cell cycle delay. Independently, ZNF768 promotes the transcription of key regulators of the cell cycle machinery, although the mechanisms through which this occurs remain unknown. Here, we report that ZNF768 protein levels are tightly regulated during the cell cycle, and its depletion leads to cell cycle exit and induction of quiescence. We found that ZNF768 modulates the cell cycle, at least in part, by controlling expression of the major pro-proliferative transcription factor\n                  <jats:italic>E2F1</jats:italic>\n                  independently of p53 activation. Consequently, depletion of ZNF768, which also represses expression of the key mitotic transcription factor and E2F1 target\n                  <jats:italic>FOXM1,</jats:italic>\n                  leads to numerous mitotic errors. Supporting these findings, cancer genomics analyses reveal that\n                  <jats:italic>ZNF768</jats:italic>\n                  expression levels are positively associated with\n                  <jats:italic>E2F1</jats:italic>\n                  and\n                  <jats:italic>FOXM1</jats:italic>\n                  expression levels in human tumors, suggesting that cancer cells might use ZNF768 to override cell cycle arrest, sustain proliferation, and promote cancer progression. Altogether, our results reveal that ZNF768 modulates cell cycle entry and proliferation, at least in part by regulating\n                  <jats:italic>E2F1</jats:italic>\n                  expression.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.03.742597",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ],
+        "date-time": "2026-08-04T16:56:14Z",
+        "timestamp": 1785862574000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "ZNF768 regulates expression of E2F1 protein to drive G0/G1 transition and cell cycle progression"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Romain",
+          "family": "Devillers",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec-Université Laval, Axe d’Oncologie, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche de l’Institut Universitaire de Cardiologie et de Pneumologie de Québec-Université Laval (IUCPQ-ULaval), Faculté de Médecine, Université Laval, Québec, Canada"
+            },
+            {
+              "name": "PROTEO-Regroupement Québécois de Recherche sur la Fonction, L’ingénierie et les Applications des Protéines, Québec City, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Benjamin",
+          "family": "Brisebois",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec-Université Laval, Axe d’Oncologie, Québec, Canada"
+            },
+            {
+              "name": "PROTEO-Regroupement Québécois de Recherche sur la Fonction, L’ingénierie et les Applications des Protéines, Québec City, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Suparba",
+          "family": "Roy",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec-Université Laval, Axe d’Oncologie, Québec, Canada"
+            },
+            {
+              "name": "PROTEO-Regroupement Québécois de Recherche sur la Fonction, L’ingénierie et les Applications des Protéines, Québec City, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Emeline I. J.",
+          "family": "Lelong",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec-Université Laval, Axe d’Oncologie, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Audrey",
+          "family": "Poirier",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de Recherche de l’Institut Universitaire de Cardiologie et de Pneumologie de Québec-Université Laval (IUCPQ-ULaval), Faculté de Médecine, Université Laval, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alona",
+          "family": "Kolonohuz",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de Recherche de l’Institut Universitaire de Cardiologie et de Pneumologie de Québec-Université Laval (IUCPQ-ULaval), Faculté de Médecine, Université Laval, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Danielle",
+          "family": "Caron",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "PROTEO-Regroupement Québécois de Recherche sur la Fonction, L’ingénierie et les Applications des Protéines, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Christophe",
+          "family": "Tav",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            },
+            {
+              "name": "Centre de Recherche en Données Massives de l’Université Laval, Québec, QC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Romain",
+          "family": "Villot",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de Recherche de l’Institut Universitaire de Cardiologie et de Pneumologie de Québec-Université Laval (IUCPQ-ULaval), Faculté de Médecine, Université Laval, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Frédéric",
+          "family": "Lessard",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec-Université Laval, Axe d’Oncologie, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Laura",
+          "family": "Tribouillard",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de Recherche de l’Institut Universitaire de Cardiologie et de Pneumologie de Québec-Université Laval (IUCPQ-ULaval), Faculté de Médecine, Université Laval, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Chantal",
+          "family": "Garand",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec-Université Laval, Axe d’Oncologie, Québec, Canada"
+            },
+            {
+              "name": "PROTEO-Regroupement Québécois de Recherche sur la Fonction, L’ingénierie et les Applications des Protéines, Québec City, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Arnaud",
+          "family": "Droit",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            },
+            {
+              "name": "Centre de Recherche en Données Massives de l’Université Laval, Québec, QC, Canada"
+            },
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec- Université Laval, Axe Endocrinologie et Néphrologie, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Samer",
+          "family": "Hussein",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec-Université Laval, Axe d’Oncologie, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Philippe",
+          "family": "Joubert",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de Recherche de l’Institut Universitaire de Cardiologie et de Pneumologie de Québec-Université Laval (IUCPQ-ULaval), Faculté de Médecine, Université Laval, Québec, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mathieu",
+          "family": "Laplante",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de Recherche de l’Institut Universitaire de Cardiologie et de Pneumologie de Québec-Université Laval (IUCPQ-ULaval), Faculté de Médecine, Université Laval, Québec, Canada"
+            },
+            {
+              "name": "PROTEO-Regroupement Québécois de Recherche sur la Fonction, L’ingénierie et les Applications des Protéines, Québec City, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1212-7039",
+          "authenticated-orcid": false,
+          "given": "Sabine",
+          "family": "Elowe",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre de recherche du Centre Hospitalier Universitaire (CHU) de Québec-Université Laval, Axe d’Oncologie, Québec, Canada"
+            },
+            {
+              "name": "PROTEO-Regroupement Québécois de Recherche sur la Fonction, L’ingénierie et les Applications des Protéines, Québec City, Canada"
+            },
+            {
+              "name": "Centre de Recherche sur le Cancer, CHU de Québec-Université Laval, Québec City, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.1",
+          "doi-asserted-by": "crossref",
+          "first-page": "100923",
+          "DOI": "10.1016/j.xgen.2025.100923",
+          "article-title": "Evolutionarily recent transcription factors partake in human cell cycle regulation",
+          "volume": "5",
+          "year": "2025",
+          "journal-title": "Cell Genomics"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nrc3556"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nrc2696"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41568-019-0143-7"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/icb/icm066"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.6",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Kamaliyan, Z. & Clarke, T. L . Zinc finger proteins: guardians of genome stability. Front. Cell Dev. Biol. 12, (2024).",
+          "DOI": "10.3389/fcell.2024.1448789"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gky1148"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.8",
+          "doi-asserted-by": "crossref",
+          "first-page": "4136",
+          "DOI": "10.3390/cancers13164136",
+          "article-title": "ZNF768 Expression Associates with High Proliferative Clinicopathological Features in Lung Adenocarcinoma",
+          "volume": "13",
+          "year": "2021",
+          "journal-title": "Cancers"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.9",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Villot, R. et al. ZNF768 links oncogenic RAS to cellular senescence. Nat. Commun. 12, (2021).",
+          "DOI": "10.1038/s41467-021-24932-w"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.10",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Villot, R. et al. ZNF768: controlling cellular senescence and proliferation with ten fingers. Mol. Cell. Oncol. 8, (2021).",
+          "DOI": "10.1080/23723556.2021.1985930"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.11",
+          "doi-asserted-by": "crossref",
+          "first-page": "1793",
+          "DOI": "10.1038/s41388-025-03352-w",
+          "article-title": "ZNF768 loss amplifies p53 action and reduces lung tumorigenesis in mice",
+          "volume": "44",
+          "year": "2025",
+          "journal-title": "Oncogene"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gad.1040502"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2008.02.027"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.14",
+          "first-page": "1710",
+          "article-title": "Cell cycle analysis of a cell proliferation-associated human nuclear antigen defined by the monoclonal antibody Ki-67",
+          "volume": "133",
+          "year": "1984",
+          "journal-title": "J. Immunol. Baltim. Md 1950"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2020.05.040"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.16",
+          "doi-asserted-by": "crossref",
+          "first-page": "230",
+          "DOI": "10.1016/j.cels.2021.10.007",
+          "article-title": "The structure of the human cell cycle",
+          "volume": "13",
+          "year": "2022",
+          "journal-title": "Cell Syst"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.celrep.2017.09.007"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-019-09234-6"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-022-32205-3"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng1180"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.0506580102"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkx1013"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2024.08.037"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.24",
+          "doi-asserted-by": "crossref",
+          "first-page": "774",
+          "DOI": "10.1016/j.molcel.2026.01.003",
+          "article-title": "RBPscan: A quantitative in vivo tool for profiling RNA-binding protein interactions",
+          "volume": "86",
+          "year": "2026",
+          "journal-title": "Mol. Cell"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.25",
+          "doi-asserted-by": "crossref",
+          "first-page": "393",
+          "DOI": "10.3390/genes14020393",
+          "article-title": "Deregulated E2F Activity as a Cancer-Cell Specific Therapeutic Tool",
+          "volume": "14",
+          "year": "2023",
+          "journal-title": "Genes"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/MCB.14.1.299"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1074/jbc.M501410200"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gki855"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.29",
+          "doi-asserted-by": "crossref",
+          "first-page": "509",
+          "DOI": "10.1158/1535-7163.MCT-26-0155",
+          "article-title": "Expression of Concern: ATM and p53 Regulate FOXM1 Expression via E2F in Breast Cancer Epirubicin Treatment and Resistance",
+          "volume": "25",
+          "year": "2026",
+          "journal-title": "Mol. Cancer Ther"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gad.436007"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ncb1767"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.32",
+          "doi-asserted-by": "crossref",
+          "first-page": "1658515",
+          "DOI": "10.1080/23723556.2019.1658515",
+          "article-title": "Another string to the polo bow: a new mitotic role of PLK1 in centromere protection",
+          "volume": "6",
+          "year": "2019",
+          "journal-title": "Mol. Cell. Oncol"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/bph.16257"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.arr.2018.02.004"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.4161/cc.8.5.7753"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1098/rsfs.2013.0074"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2019.01.004"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.7554/eLife.02872"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/1873-3468.13628"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-66836-z"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.celrep.2016.01.068"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.celrep.2012.09.033"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.43",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Kim, K. H. & Sederstrom, J. M . Assaying Cell Cycle Status Using Flow Cytometry. Curr. Protoc. Mol. Biol. 111, (2015).",
+          "DOI": "10.1002/0471142727.mb2806s111"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkae410"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/bts635"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btt656"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-014-0550-8"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/1471-2105-14-7"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btr260"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.50",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gr.209643.116"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature11247"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.52",
+          "doi-asserted-by": "crossref",
+          "first-page": "1237092",
+          "DOI": "10.3389/fgene.2023.1237092",
+          "article-title": "Glucocorticoid stimulation induces regionalized gene responses within topologically associating domains",
+          "volume": "14",
+          "year": "2023",
+          "journal-title": "Front. Genet"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.53",
+          "unstructured": "Andrews, S. , Babraham Bioinformatics . FastQC: A quality control tool for high throughput sequence data. https://www.bioinformatics.babraham.ac.uk/projects/fastqc/. (2010)."
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/bty560"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.55",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Bourgey, M. et al. GenPipes: an open-source framework for distributed and scalable genomic analyses. GigaScience 8, giz037 (2019).",
+          "DOI": "10.1093/gigascience/giz037"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.56",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btu170"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1109/IPDPS.2019.00041"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.58",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btv098"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.59",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Danecek, P. et al. Twelve years of SAMtools and BCFtools. GigaScience 10, giab008 (2021).",
+          "DOI": "10.1093/gigascience/giab008"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.60",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkw257"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.61",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btp328"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.62",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btac057"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.63",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkab996"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.64",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkv1507"
+        },
+        {
+          "key": "2026080521452646000_2026.08.03.742597v1.65",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1083/jcb.202001064"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.03.742597",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            6
+          ]
+        ],
+        "date-time": "2026-08-06T04:46:27Z",
+        "timestamp": 1785991587000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.03.742597"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "references-count": 65,
+      "URL": "https://doi.org/10.64898/2026.08.03.742597",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

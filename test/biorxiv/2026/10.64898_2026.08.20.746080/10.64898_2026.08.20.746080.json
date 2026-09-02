@@ -1,0 +1,426 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.20.746080",
+  "title": "CRISPR/Cas9-Mediated Knockout of ZFP36L1 Impairs Cell Proliferation, Alters Cell-Cycle Progression, and Enhances DNA Damage Responses in MDA-MB-231 Triple-Negative Breast Cancer Cells",
+  "doi": "10.64898/2026.08.20.746080",
+  "abstract": "Background Zinc finger protein 36-like 1 (ZFP36L1) is an AU-rich element-binding RNA-binding protein that regulates post-transcriptional gene expression and has been implicated in tumor progression, cell-cycle regulation, and DNA damage responses. However, its functional role in triple-negative breast cancer (TNBC) remains poorly understood. This study investigated the effects of CRISPR/Cas9-mediated ZFP36L1 knockout on cell proliferation, doxorubicin (DOX) sensitivity, cell-cycle progression, and DNA damage responses in MDA-MB-231 TNBC cells. Methods Wild-type (WT) and CRISPR/Cas9-generated ZFP36L1 knockout (KO) MDA-MB-231 cells were cultured under standard conditions. Cellular proliferation was evaluated by cell counting over three weeks. Cell viability following DOX treatment was determined using the MTT assay, and half-maximal inhibitory concentration (IC 50 ) values were calculated. Cell-cycle distribution was assessed by propidium iodide flow cytometry after 24 h of DOX exposure, while DNA damage was quantified by γ-H2AX flow cytometric analysis. Statistical significance was determined using Student’s t -test with P < 0.05 considered significant. Results ZFP36L1 knockout reduced the proliferative capacity of MDA-MB-231 cells compared with WT cells. Both cell lines exhibited dose-dependent decreases in viability following DOX treatment. KO cells demonstrated a higher mean IC 50 than WT cells (9.64 vs. 8.40 μM), indicating a trend toward reduced DOX sensitivity; however, this difference was not statistically significant ( P = 0.569). Flow cytometric analysis revealed enhanced accumulation of KO cells in the S and G 2 /M phases following DOX treatment, suggesting altered cell-cycle checkpoint regulation. Furthermore, KO cells exhibited elevated basal γ-H2AX expression and greater DOX-induced γ-H2AX accumulation than WT cells, indicating increased DNA damage and impaired maintenance of genomic stability. Conclusions CRISPR/Cas9-mediated loss of ZFP36L1 suppresses proliferation, alters cell-cycle checkpoint dynamics, and enhances DNA damage accumulation in MDA-MB-231 TNBC cells. These findings indicate that ZFP36L1 plays a context-dependent role in regulating genomic stability and cellular responses to genotoxic stress, highlighting its potential as a biomarker and therapeutic target in triple-negative breast cancer.",
+  "authors": [
+    "Hope H.G Gandu",
+    "Purity T. Y Gandu",
+    "Efe Okorare",
+    "Michael Uzorchukwu Ochem",
+    "Nneamaka Henrietta Okeke",
+    "Divine O. Nwachi",
+    "Dennis Kure Yusuf",
+    "Nwanneka Grace Anene",
+    "Reem G A Hamed",
+    "Usman Karuma Shuaib"
+  ],
+  "published_date": "2026-08-23",
+  "updated_date": "2026-08-24T05:00:30Z",
+  "journal": "bioRxiv",
+  "category": "Cancer Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.20.746080",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.20.746080.full.pdf",
+  "pdf_path": "",
+  "pdf_downloaded": false,
+  "query": "10.64898/2026.08.20.746080",
+  "version": "",
+  "keywords": [
+    "Cancer Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Cancer Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            27
+          ]
+        ],
+        "date-time": "2026-08-27T11:21:02Z",
+        "timestamp": 1787829662928,
+        "version": "build-2784847793"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            23
+          ]
+        ]
+      },
+      "group-title": "Cancer Biology",
+      "reference-count": 14,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                23
+              ]
+            ],
+            "date-time": "2026-08-23T00:00:00Z",
+            "timestamp": 1787443200000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            23
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:sec>\n                  <jats:title>Background</jats:title>\n                  <jats:p>Zinc finger protein 36-like 1 (ZFP36L1) is an AU-rich element-binding RNA-binding protein that regulates post-transcriptional gene expression and has been implicated in tumor progression, cell-cycle regulation, and DNA damage responses. However, its functional role in triple-negative breast cancer (TNBC) remains poorly understood. This study investigated the effects of CRISPR/Cas9-mediated ZFP36L1 knockout on cell proliferation, doxorubicin (DOX) sensitivity, cell-cycle progression, and DNA damage responses in MDA-MB-231 TNBC cells.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Methods</jats:title>\n                  <jats:p>\n                    Wild-type (WT) and CRISPR/Cas9-generated ZFP36L1 knockout (KO) MDA-MB-231 cells were cultured under standard conditions. Cellular proliferation was evaluated by cell counting over three weeks. Cell viability following DOX treatment was determined using the MTT assay, and half-maximal inhibitory concentration (IC\n                    <jats:sub>50</jats:sub>\n                    ) values were calculated. Cell-cycle distribution was assessed by propidium iodide flow cytometry after 24 h of DOX exposure, while DNA damage was quantified by γ-H2AX flow cytometric analysis. Statistical significance was determined using Student’s\n                    <jats:italic>t</jats:italic>\n                    -test with\n                    <jats:italic>P</jats:italic>\n                    &lt; 0.05 considered significant.\n                  </jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Results</jats:title>\n                  <jats:p>\n                    ZFP36L1 knockout reduced the proliferative capacity of MDA-MB-231 cells compared with WT cells. Both cell lines exhibited dose-dependent decreases in viability following DOX treatment. KO cells demonstrated a higher mean IC\n                    <jats:sub>50</jats:sub>\n                    than WT cells (9.64 vs. 8.40 μM), indicating a trend toward reduced DOX sensitivity; however, this difference was not statistically significant (\n                    <jats:italic>P</jats:italic>\n                    = 0.569). Flow cytometric analysis revealed enhanced accumulation of KO cells in the S and G\n                    <jats:sub>2</jats:sub>\n                    /M phases following DOX treatment, suggesting altered cell-cycle checkpoint regulation. Furthermore, KO cells exhibited elevated basal γ-H2AX expression and greater DOX-induced γ-H2AX accumulation than WT cells, indicating increased DNA damage and impaired maintenance of genomic stability.\n                  </jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Conclusions</jats:title>\n                  <jats:p>CRISPR/Cas9-mediated loss of ZFP36L1 suppresses proliferation, alters cell-cycle checkpoint dynamics, and enhances DNA damage accumulation in MDA-MB-231 TNBC cells. These findings indicate that ZFP36L1 plays a context-dependent role in regulating genomic stability and cellular responses to genotoxic stress, highlighting its potential as a biomarker and therapeutic target in triple-negative breast cancer.</jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.08.20.746080",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            24
+          ]
+        ],
+        "date-time": "2026-08-24T05:00:30Z",
+        "timestamp": 1787547630000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "CRISPR/Cas9-Mediated Knockout of ZFP36L1 Impairs Cell Proliferation, Alters Cell-Cycle Progression, and Enhances DNA Damage Responses in MDA-MB-231 Triple-Negative Breast Cancer Cells"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0001-8399-4423",
+          "authenticated-orcid": false,
+          "given": "Hope H.G",
+          "family": "Gandu",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "University of Westminster, London. United Kingdom"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0001-2095-8238",
+          "authenticated-orcid": false,
+          "given": "Purity T. Y",
+          "family": "Gandu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Tambov state university, Tambov. Russia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0002-7858-220X",
+          "authenticated-orcid": false,
+          "given": "Efe",
+          "family": "Okorare",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Gloucestershire Royal Hospital, Gloucestershire. England"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Michael Uzorchukwu",
+          "family": "Ochem",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Margaret Lawrence University, Abuja. Nigeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0007-4590-0044",
+          "authenticated-orcid": false,
+          "given": "Nneamaka Henrietta",
+          "family": "Okeke",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Glangwilli General hospital, Wales. United Kingdom"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0004-2325-3518",
+          "authenticated-orcid": false,
+          "given": "Divine O.",
+          "family": "Nwachi",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Benjamin S Carson School of Medicine, Babcock University, Ogun. Nigeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0004-8738-842X",
+          "authenticated-orcid": false,
+          "given": "Dennis Kure",
+          "family": "Yusuf",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Abubakar Tafawa Balewa University, Bauchi. Nigeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0001-4289-4108",
+          "authenticated-orcid": false,
+          "given": "Nwanneka Grace",
+          "family": "Anene",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "University of Nigeria Teaching Hospital, Ituku-Ozalla, Enugu. Nigeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0007-1312-4941",
+          "authenticated-orcid": false,
+          "given": "Reem G A",
+          "family": "Hamed",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Alzaiem Alazhari University, Khartoum Bahri. Sudan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0005-3033-0689",
+          "authenticated-orcid": false,
+          "given": "Usman Karuma",
+          "family": "Shuaib",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Medical Biochemistry, University of Abuja. Nigeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s12282-020-01098-9"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nrm2852"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s12943-023-01925-5"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cellsig.2022.110462"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.21873/cdp.10266"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.exphem.2021.05.006"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s12935-022-02654-3"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1158/0008-5472.CAN-18-2796"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1097/MD.0000000000047114"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3390/cancers12061539"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3390/cancers17233876"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/978-1-61779-080-5_20"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/fmolb.2022.687786"
+        },
+        {
+          "key": "2026082703451324000_2026.08.20.746080v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41419-025-08217-4"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.20.746080",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            27
+          ]
+        ],
+        "date-time": "2026-08-27T10:46:00Z",
+        "timestamp": 1787827560000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.20.746080"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            23
+          ]
+        ]
+      },
+      "references-count": 14,
+      "URL": "https://doi.org/10.64898/2026.08.20.746080",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            23
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}
