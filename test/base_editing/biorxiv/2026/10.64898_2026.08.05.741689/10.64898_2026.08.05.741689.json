@@ -1,0 +1,874 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.05.741689",
+  "title": "Optimizing CRISPR/Cas9 genome editing in primary human hematopoietic cells to advance studies into HIV biology",
+  "doi": "10.64898/2026.08.05.741689",
+  "abstract": "Defining how human host factors shape HIV-1 infection in vivo remains essential for the development of genetically engineered cell therapies. Here, we established a non-viral CRISPR/Cas9 ribonucleoprotein-based platform for efficient single and multiplex gene editing in primary human CD34 + hematopoietic stem and progenitor cells (HSPCs). Edited HSPCs retained viability, proliferative capacity, primitive immunophenotypes, and multilineage differentiation potential and supported targeted reporter knock-in independently of the cell source, cord blood (CB), bone marrow (BM), and mobilized from peripheral blood (MPB). Following differentiation, SAMHD1 knockout increased HIV-1 susceptibility of HSPC-derived macrophages, MX2 knockout also increased HIV infection in cells pre-stimulated with IFN-α2a, and CXCR4 knockout blocked X4-tropic HIV-1 infection of HSPC-derived megakaryocytes. We then transplanted CCR5-, SAMHD1-, or non-targeting control-edited HSPCs into immunodeficient mice and challenged reconstituted animals with R5-tropic HIV-1. CCR5 knockout prevented detectable viral spread, validating the model using a clinically relevant dependency factor. In contrast, SAMHD1 knockout accelerated viral dissemination, with earlier plasma viremia and 3.6-fold higher cumulative viremia, although endpoint viral burden was not significantly different from controls. These findings establish transplantation of CRISPR/Cas9-edited human HSPCs as a modular platform for dissecting HIV-1 host-factor function across hematopoietic lineages ex vivo and in vivo and for evaluating engineered cell-based strategies.",
+  "authors": [
+    "Hong-Ru Chen",
+    "Nicole P. Kadzioch",
+    "Madeleine Gapp",
+    "Hsiu-Hui Yang",
+    "Adrian Ruhle",
+    "Javier Villamizar Cujar",
+    "Thimo Fuchs",
+    "Niklas A. Schmacke",
+    "Veit Hornung",
+    "Roberto F. Speck",
+    "Oliver T. Keppler",
+    "Manuel Albanese"
+  ],
+  "published_date": "2026-08-05",
+  "updated_date": "2026-08-05T13:40:47Z",
+  "journal": "bioRxiv",
+  "category": "Bioengineering",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.05.741689",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.05.741689.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.05.741689/10.64898_2026.08.05.741689.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.05.741689",
+  "version": "",
+  "keywords": [
+    "Bioengineering"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Bioengineering",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            7
+          ]
+        ],
+        "date-time": "2026-08-07T16:52:02Z",
+        "timestamp": 1786121522206,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ]
+      },
+      "group-title": "Bioengineering",
+      "reference-count": 71,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                5
+              ]
+            ],
+            "date-time": "2026-08-05T00:00:00Z",
+            "timestamp": 1785888000000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "https://www.biorxiv.org/about/FAQ#license"
+        }
+      ],
+      "funder": [
+        {
+          "name": "AIRC",
+          "award": [
+            "MFAG 28809"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "MFAG 28809"
+              ]
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/501100001659",
+          "name": "Deutsche Forschungsgemeinschaft",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "KE742/4-2"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "KE742/4-2"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/501100001659",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "award": [
+            "SPP-1923"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "SPP-1923"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/018mejw64",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "name": "Deutsche Zentrum fuer Infektionsforschung",
+          "award": [
+            "TTU 04.820"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "TTU 04.820"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MUR",
+          "award": [
+            "FIS2023-00896"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "FIS2023-00896"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "UZH Global Strategy and Partnerships Funding Scheme"
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  Defining how human host factors shape HIV-1 infection\n                  <jats:italic>in vivo</jats:italic>\n                  remains essential for the development of genetically engineered cell therapies. Here, we established a non-viral CRISPR/Cas9 ribonucleoprotein-based platform for efficient single and multiplex gene editing in primary human CD34\n                  <jats:sup>+</jats:sup>\n                  hematopoietic stem and progenitor cells (HSPCs). Edited HSPCs retained viability, proliferative capacity, primitive immunophenotypes, and multilineage differentiation potential and supported targeted reporter knock-in independently of the cell source, cord blood (CB), bone marrow (BM), and mobilized from peripheral blood (MPB). Following differentiation, SAMHD1 knockout increased HIV-1 susceptibility of HSPC-derived macrophages, MX2 knockout also increased HIV infection in cells pre-stimulated with IFN-α2a, and CXCR4 knockout blocked X4-tropic HIV-1 infection of HSPC-derived megakaryocytes. We then transplanted CCR5-, SAMHD1-, or non-targeting control-edited HSPCs into immunodeficient mice and challenged reconstituted animals with R5-tropic HIV-1. CCR5 knockout prevented detectable viral spread, validating the model using a clinically relevant dependency factor. In contrast, SAMHD1 knockout accelerated viral dissemination, with earlier plasma viremia and 3.6-fold higher cumulative viremia, although endpoint viral burden was not significantly different from controls. These findings establish transplantation of CRISPR/Cas9-edited human HSPCs as a modular platform for dissecting HIV-1 host-factor function across hematopoietic lineages\n                  <jats:italic>ex vivo</jats:italic>\n                  and\n                  <jats:italic>in vivo</jats:italic>\n                  and for evaluating engineered cell-based strategies.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.05.741689",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ],
+        "date-time": "2026-08-05T13:40:47Z",
+        "timestamp": 1785937247000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Optimizing CRISPR/Cas9 genome editing in primary human hematopoietic cells to advance studies into HIV biology"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-3884-1441",
+          "authenticated-orcid": false,
+          "given": "Hong-Ru",
+          "family": "Chen",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Max von Pettenkofer Institute and Gene Center, Virology, National Reference Center for Retroviruses, Faculty of Medicine, LMU München, Munich, Germany"
+            },
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-0432-8658",
+          "authenticated-orcid": false,
+          "given": "Nicole P.",
+          "family": "Kadzioch",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Infectious Diseases and Hospital Epidemiology, University of Zurich, University Hospital of Zurich, Zurich, Switzerland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0004-5427-184X",
+          "authenticated-orcid": false,
+          "given": "Madeleine",
+          "family": "Gapp",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Max von Pettenkofer Institute and Gene Center, Virology, National Reference Center for Retroviruses, Faculty of Medicine, LMU München, Munich, Germany"
+            },
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1740-0137",
+          "authenticated-orcid": false,
+          "given": "Hsiu-Hui",
+          "family": "Yang",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Max von Pettenkofer Institute and Gene Center, Virology, National Reference Center for Retroviruses, Faculty of Medicine, LMU München, Munich, Germany"
+            },
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-8132-9814",
+          "authenticated-orcid": false,
+          "given": "Adrian",
+          "family": "Ruhle",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Max von Pettenkofer Institute and Gene Center, Virology, National Reference Center for Retroviruses, Faculty of Medicine, LMU München, Munich, Germany"
+            },
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-5631-5552",
+          "authenticated-orcid": false,
+          "given": "Javier",
+          "family": "Villamizar Cujar",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Max von Pettenkofer Institute and Gene Center, Virology, National Reference Center for Retroviruses, Faculty of Medicine, LMU München, Munich, Germany"
+            },
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0001-6928-1248",
+          "authenticated-orcid": false,
+          "given": "Thimo",
+          "family": "Fuchs",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Max von Pettenkofer Institute and Gene Center, Virology, National Reference Center for Retroviruses, Faculty of Medicine, LMU München, Munich, Germany"
+            },
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-3998-1139",
+          "authenticated-orcid": false,
+          "given": "Niklas A.",
+          "family": "Schmacke",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-4150-194X",
+          "authenticated-orcid": false,
+          "given": "Veit",
+          "family": "Hornung",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-8453-1137",
+          "authenticated-orcid": false,
+          "given": "Roberto F.",
+          "family": "Speck",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Infectious Diseases and Hospital Epidemiology, University of Zurich, University Hospital of Zurich, Zurich, Switzerland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1384-8946",
+          "authenticated-orcid": false,
+          "given": "Oliver T.",
+          "family": "Keppler",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Max von Pettenkofer Institute and Gene Center, Virology, National Reference Center for Retroviruses, Faculty of Medicine, LMU München, Munich, Germany"
+            },
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            },
+            {
+              "name": "German Centre for Infection Research (DZIF), Partner Site Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-4614-7599",
+          "authenticated-orcid": false,
+          "given": "Manuel",
+          "family": "Albanese",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Max von Pettenkofer Institute and Gene Center, Virology, National Reference Center for Retroviruses, Faculty of Medicine, LMU München, Munich, Germany"
+            },
+            {
+              "name": "Gene Center and Department of Biochemistry, Ludwig-Maximilians-Universität München, Munich, Germany"
+            },
+            {
+              "name": "National Institute of Molecular Genetics (INGM), Milan, Italy"
+            },
+            {
+              "name": "Department for Clinical Sciences and Community Health (DISCCO) (DoE 2023–2027), University of Milan, Milan, Italy"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-56116-1"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/cid/ciab541"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.4049/jimmunol.1600343"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0092-8674(00)80110-5"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/381667a0"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa0802905"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature10117"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/1742-4690-9-87"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature10195"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nm.2964"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s12977-014-0068-x"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s12977-020-00524-2"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.celrep.2019.10.009"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.ppat.1007408"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.15252/embr.201643179"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2014.05.010"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2015.02.032"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-018-0326-5"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41592-021-01328-8"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1512503112"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.1663"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/JVI.00277-15"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3408"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/mt.2013.65"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-55873-3"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature20134"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/scitranslmed.aaf9336"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/mt.2016.148"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/scitranslmed.aah3480"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa2309676"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.stem.2020.12.002"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S2352-3026(19)30202-9"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.intimp.2020.106266"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1613635114"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.ppat.1002425"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature10195"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.scr.2015.06.012"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.stem.2012.01.006"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/cshperspect.a008250"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.stem.2024.03.002"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-019-11962-8"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ymthe.2023.11.020"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature12542"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature12653"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/jvi.00709-18"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.86.14.5595"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/j.1600-0609.1992.tb00591.x"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ijid.2021.02.118"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3109/10428190009148861"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.50",
+          "doi-asserted-by": "crossref",
+          "first-page": "481",
+          "DOI": "10.1182/blood.V77.3.481.481",
+          "article-title": "Human immunodeficiency virus infection of megakaryocytic cells",
+          "volume": "77",
+          "year": "1991",
+          "journal-title": "Blood"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1006/viro.2000.0193"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3791/56420"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.53",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.2217/fvl.09.72"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.0604493103"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.55",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-58371-8"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.56",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.omtm.2022.01.012"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.celrep.2024.113941"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.58",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0287052"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.59",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkaf767"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.60",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-025-02915-2"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.61",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-026-03142-z"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.62",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1182/blood.v91.4.1225"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.63",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1182/bloodadvances.2020004112"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.64",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.1663"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.65",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0551-y"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.66",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.7554/eLife.27873"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.67",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s12977-020-00516-2"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.68",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.xcrm.2025.102157"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.69",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gr.176701.114"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.70",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s12865-017-0209-9"
+        },
+        {
+          "key": "2026080621502322000_2026.08.05.741689v1.71",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/fimmu.2024.1439328"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.05.741689",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            7
+          ]
+        ],
+        "date-time": "2026-08-07T04:50:54Z",
+        "timestamp": 1786078254000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.05.741689"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ]
+      },
+      "references-count": 71,
+      "URL": "https://doi.org/10.64898/2026.08.05.741689",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

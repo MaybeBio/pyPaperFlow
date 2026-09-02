@@ -1338,8 +1338,18 @@ export UNDETECTED_CHROME_PATH="$HOME/.local/chrome/opt/google/chrome/chrome"
 export UNDETECTED_DRIVER_PATH="$HOME/.local/bin/chromedriver"
 
 # 然后命令依旧
+# ⚠️ 注意该命令因为需要运行浏览器，所以运行时间会比较长
 paperflow biorxiv-fetch -f ./test/searched_biorxiv_ids.txt -o ./test --download-pdf      
 ```
+
+现在是能够支持获取所有的biorxiv文献的pdf文件了
+```bash
+Fetching 18 bioRxiv DOIs from file /data2/pyPaperFlow/test/searched_biorxiv_ids.txt.
+Fetched 18 bioRxiv papers.
+Saved to /data2/pyPaperFlow/test/biorxiv
+```
+
+
 
 ### 3. 搜索并获取 medRxiv 论文
 medRxiv 与 bioRxiv 共用同一套检索：默认是 Crossref（openRxiv，元数据相关性检索）∪ Europe PMC（预印本全文布尔 AND）的并集，按 DOI 去重；通过 DOI accession 位数（medRxiv 8 位 vs bioRxiv 6 位）区分平台，Europe PMC 结果同样按此过滤。query 为 DOI 时直接精确取回该论文。

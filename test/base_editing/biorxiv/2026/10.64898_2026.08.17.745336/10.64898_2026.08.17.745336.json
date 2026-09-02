@@ -1,0 +1,515 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.17.745336",
+  "title": "Virus-like particle-delivered base editor collection to expand the genome engineering toolbox",
+  "doi": "10.64898/2026.08.17.745336",
+  "abstract": "Virus-like particles (VLPs) enable transient, non-integrating delivery of CRISPR-Cas9 ribonucleoprotein cargo. Although VLPs have been reported for efficient DNA editing via base editors RNP delivery, the diversity of base editors tested as VLPs remains limited. We generated and benchmarked a panel of 12 base editors on the v5 eVLP backbone, targeting three genomic loci (HEK3, B2M, PDCD1) across five VLP dosages in LentiX-293T cells. Editing efficiency was generally dosage-dependent across all editors and varied by editor class and identity; PAM-flexible variants had lower editing efficiency than NGG-restricted counterparts, and the dual-function SPACE base editors showed reduced efficiency. We further characterized position-specific editing efficiencies and outcomes of the base editor VLP collection, revealing that a wide variety of mutation types are possible with the base editors in this collection.",
+  "authors": [
+    "Asfar Lathif Salaudeen",
+    "Trevor Shyiak",
+    "Carl G. de Boer"
+  ],
+  "published_date": "2026-08-18",
+  "updated_date": "2026-08-18T17:30:29Z",
+  "journal": "bioRxiv",
+  "category": "Synthetic Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.17.745336",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.17.745336.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.17.745336/10.64898_2026.08.17.745336.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.17.745336",
+  "version": "",
+  "keywords": [
+    "Synthetic Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Synthetic Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ],
+        "date-time": "2026-08-21T16:07:18Z",
+        "timestamp": 1787328438483,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "group-title": "Synthetic Biology",
+      "reference-count": 44,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                18
+              ]
+            ],
+            "date-time": "2026-08-18T00:00:00Z",
+            "timestamp": 1787011200000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "name": "National Science and Engineering Research Council of Canada",
+          "award": [
+            "RGPIN-2020-05425"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "RGPIN-2020-05425"
+              ]
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>Virus-like particles (VLPs) enable transient, non-integrating delivery of CRISPR-Cas9 ribonucleoprotein cargo. Although VLPs have been reported for efficient DNA editing via base editors RNP delivery, the diversity of base editors tested as VLPs remains limited. We generated and benchmarked a panel of 12 base editors on the v5 eVLP backbone, targeting three genomic loci (HEK3, B2M, PDCD1) across five VLP dosages in LentiX-293T cells. Editing efficiency was generally dosage-dependent across all editors and varied by editor class and identity; PAM-flexible variants had lower editing efficiency than NGG-restricted counterparts, and the dual-function SPACE base editors showed reduced efficiency. We further characterized position-specific editing efficiencies and outcomes of the base editor VLP collection, revealing that a wide variety of mutation types are possible with the base editors in this collection.</jats:p>",
+      "DOI": "10.64898/2026.08.17.745336",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T17:30:29Z",
+        "timestamp": 1787074229000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Virus-like particle-delivered base editor collection to expand the genome engineering toolbox"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0004-8447-6141",
+          "authenticated-orcid": false,
+          "given": "Asfar Lathif",
+          "family": "Salaudeen",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Genome Science and Technology Graduate Program, University of British Columbia, Vancouver, BC, Canada, V6T 1Z4"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0006-0479-1382",
+          "authenticated-orcid": false,
+          "given": "Trevor",
+          "family": "Shyiak",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Genome Science and Technology Graduate Program, University of British Columbia, Vancouver, BC, Canada, V6T 1Z4"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8935-5921",
+          "authenticated-orcid": false,
+          "given": "Carl G.",
+          "family": "de Boer",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Biomedical Engineering, University of British Columbia, Vancouver, BC, Canada, V6T 1Z3"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0561-9"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/scitranslmed.abl9238"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.3",
+          "doi-asserted-by": "crossref",
+          "first-page": "2003",
+          "DOI": "10.1016/j.ajhg.2023.10.005",
+          "article-title": "Efficient in vivo prime editing corrects the most frequent phenylketonuria variant, associated with high unmet medical need",
+          "volume": "110",
+          "year": "2023",
+          "journal-title": "Am. J. Hum. Genet"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.4",
+          "doi-asserted-by": "crossref",
+          "first-page": "4998",
+          "DOI": "10.1038/s41467-023-40701-3",
+          "article-title": "One-step generation of tumor models by base editor multiplexing in adult stem cell-derived organoids",
+          "volume": "14",
+          "year": "2023",
+          "journal-title": "Nat. Commun"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2023.03.035"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.6",
+          "doi-asserted-by": "crossref",
+          "first-page": "1458",
+          "DOI": "10.1038/s41587-024-02439-1",
+          "article-title": "Multimodal scanning of genetic variants with base and prime editing",
+          "volume": "43",
+          "year": "2025",
+          "journal-title": "Nat. Biotechnol"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-021-03609-w"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1182/bloodadvances.2020003702"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-023-01434-7"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.10",
+          "doi-asserted-by": "crossref",
+          "first-page": "616",
+          "DOI": "10.1038/s41551-023-01026-0",
+          "article-title": "Ex vivo prime editing of patient haematopoietic stem cells rescues sickle-cell disease phenotypes after engraftment in mice",
+          "volume": "7",
+          "year": "2023",
+          "journal-title": "Nat. Biomed. Eng"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1080/10717544.2018.1474964"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41573-023-00762-x"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2005.07.013"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-018-07845-z"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.15",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Gutierrez-Guerrero, A. et al. Baboon Envelope Pseudotyped “Nanoblades” Carrying Cas9/gRNA Complexes Allow Efficient Genome Editing in Human T, B, and CD34+ Cells and Knock-in of AAV6-Encoded Donor DNA in CD34+ Cells. Front. Genome Ed. 3, (2021).",
+          "DOI": "10.3389/fgeed.2021.604371"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.16",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Hamilton, J. R. et al. Targeted delivery of CRISPR-Cas9 and transgenes enables complex immune cell engineering. Cell Rep. 35, (2021).",
+          "DOI": "10.1016/j.celrep.2021.109207"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2021.12.021"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-023-02078-y"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.19",
+          "doi-asserted-by": "crossref",
+          "first-page": "1635",
+          "DOI": "10.1038/s41587-024-02467-x",
+          "article-title": "Directed evolution of engineered virus-like particles with improved production and transduction efficiencies",
+          "volume": "43",
+          "year": "2025",
+          "journal-title": "Nat. Biotechnol"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.64898/2026.02.10.705092"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-022-01533-6"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0453-z"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-022-01410-2"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-019-0134-y"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-022-01595-6"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-023-01821-9"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-024-45969-7"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0609-x"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0535-y"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.30",
+          "doi-asserted-by": "crossref",
+          "first-page": "111",
+          "DOI": "10.1038/s41551-019-0505-1",
+          "article-title": "High-throughput analysis of the activities of xCas9, SpCas9-NG and SpCas9 at matched and mismatched target sequences in human cells",
+          "volume": "4",
+          "year": "2020",
+          "journal-title": "Nat. Biomed. Eng"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.31",
+          "doi-asserted-by": "crossref",
+          "first-page": "8785",
+          "DOI": "10.1093/nar/gkab507",
+          "article-title": "In-depth assessment of the PAM compatibility and editing activities of Cas9 variants",
+          "volume": "49",
+          "year": "2021",
+          "journal-title": "Nucleic Acids Res"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.32",
+          "first-page": "1",
+          "article-title": "Comprehensive evaluation and prediction of editing outcomes for near-PAMless adenine and cytosine base editors",
+          "volume": "7",
+          "year": "2024",
+          "journal-title": "Commun. Biol"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.33",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Zhang, X.-H. , Tee, L. Y. , Wang, X.-G. Huang, Q.-S. & Yang, S.-H. Off-target Effects in CRISPR/Cas9-mediated Genome Engineering. Mol. Ther. Nucleic Acids 4, (2015).",
+          "DOI": "10.1038/mtna.2015.37"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0414-6"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-022-01611-9"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature12477"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2020.05.037"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.38",
+          "doi-asserted-by": "crossref",
+          "first-page": "ysaf020",
+          "DOI": "10.1093/synbio/ysaf020",
+          "article-title": "RAPID-DASH: fast and efficient assembly of guide RNA arrays for multiplexed CRISPR-Cas9 applications",
+          "volume": "11",
+          "year": "2026",
+          "journal-title": "Synth. Biol"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.39",
+          "doi-asserted-by": "crossref",
+          "first-page": "btad328",
+          "DOI": "10.1093/bioinformatics/btad328",
+          "article-title": "GIL: a python package for designing custom indexing primers",
+          "volume": "39",
+          "year": "2023",
+          "journal-title": "Bioinformatics"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btt593"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.41",
+          "unstructured": "Andrews, S. (2010) FastQC A Quality Control Tool for High Throughput Sequence Data. https://www.bioinformatics.babraham.ac.uk/projects/fastqc/."
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btw354"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.43",
+          "doi-asserted-by": "crossref",
+          "first-page": "10",
+          "DOI": "10.14806/ej.17.1.200",
+          "article-title": "Cutadapt removes adapter sequences from high-throughput sequencing reads",
+          "volume": "17",
+          "year": "2011",
+          "journal-title": "EMBnet.journal"
+        },
+        {
+          "key": "2026082108002114000_2026.08.17.745336v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-019-0032-3"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.17.745336",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            21
+          ]
+        ],
+        "date-time": "2026-08-21T15:00:31Z",
+        "timestamp": 1787324431000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.17.745336"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "references-count": 44,
+      "URL": "https://doi.org/10.64898/2026.08.17.745336",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

@@ -1,0 +1,636 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.17.745178",
+  "title": "Compact type II-C Cas9 nucleases with expanded PAM access and high fidelity for therapeutic genome editing",
+  "doi": "10.64898/2026.08.17.745178",
+  "abstract": "Compact type II-C Cas9 nucleases are attractive for therapeutic genome editing because their small size enables packaging into adeno-associated viral (AAV) vectors, and their extended protospacer-adjacent motifs (PAMs) reduce off-target cleavage while expanding targeting scope. Yet characterized type II-C orthologs have edited mammalian cells far less efficiently than the canonical SpCas9. Here, we used embedding-based metagenomic mining of >4.7 × 10 proteins, combined with AlphaFold3 structure prediction and locus-context analysis, to identify three previously uncharacterized compact type II-C Cas9 orthologs, NsuCas9 (1,092 aa), PsuCas9 (1,084 aa), and GfoCas9 (1,074 aa), and benchmarked them in vitro and in human HEK293T cells. All three are robust RNA-guided nucleases with distinct PAM specificities (N CC, N NYAA, and N RHAA, respectively), divergent thermal profiles, and asymmetric sgRNA cross-compatibility. In human cells, PsuCas9 with an N ATAA PAM reaches 78.4% indels and matches or exceeds SpCas9 at multiple loci, representing the first natural compact type II-C ortholog reported to do so, while GfoCas9 and NsuCas9 add complementary coverage. All three show a strong deletion-biased repair signature and no detectable editing across 33 predicted off-target sites. These compact, high-fidelity nucleases expand the CRISPR targeting space for AAV-deliverable therapeutic editing.",
+  "authors": [
+    "Qiaochu Wang",
+    "Sivakrishna Rao Gundra",
+    "Rashid Aman",
+    "Ahmed Saleh",
+    "Ahmed M. Kazlak",
+    "Maazallah Masood",
+    "Norhan Hassan",
+    "Magdy M. Mahfouz"
+  ],
+  "published_date": "2026-08-18",
+  "updated_date": "2026-08-18T15:35:19Z",
+  "journal": "bioRxiv",
+  "category": "Bioengineering",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.17.745178",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.17.745178.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.17.745178/10.64898_2026.08.17.745178.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.17.745178",
+  "version": "",
+  "keywords": [
+    "Bioengineering"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Bioengineering",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ],
+        "date-time": "2026-08-20T22:23:27Z",
+        "timestamp": 1787264607204,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "group-title": "Bioengineering",
+      "reference-count": 51,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                18
+              ]
+            ],
+            "date-time": "2026-08-18T00:00:00Z",
+            "timestamp": 1787011200000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "DOI": "10.13039/501100004052",
+          "name": "King Abdullah University of Science and Technology",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "BAS/1/1035-01-01"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "BAS/1/1035-01-01"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/501100004052",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  Compact type II-C Cas9 nucleases are attractive for therapeutic genome editing because their small size enables packaging into adeno-associated viral (AAV) vectors, and their extended protospacer-adjacent motifs (PAMs) reduce off-target cleavage while expanding targeting scope. Yet characterized type II-C orthologs have edited mammalian cells far less efficiently than the canonical SpCas9. Here, we used embedding-based metagenomic mining of &gt;4.7 × 10 proteins, combined with AlphaFold3 structure prediction and locus-context analysis, to identify three previously uncharacterized compact type II-C Cas9 orthologs, NsuCas9 (1,092 aa), PsuCas9 (1,084 aa), and GfoCas9 (1,074 aa), and benchmarked them\n                  <jats:italic>in vitro</jats:italic>\n                  and in human HEK293T cells. All three are robust RNA-guided nucleases with distinct PAM specificities (N CC, N NYAA, and N RHAA, respectively), divergent thermal profiles, and asymmetric sgRNA cross-compatibility. In human cells, PsuCas9 with an N ATAA PAM reaches 78.4% indels and matches or exceeds SpCas9 at multiple loci, representing the first natural compact type II-C ortholog reported to do so, while GfoCas9 and NsuCas9 add complementary coverage. All three show a strong deletion-biased repair signature and no detectable editing across 33 predicted off-target sites. These compact, high-fidelity nucleases expand the CRISPR targeting space for AAV-deliverable therapeutic editing.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.17.745178",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T15:35:19Z",
+        "timestamp": 1787067319000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Compact type II-C Cas9 nucleases with expanded PAM access and high fidelity for therapeutic genome editing"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Qiaochu",
+          "family": "Wang",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Laboratory for Genome Engineering and Synthetic Biology, Division of Biomedical Sciences, King Abdullah University of Science and Technology (KAUST), Thuwal 23955-6900, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sivakrishna Rao",
+          "family": "Gundra",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratory for Genome Engineering and Synthetic Biology, Division of Biomedical Sciences, King Abdullah University of Science and Technology (KAUST), Thuwal 23955-6900, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Rashid",
+          "family": "Aman",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratory for Genome Engineering and Synthetic Biology, Division of Biomedical Sciences, King Abdullah University of Science and Technology (KAUST), Thuwal 23955-6900, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ahmed",
+          "family": "Saleh",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratory for Genome Engineering and Synthetic Biology, Division of Biomedical Sciences, King Abdullah University of Science and Technology (KAUST), Thuwal 23955-6900, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ahmed M.",
+          "family": "Kazlak",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratory for Genome Engineering and Synthetic Biology, Division of Biomedical Sciences, King Abdullah University of Science and Technology (KAUST), Thuwal 23955-6900, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Maazallah",
+          "family": "Masood",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratory for Genome Engineering and Synthetic Biology, Division of Biomedical Sciences, King Abdullah University of Science and Technology (KAUST), Thuwal 23955-6900, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Norhan",
+          "family": "Hassan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratory for Genome Engineering and Synthetic Biology, Division of Biomedical Sciences, King Abdullah University of Science and Technology (KAUST), Thuwal 23955-6900, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-0616-6365",
+          "authenticated-orcid": false,
+          "given": "Magdy M.",
+          "family": "Mahfouz",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratory for Genome Engineering and Synthetic Biology, Division of Biomedical Sciences, King Abdullah University of Science and Technology (KAUST), Thuwal 23955-6900, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1138140"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1146/annurev-biochem-072911-172315"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1225829"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/acschembio.7b00855"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/biot.201400046"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.3993"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.3284"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gku402"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ncomms14500"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2018.12.003"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-020-19344-1"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1313587110"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkaa998"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.14",
+          "doi-asserted-by": "crossref",
+          "first-page": "1968",
+          "DOI": "10.1038/s41467-019-09741-6",
+          "article-title": "Structural basis for the promiscuous PAM recognition by Corynebacterium diphtheriae Cas9",
+          "volume": "10",
+          "year": "2019",
+          "journal-title": "Nat Commun"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2024.04.031"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.16",
+          "doi-asserted-by": "crossref",
+          "first-page": "583164",
+          "DOI": "10.3389/fcell.2020.583164",
+          "article-title": "Characterization of Brevibacillus laterosporus Cas9 (BlatCas9) for Mammalian Genome Editing",
+          "volume": "8",
+          "year": "2020",
+          "journal-title": "Front Cell Dev Biol"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-024-47800-9"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-018-1591-1"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.19",
+          "doi-asserted-by": "crossref",
+          "first-page": "211",
+          "DOI": "10.1038/s42003-022-03149-7",
+          "article-title": "Engineered Campylobacter jejuni Cas9 variant with enhanced activity and broader targeting range",
+          "volume": "5",
+          "year": "2022",
+          "journal-title": "Commun Biol"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41589-023-01427-x"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.21",
+          "doi-asserted-by": "crossref",
+          "first-page": "79",
+          "DOI": "10.1186/s13059-024-03215-9",
+          "article-title": "Eukaryotic-driven directed evolution of Cas9 nucleases",
+          "volume": "25",
+          "year": "2024",
+          "journal-title": "Genome Biol"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.22",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Wei, J , Hou, L , Liu, J , Wang, Z , Gao, S , Qi, T , et al. (2022). Closely related type II-C Cas9 orthologs recognize diverse PAMs. Elife 11.",
+          "DOI": "10.7554/eLife.77825"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.23",
+          "doi-asserted-by": "crossref",
+          "first-page": "472",
+          "DOI": "10.1089/crispr.2021.0143",
+          "article-title": "Compact Cje3Cas9 for Efficient In Vivo Genome Editing and Adenine Base Editing",
+          "volume": "5",
+          "year": "2022",
+          "journal-title": "Crispr j"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.24",
+          "doi-asserted-by": "crossref",
+          "first-page": "1177",
+          "DOI": "10.1016/j.ymthe.2023.01.029",
+          "article-title": "Genome editing with natural and engineered CjCas9 orthologs",
+          "volume": "31",
+          "year": "2023",
+          "journal-title": "Mol Ther"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.25",
+          "doi-asserted-by": "crossref",
+          "first-page": "152",
+          "DOI": "10.1038/s42003-025-09430-9",
+          "article-title": "In vivo genome editing with a novel Cj4Cas9",
+          "volume": "9",
+          "year": "2025",
+          "journal-title": "Commun Biol"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/S41586-021-03819-2"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.27",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Nayfach, S , Bhatnagar, A , Novichkov, A , Kim, N , Hoffnagle, AM , Hussain, R , et al. (2026). Customizing CRISPR-Cas PAM specificity with protein language models. Nat Biotechnol.",
+          "DOI": "10.1038/s41587-025-02995-0"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41579-019-0299-x"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2015.08.007"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2019.09.025"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.31",
+          "first-page": "462",
+          "article-title": "CRISPRCasTyper: Automated Identification",
+          "volume": "3",
+          "year": "2020",
+          "journal-title": "Annotation, and Classification of CRISPR-Cas Loci. CRISPR J"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.32",
+          "doi-asserted-by": "crossref",
+          "first-page": "438",
+          "DOI": "10.1089/crispr.2020.0093",
+          "article-title": "Identification and Evolution of Cas9 tracrRNAs",
+          "volume": "4",
+          "year": "2021",
+          "journal-title": "CRISPR J"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.33",
+          "doi-asserted-by": "crossref",
+          "first-page": "423",
+          "DOI": "10.1080/15476286.2018.1498281",
+          "article-title": "Prediction and diversity of tracrRNAs from type II CRISPR-Cas systems",
+          "volume": "16",
+          "year": "2019",
+          "journal-title": "RNA Biol"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41596-020-00465-2"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/BIOINFORMATICS/BTZ921"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkt1074"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2022.09.032"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature14299"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/molbev/mst010"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pcbi.1002195"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-023-01773-0"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.42",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Mitrofanov, A , Ziemann, M , Alkhnbashi, OS , Hess, WR , and Backofen, R (2022). CRISPRtracrRNA: robust approach for CRISPR tracrRNA detection. Bioinformatics 38: ii42-ii48.",
+          "DOI": "10.1093/bioinformatics/btac466"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/pro.3235"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/bts565"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btp348"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/molbev/msaa015"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.4285"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkae268"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1089/crispr.2022.0090"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.50",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkn188"
+        },
+        {
+          "key": "2026082014252742000_2026.08.17.745178v1.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-019-0032-3"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.17.745178",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            20
+          ]
+        ],
+        "date-time": "2026-08-20T21:25:38Z",
+        "timestamp": 1787261138000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.17.745178"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "references-count": 51,
+      "URL": "https://doi.org/10.64898/2026.08.17.745178",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

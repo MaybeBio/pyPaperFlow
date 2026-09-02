@@ -26,8 +26,8 @@
   "category": "Evolutionary Biology",
   "landing_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.742039",
   "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.742039.full.pdf",
-  "pdf_path": "",
-  "pdf_downloaded": false,
+  "pdf_path": "test/biorxiv/2026/10.64898_2026.07.31.742039/10.64898_2026.07.31.742039.pdf",
+  "pdf_downloaded": true,
   "query": "10.64898/2026.07.31.742039",
   "version": "",
   "keywords": [

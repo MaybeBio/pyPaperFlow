@@ -1,0 +1,601 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.13.744691",
+  "title": "A Toolbox for Binary and Rheostat-like Modulation of TOX Expression via Genome and Epigenome Editing in Primary Human T cells",
+  "doi": "10.64898/2026.08.13.744691",
+  "abstract": "T cells, which are central mediators of the adaptive immune response, can become dysfunctional when faced with persistent antigen stimulation, such as in chronic infections and cancer. This dysfunctional state, known as T cell exhaustion, limits pro-inflammatory T cell function, dampens cytotoxicity and proliferative capacity, and promotes expression of inhibitory receptors. Thymocyte Selection-Associated High Mobility Group Box (TOX) has been proposed as a master regulator of T cell exhaustion due to its necessity for survival of exhausted T cells as well as its role in shaping chromatin accessibility in murine models. Interestingly, partial Tox deficiency may improve control of murine tumors. In human tumor infiltrating lymphocytes, high TOX expression is associated with poor disease prognosis. However, the mechanisms by which TOX expression is regulated and its importance to human T cell exhaustion remain poorly understood. We report here a robust strategy for generating a genetic knockout of TOX via base editing or a knockout phenocopy via epigenome editing in primary human T cells ex vivo , with each approach resulting in near-complete elimination of TOX mRNA. Guided by enhancer prediction data, we use epigenome editing to identify several human cis -regulatory regions which function to silence TOX expression to varying levels when targeted with CRISPRoff. TOX deficiency had no measurable impact on survival or exhaustion marker levels in human CD8+ T cells in a model of anti-CD3/anti-CD28 stimulation in vitro . In agreement with these data, expression profiling revealed that TOX knockout effects on the transcriptome are limited to TOX itself, with no observable downstream effects. These studies show that a complete TOX knockout or silencing has no effect on exhaustion marker expression levels or the transcriptome in repeat-anti-CD3/anti-CD28-stimulated primary human T cells in vitro . Taken together, we developed a powerful toolkit of genome and epigenome editing strategies to modify expression of a gene of interest in primary human T cells and study its function. We propose that this framework can be applied to additional genes of interest both to gain mechanistic information about T cell function, as well as develop strategies for improvement of T cell immunotherapies.",
+  "authors": [
+    "Elaine V. Schanzer",
+    "Katharine F. Vostrejs",
+    "Alexandra N. Kurciska",
+    "Omar Khan",
+    "Fyodor D. Urnov"
+  ],
+  "published_date": "2026-08-14",
+  "updated_date": "2026-08-15T06:35:17Z",
+  "journal": "bioRxiv",
+  "category": "Molecular Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.13.744691",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.13.744691.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.13.744691/10.64898_2026.08.13.744691.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.13.744691",
+  "version": "",
+  "keywords": [
+    "Molecular Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Molecular Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T18:29:10Z",
+        "timestamp": 1787077750445,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ]
+      },
+      "group-title": "Molecular Biology",
+      "reference-count": 55,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                14
+              ]
+            ],
+            "date-time": "2026-08-14T00:00:00Z",
+            "timestamp": 1786665600000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by-nd/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "award": [
+            "5T32GM007232-44"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "5T32GM007232-44"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/01cwqze88",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "DISC2-14907"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "DISC2-14907"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/033m8b439",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "name": "Weill Neurohub Investigators Program"
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ]
+      },
+      "abstract": "<jats:title>ABSTRACT</jats:title>\n                <jats:p>\n                  T cells, which are central mediators of the adaptive immune response, can become dysfunctional when faced with persistent antigen stimulation, such as in chronic infections and cancer. This dysfunctional state, known as T cell exhaustion, limits pro-inflammatory T cell function, dampens cytotoxicity and proliferative capacity, and promotes expression of inhibitory receptors. Thymocyte Selection-Associated High Mobility Group Box (TOX) has been proposed as a master regulator of T cell exhaustion due to its necessity for survival of exhausted T cells as well as its role in shaping chromatin accessibility in murine models. Interestingly, partial\n                  <jats:italic>Tox</jats:italic>\n                  deficiency may improve control of murine tumors. In human tumor infiltrating lymphocytes, high TOX expression is associated with poor disease prognosis. However, the mechanisms by which\n                  <jats:italic>TOX</jats:italic>\n                  expression is regulated and its importance to human T cell exhaustion remain poorly understood. We report here a robust strategy for generating a genetic knockout of TOX via base editing or a knockout phenocopy via epigenome editing in primary human T cells\n                  <jats:italic>ex vivo</jats:italic>\n                  , with each approach resulting in near-complete elimination of TOX mRNA. Guided by enhancer prediction data, we use epigenome editing to identify several human\n                  <jats:italic>cis</jats:italic>\n                  -regulatory regions which function to silence\n                  <jats:italic>TOX</jats:italic>\n                  expression to varying levels when targeted with CRISPRoff. TOX deficiency had no measurable impact on survival or exhaustion marker levels in human CD8+ T cells in a model of anti-CD3/anti-CD28 stimulation\n                  <jats:italic>in vitro</jats:italic>\n                  . In agreement with these data, expression profiling revealed that TOX knockout effects on the transcriptome are limited to TOX itself, with no observable downstream effects. These studies show that a complete TOX knockout or silencing has no effect on exhaustion marker expression levels or the transcriptome in repeat-anti-CD3/anti-CD28-stimulated primary human T cells\n                  <jats:italic>in vitro</jats:italic>\n                  . Taken together, we developed a powerful toolkit of genome and epigenome editing strategies to modify expression of a gene of interest in primary human T cells and study its function. We propose that this framework can be applied to additional genes of interest both to gain mechanistic information about T cell function, as well as develop strategies for improvement of T cell immunotherapies.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.13.744691",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            15
+          ]
+        ],
+        "date-time": "2026-08-15T06:35:17Z",
+        "timestamp": 1786775717000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "A Toolbox for Binary and Rheostat-like Modulation of TOX Expression via Genome and Epigenome Editing in Primary Human T cells"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0003-2863-100X",
+          "authenticated-orcid": false,
+          "given": "Elaine V.",
+          "family": "Schanzer",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Department of Molecular and Cell Biology, University of California, Berkeley, Berkeley, CA, USA"
+            },
+            {
+              "name": "Innovative Genomics Institute, University of California, Berkeley, Berkeley, CA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Katharine F.",
+          "family": "Vostrejs",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Molecular and Cell Biology, University of California, Berkeley, Berkeley, CA, USA"
+            },
+            {
+              "name": "Innovative Genomics Institute, University of California, Berkeley, Berkeley, CA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alexandra N.",
+          "family": "Kurciska",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Innovative Genomics Institute, University of California, Berkeley, Berkeley, CA, USA"
+            },
+            {
+              "name": "Department of Environmental Science, Policy, and Management, University of California, Berkeley, Berkeley, CA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-7641-6163",
+          "authenticated-orcid": false,
+          "given": "Omar",
+          "family": "Khan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Laboratory Medicine, University of California, San Francisco, San Francisco, USA"
+            },
+            {
+              "name": "Gladstone-UCSF Institute of Genomic Immunology, University of California, San Francisco, San Francisco, USA"
+            },
+            {
+              "name": "Parker Institute for Cancer Immunotherapy, San Francisco, CA, USA"
+            },
+            {
+              "name": "UCSF Helen Diller Family Comprehensive Cancer Center, University of California, San Francisco, San Francisco, CA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7542-4084",
+          "authenticated-orcid": false,
+          "given": "Fyodor D.",
+          "family": "Urnov",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Molecular and Cell Biology, University of California, Berkeley, Berkeley, CA, USA"
+            },
+            {
+              "name": "Innovative Genomics Institute, University of California, Berkeley, Berkeley, CA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.1",
+          "unstructured": "Merck Sharp & Dohme LLC. KEYTRUDA (pembrolizumab) injection, for intravenous use [prescribing information], https://www.merck.com/product/usa/pi_circulars/k/keytruda/keytruda_pi.pdf; 2026 Jul (accessed 2026 Aug 5)."
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.12659/MSM.948125"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41571-022-00689-z"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41577-019-0221-9"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aae0491"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aaf2807"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature22367"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41590-021-00975-5"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41590-022-01224-z"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41590-023-01578-y"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.celrep.2021.110079"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ccell.2024.07.002"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-019-1325-x"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-019-1324-y"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1905675116"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13073-020-00722-9"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cyto.2014.11.024"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.isci.2018.03.009"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature24644"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-021-22009-2"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-021-03534-y"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41551-023-01132-z"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2021.03.025"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-025-02856-w"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.7554/eLife.19760"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-024-02320-1"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-026-10781-4"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.28",
+          "doi-asserted-by": "crossref",
+          "first-page": "5921",
+          "DOI": "10.4049/jimmunol.159.12.5921",
+          "article-title": "Effects of CD28 costimulation on long-term proliferation of CD4+ T cells in the absence of exogenous feeder cells",
+          "volume": "159",
+          "year": "1997",
+          "journal-title": "J Immunol"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-022-05126-w"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.10.05.680562"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.immuni.2016.07.011"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.09.23.678127"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa2309676"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.7554/eLife.75115"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.64898/2026.02.24.707761"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/sciimmunol.abj9123"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/sciimmunol.aba7918"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41590-026-02453-2"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1158/1078-0432.CCR-21-0206"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.immuni.2024.08.005"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ni767"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/1471-2164-4-13"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1084/jem.20071944"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.4049/jimmunol.1101474"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13223-024-00938-z"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.jaci.2024.12.1075"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.47",
+          "unstructured": "Clinvar - Variation Search n.d. https://www.ncbi.nlm.nih.gov/clinvar/search/?gene=tox&assembly=GRCh38 (accessed July 28, 2026)."
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ajhg.2013.01.013"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gr.229102. Article published online before print in May 2002"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.50",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-020-2528-x"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-016-1012-2"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.3015"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.53",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3437"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.2647"
+        },
+        {
+          "key": "2026081811001114000_2026.08.13.744691v1.55",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.3543"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.13.744691",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T18:00:18Z",
+        "timestamp": 1787076018000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.13.744691"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ]
+      },
+      "references-count": 55,
+      "URL": "https://doi.org/10.64898/2026.08.13.744691",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

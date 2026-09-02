@@ -1,0 +1,1432 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.08.743703",
+  "title": "A cuffed CRISPR guide RNA for microRNA activity-dependent genome editing",
+  "doi": "10.64898/2026.08.08.743703",
+  "abstract": "Cells in multicellular eukaryotic systems are diverse biological units, with characteristics and functions determined by their molecular profiles. CRISPR–Cas9 genome editing has been widely used across biology to modulate gene expression and study gene function. However, there is currently no versatile and scalable method for editing a cell’s genome in response to endogenous cellular signals. Here, we report the engineering of a CRISPR guide RNA that efficiently confers genome editing in response to the catalytic activity of a target microRNA (miRNA) within a cell. miRNAs are short non-coding RNAs that are widely conserved across eukaryotes and can cleave their target RNA through almost perfect base pairing. In mammals, miRNAs are largely involved in development and homeostasis as well as disease progression and developmental disorders. To leverage these properties for genome editing, we developed a cuffed guide RNA (cgRNA) which is composed of a permutated order of sequence domains from the commonly used single guide RNA (sgRNA). These permutated domains were then concatenated with a miRNA target sequence, yielding a warped guide RNA that is inactive until cleaved by a complementary miRNA. We demonstrated that cgRNA enabled efficient miRNA activity-dependent genome editing in human and mouse cell lines. Biochemical and structural analyses revealed three stages of inhibition of the CRISPR genome-editing pathway for unprocessed cgRNA. Utilizing a lentiviral library of cgRNAs containing miRNA targets covering mouse genome-wide miRNAs, we identified miRNA cleavage activities and their sequence specificities in mouse embryonic stem cells and during smooth muscle cell differentiation. Furthermore, we showed that endogenous mRNA expression could be irreversibly recorded into a DNA sequence using a cgRNA targeted by a synthetic miRNA repeat. cgRNA is a simple, robust, miRNA activity-gated genome editing system that could facilitate the development of cell state-specific genome editing, the mapping of miRNA activity and gene expression landscapes, and the recording of molecularly determined cell states during the long-term progression of multicellular systems.",
+  "authors": [
+    "Arman Adel",
+    "Yutaro Shuto",
+    "Shunsuke Kawasaki",
+    "Yonggang Lu",
+    "Hiroki Ono",
+    "Satoshi N. Omura",
+    "Ryoya Nakagawa",
+    "Alima Suleimenova",
+    "Meghan Robinson",
+    "Tabea L. Stephan",
+    "Hideto Mori",
+    "Brett Kiyota",
+    "Sanchit Chopra",
+    "Nemekhbayar Baatartsogt",
+    "Morisada Hayakawa",
+    "Yuji Kashiwakura",
+    "Tsukasa Ohmori",
+    "Ryan Flannigan",
+    "T. Michael Underhill",
+    "Pamela A. Hoodless",
+    "Hiroyuki Aburatani",
+    "Hirohide Saito",
+    "Osamu Nureki",
+    "Nozomu Yachie"
+  ],
+  "published_date": "2026-08-10",
+  "updated_date": "2026-08-10T15:45:23Z",
+  "journal": "bioRxiv",
+  "category": "Bioengineering",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.08.743703",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.08.743703.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.08.743703/10.64898_2026.08.08.743703.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.08.743703",
+  "version": "",
+  "keywords": [
+    "Bioengineering"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Bioengineering",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            13
+          ]
+        ],
+        "date-time": "2026-08-13T11:32:25Z",
+        "timestamp": 1786620745950,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            10
+          ]
+        ]
+      },
+      "group-title": "Bioengineering",
+      "reference-count": 145,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                10
+              ]
+            ],
+            "date-time": "2026-08-10T00:00:00Z",
+            "timestamp": 1786320000000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "id": [
+            {
+              "id": "https://ror.org/00097mb19",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "id": [
+            {
+              "id": "https://ror.org/01gavpb45",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/100009619",
+          "name": "Japan Agency for Medical Research and Development",
+          "doi-asserted-by": "crossref",
+          "id": [
+            {
+              "id": "10.13039/100009619",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "id": [
+            {
+              "id": "https://ror.org/000az4664",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "id": [
+            {
+              "id": "https://ror.org/036jq7b41",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "abstract": "<jats:p>Cells in multicellular eukaryotic systems are diverse biological units, with characteristics and functions determined by their molecular profiles. CRISPR–Cas9 genome editing has been widely used across biology to modulate gene expression and study gene function. However, there is currently no versatile and scalable method for editing a cell’s genome in response to endogenous cellular signals. Here, we report the engineering of a CRISPR guide RNA that efficiently confers genome editing in response to the catalytic activity of a target microRNA (miRNA) within a cell. miRNAs are short non-coding RNAs that are widely conserved across eukaryotes and can cleave their target RNA through almost perfect base pairing. In mammals, miRNAs are largely involved in development and homeostasis as well as disease progression and developmental disorders. To leverage these properties for genome editing, we developed a cuffed guide RNA (cgRNA) which is composed of a permutated order of sequence domains from the commonly used single guide RNA (sgRNA). These permutated domains were then concatenated with a miRNA target sequence, yielding a warped guide RNA that is inactive until cleaved by a complementary miRNA. We demonstrated that cgRNA enabled efficient miRNA activity-dependent genome editing in human and mouse cell lines. Biochemical and structural analyses revealed three stages of inhibition of the CRISPR genome-editing pathway for unprocessed cgRNA. Utilizing a lentiviral library of cgRNAs containing miRNA targets covering mouse genome-wide miRNAs, we identified miRNA cleavage activities and their sequence specificities in mouse embryonic stem cells and during smooth muscle cell differentiation. Furthermore, we showed that endogenous mRNA expression could be irreversibly recorded into a DNA sequence using a cgRNA targeted by a synthetic miRNA repeat. cgRNA is a simple, robust, miRNA activity-gated genome editing system that could facilitate the development of cell state-specific genome editing, the mapping of miRNA activity and gene expression landscapes, and the recording of molecularly determined cell states during the long-term progression of multicellular systems.</jats:p>",
+      "DOI": "10.64898/2026.08.08.743703",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            10
+          ]
+        ],
+        "date-time": "2026-08-10T15:45:23Z",
+        "timestamp": 1786376723000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "A cuffed CRISPR guide RNA for microRNA activity-dependent genome editing"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0007-5339-2481",
+          "authenticated-orcid": false,
+          "given": "Arman",
+          "family": "Adel",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "School of Biomedical Engineering, The University of British Columbia, Vancouver, BC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0007-8710-4134",
+          "authenticated-orcid": false,
+          "given": "Yutaro",
+          "family": "Shuto",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biological Sciences, Graduate School of Science, The University of Tokyo, Tokyo, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-1580-4127",
+          "authenticated-orcid": false,
+          "given": "Shunsuke",
+          "family": "Kawasaki",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Premium Research Institute for Human Metaverse Medicine, The University of Osaka, Suita, Osaka, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0198-8906",
+          "authenticated-orcid": false,
+          "given": "Yonggang",
+          "family": "Lu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Premium Research Institute for Human Metaverse Medicine, The University of Osaka, Suita, Osaka, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0008-2963-5743",
+          "authenticated-orcid": false,
+          "given": "Hiroki",
+          "family": "Ono",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Life Science Frontiers, Center for iPS Cell Research and Application, Kyoto University, Kyoto, Sakyo-Ku, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-2436-0847",
+          "authenticated-orcid": false,
+          "given": "Satoshi N.",
+          "family": "Omura",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biological Sciences, Graduate School of Science, The University of Tokyo, Tokyo, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-4293-7235",
+          "authenticated-orcid": false,
+          "given": "Ryoya",
+          "family": "Nakagawa",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biological Sciences, Graduate School of Science, The University of Tokyo, Tokyo, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0009-7471-0199",
+          "authenticated-orcid": false,
+          "given": "Alima",
+          "family": "Suleimenova",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Biomedical Engineering, The University of British Columbia, Vancouver, BC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4071-4035",
+          "authenticated-orcid": false,
+          "given": "Meghan",
+          "family": "Robinson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Reproductive & Sexual Medicine Centre, M.H. Mohseni Institute of Urologic Sciences, Vancouver, BC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-3636-0510",
+          "authenticated-orcid": false,
+          "given": "Tabea L.",
+          "family": "Stephan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Basic and Translational Research, BC Cancer Research Institute, Vancouver, BC"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4849-0056",
+          "authenticated-orcid": false,
+          "given": "Hideto",
+          "family": "Mori",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Life Science Frontiers, Center for iPS Cell Research and Application, Kyoto University, Kyoto, Sakyo-Ku, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-9339-7331",
+          "authenticated-orcid": false,
+          "given": "Brett",
+          "family": "Kiyota",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Biomedical Engineering, The University of British Columbia, Vancouver, BC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0249-8861",
+          "authenticated-orcid": false,
+          "given": "Sanchit",
+          "family": "Chopra",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Biomedical Engineering, The University of British Columbia, Vancouver, BC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-3004-8457",
+          "authenticated-orcid": false,
+          "given": "Nemekhbayar",
+          "family": "Baatartsogt",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, School of Medicine, Jichi Medical University, Shimotsuke, Tochigi, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1869-2450",
+          "authenticated-orcid": false,
+          "given": "Morisada",
+          "family": "Hayakawa",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, School of Medicine, Jichi Medical University, Shimotsuke, Tochigi, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0585-3937",
+          "authenticated-orcid": false,
+          "given": "Yuji",
+          "family": "Kashiwakura",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, School of Medicine, Jichi Medical University, Shimotsuke, Tochigi, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-5082-6394",
+          "authenticated-orcid": false,
+          "given": "Tsukasa",
+          "family": "Ohmori",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biochemistry, School of Medicine, Jichi Medical University, Shimotsuke, Tochigi, Japan"
+            },
+            {
+              "name": "Center for Gene Therapy Research, Jichi Medical University, Shimotsuke, Tochigi, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-6964-7521",
+          "authenticated-orcid": false,
+          "given": "Ryan",
+          "family": "Flannigan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Reproductive & Sexual Medicine Centre, M.H. Mohseni Institute of Urologic Sciences, Vancouver, BC, Canada"
+            },
+            {
+              "name": "Department of Urologic Sciences, The University of British Columbia, Vancouver, BC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-3048-9102",
+          "authenticated-orcid": false,
+          "given": "T. Michael",
+          "family": "Underhill",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Biomedical Engineering, The University of British Columbia, Vancouver, BC, Canada"
+            },
+            {
+              "name": "Department of Medical Genetics, The University of British Columbia, Vancouver, BC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-1371-0725",
+          "authenticated-orcid": false,
+          "given": "Pamela A.",
+          "family": "Hoodless",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Biomedical Engineering, The University of British Columbia, Vancouver, BC, Canada"
+            },
+            {
+              "name": "Basic and Translational Research, BC Cancer Research Institute, Vancouver, BC"
+            },
+            {
+              "name": "Department of Medical Genetics, The University of British Columbia, Vancouver, BC, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0438-1544",
+          "authenticated-orcid": false,
+          "given": "Hiroyuki",
+          "family": "Aburatani",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Research Center for Advanced Science and Technology, The University of Tokyo, Tokyo, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-8570-5784",
+          "authenticated-orcid": false,
+          "given": "Hirohide",
+          "family": "Saito",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Life Science Frontiers, Center for iPS Cell Research and Application, Kyoto University, Kyoto, Sakyo-Ku, Japan"
+            },
+            {
+              "name": "Institute for Quantitative Biosciences, The University of Tokyo, Tokyo, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-1813-7008",
+          "authenticated-orcid": false,
+          "given": "Osamu",
+          "family": "Nureki",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Biological Sciences, Graduate School of Science, The University of Tokyo, Tokyo, Japan"
+            },
+            {
+              "name": "Cell Biology Center, Institute of Integrated Research, Institute of Science Tokyo, Tokyo, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-1582-6027",
+          "authenticated-orcid": false,
+          "given": "Nozomu",
+          "family": "Yachie",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Biomedical Engineering, The University of British Columbia, Vancouver, BC, Canada"
+            },
+            {
+              "name": "Premium Research Institute for Human Metaverse Medicine, The University of Osaka, Suita, Osaka, Japan"
+            },
+            {
+              "name": "CREST Cell Control Program, Japan Science and Technology Agency, Core Research for Evolutional Science and Technology, Kawaguchi-shi, Saitama, Japan"
+            },
+            {
+              "name": "The McMillan Multiscale Human Program, the Canadian Institute for Advanced Research, Toronto, Canada"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.add8643"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-023-06675-4"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2018.10.024"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature14136"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2021.03.025"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa2031054"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-021-03534-y"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.abo3471"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.4194"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-021-04366-6"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3245"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/sciadv.abb1777"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aap8992"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2019.07.011"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-024-07706-4"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3805"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-022-01524-7"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-026-10156-9"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2023.06.013"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0704-z"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.adz9353"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-023-01683-1"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aaf7907"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature20777"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.4103"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-019-1184-5"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.abc1944"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nrm2085"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2021.11.026"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.tree.2008.06.005"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2019.06.012"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2007.04.040"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0960-9822(02)00809-6"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3947"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.2002277117"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature08170"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/1471-2164-14-264"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.neuron.2013.10.062"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/cshperspect.a008144"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gky1141"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkae1072"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/aps.2018.30"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/sigtrans.2015.4"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng.355"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng.369"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2008.02.019"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2007.03.030"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gad.1738708"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1523/JNEUROSCI.5085-10.2011"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.50",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/fncel.2013.00220"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkx309"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkz271"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.53",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41556-019-0292-7"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1145718"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.55",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2007.04.037"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.56",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-019-0090-6"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1074/jbc.M100493200"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.58",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-022-30976-3"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.59",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aaf8729"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.60",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0509-0"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.61",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1080/15476286.2014.996465"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.62",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkt836"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.63",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nsmb.2577"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.64",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2013.04.001"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.65",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gky1293"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.66",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1809609115"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.67",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1089/scd.2008.0247"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.68",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41594-026-01753-3"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.69",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-022-05114-0"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.70",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aad8282"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.71",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-024-47830-3"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.72",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41594-019-0258-2"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.73",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41594-022-00756-0"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.74",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aab1452"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.75",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/fendo.2018.00402"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.76",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41576-023-00611-y"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.77",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/wrna.1627"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.78",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.xplc.2020.100135"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.79",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pgen.1009755"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.80",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-021-04228-1"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.81",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-65669-0"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.82",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-014-0550-8"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.83",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkad392"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.84",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.stemcr.2020.07.019"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.85",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.stemcr.2015.12.004"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.86",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/1471-2164-10-413"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.87",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature09039"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.88",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0092-8674(03)00759-1"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.89",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1089/scd.2008.0179"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.90",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1074/jbc.M109.095612"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.91",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature07086"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.92",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/cphy.c150041"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.93",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1523/JNEUROSCI.2745-11.2011"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.94",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.isci.2022.104169"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.95",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3349/ymj.2017.58.1.234"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.96",
+          "first-page": "972",
+          "article-title": "lncRNA TUG1 promotes atherosclerosis progression by targeting miR-382-5p",
+          "volume": "14",
+          "year": "2021",
+          "journal-title": "Int J Clin Exp Pathol"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.97",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3390/ijms23010331"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.98",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/1750-1172-8-55"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.99",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ymthe.2019.10.002"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.100",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.0708115104"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.101",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/gr.2722704"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.102",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/sj.emboj.7601512"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.103",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkl143"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.104",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/acssynbio.5b00180"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.105",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-021-23889-0"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.106",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.4161/trns.27369"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.107",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0092-8674(03)00392-1"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.108",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2021.04.012"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.109",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aat9804"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.110",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.ado5978"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.111",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1102513"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.112",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3301"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.113",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.stem.2015.04.005"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.114",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/sciadv.abj1793"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.115",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-60392-2"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.116",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.2078"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.117",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-018-04575-0"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.118",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.10.14.682465"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.119",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-018-07181-2"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.120",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2009.08.002"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.121",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ncomms4687"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.122",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2010.03.013"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.123",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkad1142"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.124",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3192"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.125",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-022-30588-x"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.126",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-024-07497-8"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.127",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/bs.mie.2025.01.052"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.128",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.4169"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.129",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.4193"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.130",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41592-020-00990-8"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.131",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1107/S205225251801463X"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.132",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.jmb.2003.07.013"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.133",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1107/S0907444904019158"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.134",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1107/S0907444910007493"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.135",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1107/S2059798321009475"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.136",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1107/S1399004714016241"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.137",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/pro.3330"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.138",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/pro.3943"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.139",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-025-02649-1"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.140",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-017-1164-8"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.141",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.14806/ej.17.1.200"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.142",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s12859-018-2287-y"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.143",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2022.11.026"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.144",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0101717"
+        },
+        {
+          "key": "2026081303500836000_2026.08.08.743703v3.145",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1109/TVCG.2011.56"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.08.743703",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            13
+          ]
+        ],
+        "date-time": "2026-08-13T10:50:13Z",
+        "timestamp": 1786618213000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.08.743703"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            10
+          ]
+        ]
+      },
+      "references-count": 145,
+      "URL": "https://doi.org/10.64898/2026.08.08.743703",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            10
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

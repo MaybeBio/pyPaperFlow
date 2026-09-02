@@ -1,0 +1,797 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.10.744034",
+  "title": "Reprogramming Cas9 PAM Recognition for Allele-Specific Editing",
+  "doi": "10.64898/2026.08.10.744034",
+  "abstract": "The therapeutic potential of CRISPR-Cas9 genome editing is fundamentally constrained by the requirement for specific short DNA sequences (PAMs) flanking the target site, limiting access to many clinically relevant genomic loci. This stringent PAM requirement is particularly problematic in applications which require precise positioning, such as base editing and allele-specific editing. Although PAM-relaxed variants have expanded the targetable genome, they incur trade-offs in on-target activity, off-target editing, and cleavage kinetics. This highlights an unmet need for variants that are re-targeted to alternative PAMs in order to maintain the specificity and enzymatic performance inherent to stringent dinucleotide PAM recognition. To overcome these limitations, we developed a yeast selection platform capable of engineering SpCas9 variants with re-specified PAM recognition. Using a clinically relevant Huntington's disease gene (HTT) SNP as a proof-of-concept target, we engineered variants with reciprocal NGC and NGT PAM selectivity, as a step toward allele-specific editing in a large percentage of Huntington's disease patients. These yeast-selected SpCas9 variants retained their modified activity across multiple endogenous HEK293T loci, demonstrating that this specificity is robust across diverse genomic contexts. The variants surpassed PAM-broadened variants on their respective on-target PAM while displaying broad loss of activity across alternative PAMs, effectively re-specifying PAM recognition toward a single dinucleotide sequence. Retargeted variants recovered on-target cleavage kinetics approaching wild-type SpCas9, even under competing substrate conditions, demonstrating that PAM re-specification can simultaneously restore catalytic efficiency and improve specificity. Beyond NGC and NGT, we leveraged our high-throughput platform to engineer Cas9 with re-specified activity across multiple additional non-canonical PAMs in yeast, further demonstrating its utility as a general and programmable framework for expanding the therapeutic reach of precision genome editing.",
+  "authors": [
+    "Julia Amber Tartaglia",
+    "Vivian Nguyen",
+    "John Desmarais",
+    "Rachel Weissman",
+    "Brittney Thornton",
+    "Marena Trinidad",
+    "Kevin Briseno",
+    "Taylor Hudson",
+    "Carmelle Catamura",
+    "Liana Lareau",
+    "Fyodor Urnov",
+    "Jennifer A Doudna",
+    "David Savage"
+  ],
+  "published_date": "2026-08-11",
+  "updated_date": "2026-08-11T16:50:15Z",
+  "journal": "bioRxiv",
+  "category": "Molecular Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.10.744034",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.10.744034.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.10.744034/10.64898_2026.08.10.744034.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.10.744034",
+  "version": "",
+  "keywords": [
+    "Molecular Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Molecular Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            9,
+            1
+          ]
+        ],
+        "date-time": "2026-09-01T20:16:15Z",
+        "timestamp": 1788293775958,
+        "version": "build-2803163510"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "group-title": "Molecular Biology",
+      "reference-count": 68,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                11
+              ]
+            ],
+            "date-time": "2026-08-11T00:00:00Z",
+            "timestamp": 1786406400000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "id": [
+            {
+              "id": "https://ror.org/006w34k90",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "abstract": "<jats:p>The therapeutic potential of CRISPR-Cas9 genome editing is fundamentally constrained by the requirement for specific short DNA sequences (PAMs) flanking the target site, limiting access to many clinically relevant genomic loci. This stringent PAM requirement is particularly problematic in applications which require precise positioning, such as base editing and allele-specific editing. Although PAM-relaxed variants have expanded the targetable genome, they incur trade-offs in on-target activity, off-target editing, and cleavage kinetics. This highlights an unmet need for variants that are re-targeted to alternative PAMs in order to maintain the specificity and enzymatic performance inherent to stringent dinucleotide PAM recognition. To overcome these limitations, we developed a yeast selection platform capable of engineering SpCas9 variants with re-specified PAM recognition. Using a clinically relevant Huntington's disease gene (HTT) SNP as a proof-of-concept target, we engineered variants with reciprocal NGC and NGT PAM selectivity, as a step toward allele-specific editing in a large percentage of Huntington's disease patients. These yeast-selected SpCas9 variants retained their modified activity across multiple endogenous HEK293T loci, demonstrating that this specificity is robust across diverse genomic contexts. The variants surpassed PAM-broadened variants on their respective on-target PAM while displaying broad loss of activity across alternative PAMs, effectively re-specifying PAM recognition toward a single dinucleotide sequence. Retargeted variants recovered on-target cleavage kinetics approaching wild-type SpCas9, even under competing substrate conditions, demonstrating that PAM re-specification can simultaneously restore catalytic efficiency and improve specificity. Beyond NGC and NGT, we leveraged our high-throughput platform to engineer Cas9 with re-specified activity across multiple additional non-canonical PAMs in yeast, further demonstrating its utility as a general and programmable framework for expanding the therapeutic reach of precision genome editing.</jats:p>",
+      "DOI": "10.64898/2026.08.10.744034",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ],
+        "date-time": "2026-08-11T16:50:15Z",
+        "timestamp": 1786467015000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Reprogramming Cas9 PAM Recognition for Allele-Specific Editing"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Julia Amber",
+          "family": "Tartaglia",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Vivian",
+          "family": "Nguyen",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-7739-2079",
+          "authenticated-orcid": false,
+          "given": "John",
+          "family": "Desmarais",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1806-6564",
+          "authenticated-orcid": false,
+          "given": "Rachel",
+          "family": "Weissman",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0000-5615-2853",
+          "authenticated-orcid": false,
+          "given": "Brittney",
+          "family": "Thornton",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7839-4642",
+          "authenticated-orcid": false,
+          "given": "Marena",
+          "family": "Trinidad",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Kevin",
+          "family": "Briseno",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0002-5057-2018",
+          "authenticated-orcid": false,
+          "given": "Taylor",
+          "family": "Hudson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Carmelle",
+          "family": "Catamura",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-3223-3426",
+          "authenticated-orcid": false,
+          "given": "Liana",
+          "family": "Lareau",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7542-4084",
+          "authenticated-orcid": false,
+          "given": "Fyodor",
+          "family": "Urnov",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-9161-999X",
+          "authenticated-orcid": false,
+          "given": "Jennifer A",
+          "family": "Doudna",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC Berkeley;"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0042-2257",
+          "authenticated-orcid": false,
+          "given": "David",
+          "family": "Savage",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "UC, Berkeley"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1225829"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.add8643"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1017/s0033583519000052"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1146/annurev-biophys-062215-010822"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature13011"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature15544"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41579-022-00739-4"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature13579"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.15252/embj.201899466"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1099/mic.0.023960-0"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.4161/rna.23764"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aas9129"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature26155"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aba8853"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2025.03.024"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.16",
+          "doi-asserted-by": "crossref",
+          "first-page": "8785",
+          "DOI": "10.1093/nar/gkab507",
+          "article-title": "In-depth assessment of the PAM compatibility and editing activities of Cas9 variants",
+          "volume": "49",
+          "year": "2021",
+          "journal-title": "Nucleic Acids Res"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-024-47830-3"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature14592"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3404"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-019-08395-8"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-023-41829-y"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-020-16117-8"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.23",
+          "doi-asserted-by": "crossref",
+          "first-page": "539",
+          "DOI": "10.1038/s41586-025-09021-y",
+          "article-title": "Custom CRISPR-Cas9 PAM variants via scalable engineering and machine learning",
+          "volume": "643",
+          "year": "2025",
+          "journal-title": "Nature"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ymthe.2020.05.002"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.2623"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.2647"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ymthe.2020.11.009"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.28",
+          "doi-asserted-by": "crossref",
+          "first-page": "547",
+          "DOI": "10.1016/j.omtm.2022.08.005",
+          "article-title": "PAM-altering SNP-based allele-specific CRISPR-Cas9 therapeutic strategies for Huntington’s disease",
+          "volume": "26",
+          "year": "2022",
+          "journal-title": "Mol. Ther. Methods Clin. Dev"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.29",
+          "doi-asserted-by": "crossref",
+          "first-page": "59",
+          "DOI": "10.1007/s40484-014-0030-x",
+          "article-title": "Target specificity of the CRISPR-Cas9 system",
+          "volume": "2",
+          "year": "2014",
+          "journal-title": "Quant. Biol"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41582-020-0389-4"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.31",
+          "first-page": "4566",
+          "article-title": "Permanent inactivation of Huntington’s disease mutation by personalized allele-specific CRISPR/Cas9",
+          "volume": "25",
+          "year": "2016",
+          "journal-title": "Hum. Mol. Genet"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ymthe.2016.11.010"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.4066"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-026-03059-7"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/B978-0-12-420067-8.00008-8"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.36",
+          "doi-asserted-by": "crossref",
+          "first-page": "687",
+          "DOI": "10.1038/s41570-019-0143-x",
+          "article-title": "The importance of catalytic promiscuity for enzyme design and evolution",
+          "volume": "3",
+          "year": "2019",
+          "journal-title": "Nat. Rev. Chem"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cbpa.2009.01.017"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cbpa.2006.08.011"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1178811"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1178817"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.2304"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ncomms1962"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.43",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Dreier, B. , Fuller, R.P. , Segal, D.J. , Lund, C.V. , Blancafort, P. , Huber, A. , Koksch, B. , and Barbas, C.F ., 3rd (2005). Development of zinc finger domains for recognition of the 5’-CNN-3’ family DNA sequences and their use in the construction of artificial transcription factors. J. Biol. Chem. 280, 35588–35597.",
+          "DOI": "10.1074/jbc.M506654200"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.2028256"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.96.6.2758"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1146/annurev.biophys.29.1.183"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkt520"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.48",
+          "doi-asserted-by": "crossref",
+          "first-page": "194a",
+          "DOI": "10.1016/j.bpj.2017.11.1082",
+          "article-title": "Enhanced proofreading governs CRISPR-Cas9 targeting accuracy",
+          "volume": "114",
+          "year": "2018",
+          "journal-title": "Biophys. J"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2016.02.020"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.50",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/S41587-020-0412-8"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.51",
+          "doi-asserted-by": "crossref",
+          "first-page": "349",
+          "DOI": "10.1038/s41467-020-20650-x",
+          "article-title": "Engineered dual selection for directed evolution of SpCas9 PAM specificity",
+          "volume": "12",
+          "year": "2021",
+          "journal-title": "Nat. Commun"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0555-7"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.53",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.64898/2026.07.20.739671"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-025-09298-z"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.55",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cbpa.2014.05.008"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.56",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkt135"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.2019"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.58",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/bty191"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.59",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btp352"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.60",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.celrep.2021.109207"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.61",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nprot.2007.13"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.62",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1109/MCSE.2007.55"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.63",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-019-0032-3"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.64",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btu048"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.65",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41594-022-00756-0"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.66",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.celrep.2017.12.041"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.67",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/BIOINFORMATICS/BTZ921"
+        },
+        {
+          "key": "2026081315550829000_2026.08.10.744034v1.68",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/S41586-024-07487-W"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.10.744034",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            9,
+            1
+          ]
+        ],
+        "date-time": "2026-09-01T19:40:11Z",
+        "timestamp": 1788291611000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.10.744034"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "references-count": 68,
+      "URL": "https://doi.org/10.64898/2026.08.10.744034",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

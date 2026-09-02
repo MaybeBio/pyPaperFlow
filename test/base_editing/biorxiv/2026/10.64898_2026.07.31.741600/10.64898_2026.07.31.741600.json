@@ -1,0 +1,520 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.07.31.741600",
+  "title": "Immobilized dicot and monocot viral vectors enable rapid screening of RNA mobility elements for mobile RNA engineering and RNA-based genome editing",
+  "doi": "10.64898/2026.07.31.741600",
+  "abstract": "RNA mobility has emerged as a valuable component of RNA-based genome editing and DNA-free transformation technologies. However, experimental systems for rapidly evaluating RNA mobility remain limited, particularly in monocot species where grafting approaches are not feasible. Here, we developed immobilized versions of Foxtail Mosaic Virus (FoMV) and Tobacco Rattle Virus (TRV) with impaired systemic viral movement as generalizable platforms for transient expression and functional screening of mobile RNAs. A simple Nicotiana benthamiana leaf assay enabled direct visualization and molecular quantification of transcript mobility using fluorescent reporter fusions carrying seven previously described RNA mobility elements from dicot and monocot species. The platform consistently distinguished mobile elements displaying higher or lower frequencies of mobility across both viral systems, with T-RNA-like sequence (TLS), TLSgly and maize FLOWERING LOCUS T ( FT ) ortholog, ZCN19, and as well as ZCN16 displaying significantly higher frequencies of mobility compared to non-mobile element controls in FoMV and TRV, respectively. Translation of these findings to virus-induced genome editing demonstrated that mobile elements identified through the screening platform enhanced FoMV-mediated editing of PHYTOENE DESATURASE in Setaria viridis ( SvPDS ), with TLSgly increasing somatic editing frequencies approximately two-fold relative to sgRNA alone. Together, these results establish immobilized FoMV and TRV platforms as versatile screening tools for evaluating RNA mobility, optimizing RNA cargos for viral genome editing, and a scalable framework for engineering mobile RNAs and accelerating development of RNA-based technologies for functional genomics and crop improvement.",
+  "authors": [
+    "Nathaniel M. Butler",
+    "Charlene M. Grahn",
+    "Colby Starker"
+  ],
+  "published_date": "2026-08-03",
+  "updated_date": "2026-08-03T13:20:33Z",
+  "journal": "bioRxiv",
+  "category": "Plant Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.741600",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.741600.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.07.31.741600/10.64898_2026.07.31.741600.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.07.31.741600",
+  "version": "",
+  "keywords": [
+    "Plant Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Plant Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ],
+        "date-time": "2026-08-05T10:50:43Z",
+        "timestamp": 1785927043514,
+        "version": "3.56.0"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            3
+          ]
+        ]
+      },
+      "group-title": "Plant Biology",
+      "reference-count": 47,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                3
+              ]
+            ],
+            "date-time": "2026-08-03T00:00:00Z",
+            "timestamp": 1785715200000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "https://www.biorxiv.org/about/FAQ#license"
+        }
+      ],
+      "funder": [
+        {
+          "DOI": "10.13039/100000015",
+          "name": "US Department of Energy",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "DE SC0023160"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "DE SC0023160"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100000015",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/100000015",
+          "name": "US Department of Energy",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "DE SC0018420"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "DE SC0018420"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100000015",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            3
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Summary</jats:title>\n                <jats:p>\n                  RNA mobility has emerged as a valuable component of RNA-based genome editing and DNA-free transformation technologies. However, experimental systems for rapidly evaluating RNA mobility remain limited, particularly in monocot species where grafting approaches are not feasible. Here, we developed immobilized versions of\n                  <jats:italic>Foxtail Mosaic Virus</jats:italic>\n                  (FoMV) and\n                  <jats:italic>Tobacco Rattle Virus</jats:italic>\n                  (TRV) with impaired systemic viral movement as generalizable platforms for transient expression and functional screening of mobile RNAs. A simple\n                  <jats:italic>Nicotiana benthamiana</jats:italic>\n                  leaf assay enabled direct visualization and molecular quantification of transcript mobility using fluorescent reporter fusions carrying seven previously described RNA mobility elements from dicot and monocot species. The platform consistently distinguished mobile elements displaying higher or lower frequencies of mobility across both viral systems, with T-RNA-like sequence (TLS), TLSgly and maize\n                  <jats:italic>FLOWERING LOCUS T</jats:italic>\n                  (\n                  <jats:italic>FT</jats:italic>\n                  ) ortholog, ZCN19, and as well as ZCN16 displaying significantly higher frequencies of mobility compared to non-mobile element controls in FoMV and TRV, respectively. Translation of these findings to virus-induced genome editing demonstrated that mobile elements identified through the screening platform enhanced FoMV-mediated editing of\n                  <jats:italic>PHYTOENE DESATURASE</jats:italic>\n                  in\n                  <jats:italic>Setaria viridis</jats:italic>\n                  (\n                  <jats:italic>SvPDS</jats:italic>\n                  ), with TLSgly increasing somatic editing frequencies approximately two-fold relative to sgRNA alone. Together, these results establish immobilized FoMV and TRV platforms as versatile screening tools for evaluating RNA mobility, optimizing RNA cargos for viral genome editing, and a scalable framework for engineering mobile RNAs and accelerating development of RNA-based technologies for functional genomics and crop improvement.\n                </jats:p>",
+      "DOI": "10.64898/2026.07.31.741600",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            3
+          ]
+        ],
+        "date-time": "2026-08-03T13:20:33Z",
+        "timestamp": 1785763233000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Immobilized dicot and monocot viral vectors enable rapid screening of RNA mobility elements for mobile RNA engineering and RNA-based genome editing"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-9235-7626",
+          "authenticated-orcid": false,
+          "given": "Nathaniel M.",
+          "family": "Butler",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Center for Plant Science Innovation, University of Nebraska, Lincoln, Nebraska, USA"
+            },
+            {
+              "name": "Plant Transformation Core Research Facility, Agricultural Research Division, Institute of Agriculture and Natural Resources, University of Nebraska, Lincoln, Nebraska, USA"
+            },
+            {
+              "name": "Department of Agronomy & Horticulture, University of Nebraska, Lincoln, Nebraska, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Charlene M.",
+          "family": "Grahn",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Plant Science Innovation, University of Nebraska, Lincoln, Nebraska, USA"
+            },
+            {
+              "name": "Plant Transformation Core Research Facility, Agricultural Research Division, Institute of Agriculture and Natural Resources, University of Nebraska, Lincoln, Nebraska, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Colby",
+          "family": "Starker",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Precision Plant Genomics, University of Minnesota, St. Paul, Minnesota, USA"
+            },
+            {
+              "name": "Department of Genetics, Cell Biology and Development, University of Minnesota, St. Paul, Minnesota, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/FGEED.2022.925088/FULL"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/MPP.13330"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s00438-023-01998-3"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1104/pp.17.01679"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/PBI.70250"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/S00122-025-04990-0"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/TPG2.20312;WEBSITE:WEBSITE:ACSESS.ONLINELIBRARY.WILEY.COM;WGROUP:STRING:PUBLICATION"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1089/crispr.2021.0113"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/0042-6822(79)90279-4"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1094/MPMI-12-12-0280-R"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/J.ENVRES.2025.122892"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41477-020-0670-y"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3390/V10090484"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/jxb/ern250"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/S41525-023-00387-4"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1059805"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/NPH.70400"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/JVI.02346-08"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/JOURNAL.PONE.0046451"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1104/pp.16.00010"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1105/tpc.16.00124"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.4161/RNA.19965"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.270.5244.1980"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1104/pp.18.00107"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3390/V15020531"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/pld3.181"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1104/pp.16.00172"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/plphys/kiac159"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/J.MOCELL.2026.100348"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/PBI.12412;JOURNAL:JOURNAL:14677652;ISSUE:ISSUE:DOI"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/FGEED.2025.1588089"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/FPLS.2021.671091/TEXT"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/J.PMPP.2025.102793"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41477-025-02025-6"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/J.CPB.2026.100588"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ncomms13274"
+        },
+        {
+          "issue": "2",
+          "key": "2026080503301131000_2026.07.31.741600v1.37",
+          "doi-asserted-by": "crossref",
+          "first-page": "582",
+          "DOI": "10.1111/nph.15772",
+          "article-title": "Connecting the pieces: uncovering the molecular basis for long-distance communication through plant grafting",
+          "volume": "223",
+          "year": "2019",
+          "journal-title": "New Phytologist"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/FPLS.2021.630396"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1099/vir.0.82667-0"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/J.TPLANTS.2026.05.012"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-022-01585-8"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/J.VIROL.2024.110028"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/tpj.17193"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/978-1-0716-0712-1_10"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1105/tpc.15.01056"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/FGEED.2022.780238/TEXT"
+        },
+        {
+          "key": "2026080503301131000_2026.07.31.741600v1.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/J.XPLC.2021.100168"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.07.31.741600",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ],
+        "date-time": "2026-08-05T10:30:19Z",
+        "timestamp": 1785925819000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.07.31.741600"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            3
+          ]
+        ]
+      },
+      "references-count": 47,
+      "URL": "https://doi.org/10.64898/2026.07.31.741600",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            3
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

@@ -1,0 +1,997 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.07.29.741564",
+  "title": "Identifying the causal allele in the CD40 autoimmune locus enables discovery of context-specific trans-effects in B cells",
+  "doi": "10.64898/2026.07.29.741564",
+  "abstract": "Thousands of genetic variants are associated with autoimmune diseases, but causal variants, their mechanisms, and the pathogenic context in which they act are elusive. Knowledge of pathogenic contexts may enable effective targeted therapies, instead of broad immunosuppressive approaches. First, to focus on the genetics of immune response, we used surface marker CITE-seq data from 1,055,857 peripheral blood mononuclear cells from 356 individuals. We defined genetic associations to 148 surface proteins across eight cell types. We observed a signal in the CD40 locus, implicated in rheumatoid arthritis (RA) and other autoimmune conditions. RA risk variants increased CD40 protein expression by ∼20% on B cells, but with minimal mRNA effects. Second, we deployed base-resolution genome editing, with CRAFT-seq, capturing genomic DNA sequence at the edited site and multimodal phenotypes at single-cell resolution. We defined a single causal allele, rs1883832, within the Kozak motif. Third, we edited this allele, in primary B cells and conducted CRAFTseq to demonstrate trans -effects in >200 genes. These effects were only in the light zone germinal center-like state. Importantly, these trans -effects were not seen in population-scale cohorts of unstimulated B cells. This represents a framework to define disease causal alleles, their cis – and trans -effects. It demonstrates the power of defining causal genetic variation to find trans -effects through editing, which cannot easily be found in population studies.",
+  "authors": [
+    "Yoshihiko Tomofuji",
+    "Zepeng Mu",
+    "Hafsa Mire",
+    "Yu Zhao",
+    "Cassidy Liu",
+    "Vidya Jayanthi",
+    "Nicholas Sugiarto",
+    "Accelerating Medicines Partnership®: RA/SLE Network",
+    "Jeffrey A. Sparks",
+    "Soumya Raychaudhuri"
+  ],
+  "published_date": "2026-08-04",
+  "updated_date": "2026-08-05T07:30:12Z",
+  "journal": "bioRxiv",
+  "category": "Genetics",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.07.29.741564",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.07.29.741564.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.07.29.741564/10.64898_2026.07.29.741564.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.07.29.741564",
+  "version": "",
+  "keywords": [
+    "Genetics"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Genetics",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            7
+          ]
+        ],
+        "date-time": "2026-08-07T16:49:34Z",
+        "timestamp": 1786121374540,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "group-title": "Genetics",
+      "reference-count": 111,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                4
+              ]
+            ],
+            "date-time": "2026-08-04T00:00:00Z",
+            "timestamp": 1785801600000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "DOI": "10.13039/100015326",
+          "name": "NIH Common Fund",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "2P01AI148102 5R01HG013083, 5U01HG012009, 5R01AR063759"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "2P01AI148102 5R01HG013083, 5U01HG012009, 5R01AR063759"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100015326",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  Thousands of genetic variants are associated with autoimmune diseases, but causal variants, their mechanisms, and the pathogenic context in which they act are elusive. Knowledge of pathogenic contexts may enable effective targeted therapies, instead of broad immunosuppressive approaches. First, to focus on the genetics of immune response, we used surface marker CITE-seq data from 1,055,857 peripheral blood mononuclear cells from 356 individuals. We defined genetic associations to 148 surface proteins across eight cell types. We observed a signal in the CD40 locus, implicated in rheumatoid arthritis (RA) and other autoimmune conditions. RA risk variants increased CD40 protein expression by ∼20% on B cells, but with minimal mRNA effects. Second, we deployed base-resolution genome editing, with CRAFT-seq, capturing genomic DNA sequence at the edited site and multimodal phenotypes at single-cell resolution. We defined a single causal allele, rs1883832, within the Kozak motif. Third, we edited this allele, in primary B cells and conducted CRAFTseq to demonstrate\n                  <jats:italic>trans</jats:italic>\n                  -effects in &gt;200 genes. These effects were only in the light zone germinal center-like state. Importantly, these\n                  <jats:italic>trans</jats:italic>\n                  -effects were not seen in population-scale cohorts of unstimulated B cells. This represents a framework to define disease causal alleles, their\n                  <jats:italic>cis</jats:italic>\n                  – and\n                  <jats:italic>trans</jats:italic>\n                  -effects. It demonstrates the power of defining causal genetic variation to find\n                  <jats:italic>trans</jats:italic>\n                  -effects through editing, which cannot easily be found in population studies.\n                </jats:p>",
+      "DOI": "10.64898/2026.07.29.741564",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ],
+        "date-time": "2026-08-05T07:30:12Z",
+        "timestamp": 1785915012000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Identifying the causal allele in the CD40 autoimmune locus enables discovery of context-specific trans-effects in B cells"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-1661-0941",
+          "authenticated-orcid": false,
+          "given": "Yoshihiko",
+          "family": "Tomofuji",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Center for Data Sciences, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Genetics, Department of Medicine, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-7717-3247",
+          "authenticated-orcid": false,
+          "given": "Zepeng",
+          "family": "Mu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Data Sciences, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Genetics, Department of Medicine, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hafsa",
+          "family": "Mire",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Data Sciences, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Genetics, Department of Medicine, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Yu",
+          "family": "Zhao",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Data Sciences, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Genetics, Department of Medicine, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Cassidy",
+          "family": "Liu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Data Sciences, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Genetics, Department of Medicine, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Vidya",
+          "family": "Jayanthi",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Data Sciences, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Genetics, Department of Medicine, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0001-7036-8375",
+          "authenticated-orcid": false,
+          "given": "Nicholas",
+          "family": "Sugiarto",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Data Sciences, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Genetics, Department of Medicine, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "name": "Accelerating Medicines Partnership®: RA/SLE Network",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5556-4618",
+          "authenticated-orcid": false,
+          "given": "Jeffrey A.",
+          "family": "Sparks",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1901-8265",
+          "authenticated-orcid": false,
+          "given": "Soumya",
+          "family": "Raychaudhuri",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Data Sciences, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Genetics, Department of Medicine, Brigham and Women’s Hospital, Boston, MA, USA"
+            },
+            {
+              "name": "Division of Rheumatology, Inflammation, and Immunity, Department of Medicine, Brigham and Women’s Hospital and Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA, USA"
+            },
+            {
+              "name": "Department of Biomedical Informatics, Harvard Medical School, Boston, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ajhg.2022.12.011"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-022-01213-w"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng.233"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aav7188"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-023-01384-0"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-021-00931-x"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/j.1600-065X.2009.00782.x"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMc2508023"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa2308917"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(23)01126-1"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-024-01896-3"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-022-01051-w"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-023-06592-6"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-025-02291-2"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.3973"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.4380"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-019-1711-4"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature17946"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature24644"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.03.12.642879"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41592-025-02805-0"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.adh7699"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-025-09313-3"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng.2756"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/hmg/ddv194"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-021-00913-z"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0093844"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gky780"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-016-1142-6"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.30",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1246980"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-63856-7"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1246949"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.abf1970"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1172/JCI185217"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.08.11.669754"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pgen.1004383"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.abf3041"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2020.06.045"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-023-41180-2"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-56719-8"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-021-03552-w"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.xgen.2022.100212"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-021-21049-y"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng.2667"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa1215734"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa1215739"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/fcell.2021.612830"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41592-025-02793-1"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.jaci.2015.01.014"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.50",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41385-018-0057-9"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/eji.201444778"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/cea.13017"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.53",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S2665-9913(20)30038-2"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa2309439"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.55",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-019-0505-9"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.56",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/0022-2836(87)90418-9"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.4049/jimmunol.2001173"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.58",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41592-019-0619-0"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.59",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1182/blood-2003-12-4291"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.60",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-020-0684-4"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.61",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.immuni.2024.01.006"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.62",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-021-25957-x"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.63",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-023-06708-y"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.64",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/scitranslmed.aaq0305"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.65",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-022-04713-1"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.66",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-022-01066-3"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.67",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41591-020-01145-0"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.68",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/ar3337"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.69",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41590-023-01588-w"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.70",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/cmi.2009.103"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.71",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.abj8222"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.72",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-019-1237-9"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.73",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41576-020-0258-4"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.74",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pgen.1003487"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.75",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.xgen.2025.100973"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.76",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-024-01909-1"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.77",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1086/519795"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.78",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-019-13225-y"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.79",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ng.3656"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.80",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature15393"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.81",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-023-01586-6"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.82",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.02.24.639351"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.83",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2023.05.29.542756"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.84",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cels.2018.11.005"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.85",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-017-1382-0"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.86",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nbt.4042"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.87",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.12688/f1000research.73600.2"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.88",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-023-01767-y"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.89",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2021.04.048"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.90",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-023-06708-y"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.91",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-019-1836-7"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.92",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btq340"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.93",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkq603"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.94",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-022-02761-4"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.95",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.aaz1776"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.96",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pgen.1004383"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.97",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.18637/jss.v036.i03"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.98",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/bty560"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.99",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nmeth.1923"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.100",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/gb-2008-9-9-r137"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.101",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btq033"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.102",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btp328"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.103",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-024-07259-6"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.104",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-024-02268-2"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.105",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41551-023-01132-z"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.106",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2021.05.05.442755"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.107",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioadv/vbad181"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.108",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-019-0032-3"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.109",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-014-0550-8"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.110",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.5281/zenodo.20737956"
+        },
+        {
+          "key": "2026080621405402000_2026.07.29.741564v1.111",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.5281/zenodo.8373756"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.07.29.741564",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            7
+          ]
+        ],
+        "date-time": "2026-08-07T04:42:11Z",
+        "timestamp": 1786077731000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.07.29.741564"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "references-count": 111,
+      "URL": "https://doi.org/10.64898/2026.07.29.741564",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

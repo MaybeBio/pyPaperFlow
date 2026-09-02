@@ -14,8 +14,8 @@
   "category": "Biophysics",
   "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.28.747767",
   "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.28.747767.full.pdf",
-  "pdf_path": "",
-  "pdf_downloaded": false,
+  "pdf_path": "test/biorxiv/2026/10.64898_2026.08.28.747767/10.64898_2026.08.28.747767.pdf",
+  "pdf_downloaded": true,
   "query": "10.64898/2026.08.28.747767",
   "version": "",
   "keywords": [

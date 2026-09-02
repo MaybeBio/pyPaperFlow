@@ -1,0 +1,370 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.09.742435",
+  "title": "SAM-Targeted CRISPR-Cas9 RNP Delivery Combined with Leaf Regeneration Enables DNA-Free, Non-Chimeric Genome Editing in ‘Fuji’ Apple",
+  "doi": "10.64898/2026.08.09.742435",
+  "abstract": "DNA-free genome editing is a promising strategy for the genetic improvement of horticultural crops and fruit trees because it enables targeted mutagenesis without stable genetic transformation. In planta particle bombardment (iPB) delivers CRISPR-Cas9 ribonucleoproteins (RNPs) directly into shoot apical meristems (SAMs), enabling heritable genome editing without the use of tissue culture-based transformation systems. However, the practical application of iPB-mediated editing in fruit trees is limited by the frequent occurrence of chimerism, which cannot be readily eliminated through sexual segregation while maintaining the genetic background of elite cultivars. To overcome this limitation, we combined iPB-mediated RNP delivery with regeneration from edited leaf tissues (iPB-REG). Using this approach, we targeted the self-incompatibility gene S9-RNase in the elite apple cultivar ‘Fuji’ and efficiently recovered non-chimeric edited plants. These results establish iPB-REG as a practical strategy for producing uniform genome-edited fruit trees and provide a valuable platform for DNA-free genetic improvement and functional genomics in clonally propagated perennial crops.",
+  "authors": [
+    "Chikako Nishitani",
+    "Nozomi Tsujino",
+    "Misa Kuroki",
+    "Masato Wada",
+    "Ryozo Imai"
+  ],
+  "published_date": "2026-08-11",
+  "updated_date": "2026-08-11T18:30:19Z",
+  "journal": "bioRxiv",
+  "category": "Plant Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.09.742435",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.09.742435.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.09.742435/10.64898_2026.08.09.742435.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.09.742435",
+  "version": "",
+  "keywords": [
+    "Plant Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Plant Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ],
+        "date-time": "2026-08-14T15:31:18Z",
+        "timestamp": 1786721478303,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "group-title": "Plant Biology",
+      "reference-count": 12,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                11
+              ]
+            ],
+            "date-time": "2026-08-11T00:00:00Z",
+            "timestamp": 1786406400000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "https://www.biorxiv.org/about/FAQ#license"
+        }
+      ],
+      "funder": [
+        {
+          "name": "Ministry of Agriculture, Forestry and Fisheries of Japan (MAFF) – DIT Program",
+          "award": [
+            "DIT3001"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "DIT3001"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "NARO Innovation Promotion Program"
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>DNA-free genome editing is a promising strategy for the genetic improvement of horticultural crops and fruit trees because it enables targeted mutagenesis without stable genetic transformation. In planta particle bombardment (iPB) delivers CRISPR-Cas9 ribonucleoproteins (RNPs) directly into shoot apical meristems (SAMs), enabling heritable genome editing without the use of tissue culture-based transformation systems. However, the practical application of iPB-mediated editing in fruit trees is limited by the frequent occurrence of chimerism, which cannot be readily eliminated through sexual segregation while maintaining the genetic background of elite cultivars. To overcome this limitation, we combined iPB-mediated RNP delivery with regeneration from edited leaf tissues (iPB-REG). Using this approach, we targeted the self-incompatibility gene S9-RNase in the elite apple cultivar ‘Fuji’ and efficiently recovered non-chimeric edited plants. These results establish iPB-REG as a practical strategy for producing uniform genome-edited fruit trees and provide a valuable platform for DNA-free genetic improvement and functional genomics in clonally propagated perennial crops.</jats:p>",
+      "DOI": "10.64898/2026.08.09.742435",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ],
+        "date-time": "2026-08-11T18:30:19Z",
+        "timestamp": 1786473019000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "SAM-Targeted CRISPR-Cas9 RNP Delivery Combined with Leaf Regeneration Enables DNA-Free, Non-Chimeric Genome Editing in ‘Fuji’ Apple"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0008-5204-0975",
+          "authenticated-orcid": false,
+          "given": "Chikako",
+          "family": "Nishitani",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "NARO Institute of Fruit Tree Science, 2-1 Fujimoto, Tsukuba, Ibaraki 305-8605, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Nozomi",
+          "family": "Tsujino",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "NARO Institute of Fruit Tree Science, 2-1 Fujimoto, Tsukuba, Ibaraki 305-8605, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Misa",
+          "family": "Kuroki",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "NARO Institute of Agrobiological Sciences, Kannondai 3-1-3, Tsukuba, Ibaraki 305-8604, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Masato",
+          "family": "Wada",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "NARO Institute of Fruit Tree Science, 92-24, Nabeyashiki, Shimokuriyagawa, Morioka, Iwate 020-0123, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4651-3461",
+          "authenticated-orcid": false,
+          "given": "Ryozo",
+          "family": "Imai",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "NARO Institute of Agrobiological Sciences, Kannondai 3-1-3, Tsukuba, Ibaraki 305-8604, Japan"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s00299-003-0716-4"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/plphys/kiab570"
+        },
+        {
+          "issue": "4",
+          "key": "2026081407450564000_2026.08.09.742435v1.3",
+          "doi-asserted-by": "crossref",
+          "first-page": "2320",
+          "DOI": "10.1093/plphys/kiae491",
+          "article-title": "DNA-free and genotype-independent CRISPR/Cas9 system in soybean",
+          "volume": "196",
+          "year": "2024",
+          "journal-title": "Plant Physiology"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.4",
+          "doi-asserted-by": "crossref",
+          "first-page": "171",
+          "DOI": "10.5511/plantbiotechnology.20.0206a",
+          "article-title": "In planta particle bombardment (iPB): A new method for plant transformation and genome editing",
+          "volume": "37",
+          "year": "2020",
+          "journal-title": "Plant Biotechnology"
+        },
+        {
+          "issue": "1",
+          "key": "2026081407450564000_2026.08.09.742435v1.5",
+          "first-page": "319",
+          "article-title": "New strategies to overcome present CRISPR/Cas9 limitations in apple and pear: efficient dechimerization and base editing",
+          "volume": "22",
+          "year": "2021",
+          "journal-title": "International Journal of Molecular Sciences"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.6",
+          "doi-asserted-by": "crossref",
+          "first-page": "31481",
+          "DOI": "10.1038/srep31481",
+          "article-title": "Efficient genome editing in apple using a CRISPR/Cas9 system",
+          "volume": "6",
+          "year": "2016",
+          "journal-title": "Scientific Reports"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/srep15358"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.8",
+          "doi-asserted-by": "crossref",
+          "first-page": "113",
+          "DOI": "10.1007/s11103-024-01514-0",
+          "article-title": "Alternative splicing and deletion in S-RNase confer stylar-part self-compatibility in the apple cultivar ‘Vered",
+          "volume": "114",
+          "year": "2024",
+          "journal-title": "Plant Molecular Biology"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/pbi.13253"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.10",
+          "doi-asserted-by": "crossref",
+          "first-page": "1623097",
+          "DOI": "10.3389/fgeed.2025.1623097",
+          "article-title": "A long shelf-life melon created via CRISPR/Cas9 RNP-based in planta genome editing",
+          "volume": "7",
+          "year": "2025",
+          "journal-title": "Frontiers in Genome Editing"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41598-017-10930-5"
+        },
+        {
+          "key": "2026081407450564000_2026.08.09.742435v1.12",
+          "doi-asserted-by": "crossref",
+          "first-page": "112011",
+          "DOI": "10.1016/j.scienta.2023.112011",
+          "article-title": "Release of chimeras and efficient selection of editing mutants by CRISPR/Cas9-mediated gene editing in apple",
+          "volume": "316",
+          "year": "2023",
+          "journal-title": "Scientia Horticulturae"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.09.742435",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ],
+        "date-time": "2026-08-14T14:45:13Z",
+        "timestamp": 1786718713000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.09.742435"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "references-count": 12,
+      "URL": "https://doi.org/10.64898/2026.08.09.742435",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

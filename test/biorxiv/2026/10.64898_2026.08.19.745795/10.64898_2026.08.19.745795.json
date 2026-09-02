@@ -24,8 +24,8 @@
   "category": "Synthetic Biology",
   "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.19.745795",
   "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.19.745795.full.pdf",
-  "pdf_path": "",
-  "pdf_downloaded": false,
+  "pdf_path": "test/biorxiv/2026/10.64898_2026.08.19.745795/10.64898_2026.08.19.745795.pdf",
+  "pdf_downloaded": true,
   "query": "10.64898/2026.08.19.745795",
   "version": "",
   "keywords": [

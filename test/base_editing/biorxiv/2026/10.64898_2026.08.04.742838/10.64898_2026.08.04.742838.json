@@ -1,0 +1,532 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.04.742838",
+  "title": "Tunable Expression of an AAV Payload Using ADAR-mediated RNA Editing",
+  "doi": "10.64898/2026.08.04.742838",
+  "abstract": "A challenge of “once-and-done” adeno associated virus (AAV)-based gene therapy is the inability to modulate the level of therapeutic protein expression post-administration. Herein, we demonstrate the utility of an adenosine deaminase acting on RNA (ADAR) - mediated gene switch to control AAV-delivered gene expression. Using a premature termination codon (PTC) in the human Factor IX (hFIX) transgene, we established an ON switch, where expression of hFIX is contingent on rescuing the PTC mutation via RNA editing. In vitro and in vivo studies demonstrated silencing of the hFIX transgene by the PTC mutation and induction of protein expression by administration of an ADAR-recruiting trigger RNA. Mice transduced with a hepatotropic AAV capsid encoding an ApoE-hAAT hFIX-PTC transgene expression cassette showed a dose-dependent response between the levels of LNP-delivered trigger RNA and the amount of plasma hFIX expression achieved. We observed predictable and reproducible levels of hFIX expression upon multiple rounds of RNA editing and demonstrated that this system can achieve clinically relevant levels of hFIX. This work suggests that ADAR-mediated RNA editing may be a valuable tool for tunable expression of therapeutic transgenes in applied gene therapies.",
+  "authors": [
+    "Joseph Silverberg",
+    "Laura Pereira",
+    "Robert Schmidt",
+    "Cameron Baptista",
+    "Ahil N Ganesh",
+    "Nicole Harbaugh",
+    "Lauren Moffa",
+    "Alexander Metz",
+    "Victor Howard",
+    "Sean Armour",
+    "Daniel M Cohen",
+    "Federico Mingozzi"
+  ],
+  "published_date": "2026-08-05",
+  "updated_date": "2026-08-05T13:40:45Z",
+  "journal": "bioRxiv",
+  "category": "Synthetic Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.04.742838",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.04.742838.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.04.742838/10.64898_2026.08.04.742838.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.04.742838",
+  "version": "",
+  "keywords": [
+    "Synthetic Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Synthetic Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            8
+          ]
+        ],
+        "date-time": "2026-08-08T02:44:44Z",
+        "timestamp": 1786157084995,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ]
+      },
+      "group-title": "Synthetic Biology",
+      "reference-count": 21,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                5
+              ]
+            ],
+            "date-time": "2026-08-05T00:00:00Z",
+            "timestamp": 1785888000000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  A challenge of “once-and-done” adeno associated virus (AAV)-based gene therapy is the inability to modulate the level of therapeutic protein expression post-administration. Herein, we demonstrate the utility of an adenosine deaminase acting on RNA (ADAR) - mediated gene switch to control AAV-delivered gene expression. Using a premature termination codon (PTC) in the human Factor IX (hFIX) transgene, we established an ON switch, where expression of hFIX is contingent on rescuing the PTC mutation via RNA editing.\n                  <jats:italic>In vitro</jats:italic>\n                  and\n                  <jats:italic>in vivo</jats:italic>\n                  studies demonstrated silencing of the hFIX transgene by the PTC mutation and induction of protein expression by administration of an ADAR-recruiting trigger RNA. Mice transduced with a hepatotropic AAV capsid encoding an ApoE-hAAT hFIX-PTC transgene expression cassette showed a dose-dependent response between the levels of LNP-delivered trigger RNA and the amount of plasma hFIX expression achieved. We observed predictable and reproducible levels of hFIX expression upon multiple rounds of RNA editing and demonstrated that this system can achieve clinically relevant levels of hFIX. This work suggests that ADAR-mediated RNA editing may be a valuable tool for tunable expression of therapeutic transgenes in applied gene therapies.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.04.742838",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ],
+        "date-time": "2026-08-05T13:40:45Z",
+        "timestamp": 1785937245000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Tunable Expression of an AAV Payload Using ADAR-mediated RNA Editing"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Joseph",
+          "family": "Silverberg",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Spark Therapeutics"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Laura",
+          "family": "Pereira",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Roche Innovation Center Philadelphia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Robert",
+          "family": "Schmidt",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Roche Innovation Center Philadelphia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Cameron",
+          "family": "Baptista",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Spark Therapeutics"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ahil N",
+          "family": "Ganesh",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Roche Innovation Center Philadelphia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Nicole",
+          "family": "Harbaugh",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Roche Innovation Center Philadelphia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Lauren",
+          "family": "Moffa",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Roche Innovation Center Philadelphia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alexander",
+          "family": "Metz",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Roche Innovation Center Philadelphia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Victor",
+          "family": "Howard",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Spark Therapeutics"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sean",
+          "family": "Armour",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Roche Innovation Center Philadelphia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-7963-668X",
+          "authenticated-orcid": false,
+          "given": "Daniel M",
+          "family": "Cohen",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Roche Innovation Center Philadelphia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Federico",
+          "family": "Mingozzi",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Spark Therapeutics"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.1",
+          "doi-asserted-by": "crossref",
+          "first-page": "57",
+          "DOI": "10.1007/978-1-4939-3271-9_4",
+          "article-title": "Regulated Gene Therapy",
+          "volume": "1382",
+          "year": "2016",
+          "journal-title": "Methods Mol. Biol"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41573"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.3",
+          "first-page": "317",
+          "article-title": "Adeno-Associated Virus (AAV) as a Vector for Gene Therapy",
+          "volume": "31",
+          "year": "2017",
+          "journal-title": "BioDrugs Clin. Immunother. Biopharm. Gene Ther"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.4",
+          "doi-asserted-by": "crossref",
+          "first-page": "11094",
+          "DOI": "10.3390/ijms252011094",
+          "article-title": "Molecular Engineering of Virus Tropism",
+          "volume": "25",
+          "year": "2024",
+          "journal-title": "Int. J. Mol. Sci"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.5",
+          "doi-asserted-by": "crossref",
+          "first-page": "101588",
+          "DOI": "10.1016/j.omtm.2025.101588",
+          "article-title": "Comparative analysis of cell-specific promoters in AAV9-mediated gene therapy targeting the central nervous system",
+          "volume": "33",
+          "year": "2025",
+          "journal-title": "Mol. Ther. Methods Clin. Dev"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.2174/138920312801619475"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.7",
+          "doi-asserted-by": "crossref",
+          "first-page": "101116",
+          "DOI": "10.1016/j.crmeth.2025.101116",
+          "article-title": "AAV vectors for specific and efficient gene expression in microglia",
+          "volume": "5",
+          "year": "2025",
+          "journal-title": "Cell Rep. Methods"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0102538"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.9",
+          "doi-asserted-by": "crossref",
+          "first-page": "79",
+          "DOI": "10.1007/978-3-030-27378-1_13",
+          "article-title": "A Comparison of Inducible Gene Expression Platforms: Implications for Recombinant Adeno-Associated Virus (rAAV) Vector-Mediated Ocular Gene Therapy",
+          "volume": "1185",
+          "year": "2019",
+          "journal-title": "Adv. Exp. Med. Biol"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1021/bp000129c"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3390/cells8080796"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.12",
+          "doi-asserted-by": "crossref",
+          "first-page": "421",
+          "DOI": "10.3390/biology9120421",
+          "article-title": "Targeted Protein Degradation Tools: Overview and Future Perspectives",
+          "volume": "9",
+          "year": "2020",
+          "journal-title": "Biology"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.13",
+          "doi-asserted-by": "crossref",
+          "first-page": "384",
+          "DOI": "10.1016/j.omtn.2022.07.012",
+          "article-title": "Minding the gap: Unlockingthe therapeutic potentialof aptamers and making up for lost time",
+          "volume": "29",
+          "year": "2022",
+          "journal-title": "Mol. Ther. Nucleic Acids"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.14",
+          "doi-asserted-by": "crossref",
+          "first-page": "1970",
+          "DOI": "10.1038/s41467-023-37774-5",
+          "article-title": "RNAi-mediated rheostat for dynamic control of AAV-delivered transgenes",
+          "volume": "14",
+          "year": "2023",
+          "journal-title": "Nat. Commun"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.15",
+          "doi-asserted-by": "crossref",
+          "first-page": "1454",
+          "DOI": "10.1038/s41587-023-01989-0",
+          "article-title": "Control of mammalian gene expression by modulation of polyA signal cleavage at 5’ UTR",
+          "volume": "42",
+          "year": "2024",
+          "journal-title": "Nat. Biotechnol"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-017-1347-3"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s10565-024-09905-1"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.1715320114"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/wsbm.10"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.20",
+          "doi-asserted-by": "crossref",
+          "first-page": "938",
+          "DOI": "10.1038/s41587-021-01171-4",
+          "article-title": "Efficient in vitro and in vivo RNA editing via recruitment of endogenous ADARs using circular guide RNAs",
+          "volume": "40",
+          "year": "2022",
+          "journal-title": "Nat. Biotechnol"
+        },
+        {
+          "key": "2026080719250584000_2026.08.04.742838v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3109/10409238.2012.694846"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.04.742838",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            8
+          ]
+        ],
+        "date-time": "2026-08-08T02:25:15Z",
+        "timestamp": 1786155915000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.04.742838"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ]
+      },
+      "references-count": 21,
+      "URL": "https://doi.org/10.64898/2026.08.04.742838",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            5
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

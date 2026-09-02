@@ -1,0 +1,510 @@
+{
+  "source": "biorxiv",
+  "source_id": "10.64898/2026.08.07.743462",
+  "title": "Prime-Editing in <i>Marchantia paleacea</i> : Expanding the Genome-Editing Toolbox in Bryophytes",
+  "doi": "10.64898/2026.08.07.743462",
+  "abstract": "Since the development of CRISPR-based genome editing tools, a number of novel technologies have emerged. This includes Prime-Editing that acts as a search and replace genome editing tool. Prime-Editing has been deployed across multiple clades, including in a few flowering plants. Here, we report on the development of an efficient Prime Editor (PE) for the model bryophyte Marchantia. Initial tests were conducted on Acetolactate Synthase as a target and revealed an average efficiency above 40%. The system has been developed in the GoldenGate cloning system, facilitating construct design. The development of PE in Marchantia expands the Genome-Editing tools available for this emerging model in plant biology.",
+  "authors": [
+    "Benoit Danilo",
+    "Aurélie Quillien",
+    "Cristina Rojas-Latorre",
+    "Zaïd Nibani",
+    "Clara Mestre",
+    "Pierre-Marc Delaux",
+    "Dominique Lauressergues",
+    "Julie Neveu"
+  ],
+  "published_date": "2026-08-11",
+  "updated_date": "2026-08-11T17:40:20Z",
+  "journal": "bioRxiv",
+  "category": "Plant Biology",
+  "landing_url": "https://www.biorxiv.org/content/10.64898/2026.08.07.743462",
+  "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.08.07.743462.full.pdf",
+  "pdf_path": "test/1/biorxiv/2026/10.64898_2026.08.07.743462/10.64898_2026.08.07.743462.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.07.743462",
+  "version": "",
+  "keywords": [
+    "Plant Biology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Plant Biology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "bioRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            13
+          ]
+        ],
+        "date-time": "2026-08-13T21:28:57Z",
+        "timestamp": 1786656537682,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "group-title": "Plant Biology",
+      "reference-count": 23,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                11
+              ]
+            ],
+            "date-time": "2026-08-11T00:00:00Z",
+            "timestamp": 1786406400000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by-nc/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "DOI": "10.13039/501100001665",
+          "name": "Agence Nationale de la Recherche",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "ANR-10-LABX-41"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "ANR-10-LABX-41"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/501100001665",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/501100001665",
+          "name": "Agence Nationale de la Recherche",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "ANR-18-EURE-0019"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "ANR-18-EURE-0019"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/501100001665",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/501100001665",
+          "name": "Agence Nationale de la Recherche",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "ANR-22-PESV-0002"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "ANR-22-PESV-0002"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/501100001665",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "name": "European Research Council",
+          "award": [
+            "101001675"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "101001675"
+              ]
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  Since the development of CRISPR-based genome editing tools, a number of novel technologies have emerged. This includes Prime-Editing that acts as a\n                  <jats:italic>search and replace</jats:italic>\n                  genome editing tool. Prime-Editing has been deployed across multiple clades, including in a few flowering plants. Here, we report on the development of an efficient Prime Editor (PE) for the model bryophyte Marchantia. Initial tests were conducted on\n                  <jats:italic>Acetolactate Synthase</jats:italic>\n                  as a target and revealed an average efficiency above 40%. The system has been developed in the GoldenGate cloning system, facilitating construct design. The development of PE in Marchantia expands the Genome-Editing tools available for this emerging model in plant biology.\n                </jats:p>",
+      "DOI": "10.64898/2026.08.07.743462",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ],
+        "date-time": "2026-08-11T17:40:20Z",
+        "timestamp": 1786470020000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Prime-Editing in\n                  <i>Marchantia paleacea</i>\n                  : Expanding the Genome-Editing Toolbox in Bryophytes"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-0360-282X",
+          "authenticated-orcid": false,
+          "given": "Benoit",
+          "family": "Danilo",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Laboratoire de Recherche en Sciences Végétales (LRSV), Université de Toulouse, CNRS, Toulouse INP, Castanet-Tolosan, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-4814-1895",
+          "authenticated-orcid": false,
+          "given": "Aurélie",
+          "family": "Quillien",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratoire de Recherche en Sciences Végétales (LRSV), Université de Toulouse, CNRS, Toulouse INP, Castanet-Tolosan, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Cristina",
+          "family": "Rojas-Latorre",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratoire de Recherche en Sciences Végétales (LRSV), Université de Toulouse, CNRS, Toulouse INP, Castanet-Tolosan, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Zaïd",
+          "family": "Nibani",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratoire de Recherche en Sciences Végétales (LRSV), Université de Toulouse, CNRS, Toulouse INP, Castanet-Tolosan, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Clara",
+          "family": "Mestre",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratoire de Recherche en Sciences Végétales (LRSV), Université de Toulouse, CNRS, Toulouse INP, Castanet-Tolosan, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-6211-157X",
+          "authenticated-orcid": false,
+          "given": "Pierre-Marc",
+          "family": "Delaux",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratoire de Recherche en Sciences Végétales (LRSV), Université de Toulouse, CNRS, Toulouse INP, Castanet-Tolosan, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0420-2366",
+          "authenticated-orcid": false,
+          "given": "Dominique",
+          "family": "Lauressergues",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratoire de Recherche en Sciences Végétales (LRSV), Université de Toulouse, CNRS, Toulouse INP, Castanet-Tolosan, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0665-9802",
+          "authenticated-orcid": false,
+          "given": "Julie",
+          "family": "Neveu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Laboratoire de Recherche en Sciences Végétales (LRSV), Université de Toulouse, CNRS, Toulouse INP, Castanet-Tolosan, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-019-1711-4"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/pbi.13399"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.pestbp.2023.105370"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2021.09.018"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cell.2023.07.039"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0003647"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s11105-026-01703-9"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13059-020-02170-5"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molp.2022.09.006"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1225829"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-021-00868-w"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-020-0455-x"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-024-02405-x"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.xplc.2024.101227"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/pbi.13497"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.plantsci.2021.111162"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.abg0929"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0205117"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41467-025-67874-3"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/jxb/erae053"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41477-024-01786-w"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-022-01254-w"
+        },
+        {
+          "key": "2026081313551238000_2026.08.07.743462v1.23",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-022-01254-w"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.07.743462",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            13
+          ]
+        ],
+        "date-time": "2026-08-13T20:55:18Z",
+        "timestamp": 1786654518000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.08.07.743462"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "references-count": 23,
+      "URL": "https://doi.org/10.64898/2026.08.07.743462",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            11
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}
