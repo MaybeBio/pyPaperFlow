@@ -356,6 +356,11 @@ def arxiv_fetch_cmd(
     fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend)
     output = output_dir if output_dir else storage_dir
 
+    provided = [name for name, value in (("query", query), ("--file", file), ("--id", arxiv_id)) if value]
+    if len(provided) > 1:
+        typer.secho(f"Error: provide only one of query, --file, or --id (got {', '.join(provided)}).", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+
     if query:
         records = fetcher.fetch_from_query(
             query=query,
@@ -444,6 +449,11 @@ def biorxiv_fetch_cmd(
 
     fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
     output = output_dir if output_dir else storage_dir
+
+    provided = [name for name, value in (("query", query), ("--file", file), ("--doi", doi)) if value]
+    if len(provided) > 1:
+        typer.secho(f"Error: provide only one of query, --file, or --doi (got {', '.join(provided)}).", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
 
     if query:
         records = fetcher.fetch_from_query(
@@ -534,6 +544,11 @@ def medrxiv_fetch_cmd(
 
     fetcher = BioRxivFetcher(root_dir=storage_dir, platform="medrxiv", window_days=window_days)
     output = output_dir if output_dir else storage_dir
+
+    provided = [name for name, value in (("query", query), ("--file", file), ("--doi", doi)) if value]
+    if len(provided) > 1:
+        typer.secho(f"Error: provide only one of query, --file, or --doi (got {', '.join(provided)}).", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
 
     if query:
         records = fetcher.fetch_from_query(
