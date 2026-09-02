@@ -1036,7 +1036,7 @@ the following table shows
 
 you can check all the output JSON files here : [parse](../test/Other_database/parse/)
 
-## 🧬 Case 8: Search and fetch papers on other databases
+## 🧬 Case 8: Search and fetch papers on other databases: Preprint 
 
 ### 0. 命令速查 (TL;DR)
 
@@ -1108,7 +1108,7 @@ paperflow medrxiv-fetch --file ./papers/searched_medrxiv_ids.txt --download-pdf 
 `*-search` 与 `*-fetch` 的 **query 模式**现在默认 = Crossref(元数据相关性)∪ Europe PMC(预印本全文布尔 AND),按 DOI 去重。要点:
 
 1. **只有 query 模式走并集**:`--file` / `--doi` 是按 DOI 直接抓,不涉及搜索,行为不变。
-2. **裸词 = AND**:`zinc finger 263` → `zinc AND finger AND 263`;你写 `AND/OR/NOT` 就原样透传给 Europe PMC。Crossref 侧仍按原有相关性 + 本地 AND。
+2. **裸词 = AND**:`zinc finger 263` → `zinc AND finger AND 263`;写 `AND/OR/NOT` 就原样透传给 Europe PMC。Crossref 侧仍按原有相关性 + 本地 AND。
 3. **日期依然生效**:`--start-date/--end-date` 同时约束两个后端;若某个日期窗口内 Europe PMC 全文无命中,结果就是 0(不是没生效)。
 4. 用 `--no-europepmc` 可回退到纯 Crossref。
 
@@ -1133,7 +1133,7 @@ paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pd
 常用参数：
 
 - `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
-- `--backend`：可选 `native`（内置的 httpx 方案）或 `paperscraper`（安装了第三方包时可用）。
+- `--backend`：可选 `native`（内置的 httpx 方案）或 `paperscraper`（安装了第三方包时可用, ⚠️ 暂时未测试paperscraper）。
 - `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
 - `--no-download-pdf`：只保存元数据，不下载 PDF。
 
@@ -1196,8 +1196,37 @@ paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-
     - arXiv 的抓取流程只负责元数据标准化与 PDF 下载；当前仓库没有内建将 arXiv PDF 自动解析为 Markdown/结构化全文的步骤。若需后续文本解析，请在下载后接入 PDF 解析器（例如 `pdfplumber`、`minerU`、或 OCR/布局解析管线），并将解析结果保存为 `*_parsed.md` 或结构化 JSON，以便 `merge` 等下游工具使用。
 
 
+> ⚠️ 下面是 arxiv-* 模块实测用例
+
+```python
+❯ paperflow arxiv-search "zinc finger" --start-date 2025-01-01 --end-date 2026-12-31 -o ./test
+
+Found 2 arXiv papers.
+2507.06458v1
+2502.09135v1
+arXiv IDs saved to ./test/searched_arxiv_ids.txt.
+
+```
+
+此处可以查看 [searched_arxiv_ids.txt](../test/searched_arxiv_ids.txt)
+
+然后我们可以使用 `arxiv-fetch` 来抓取这些论文的元数据和 PDF：
+
+```python
+❯  paperflow arxiv-fetch -f ./test/searched_arxiv_ids.txt -o ./test --download-pdf
+
+Fetching 2 arXiv IDs from file /data2/pyPaperFlow/test/searched_arxiv_ids.txt.
+Fetched 2 arXiv papers.
+Saved to /data2/pyPaperFlow/test/arxiv
+```
+
+论文获取结果可以查看 [arxiv](../test/arxiv/)，可以发现每篇论文都按 `{source}/{year}/{source_id}/` 结构保存，包含 JSON 元数据和 PDF 文件。
+
+至于pdf文件，我们可以使用 MinerU 或其他 PDF 解析工具来进一步处理，提取结构化内容或转换为 Markdown，然后可以和前面的 PMC 论文处理流程结合，进行后续分析和整理。
+
+
 ### 2. 搜索并获取 bioRxiv 论文
-bioRxiv 的 query 检索默认是**双后端并集**：Crossref（openRxiv，元数据相关性检索 + 本地 AND）∪ Europe PMC（预印本全文布尔 AND），按 DOI 去重。Europe PMC 走全文，能补上 Crossref 只看标题摘要而漏掉的「基因缩写写法」。用 `--no-europepmc` 可回退到纯 Crossref。若 query 本身是一个 DOI（如 `10.1101/2023.06.22.546069`），会直接走 `/works/{doi}` 精确取回该论文，不再做书目检索。
+bioRxiv 的 query 检索(我们此处设计是)默认是**双后端并集**：Crossref（openRxiv，元数据相关性检索 + 本地 AND）∪ Europe PMC（预印本全文布尔 AND），按 DOI 去重。Europe PMC 走全文，能补上 Crossref 只看标题摘要而漏掉的「基因缩写写法」。用 `--no-europepmc` 可回退到纯 Crossref。若 query 本身是一个 DOI（如 `10.1101/2023.06.22.546069`），会直接走 `/works/{doi}` 精确取回该论文，不再做书目检索。
 
 ```bash
 paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
@@ -1236,9 +1265,60 @@ paperflow biorxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./p
 paperflow biorxiv-fetch --file ./searched_biorxiv_ids.txt --no-download-pdf -o ./papers/biorxiv
 ```
 
+> ⚠️ 下面是 biorxiv-* 模块实测用例
+
+```python
+❯ paperflow biorxiv-search "zinc finger 263 OR zfp263 OR znf263" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test
+
+Found 18 bioRxiv papers.
+10.64898/2026.08.25.746729
+10.64898/2026.08.26.747357
+10.64898/2026.08.25.747015
+10.64898/2026.08.20.744945
+10.64898/2026.08.13.744650
+10.64898/2026.08.28.747767
+10.64898/2026.08.29.747956
+10.64898/2026.07.31.742039
+10.64898/2026.08.20.746118
+10.64898/2026.08.19.745795
+10.64898/2026.08.13.744713
+10.64898/2026.08.23.746472
+10.64898/2026.08.22.746471
+10.64898/2026.08.12.744261
+10.64898/2026.08.04.740911
+10.64898/2026.08.03.742597
+10.64898/2026.08.19.745709
+10.64898/2026.08.20.746080
+bioRxiv IDs saved to ./test/searched_biorxiv_ids.txt.
+
+```
+
+此处可以查看 [searched_biorxiv_ids.txt](../test/searched_biorxiv_ids.txt)
+
+然后我们可以使用 `biorxiv-fetch` 来抓取这些论文的元数据和 PDF：
+
+```python
+❯  paperflow biorxiv-fetch -f ./test/searched_biorxiv_ids.txt -o ./test --download-pdf
+
+Fetching 18 bioRxiv DOIs from file /data2/pyPaperFlow/test/searched_biorxiv_ids.txt.
+Fetched 18 bioRxiv papers.
+Saved to /data2/pyPaperFlow/test/biorxiv
+```
+
+获取的论文结果可以查看 [biorxiv](../test/biorxiv/)，可以发现每篇论文都按 `{source}/{year}/{source_id}/` 结构保存，包含 JSON 元数据。
+
+> 🌟 bioRxiv 因为有cloudflare验证，我们无法确保能够下载到pdf文件数据(尽管我们也设置了cloakbrowser)，目前测试数据一般都无法获取pdf文件。但是我们已经在 必然获取的json文件中 提供了pdf文件的url，所以`建议是人工复核下载`
+
+我们以 [10.64898_2026.07.31.742039.json](../test/biorxiv/2026/10.64898_2026.07.31.742039/10.64898_2026.07.31.742039.json) 为例
+
+```bash
+# 关于pdf路径的两个字段信息已经在json文件中提供了
+"landing_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.742039",
+"pdf_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.742039.full.pdf"
+```
 
 ### 3. 搜索并获取 medRxiv 论文
-medRxiv 与 bioRxiv 共用同一套检索：默认是 Crossref（openRxiv，元数据相关性检索）∪ Europe PMC（预印本全文布尔 AND）的并集，按 DOI 去重；通过 DOI accession 位数（medRxiv 8 位 vs bioRxiv 6 位）区分平台，欧洲 PMC 结果同样按此过滤。query 为 DOI 时直接精确取回该论文。
+medRxiv 与 bioRxiv 共用同一套检索：默认是 Crossref（openRxiv，元数据相关性检索）∪ Europe PMC（预印本全文布尔 AND）的并集，按 DOI 去重；通过 DOI accession 位数（medRxiv 8 位 vs bioRxiv 6 位）区分平台，Europe PMC 结果同样按此过滤。query 为 DOI 时直接精确取回该论文。
 
 ```bash
 paperflow medrxiv-search "vaccine AND efficacy" --max-results 10
