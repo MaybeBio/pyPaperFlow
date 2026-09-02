@@ -33,6 +33,19 @@ def _save_id_list(output_dir: str, filename: str, values: List[str]) -> str:
     return output_file
 
 
+def _report_pdf_summary(records: List[Any], host: str) -> None:
+    """Warn when PDFs failed to download so metadata-only results are not silent."""
+    downloaded = sum(1 for record in records if getattr(record, "pdf_downloaded", False))
+    failed = len(records) - downloaded
+    if failed:
+        typer.secho(
+            f"PDF download: {downloaded}/{len(records)} succeeded; {failed} failed. "
+            f"{host} serves PDFs behind Cloudflare bot protection — try a different "
+            "network, or set PAPER_FETCH_CLOAK=1 (needs cloakbrowser) and retry.",
+            fg=typer.colors.YELLOW,
+        )
+
+
 #############################################################
 #  1, For Pubmed Parser
 #############################################################
@@ -385,6 +398,8 @@ def arxiv_fetch_cmd(
         raise typer.Exit(code=1)
 
     typer.echo(f"Fetched {len(records)} arXiv papers.")
+    if download_pdf:
+        _report_pdf_summary(records, "arXiv")
     typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'arxiv'))}", fg=typer.colors.GREEN)
 
 
@@ -480,6 +495,8 @@ def biorxiv_fetch_cmd(
         raise typer.Exit(code=1)
 
     typer.echo(f"Fetched {len(records)} bioRxiv papers.")
+    if download_pdf:
+        _report_pdf_summary(records, "bioRxiv")
     typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'biorxiv'))}", fg=typer.colors.GREEN)
 
 
@@ -575,6 +592,8 @@ def medrxiv_fetch_cmd(
         raise typer.Exit(code=1)
 
     typer.echo(f"Fetched {len(records)} medRxiv papers.")
+    if download_pdf:
+        _report_pdf_summary(records, "medRxiv")
     typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'medrxiv'))}", fg=typer.colors.GREEN)
 
 

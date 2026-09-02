@@ -1317,6 +1317,16 @@ Saved to /data2/pyPaperFlow/test/biorxiv
 "pdf_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.742039.full.pdf"
 ```
 
+目前使用 `--download-pdf` 选项下载pdf文件，会给出终端提醒
+```python 
+❯ paperflow biorxiv-fetch -f ./test/searched_biorxiv_ids.txt -o ./test --download-pdf
+Fetching 18 bioRxiv DOIs from file /data2/pyPaperFlow/test/searched_biorxiv_ids.txt.
+Fetched 18 bioRxiv papers.
+PDF download: 0/18 succeeded; 18 failed. bioRxiv serves PDFs behind Cloudflare bot protection — try a different network, or set PAPER_FETCH_CLOAK=1 (needs cloakbrowser) and retry.
+Saved to /data2/pyPaperFlow/test/biorxiv
+```
+
+
 ### 3. 搜索并获取 medRxiv 论文
 medRxiv 与 bioRxiv 共用同一套检索：默认是 Crossref（openRxiv，元数据相关性检索）∪ Europe PMC（预印本全文布尔 AND）的并集，按 DOI 去重；通过 DOI accession 位数（medRxiv 8 位 vs bioRxiv 6 位）区分平台，Europe PMC 结果同样按此过滤。query 为 DOI 时直接精确取回该论文。
 
@@ -1353,7 +1363,17 @@ paperflow medrxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./p
 paperflow medrxiv-fetch --file ./searched_medrxiv_ids.txt --no-download-pdf -o ./papers/medrxiv
 ```
 
-注意：bioRxiv / medRxiv 的 PDF 由 `www.biorxiv.org` / `www.medrxiv.org` 提供，对非浏览器客户端和部分数据中心 IP 会返回 403（反爬）。下载会先尝试直连（含通过 `api.biorxiv.org` 获取精确版本号的 `{doi}v{version}.full.pdf` 地址），若仍失败且设置了 `PAPER_FETCH_CLOAK=1`，会自动改用 CloakBrowser 回退重试（需可用 `cloakbrowser` 环境，可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`）。
+注意：bioRxiv / medRxiv 的 PDF 由 `www.biorxiv.org` / `www.medrxiv.org` 提供，其 PDF 端点走 Cloudflare 反爬——**非浏览器客户端（curl / httpx / requests 等）或数据中心 IP 会拿到 403 挑战页或 429，而不是 PDF 字节**；换用 curl 也一样，因为 Cloudflare 校验的是浏览器 TLS 指纹 + JS 挑战执行，跟用哪个 HTTP 客户端无关。
+
+`--download-pdf` 会按顺序尝试以下回退链（实现见 `biorxiv_fetcher.py::_download_pdf`）：
+
+1. `{doi}.full.pdf`（无版本号）
+2. 通过 `api.biorxiv.org/details/{platform}/{doi}` 取精确版本号，构造 `{doi}v{version}.full.pdf`
+3. HighWire `early` 路径 `/content/{platform}/early/{y}/{m}/{d}/{accession}.full.pdf`
+4. 抓 landing 页的 `<meta name="citation_pdf_url">` 地址
+5. （仅当 `PAPER_FETCH_CLOAK=1`）用 CloakBrowser 回退重试（需 `cloakbrowser` 环境，可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`）
+
+从被 Cloudflare 标记的 IP 出发，连 CloakBrowser（无头/有头）也可能卡在 "Just a moment…"。最有效的解法是换非数据中心网络或换代理节点。
 
 
 
@@ -1459,4 +1479,14 @@ paperflow medrxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./p
 paperflow medrxiv-fetch --file ./searched_medrxiv_ids.txt --no-download-pdf -o ./papers/medrxiv
 ```
 
-Note: bioRxiv/medRxiv PDFs are served by `www.biorxiv.org` / `www.medrxiv.org`, which return 403 to non-browser clients and some data-center IPs (bot protection). Download first tries direct routes (including the exact-version `{doi}v{version}.full.pdf` resolved via `api.biorxiv.org`); if those still fail and `PAPER_FETCH_CLOAK=1` is set, it falls back to CloakBrowser automatically (requires a working `cloakbrowser` env; optional `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`).
+Note: bioRxiv/medRxiv PDFs are served by `www.biorxiv.org` / `www.medrxiv.org` behind Cloudflare bot protection — **non-browser clients (curl / httpx / requests, etc.) or data-center IPs get a 403 challenge page or 429 instead of PDF bytes**. Switching to `curl` does not help: Cloudflare checks the browser TLS fingerprint + JS challenge execution, which is independent of the HTTP client.
+
+`--download-pdf` tries the following fallback chain in order (see `biorxiv_fetcher.py::_download_pdf`):
+
+1. `{doi}.full.pdf` (unversioned)
+2. resolve the exact version via `api.biorxiv.org/details/{platform}/{doi}`, then `{doi}v{version}.full.pdf`
+3. the HighWire `early` path `/content/{platform}/early/{y}/{m}/{d}/{accession}.full.pdf`
+4. scrape the landing page's `<meta name="citation_pdf_url">`
+5. (only when `PAPER_FETCH_CLOAK=1`) retry via CloakBrowser (needs `cloakbrowser`; optional `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`)
+
+From a Cloudflare-flagged IP, even CloakBrowser (headless or headed) can get stuck at "Just a moment…". The most effective fix is a non-data-center network or a different proxy node.
