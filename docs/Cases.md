@@ -1326,6 +1326,20 @@ PDF download: 0/18 succeeded; 18 failed. bioRxiv serves PDFs behind Cloudflare b
 Saved to /data2/pyPaperFlow/test/biorxiv
 ```
 
+> ⚠️ 2026-09-02 更新: 新增了 `PAPER_FETCH_UNDETECTED` 环境变量，用于启用 `undetected-chromedriver` 回退机制，以解决 Cloudflare 验证问题
+
+现在命令运行如下:
+
+```python
+# paperflow 需要在 安装 undetected-chromedriver 的环境中运行
+# 以下都可以直接在 ~/.bashrc 或 ~/.zshrc 中设置，或者在终端中直接 export
+export PAPER_FETCH_UNDETECTED=1
+export UNDETECTED_CHROME_PATH="$HOME/.local/chrome/opt/google/chrome/chrome"
+export UNDETECTED_DRIVER_PATH="$HOME/.local/bin/chromedriver"
+
+# 然后命令依旧
+paperflow biorxiv-fetch -f ./test/searched_biorxiv_ids.txt -o ./test --download-pdf      
+```
 
 ### 3. 搜索并获取 medRxiv 论文
 medRxiv 与 bioRxiv 共用同一套检索：默认是 Crossref（openRxiv，元数据相关性检索）∪ Europe PMC（预印本全文布尔 AND）的并集，按 DOI 去重；通过 DOI accession 位数（medRxiv 8 位 vs bioRxiv 6 位）区分平台，Europe PMC 结果同样按此过滤。query 为 DOI 时直接精确取回该论文。

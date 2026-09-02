@@ -33,17 +33,29 @@ def _save_id_list(output_dir: str, filename: str, values: List[str]) -> str:
     return output_file
 
 
-def _report_pdf_summary(records: List[Any], host: str) -> None:
+def _report_pdf_summary(records: List[Any], host: str, *, cloudflare: bool = False) -> None:
     """Warn when PDFs failed to download so metadata-only results are not silent."""
     downloaded = sum(1 for record in records if getattr(record, "pdf_downloaded", False))
     failed = len(records) - downloaded
-    if failed:
-        typer.secho(
-            f"PDF download: {downloaded}/{len(records)} succeeded; {failed} failed. "
-            f"{host} serves PDFs behind Cloudflare bot protection — try a different "
-            "network, or set PAPER_FETCH_CLOAK=1 (needs cloakbrowser) and retry.",
-            fg=typer.colors.YELLOW,
+    if not failed:
+        return
+    if cloudflare:
+        # bioRxiv/medRxiv serve PDFs behind Cloudflare bot protection. Plain
+        # curl/httpx (and often CloakBrowser) still fail; only the
+        # undetected_chromedriver browser fallback reliably returns PDF bytes.
+        hint = (
+            f"{host} serves PDFs behind Cloudflare bot protection. To download them, "
+            "enable the undetected_chromedriver fallback and retry: "
+            "PAPER_FETCH_UNDETECTED=1 (+ UNDETECTED_CHROME_PATH / UNDETECTED_DRIVER_PATH; "
+            "see docs/undetected_fallback.md for install steps), or PAPER_FETCH_CLOAK=1 "
+            "(needs cloakbrowser)."
         )
+    else:
+        hint = f"{host} PDF download failed — try a different network and retry."
+    typer.secho(
+        f"PDF download: {downloaded}/{len(records)} succeeded; {failed} failed. {hint}",
+        fg=typer.colors.YELLOW,
+    )
 
 
 #############################################################
@@ -496,7 +508,7 @@ def biorxiv_fetch_cmd(
 
     typer.echo(f"Fetched {len(records)} bioRxiv papers.")
     if download_pdf:
-        _report_pdf_summary(records, "bioRxiv")
+        _report_pdf_summary(records, "bioRxiv", cloudflare=True)
     typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'biorxiv'))}", fg=typer.colors.GREEN)
 
 
@@ -593,7 +605,7 @@ def medrxiv_fetch_cmd(
 
     typer.echo(f"Fetched {len(records)} medRxiv papers.")
     if download_pdf:
-        _report_pdf_summary(records, "medRxiv")
+        _report_pdf_summary(records, "medRxiv", cloudflare=True)
     typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'medrxiv'))}", fg=typer.colors.GREEN)
 
 
