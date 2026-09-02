@@ -1372,8 +1372,23 @@ paperflow medrxiv-fetch --file ./searched_medrxiv_ids.txt --no-download-pdf -o .
 3. HighWire `early` 路径 `/content/{platform}/early/{y}/{m}/{d}/{accession}.full.pdf`
 4. 抓 landing 页的 `<meta name="citation_pdf_url">` 地址
 5. （仅当 `PAPER_FETCH_CLOAK=1`）用 CloakBrowser 回退重试（需 `cloakbrowser` 环境，可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`）
+6. （仅当 `PAPER_FETCH_UNDETECTED=1`）用 undetected_chromedriver + Xvfb 有头 Chrome 回退，能真正解掉 Cloudflare 挑战并拿到 PDF 字节
 
-从被 Cloudflare 标记的 IP 出发，连 CloakBrowser（无头/有头）也可能卡在 "Just a moment…"。最有效的解法是换非数据中心网络或换代理节点。
+从被 Cloudflare 标记的 IP 出发，前 5 步（含 CloakBrowser 无头/有头）都可能拿到 403/429 或卡 "Just a moment…"。第 6 步是唯一经实测能稳定下载到 PDF 字节的解法，但需要额外装 Chrome + chromedriver + `undetected-chromedriver` + Xvfb。
+
+> **换机器 / 别人要用 biorxiv 或 medRxiv 的 PDF 下载，按这个做**：完整安装步骤、环境变量、以及调试手册见 [undetected_fallback.md](undetected_fallback.md)。简言之：
+>
+> 1. 装 Chrome（`dpkg -x` 解包到用户目录，零 sudo）+ 版本匹配的 chromedriver（Chrome for Testing）
+> 2. `pip install undetected-chromedriver`（装进跑 `paperflow` 的那个环境）
+> 3. 装 `xvfb`（Linux 无桌面时）
+> 4. 设环境变量：
+>    ```bash
+>    export PAPER_FETCH_UNDETECTED=1
+>    export UNDETECTED_CHROME_PATH="$HOME/.local/chrome/opt/google/chrome/chrome"
+>    export UNDETECTED_DRIVER_PATH="$HOME/.local/bin/chromedriver"
+>    ```
+>
+> 默认（不设 `PAPER_FETCH_UNDETECTED`）时，biorxiv/medrxiv 命令的行为与此功能加入前完全一致，无任何影响。
 
 
 
@@ -1488,5 +1503,20 @@ Note: bioRxiv/medRxiv PDFs are served by `www.biorxiv.org` / `www.medrxiv.org` b
 3. the HighWire `early` path `/content/{platform}/early/{y}/{m}/{d}/{accession}.full.pdf`
 4. scrape the landing page's `<meta name="citation_pdf_url">`
 5. (only when `PAPER_FETCH_CLOAK=1`) retry via CloakBrowser (needs `cloakbrowser`; optional `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`)
+6. (only when `PAPER_FETCH_UNDETECTED=1`) retry via undetected_chromedriver + Xvfb headed Chrome, which actually solves the Cloudflare challenge and returns PDF bytes
 
-From a Cloudflare-flagged IP, even CloakBrowser (headless or headed) can get stuck at "Just a moment…". The most effective fix is a non-data-center network or a different proxy node.
+From a Cloudflare-flagged IP, steps 1–5 (including CloakBrowser, headless or headed) can all return 403/429 or stall at "Just a moment…". Step 6 is the only path verified to reliably download PDF bytes, but it needs Chrome + chromedriver + `undetected-chromedriver` + Xvfb installed.
+
+> **New machine / another user wants biorxiv or medRxiv PDF download — do this**: full install steps, environment variables, and debugging notes are in [undetected_fallback.md](undetected_fallback.md). In short:
+>
+> 1. Install Chrome (`dpkg -x` into a user dir, no sudo) + a version-matched chromedriver (Chrome for Testing)
+> 2. `pip install undetected-chromedriver` (into the env that runs `paperflow`)
+> 3. Install `xvfb` (on headless Linux)
+> 4. Set:
+>    ```bash
+>    export PAPER_FETCH_UNDETECTED=1
+>    export UNDETECTED_CHROME_PATH="$HOME/.local/chrome/opt/google/chrome/chrome"
+>    export UNDETECTED_DRIVER_PATH="$HOME/.local/bin/chromedriver"
+>    ```
+>
+> With `PAPER_FETCH_UNDETECTED` unset (the default), the biorxiv/medrxiv commands behave exactly as before this feature was added — no impact.

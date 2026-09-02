@@ -12,6 +12,7 @@ import httpx
 from bs4 import BeautifulSoup
 
 from ..integrations.cloak_fallback import cloak_fetch_pdf, is_cloak_enabled
+from ..integrations.undetected_fallback import is_undetected_enabled, undetected_fetch_pdf
 
 from .source_models import SourcePaper
 from .source_utils import (
@@ -589,21 +590,32 @@ class BioRxivFetcher:
         if citation_pdf and download_binary(citation_pdf, pdf_path, headers=self.headers, timeout=self.request_timeout):
             return True
 
-        if not is_cloak_enabled():
-            return False
-
         # bioRxiv/medRxiv serve a Cloudflare challenge to non-browser clients
-        # (HTTP 403). When the operator opted in via PAPER_FETCH_CLOAK, retry
-        # each PDF candidate through CloakBrowser before giving up.
-        for candidate in pdf_candidates:
-            data = cloak_fetch_pdf(candidate, timeout=int(self.request_timeout))
-            if data and data[:5].startswith(b"%PDF"):
-                try:
-                    pdf_path.parent.mkdir(parents=True, exist_ok=True)
-                    pdf_path.write_bytes(data)
-                    return True
-                except OSError:
-                    return False
+        # (HTTP 403). Two opt-in browser fallbacks can clear it, in increasing
+        # order of strength: CloakBrowser (PAPER_FETCH_CLOAK), then
+        # undetected_chromedriver (PAPER_FETCH_UNDETECTED) for hosts where
+        # CloakBrowser's stealth still stalls at "Just a moment...".
+        if is_cloak_enabled():
+            for candidate in pdf_candidates:
+                data = cloak_fetch_pdf(candidate, timeout=int(self.request_timeout))
+                if data and data[:5].startswith(b"%PDF"):
+                    try:
+                        pdf_path.parent.mkdir(parents=True, exist_ok=True)
+                        pdf_path.write_bytes(data)
+                        return True
+                    except OSError:
+                        return False
+
+        if is_undetected_enabled():
+            for candidate in pdf_candidates:
+                data = undetected_fetch_pdf(candidate, timeout=int(self.request_timeout))
+                if data and data[:5].startswith(b"%PDF"):
+                    try:
+                        pdf_path.parent.mkdir(parents=True, exist_ok=True)
+                        pdf_path.write_bytes(data)
+                        return True
+                    except OSError:
+                        return False
 
         return False
 
