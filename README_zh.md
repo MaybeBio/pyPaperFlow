@@ -181,9 +181,13 @@ pip install openai anthropic
 pip install paperscraper
 ```
 
-> ⚠️ 正常使用情况下你只需要源码安装本仓库+MinerU即可，也就是1、2两步
+> ⚠️ 正常使用情况下你只需要源码安装本仓库+MinerU即可，也就是1、2两步。
+> 
+> 甚至你可以只做第 1 步，安装我们的软件，因为 mineru 与文献获取步骤无关
 
 ## 🛠️ 使用方法
+
+> 📌 **提示**：想直接上手的，参考使用示例 [Cases.md](./docs/Cases.md) 即可，以下内容均为理论流程分析，可跳过
 
 本工具 pyPaperFlow 专为学术研究打造，整体设计严格贴合科研人员开展`文献调研、文献研读、文献理解分析及文献语料复用`的真实工作逻辑。
 
@@ -197,35 +201,38 @@ pip install paperscraper
 
 ```python
 ❯ paperflow --help
-                                                                                                                                                
- Usage: paperflow [OPTIONS] COMMAND [ARGS]...                                                                                                   
-                                                                                                                                                
- pyPaperFlow CLI                                                                                                                                
-                                                                                                                                                
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --install-completion          Install completion for the current shell.                                                                      │
-│ --show-completion             Show completion for the current shell, to copy it or customize the installation.                               │
-│ --help                        Show this message and exit.                                                                                    │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ pubmed-search      Search PubMed using Your customized query and return PMIDs.                                                               │
-│ pubmed-meta        Fetch paper metadata from PubMed using Your customized query, pmid list file and save to storage.                         │
-│ pubmed-content     Download full text (PMC) for given PMIDs if the paper has a PMC ID.                                                       │
-│ pubmed-all         Fetch BOTH metadata and full text (if available) for papers.                                                              │
-│                    Also extracts URLs from full text and updates metadata links.                                                             │
-│ pubmed-merge-json  Create a merged JSON (or JSONL) file from PubMed paper directories.                                                       │
-│ pubmed-export-md   Export a single Markdown view from a merged JSON file using optional YAML config.                                         │
-│ arxiv-search       Search arXiv and write matching IDs to a text file.                                                                       │
-│ arxiv-fetch        Fetch arXiv metadata and attempt to download PDFs.                                                                        │
-│ biorxiv-search     Search bioRxiv and write matching IDs to a text file.                                                                     │
-│ biorxiv-fetch      Fetch bioRxiv metadata and attempt to download PDFs.                                                                      │
-│ paper-fetch        Fetch PDFs by DOI — passes through to the paper-fetch engine.                                                             │
-│ pdf-parse          Parse a PDF file using MinerU engine, and clean up the output directory.                                                  │
-│ mineru-parse       Parse mineru output content_list_v2.json into canonical sectioned JSON.                                                   │
-│ mineru-export-md   Export structured mineru JSON to a clean Markdown file for LLM processing.                                                │
-│ github-export      Export GitHub links from merged PubMed JSON, validate accessibility,                                                      │
-│                    and aggregate `ghresearcher parse <owner/repo> --view` outputs into one markdown.                                         │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                                                                                                              
+ Usage: paperflow [OPTIONS] COMMAND [ARGS]...                                                                                                 
+                                                                                                                                              
+ pyPaperFlow CLI                                                                                                                              
+                                                                                                                                              
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                                                                    │
+│ --show-completion             Show completion for the current shell, to copy it or customize the installation.                             │
+│ --help                        Show this message and exit.                                                                                  │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ pubmed-search      Search PubMed using Your customized query and return PMIDs.                                                             │
+│ pubmed-meta        Fetch paper metadata from PubMed using Your customized query, pmid list file and save to storage.                       │
+│ pubmed-content     Download full text (PMC) for given PMIDs if the paper has a PMC ID.                                                     │
+│ pubmed-all         Fetch BOTH metadata and full text (if available) for papers.                                                            │
+│                    Also extracts URLs from full text and updates metadata links.                                                           │
+│ pubmed-merge-json  Create a merged JSON (or JSONL) file from PubMed paper directories.                                                     │
+│ pubmed-export-md   Export a single Markdown view from a merged JSON file using optional YAML config.                                       │
+│ arxiv-search       Search arXiv and write matching IDs to a text file.                                                                     │
+│ arxiv-fetch        Fetch arXiv metadata and attempt to download PDFs.                                                                      │
+│ biorxiv-search     Search bioRxiv and write matching IDs to a text file.                                                                   │
+│ biorxiv-fetch      Fetch bioRxiv metadata and attempt to download PDFs.                                                                    │
+│ medrxiv-search     Search medRxiv and write matching IDs to a text file.                                                                   │
+│ medrxiv-fetch      Fetch medRxiv metadata and attempt to download PDFs.                                                                    │
+│ paper-fetch        Fetch PDFs by DOI — passes through to the paper-fetch engine.                                                           │
+│ pdf-parse          Parse a PDF file using MinerU engine, and clean up the output directory.                                                │
+│ mineru-parse       Parse mineru output content_list_v2.json into canonical sectioned JSON.                                                 │
+│ mineru-export-md   Export structured mineru JSON to a clean Markdown file for LLM processing.                                              │
+│ github-export      Export GitHub links from merged PubMed JSON, validate accessibility,                                                    │
+│                    and aggregate `ghresearcher parse <owner/repo> --view` outputs into one markdown.                                       │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
 
 ```
 
@@ -251,6 +258,10 @@ bioRxiv 相关模块：
 - biorxiv-fetch # 从 bioRxiv 获取论文元数据和 PDF 文件
 
 
+medRxiv 相关模块：
+- medrxiv-search # 搜索 medRxiv 并返回 文献ID 列表
+- medrxiv-fetch # 从 medRxiv 获取论文元数据和 PDF 文件
+
 第3方辅助解析模块：
 - paper-fetch # 从 DOI 获取 PDF 文件
 - pdf-parse # 利用mineru引擎解析 PDF 文件为 JSON、Markdown 格式文本
@@ -259,7 +270,7 @@ bioRxiv 相关模块：
 - github-export # 批量导出 GitHub 论文代码仓库链接，并验证可访问性，聚合 ghresearcher 输出为 Markdown 文件
 ```
 
-> ⚠️ `其他文献预印本平台模块正在开发中，敬请期待！`
+> ⚠️ `其他文献预印本平台模块正在开发完善中，敬请期待！`
 
 ### 1. 研究起点
 

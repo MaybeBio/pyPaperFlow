@@ -1349,7 +1349,9 @@ Fetched 18 bioRxiv papers.
 Saved to /data2/pyPaperFlow/test/biorxiv
 ```
 
+获取的论文结果可以查看 [biorxiv](../test/biorxiv/)，可以发现每篇论文都按 `{source}/{year}/{source_id}/` 结构保存，包含 JSON 元数据以及新增下载的 PDF 文件。
 
+另外一个biorxiv文献抓取示例，参考[2026年8-9月期间一个月的base-editing关键词文献](../test/base_editing/)
 
 ### 3. 搜索并获取 medRxiv 论文
 medRxiv 与 bioRxiv 共用同一套检索：默认是 Crossref（openRxiv，元数据相关性检索）∪ Europe PMC（预印本全文布尔 AND）的并集，按 DOI 去重；通过 DOI accession 位数（medRxiv 8 位 vs bioRxiv 6 位）区分平台，Europe PMC 结果同样按此过滤。query 为 DOI 时直接精确取回该论文。
