@@ -1454,8 +1454,8 @@ You may directly run the test scripts to verify the correctness and completeness
 <details>
 <summary><b>3. Literature Acquisition (and Full‑Text Download)</b></summary>
 
-> - [ ] Refine and encapsulate the `paper‑fetch` module. Refer to [2026‑05‑08 paper‑fetch Encapsulation](https://github.com/Agents365‑ai/paper‑fetch); evaluate integration or replacement with more robust modules offering higher hit rates.
-> - [ ] The `pdf‑parse` module currently wraps basic MinerU parsing commands with the CPU backend (`‑b pipeline`). Future integration of GPU‑accelerated features; see [MinerU Repository](https://github.com/opendatalab/MinerU) for details.
+> - [x] Refine and encapsulate the `paper‑fetch` module. Refer to [2026‑05‑08 paper‑fetch Encapsulation](https://github.com/Agents365‑ai/paper‑fetch); evaluate integration or replacement with more robust modules offering higher hit rates.
+> - [x] The `pdf‑parse` module currently wraps basic MinerU parsing commands with the CPU backend (`‑b pipeline`). Future integration of GPU‑accelerated features; see [MinerU Repository](https://github.com/opendatalab/MinerU) for details.
 
 </details>
 
@@ -1474,7 +1474,10 @@ You may directly run the test scripts to verify the correctness and completeness
 <details>
 <summary><b>5. Processing for Other Literature Databases</b></summary>
 
-> - [ ] Develop a unified `search‑fetch‑parse` pipeline for non‑PubMed databases and complete corresponding modules. Refer to open‑source implementations such as [paperscraper](https://github.com/jannisborn/paperscraper) and [paper‑tracker](https://github.com/RainerSeventeen/paper‑tracker).
+> - [x] Develop a unified `search‑fetch‑parse` pipeline for non‑PubMed databases and complete corresponding modules. Refer to open‑source implementations such as [paperscraper](https://github.com/jannisborn/paperscraper) and [paper‑tracker](https://github.com/RainerSeventeen/paper‑tracker).
+> - [ ] Multi‑source retrieval merge (primitive ready, orchestration pending): `preprint/source_merge.py` already provides `merge_papers` (backfill missing DOIs → dedupe by DOI, key cascade DOI → title+authors → source_id). The cross‑source orchestration command is not yet implemented; when adding a unified `search --sources arxiv,biorxiv,medrxiv,chemrxiv` that merges results into a single corpus, call `merge_papers` directly.
+> - [ ] Optional connectors (add on demand): skip a standalone Semantic Scholar metadata connector — it overlaps with the S2 usage inside `pdf_fetch.py` (`openAccessPdf`/`externalIds`), avoiding dual maintenance. Introduce an OpenAlex connector (`api.openalex.org/works`, inverted‑index abstract reconstruction + authors + citations/references) only when there is a concrete need for batch DOI‑based metadata completion or citation‑graph harvesting; emit `SourcePaper`.
+> - [ ] Infrastructure alignment (partially done): `extract_doi` unified into `source_merge.py`; `safe_filename` already present (`source_utils.py`); `get_env` deferred (mismatches the existing flat `os.environ.get` style); OAI‑PMH base class deferred until a generic OAI repository is actually integrated.
 
 </details>
 

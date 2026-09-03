@@ -1776,8 +1776,8 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 <details>
 <summary><b>3. 文献获取（及全文下载）</b></summary>
 
-> - [ ] paper-fetch 模块的完善封装，目前参考[2026-05-08 封装paper-fetch](https://github.com/Agents365-ai/paper-fetch)，考虑加入或替换为更鲁棒、命中率更高的模块
-> - [ ] pdf-parse 模块目前封装了mineru的简单解析指令，默认使用cpu后端（-b pipeline），后续考虑gpu等进行深入功能集成，详情参考[mineru仓库](https://github.com/opendatalab/MinerU)
+> - [x] paper-fetch 模块的完善封装，目前参考[2026-05-08 封装paper-fetch](https://github.com/Agents365-ai/paper-fetch)，考虑加入或替换为更鲁棒、命中率更高的模块
+> - [x] pdf-parse 模块目前封装了mineru的简单解析指令，默认使用cpu后端（-b pipeline），后续考虑gpu等进行深入功能集成，详情参考[mineru仓库](https://github.com/opendatalab/MinerU)
 
 
 
@@ -1799,7 +1799,10 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 <details>
 <summary><b>5. 其他文献数据平台的处理</b></summary>
 
-> - [ ] 对于其他非pubmed数据库，也需要做一套`search-fetch-parse`解析方案，完善相应模块，可以参考一些开源实现[paperscraper](https://github.com/jannisborn/paperscraper)、[paper-tracker](https://github.com/RainerSeventeen/paper-tracker)
+> - [x] 对于其他非pubmed数据库，也需要做一套`search-fetch-parse`解析方案，完善相应模块，可以参考一些开源实现[paperscraper](https://github.com/jannisborn/paperscraper)、[paper-tracker](https://github.com/RainerSeventeen/paper-tracker)
+> - [ ] 多源检索合并（基建已备、编排待做）：`preprint/source_merge.py` 已提供 `merge_papers`（补全缺失 DOI → 按 DOI 去重，键级联 DOI → title+authors → source_id）。尚未实现跨源编排命令；将来做 `search --sources arxiv,biorxiv,medrxiv,chemrxiv` 统一检索并合并为单一 corpus 时直接调用。
+> - [ ] 可选连接器（按需再上）：Semantic Scholar 元数据连接器暂不单独实现——与 `pdf_fetch.py` 内 S2（`openAccessPdf`/`externalIds`）用途重叠，避免两处维护；OpenAlex 连接器（`api.openalex.org/works`，abstract 倒排索引重建 + authors + citations/references）在确有「按 DOI 批量补全 metadata / 抓引用网络」需求时引入，产出 `SourcePaper`。
+> - [ ] 基础设施对齐（部分已完成）：`extract_doi` 已统一到 `source_merge.py`；`safe_filename` 已存在（`source_utils.py`）；`get_env` 因与现有扁平 `os.environ.get` 风格不符暂不引入；OAI-PMH 基类留到真正接入通用 OAI 仓库时再上。
 
 
 </details>
