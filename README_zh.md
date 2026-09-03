@@ -318,17 +318,21 @@ ChemRxiv 相关模块：
 - arXiv
 - bioRxiv，medRxiv，chemRxiv 等预印本平台
 
-> **⚠️：预印本检索走 Crossref 元数据（而非各平台官方 API / 全文）。** bioRxiv/medRxiv/ChemRxiv 均通过 Crossref 索引（openRxiv 前缀 `10.64898` / ChemRxiv 前缀 `10.26434`）检索，而非平台官方门户——Crossref 提供跨平台统一的 `query.bibliographic` 相关性检索（先按相关性排序，再在本地对标题/摘要等做布尔 AND 复核）+ cursor 翻页。对 ChemRxiv 尤为关键：其官方公开 API（`chemrxiv.org/engage/chemrxiv/public-api/v1/items`）对非浏览器客户端是 **Cloudflare 403 墙**，而 Crossref 沉积稳定可查，故 ChemRxiv 为纯 Crossref；bioRxiv 另并入 Europe PMC 全文检索（用 `--no-europepmc` 关闭）。
+> **⚠️：预印本检索 = Crossref 相关性检索 + 本地布尔复核（不是全库拉取，也不用各平台官方 API）。** 每次请求都会让 Crossref **只在其平台前缀内**检索（`filter=prefix:10.64898 / 10.26434,type:posted-content`）——平台圈定发生在服务端，而不是本地对全量结果再做前缀过滤。bioRxiv 与 medRxiv 共用 openRxiv 前缀 `10.64898`，故二者再用 DOI 编号位数（6 位 = bioRxiv、8 位 = medRxiv）在本地区分。
 >
-> **经 Crossref 检索平台的潜在问题：**
+> 相关性这一步的行为：`query.bibliographic` 是**模糊、OR 式的打分排序**（两个词的查询返回量比任一单词都多，例如 chemRxiv 上 "base editing" ≈ "base" 与 "editing" 的并集），即它是严格命中的**超集**。抓取端用 cursor 把整个结果集**翻到底**（不是截断的 top-N），再在本地只保留元数据里 **query 每个词都真实出现**的记录（对标题/摘要等做布尔 AND）。因为 严格命中 ⊆ relevance 超集，排序不会丢掉任何元数据层面的精确命中——它只改变返回顺序。
 >
-> ① **平台边界 = Crossref 前缀，而非平台原生分类**——bioRxiv 与 medRxiv 共用同一 openRxiv 前缀，二者靠 DOI 编号位数（6 位 = bioRxiv、8 位 = medRxiv）在本地启发式区分，而非平台自身的分类体系。
+> **相关性检索的限制：**
 >
-> ② **入库延迟**——刚上传几分钟的预印本可能尚未被 Crossref 收录。
+> ① **入库延迟**——刚上传几分钟的预印本可能尚未被 Crossref 收录。
 >
-> ③ **仅元数据匹配，非全文**——Crossref 在标题/摘要上打分，本地 AND 复核也在同一元数据上进行，故只出现在正文里的词会漏检。仅 bioRxiv/medRxiv 的 Europe PMC 索引全文；**ChemRxiv 无任何全文**，正文词漏检属预期。
+> ② **仅元数据匹配**——Crossref 只对沉积的元数据（标题/摘要等）打分，只出现在正文里的词对它不可见。仅 bioRxiv/medRxiv 的 Europe PMC 索引全文；**ChemRxiv 无任何全文**，故正文词漏检属预期。
 >
-> ④ **版本重复**——Crossref 将每次改版单独注册成独立 DOI work，`.../v1` 与 `.../v2` 会同时命中，可能需手动去重。
+> ③ **版本重复**——每次改版都被注册成独立 DOI work，`.../v1` 与 `.../v2` 会同时命中，可能需手动去重。
+>
+> **与"全量枚举拉取"的区别：** 相关性检索是对沉积元数据的启发式。想"构造性零遗漏"则改为**全库枚举**——`filter=prefix…` 不带 `query`，用 cursor 把整个平台的记录翻完（约 5.5 万 chemRxiv / 43.6 万 openRxiv），再在本地做布尔 AND；不经任何相关性引擎，召回 = "该前缀下元数据真正全词命中的全部记录"（配合 `--start/--end-date` 窗口可缩小拉取量）。代价是每次搜索都要下载整个语料，且仍继承上面的源层边界（入库延迟 / 仅元数据 / 版本重复）。本工具目前的 `search()` 走相关性，暂未提供全量模式开关。
+>
+> 全库拉取对于轻量级的文献调研并不适用，除非你有明确的理由需要获取某一特定数据库的全部文献，而且每年每月更新的文献本身就具有一定的冗余性，所以从效率+数量上考虑，单纯相关性检索应该能够满足绝大多数科研工作者的文献调研需求(`因为真正重要的内容一定会反复出现，往往不需要担心全量遗漏`)。当然，对于全量拉取，可以参考其他开源工具如 [paperscraper](https://github.com/jannisborn/paperscraper) 等的实现。
 
 建议用户提前学习并熟练掌握上述数据库的检索语法，本工具内置搜索模块的运行逻辑与数据库网页端搜索框基本一致。
 

@@ -311,17 +311,19 @@ Our literature database primarily covers biomedical research and computational i
 - arXiv
 - bioRxiv，medRxiv，chemRxiv
 
-> **⚠️ — preprint search runs on Crossref metadata, not each server's official API.** bioRxiv/medRxiv/ChemRxiv preprints are searched through a Crossref‑backed index (openRxiv prefix `10.64898` / ChemRxiv prefix `10.26434`) rather than the native portals, because Crossref exposes one uniform relevance search (`query.bibliographic`, relevance‑ranked then re‑checked locally as a boolean AND over title/abstract/…) with cursor pagination. For ChemRxiv in particular, its official public API (`chemrxiv.org/engage/chemrxiv/public-api/v1/items`) is **Cloudflare‑walled (HTTP 403) to non‑browser clients**, while the Crossref deposit stays reliably queryable, so ChemRxiv search is Crossref‑only; bioRxiv additionally unions Europe PMC full‑text search (disable with `--no-europepmc`).
+> **⚠️ — Preprint search = Crossref relevance search + local boolean re-check (not a full-corpus pull, and not each server's official API).** Each request asks Crossref to search ONLY that platform's prefix (`filter=prefix:10.64898 / 10.26434,type:posted-content`) — platform scoping happens server-side, not by post-filtering a global result set. bioRxiv and medRxiv share the openRxiv prefix `10.64898`, so those two are then told apart locally by DOI-accession digit count (6 = bioRxiv, 8 = medRxiv).
 >
-> **Potential problems of searching a platform through Crossref:**
+> How the relevance step behaves: `query.bibliographic` is a fuzzy, OR-like ranking (a two-term query returns more than either single term — e.g. chemRxiv "base editing" ≈ the union of "base" and "editing"), i.e. a **superset** of the strict matches. The fetcher cursor-paginates the whole result set (not a capped top-N), then keeps only records in which **every** query term is actually present in the metadata (local boolean AND over title/abstract/…). Because strict matches ⊆ relevance superset, ranking never drops a metadata-level exact match — it only changes the order.
 >
-> ① **Platform identity = Crossref prefix, not the native server.** bioRxiv and medRxiv share one openRxiv prefix, so they are separated locally by a DOI‑accession heuristic (6 digits = bioRxiv, 8 digits = medRxiv), not by any platform‑native classification.
+> **Limitations of the relevance search:**
 >
-> ② **Deposit lag** — a preprint posted minutes ago may not be indexed in Crossref yet.
+> ① **Deposit lag** — a preprint posted minutes ago may not be indexed in Crossref yet.
 >
-> ③ **Metadata‑only matching, not full text** — Crossref scores on title/abstract and the local AND re‑check runs on that same metadata, so query terms that appear only in the paper body are missed. Only the bioRxiv/medRxiv Europe PMC leg indexes full text; **ChemRxiv has no full‑text leg at all**, so body‑only‑term misses are expected there.
+> ② **Metadata-only matching** — Crossref scores deposited metadata (title/abstract/…), so query terms that appear only in the paper body are invisible to it. Only the bioRxiv/medRxiv Europe PMC leg indexes full text; **ChemRxiv has no full-text leg at all**, so body-only-term misses are expected there.
 >
-> ④ **Version duplication** — Crossref registers every revision as its own DOI work, so `.../v1` and `.../v2` both match a search and may need manual dedup.
+> ③ **Version duplication** — every revision is its own DOI work, so `.../v1` and `.../v2` both match a search and may need manual dedup.
+>
+> **Difference vs. exhaustive full-corpus enumeration:** a relevance search is a heuristic over the deposited metadata. The "no-omission-by-construction" alternative is to list the *whole* platform corpus (`filter=prefix…` with no `query`, cursor-paging every record — ≈ 55k ChemRxiv / 436k openRxiv) and run the boolean AND locally, with no relevance engine in the loop; recall is then exactly "all records whose metadata fully matches the query" (a `--start/--end-date` window shrinks the pull). The cost is downloading the full corpus per search, and it still inherits the source-level boundaries above (deposit lag, metadata-only, version duplication). This tool's `search()` path is relevance-based today; the exhaustive mode is not currently exposed as a flag.
 
 We recommend that you proactively learn and master the search syntax of these databases, as our built‑in search module functions similarly to the search bar on official web portals.
 
