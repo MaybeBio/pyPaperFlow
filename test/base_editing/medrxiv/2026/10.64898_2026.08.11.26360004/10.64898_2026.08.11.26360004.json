@@ -1,0 +1,1138 @@
+{
+  "source": "medrxiv",
+  "source_id": "10.64898/2026.08.11.26360004",
+  "title": "Statistical analysis plan for the ‘Pharyngeal electrical stimulation for acute stroke dysphagia trial’ (PhEAST) (ISRCTN98886991)",
+  "doi": "10.64898/2026.08.11.26360004",
+  "abstract": "Introduction Post stroke dysphagia is common, associated with poor functional outcome and lacks treatment strategies beyond behaviour therapies delivered by speech & language therapists. Here, we present the statistical analysis plan for the ongoing pharyngeal electrical stimulation for acute stroke dysphagia trial (PhEAST). PES is a candidate treatment for dysphagia present in non-ventilated stroke patients. Methods PhEAST is an investigator-initiated international prospective randomised open-label blinded-endpoint phase-4 superiority trial involving 650 participants with tube-dependent post-stroke dysphagia. Consenting patients are randomised to PES versus no PES given on top of standard care with PES given daily for 6 days. The primary outcome is the dysphagia severity rating scale (DSR.S), a measure of swallowing impairment, made at days 14 and 90 and analysed using repeated measures regression. Conclusion We present the statistical analysis plan for the main analyses based on data up to day 90 along with planned secondary analyses including presentation of baseline data, health economics, cognition and extended follow-up to 12 months.",
+  "authors": [
+    "Lisa J Woodhouse",
+    "Iris I Mhlanga",
+    "Cristina Roadevin",
+    "Jacqui K Benfield",
+    "Lisa F Everton",
+    "Gwenllian Wilkinson",
+    "Sarah Greatrex",
+    "Cameron JC Skinner",
+    "Gemma Squires",
+    "Amanda Buck",
+    "Corinne Latulipe",
+    "Kennedy M Cadman",
+    "Nikola Sprigg",
+    "Kailash Krishnan",
+    "Jason P Appleton",
+    "Karl Matz",
+    "Helle K Iversen",
+    "Satish Mistry",
+    "Marilyn James",
+    "Timothy J England",
+    "Shaheen Hamdy",
+    "Alan A Montgomery",
+    "Philip M Bath",
+    "PhEAST Investigators"
+  ],
+  "published_date": "2026-08-12",
+  "updated_date": "2026-08-12T23:05:13Z",
+  "journal": "medRxiv",
+  "category": "Neurology",
+  "landing_url": "https://www.medrxiv.org/content/10.64898/2026.08.11.26360004",
+  "pdf_url": "https://www.medrxiv.org/content/10.64898/2026.08.11.26360004.full.pdf",
+  "pdf_path": "test/base_editing/medrxiv/2026/10.64898_2026.08.11.26360004/10.64898_2026.08.11.26360004.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.11.26360004",
+  "version": "",
+  "keywords": [
+    "Neurology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Neurology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "medRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            15
+          ]
+        ],
+        "date-time": "2026-08-15T05:26:55Z",
+        "timestamp": 1786771615554,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "group-title": "Neurology",
+      "reference-count": 80,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                12
+              ]
+            ],
+            "date-time": "2026-08-12T00:00:00Z",
+            "timestamp": 1786492800000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "name": "NIHR HTA",
+          "award": [
+            "NIHR132016"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "NIHR132016"
+              ]
+            }
+          ]
+        },
+        {
+          "award": [
+            "N/A"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "N/A"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/04a6evj08",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "abstract": "<jats:title>ABSTRACT</jats:title>\n                <jats:sec>\n                  <jats:title>Introduction</jats:title>\n                  <jats:p>Post stroke dysphagia is common, associated with poor functional outcome and lacks treatment strategies beyond behaviour therapies delivered by speech &amp; language therapists. Here, we present the statistical analysis plan for the ongoing pharyngeal electrical stimulation for acute stroke dysphagia trial (PhEAST). PES is a candidate treatment for dysphagia present in non-ventilated stroke patients.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Methods</jats:title>\n                  <jats:p>PhEAST is an investigator-initiated international prospective randomised open-label blinded-endpoint phase-4 superiority trial involving 650 participants with tube-dependent post-stroke dysphagia. Consenting patients are randomised to PES versus no PES given on top of standard care with PES given daily for 6 days. The primary outcome is the dysphagia severity rating scale (DSR.S), a measure of swallowing impairment, made at days 14 and 90 and analysed using repeated measures regression.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Conclusion</jats:title>\n                  <jats:p>We present the statistical analysis plan for the main analyses based on data up to day 90 along with planned secondary analyses including presentation of baseline data, health economics, cognition and extended follow-up to 12 months.</jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.08.11.26360004",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ],
+        "date-time": "2026-08-12T23:05:13Z",
+        "timestamp": 1786575913000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Statistical analysis plan for the ‘Pharyngeal electrical stimulation for acute stroke dysphagia trial’ (PhEAST) (ISRCTN98886991)"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Lisa J",
+          "family": "Woodhouse",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Iris I",
+          "family": "Mhlanga",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Cristina",
+          "family": "Roadevin",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Nottingham Clinical Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jacqui K",
+          "family": "Benfield",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Lisa F",
+          "family": "Everton",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            },
+            {
+              "name": "Speech & Language Therapy, Nottingham University Hospitals NHS Trust, Nottingham, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Gwenllian",
+          "family": "Wilkinson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            },
+            {
+              "name": "Speech & Language Therapy, Nottingham University Hospitals NHS Trust, Nottingham, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sarah",
+          "family": "Greatrex",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Cameron JC",
+          "family": "Skinner",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Gemma",
+          "family": "Squires",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Amanda",
+          "family": "Buck",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Corinne",
+          "family": "Latulipe",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Kennedy M",
+          "family": "Cadman",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Nikola",
+          "family": "Sprigg",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            },
+            {
+              "name": "Stroke, Nottingham University Hospitals NHS Trust, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Kailash",
+          "family": "Krishnan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            },
+            {
+              "name": "Stroke, Nottingham University Hospitals NHS Trust, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jason P",
+          "family": "Appleton",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            },
+            {
+              "name": "Stroke, Nottingham University Hospitals NHS Trust, Nottingham UK"
+            },
+            {
+              "name": "Stroke, University Hospitals of Derby and Burton NHS Foundation Trust, Derby UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Karl",
+          "family": "Matz",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre for Clinical Neurosciences and Prevention, University of Continuing Education Krems, Krems Austria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5880-6352",
+          "authenticated-orcid": false,
+          "given": "Helle K",
+          "family": "Iversen",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Neurology, University hospital Rigshospitalet, Denmark"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Satish",
+          "family": "Mistry",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Phagenesis Ltd, Manchester UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Marilyn",
+          "family": "James",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Nottingham Clinical Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-5330-8584",
+          "authenticated-orcid": false,
+          "given": "Timothy J",
+          "family": "England",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            },
+            {
+              "name": "Stroke, University Hospitals of Derby and Burton NHS Foundation Trust, Derby UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Shaheen",
+          "family": "Hamdy",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Phagenesis Ltd, Manchester UK"
+            },
+            {
+              "name": "Centre for Gastrointestinal Sciences, Faculty of Biology, Medicine and Health, University of Manchester, Manchester UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alan A",
+          "family": "Montgomery",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Nottingham Clinical Trials Unit, University of Nottingham, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-2734-5132",
+          "authenticated-orcid": false,
+          "given": "Philip M",
+          "family": "Bath",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Stroke Trials Unit, University of Nottingham, Nottingham UK"
+            },
+            {
+              "name": "Stroke, Nottingham University Hospitals NHS Trust, Nottingham UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "name": "PhEAST Investigators",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1177/1747493016639057"
+        },
+        {
+          "issue": "9",
+          "key": "2026081421401148000_2026.08.11.26360004v1.2",
+          "doi-asserted-by": "crossref",
+          "first-page": "858",
+          "DOI": "10.1016/S1474-4422(23)00153-9",
+          "article-title": "The assessment of dysphagia after stroke: state of the art and future directions",
+          "volume": "22",
+          "year": "2023",
+          "journal-title": "Lancet Neurol"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S1474-4422(24)00053-X"
+        },
+        {
+          "issue": "10",
+          "key": "2026081421401148000_2026.08.11.26360004v1.4",
+          "first-page": "CD000323",
+          "article-title": "Swallowing therapy for dysphagia in acute and subacute stroke",
+          "volume": "10",
+          "year": "2018",
+          "journal-title": "Cochrane Database Syst Rev"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.5",
+          "unstructured": "NICE. Transcutaneous neuromuscular electrical stimulation for oropharyngeal dysphagia in adults: NICE, 2018."
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nm1196-1217"
+        },
+        {
+          "issue": "1",
+          "key": "2026081421401148000_2026.08.11.26360004v1.7",
+          "doi-asserted-by": "crossref",
+          "first-page": "64",
+          "DOI": "10.1038/264",
+          "article-title": "Long-term reorganization of human motor cortex driven by short-term sensory stimulation",
+          "volume": "1",
+          "year": "1998",
+          "journal-title": "Nat Neurose!"
+        },
+        {
+          "issue": "9097",
+          "key": "2026081421401148000_2026.08.11.26360004v1.8",
+          "first-page": "686",
+          "article-title": "Explaining oropharyngeal dysphagia after unilateral hemispheric stroke",
+          "volume": "350",
+          "year": "1997",
+          "journal-title": "The Lancet"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.9",
+          "doi-asserted-by": "crossref",
+          "first-page": "117",
+          "DOI": "10.1016/j.neuroimage.2014.10.016",
+          "article-title": "Pharyngeal electrical stimulation can modulate swallowing in cortical processing and behavior - magnetoencephalographic evidence",
+          "volume": "104",
+          "year": "2015",
+          "journal-title": "Neuroimage"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0896-6273(02)00705-5"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1053/j.gastro.2009.04.056"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1053/j.gastro.2010.01.052"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/gutjnl-2014-307263.63"
+        },
+        {
+          "issue": "429053",
+          "key": "2026081421401148000_2026.08.11.26360004v1.14",
+          "first-page": "8",
+          "article-title": "Pharyngeal Electrical Stimulation for Treatment of Poststroke Dysphagia: Individual Patient Data Meta-Analysis of Randomised Controlled Trials",
+          "volume": "2015",
+          "year": "2015",
+          "journal-title": "Stroke Research and Treatment"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1161/STROKEAHA.115.012455"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.16",
+          "doi-asserted-by": "crossref",
+          "first-page": "100608",
+          "DOI": "10.1016/j.eclinm.2020.100608",
+          "article-title": "Pharyngeal electrical stimulation for neurogenic dysphagia following stroke, traumatic brain injury or other causes: Main results from the PHADER cohort study",
+          "volume": "28",
+          "year": "2020",
+          "journal-title": "EClinicalMedicine"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.17",
+          "doi-asserted-by": "crossref",
+          "first-page": "jrm43538",
+          "DOI": "10.2340/jrm.v57.43538",
+          "article-title": "Pharyngeal electrical stimulation to treat dysphagia in acute stroke: learnings from cases in the PhEED clinical trial",
+          "volume": "57",
+          "year": "2025",
+          "journal-title": "J Rehabil Med"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.18",
+          "unstructured": "NICE. Pharyngeal electrical stimulation for neurogenic dysphagia. London: National Institute for Health and Care Excellence, 2024."
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s00134-015-3897-8"
+        },
+        {
+          "issue": "10",
+          "key": "2026081421401148000_2026.08.11.26360004v1.20",
+          "doi-asserted-by": "crossref",
+          "first-page": "849",
+          "DOI": "10.1016/S1474-4422(18)30255-2",
+          "article-title": "Pharyngeal electrical stimulation for early decannulation in tracheotomised patients with neurogenic dysphagia after stroke (PHAST-TRAC): a prospective, single-blinded, randomised trial",
+          "volume": "17",
+          "year": "2018",
+          "journal-title": "Lancet Neurol"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1177/23969873211039721"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.22",
+          "unstructured": "Intercollegiate Stroke Working Party. National Clinical Guideline for Stroke for the UK and Ireland. London: Royal College Physicians, 2023."
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.23",
+          "unstructured": "Prabhakaran S , Gonzalez NR , Zachrison KS , et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke 2026."
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.24",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Benfield JK , Everton LF , Woodhouse LJ , et al. Pharyngeal electrical stimulation versus none for post stroke dysphagia: rationale, design and protocol for the parallel group superiority pharyngeal electrical stimulation for acute stroke dysphagia trial (PhEAST) (2SRCTN98886991). Cerebrovasc Dis Extra 2026: 1–13.",
+          "DOI": "10.1159/000553643"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.apmr.2004.11.049"
+        },
+        {
+          "issue": "1",
+          "key": "2026081421401148000_2026.08.11.26360004v1.26",
+          "doi-asserted-by": "crossref",
+          "first-page": "7268",
+          "DOI": "10.1038/s41598-020-64208-9",
+          "article-title": "Psychometric assessment and validation of the dysphagia severity rating scale in stroke patients",
+          "volume": "10",
+          "year": "2020",
+          "journal-title": "Sci Rep"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(00)03651-5"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/ijs.12235"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/ijs.12445"
+        },
+        {
+          "issue": "2",
+          "key": "2026081421401148000_2026.08.11.26360004v1.30",
+          "doi-asserted-by": "crossref",
+          "first-page": "193",
+          "DOI": "10.1177/2396987318756696",
+          "article-title": "Statistical analysis plan for the ‘Rapid Intervention with Glyceryl trinitrate in Hypertensive stroke Trial-2 (R2GHT-2)’",
+          "volume": "3",
+          "year": "2018",
+          "journal-title": "Eur Stroke J"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1001/jama.2017.18556"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13063-020-04828-8"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.33",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1161/STROKEAHA.106.473579"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/1745-6215-12-101"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(14)61121-1"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(17)32849-0"
+        },
+        {
+          "issue": "1",
+          "key": "2026081421401148000_2026.08.11.26360004v1.37",
+          "doi-asserted-by": "crossref",
+          "first-page": "e0164608",
+          "DOI": "10.1371/journal.pone.0164608",
+          "article-title": "Intensive versus Guideline Blood Pressure and Lipid Lowering in Patients with Previous Stroke: Main Results from the Pilot ‘Prevention of Decline in Cognition after Stroke Trial* (PODCAST) Randomised Controlled Trial",
+          "volume": "12",
+          "year": "2017",
+          "journal-title": "PLoS One"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(18)31033-X"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(19)30194-1"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.40",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/sim.1366"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.41",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1089/neu.2006.23.1295"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1161/STROKEAHA.108.519207"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.43",
+          "unstructured": "Gray LJ , Collier T , Bath PMW , on behalf of the OAST Collaboration. Calculation of sample size for stroke trials assessing functional outcome: comparison of binary and ordinal approaches. European Stroke Conference; 2008; Nice, France; 2008."
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1161/STROKEAHA.111.641423"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/j.1747-4949.2012.00773.x"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(14)61121-1"
+        },
+        {
+          "issue": "2",
+          "key": "2026081421401148000_2026.08.11.26360004v1.47",
+          "doi-asserted-by": "crossref",
+          "first-page": "120",
+          "DOI": "10.1007/s12975-017-0548-0",
+          "article-title": "Route of Feeding as a Proxy for Dysphagia After Stroke and the Effect of Transdermal Glyceryl Trinitrate: Data from the Efficacy of Nitric Oxide in Stroke Randomised Controlled Trial",
+          "volume": "9",
+          "year": "2018",
+          "journal-title": "Transl Stroke Res"
+        },
+        {
+          "issue": "12",
+          "key": "2026081421401148000_2026.08.11.26360004v1.48",
+          "doi-asserted-by": "crossref",
+          "first-page": "108484",
+          "DOI": "10.1016/j.jstrokecerebrovasdis.2025.108484",
+          "article-title": "Mode of nutrition as a reflection of swallowing ability in acute and sub-acute stroke: Validation of a bedside tool",
+          "volume": "34",
+          "year": "2025",
+          "journal-title": "J Stroke Cerebrovasc Dis"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s00455-016-9758-y"
+        },
+        {
+          "issue": "5",
+          "key": "2026081421401148000_2026.08.11.26360004v1.50",
+          "doi-asserted-by": "crossref",
+          "first-page": "934",
+          "DOI": "10.1016/j.apmr.2018.01.012",
+          "article-title": "Creation and Initial Validation of the International Dysphagia Diet Standardisation Initiative Functional Diet Scale",
+          "volume": "99",
+          "year": "2018",
+          "journal-title": "Arch Phys Med Rehabil"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1177/000348940811701210"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1161/STROKEAHA.113.001847"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.53",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1001/archpsyc.1965.01730060026004"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1161/STROKEAHA.107.493320"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.55",
+          "unstructured": "EMEA. Points to Consider on Multiplicity Issues in Clinical Trials. EMEA 2002."
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.56",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(05)66516-6"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.57",
+          "unstructured": "Wilkinson G , McLaughlin C , Rehman H , Hamdy S , Bath PM . Treatment of post-stroke dysphagia with pharyngeal electrical stimulation: the multicentre assessment of pharyngeal electrical stimulation (MAPS) Clinical Registry. Submitted 2026."
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.58",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.4037/ccn2019238"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.59",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/BF00417897"
+        },
+        {
+          "issue": "1",
+          "key": "2026081421401148000_2026.08.11.26360004v1.60",
+          "doi-asserted-by": "crossref",
+          "first-page": "89",
+          "DOI": "10.1177/2396987320953312",
+          "article-title": "Rates, risks and routes to reduce vascular dementia (R4vad), a UK-wide multicentre prospective observational cohort study of cognition after stroke: Protocol",
+          "volume": "6",
+          "year": "2021",
+          "journal-title": "Eur Stroke J"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.61",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Galovic M , Stauber AJ , Leisi N , et al. Development and Validation of a Prognostic Model of Swallowing Recovery and Enteral Tube Feeding After Ischemic Stroke. JAMA Neurol 2019.",
+          "DOI": "10.1001/jamaneurol.2018.4858"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.62",
+          "first-page": "429053",
+          "article-title": "Pharyngeal Electrical Stimulation for Treatment of Poststroke Dysphagia: Individual Patient Data Meta­Analysis of Randomised Controlled Trials",
+          "volume": "2015",
+          "year": "2015",
+          "journal-title": "Stroke Res Treat"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.63",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1161/STROKEAHA.106.473579"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.64",
+          "unstructured": "Curtis L , Burns A. Unit Costs of Health and Social Care 2023. Canterbury: Personal Social Services Research Unit, 2023."
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.65",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/bmj.d40"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.66",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/sim.4067"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.67",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1161/01.STR.25.11.2220"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.68",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.2307/2288413"
+        },
+        {
+          "issue": "10",
+          "key": "2026081421401148000_2026.08.11.26360004v1.69",
+          "first-page": "el08784",
+          "article-title": "Applications of the Wei-Lachin multivariate one-sided test for multiple outcomes on possibly different scales",
+          "volume": "9",
+          "year": "2014",
+          "journal-title": "PLoS One"
+        },
+        {
+          "issue": "7",
+          "key": "2026081421401148000_2026.08.11.26360004v1.70",
+          "doi-asserted-by": "crossref",
+          "first-page": "682",
+          "DOI": "10.1001/jamaneurol.2023.1526",
+          "article-title": "Isosorbide Mononitrate and Cilostazol Treatment in Patients With Symptomatic Cerebral Small Vessel Disease: The Lacunar Intervention Trial-2 (LAC1-2) Randomized Clinical Trial",
+          "volume": "80",
+          "year": "2023",
+          "journal-title": "JAMA Neurol"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.71",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/0140-6736(91)93206-O"
+        },
+        {
+          "issue": "2",
+          "key": "2026081421401148000_2026.08.11.26360004v1.72",
+          "doi-asserted-by": "crossref",
+          "first-page": "581",
+          "DOI": "10.1177/23969873231166194",
+          "article-title": "Effect of proximal blood flow arrest during endovascular thrombectomy (ProFATE): Study protocol for a multicentre randomised controlled trial",
+          "volume": "8",
+          "year": "2023",
+          "journal-title": "Eur Stroke J"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.73",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1503/cmaj.050051"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.74",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1159/000313438"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.75",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/j.1532-5415.2005.53221.x"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.76",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0887-6177(97)00095-4"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.77",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/gps.930091006"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.78",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/gps.5454"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.79",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/(SICI)1099-1166(199911)14:11<936::AID-GPS39>3.0.CO;2-1"
+        },
+        {
+          "key": "2026081421401148000_2026.08.11.26360004v1.80",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1001/archpsyc.1965.01720310065008"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.11.26360004",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            15
+          ]
+        ],
+        "date-time": "2026-08-15T04:40:25Z",
+        "timestamp": 1786768825000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://medrxiv.org/lookup/doi/10.64898/2026.08.11.26360004"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "references-count": 80,
+      "URL": "https://doi.org/10.64898/2026.08.11.26360004",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

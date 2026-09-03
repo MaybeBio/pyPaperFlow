@@ -1,0 +1,800 @@
+{
+  "source": "medrxiv",
+  "source_id": "10.64898/2026.08.03.26359558",
+  "title": "Guidance for clinical variant classification in genes for spliceosomal small nuclear RNAs",
+  "doi": "10.64898/2026.08.03.26359558",
+  "abstract": "Background Small nuclear RNAs (snRNAs) are RNA components of the major and minor spliceosomes that play a core role in splice-site recognition and control of the splicing process. Variants in genes that produce snRNAs are increasingly recognised as major contributors to rare disorders, including neurodevelopmental disorders (NDD) and retinal dystrophies (collectively termed ‘RNUopathies’, a subset of ‘spliceosomopathies’). Clinical interpretation of variants in snRNAs is, however, challenging and existing guidance to support clinical variant classification does not adequately capture the unique features of snRNAs that necessitate a bespoke approach. Methods We quantified the elevated background mutation rate in snRNA genes using de novo variants from 12,007 trios and assessed mutation density in 76,215 genome sequenced individuals in gnomAD. We convened a panel of clinical, research, and industry scientists with wide-ranging expertise in clinical variant interpretation and classification and expert knowledge in snRNA genes to draft and refine a guidance document. Results We detail important considerations for variant classification in snRNA genes. These include: the difficulties of variant identification which requires genome or targeted sequencing approaches, the large number of gene paralogs with high sequence identity that complicate read mapping and variant calling, and historical inaccuracies in snRNA gene annotation. Further we show a ∼50-fold increase in de novo mutation rate in snRNA genes compared to intergenic sequence and discuss the implications of this for variant classification. We provide a set of specific recommendations for classifying variants in snRNA genes. Finally, we introduce RNUdb, an interactive web-based tool to support snRNA variant annotation and classification. Conclusions We provide the first guidance for clinical variant classification in snRNA genes and anticipate that this will support routine screening and analysis of snRNA genes in clinical genetic testing.",
+  "authors": [
+    "Elston N D’Souza",
+    "Alexander JM Blakes",
+    "Robin Paluch",
+    "Siddharth Banka",
+    "Maya Chopra",
+    "Alison J Coffey",
+    "Christel Depienne",
+    "Wojciech P Galej",
+    "Sylvie Mazoyer",
+    "Caroline Nava",
+    "Anne O’Donnell Luria",
+    "Jillian O’Toole",
+    "Pia Riestra Crespo",
+    "Carlo Rivolta",
+    "Stephan Sanders",
+    "Nicola Whiffin"
+  ],
+  "published_date": "2026-08-04",
+  "updated_date": "2026-08-04T19:15:15Z",
+  "journal": "medRxiv",
+  "category": "Genetic and Genomic Medicine",
+  "landing_url": "https://www.medrxiv.org/content/10.64898/2026.08.03.26359558",
+  "pdf_url": "https://www.medrxiv.org/content/10.64898/2026.08.03.26359558.full.pdf",
+  "pdf_path": "test/base_editing/medrxiv/2026/10.64898_2026.08.03.26359558/10.64898_2026.08.03.26359558.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.03.26359558",
+  "version": "",
+  "keywords": [
+    "Genetic and Genomic Medicine"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Genetic and Genomic Medicine",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "medRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            7
+          ]
+        ],
+        "date-time": "2026-08-07T15:55:15Z",
+        "timestamp": 1786118115532,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "group-title": "Genetic and Genomic Medicine",
+      "reference-count": 54,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                4
+              ]
+            ],
+            "date-time": "2026-08-04T00:00:00Z",
+            "timestamp": 1785801600000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:sec>\n                  <jats:title>Background</jats:title>\n                  <jats:p>Small nuclear RNAs (snRNAs) are RNA components of the major and minor spliceosomes that play a core role in splice-site recognition and control of the splicing process. Variants in genes that produce snRNAs are increasingly recognised as major contributors to rare disorders, including neurodevelopmental disorders (NDD) and retinal dystrophies (collectively termed ‘RNUopathies’, a subset of ‘spliceosomopathies’). Clinical interpretation of variants in snRNAs is, however, challenging and existing guidance to support clinical variant classification does not adequately capture the unique features of snRNAs that necessitate a bespoke approach.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Methods</jats:title>\n                  <jats:p>\n                    We quantified the elevated background mutation rate in snRNA genes using\n                    <jats:italic>de novo</jats:italic>\n                    variants from 12,007 trios and assessed mutation density in 76,215 genome sequenced individuals in gnomAD. We convened a panel of clinical, research, and industry scientists with wide-ranging expertise in clinical variant interpretation and classification and expert knowledge in snRNA genes to draft and refine a guidance document.\n                  </jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Results</jats:title>\n                  <jats:p>\n                    We detail important considerations for variant classification in snRNA genes. These include: the difficulties of variant identification which requires genome or targeted sequencing approaches, the large number of gene paralogs with high sequence identity that complicate read mapping and variant calling, and historical inaccuracies in snRNA gene annotation. Further we show a ∼50-fold increase in\n                    <jats:italic>de novo</jats:italic>\n                    mutation rate in snRNA genes compared to intergenic sequence and discuss the implications of this for variant classification. We provide a set of specific recommendations for classifying variants in snRNA genes. Finally, we introduce RNUdb, an interactive web-based tool to support snRNA variant annotation and classification.\n                  </jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Conclusions</jats:title>\n                  <jats:p>We provide the first guidance for clinical variant classification in snRNA genes and anticipate that this will support routine screening and analysis of snRNA genes in clinical genetic testing.</jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.08.03.26359558",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ],
+        "date-time": "2026-08-04T19:15:15Z",
+        "timestamp": 1785870915000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Guidance for clinical variant classification in genes for spliceosomal small nuclear RNAs"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Elston N",
+          "family": "D’Souza",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Big Data Institute, University of Oxford, Oxford, UK"
+            },
+            {
+              "name": "Centre for Human Genetics, University of Oxford, Oxford, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alexander JM",
+          "family": "Blakes",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Big Data Institute, University of Oxford, Oxford, UK"
+            },
+            {
+              "name": "Centre for Human Genetics, University of Oxford, Oxford, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Robin",
+          "family": "Paluch",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Human Genetics, University Hospital Essen, University Duisburg-Essen, Essen, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Siddharth",
+          "family": "Banka",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Division of Evolution and Genomic Sciences, School of Biological Sciences, Faculty of Biology, Medicine and Health, University of Manchester, Manchester, UK"
+            },
+            {
+              "name": "Manchester Centre for Genomic Medicine, St Mary’s Hospital, Manchester University NHS Foundation Trust, Health Innovation Manchester, Manchester, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Maya",
+          "family": "Chopra",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rosamund Stone Zander and Hansjoerg Wyss Translational Neuroscience Center, Department of Neurology, Boston Children’s Hospital, Boston, Massachusetts, USA"
+            },
+            {
+              "name": "Division of Genetics and Genomics, Boston Children’s Hospital, Boston, MA 02115, USA"
+            },
+            {
+              "name": "Harvard Medical School, Boston, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alison J",
+          "family": "Coffey",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Illumina Inc, 19 Granta Park, Great Abington, Cambridge, Cambridgeshire, CB21 6DF, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Christel",
+          "family": "Depienne",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Human Genetics, University Hospital Essen, University Duisburg-Essen, Essen, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Wojciech P",
+          "family": "Galej",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "EMBL Grenoble, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sylvie",
+          "family": "Mazoyer",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Université Claude Bernard Lyon 1, INSERM, CNRS, Centre de Recherche en Neurosciences de Lyon CRNL U1028 UMR5292, GENDEV, 69500 Bron, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Caroline",
+          "family": "Nava",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Sorbonne Université, Institut du Cerveau - Paris Brain Institute - ICM, Inserm, CNRS, Paris, France"
+            },
+            {
+              "name": "Assistance Publique - Hôpitaux de Paris (APHP) Sorbonne Université, Département de Génétique Médicale, Hôpital Pitié-Salpêtrière, Paris, France"
+            },
+            {
+              "name": "Laboratoire SeqOIA, Paris, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Anne",
+          "family": "O’Donnell Luria",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Division of Genetics and Genomics, Boston Children’s Hospital, Boston, MA 02115, USA"
+            },
+            {
+              "name": "Harvard Medical School, Boston, MA, USA"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA 02142, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jillian",
+          "family": "O’Toole",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rosamund Stone Zander and Hansjoerg Wyss Translational Neuroscience Center, Department of Neurology, Boston Children’s Hospital, Boston, Massachusetts, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Pia",
+          "family": "Riestra Crespo",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "GeneDx, LLC, Gaithesburg, MD, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Carlo",
+          "family": "Rivolta",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Molecular and Clinical Ophthalmology Basel (IOB), Basel, Switzerland"
+            },
+            {
+              "name": "Department of Ophthalmology, University of Basel, Basel, Switzerland"
+            },
+            {
+              "name": "Division of Genetics and Genome Biology, University of Leicester, Leicester, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Stephan",
+          "family": "Sanders",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Developmental and Regenerative Medicine, Department of Paediatrics, University of Oxford, Oxford, OX3 7TY, UK"
+            },
+            {
+              "name": "Department of Psychiatry and Behavioral Sciences, UCSF Weill Institute for Neurosciences, University of California, San Francisco, San Francisco, CA 94158, USA"
+            },
+            {
+              "name": "New York Genome Center, New York, NY 10013, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-1554-6594",
+          "authenticated-orcid": false,
+          "given": "Nicola",
+          "family": "Whiffin",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Big Data Institute, University of Oxford, Oxford, UK"
+            },
+            {
+              "name": "Centre for Human Genetics, University of Oxford, Oxford, UK"
+            },
+            {
+              "name": "Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA 02142, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/nature01031"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.2",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Tholen J , Galej WP . Structural studies of the spliceosome: Bridging the gaps. Curr Opin Struct Biol. 2022;77:102461.",
+          "DOI": "10.1016/j.sbi.2022.102461"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.3",
+          "doi-asserted-by": "crossref",
+          "first-page": "61",
+          "DOI": "10.1002/wrna.1141",
+          "article-title": "The significant other: splicing by the minor spliceosome",
+          "volume": "4",
+          "year": "2013",
+          "journal-title": "Wiley Interdiscip Rev RNA"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.15252/embj.2019103777"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1261/rna.078768.121"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1200587"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1126/science.1202205"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ncomms9718"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/ajmg.a.38581"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/ana.24826"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/humu.24239"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-024-07773-7"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41591-024-03085-5"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.14",
+          "doi-asserted-by": "crossref",
+          "first-page": "1367",
+          "DOI": "10.1038/s41588-025-02159-5",
+          "article-title": "Mutations in the small nuclear RNA gene RNU2-2 cause a severe neurodevelopmental disorder with prominent epilepsy",
+          "volume": "57",
+          "year": "2025",
+          "journal-title": "Nat Genet"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-025-02209-y"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-025-02184-4"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.17",
+          "doi-asserted-by": "crossref",
+          "first-page": "761",
+          "DOI": "10.1038/s41588-026-02554-6",
+          "article-title": "Biallelic variants in the noncoding RNA gene RNU4-2 cause a recessive neurodevelopmental syndrome with distinct white matter changes",
+          "volume": "58",
+          "year": "2026",
+          "journal-title": "Nat Genet"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41586-026-10334-9"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-025-02451-4"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.20",
+          "doi-asserted-by": "crossref",
+          "first-page": "798",
+          "DOI": "10.1038/s41588-026-02551-9",
+          "article-title": "Biallelic variants in RNU2-2 cause a remarkably frequent developmental and epileptic encephalopathy",
+          "volume": "58",
+          "year": "2026",
+          "journal-title": "Nat Genet"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.21",
+          "doi-asserted-by": "crossref",
+          "first-page": "782",
+          "DOI": "10.1038/s41588-026-02547-5",
+          "article-title": "Systematic analysis of snRNA genes reveals frequent RNU2-2 variants in dominant and recessive developmental and epileptic encephalopathies",
+          "volume": "58",
+          "year": "2026",
+          "journal-title": "Nat Genet"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.22",
+          "doi-asserted-by": "crossref",
+          "first-page": "774",
+          "DOI": "10.1038/s41588-026-02539-5",
+          "article-title": "Biallelic variants in RNU2-2 cause the most prevalent known recessive neurodevelopmental disorder",
+          "volume": "58",
+          "year": "2026",
+          "journal-title": "Nat Genet"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.23",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Mendez R , Arriaga TM , Ma J , Bonner DE , Emami S , Levy RJ , et al. Biallelic Variants in RNU6ATAC Result in a Minor Spliceopathy Characterized by Transcriptome-Wide Minor Intron Retention Events and Short Stature with Variable Multisystem Manifestations. HGG Adv. 2026;100588.",
+          "DOI": "10.1016/j.xhgg.2026.100588"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.24",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.01.02.24318941"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.25",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ajhg.2026.02.017"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41588-023-01562-0"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0076054"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/gim.2015.30"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.29",
+          "unstructured": "Clinical Genome Resource. ClinGen Variant Classification Guidance - ClinGen [Internet]. [cited 2026 Apr 20]. Available from: https://clinicalgenome.org/tools/clingen-variant-classification-guidance/"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.30",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Ellingford JM , Ahn JW , Bagnall RD , Baralle D , Barton S , Campbell C , et al. Recommendations for clinical interpretation of variants found in non-coding regions of the genome. Genome Med. 2022;14:73.",
+          "DOI": "10.1186/s13073-022-01073-3"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkae1078"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.32",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/0471250953.bi1112s47"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.33",
+          "unstructured": "England G. National Genomic Research Library [Internet]. figshare; 2025 [cited 2026 May 28]. Available from: https://figshare.com/articles/dataset/GenomicEnglandProtocol_pdf/4530893/8"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/gigascience/giab008"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkad1005"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.36",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Aspden JL , Wallace EWJ , Whiffin N . Not all exons are protein coding: Addressing a common misconception. Cell Genom. 2023;3:100296.",
+          "DOI": "10.1016/j.xgen.2023.100296"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/jmg-2025-110987"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.38",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Bousquets-Muñoz P , Díaz-Navarro A , Nadeu F , Sánchez-Pitiot A , López-Tamargo S , Shuai S , et al. PanCancer analysis of somatic mutations in repetitive regions reveals recurrent mutations in snRNA U2. NPJ Genom Med. 2022;7:19.",
+          "DOI": "10.1038/s41525-022-00292-2"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.39",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Prasetyo NK , Gardner PP . Assessing the robustness of human ncRNA notations [Internet]. bioRxiv. 2024. Available from: http://biorxiv.org/lookup/doi/10.1101/2024.12.08.627405",
+          "DOI": "10.1101/2024.12.08.627405"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.40",
+          "unstructured": "[No title] [Internet]. [cited 2026 May 28]. Available from: https://clinicalgenome.org/site/assets/files/3461/svi_proposal_for_de_novo_criteria_v1_1.pdf"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.41",
+          "unstructured": "[No title] [Internet]. [cited 2026 May 28]. Available from: https://clinicalgenome.org/site/assets/files/3717/svi_proposal_for_pm3_criterion_-_version_1.pdf"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.42",
+          "doi-asserted-by": "crossref",
+          "first-page": "e0235655",
+          "DOI": "10.1371/journal.pone.0235655",
+          "article-title": "Clinical interpretation of variants identified in RNU4ATAC, a non-coding spliceosomal gene",
+          "volume": "15",
+          "year": "2020",
+          "journal-title": "PLoS One"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ajhg.2022.10.013"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/S41586-024-07487-W"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/humu.24088"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/gim.2017.210"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.47",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.molcel.2008.04.013"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/0092-8674(92)90556-R"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1261/rna.071423.119"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.50",
+          "doi-asserted-by": "crossref",
+          "first-page": "24",
+          "DOI": "10.1016/j.ajhg.2023.11.009",
+          "article-title": "ClinGen guidance for use of the PP1/BS4 co-segregation and PP4 phenotype specificity criteria for sequence variant pathogenicity classification",
+          "volume": "111",
+          "year": "2024",
+          "journal-title": "Am J Hum Genet"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.51",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/0092-8674(91)90413-S"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.2102569120"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.53",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Brnich SE , Abou Tayoun AN , Couch FJ , Cutting GR , Greenblatt MS , Heinen CD , et al. Recommendations for application of the functional evidence PS3/BS3 criterion using the ACMG/AMP sequence variant interpretation framework. Genome Med. 2019;12:3.",
+          "DOI": "10.1101/709428"
+        },
+        {
+          "key": "2026080608000532000_2026.08.03.26359558v1.54",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.gim.2022.02.007"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.03.26359558",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            6
+          ]
+        ],
+        "date-time": "2026-08-06T15:00:18Z",
+        "timestamp": 1786028418000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://medrxiv.org/lookup/doi/10.64898/2026.08.03.26359558"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "references-count": 54,
+      "URL": "https://doi.org/10.64898/2026.08.03.26359558",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

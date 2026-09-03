@@ -1,0 +1,397 @@
+{
+  "source": "medrxiv",
+  "source_id": "10.64898/2026.07.30.26358885",
+  "title": "Automating clinical trial outcome identification and misreporting detection using RegCheck",
+  "doi": "10.64898/2026.07.30.26358885",
+  "abstract": "Objective To evaluate the accuracy and cost of RegCheck, an automated large language model (LLM)-based workflow, for identifying clinical trial outcomes and detecting outcome misreporting by comparing its outputs with manual assessments from the COMPare Trials project. Design Validation study. Setting Sixty-two clinical trials originally assessed in the COMPare Trials project, sampled from five high impact general medical journals. Participants Published clinical trial reports and their corresponding prespecified registrations and/or protocols. Main outcome measures Four prespecified research questions were examined. RQ1 assessed outcome extraction recall relative to COMPare. RQ2 assessed accuracy of outcome classification as primary, secondary, or non-prespecified. RQ3 assessed accuracy of misreporting detection relative to COMPare, with additional manual adjudication of discrepancies between RegCheck and COMPare. RQ4 assessed the average per-paper cost of running the automated workflow. Results Across the validation papers, RegCheck achieved 91.2% outcome extraction recall relative to COMPare, and 83.6% outcome classification accuracy. For detection of outcome misreporting, RegCheck’s overall accuracy was 85.6%. However, after resolving discrepancies with the original human judgements (which frequently favoured RegCheck’s judgement), revised accuracy for outcome misreporting detection was 94.8%. The mean cost of running the workflow was 5.94 USD per paper. Conclusions RegCheck achieved high overall performance with a rigorous manual benchmark for identifying prespecified and reported outcomes in clinical trials, and detecting outcome misreporting, while operating at very low marginal cost. Adjudication of discrepant judgements suggested that RegCheck frequently identified valid issues not captured in the reference standard. Automated outcome checking may offer a scalable way to support editors, peer reviewers, and authors in detecting outcome switching and improving trial reporting. What is already known on this topic Undeclared discrepancies between prespecified and reported trial outcomes remain common and can distort the medical evidence base. Manual auditing projects such as COMPare Trials have shown that outcome switching is prevalent, but this work is labour intensive and difficult to sustain at scale. Large language models may help automate registration-to-publication comparisons, but their performance against established manual benchmarks has not been well characterised. What this study adds RegCheck, an LLM-based workflow, achieved high performance for outcome extraction, generally high performance for outcome classification (with three protocols exhibiting exceptionally poor performance), and high performance for misreporting detection when benchmarked against COMPare Trials. Manual adjudication of disagreements in misreporting judgements suggested that RegCheck’s judgements of misreporting were (at times) more accurate than those of the human reports. The workflow operated at a low mean cost per paper, suggesting that automated trial checking could be deployed at scale as a screening and decision-support tool.",
+  "authors": [
+    "Jamie Cummins",
+    "Henry Drysdale",
+    "Malte Elson",
+    "Ian Hussey",
+    "Ben Goldacre",
+    "Nicholas J. DeVito"
+  ],
+  "published_date": "2026-08-02",
+  "updated_date": "2026-08-03T06:00:11Z",
+  "journal": "medRxiv",
+  "category": "Epidemiology",
+  "landing_url": "https://www.medrxiv.org/content/10.64898/2026.07.30.26358885",
+  "pdf_url": "https://www.medrxiv.org/content/10.64898/2026.07.30.26358885.full.pdf",
+  "pdf_path": "test/base_editing/medrxiv/2026/10.64898_2026.07.30.26358885/10.64898_2026.07.30.26358885.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.07.30.26358885",
+  "version": "",
+  "keywords": [
+    "Epidemiology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Epidemiology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "medRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ],
+        "date-time": "2026-08-04T18:47:05Z",
+        "timestamp": 1785869225489,
+        "version": "3.56.0"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            2
+          ]
+        ]
+      },
+      "group-title": "Epidemiology",
+      "reference-count": 20,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                2
+              ]
+            ],
+            "date-time": "2026-08-02T00:00:00Z",
+            "timestamp": 1785628800000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "award": [
+            "100014E_225145"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "100014E_225145"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/00yjd3n13",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            2
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:sec>\n                  <jats:title>Objective</jats:title>\n                  <jats:p>To evaluate the accuracy and cost of RegCheck, an automated large language model (LLM)-based workflow, for identifying clinical trial outcomes and detecting outcome misreporting by comparing its outputs with manual assessments from the COMPare Trials project.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Design</jats:title>\n                  <jats:p>Validation study.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Setting</jats:title>\n                  <jats:p>Sixty-two clinical trials originally assessed in the COMPare Trials project, sampled from five high impact general medical journals.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Participants</jats:title>\n                  <jats:p>Published clinical trial reports and their corresponding prespecified registrations and/or protocols.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Main outcome measures</jats:title>\n                  <jats:p>Four prespecified research questions were examined. RQ1 assessed outcome extraction recall relative to COMPare. RQ2 assessed accuracy of outcome classification as primary, secondary, or non-prespecified. RQ3 assessed accuracy of misreporting detection relative to COMPare, with additional manual adjudication of discrepancies between RegCheck and COMPare. RQ4 assessed the average per-paper cost of running the automated workflow.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Results</jats:title>\n                  <jats:p>Across the validation papers, RegCheck achieved 91.2% outcome extraction recall relative to COMPare, and 83.6% outcome classification accuracy. For detection of outcome misreporting, RegCheck’s overall accuracy was 85.6%. However, after resolving discrepancies with the original human judgements (which frequently favoured RegCheck’s judgement), revised accuracy for outcome misreporting detection was 94.8%. The mean cost of running the workflow was 5.94 USD per paper.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Conclusions</jats:title>\n                  <jats:p>RegCheck achieved high overall performance with a rigorous manual benchmark for identifying prespecified and reported outcomes in clinical trials, and detecting outcome misreporting, while operating at very low marginal cost. Adjudication of discrepant judgements suggested that RegCheck frequently identified valid issues not captured in the reference standard. Automated outcome checking may offer a scalable way to support editors, peer reviewers, and authors in detecting outcome switching and improving trial reporting.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>What is already known on this topic</jats:title>\n                  <jats:p>Undeclared discrepancies between prespecified and reported trial outcomes remain common and can distort the medical evidence base.</jats:p>\n                  <jats:p>Manual auditing projects such as COMPare Trials have shown that outcome switching is prevalent, but this work is labour intensive and difficult to sustain at scale.</jats:p>\n                  <jats:p>Large language models may help automate registration-to-publication comparisons, but their performance against established manual benchmarks has not been well characterised.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>What this study adds</jats:title>\n                  <jats:p>RegCheck, an LLM-based workflow, achieved high performance for outcome extraction, generally high performance for outcome classification (with three protocols exhibiting exceptionally poor performance), and high performance for misreporting detection when benchmarked against COMPare Trials.</jats:p>\n                  <jats:p>Manual adjudication of disagreements in misreporting judgements suggested that RegCheck’s judgements of misreporting were (at times) more accurate than those of the human reports.</jats:p>\n                  <jats:p>The workflow operated at a low mean cost per paper, suggesting that automated trial checking could be deployed at scale as a screening and decision-support tool.</jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.07.30.26358885",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            3
+          ]
+        ],
+        "date-time": "2026-08-03T06:00:11Z",
+        "timestamp": 1785736811000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Automating clinical trial outcome identification and misreporting detection using RegCheck"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-9729-4900",
+          "authenticated-orcid": false,
+          "given": "Jamie",
+          "family": "Cummins",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Institute of Psychology, University of Bern"
+            },
+            {
+              "name": "Bennett Institute of Applied Data Science, University of Oxford"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Henry",
+          "family": "Drysdale",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Bennett Institute of Applied Data Science, University of Oxford"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Malte",
+          "family": "Elson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Psychology, University of Bern"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ian",
+          "family": "Hussey",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Psychology, University of Bern"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ben",
+          "family": "Goldacre",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Bennett Institute of Applied Data Science, University of Oxford"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8286-1995",
+          "authenticated-orcid": false,
+          "given": "Nicholas J.",
+          "family": "DeVito",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Bennett Institute of Applied Data Science, University of Oxford"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0066844"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1001/jama.291.20.2457"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/bmj.c365"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/bmj-2024-081123"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/bmj.c332"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.jclinepi.2021.05.003"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s12874-017-0465-7"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13063-019-3173-2"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMe048225"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1186/s13063-019-3172-3"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.36850/e5ce-4cc5"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.48550/arXiv.2601.13330"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/oxfordjournals.aje.a116627"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/978-3-642-04346-8_62"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.15",
+          "unstructured": "Lewis P , Perez E , Piktus A , Petroni F , Karpukhin V , Goyal N , et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. In: Advances in Neural Information Processing Systems [Internet]. Curran Associates, Inc.; 2020 [cited 2026 Jul 18]. p. 9459–74. Available from: https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.64898/2026.03.15.26348383"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.48550/arXiv.2509.13397"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.48550/arXiv.2310.11324"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/266452"
+        },
+        {
+          "key": "2026080411201142000_2026.07.30.26358885v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.12688/f1000research.10010.1"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.07.30.26358885",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            4
+          ]
+        ],
+        "date-time": "2026-08-04T18:20:19Z",
+        "timestamp": 1785867619000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://medrxiv.org/lookup/doi/10.64898/2026.07.30.26358885"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            2
+          ]
+        ]
+      },
+      "references-count": 20,
+      "URL": "https://doi.org/10.64898/2026.07.30.26358885",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            2
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

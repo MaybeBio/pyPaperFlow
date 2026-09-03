@@ -1,0 +1,746 @@
+{
+  "source": "medrxiv",
+  "source_id": "10.64898/2026.08.05.26359678",
+  "title": "Variation in uptake and dose reduction of CDK4/6 inhibitors for the treatment of breast cancer in England, 2019–2024: a descriptive observational study using OpenPrescribing Hospitals",
+  "doi": "10.64898/2026.08.05.26359678",
+  "abstract": "Background The number of novel cancer therapies approved for use in England by the National Institute for Health and Care Excellence is increasing. Monitoring the adoption of new therapies is important to assess equity of access and evaluate real-world prescribing practices. OpenPrescribing Hospitals has recently been launched to facilitate analysis of open secondary care medicines data in England. Using this platform, we set out to describe the use of cyclin-dependent kinase 4 and 6 (CDK4/6) inhibitors, including the frequency of dose reductions, within National Health Service (NHS) hospitals in England between January 2019 and December 2024. Methods The monthly proportion of each CDK4/6 inhibitor relative to total CDK4/6 inhibitor use was calculated at hospital level. Regional variation was assessed across Cancer Alliances by comparing the proportions of each CDK4/6 inhibitor used within each alliance in 2021 and 2024. Use of lower strength palbociclib and abemaciclib was used as a proxy for dose reductions. Findings There was more than a 3-fold increase in the use of CDK4/6 inhibitors between 2019 and 2024. In 2019, 78.6%, 11.9% and 9.5% of CDK4/6 inhibitors used were palbociclib, abemaciclib and ribociclib, compared with 40.2%, 41.2% and 18.6% in 2024. There was variation in the relative percentage change in use of each agent by Cancer Alliance. Use of lower strengths was common for both palbociclib (60%) and abemaciclib (63%). Interpretation Changes in usage appeared responsive to publication of key evidence and regulatory milestones. There was a higher apparent frequency of dose reductions than reported in clinical trials. OpenPrescribing Hospitals is an accessible, publicly available tool for understanding uptake and use of medicines in NHS hospitals in England.",
+  "authors": [
+    "Louis Fisher",
+    "Calum Polwart",
+    "Christopher Wood",
+    "Ben Goldacre",
+    "Laura Anderson",
+    "Jennifer Isherwood",
+    "Sumeet Hindocha",
+    "Brian MacKenna",
+    "Victoria Speed"
+  ],
+  "published_date": "2026-08-10",
+  "updated_date": "2026-08-10T13:40:18Z",
+  "journal": "medRxiv",
+  "category": "Oncology",
+  "landing_url": "https://www.medrxiv.org/content/10.64898/2026.08.05.26359678",
+  "pdf_url": "https://www.medrxiv.org/content/10.64898/2026.08.05.26359678.full.pdf",
+  "pdf_path": "test/base_editing/medrxiv/2026/10.64898_2026.08.05.26359678/10.64898_2026.08.05.26359678.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.05.26359678",
+  "version": "",
+  "keywords": [
+    "Oncology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Oncology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "medRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ],
+        "date-time": "2026-08-14T13:34:12Z",
+        "timestamp": 1786714452435,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            10
+          ]
+        ]
+      },
+      "group-title": "Oncology",
+      "reference-count": 77,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                10
+              ]
+            ],
+            "date-time": "2026-08-10T00:00:00Z",
+            "timestamp": 1786320000000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "name": "Health Foundation",
+          "award": [
+            "7599"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "7599"
+              ]
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/501100000272",
+          "name": "National Institute for Health Research",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "SPCR 327"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "SPCR 327"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/501100000272",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/501100000272",
+          "name": "National Institute for Health Research",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "PB-PG-0418-20036"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "PB-PG-0418-20036"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/501100000272",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/501100000272",
+          "name": "National Institute for Health Research",
+          "doi-asserted-by": "crossref",
+          "id": [
+            {
+              "id": "10.13039/501100000272",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:sec>\n                  <jats:title>Background</jats:title>\n                  <jats:p>The number of novel cancer therapies approved for use in England by the National Institute for Health and Care Excellence is increasing. Monitoring the adoption of new therapies is important to assess equity of access and evaluate real-world prescribing practices. OpenPrescribing Hospitals has recently been launched to facilitate analysis of open secondary care medicines data in England. Using this platform, we set out to describe the use of cyclin-dependent kinase 4 and 6 (CDK4/6) inhibitors, including the frequency of dose reductions, within National Health Service (NHS) hospitals in England between January 2019 and December 2024.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Methods</jats:title>\n                  <jats:p>The monthly proportion of each CDK4/6 inhibitor relative to total CDK4/6 inhibitor use was calculated at hospital level. Regional variation was assessed across Cancer Alliances by comparing the proportions of each CDK4/6 inhibitor used within each alliance in 2021 and 2024. Use of lower strength palbociclib and abemaciclib was used as a proxy for dose reductions.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Findings</jats:title>\n                  <jats:p>There was more than a 3-fold increase in the use of CDK4/6 inhibitors between 2019 and 2024. In 2019, 78.6%, 11.9% and 9.5% of CDK4/6 inhibitors used were palbociclib, abemaciclib and ribociclib, compared with 40.2%, 41.2% and 18.6% in 2024. There was variation in the relative percentage change in use of each agent by Cancer Alliance. Use of lower strengths was common for both palbociclib (60%) and abemaciclib (63%).</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Interpretation</jats:title>\n                  <jats:p>Changes in usage appeared responsive to publication of key evidence and regulatory milestones. There was a higher apparent frequency of dose reductions than reported in clinical trials. OpenPrescribing Hospitals is an accessible, publicly available tool for understanding uptake and use of medicines in NHS hospitals in England.</jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.08.05.26359678",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            10
+          ]
+        ],
+        "date-time": "2026-08-10T13:40:18Z",
+        "timestamp": 1786369218000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Variation in uptake and dose reduction of CDK4/6 inhibitors for the treatment of breast cancer in England, 2019–2024: a descriptive observational study using OpenPrescribing Hospitals"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-0295-3812",
+          "authenticated-orcid": false,
+          "given": "Louis",
+          "family": "Fisher",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Bennett Institute for Applied Data Science, Nuffield Department of Primary Care Health Sciences, University of Oxford, OX2 6GG, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-4774-6366",
+          "authenticated-orcid": false,
+          "given": "Calum",
+          "family": "Polwart",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "James Cook Cancer Institute, South Tees Hospitals NHS Foundation Trust, Marton Road, Middlesbrough, TS4 3BW, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-5184-0606",
+          "authenticated-orcid": false,
+          "given": "Christopher",
+          "family": "Wood",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Bennett Institute for Applied Data Science, Nuffield Department of Primary Care Health Sciences, University of Oxford, OX2 6GG, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5127-4728",
+          "authenticated-orcid": false,
+          "given": "Ben",
+          "family": "Goldacre",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Bennett Institute for Applied Data Science, Nuffield Department of Primary Care Health Sciences, University of Oxford, OX2 6GG, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Laura",
+          "family": "Anderson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "King’s College Hospital NHS Foundation Trust, London, SE5 9RS"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jennifer",
+          "family": "Isherwood",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Milton Keynes University Hospital NHS Foundation Trust, Milton Keynes, MK6 5LD"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-1644-0142",
+          "authenticated-orcid": false,
+          "given": "Sumeet",
+          "family": "Hindocha",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "The Royal Marsden NHS Foundation Trust, London, SW3 6JJ"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-3786-9063",
+          "authenticated-orcid": false,
+          "given": "Brian",
+          "family": "MacKenna",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Bennett Institute for Applied Data Science, Nuffield Department of Primary Care Health Sciences, University of Oxford, OX2 6GG, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-5064-9375",
+          "authenticated-orcid": false,
+          "given": "Victoria",
+          "family": "Speed",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Bennett Institute for Applied Data Science, Nuffield Department of Primary Care Health Sciences, University of Oxford, OX2 6GG, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.1",
+          "unstructured": "The SACT capacity crisis in the NHS. The Royal College of Radiologists. Accessed January 29, 2026. https://www.rcr.ac.uk/news-policy/policy-reports-initiatives/the-sact-capacity-crisis-in-the-nhs/"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S1470-2045(24)00345-0"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.3",
+          "unstructured": "The NHS Long Term Plan. NHS. Accessed July 30, 2026. https://webarchive.nationalarchives.gov.uk/ukgwa/20230418155402/ https://www.longtermplan.nhs.uk/publication/nhs-long-term-plan/"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.4",
+          "unstructured": "Accelerated Access Review: final report. GOV.UK. Accessed July 30, 2026. https://www.gov.uk/government/publications/accelerated-access-review-final-report"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/onco.13531"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/onco.13684"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41416-023-02439-z"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.8",
+          "unstructured": "Verzenios. European Medicines Agency (EMA). October 29, 2018. Accessed October 31, 2025. https://www.ema.europa.eu/en/medicines/human/EPAR/verzenios"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.9",
+          "unstructured": "Kisqali. European Medicines Agency (EMA). August 22, 2017. Accessed January 9, 2026. https://www.ema.europa.eu/en/medicines/human/EPAR/kisqali"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.10",
+          "unstructured": "Ibrance. European Medicines Agency (EMA). July 30, 2018. Accessed October 31, 2025. https://www.ema.europa.eu/en/medicines/human/EPAR/ibrance"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.11",
+          "unstructured": "Palbociclib with an aromatase inhibitor for previously untreated, hormone receptor-positive, HER2-negative, locally advanced or metastatic breast cancer (TA495). NICE. December 20, 2017. Accessed April 9, 2026. https://www.nice.org.uk/guidance/ta495"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.12",
+          "unstructured": "Ribociclib with an aromatase inhibitor for previously untreated, hormone receptor-positive, HER2-negative, locally advanced or metastatic breast cancer (TA496). NICE. December 20, 2017. Accessed April 9, 2026. https://www.nice.org.uk/guidance/ta496"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.13",
+          "unstructured": "Abemaciclib with an aromatase inhibitor for previously untreated, hormone receptor-positive, HER2-negative, locally advanced or metastatic breast cancer (TA563). NICE. February 27, 2019. Accessed April 9, 2026. https://www.nice.org.uk/guidance/ta563"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.14",
+          "unstructured": "Abemaciclib with endocrine therapy for adjuvant treatment of hormone receptor-positive, HER2-negative, node-positive early breast cancer at high risk of recurrence (TA810). NICE. July 20, 2022. Accessed April 9, 2026. https://www.nice.org.uk/guidance/ta810"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.15",
+          "unstructured": "Ribociclib with an aromatase inhibitor for adjuvant treatment of hormone receptor-positive HER2-negative early breast cancer at high risk of recurrence (TA1086). NICE. August 6, 2025. Accessed January 30, 2026. https://www.nice.org.uk/guidance/ta1086"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.annonc.2021.09.019"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1200/JCO.21.01392"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1200/JCO.24.00886"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.6004/jnccn.2023.0031"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.annonc.2026.05.707"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.21",
+          "unstructured": "NICE Technology Appraisals in the NHS in England (Innovation Scorecard) - to June 2025. NHS Business Services Authority. Accessed October 31, 2025. https://www.nhsbsa.nhs.uk/statistical-collections/nice-technology-appraisals/nice-technology-appraisals-nhs-england-innovation-scorecard-june-2025"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.22",
+          "unstructured": "SACT time to first treatment dashboard. National Disease Registration Service. Accessed October 31, 2025. https://digital.nhs.uk/ndrs/data/data-outputs/cancer-data-hub/sact-time-to-first-treatment"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.23",
+          "unstructured": "The Model Health System. NHS England. Accessed January 17, 2025. https://www.england.nhs.uk/applications/model-hospital/"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.24",
+          "unstructured": "Define. RX-Info. Accessed January 17, 2025. https://www.rx-info.co.uk/products/define/"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.25",
+          "unstructured": "Fingertips. Department of Health and Social Care. Accessed July 30, 2026. https://fingertips.phe.org.uk/"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2025.11.13.25340060"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.27",
+          "unstructured": "Secondary Care Medicines Data (SCMD). NHS BSA Open Data Portal. Accessed January 16, 2025. https://opendata.nhsbsa.net/dataset/secondary-care-medicines-data"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.28",
+          "unstructured": "Analysis of abemaciclib, ribociclib and palbociclib in secondary care in England. OpenPrescribing Hospitals. Accessed December 16, 2025. https://hospitals.openprescribing.net/analyse/?vtms=774399006,777435007,777047009&quantity=ddd"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.29",
+          "unstructured": "Downloading Charts. OpenPrescribing Hospitals. http://hospitals.openprescribing.net/faq/#downloading-charts"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.30",
+          "unstructured": "NHS dictionary of medicines and devices (dm+d). NHS Business Services Authority. Accessed January 17, 2025. https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.31",
+          "unstructured": "Organisation Data Service (ODS). NHS England Digital. Accessed January 17, 2025. https://digital.nhs.uk/services/organisation-data-service"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.32",
+          "unstructured": "ATC/DDD Index. WHO Collaborating Centre for Drug Statistics Methodology. Accessed May 30, 2025. https://atcddd.fhi.no/atc_ddd_index/"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.33",
+          "unstructured": "Estates Returns Information Collection. NHS England Digital. Accessed November 28, 2025. https://digital.nhs.uk/data-and-information/publications/statistical/estates-returns-information-collection"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.53764/oph.pwxj45iw6y"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.35",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.53764/oph.4e5ieyekuv"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.36",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.53764/oph.3t4q2llxbo"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.37",
+          "unstructured": "IBRANCE® (palbociclib) Tablets. IBRANCE. Accessed January 30, 2026. https://www.ibrance.com/tablets"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.38",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa2114663"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1200/JCO.2022.40.17_suppl.LBA1003"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.40",
+          "unstructured": "Palbociclib with fulvestrant for treating hormone receptor-positive, HER2-negative, advanced breast cancer (TA619). NICE. January 15, 2020. Accessed April 9, 2026. https://www.nice.org.uk/guidance/ta619"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.41",
+          "unstructured": "Palbociclib with fulvestrant for treating hormone receptor-positive, HER2-negative advanced breast cancer after endocrine therapy (TA836). NICE. October 26, 2022. Accessed April 24, 2026. https://www.nice.org.uk/guidance/ta836"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.42",
+          "unstructured": "Abemaciclib with fulvestrant for treating hormone receptor-positive, HER2-negative advanced breast cancer after endocrine therapy (TA579). NICE. May 8, 2019. Accessed April 23, 2026. https://www.nice.org.uk/guidance/ta579"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.43",
+          "unstructured": "Abemaciclib with fulvestrant for treating hormone receptor-positive, HER2-negative advanced breast cancer after endocrine therapy (TA725). NICE. September 15, 2021. Accessed April 9, 2026. https://www.nice.org.uk/guidance/ta725"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.44",
+          "unstructured": "Approval package for palbociclib. FDA. Accessed July 30, 2026. https://www.accessdata.fda.gov/drugsatfda_docs/nda/2016/207103Orig1s002.pdf"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.45",
+          "unstructured": "Regulatory Approval, Reimbursement, and Clinical Use of Cyclin-Dependent Kinase 4/6 Inhibitors in Metastatic Breast Cancer in the Netherlands | Health Policy | JAMA Network Open | JAMA Network. Accessed July 30, 2026. https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2801495"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.46",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41416-023-02352-5"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.47",
+          "unstructured": "ebmdatalab/cdk4-6-uptake-openprescribing-hospitals. GitHub. Accessed July 30, 2026. https://github.com/ebmdatalab/cdk4-6-uptake-openprescribing-hospitals"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.48",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.53764/oph.aBIVeEtBtq"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.49",
+          "unstructured": "Eli Lilly and Company Limited. Verzenios 150 mg film-coated tablets - Summary of Product Characteristics. Electronic Medicines Compendium. August 4, 2025. Accessed October 17, 2025. https://www.medicines.org.uk/emc/product/11047/smpc"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.50",
+          "unstructured": "Novartis Pharmaceuticals UK Ltd. Kisqali 200 mg film-coated tablets - Summary of Product Characteristics. Electronic Medicines Compendium. August 7, 2025. Accessed October 17, 2025. https://www.medicines.org.uk/emc/product/8110/smpc"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.51",
+          "unstructured": "Pfizer Limited. Ibrance 125 mg film-coated tablets - Summary of Product Characteristics. Electronic Medicines Compendium. January 3, 2025. Accessed October 17, 2025. https://www.medicines.org.uk/emc/product/11962/smpc"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.52",
+          "unstructured": "Secondary Care Medicines Data Release Guidance v005. https://github.com/NHSBSA-Open-Data/ODP/raw/ab57824f4e723f9b2057d1aef750d92f85d6136c/Secondary%20Care%20Medicines%20Data%20Release%20Guidance%20v0.5.docx"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.53",
+          "unstructured": "Patient access schemes and pricing agreements. NICE website: The National Institute for Health and Care Excellence. Accessed July 24, 2026. https://www.nice.org.uk/what-nice-does/patient-access-schemes-and-pricing-agreements"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.54",
+          "unstructured": "Eli Lilly and Company. A Study of Abemaciclib (LY2835219) Combined With Fulvestrant in Women With Hormone Receptor Positive HER2 Negative Breast Cancer (MONARCH 2). clinicaltrials.gov; 2025. Accessed April 24, 2026. https://clinicaltrials.gov/study/NCT02107703"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.55",
+          "unstructured": "Eli Lilly and Company. A Study of Nonsteroidal Aromatase Inhibitors Plus Abemaciclib (LY2835219) in Postmenopausal Women With Breast Cancer (MONARCH 3). clinicaltrials.gov; 2026. Accessed April 24, 2026. https://clinicaltrials.gov/study/NCT02246621"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.56",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1200/JCO.2017.73.7585"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1200/JCO.2017.75.6155"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.58",
+          "unstructured": "Abemaciclib plus endocrine therapy for hormone receptor-positive, HER2-negative, node-positive, high-risk early breast cancer (monarchE): results from a preplanned interim analysis of a randomised, open-label, phase 3 trial - The Lancet Oncology. Accessed April 24, 2026. https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(22)00694-5/abstract"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.59",
+          "unstructured": "Eli Lilly and Company. Endocrine Therapy With or Without Abemaciclib (LY2835219) Following Surgery in Participants With Breast Cancer (monarchE). clinicaltrials.gov; 2025. Accessed April 24, 2026. https://clinicaltrials.gov/study/NCT03155997"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.60",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.esmorw.2024.100064"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.61",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1177/10781552251319607"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.62",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.clon.2024.01.030"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.63",
+          "unstructured": "Pfizer. A Study of Palbociclib (PD-0332991) + Letrozole vs. Letrozole For 1st Line Treatment Of Postmenopausal Women With ER+/HER2- Advanced Breast Cancer (PALOMA-2). clinicaltrials.gov; 2024. Accessed April 24, 2026. https://clinicaltrials.gov/study/NCT01740427"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.64",
+          "unstructured": "Pfizer. Palbociclib (PD-0332991) Combined With Fulvestrant In Hormone Receptor+ HER2-Negative Metastatic Breast Cancer After Endocrine Failure (PALOMA-3). clinicaltrials.gov; 2024. Accessed April 24, 2026. https://clinicaltrials.gov/study/NCT01942135"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.65",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1056/NEJMoa1607303"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.66",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S1470-2045(15)00613-0"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.67",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.breast.2021.11.013"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.68",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.breast.2025.104448"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.69",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1177/17588359251326710"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.70",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41416-021-01415-9"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.71",
+          "unstructured": "Rx-Info. RX-Info. Accessed November 6, 2025. https://www.rx-info.co.uk/"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.72",
+          "unstructured": "NHSBSA. NHS Business Services Authority. Accessed November 6, 2025. https://www.nhsbsa.nhs.uk/#"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.73",
+          "unstructured": "The National Cancer Plan for England: delivering world class cancer care (accessible version). GOV.UK. Accessed June 26, 2026. https://www.gov.uk/government/publications/national-cancer-plan-for-england/the-national-cancer-plan-for-england-delivering-world-class-cancer-care-accessible-version"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.74",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.12688/wellcomeopenres.17360.1"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.75",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.2196/51323"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.76",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.7861/clinmedicine.19-4-273"
+        },
+        {
+          "key": "2026081405550757000_2026.08.05.26359678v2.77",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/ejhg.2013.257"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.05.26359678",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ],
+        "date-time": "2026-08-14T12:55:22Z",
+        "timestamp": 1786712122000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://medrxiv.org/lookup/doi/10.64898/2026.08.05.26359678"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            10
+          ]
+        ]
+      },
+      "references-count": 77,
+      "URL": "https://doi.org/10.64898/2026.08.05.26359678",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            10
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

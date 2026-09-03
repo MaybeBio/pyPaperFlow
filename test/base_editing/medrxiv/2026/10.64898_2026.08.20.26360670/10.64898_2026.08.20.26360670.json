@@ -1,0 +1,995 @@
+{
+  "source": "medrxiv",
+  "source_id": "10.64898/2026.08.20.26360670",
+  "title": "OXA-181 transmission confounded by a stable IncX3 plasmid",
+  "doi": "10.64898/2026.08.20.26360670",
+  "abstract": "OXA-48-like carbapenemases have been historically rare, however steady increases both locally and globally have warranted further investigation into their spread. Here we present the largest genomic analysis of bla OXA-181 -producing bacteria in Australia to date, focusing on a single jurisdiction over seven years (2017 – 2024). The initial investigation was prompted by an outbreak in 2017, where enhanced genomic surveillance in a single hospital identified 85 outbreak isolates related to an imported Escherichia coli ST38, carrying bla OXA-181 on an IncX3/colKP3 plasmid (previously reported as pOXA181). After four months of intensive infection control, the initial outbreak strain was eliminated. To confirm the outbreak plasmid was also contained, we collected all bla OXA-181 -positive isolates from the same jurisdiction over subsequent years and sequenced with both Illumina and Oxford Nanopore Technologies to investigate clonal and mobile genetic element mediated spread. While continued surveillance post-2017 did not identify the same E. coli strain following the outbreak, pOXA181 plasmids were identified in >70% of surveillance isolates, with minimal genetic changes, which initially suggested local plasmid-mediated spread. Additional comparison to a global collection of pOXA181 plasmids found that epidemiologically unrelated pOXA181 plasmids were near identical, with no rearrangements and low, or no, single nucleotide polymorphisms. This suggests the mutation rate of pOXA-181 is incompatible with recent genomic transmission inference. This study highlights the current genomic epidemiology and drivers of bla OXA-181 and further demonstrates the necessity for detailed understanding of plasmid evolutionary rates to inform genomic surveillance. Data summary All assemblies and raw sequence data has been uploaded under BioProject PRJNA545001 (see accessions in Supplementary Dataset S1). Impact Statement Here we present one of the largest genomic studies of bla OXA-181 -producing bacteria globally, combining seven years of local genomic surveillance with a global collection of bla OXA-181 -carrying plasmids. We found that the IncX3/colKP3 plasmid carrying bla OXA-181 is remarkably stable, with epidemiologically unrelated plasmids showing little or no genetic variation. Consequently, plasmids that appear to be recently transmitted based on genomic similarity alone may instead represent independent introductions of a highly conserved plasmid. This finding highlights an important limitation of plasmid-based genomic epidemiology and demonstrates that plasmid sequence similarity cannot necessarily be interpreted as evidence of recent transmission. Our study provides a cautionary example for the increasing use of long-read sequencing and plasmid surveillance in antimicrobial resistance investigations, emphasising the need to consider plasmid evolutionary rates and epidemiological context when interpreting genomic evidence of transmission.",
+  "authors": [
+    "Tricia S. E. Lee",
+    "Liam Nguyen",
+    "Brian M. Forde",
+    "Toby Maidment",
+    "Suifang Ye",
+    "Andrew Henderson",
+    "E. Geoffrey Playford",
+    "Naomi Runnegar",
+    "Belinda Henderson",
+    "Catherine Watson",
+    "Margaret Lindsay",
+    "Evan Bursle",
+    "Joel Douglas",
+    "Jocelyn Hume",
+    "David L. Paterson",
+    "Timothy Kidd",
+    "Bianca Graves",
+    "Anna Hume",
+    "Michael B Hall",
+    "Mark A Schembri",
+    "Scott A. Beatson",
+    "Patrick N.A. Harris",
+    "Leah W. Roberts"
+  ],
+  "published_date": "2026-08-26",
+  "updated_date": "2026-08-26T18:25:12Z",
+  "journal": "medRxiv",
+  "category": "Genetic and Genomic Medicine",
+  "landing_url": "https://www.medrxiv.org/content/10.64898/2026.08.20.26360670",
+  "pdf_url": "https://www.medrxiv.org/content/10.64898/2026.08.20.26360670.full.pdf",
+  "pdf_path": "test/base_editing/medrxiv/2026/10.64898_2026.08.20.26360670/10.64898_2026.08.20.26360670.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.20.26360670",
+  "version": "",
+  "keywords": [
+    "Genetic and Genomic Medicine"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Genetic and Genomic Medicine",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "medRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            28
+          ]
+        ],
+        "date-time": "2026-08-28T23:20:31Z",
+        "timestamp": 1787959231326,
+        "version": "build-2784847793"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ]
+      },
+      "group-title": "Genetic and Genomic Medicine",
+      "reference-count": 62,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                26
+              ]
+            ],
+            "date-time": "2026-08-26T00:00:00Z",
+            "timestamp": 1787702400000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "name": "NHMRC Investigator",
+          "award": [
+            "2026911"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "2026911"
+              ]
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  OXA-48-like carbapenemases have been historically rare, however steady increases both locally and globally have warranted further investigation into their spread. Here we present the largest genomic analysis of\n                  <jats:italic>bla</jats:italic>\n                  <jats:sub>OXA-181</jats:sub>\n                  -producing bacteria in Australia to date, focusing on a single jurisdiction over seven years (2017 – 2024).\n                </jats:p>\n                <jats:p>\n                  The initial investigation was prompted by an outbreak in 2017, where enhanced genomic surveillance in a single hospital identified 85 outbreak isolates related to an imported\n                  <jats:italic>Escherichia coli</jats:italic>\n                  ST38, carrying\n                  <jats:italic>bla</jats:italic>\n                  <jats:sub>OXA-181</jats:sub>\n                  on an IncX3/colKP3 plasmid (previously reported as pOXA181). After four months of intensive infection control, the initial outbreak strain was eliminated. To confirm the outbreak plasmid was also contained, we collected all\n                  <jats:italic>bla</jats:italic>\n                  <jats:sub>OXA-181</jats:sub>\n                  -positive isolates from the same jurisdiction over subsequent years and sequenced with both Illumina and Oxford Nanopore Technologies to investigate clonal and mobile genetic element mediated spread.\n                </jats:p>\n                <jats:p>\n                  While continued surveillance post-2017 did not identify the same\n                  <jats:italic>E. coli</jats:italic>\n                  strain following the outbreak, pOXA181 plasmids were identified in &gt;70% of surveillance isolates, with minimal genetic changes, which initially suggested local plasmid-mediated spread. Additional comparison to a global collection of pOXA181 plasmids found that epidemiologically unrelated pOXA181 plasmids were near identical, with no rearrangements and low, or no, single nucleotide polymorphisms. This suggests the mutation rate of pOXA-181 is incompatible with recent genomic transmission inference.\n                </jats:p>\n                <jats:p>\n                  This study highlights the current genomic epidemiology and drivers of\n                  <jats:italic>bla</jats:italic>\n                  <jats:sub>OXA-181</jats:sub>\n                  and further demonstrates the necessity for detailed understanding of plasmid evolutionary rates to inform genomic surveillance.\n                </jats:p>\n                <jats:sec>\n                  <jats:title>Data summary</jats:title>\n                  <jats:p>All assemblies and raw sequence data has been uploaded under BioProject PRJNA545001 (see accessions in Supplementary Dataset S1).</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Impact Statement</jats:title>\n                  <jats:p>\n                    Here we present one of the largest genomic studies of\n                    <jats:italic>bla</jats:italic>\n                    <jats:sub>OXA-181</jats:sub>\n                    -producing bacteria globally, combining seven years of local genomic surveillance with a global collection of\n                    <jats:italic>bla</jats:italic>\n                    <jats:sub>OXA-181</jats:sub>\n                    -carrying plasmids. We found that the IncX3/colKP3 plasmid carrying\n                    <jats:italic>bla</jats:italic>\n                    <jats:sub>OXA-181</jats:sub>\n                    is remarkably stable, with epidemiologically unrelated plasmids showing little or no genetic variation. Consequently, plasmids that appear to be recently transmitted based on genomic similarity alone may instead represent independent introductions of a highly conserved plasmid. This finding highlights an important limitation of plasmid-based genomic epidemiology and demonstrates that plasmid sequence similarity cannot necessarily be interpreted as evidence of recent transmission. Our study provides a cautionary example for the increasing use of long-read sequencing and plasmid surveillance in antimicrobial resistance investigations, emphasising the need to consider plasmid evolutionary rates and epidemiological context when interpreting genomic evidence of transmission.\n                  </jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.08.20.26360670",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ],
+        "date-time": "2026-08-26T18:25:12Z",
+        "timestamp": 1787768712000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "OXA-181 transmission confounded by a stable IncX3 plasmid"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "given": "Tricia S. E.",
+          "family": "Lee",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Frazer Institute, The University of Queensland, Herston, QLD 4029, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0001-3438-1396",
+          "authenticated-orcid": false,
+          "given": "Liam",
+          "family": "Nguyen",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Frazer Institute, The University of Queensland, Herston, QLD 4029, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Brian M.",
+          "family": "Forde",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Australian Infectious Diseases Research Centre, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Institute for Molecular Bioscience, The University of Queensland, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Toby",
+          "family": "Maidment",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Frazer Institute, The University of Queensland, Herston, QLD 4029, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Suifang",
+          "family": "Ye",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Pathology Queensland, Princess Alexandra Hospital Laboratory, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Andrew",
+          "family": "Henderson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute for Molecular Bioscience, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Infection Management Services, Princess Alexandra Hospital, Metro South Hospital and Health Service, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "E. Geoffrey",
+          "family": "Playford",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Infection Management Services, Princess Alexandra Hospital, Metro South Hospital and Health Service, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Pathology Queensland, Princess Alexandra Hospital Laboratory, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "University of Queensland, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-1196-4131",
+          "authenticated-orcid": false,
+          "given": "Naomi",
+          "family": "Runnegar",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Infection Management Services, Princess Alexandra Hospital, Metro South Hospital and Health Service, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "PA-Southside Clinical Unit, Faculty of Medicine, University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Pathology Queensland, Princess Alexandra Hospital Laboratory, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Belinda",
+          "family": "Henderson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Infection Management Services, Princess Alexandra Hospital, Metro South Hospital and Health Service, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Catherine",
+          "family": "Watson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Infection Management Services, Princess Alexandra Hospital, Metro South Hospital and Health Service, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Margaret",
+          "family": "Lindsay",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Infection Management Services, Princess Alexandra Hospital, Metro South Hospital and Health Service, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Evan",
+          "family": "Bursle",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Infection Management Services, Princess Alexandra Hospital, Metro South Hospital and Health Service, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Pathology Queensland, Central Laboratory, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Joel",
+          "family": "Douglas",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Pathology Queensland, Princess Alexandra Hospital Laboratory, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jocelyn",
+          "family": "Hume",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Frazer Institute, The University of Queensland, Herston, QLD 4029, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "David L.",
+          "family": "Paterson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Frazer Institute, The University of Queensland, Herston, QLD 4029, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Timothy",
+          "family": "Kidd",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Pathology Queensland, Princess Alexandra Hospital Laboratory, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Bianca",
+          "family": "Graves",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Pathology Queensland, Princess Alexandra Hospital Laboratory, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Anna",
+          "family": "Hume",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Pathology Queensland, Princess Alexandra Hospital Laboratory, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-3683-6208",
+          "authenticated-orcid": false,
+          "given": "Michael B",
+          "family": "Hall",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Frazer Institute, The University of Queensland, Herston, QLD 4029, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4863-9260",
+          "authenticated-orcid": false,
+          "given": "Mark A",
+          "family": "Schembri",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Chemistry and Molecular Biosciences, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Australian Infectious Diseases Research Centre, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Institute for Molecular Bioscience, The University of Queensland, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Scott A.",
+          "family": "Beatson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Chemistry and Molecular Biosciences, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Australian Infectious Diseases Research Centre, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Australian Centre for Ecogenomics, The University of Queensland, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Patrick N.A.",
+          "family": "Harris",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Australian Infectious Diseases Research Centre, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Frazer Institute, The University of Queensland, Herston, QLD 4029, Australia"
+            },
+            {
+              "name": "Pathology Queensland, Central Laboratory, Brisbane, QLD, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1024-0564",
+          "authenticated-orcid": false,
+          "given": "Leah W.",
+          "family": "Roberts",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Chemistry and Molecular Biosciences, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Australian Infectious Diseases Research Centre, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Australian Centre for Ecogenomics, The University of Queensland, Brisbane, QLD, Australia"
+            },
+            {
+              "name": "Frazer Institute, The University of Queensland, Herston, QLD 4029, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S0140-6736(21)02724-0/ATTACHMENT/4504FC2B-08AE-46D6-BD75-80811DF8B5E6/MMC1.PDF"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/infdis/jiw282"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/jac/dks121"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/infdis/jiw282"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.5",
+          "doi-asserted-by": "crossref",
+          "first-page": "1581",
+          "DOI": "10.1093/jac/dkae140",
+          "article-title": "Global epidemiology and antimicrobial resistance of Enterobacterales harbouring genes encoding OXA-48-like carbapenemases: insights from the results of the Antimicrobial Testing Leadership and Surveillance (ATLAS) programme 2018–2021",
+          "volume": "79",
+          "year": "2024",
+          "journal-title": "J Antimicrob Chemother"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.6",
+          "first-page": "e00216",
+          "article-title": "OXA-48-Like β-Lactamases: Global Epidemiology, Treatment Options, and Development Pipeline",
+          "volume": "66",
+          "year": "2022",
+          "journal-title": "Antimicrobial Agents and Chemotherapy"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/NAR/GKAC920"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/jac/dku524"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.cmi.2019.12.006"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/aac.00184-21"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.11",
+          "doi-asserted-by": "crossref",
+          "first-page": "535",
+          "DOI": "10.1111/imj.16374",
+          "article-title": "Epidemiology and clinical significance of carbapenemases in Australia: a narrative review",
+          "volume": "54",
+          "year": "2024",
+          "journal-title": "Internal Medicine Journal"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ijantimicag.2012.11.003"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.13",
+          "unstructured": "Control, A . C. for D. Sixth Australian report on antimicrobial use and resistance in human health (AURA report). https://www.cdc.gov.au/resources/publications/sixth-australian-report-antimicrobial-use-and-resistance-human-health-aura-report (2026)."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.14",
+          "unstructured": "CARAlert annual report: 2025 | Australian Commission on Safety and Ǫuality in Health Care. https://www.safetyandquality.gov.au/resources/caralert-annual-report-2025."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.15",
+          "unstructured": "Clinical and Economic Outcomes of Genome Sequencing Availability on Containing a Hospital Outbreak of Resistant Escherichia coli in Australia - Value in Health. https://www.valueinhealthjournal.com/article/S1098-3015(20)30183-2/fulltext?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS1098301520301832%3Fshowall%3Dtrue."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.16",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ijantimicag.2011.03.010"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/AAC.01734-10"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.18",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/JCM.00661-08"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.19",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/978-90-481-9039-3_74"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/bty560"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.21",
+          "unstructured": "Victorian-Bioinformatics-Consortium/nesoni. Victorian Bioinformatics Consortium (2025)."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.22",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1089/cmb.2012.0021"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.23",
+          "unstructured": "Seemann, T. tseemann/mlst. (2025)."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.24",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Jolley, K. A . C Maiden, M. C . BIGSdb: Scalable analysis of bacterial genome variation at the population level. BMC Bioinformatics 11, 595 (2010).",
+          "DOI": "10.1186/1471-2105-11-595"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.25",
+          "unstructured": "Seemann, T . tseemann/abricate. (2025)."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.26",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/AAC.02412-14"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.27",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gki177"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.28",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/jac/dks261"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.29",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/AAC.01310-13"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.30",
+          "first-page": "e000102",
+          "article-title": "Identification of Klebsiella capsule synthesis loci from whole genome data",
+          "volume": "2",
+          "year": "2016",
+          "journal-title": "Microbial Genomics"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.31",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/JCM.00737-17"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.32",
+          "doi-asserted-by": "crossref",
+          "first-page": "2991",
+          "DOI": "10.21105/joss.02991",
+          "article-title": "Nanoq: ultra-fast quality control for nanopore reads",
+          "volume": "7",
+          "year": "2022",
+          "journal-title": "Journal of Open Source Software"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.33",
+          "doi-asserted-by": "crossref",
+          "first-page": "1348",
+          "DOI": "10.1038/s41587-024-02412-y",
+          "article-title": "Rapid species-level metagenome profiling and containment estimation with sylph",
+          "volume": "43",
+          "year": "2025",
+          "journal-title": "Nat Biotechnol"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.34",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pone.0163962"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.35",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Wick, R. R. , Howden, B. P . C Stinear, T. P . Autocycler: long-read consensus assembly for bacterial genomes. Bioinformatics 41, btaf474 (2025).",
+          "DOI": "10.1093/bioinformatics/btaf474"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.36",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Feldgarden, M. et al. AMRFinderPlus and the Reference Gene Catalog facilitate examination of the genomic links among antimicrobial resistance, stress response, and virulence. Sci Rep 11, 12728 (2021).",
+          "DOI": "10.1038/s41598-021-91456-0"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.37",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/bioinformatics/btt086"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.38",
+          "unstructured": "CheckM2: a rapid, scalable and accurate tool for assessing microbial genome quality using machine learning | Nature Methods. https://www.nature.com/articles/s41592-023-01940-w."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.39",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2024.03.08.584059"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.40",
+          "unstructured": "Fast and robust metagenomic sequence comparison through sparse chaining with skani | Nature Methods. https://www.nature.com/articles/s41592-023-02018-3."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.41",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Kille, B. et al. Parsnp 2.0: scalable core-genome alignment for massive microbial datasets. Bioinformatics 40, btae311 (2024).",
+          "DOI": "10.1093/bioinformatics/btae311"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.42",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gku1196"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.43",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/BIOINFORMATICS/BTZ305"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.44",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1101/2024.08.30.610459"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.45",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/nar/gkab1111"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.46",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Frolova, D. et al. Applying rearrangement distances to enable plasmid epidemiology with pling. Microbial Genomics 10, 001300 (2024).",
+          "DOI": "10.1099/mgen.0.001300"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.47",
+          "doi-asserted-by": "crossref",
+          "first-page": "3021",
+          "DOI": "10.21105/joss.03021",
+          "article-title": "L. seaborn: statistical data visualization",
+          "volume": "6",
+          "year": "2021",
+          "journal-title": "Journal of Open Source Software"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.48",
+          "first-page": "e04584",
+          "article-title": "First Report of OXA-181-Producing Enterobacterales Isolates in Latin America",
+          "volume": "11",
+          "year": "2023",
+          "journal-title": "Microbiology Spectrum"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.49",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/AAC.00442-15"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.50",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/jac/dkr396"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.51",
+          "doi-asserted-by": "crossref",
+          "first-page": "2482",
+          "DOI": "10.3390/microorganisms10122482",
+          "article-title": "Global Genomic Epidemiology of Escherichia coli (ExPEC) ST38 Lineage Revealed a Virulome Associated with Human Infections",
+          "volume": "10",
+          "year": "2022",
+          "journal-title": "Microorganisms"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.52",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1099/jmm.0.000248"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.53",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1128/cmr.00102-19"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.54",
+          "first-page": "1012",
+          "article-title": "Demographic, clinical and molecular epidemiology of extended- spectrum beta-lactamase-producing Escherichia coli bloodstream infections in Central Australia",
+          "volume": "56",
+          "year": "2024",
+          "journal-title": "Pathology"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.55",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/jac/dkz242"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.56",
+          "first-page": "e01236",
+          "article-title": "Phylogenomic analysis of a global collection of Escherichia coli ST38: evidence of interspecies and environmental transmission?",
+          "volume": "8",
+          "year": "2023",
+          "journal-title": "mSystems"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.57",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1093/jac/dkx466"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.58",
+          "unstructured": "Frontiers | Escherichia coli multilocus sequence type 38 from humans and broiler production represent distinct monophyletic groups. https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2023.1173287/full."
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.59",
+          "doi-asserted-by": "crossref",
+          "first-page": "606",
+          "DOI": "10.1038/s41564-021-00879-y",
+          "article-title": "Pervasive transmission of a carbapenem resistance plasmid in the gut microbiota of hospitalized patients",
+          "volume": "6",
+          "year": "2021",
+          "journal-title": "Nat Microbiol"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.60",
+          "doi-asserted-by": "crossref",
+          "unstructured": "Yu, Z. et al. In silico characterization of IncX3 plasmids carrying blaOXA-181 in Enterobacterales. Front. Cell. Infect. Microbiol. 12, (2022).",
+          "DOI": "10.3389/fcimb.2022.988236"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.61",
+          "first-page": "e01515",
+          "article-title": "Rapidly spreading Enterobacterales with OXA-48-like carbapenemases",
+          "volume": "63",
+          "year": "2025",
+          "journal-title": "Journal of Clinical Microbiology"
+        },
+        {
+          "key": "2026082816100553000_2026.08.20.26360670v1.62",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.48610/wf6c-qy55"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.20.26360670",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            28
+          ]
+        ],
+        "date-time": "2026-08-28T23:10:16Z",
+        "timestamp": 1787958616000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://medrxiv.org/lookup/doi/10.64898/2026.08.20.26360670"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ]
+      },
+      "references-count": 62,
+      "URL": "https://doi.org/10.64898/2026.08.20.26360670",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

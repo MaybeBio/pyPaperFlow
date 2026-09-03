@@ -1,0 +1,505 @@
+{
+  "source": "medrxiv",
+  "source_id": "10.64898/2026.08.24.26361180",
+  "title": "Perceptions of non-invasive brain stimulation and barriers to it’s clinical translation: a multi-stakeholder focus group study",
+  "doi": "10.64898/2026.08.24.26361180",
+  "abstract": "Objectives Non-invasive brain stimulation (NIBS) holds significant promise for treating neurological and neuropsychiatric conditions, yet translation into routine clinical practice remains limited. We aimed to explore stakeholder perceptions of NIBS and barriers to its clinical adoption. Methods We conducted focus-group interviews with 33 participants across three key stakeholder groups in the UK: (1) people with lived experience of brain injury, depression, or dementia; (2) healthcare professionals; and (3) researchers. Reflexive thematic analysis was used to identify themes in the data. Findings Seven key themes emerged spanning preferences, hope and disappointment, communication, accessibility, infrastructure, ethical/regulatory uncertainty, and the evidence base. Across groups, NIBS was viewed positively and with cautious optimism, but substantial barriers were highlighted, including limited public and clinical awareness, challenges in demonstrating cost-effectiveness, infrastructure constraints, and difficulties navigating regulatory and translational pathways. Participants emphasised the importance of clear communication, improved education, and stronger interdisciplinary collaboration to support adoption. Notably, stakeholders prioritised evidence of clinical efficacy and usability over detailed mechanistic understanding. Conclusions These findings provide actionable insights into the translational gap in NIBS and highlight priorities for facilitating its integration into clinical care.",
+  "authors": [
+    "Matthew Weightman",
+    "Barbara Robinson",
+    "Hanna Smyth",
+    "Anton Pick",
+    "Elly Martin",
+    "Jessica Walsh",
+    "Charlotte J Stagg",
+    "Melanie K Fleming"
+  ],
+  "published_date": "2026-08-26",
+  "updated_date": "2026-08-26T17:15:18Z",
+  "journal": "medRxiv",
+  "category": "Neurology",
+  "landing_url": "https://www.medrxiv.org/content/10.64898/2026.08.24.26361180",
+  "pdf_url": "https://www.medrxiv.org/content/10.64898/2026.08.24.26361180.full.pdf",
+  "pdf_path": "test/base_editing/medrxiv/2026/10.64898_2026.08.24.26361180/10.64898_2026.08.24.26361180.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.24.26361180",
+  "version": "",
+  "keywords": [
+    "Neurology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Neurology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "medRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            29
+          ]
+        ],
+        "date-time": "2026-08-29T10:19:05Z",
+        "timestamp": 1787998745517,
+        "version": "build-2784847793"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ]
+      },
+      "group-title": "Neurology",
+      "reference-count": 12,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                26
+              ]
+            ],
+            "date-time": "2026-08-26T00:00:00Z",
+            "timestamp": 1787702400000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "DOI": "10.13039/100032827",
+          "name": "Advanced Research and Invention Agency",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "SCNI-PR01-P17"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "SCNI-PR01-P17"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100032827",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "name": "Medical Research Council Centre of Research Excellence in Restorative Neural Dynamics",
+          "award": [
+            "UKRI/MR/B000936/1"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "UKRI/MR/B000936/1"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "NIHR Oxford Health Biomedical Research Centre",
+          "award": [
+            "NIHR203316"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "NIHR203316"
+              ]
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/100010269",
+          "name": "Wellcome Trust",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "224430/Z/21/Z"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "224430/Z/21/Z"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100010269",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/100010269",
+          "name": "Wellcome Trust",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "203139/Z/16/Z"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "203139/Z/16/Z"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100010269",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/100010269",
+          "name": "Wellcome Trust",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "203139/A/16/Z"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "203139/A/16/Z"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100010269",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:sec>\n                  <jats:title>Objectives</jats:title>\n                  <jats:p>Non-invasive brain stimulation (NIBS) holds significant promise for treating neurological and neuropsychiatric conditions, yet translation into routine clinical practice remains limited. We aimed to explore stakeholder perceptions of NIBS and barriers to its clinical adoption.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Methods</jats:title>\n                  <jats:p>We conducted focus-group interviews with 33 participants across three key stakeholder groups in the UK: (1) people with lived experience of brain injury, depression, or dementia; (2) healthcare professionals; and (3) researchers. Reflexive thematic analysis was used to identify themes in the data.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Findings</jats:title>\n                  <jats:p>Seven key themes emerged spanning preferences, hope and disappointment, communication, accessibility, infrastructure, ethical/regulatory uncertainty, and the evidence base. Across groups, NIBS was viewed positively and with cautious optimism, but substantial barriers were highlighted, including limited public and clinical awareness, challenges in demonstrating cost-effectiveness, infrastructure constraints, and difficulties navigating regulatory and translational pathways. Participants emphasised the importance of clear communication, improved education, and stronger interdisciplinary collaboration to support adoption. Notably, stakeholders prioritised evidence of clinical efficacy and usability over detailed mechanistic understanding.</jats:p>\n                </jats:sec>\n                <jats:sec>\n                  <jats:title>Conclusions</jats:title>\n                  <jats:p>These findings provide actionable insights into the translational gap in NIBS and highlight priorities for facilitating its integration into clinical care.</jats:p>\n                </jats:sec>",
+      "DOI": "10.64898/2026.08.24.26361180",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ],
+        "date-time": "2026-08-26T17:15:18Z",
+        "timestamp": 1787764518000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Perceptions of non-invasive brain stimulation and barriers to it’s clinical translation: a multi-stakeholder focus group study"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0003-4379-2725",
+          "authenticated-orcid": false,
+          "given": "Matthew",
+          "family": "Weightman",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Oxford Centre for Integrative Neuroimaging, Nuffield Department of Clinical Neurosciences, University of Oxford"
+            },
+            {
+              "name": "Medical Research Council Centre of Research Excellence in Restorative Neural Dynamics, University of Oxford"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Barbara",
+          "family": "Robinson",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Oxford Centre for Integrative Neuroimaging, Nuffield Department of Clinical Neurosciences, University of Oxford"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hanna",
+          "family": "Smyth",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Oxford Centre for Integrative Neuroimaging, Nuffield Department of Clinical Neurosciences, University of Oxford"
+            },
+            {
+              "name": "Department of English and Creative Writing, University of Exeter"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0006-3802-7016",
+          "authenticated-orcid": false,
+          "given": "Anton",
+          "family": "Pick",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Oxford Centre for Integrative Neuroimaging, Nuffield Department of Clinical Neurosciences, University of Oxford"
+            },
+            {
+              "name": "Oxford Centre for Enablement, Oxford University Hospitals NHS Foundation Trust"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8760-1180",
+          "authenticated-orcid": false,
+          "given": "Elly",
+          "family": "Martin",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Medical Physics and Biomedical Engineering, University College London"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-9723-3043",
+          "authenticated-orcid": false,
+          "given": "Jessica",
+          "family": "Walsh",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Translational Research Office, University College London"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Charlotte J",
+          "family": "Stagg",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Oxford Centre for Integrative Neuroimaging, Nuffield Department of Clinical Neurosciences, University of Oxford"
+            },
+            {
+              "name": "Medical Research Council Centre of Research Excellence in Restorative Neural Dynamics, University of Oxford"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-2232-9598",
+          "authenticated-orcid": false,
+          "given": "Melanie K",
+          "family": "Fleming",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Oxford Centre for Integrative Neuroimaging, Nuffield Department of Clinical Neurosciences, University of Oxford"
+            },
+            {
+              "name": "Medical Research Council Centre of Research Excellence in Restorative Neural Dynamics, University of Oxford"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/S1474-4422(24)00038-3"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41587-019-0234-8"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1097/YCT.0000000000000990"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3389/fnhum.2024.1385427"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1177/0706743719893584"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.psychres.2022.114612"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1111/ner.13461"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.8",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/bmjopen-2021-058928"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.9",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41598-025-89437-8"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1191/1478088706qp063oa"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s11126-021-09916-9"
+        },
+        {
+          "key": "2026082903001009000_2026.08.24.26361180v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/bmjment-2025-302237"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.24.26361180",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            29
+          ]
+        ],
+        "date-time": "2026-08-29T10:00:21Z",
+        "timestamp": 1787997621000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://medrxiv.org/lookup/doi/10.64898/2026.08.24.26361180"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ]
+      },
+      "references-count": 12,
+      "URL": "https://doi.org/10.64898/2026.08.24.26361180",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            26
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

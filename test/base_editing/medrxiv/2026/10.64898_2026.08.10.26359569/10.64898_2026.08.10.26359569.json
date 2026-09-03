@@ -1,0 +1,464 @@
+{
+  "source": "medrxiv",
+  "source_id": "10.64898/2026.08.10.26359569",
+  "title": "Prevalence of the photic sneeze reflex: A systematic review and meta-analysis",
+  "doi": "10.64898/2026.08.10.26359569",
+  "abstract": "The photic sneeze reflex (PSR), in which exposure to bright light triggers sneezing, is widely recognised but inconsistently defined and measured. We conducted the first systematic review and meta-analysis of PSR prevalence to synthesise the epidemiological evidence, assess methodological quality, and identify priorities for future research. We included 18 articles comprising 31 study groups and extracted prevalence estimates, study characteristics, ascertainment methods, and epidemiological information. Fifteen eligible study groups classified as healthy were included in the primary meta-analysis. The pooled prevalence was 22% (95% CI, 15%-29%), with extreme between-study heterogeneity (I² = 99.3%). Reported prevalence estimates and associations with participant characteristics varied widely, and nearly all studies were judged to be at high risk of bias. The pooled estimate should therefore be interpreted as a descriptive summary of the available evidence rather than a precise estimate of population prevalence. Future studies require a standardised operational definition, representative sampling, transparent reporting, and reproducible methods for assessing light-triggered sneezing.",
+  "authors": [
+    "Josef Trinkl",
+    "Stephan Munkwitz",
+    "Lucien Bickerstaff",
+    "Taisuke Eto",
+    "Manuel Spitschan"
+  ],
+  "published_date": "2026-08-12",
+  "updated_date": "2026-08-12T23:00:12Z",
+  "journal": "medRxiv",
+  "category": "Neurology",
+  "landing_url": "https://www.medrxiv.org/content/10.64898/2026.08.10.26359569",
+  "pdf_url": "https://www.medrxiv.org/content/10.64898/2026.08.10.26359569.full.pdf",
+  "pdf_path": "test/base_editing/medrxiv/2026/10.64898_2026.08.10.26359569/10.64898_2026.08.10.26359569.pdf",
+  "pdf_downloaded": true,
+  "query": "10.64898/2026.08.10.26359569",
+  "version": "",
+  "keywords": [
+    "Neurology"
+  ],
+  "extra": {
+    "publisher": "openRxiv",
+    "prefix": "10.64898",
+    "type": "posted-content",
+    "group_title": "Neurology",
+    "raw_record": {
+      "institution": [
+        {
+          "name": "medRxiv"
+        }
+      ],
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ],
+        "date-time": "2026-08-14T15:02:48Z",
+        "timestamp": 1786719768627,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "group-title": "Neurology",
+      "reference-count": 22,
+      "publisher": "openRxiv",
+      "license": [
+        {
+          "start": {
+            "date-parts": [
+              [
+                2026,
+                8,
+                12
+              ]
+            ],
+            "date-time": "2026-08-12T00:00:00Z",
+            "timestamp": 1786492800000
+          },
+          "content-version": "vor",
+          "delay-in-days": 0,
+          "URL": "http://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "funder": [
+        {
+          "award": [
+            "Max Planck Research Group Translational Sensory and Circadian Neuroscience"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "Max Planck Research Group Translational Sensory and Circadian Neuroscience"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/01hhn8329",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "award": [
+            "204686/Z/16/Z"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "204686/Z/16/Z"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "https://ror.org/029chgv08",
+              "id-type": "ROR",
+              "asserted-by": "publisher"
+            }
+          ]
+        },
+        {
+          "DOI": "10.13039/100005156",
+          "name": "Alexander von Humboldt Foundation",
+          "doi-asserted-by": "crossref",
+          "award": [
+            "Ref 3.5 - 1244173 - JPN - HFST-P"
+          ],
+          "award-info": [
+            {
+              "award-number": [
+                "Ref 3.5 - 1244173 - JPN - HFST-P"
+              ]
+            }
+          ],
+          "id": [
+            {
+              "id": "10.13039/100005156",
+              "id-type": "DOI",
+              "asserted-by": "crossref"
+            }
+          ]
+        }
+      ],
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "accepted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>The photic sneeze reflex (PSR), in which exposure to bright light triggers sneezing, is widely recognised but inconsistently defined and measured. We conducted the first systematic review and meta-analysis of PSR prevalence to synthesise the epidemiological evidence, assess methodological quality, and identify priorities for future research. We included 18 articles comprising 31 study groups and extracted prevalence estimates, study characteristics, ascertainment methods, and epidemiological information. Fifteen eligible study groups classified as healthy were included in the primary meta-analysis. The pooled prevalence was 22% (95% CI, 15%-29%), with extreme between-study heterogeneity (I² = 99.3%). Reported prevalence estimates and associations with participant characteristics varied widely, and nearly all studies were judged to be at high risk of bias. The pooled estimate should therefore be interpreted as a descriptive summary of the available evidence rather than a precise estimate of population prevalence. Future studies require a standardised operational definition, representative sampling, transparent reporting, and reproducible methods for assessing light-triggered sneezing.</jats:p>",
+      "DOI": "10.64898/2026.08.10.26359569",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ],
+        "date-time": "2026-08-12T23:00:12Z",
+        "timestamp": 1786575612000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Prevalence of the photic sneeze reflex: A systematic review and meta-analysis"
+      ],
+      "prefix": "10.64898",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0008-9064-4972",
+          "authenticated-orcid": false,
+          "given": "Josef",
+          "family": "Trinkl",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Translational Sensory & Circadian Neuroscience, Max Planck Institute for Biological Cybernetics, Tübingen, Germany"
+            },
+            {
+              "name": "University Hospital and Faculty of Medicine, University of Tübingen, Tübingen, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-9559-5566",
+          "authenticated-orcid": false,
+          "given": "Stephan",
+          "family": "Munkwitz",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Translational Sensory & Circadian Neuroscience, Max Planck Institute for Biological Cybernetics, Tübingen, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-2683-8130",
+          "authenticated-orcid": false,
+          "given": "Lucien",
+          "family": "Bickerstaff",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Translational Sensory & Circadian Neuroscience, Max Planck Institute for Biological Cybernetics, Tübingen, Germany"
+            },
+            {
+              "name": "TUM School of Medicine and Health, Chronobiology & Health, Technical University of Munich, Munich, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-0347-7408",
+          "authenticated-orcid": false,
+          "given": "Taisuke",
+          "family": "Eto",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Translational Sensory & Circadian Neuroscience, Max Planck Institute for Biological Cybernetics, Tübingen, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-8572-9268",
+          "authenticated-orcid": false,
+          "given": "Manuel",
+          "family": "Spitschan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Translational Sensory & Circadian Neuroscience, Max Planck Institute for Biological Cybernetics, Tübingen, Germany"
+            },
+            {
+              "name": "TUM School of Medicine and Health, Chronobiology & Health, Technical University of Munich, Munich, Germany"
+            },
+            {
+              "name": "TUM Institute for Advanced Study (TUM-IAS), Technical University of Munich, Garching, Germany"
+            },
+            {
+              "name": "TUMCREATE Ltd., Singapore, Singapore"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "54368",
+      "reference": [
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.1",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1002/dev.420010113"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.2",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/ebmental-2019-300117"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.3",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1159/000153407"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.4",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3138/guthrie.64.3.104"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.5",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1371/journal.pgen.1000993"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.6",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1212/WNL.14.5.483"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.7",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1159/000153527"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.8",
+          "unstructured": "Joanna Briggs Institute, 2020. Checklist for Prevalence Studies. Joanna Briggs Institute."
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.9",
+          "first-page": "215",
+          "article-title": "東北地方における光刺激によって誘発されるくしゃみ反射に関するアンケート調査 - Questionnaire Survey on Sneezing Reflex Induced by Light Stimulus in Tohoku",
+          "volume": "125",
+          "year": "1992",
+          "journal-title": "Igaku Seibutsugaku"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.10",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s00405-016-4256-2"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.11",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1001/jama.1987.03390100068019"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.12",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1073/pnas.2007402117"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.13",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1016/j.ophtha.2009.09.007"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.14",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.3949/ccjm.54.5.431"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.15",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1136/bmj.n71"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.16",
+          "doi-asserted-by": "crossref",
+          "first-page": "599",
+          "DOI": "10.1056/NEJM198403013100923",
+          "article-title": "Autosomal dominant transmission of the “photic sneeze reflex.”",
+          "volume": "310",
+          "year": "1984",
+          "journal-title": "N. Engl. J. Med"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.17",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s10038-018-0441-z"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.18",
+          "first-page": "372",
+          "article-title": "The photic sneeze response: a descriptive report of a clinic population",
+          "volume": "66",
+          "year": "1995",
+          "journal-title": "J. Am. Optom. Assoc"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.19",
+          "unstructured": "Takahashi, S. , 1942. 所謂血管運動神經性鼻炎ノ臨床的統計的觀察 - Clinical and Statistical Observations on So-called Vasomotor Rhinitis. Kyoto Imp. Univ. Fac. Med."
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.20",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1007/s00221-024-06988-4"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.21",
+          "doi-asserted-by": "publisher",
+          "DOI": "10.1038/s41598-019-41551-0"
+        },
+        {
+          "key": "2026081407200723000_2026.08.10.26359569v1.22",
+          "doi-asserted-by": "crossref",
+          "first-page": "208",
+          "DOI": "10.3928/1542-8877-19990301-10",
+          "article-title": "The photic sneeze reflex and ocular anesthesia",
+          "volume": "30",
+          "year": "1999",
+          "journal-title": "Ophthalmic Surg. Lasers"
+        }
+      ],
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.08.10.26359569",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            14
+          ]
+        ],
+        "date-time": "2026-08-14T14:20:12Z",
+        "timestamp": 1786717212000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "http://medrxiv.org/lookup/doi/10.64898/2026.08.10.26359569"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "references-count": 22,
+      "URL": "https://doi.org/10.64898/2026.08.10.26359569",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            12
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

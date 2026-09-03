@@ -1389,7 +1389,42 @@ paperflow medrxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./p
 paperflow medrxiv-fetch --file ./searched_medrxiv_ids.txt --no-download-pdf -o ./papers/medrxiv
 ```
 
-注意：bioRxiv / medRxiv 的 PDF 由 `www.biorxiv.org` / `www.medrxiv.org` 提供，其 PDF 端点走 Cloudflare 反爬——**非浏览器客户端（curl / httpx / requests 等）或数据中心 IP 会拿到 403 挑战页或 429，而不是 PDF 字节**；换用 curl 也一样，因为 Cloudflare 校验的是浏览器 TLS 指纹 + JS 挑战执行，跟用哪个 HTTP 客户端无关。
+
+> ⚠️ 下面是 medrxiv-* 模块实测用例
+
+```python 
+❯ paperflow medrxiv-search "base editing" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test/base_editing
+Found 9 medRxiv papers.
+10.64898/2026.08.11.26360004
+10.64898/2026.08.20.26360670
+10.64898/2026.08.24.26361180
+10.64898/2026.08.11.26360205
+10.64898/2026.07.30.26358885
+10.64898/2026.08.05.26359678
+10.64898/2026.08.03.26359558
+10.64898/2026.08.11.26360119
+10.64898/2026.08.10.26359569
+medRxiv IDs saved to ./test/base_editing/searched_medrxiv_ids.txt.
+
+```
+
+可以看到，基本上在这过去的一个月中，medRxiv 上关于 base editing 的预印本论文数量不多，只有 9 篇。
+
+我们紧接着进行抓取这些论文的元数据和 PDF：
+
+```python
+❯ paperflow medrxiv-fetch -f ./test/base_editing/searched_medrxiv_ids.txt  -o ./test/base_editing  --download-pdf
+Fetching 9 medRxiv DOIs from file /data2/pyPaperFlow/test/base_editing/searched_medrxiv_ids.txt.
+Fetched 9 medRxiv papers.
+Saved to /data2/pyPaperFlow/test/base_editing/medrxiv
+```
+
+对于下载下来的论文结果，可以查看 [medrxiv](../test/base_editing/medrxiv/)，可以发现每篇论文都按 `{source}/{year}/{source_id}/` 结构保存，包含 JSON 元数据以及新增下载的 PDF 文件。
+
+
+----
+
+> ⚠️ 注意：bioRxiv / medRxiv 的 PDF 由 `www.biorxiv.org` / `www.medrxiv.org` 提供，其 PDF 端点走 Cloudflare 反爬——**非浏览器客户端（curl / httpx / requests 等）或数据中心 IP 会拿到 403 挑战页或 429，而不是 PDF 字节**；换用 curl 也一样，因为 Cloudflare 校验的是浏览器 TLS 指纹 + JS 挑战执行，跟用哪个 HTTP 客户端无关。
 
 `--download-pdf` 会按顺序尝试以下回退链（实现见 `biorxiv_fetcher.py::_download_pdf`）：
 
