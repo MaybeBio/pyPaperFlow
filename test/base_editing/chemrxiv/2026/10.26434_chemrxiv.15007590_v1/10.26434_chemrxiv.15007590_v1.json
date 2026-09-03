@@ -1,0 +1,347 @@
+{
+  "source": "chemrxiv",
+  "source_id": "10.26434/chemrxiv.15007590/v1",
+  "title": "Multicomponent Molecular Editing of Polybutadiene: From Design Space to Battery Function",
+  "doi": "10.26434/chemrxiv.15007590/v1",
+  "abstract": "Multicomponent post-polymerization modification (PPM) reactions offer a powerful strategy for rapidly diversifying polymers, yet their potential for systematically exploring structure-property-function relationships remains largely unexplored. Herein, we report an electrophilic multicomponent molecular editing strategy that enables the construction of a polybutadiene-derived molecular design space through systematic variation of cyclic ethers and N- or O-based nucleophiles. By combining three cyclic ethers with six nucleophiles, an 18-member library was generated, allowing systematic variation of spacer architecture, polarity, and intermolecular interactions. The resulting design space was mapped across thermal and selected morphological and mobility dimensions, revealing that relatively small molecular variations induce substantial changes in macroscopic material behavior. In particular, P9 exhibited distinct nanoscale organization and proton relaxation behavior, illustrating how subtle structural variation translates into differences in morphology and molecular dynamics. Mapping these complementary landscapes guided the selection of P11, with its balanced combination of functionality and physicochemical properties, as a candidate electrolyte additive for Li-S batteries. Electrochemical evaluation revealed that P11 alters the sulfur redox response and impedance response and increases the Coulombic efficiency, resulting in a more gradual capacity decay relative to the cell containing the baseline electrolyte, while also increasing polarization and reducing the accessible capacity. Quantitative sensitivity analysis translated the multidimensional property landscapes into transferable design rules, identifying nucleophile identity as the dominant handle for functionalization degree and thermal stability, whereas the glass transition temperatures exhibited a more distributed dependence on both molecular inputs. From a broader perspective, this work establishes multicomponent molecular editing as a platform for systematically navigating multidimensional polymer design space, extracting molecular design rules, and translating molecular diversification into application-directed material selection.",
+  "authors": [
+    "Janna Jeschke",
+    "Oghenegare Emmanuel Eyankware",
+    "Ioannis Moutsios",
+    "Loïc Vidal",
+    "Cyril Vaulot",
+    "Azra Kocaarslan",
+    "Angelina Sarapulova",
+    "Sonia Dsoke",
+    "Hatice Mutlu"
+  ],
+  "published_date": "2026-08-18",
+  "updated_date": "2026-08-18T13:29:37Z",
+  "journal": "ChemRxiv",
+  "category": "",
+  "landing_url": "https://doi.org/10.26434/chemrxiv.15007590/v1",
+  "pdf_url": "https://chemrxiv.org/doi/pdf/10.26434/chemrxiv.15007590/v1",
+  "pdf_path": "test/base_editing/chemrxiv/2026/10.26434_chemrxiv.15007590_v1/10.26434_chemrxiv.15007590_v1.pdf",
+  "pdf_downloaded": true,
+  "query": "10.26434/chemrxiv.15007590/v1",
+  "version": "",
+  "keywords": [],
+  "extra": {
+    "publisher": "American Chemical Society (ACS)",
+    "prefix": "10.26434",
+    "type": "posted-content",
+    "group_title": "",
+    "raw_record": {
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T14:25:01Z",
+        "timestamp": 1787063101744,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "reference-count": 0,
+      "publisher": "American Chemical Society (ACS)",
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "abstract": "<jats:p>Multicomponent post-polymerization modification (PPM) reactions offer a powerful strategy for rapidly diversifying polymers, yet their potential for systematically exploring structure-property-function relationships remains largely unexplored. Herein, we report an electrophilic multicomponent molecular editing strategy that enables the construction of a polybutadiene-derived molecular design space through systematic variation of cyclic ethers and N- or O-based nucleophiles. By combining three cyclic ethers with six nucleophiles, an 18-member library was generated, allowing systematic variation of spacer architecture, polarity, and intermolecular interactions. The resulting design space was mapped across thermal and selected morphological and mobility dimensions, revealing that relatively small molecular variations induce substantial changes in macroscopic material behavior. In particular, P9 exhibited distinct nanoscale organization and proton relaxation behavior, illustrating how subtle structural variation translates into differences in morphology and molecular dynamics. Mapping these complementary landscapes guided the selection of P11, with its balanced combination of functionality and physicochemical properties, as a candidate electrolyte additive for Li-S batteries. Electrochemical evaluation revealed that P11 alters the sulfur redox response and impedance response and increases the Coulombic efficiency, resulting in a more gradual capacity decay relative to the cell containing the baseline electrolyte, while also increasing polarization and reducing the accessible capacity. Quantitative sensitivity analysis translated the multidimensional property landscapes into transferable design rules, identifying nucleophile identity as the dominant handle for functionalization degree and thermal stability, whereas the glass transition temperatures exhibited a more distributed dependence on both molecular inputs. From a broader perspective, this work establishes multicomponent molecular editing as a platform for systematically navigating multidimensional polymer design space, extracting molecular design rules, and translating molecular diversification into application-directed material selection.</jats:p>",
+      "DOI": "10.26434/chemrxiv.15007590/v1",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T13:29:37Z",
+        "timestamp": 1787059777000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Multicomponent Molecular Editing of Polybutadiene: From Design Space to Battery Function"
+      ],
+      "prefix": "10.26434",
+      "author": [
+        {
+          "given": "Janna",
+          "family": "Jeschke",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Institut de Science des Matériaux de Mulhouse (IS2M, UMR 7361 CNRS/Université de Haute Alsace (UHA, 15 rue Jean Starcky, Mulhouse Cedex, France, 68057"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Oghenegare Emmanuel",
+          "family": "Eyankware",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "FMF-Freiburg Materials Research Center, University of Freiburg, Stefan-Meier Str. 21, Freiburg, Germany, 79104"
+            },
+            {
+              "name": "Fraunhofer Institute for Solar Energy Systems, Heidenhofstr. 2, Freiburg, Germany, 79110"
+            },
+            {
+              "name": "Institute for Sustainable Systems Engineering (INATECH), Emmy-Noether-Straße 2, Freiburg, Germany, 79110"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5873-6374",
+          "authenticated-orcid": false,
+          "given": "Ioannis",
+          "family": "Moutsios",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Materials Science Engineering",
+              "place": [
+                "Ioannina, Greece"
+              ]
+            },
+            {
+              "name": "University of Ioannina University Campus-Dourouti",
+              "place": [
+                "Ioannina, Greece"
+              ]
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Loïc",
+          "family": "Vidal",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institut de Science des Matériaux de Mulhouse (IS2M, UMR 7361 CNRS/Université de Haute Alsace (UHA, 15 rue Jean Starcky, Mulhouse Cedex, France, 68057"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Cyril",
+          "family": "Vaulot",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institut de Science des Matériaux de Mulhouse (IS2M, UMR 7361 CNRS/Université de Haute Alsace (UHA, 15 rue Jean Starcky, Mulhouse Cedex, France, 68057"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Azra",
+          "family": "Kocaarslan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Functional Interfaces (IFG, Karlsruhe Institute of Technology (KIT, Hermann-von-Helmholtz-Platz 1, Eggenstein-Leopoldshafen, Germany, 76344"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Angelina",
+          "family": "Sarapulova",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "FMF-Freiburg Materials Research Center, University of Freiburg, Stefan-Meier Str. 21, Freiburg, Germany, 79104"
+            },
+            {
+              "name": "Fraunhofer Institute for Solar Energy Systems, Heidenhofstr. 2, Freiburg, Germany, 79110"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-9295-2110",
+          "authenticated-orcid": false,
+          "given": "Sonia",
+          "family": "Dsoke",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "FMF-Freiburg Materials Research Center, University of Freiburg, Stefan-Meier Str. 21, Freiburg, Germany, 79104"
+            },
+            {
+              "name": "Fraunhofer Institute for Solar Energy Systems, Heidenhofstr. 2, Freiburg, Germany, 79110"
+            },
+            {
+              "name": "Institute for Sustainable Systems Engineering (INATECH), Emmy-Noether-Straße 2, Freiburg, Germany, 79110"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-4683-0515",
+          "authenticated-orcid": false,
+          "given": "Hatice",
+          "family": "Mutlu",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institut de Science des Matériaux de Mulhouse (IS2M, UMR 7361 CNRS/Université de Haute Alsace (UHA, 15 rue Jean Starcky, Mulhouse Cedex, France, 68057"
+            },
+            {
+              "name": "Leibniz-Institut für Verbundwerkstoffe GmbH, Erwin-Schrödinger-Straße 58, Kaiserslautern, 67663"
+            },
+            {
+              "name": "Department of Chemistry, Technical Polymer Chemistry",
+              "place": [
+                "Kaiserslautern"
+              ]
+            },
+            {
+              "name": "Rheinland-Pfälzische Technische Universität Kaiserslautern-Landau (RPTU)",
+              "place": [
+                "Kaiserslautern"
+              ]
+            },
+            {
+              "name": "Helmholtz Institute for Polymers in Energy Applications Jena (HIPOLE Jena), Helmholtz-Zentrum Berlin für Materialien und Energie (HZB), Lessingstrasse 12-14, Jena, Germany, 07743"
+            },
+            {
+              "name": "Institute of Organic Chemistry and Macromolecular Chemistry",
+              "place": [
+                "Jena"
+              ]
+            },
+            {
+              "name": "Friedrich Schiller University Jena",
+              "place": [
+                "Jena"
+              ]
+            },
+            {
+              "name": "Helmholtz-Zentrum Berlin for Materials and Energy GmbH, Hahn-Meitner-Platz 1, Berlin, 14109"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "316",
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://chemrxiv.org/doi/pdf/10.26434/chemrxiv.15007590/v1",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ],
+        "date-time": "2026-08-18T13:29:37Z",
+        "timestamp": 1787059777000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "https://chemrxiv.org/doi/full/10.26434/chemrxiv.15007590/v1"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "references-count": 0,
+      "URL": "https://doi.org/10.26434/chemrxiv.15007590/v1",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            18
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}

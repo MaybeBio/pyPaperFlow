@@ -1510,12 +1510,12 @@ paperflow chemrxiv-fetch --file ./searched_chemrxiv_ids.txt --download-pdf -o ./
 > ⚠️ 下面是 chemrxiv-* 模块实测用例
 
 ```python 
-❯ paperflow chemrxiv-search "base editing" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test/chemrxiv_demo
+❯ paperflow chemrxiv-search "base editing" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test/base_editing
 Found 3 ChemRxiv papers.
 10.26434/chemrxiv.15007500/v1
 10.26434/chemrxiv.15007500/v2
 10.26434/chemrxiv.15007590/v1
-ChemRxiv IDs saved to ./test/chemrxiv_demo/searched_chemrxiv_ids.txt.
+ChemRxiv IDs saved to ./test/base_editing/searched_chemrxiv_ids.txt.
 ```
 
 可以看到，过去一个多月 ChemRxiv 上 "base editing" 的命中很少——但这 **3 条 DOI 实际只有 2 篇论文**：
@@ -1528,15 +1528,15 @@ ChemRxiv IDs saved to ./test/chemrxiv_demo/searched_chemrxiv_ids.txt.
 紧接着抓取这些论文的元数据和 PDF：
 
 ```python
-❯ paperflow chemrxiv-fetch -f ./test/chemrxiv_demo/searched_chemrxiv_ids.txt -o ./test/chemrxiv_demo --download-pdf
-Fetching 3 ChemRxiv DOIs from file /data2/pyPaperFlow/test/chemrxiv_demo/searched_chemrxiv_ids.txt.
+❯ paperflow chemrxiv-fetch -f ./test/base_editing/searched_chemrxiv_ids.txt -o ./test/base_editing   --download-pdf
+Fetching 3 ChemRxiv DOIs from file /data2/pyPaperFlow/test/base_editing/searched_chemrxiv_ids.txt.
 Fetched 3 ChemRxiv papers.
-Saved to /data2/pyPaperFlow/test/chemrxiv_demo/chemrxiv
+Saved to /data2/pyPaperFlow/test/base_editing/chemrxiv
 ```
 
 > ✅ 与 bioRxiv/medRxiv 不同，这次 **3 份 PDF 全部经 `chemrxiv.org/doi/pdf/{doi}` httpx 直连下载成功**（返回 `%PDF` 字节），没遇到 Cloudflare 403，无需浏览器回退。
 
-下载下来的结果可查看 [chemrxiv](../test/chemrxiv_demo/chemrxiv/)，每篇都按 `{source}/{year}/{source_id}/` 结构保存（目录名里 DOI 的 `/` 换成 `_`，如 `10.26434_chemrxiv.15007590_v1/`），包含 JSON 元数据以及新增下载的 PDF 文件。
+下载下来的结果可查看 [chemrxiv](../test/base_editing/chemrxiv/)，每篇都按 `{source}/{year}/{source_id}/` 结构保存（目录名里 DOI 的 `/` 换成 `_`，如 `10.26434_chemrxiv.15007590_v1/`），包含 JSON 元数据以及新增下载的 PDF 文件。
 
 
 ### 1. Search and Fetch arXiv Papers

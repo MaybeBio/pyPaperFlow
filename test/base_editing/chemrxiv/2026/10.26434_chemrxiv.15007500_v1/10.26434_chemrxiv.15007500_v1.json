@@ -1,0 +1,237 @@
+{
+  "source": "chemrxiv",
+  "source_id": "10.26434/chemrxiv.15007500/v1",
+  "title": "Phenonium-Ion-Mediated Skeletal Editing of Paracyclophanes",
+  "doi": "10.26434/chemrxiv.15007500/v1",
+  "abstract": "Phenonium ions have played a central role in physical-organic chemistry, yet their use as strategic intermediates in synthesis remains underexplored. Here, we report a phenonium-ion-mediated strategy for the skeletal editing of paracyclophanes. Installation of a one-carbon handle at the aliphatic bridge, followed by direct alcohol activation with BF 3 ·OEt 2 under solvolysis-avoiding conditions, generates a paracyclophane-derived phenonium ion that undergoes regioselective ring opening by external nucleophiles. This strategy provides modular access to functionalised higher paracyclophane homologues and tolerates S-, N-, C-, selenium-, and halide-based nucleophiles under operationally simple, gram-scalable conditions. The sequence can be applied iteratively and extended to double bridge expansion, while reductive desulfurization furnishes the corresponding parent hydrocarbons. Mechanistic studies combining NMR spectroscopy, kinetic analysis, stereochemical probes, and DFT calculations support a self-accelerating mechanism in which product water shifts BF 3 speciation towards BF 3 ·H 2 O, which assists leaving-group departure through hydrogen-bond donation and thereby facilitates phenonium-ion formation. Together, these results establish paracyclophane-derived phenonium ions as controllable intermediates for skeletal editing and provide practical access to higher paracyclophane topologies with application potential in functional materials, as exemplified by a bridge-expanded TADF emitter.",
+  "authors": [
+    "Tilman Köhler",
+    "Pascal Marx",
+    "André Jung",
+    "Maximilian Hartmann",
+    "Jasmin Seibert",
+    "Olaf Fuhr",
+    "Eli Zysman-Colman",
+    "Stefan Bräse"
+  ],
+  "published_date": "2026-08-17",
+  "updated_date": "2026-08-17T11:32:53Z",
+  "journal": "ChemRxiv",
+  "category": "",
+  "landing_url": "https://doi.org/10.26434/chemrxiv.15007500/v1",
+  "pdf_url": "https://chemrxiv.org/doi/pdf/10.26434/chemrxiv.15007500/v1",
+  "pdf_path": "test/base_editing/chemrxiv/2026/10.26434_chemrxiv.15007500_v1/10.26434_chemrxiv.15007500_v1.pdf",
+  "pdf_downloaded": true,
+  "query": "10.26434/chemrxiv.15007500/v1",
+  "version": "",
+  "keywords": [],
+  "extra": {
+    "publisher": "American Chemical Society (ACS)",
+    "prefix": "10.26434",
+    "type": "posted-content",
+    "group_title": "",
+    "raw_record": {
+      "indexed": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            17
+          ]
+        ],
+        "date-time": "2026-08-17T12:25:28Z",
+        "timestamp": 1786969528543,
+        "version": "build-2736575974"
+      },
+      "posted": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            17
+          ]
+        ]
+      },
+      "reference-count": 0,
+      "publisher": "American Chemical Society (ACS)",
+      "content-domain": {
+        "domain": [],
+        "crossmark-restriction": false
+      },
+      "short-container-title": [],
+      "abstract": "<jats:p>\n                  Phenonium ions have played a central role in physical-organic chemistry, yet their use as strategic intermediates in synthesis remains underexplored. Here, we report a phenonium-ion-mediated strategy for the skeletal editing of paracyclophanes. Installation of a one-carbon handle at the aliphatic bridge, followed by direct alcohol activation with BF\n                  <jats:sub>3</jats:sub>\n                  ·OEt\n                  <jats:sub>2</jats:sub>\n                  under solvolysis-avoiding conditions, generates a paracyclophane-derived phenonium ion that undergoes regioselective ring opening by external nucleophiles. This strategy provides modular access to functionalised higher paracyclophane homologues and tolerates S-, N-, C-, selenium-, and halide-based nucleophiles under operationally simple, gram-scalable conditions. The sequence can be applied iteratively and extended to double bridge expansion, while reductive desulfurization furnishes the corresponding parent hydrocarbons. Mechanistic studies combining NMR spectroscopy, kinetic analysis, stereochemical probes, and DFT calculations support a self-accelerating mechanism in which product water shifts BF\n                  <jats:sub>3</jats:sub>\n                  speciation towards BF\n                  <jats:sub>3</jats:sub>\n                  ·H\n                  <jats:sub>2</jats:sub>\n                  O, which assists leaving-group departure through hydrogen-bond donation and thereby facilitates phenonium-ion formation. Together, these results establish paracyclophane-derived phenonium ions as controllable intermediates for skeletal editing and provide practical access to higher paracyclophane topologies with application potential in functional materials, as exemplified by a bridge-expanded TADF emitter.\n                </jats:p>",
+      "DOI": "10.26434/chemrxiv.15007500/v1",
+      "type": "posted-content",
+      "created": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            17
+          ]
+        ],
+        "date-time": "2026-08-17T11:32:53Z",
+        "timestamp": 1786966373000
+      },
+      "source": "Crossref",
+      "is-referenced-by-count": 0,
+      "title": [
+        "Phenonium-Ion-Mediated Skeletal Editing of Paracyclophanes"
+      ],
+      "prefix": "10.26434",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0009-6122-7739",
+          "authenticated-orcid": false,
+          "given": "Tilman",
+          "family": "Köhler",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Pascal",
+          "family": "Marx",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "André",
+          "family": "Jung",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Maximilian",
+          "family": "Hartmann",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jasmin",
+          "family": "Seibert",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Olaf",
+          "family": "Fuhr",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Eli",
+          "family": "Zysman-Colman",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Stefan",
+          "family": "Bräse",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "member": "316",
+      "container-title": [],
+      "original-title": [],
+      "link": [
+        {
+          "URL": "https://chemrxiv.org/doi/pdf/10.26434/chemrxiv.15007500/v1",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "deposited": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            17
+          ]
+        ],
+        "date-time": "2026-08-17T11:32:53Z",
+        "timestamp": 1786966373000
+      },
+      "score": 1,
+      "resource": {
+        "primary": {
+          "URL": "https://chemrxiv.org/doi/full/10.26434/chemrxiv.15007500/v1"
+        }
+      },
+      "subtitle": [],
+      "short-title": [],
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            17
+          ]
+        ]
+      },
+      "references-count": 0,
+      "URL": "https://doi.org/10.26434/chemrxiv.15007500/v1",
+      "relation": {},
+      "subject": [],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            17
+          ]
+        ]
+      },
+      "subtype": "preprint"
+    }
+  }
+}
