@@ -628,6 +628,8 @@ The workflow of our paper acquisition module is outlined below:
 ┌─────────────────────────────────────────┐
 │  3. arXiv (via S2 externalIds.ArXiv)     │
 │  4. Europe PMC → PMC (via PMCID)         │
+│     No PMCID: DOI→PMCID recovery         │
+│     (Europe PMC hasPDF=Y / OpenAIRE)     │
 │  5. bioRxiv / medRxiv (DOI prefix: 10.1101/)
 └─────────────────────────────────────────┘
            Total Failure ↓
@@ -638,7 +640,12 @@ The workflow of our paper acquisition module is outlined below:
 └─────────────────────────────────────────┘
            Persistent Failure ↓
 ┌─────────────────────────────────────────┐
-│  7. Sci‑Hub Mirror Fallback (enabled by default, configurable)
+│  7. CORE Repository Aggregator (optional, requires CORE_API_KEY)
+│     → core.ac.uk aggregates OA full-text downloadUrl
+└─────────────────────────────────────────┘
+           Persistent Failure ↓
+┌─────────────────────────────────────────┐
+│  8. Sci‑Hub Mirror Fallback (enabled by default, configurable)
 │     → 1 request‑per‑second rate‑limiting to prevent CAPTCHA triggers
 │     → Automatic discovery of active new mirrors
 └─────────────────────────────────────────┘
@@ -651,9 +658,10 @@ Resolution Priority Sequence
 Unpaywall: The optimal open‑access source covering the broadest range of publishers with the highest hit rate.
 Semantic Scholar: Retrieves OA PDF links and cross‑platform external identifiers.
 arXiv: Activated when an arXiv identifier is available for the target paper.
-PubMed Central (PMC) OA Subset: Activated when a PMCID is associated with the paper.
+PubMed Central (PMC) OA Subset: Activated when a PMCID is associated with the paper; when no PMCID is known, a DOI→PMCID recovery is attempted first (Europe PMC search hasPDF=Y / OpenAIRE originalId).
 bioRxiv / medRxiv: Triggered for preprints with the DOI prefix 10.1101/.
 Publisher Direct Links: Enabled only under institutional mode (PAPER_FETCH_INSTITUTIONAL=1), authorized via the caller’s institutional subscription IP, cookies, or EZproxy access.
+CORE Repository Aggregator: Optional, requires CORE_API_KEY; aggregates full texts from many repositories, attempted only when all other OA sources miss (free tier ~5 req/10s).
 Sci‑Hub Mirror Fallback: Enabled by default as the final retrieval backup.
 Mirrors are attempted in the order specified by the environment variable PAPER_FETCH_SCIHUB_MIRRORS (default list: sci‑hub.ru, sci‑hub.st, sci‑hub.su, sci‑hub.box, sci‑hub.red, sci‑hub.al, sci‑hub.mk, sci‑hub.ee).
 If all predefined mirrors fail, the module fetches the latest live mirror list from https://www.sci‑hub.pub/ and retries.
@@ -715,6 +723,23 @@ export PAPER_FETCH_INSTITUTIONAL=1   # only effective while on the institutional
 > - In public mode, when a paper looks paywalled the error payload sets `suggest_institutional: true` and hints to set this variable and re-run from on-campus / VPN.
 
 
+**CORE repository-aggregator fallback (optional)**
+
+When a paper misses across all OA sources (Unpaywall / Semantic Scholar / arXiv / PMC / bioRxiv) but an institutional or subject repository may still hold a copy, set `CORE_API_KEY` to enable the [CORE](https://core.ac.uk) (core.ac.uk) aggregator fallback. CORE aggregates full-text metadata from thousands of OA repositories and journals worldwide; its v3 search API queries by DOI and the `downloadUrl` field of a matching record is the directly downloadable OA full-text link (paywalled records leave this field empty and are skipped automatically).
+
+```bash
+export CORE_API_KEY=your_core_api_key   # free signup: https://core.ac.uk/services/api
+```
+
+> **Principle & notes**
+> - CORE is a *repository aggregator*, not a single publisher: it pools full texts from institutional and subject repositories, covering repository copies that other sources miss.
+> - This source fires **only** when all earlier OA sources (Unpaywall / Semantic Scholar / arXiv / PMC / bioRxiv) have missed — it never interferes with the normal OA download path, so keeping it on is harmless.
+> - Requires a free API key (Bearer auth); the source is silently skipped when `CORE_API_KEY` is unset.
+> - The free tier rate-limits to roughly **5 requests / 10 seconds** and returns `403` when exceeded — imperceptible for single papers, and batch fetching is serialized/throttled.
+> - Returned links pass the same `%PDF` magic-byte + 50 MB checks; successful hits carry `source:"core"`.
+> - Only records with a non-empty `downloadUrl` are used, naturally filtering out paywalled entries with no OA copy.
+
+
 **Recommended setup (best practice)**
 
 For a mixed workload — OA papers, Cloudflare-gated OA papers, and the occasional paywalled paper your institution subscribes to — keep three things on:
@@ -740,6 +765,7 @@ All settings are read from environment variables when the process starts — the
 | Env var | Effect | Default | When to set |
 | --- | --- | --- | --- |
 | `UNPAYWALL_EMAIL` | Contact email for the Unpaywall API (sent in the User-Agent); without it the Unpaywall source is skipped. | empty | Recommended — Unpaywall is the fastest / broadest source |
+| `CORE_API_KEY` | API key for the CORE (core.ac.uk) aggregator; without it the `core` repository source is skipped. | empty | When you need coverage for institutional / subject repository OA copies |
 | `PAPER_FETCH_NO_SCIHUB` | Set to `1` to disable the Sci-Hub mirror fallback. | Sci-Hub ON | If your institution / compliance forbids Sci-Hub |
 | `PAPER_FETCH_SCIHUB_MIRRORS` | Comma-separated mirror list, tried in priority order (hostnames only). | built-in default list | When the default mirrors stop working |
 | `PAPER_FETCH_INSTITUTIONAL` | Set to `1` to enable publisher direct links (authorized by your institutional IP / cookies / EZproxy). Auto rate-limits to 1 req/s to respect publisher ToS. | off | If you have an institutional subscription |

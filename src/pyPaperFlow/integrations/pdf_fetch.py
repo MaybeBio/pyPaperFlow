@@ -4,7 +4,7 @@
 """Fetch legal open-access PDFs by DOI.
 
 Resolution order: Unpaywall -> Semantic Scholar openAccessPdf ->
-arXiv -> PMC OA -> bioRxiv/medRxiv.
+arXiv -> Europe PMC / PMC OA -> bioRxiv/medRxiv -> CORE (optional, key-gated).
 
 Exit codes:
   0  success (all DOIs resolved and downloaded / dry-run previewed)
@@ -58,6 +58,9 @@ SCHEMA_VERSION = "1.11.0"
 # ---------------------------------------------------------------------------
 
 EMAIL = os.environ.get("UNPAYWALL_EMAIL", "").strip()
+# CORE (core.ac.uk) aggregator — optional OA-repository fallback. Keyless when
+# unset (the CORE source is skipped); requires a free API key for the v3 API.
+CORE_API_KEY = os.environ.get("CORE_API_KEY", "").strip()
 # UA for API calls (Unpaywall requires contact email in the UA per their ToS).
 UA = f"paper-fetch/{CLI_VERSION} (mailto:{EMAIL or 'anonymous'})"
 # UA for PDF downloads — some publishers (e.g., iiarjournals.org) return
@@ -818,6 +821,114 @@ def try_biorxiv(doi: str, *, timeout: int) -> str | None:
                 return f"https://www.{server}.org/content/10.1101/{latest['doi'].split('/')[-1]}v{latest.get('version', 1)}.full.pdf"
         except Exception:
             continue
+    return None
+
+
+def _epmc_search_pmcid(doi: str, *, timeout: int, errors: list | None = None) -> str | None:
+    """Recover a PMCID for a DOI by searching Europe PMC, when OA with a PDF.
+
+    Complements the PMCID-based ``try_europe_pmc`` / ``try_pmc`` paths: those
+    need a PMCID already in hand (from Unpaywall or Semantic Scholar), while
+    this derives one from the DOI directly. Keyless and free. Returns the
+    normalized ``PMC…`` id only when Europe PMC flags the article as having a
+    renderable PDF (``hasPDF=Y``), so a "free but not OA" publisher link is
+    never mistaken for a PMC copy.
+    """
+    url = (
+        "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+        f"?query=DOI:%22{urllib.parse.quote(doi)}%22&format=json&resultType=core"
+    )
+    try:
+        d = _get_json(url, timeout=timeout)
+    except Exception as e:
+        if errors is not None and _is_transport_exc(e):
+            errors.append({"source": "europe_pmc_search", "detail": str(e)})
+        return None
+    results = (d.get("resultList") or {}).get("result") or []
+    if not results:
+        return None
+    item = results[0]
+    if item.get("hasPDF") != "Y":
+        return None
+    pmcid = (item.get("pmcid") or "").strip()
+    if pmcid:
+        return pmcid if pmcid.startswith("PMC") else f"PMC{pmcid}"
+    # Some records omit `pmcid` but still expose a PDF full-text URL; recover
+    # the id from that URL so the render/PMC candidates can still be built.
+    for ftu in (item.get("fullTextUrlList") or {}).get("fullTextUrl") or []:
+        recovered = _pmcid_from_url((ftu or {}).get("url"))
+        if recovered:
+            return recovered
+    return None
+
+
+def _openaire_pmcid(doi: str, *, timeout: int, errors: list | None = None) -> str | None:
+    """Recover a PMCID for a DOI from OpenAIRE's aggregated identifiers.
+
+    OpenAIRE dedupes records across many repositories and lists the PMCID in
+    the record's ``originalId`` array. Keyless and free; used as a secondary
+    recovery when Europe PMC search does not index the paper.
+    """
+    url = f"https://api.openaire.eu/search/publications?doi={urllib.parse.quote(doi)}&format=json"
+    try:
+        d = _get_json(url, timeout=timeout)
+    except Exception as e:
+        if errors is not None and _is_transport_exc(e):
+            errors.append({"source": "openaire", "detail": str(e)})
+        return None
+    results = ((d.get("response") or {}).get("results") or {}).get("result") or []
+    if not isinstance(results, list) or not results:
+        return None
+    result = results[0].get("metadata", {}).get("oaf:entity", {}).get("oaf:result", {})
+    for oid in result.get("originalId") or []:
+        raw = oid.get("$") if isinstance(oid, dict) else oid
+        if not isinstance(raw, str):
+            continue
+        m = re.match(r"^PMC(\d+)$", raw.strip())
+        if m:
+            return f"PMC{m.group(1)}"
+    return None
+
+
+def _try_core(doi: str, *, timeout: int, errors: list | None = None) -> str | None:
+    """Resolve an OA download URL for a DOI via CORE (key-gated, no-op without key).
+
+    CORE (core.ac.uk) aggregates full text across thousands of repositories and
+    returns a direct ``downloadUrl`` (e.g. ``core.ac.uk/download/<id>.pdf``).
+    Requires a free API key in ``CORE_API_KEY``; without one this is a no-op so
+    the fallback chain is unchanged for operators who have not registered.
+    """
+    if not CORE_API_KEY:
+        return None
+    url = (
+        "https://api.core.ac.uk/v3/search/works/?"
+        + urllib.parse.urlencode({"q": f'doi:"{doi}"', "limit": 3})
+    )
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": UA,
+            "Accept": "application/json",
+            "Authorization": f"Bearer {CORE_API_KEY}",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            d = json.loads(r.read().decode("utf-8"))
+    except Exception as e:
+        if errors is not None and _is_transport_exc(e):
+            errors.append({"source": "core", "detail": str(e)})
+        return None
+    for item in d.get("results") or []:
+        direct = (item.get("downloadUrl") or "").strip()
+        if direct:
+            return direct
+        # Fall back to a `download` link when `downloadUrl` is absent.
+        for link in item.get("links") or []:
+            if isinstance(link, dict) and link.get("type") == "download":
+                u = (link.get("url") or "").strip()
+                if u:
+                    return u
     return None
 
 
@@ -1606,6 +1717,28 @@ def fetch(
                     ext["PubMedCentral"] = pmcid_from_url
                     break
 
+    # Recover a PMCID by DOI search when Unpaywall / Semantic Scholar surfaced
+    # none. Europe PMC search first (keyless, richest for biomedicine); OpenAIRE
+    # as a secondary source of aggregated identifiers. Both feed the existing
+    # `if ext.get("PubMedCentral")` block below, so no new download source is
+    # introduced — the recovered id simply builds the usual Europe PMC / PMC
+    # render candidates.
+    if not ext.get("PubMedCentral"):
+        sources_tried.append("europe_pmc_search")
+        epmc_pmcid = _epmc_search_pmcid(doi, timeout=timeout, errors=resolver_errors)
+        if epmc_pmcid:
+            _progress("source_hit", doi=doi, source="europe_pmc_search", pmcid=epmc_pmcid)
+            ext["PubMedCentral"] = epmc_pmcid
+        else:
+            _progress("source_miss", doi=doi, source="europe_pmc_search")
+            sources_tried.append("openaire")
+            oa_pmcid = _openaire_pmcid(doi, timeout=timeout, errors=resolver_errors)
+            if oa_pmcid:
+                _progress("source_hit", doi=doi, source="openaire", pmcid=oa_pmcid)
+                ext["PubMedCentral"] = oa_pmcid
+            else:
+                _progress("source_miss", doi=doi, source="openaire")
+
     if ext.get("PubMedCentral"):
         # Europe PMC tried first — bypasses NCBI PMC's cloudpmc-viewer JS challenge.
         sources_tried.append("europe_pmc")
@@ -1640,6 +1773,21 @@ def fetch(
                 _add("publisher_direct", pub_url)
         else:
             _progress("source_miss", doi=doi, source="publisher_direct", reason="no_template_for_doi_prefix")
+
+    # --- CORE repository fallback (optional, key-gated) ---
+    # CORE aggregates OA full text across repositories worldwide. Queried only
+    # when no other OA candidate resolved, so the free tier's tight rate limit
+    # is not consumed on DOIs the primary sources already covered. Requires
+    # CORE_API_KEY; no-op without it.
+    if not candidates and CORE_API_KEY:
+        _progress("source_try", doi=doi, source="core")
+        sources_tried.append("core")
+        core_url = _try_core(doi, timeout=timeout, errors=resolver_errors)
+        if core_url:
+            _progress("source_hit", doi=doi, source="core", pdf_url=core_url)
+            _add("core", core_url)
+        else:
+            _progress("source_miss", doi=doi, source="core")
 
     # --- Sci-Hub fallback (last resort) ---
     # Mirror list comes from PAPER_FETCH_SCIHUB_MIRRORS or the built-in defaults;
@@ -1805,7 +1953,7 @@ def build_schema() -> dict:
         "command": "paper-fetch",
         "cli_version": CLI_VERSION,
         "schema_version": SCHEMA_VERSION,
-        "description": "Fetch PDFs by DOI via Unpaywall, Semantic Scholar, arXiv, Europe PMC, PMC, and bioRxiv/medRxiv. In institutional mode (PAPER_FETCH_INSTITUTIONAL=1), also attempts a publisher-direct fetch (publisher_direct source) using the caller's own subscription IP / cookies / EZproxy. As a last resort, falls back to Sci-Hub mirrors (scihub source); disable with PAPER_FETCH_NO_SCIHUB=1. On download failure (host_not_allowed, not_a_pdf, network_error), automatically falls back to the next candidate source.",
+        "description": "Fetch PDFs by DOI via Unpaywall, Semantic Scholar, arXiv, Europe PMC, PMC, and bioRxiv/medRxiv. When no PMCID is known, a keyless Europe PMC DOI-search (europe_pmc_search) and an OpenAIRE DOI-search (openaire) recover the PMCID so the usual Europe PMC / PMC render candidates can still be built. When no other OA candidate resolves, an optional CORE repository lookup (core source) returns a CORE-hosted OA download; requires CORE_API_KEY, no-op without it. In institutional mode (PAPER_FETCH_INSTITUTIONAL=1), also attempts a publisher-direct fetch (publisher_direct source) using the caller's own subscription IP / cookies / EZproxy. As a last resort, falls back to Sci-Hub mirrors (scihub source); disable with PAPER_FETCH_NO_SCIHUB=1. On download failure (host_not_allowed, not_a_pdf, network_error), automatically falls back to the next candidate source.",
         "subcommands": {
             "schema": "Print this schema as JSON and exit (no network).",
         },
@@ -1918,6 +2066,7 @@ def build_schema() -> dict:
         },
         "env": {
             "UNPAYWALL_EMAIL": "Optional. Contact email for Unpaywall API. If unset, Unpaywall is skipped.",
+            "CORE_API_KEY": "Optional. Free API key for the CORE (core.ac.uk) repository aggregator. If unset, the core source is skipped.",
             "PAPER_FETCH_INSTITUTIONAL": "Optional. Set to any value to opt into institutional mode: activates a 1 req/s rate limiter and enables the publisher-direct fallback. Intended for callers whose IP / cookies / EZproxy already grant subscription access. SSRF defense applies in every mode.",
             "PAPER_FETCH_NO_SCIHUB": "Optional. Set to any value to disable the Sci-Hub fallback (enabled by default).",
             "PAPER_FETCH_SCIHUB_MIRRORS": "Optional. Comma-separated list of Sci-Hub mirror hostnames to try, in priority order, overriding the built-in defaults (e.g. 'sci-hub.ru,sci-hub.st,sci-hub.su').",

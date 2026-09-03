@@ -636,6 +636,8 @@ examples:
 ┌─────────────────────────────────────────┐
 │  3. arXiv（通过 S2 的 externalIds.ArXiv） │
 │  4. Europe PMC → PMC（通过 PMCID）         │
+│     无 PMCID 时：DOI→PMCID 恢复            │
+│     （Europe PMC hasPDF=Y / OpenAIRE）     │
 │  5. bioRxiv/medRxiv（DOI 前缀 10.1101/）  │
 └─────────────────────────────────────────┘
            全部失败 ↓
@@ -646,7 +648,12 @@ examples:
 └─────────────────────────────────────────┘
            仍失败 ↓
 ┌─────────────────────────────────────────┐
-│  7. Sci-Hub 镜像回退（默认启用，可禁用）    │
+│  7. CORE 仓库聚合（可选，需 CORE_API_KEY） │
+│     → core.ac.uk 聚合 OA 全文 downloadUrl │
+└─────────────────────────────────────────┘
+           仍失败 ↓
+┌─────────────────────────────────────────┐
+│  8. Sci-Hub 镜像回退（默认启用，可禁用）    │
 │     → 1 req/s 限速，防 CAPTCHA            │
 │     → 自动发现新镜像                      │
 └─────────────────────────────────────────┘
@@ -659,9 +666,10 @@ examples:
 Unpaywall — 全出版社 OA 最佳位置（命中率最高）
 Semantic Scholar — openAccessPdf 字段 + externalIds
 arXiv — 论文有 arXiv ID 时
-PubMed Central OA 子集 — 论文有 PMCID 时
+PubMed Central OA 子集 — 论文有 PMCID 时；无 PMCID 时先做 DOI→PMCID 恢复（Europe PMC 搜索 hasPDF=Y / OpenAIRE originalId）
 bioRxiv / medRxiv — DOI 前缀为 10.1101/
 出版商直链 — 仅机构模式（PAPER_FETCH_INSTITUTIONAL=1）下启用，由调用方的订阅 IP / Cookies / EZproxy 授权
+CORE 仓库聚合 — 可选，需 CORE_API_KEY；聚合多仓库 OA 全文，仅当其他 OA 来源均未命中时尝试（免费层约 5 req/10s）
 Sci-Hub 镜像 — 兜底来源，默认开启。优先按 PAPER_FETCH_SCIHUB_MIRRORS 设定的镜像顺序尝试（默认列表：sci-hub.ru、sci-hub.st、sci-hub.su、sci-hub.box、sci-hub.red、sci-hub.al、sci-hub.mk、sci-hub.ee）；全部失败时会从 https://www.sci-hub.pub/ 抓取最新镜像列表再试一次。设置 PAPER_FETCH_NO_SCIHUB=1 可关闭。
 都失败 → 输出元数据提示走馆际互借
 
@@ -719,6 +727,23 @@ export PAPER_FETCH_INSTITUTIONAL=1   # 只有在机构网络内才有效
 > - 公开模式下，论文疑似付费墙时错误负载会带 `suggest_institutional: true`，提示设置该变量并在校园网 / VPN 内重跑。
 
 
+**CORE 仓库聚合回退（可选）**
+
+当论文在 Unpaywall / Semantic Scholar / arXiv / PMC / bioRxiv 等 OA 来源均未命中、而机构库或学科库可能存有全文时，可设置 `CORE_API_KEY` 启用 [CORE](https://core.ac.uk)（core.ac.uk）聚合回退。CORE 聚合全球数千个 OA 仓库与期刊的全文元数据；其 v3 搜索 API 按 DOI 查询，命中记录的 `downloadUrl` 字段即为可直接下载的 OA 全文直链（付费墙记录该字段为空，会被自动跳过）。
+
+```bash
+export CORE_API_KEY=your_core_api_key   # 免费申请：https://core.ac.uk/services/api
+```
+
+> **原理与要点**
+> - CORE 是「仓库聚合器」而非单一出版商：它从机构库、学科库等海量 OA 来源汇总全文，能补上其他来源覆盖不到的仓库副本。
+> - 该来源**仅在**前面的 OA 来源（Unpaywall / Semantic Scholar / arXiv / PMC / bioRxiv）都未命中时才触发——不会干扰正常 OA 下载路径，因此常开无副作用。
+> - 需要免费 API key（Bearer 认证）；不设 `CORE_API_KEY` 时该来源静默跳过。
+> - 免费层限速约 **5 请求 / 10 秒**，超出会返回 `403`——单篇无感，批量抓取时已串行限速。
+> - 返回直链同样经过 `%PDF` 魔数 + 50 MB 校验；命中记录带 `source:"core"` 标记。
+> - 仅采纳 `downloadUrl` 非空的记录，天然过滤掉无 OA 副本的付费墙条目。
+
+
 **推荐配置（最佳实践）**
 
 面对混合任务——OA 论文、被 Cloudflare 拦截的 OA 论文、以及偶尔一两篇机构有订阅的付费墙论文——常开三个开关即可：
@@ -744,6 +769,7 @@ export PAPER_FETCH_INSTITUTIONAL=1       # 付费墙论文的出版商直链
 | 环境变量 | 作用 | 默认 | 何时设置 |
 | --- | --- | --- | --- |
 | `UNPAYWALL_EMAIL` | Unpaywall API 联系邮箱（写入 User-Agent）；不设则跳过 Unpaywall 来源 | 空 | 建议设置——Unpaywall 是最快、覆盖面最广的来源 |
+| `CORE_API_KEY` | CORE (core.ac.uk) 聚合器 API key；不设则跳过 core 仓库聚合来源 | 空 | 需要覆盖机构库 / 学科库等 OA 仓库副本时 |
 | `PAPER_FETCH_NO_SCIHUB` | 设为 `1` 关闭 Sci-Hub 镜像兜底 | Sci-Hub 开 | 机构 / 合规不允许 Sci-Hub 时 |
 | `PAPER_FETCH_SCIHUB_MIRRORS` | 逗号分隔的镜像列表，按优先级尝试（仅主机名） | 内置默认列表 | 默认镜像失效时 |
 | `PAPER_FETCH_INSTITUTIONAL` | 设为 `1` 启用出版商直链（由机构 IP / Cookies / EZproxy 授权），自动 1 req/s 限速以遵守出版商 ToS | 关 | 有机构订阅时 |
