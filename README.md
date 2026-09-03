@@ -311,15 +311,17 @@ Our literature database primarily covers biomedical research and computational i
 - arXiv
 - bioRxiv，medRxiv，chemRxiv
 
-> **⚠️ — preprint search runs on Crossref metadata, not each server's official API.** bioRxiv/medRxiv/ChemRxiv preprints are searched through a Crossref‑backed index (openRxiv prefix `10.64898` / ChemRxiv prefix `10.26434`) rather than the native portals, because Crossref exposes one uniform relevance search (`query.bibliographic`) with cursor pagination across all preprint servers. For ChemRxiv in particular, its official public API (`chemrxiv.org/engage/chemrxiv/public-api/v1/items`) is **Cloudflare‑walled (HTTP 403) to non‑browser clients**, while the Crossref deposit stays reliably queryable, so ChemRxiv search is Crossref‑only (no Europe PMC leg). bioRxiv additionally unions Europe PMC full‑text search (disable with `--no-europepmc`). 
-> 
-> Trade‑offs vs. native APIs: 
-> 
-> ① **deposit lag** — a preprint posted minutes ago may not be indexed in Crossref yet; 
-> 
-> ② **metadata‑only matching** — hits are on title/abstract, not full text (only the bioRxiv/medRxiv Europe PMC leg indexes full text); 
-> 
-> ③ **version duplication** — Crossref registers every revision as its own DOI work, so `.../v1` and `.../v2` both match and may need manual dedup.
+> **⚠️ — preprint search runs on Crossref metadata, not each server's official API.** bioRxiv/medRxiv/ChemRxiv preprints are searched through a Crossref‑backed index (openRxiv prefix `10.64898` / ChemRxiv prefix `10.26434`) rather than the native portals, because Crossref exposes one uniform relevance search (`query.bibliographic`, relevance‑ranked then re‑checked locally as a boolean AND over title/abstract/…) with cursor pagination. For ChemRxiv in particular, its official public API (`chemrxiv.org/engage/chemrxiv/public-api/v1/items`) is **Cloudflare‑walled (HTTP 403) to non‑browser clients**, while the Crossref deposit stays reliably queryable, so ChemRxiv search is Crossref‑only; bioRxiv additionally unions Europe PMC full‑text search (disable with `--no-europepmc`).
+>
+> **Potential problems of searching a platform through Crossref:**
+>
+> ① **Platform identity = Crossref prefix, not the native server.** bioRxiv and medRxiv share one openRxiv prefix, so they are separated locally by a DOI‑accession heuristic (6 digits = bioRxiv, 8 digits = medRxiv), not by any platform‑native classification.
+>
+> ② **Deposit lag** — a preprint posted minutes ago may not be indexed in Crossref yet.
+>
+> ③ **Metadata‑only matching, not full text** — Crossref scores on title/abstract and the local AND re‑check runs on that same metadata, so query terms that appear only in the paper body are missed. Only the bioRxiv/medRxiv Europe PMC leg indexes full text; **ChemRxiv has no full‑text leg at all**, so body‑only‑term misses are expected there.
+>
+> ④ **Version duplication** — Crossref registers every revision as its own DOI work, so `.../v1` and `.../v2` both match a search and may need manual dedup.
 
 We recommend that you proactively learn and master the search syntax of these databases, as our built‑in search module functions similarly to the search bar on official web portals.
 

@@ -318,17 +318,17 @@ ChemRxiv 相关模块：
 - arXiv
 - bioRxiv，medRxiv，chemRxiv 等预印本平台
 
-> **⚠️：为什么预印本检索走 Crossref 元数据(我们的实现)，而不是各平台官方 API。** 
-> 
-> bioRxiv/medRxiv/ChemRxiv 预印本均通过 **Crossref 索引**（openRxiv 前缀 `10.64898` / ChemRxiv 前缀 `10.26434`）检索，而非各平台官方门户——因为 Crossref 提供跨平台统一的 `query.bibliographic` 相关性检索 + cursor 翻页。对 ChemRxiv 尤为关键：它的官方公开 API（`chemrxiv.org/engage/chemrxiv/public-api/v1/items`）对非浏览器客户端是 **Cloudflare 403 墙**，而 Crossref 沉积稳定可查，故 ChemRxiv 检索为纯 Crossref（无 Europe PMC 路）。bioRxiv 另并入 Europe PMC 全文检索（用 `--no-europepmc` 关闭）。
-> 
-> 相对官方 API 的取舍：
-> 
-> ① **入库延迟**——刚上传几分钟的预印本可能还未被 Crossref 收录；
-> 
-> ② **仅元数据匹配**——命中基于标题/摘要，不涉及全文（只有 bioRxiv/medRxiv 的 Europe PMC 路索引全文）；
-> 
-> ③ **版本重复**——Crossref 将每次改版单独注册成独立 DOI work，`.../v1` 与 `.../v2` 会同时命中，可能需手动去重。
+> **⚠️：预印本检索走 Crossref 元数据（而非各平台官方 API / 全文）。** bioRxiv/medRxiv/ChemRxiv 均通过 Crossref 索引（openRxiv 前缀 `10.64898` / ChemRxiv 前缀 `10.26434`）检索，而非平台官方门户——Crossref 提供跨平台统一的 `query.bibliographic` 相关性检索（先按相关性排序，再在本地对标题/摘要等做布尔 AND 复核）+ cursor 翻页。对 ChemRxiv 尤为关键：其官方公开 API（`chemrxiv.org/engage/chemrxiv/public-api/v1/items`）对非浏览器客户端是 **Cloudflare 403 墙**，而 Crossref 沉积稳定可查，故 ChemRxiv 为纯 Crossref；bioRxiv 另并入 Europe PMC 全文检索（用 `--no-europepmc` 关闭）。
+>
+> **经 Crossref 检索平台的潜在问题：**
+>
+> ① **平台边界 = Crossref 前缀，而非平台原生分类**——bioRxiv 与 medRxiv 共用同一 openRxiv 前缀，二者靠 DOI 编号位数（6 位 = bioRxiv、8 位 = medRxiv）在本地启发式区分，而非平台自身的分类体系。
+>
+> ② **入库延迟**——刚上传几分钟的预印本可能尚未被 Crossref 收录。
+>
+> ③ **仅元数据匹配，非全文**——Crossref 在标题/摘要上打分，本地 AND 复核也在同一元数据上进行，故只出现在正文里的词会漏检。仅 bioRxiv/medRxiv 的 Europe PMC 索引全文；**ChemRxiv 无任何全文**，正文词漏检属预期。
+>
+> ④ **版本重复**——Crossref 将每次改版单独注册成独立 DOI work，`.../v1` 与 `.../v2` 会同时命中，可能需手动去重。
 
 建议用户提前学习并熟练掌握上述数据库的检索语法，本工具内置搜索模块的运行逻辑与数据库网页端搜索框基本一致。
 
