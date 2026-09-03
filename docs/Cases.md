@@ -20,7 +20,7 @@
 
 [Case7: Parse MinerU content_list_v2.json into canonical sectioned JSON](#-case-7-parse-mineru-content_list_v2json-into-canonical-sectioned-json)
 
-[Case8: Search and fetch papers on other databases](#-case-8-search-and-fetch-papers-on-other-databases)
+[Case8: Search and fetch papers on other databases](#-case-8-search-and-fetch-papers-on-other-databases-preprint)
 
 
 ## 🧬 Case 1: Get PMIDs from Query
@@ -1103,6 +1103,22 @@ paperflow medrxiv-fetch --doi 10.1101/2020.03.20.20039555 --no-download-pdf -o .
 paperflow medrxiv-fetch --file ./papers/searched_medrxiv_ids.txt --download-pdf -o ./papers
 ```
 
+**ChemRxiv**
+
+```bash
+# 搜索:返回全部命中(单一后端 Crossref,prefix 10.26434,无 Europe PMC 并集)
+paperflow chemrxiv-search "AI drug design" -o ./papers
+paperflow chemrxiv-search "AI drug design" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers
+# → ./papers/searched_chemrxiv_ids.txt   (内容是 DOI,前缀 10.26434/...)
+
+# 抓取:按 query(默认最多 100 条)
+paperflow chemrxiv-fetch "AI drug design" --max-results 50 -o ./papers
+# 单个 DOI
+paperflow chemrxiv-fetch --doi 10.26434/chemrxiv.15007590/v1 --no-download-pdf -o ./papers
+# 承接搜索输出的 DOI 清单
+paperflow chemrxiv-fetch --file ./papers/searched_chemrxiv_ids.txt --download-pdf -o ./papers
+```
+
 **检索并集(bioRxiv / medRxiv,默认开启)**
 
 `*-search` 与 `*-fetch` 的 **query 模式**现在默认 = Crossref(元数据相关性)∪ Europe PMC(预印本全文布尔 AND),按 DOI 去重。要点:
@@ -1114,12 +1130,17 @@ paperflow medrxiv-fetch --file ./papers/searched_medrxiv_ids.txt --download-pdf 
 
 Europe PMC 走的是预印本全文,能补上 Crossref 只看标题摘要而漏掉的「基因缩写写法」(例:`Zfp263` vs `zinc finger 263`)。
 
+> 上面这套 **Crossref ∪ Europe PMC 并集只作用于 bioRxiv / medRxiv**。**ChemRxiv 是纯 Crossref 单后端**(prefix `10.26434`,publisher 记为 "American Chemical Society (ACS)",type `posted-content`),query 模式也**不并入 Europe PMC**。
+
 **注意点**
 
 1. **bioRxiv/medRxiv 的 DOI 都是 `10.1101/...`**,靠 6 位(bioRxiv) vs 8 位(medRxiv)accession 区分,所以 `--doi` 直接给 `10.1101/...` 即可,平台由命令本身决定。
 2. **PDF 403 反爬**:bioRxiv/medRxiv 对非浏览器客户端常返回 403,直连失败会自动走 CloakBrowser 回退——前提是设置 `PAPER_FETCH_CLOAK=1`(可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`)。arXiv 无此问题。
 3. **推荐工作流**:先 `*-search`(不限量拿全量清单)→ 人工筛选 → `*-fetch --file`(精确抓取元数据 + 下载 PDF),避免一次抓取过多。
 4. **排序说明**:并集结果中,Crossref 命中(相关性排序,`sort=relevance`)在前,Europe PMC 新增命中按其后端顺序追加。日期只能做过滤(`--start-date/--end-date`),不能"按日期排序+返回全部"(Crossref 限制日期排序不能配合 cursor 深度分页)。arXiv 按提交时间倒序。
+5. **ChemRxiv 检索走 Crossref,不用官方 API**:ChemRxiv 的公开 API(`chemrxiv.org/engage/chemrxiv/public-api/v1`)对非浏览器客户端(httpx/curl)返回 Cloudflare 403,而 Crossref 侧(prefix `10.26434`)是稳定、最全的元数据通道,故 `chemrxiv-*` 只查 Crossref(也不并入 Europe PMC)。⚠️ 代价见下(版本重复 / 新贴有入库延迟 / 只看标题摘要)。完整讨论见 README「注意点:为什么预印本检索走 Crossref 元数据」。
+6. **ChemRxiv PDF 直连可下**:PDF 端点固定为 `https://chemrxiv.org/doi/pdf/{doi}`,本网络实测经 httpx 直连即返回 `%PDF` 字节,**不需要** CloakBrowser / undetected_chromedriver 回退(与 bioRxiv/medRxiv 的 Cloudflare 403 相反)。万一某篇直连失败,`--download-pdf` 仍会自动走浏览器回退链。
+7. **版本重复(去重要手动)**:Crossref 把 ChemRxiv 每次改版都单独注册成一个 DOI work——`10.26434/chemrxiv-2025-tj4pr-v2` 与 `chemrxiv-2025-tj4pr`、`10.26434/chemrxiv.15007500/v2` 与 `/v1` 都会作为独立结果同时命中(见下方实测,3 条 DOI 实为 2 篇论文)。`chemrxiv-*` 不去重,用 `--file` 清单抓取前可自行剔除旧版 DOI。
 
 ### 1. 搜索并获取 arXiv 论文
 如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
@@ -1451,7 +1472,71 @@ Saved to /data2/pyPaperFlow/test/base_editing/medrxiv
 >
 > 默认（不设 `PAPER_FETCH_UNDETECTED`）时，biorxiv/medrxiv 命令的行为与此功能加入前完全一致，无任何影响。
 
+### 4. 搜索并获取 ChemRxiv 论文
 
+ChemRxiv 挂在 Cambridge "engage" 平台，官方有公开 API，但它的 endpoint（`chemrxiv.org/engage/chemrxiv/public-api/v1/items`）对非浏览器客户端是 **Cloudflare 403 墙**，httpx/curl 直接访问拿不到数据。ChemRxiv 的元数据会沉积到 Crossref（prefix `10.26434`，publisher 记为 "American Chemical Society (ACS)"，type `posted-content`），所以 `chemrxiv-*` 走**单一后端 = Crossref**（元数据 relevance 检索，`sort=relevance` + 本地布尔 AND），**不并入 Europe PMC**。query 为 DOI 时直接精确取回该论文。为什么用 Crossref 而不是官方 API，见 README「注意点」。
+
+```bash
+paperflow chemrxiv-search "base editing"
+paperflow chemrxiv-fetch "base editing" --start-date 2026-08-01 --end-date 2026-12-31 --download-pdf
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（ChemRxiv 最早日期为 2017-08-01）。
+- `--max-results`：限制返回条数；**缺省为不限量（返回该 query 全部命中）**。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+示例：
+
+```bash
+paperflow chemrxiv-fetch "AI for drug design" --max-results 50 -o ./papers/chemrxiv
+```
+
+搜索结果会保存为 `searched_chemrxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存（`source` 为 `chemrxiv`），包含 JSON 元数据，并在可用时下载 PDF。
+
+按 DOI / 文件抓取：`chemrxiv-search` 输出的是 `searched_chemrxiv_ids.txt`（每行一个 DOI，前缀 `10.26434/...`），`chemrxiv-fetch` 支持直接消费这些 DOI。query、`--file`、`--doi` 三者互斥，取其一即可。
+
+```bash
+# 单个 DOI（可重复 --doi）
+paperflow chemrxiv-fetch --doi 10.26434/chemrxiv.15007590/v1 --no-download-pdf -o ./papers/chemrxiv
+
+# 从 chemrxiv-search 生成的 DOI 文件抓取
+paperflow chemrxiv-fetch --file ./searched_chemrxiv_ids.txt --download-pdf -o ./papers/chemrxiv
+```
+
+
+> ⚠️ 下面是 chemrxiv-* 模块实测用例
+
+```python 
+❯ paperflow chemrxiv-search "base editing" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test/chemrxiv_demo
+Found 3 ChemRxiv papers.
+10.26434/chemrxiv.15007500/v1
+10.26434/chemrxiv.15007500/v2
+10.26434/chemrxiv.15007590/v1
+ChemRxiv IDs saved to ./test/chemrxiv_demo/searched_chemrxiv_ids.txt.
+```
+
+可以看到，过去一个多月 ChemRxiv 上 "base editing" 的命中很少——但这 **3 条 DOI 实际只有 2 篇论文**：
+
+- `10.26434/chemrxiv.15007500/v1`（2026-08-17）与 `/v2`（2026-08-19）是**同一篇** *Phenonium-Ion-Mediated Skeletal Editing of Paracyclophanes*（作者更新后重新提交，Crossref 把 v1/v2 各自注册成独立的 DOI work）；
+- `10.26434/chemrxiv.15007590/v1`（2026-08-18）是另一篇 *Multicomponent Molecular Editing of Polybutadiene: From Design Space to Battery Function*。
+
+这就是上面注意点第 7 条说的**版本重复**：抓取前若只想留最新版，需自行剔除旧版 DOI。
+
+紧接着抓取这些论文的元数据和 PDF：
+
+```python
+❯ paperflow chemrxiv-fetch -f ./test/chemrxiv_demo/searched_chemrxiv_ids.txt -o ./test/chemrxiv_demo --download-pdf
+Fetching 3 ChemRxiv DOIs from file /data2/pyPaperFlow/test/chemrxiv_demo/searched_chemrxiv_ids.txt.
+Fetched 3 ChemRxiv papers.
+Saved to /data2/pyPaperFlow/test/chemrxiv_demo/chemrxiv
+```
+
+> ✅ 与 bioRxiv/medRxiv 不同，这次 **3 份 PDF 全部经 `chemrxiv.org/doi/pdf/{doi}` httpx 直连下载成功**（返回 `%PDF` 字节），没遇到 Cloudflare 403，无需浏览器回退。
+
+下载下来的结果可查看 [chemrxiv](../test/chemrxiv_demo/chemrxiv/)，每篇都按 `{source}/{year}/{source_id}/` 结构保存（目录名里 DOI 的 `/` 换成 `_`，如 `10.26434_chemrxiv.15007590_v1/`），包含 JSON 元数据以及新增下载的 PDF 文件。
 
 
 ### 1. Search and Fetch arXiv Papers
@@ -1581,3 +1666,65 @@ From a Cloudflare-flagged IP, steps 1–5 (including CloakBrowser, headless or h
 >    ```
 >
 > With `PAPER_FETCH_UNDETECTED` unset (the default), the biorxiv/medrxiv commands behave exactly as before this feature was added — no impact.
+
+### 4. Search and Fetch ChemRxiv Papers
+
+ChemRxiv metadata is fetched from **Crossref only** (a single backend — no Europe PMC union): the platform's official public API (`chemrxiv.org/engage/chemrxiv/public-api/v1/items`) is Cloudflare-walled to non-browser clients (HTTP 403), whereas ChemRxiv deposits every preprint to Crossref under prefix `10.26434` (publisher recorded as "American Chemical Society (ACS)", type `posted-content`). The trade-offs vs. the official API (newest-post deposit lag, metadata-only relevance search, per-version DOI duplication) are discussed in the "Why Crossref instead of the official API" note in the README. When the query is itself a DOI, it resolves the paper directly.
+
+```bash
+paperflow chemrxiv-search "base editing"
+paperflow chemrxiv-fetch "base editing" --start-date 2026-08-01 --end-date 2026-12-31 --download-pdf
+```
+
+Useful options:
+
+- `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format (ChemRxiv dates back to 2017-08-01).
+- `--max-results`: cap the number of results. Default is **no limit** (return all matches for the query).
+- `--output-dir`: save the ID list or fetched records to a different directory.
+- `--no-download-pdf`: skip PDF download and save metadata only.
+
+Example:
+
+```bash
+paperflow chemrxiv-fetch "AI for drug design" --max-results 50 -o ./papers/chemrxiv
+```
+
+Search output is saved as `searched_chemrxiv_ids.txt`. Fetched records are stored under `source/year/source_id/` (with `source` set to `chemrxiv`; the `/` in the DOI becomes `_` in the directory name) with JSON metadata and, when available, a PDF copy.
+
+Fetch by DOI or file: `chemrxiv-fetch` accepts one or more `--doi` values or a `--file` of DOIs (one per line) in place of a query, so you can consume `chemrxiv-search` output directly.
+
+```bash
+paperflow chemrxiv-fetch --doi 10.26434/chemrxiv.15007590/v1 --no-download-pdf -o ./papers/chemrxiv
+paperflow chemrxiv-fetch --file ./searched_chemrxiv_ids.txt --download-pdf -o ./papers/chemrxiv
+```
+
+Unlike bioRxiv/medRxiv, ChemRxiv PDFs are **not** Cloudflare-walled on the PDF route: the deterministic `https://chemrxiv.org/doi/pdf/{doi}` URL downloads directly over plain httpx (`%PDF` bytes), so no browser fallback is normally needed. If an individual fetch ever fails, `--download-pdf` still falls back to the same opt-in CloakBrowser / undetected_chromedriver chain. One caveat: Crossref registers every ChemRxiv revision as its own DOI work (`.../v1` and `.../v2` both match a search), so keep only the latest version if you do not want both.
+
+A real chemrxiv-* run — committed sample data under [`test/chemrxiv_demo/`](../test/chemrxiv_demo/):
+
+```bash
+❯ paperflow chemrxiv-search "base editing" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test/chemrxiv_demo
+Found 3 ChemRxiv papers.
+10.26434/chemrxiv.15007500/v1
+10.26434/chemrxiv.15007500/v2
+10.26434/chemrxiv.15007590/v1
+ChemRxiv IDs saved to ./test/chemrxiv_demo/searched_chemrxiv_ids.txt.
+```
+
+Over roughly the last month ChemRxiv has very few "base editing" hits — and these **3 DOI records are only 2 distinct papers**:
+
+- `10.26434/chemrxiv.15007500/v1` (posted 2026-08-17) and `/v2` (2026-08-19) are the **same** paper, *Phenonium-Ion-Mediated Skeletal Editing of Paracyclophanes*, re-submitted after a revision — Crossref registers v1 and v2 as two separate DOI works.
+- `10.26434/chemrxiv.15007590/v1` (2026-08-18) is the other paper, *Multicomponent Molecular Editing of Polybutadiene: From Design Space to Battery Function*.
+
+This is the per-version duplication caveat above: drop the stale-version DOIs from a `--file` list before fetching if you only want the newest. Now fetch the metadata and PDFs for the found DOIs:
+
+```bash
+❯ paperflow chemrxiv-fetch -f ./test/chemrxiv_demo/searched_chemrxiv_ids.txt -o ./test/chemrxiv_demo --download-pdf
+Fetching 3 ChemRxiv DOIs from file /data2/pyPaperFlow/test/chemrxiv_demo/searched_chemrxiv_ids.txt.
+Fetched 3 ChemRxiv papers.
+Saved to /data2/pyPaperFlow/test/chemrxiv_demo/chemrxiv
+```
+
+> ✅ Unlike bioRxiv/medRxiv, all 3 PDFs downloaded **directly** over `https://chemrxiv.org/doi/pdf/{doi}` (`%PDF` bytes) — no Cloudflare 403, no browser fallback.
+
+Browse the committed results under [`chemrxiv`](../test/chemrxiv_demo/chemrxiv/): each paper lives in `{source}/{year}/{source_id}/` (the `/` in the DOI becomes `_`, e.g. `10.26434_chemrxiv.15007590_v1/`) with JSON metadata plus the downloaded PDF.
