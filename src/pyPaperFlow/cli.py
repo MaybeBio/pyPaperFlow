@@ -7,6 +7,7 @@ from typing import *
 from .pubmed.pubmed_fetcher import PubmedFetcher
 from .preprint.arxiv_fetcher import ArxivFetcher
 from .preprint.biorxiv_fetcher import BioRxivFetcher
+from .preprint.chemrxiv_fetcher import ChemRxivFetcher
 from .pubmed.pubmed_merger import PubmedMerger
 from .integrations import pdf_fetch
 from .integrations.github_export import run_github_export
@@ -607,6 +608,85 @@ def medrxiv_fetch_cmd(
     if download_pdf:
         _report_pdf_summary(records, "medRxiv", cloudflare=True)
     typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'medrxiv'))}", fg=typer.colors.GREEN)
+
+
+@app.command("chemrxiv-search")
+def chemrxiv_search_cmd(
+    query: str = typer.Argument(..., help="ChemRxiv search query."),
+    max_results: Optional[int] = typer.Option(None, "--max-results", "-n", help="Maximum number of ChemRxiv results to return. Default: no limit (return all matches)."),
+    storage_dir: str = opt_storage,
+    output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched ChemRxiv IDs."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+):
+    """Search ChemRxiv and write matching DOIs to a text file.
+
+    Metadata is retrieved from Crossref over ChemRxiv records (prefix
+    10.26434, publisher American Chemical Society (ACS)).
+    """
+    fetcher = ChemRxivFetcher(root_dir=storage_dir)
+    records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results)
+    typer.echo(f"Found {len(records)} ChemRxiv papers.")
+    for record in records:
+        typer.echo(record.source_id)
+
+    save_dir = output_dir if output_dir else storage_dir
+    output_file = _save_id_list(save_dir, "searched_chemrxiv_ids.txt", [record.source_id for record in records])
+    typer.echo(f"ChemRxiv IDs saved to {output_file}.")
+
+
+@app.command("chemrxiv-fetch")
+def chemrxiv_fetch_cmd(
+    query: Optional[str] = typer.Argument(None, help="ChemRxiv search query."),
+    file: Optional[str] = typer.Option(None, "--file", "-f", help="Text file containing ChemRxiv DOIs (one per line)."),
+    doi: Optional[List[str]] = typer.Option(None, "--doi", "-d", help="Single ChemRxiv DOI to fetch, can be repeated."),
+    max_results: int = typer.Option(100, "--max-results", "-n", help="Maximum number of ChemRxiv records to fetch (query mode only)."),
+    storage_dir: str = opt_storage,
+    output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save fetched ChemRxiv papers."),
+    start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD (query mode only)."),
+    end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD (query mode only)."),
+    download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
+):
+    """Fetch ChemRxiv metadata and attempt to download PDFs.
+
+    Metadata retrieval uses Crossref over ChemRxiv records (prefix 10.26434).
+    Provide one of: a positional query, --file, or one or more --doi values.
+    """
+    fetcher = ChemRxivFetcher(root_dir=storage_dir)
+    output = output_dir if output_dir else storage_dir
+
+    provided = [name for name, value in (("query", query), ("--file", file), ("--doi", doi)) if value]
+    if len(provided) > 1:
+        typer.secho(f"Error: provide only one of query, --file, or --doi (got {', '.join(provided)}).", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+
+    if query:
+        records = fetcher.fetch_from_query(
+            query=query,
+            output_dir=output,
+            start_date=start_date,
+            end_date=end_date,
+            max_results=max_results,
+            download_pdf=download_pdf,
+        )
+    elif file:
+        if not os.path.exists(file):
+            typer.echo(f"Error: File {file} not found.")
+            raise typer.Exit(code=1)
+        with open(file, "r") as handle:
+            dois = [line.strip() for line in handle if line.strip()]
+        typer.echo(f"Fetching {len(dois)} ChemRxiv DOIs from file {os.path.abspath(file)}.")
+        records = fetcher.fetch_from_dois(dois, output_dir=output, download_pdf=download_pdf)
+    elif doi:
+        records = fetcher.fetch_from_dois(doi, output_dir=output, download_pdf=download_pdf)
+    else:
+        typer.echo("Error: Must provide a query, --file, or --doi.")
+        raise typer.Exit(code=1)
+
+    typer.echo(f"Fetched {len(records)} ChemRxiv papers.")
+    if download_pdf:
+        _report_pdf_summary(records, "ChemRxiv", cloudflare=True)
+    typer.secho(f"Saved to {os.path.abspath(os.path.join(output, 'chemrxiv'))}", fg=typer.colors.GREEN)
 
 
 
