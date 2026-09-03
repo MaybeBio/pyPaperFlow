@@ -1,10 +1,4 @@
-## 选择区域 1
-
 **来源页面:** [Help - PubMed](https://pubmed.ncbi.nlm.nih.gov/help/)
-
-**选择器信息:**
-- XPath: `//*[@id="help-page"]`
-- CSS Selector: `#help-page`
 
 ### Page navigation
  - [FAQs](#faqs)
@@ -1483,4 +1477,3 @@ proc natl acad sci u s a|1991||3248|mann bj|P32022-1|
 - [PKZIP](https://ftp.ncbi.nih.gov/pubmed/J_Entrez.zip)
  Back to Top
 
-*选择时间: 2026/5/13 11:41:33*
