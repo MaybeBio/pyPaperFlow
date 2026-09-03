@@ -6,7 +6,7 @@
 
 <p><strong>An automated literature processing platform for scientific researchers.</strong></p>
 
-<p>Batch retrieve, fetch, parse, and structure papers from PubMed, arXiv, bioRxiv, and DOI-based sources.</p>
+<p>Batch retrieve, fetch, parse, and structure papers from PubMed, arXiv, bioRxiv, ChemRxiv, and DOI-based sources.</p>
 
 <p>From paper retrieval to knowledge internalization, automate the heavy lifting and keep the judgment human.</p>
 
@@ -15,7 +15,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![Workflow](https://img.shields.io/badge/Workflow-7%20Stages-0366d6)](docs/Design.md)
-[![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv%20%2F%20medRxiv-f59e0b)](#features)
+[![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv%20%2F%20medRxiv%20%2F%20chemRxiv-f59e0b)](#features)
 [![PyPI version](https://img.shields.io/pypi/v/pyPaperFlow.svg?logo=pypi&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyPaperFlow.svg?logo=python&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Downloads](https://static.pepy.tech/badge/pyPaperFlow)](https://pepy.tech/project/pyPaperFlow)
@@ -224,6 +224,8 @@ Current available modules include (`will be continuously updated`):
 │ biorxiv-fetch      Fetch bioRxiv metadata and attempt to download PDFs.                                                                    │
 │ medrxiv-search     Search medRxiv and write matching IDs to a text file.                                                                   │
 │ medrxiv-fetch      Fetch medRxiv metadata and attempt to download PDFs.                                                                    │
+│ chemrxiv-search    Search ChemRxiv and write matching IDs to a text file.                                                                  │
+│ chemrxiv-fetch     Fetch ChemRxiv metadata and attempt to download PDFs.                                                                   │
 │ paper-fetch        Fetch PDFs by DOI — passes through to the paper-fetch engine.                                                           │
 │ pdf-parse          Parse a PDF file using MinerU engine, and clean up the output directory.                                                │
 │ mineru-parse       Parse mineru output content_list_v2.json into canonical sectioned JSON.                                                 │
@@ -255,6 +257,10 @@ bioRxiv Modules:
 medRxiv Modules:
 - medrxiv-search # search medRxiv and return matching IDs
 - medrxiv-fetch # fetch medRxiv metadata and attempt to download PDFs
+
+ChemRxiv Modules:
+- chemrxiv-search # search ChemRxiv and return matching IDs
+- chemrxiv-fetch # fetch ChemRxiv metadata and attempt to download PDFs
 
 Third-party Modules:
 - paper-fetch # fetch PDFs by DOI
@@ -304,6 +310,16 @@ Our literature database primarily covers biomedical research and computational i
 - PubMed/Medline
 - arXiv
 - bioRxiv，medRxiv，chemRxiv
+
+> **⚠️ — preprint search runs on Crossref metadata, not each server's official API.** bioRxiv/medRxiv/ChemRxiv preprints are searched through a Crossref‑backed index (openRxiv prefix `10.64898` / ChemRxiv prefix `10.26434`) rather than the native portals, because Crossref exposes one uniform relevance search (`query.bibliographic`) with cursor pagination across all preprint servers. For ChemRxiv in particular, its official public API (`chemrxiv.org/engage/chemrxiv/public-api/v1/items`) is **Cloudflare‑walled (HTTP 403) to non‑browser clients**, while the Crossref deposit stays reliably queryable, so ChemRxiv search is Crossref‑only (no Europe PMC leg). bioRxiv additionally unions Europe PMC full‑text search (disable with `--no-europepmc`). 
+> 
+> Trade‑offs vs. native APIs: 
+> 
+> ① **deposit lag** — a preprint posted minutes ago may not be indexed in Crossref yet; 
+> 
+> ② **metadata‑only matching** — hits are on title/abstract, not full text (only the bioRxiv/medRxiv Europe PMC leg indexes full text); 
+> 
+> ③ **version duplication** — Crossref registers every revision as its own DOI work, so `.../v1` and `.../v2` both match and may need manual dedup.
 
 We recommend that you proactively learn and master the search syntax of these databases, as our built‑in search module functions similarly to the search bar on official web portals.
 
