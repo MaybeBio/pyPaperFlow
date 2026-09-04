@@ -24,8 +24,10 @@
 <p>
   文档阅读👉
   <a href="README.md">English</a> |
-  <a href="README_zh.md">中文</a> 
+  <a href="README_zh.md">中文</a> |
+  <a href="https://maybebio.github.io/pyPaperFlow/" target="_blank">在线文档</a>
 </p>
+
 
 <p>
   <a href="./docs/Design.md">设计文档</a> |

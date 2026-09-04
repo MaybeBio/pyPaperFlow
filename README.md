@@ -22,10 +22,12 @@
 [![Docs](https://img.shields.io/badge/Docs-online_docs-2ea44f)](https://maybebio.github.io/pyPaperFlow/)
 
 <p>
-  Document here 👉
+  文档阅读👉
   <a href="README.md">English</a> |
-  <a href="README_zh.md">中文</a> 
+  <a href="README_zh.md">中文</a> |
+  <a href="https://maybebio.github.io/pyPaperFlow/" target="_blank">中文在线文档</a>
 </p>
+
 
 <p>
   <a href="./docs/Design.md">Design</a> |
