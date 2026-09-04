@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """Regenerate mkdoc_site/*.md content pages from README_zh.md.
 
-Splits the Chinese README by its section headings (H2/H3), rewrites
-cross-page links and local asset/config paths, and demotes heading levels
-so each generated page has a single H1. It also copies ``figs/`` into
-``mkdoc_site/assets/`` so local image links resolve.
+Splits the Chinese README by its H2/H3 headings. ``RULES`` gives known
+sections stable English filenames; any H2 not listed there is auto-named from
+its heading text, and any H3 not listed is folded into its parent H2 page. So
+adding or removing a top-level section in the README needs no edits here —
+the page appears/disappears automatically, and ``nav.yml`` follows the same
+structure. Cross-page links and local asset/config paths are rewritten, and
+heading levels are demoted so each page has a single H1. ``figs/`` is copied
+into ``mkdoc_site/assets/`` so local image links resolve.
 
-``mkdoc_site/index.md`` (the homepage) is left untouched. The hand-written
-reference docs live in ``docs/`` (Design.md, Cases.md, Skills.md,
-mineru_parse.md, undetected_fallback.md, PaperDB/) and are not part of the
-MkDocs source (``docs_dir`` is ``mkdoc_site``), so they are never rendered.
+The homepage ``mkdoc_site/index.md`` is hand-written and left untouched; it is
+the only tracked file under ``mkdoc_site/`` (everything else is gitignored).
+``mkdoc_site/nav.yml`` is generated here and merged into ``mkdocs.yml`` via
+``INHERIT``, so the nav tracks the README structure automatically.
 
 Run from the repo root (also run by the CI docs workflow before ``mkdocs build``):
 
@@ -26,9 +30,9 @@ README = ROOT / "README_zh.md"
 DOCS = ROOT / "mkdoc_site"
 GH = "https://github.com/MaybeBio/pyPaperFlow"
 
-# (heading_level, keyword, target_relpath). ``keyword`` is matched as a
-# substring of the heading text (emoji included in the heading are ignored by
-# this check); the first matching rule wins.
+# (heading_level, keyword, target_relpath). ``keyword`` is a substring of the
+# heading text; first match wins. H2s not listed are auto-named from their
+# heading text; H3s not listed are folded into their parent H2 page.
 RULES = [
     (2, "简介", "overview.md"),
     (2, "功能特性", "features.md"),
@@ -52,18 +56,20 @@ RULES = [
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 
 
-def match_heading(line: str) -> tuple[int, str] | None:
-    m = HEADING_RE.match(line)
-    if not m:
-        return None
-    return len(m.group(1)), m.group(2).strip()
-
-
-def resolve_target(level: int, text: str) -> str | None:
+def find_rule(level: int, text: str) -> str | None:
     for rule_level, keyword, target in RULES:
         if rule_level == level and keyword in text:
             return target
     return None
+
+
+def slugify(text: str) -> str:
+    """Heading text -> filename stem (keeps CJK/alnum, maps the rest to '-')."""
+    stem = text.strip()
+    stem = re.sub(r"[*_`]", "", stem)
+    stem = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", stem)
+    stem = re.sub(r"[^\w]+", "-", stem)
+    return stem.strip("-") or "section"
 
 
 def gh_url(path: str) -> str:
@@ -73,8 +79,7 @@ def gh_url(path: str) -> str:
 
 
 def process(content: str, prefix: str) -> str:
-    # 1) repo-file links (docs/config/test) -> GitHub URLs. These files are
-    #    not rendered into the site, so link out to the repo instead.
+    # 1) repo-file links (docs/config/test) -> GitHub URLs
     for top in ("docs", "config", "test"):
         content = re.sub(
             rf"\]\(\./{top}/([^)]*)\)",
@@ -87,8 +92,7 @@ def process(content: str, prefix: str) -> str:
         lambda m: f"]({prefix}assets/{m.group(1)})",
         content,
     )
-
-    # 4) demote headings so the page's first heading becomes H1 (skip code fences)
+    # 3) demote headings so the page's first heading becomes H1 (skip fences)
     in_fence = False
     first_level: int | None = None
     out: list[str] = []
@@ -110,40 +114,102 @@ def process(content: str, prefix: str) -> str:
     return "".join(out)
 
 
-def main() -> None:
-    # refresh docs/assets from figs/ so image links resolve
-    shutil.rmtree(DOCS / "assets", ignore_errors=True)
-    shutil.copytree(ROOT / "figs", DOCS / "assets")
-
-    lines = README.read_text(encoding="utf-8").splitlines(keepends=True)
-
-    buffers: dict[str, list[str]] = {}
-    order: list[str] = []
-    current: str | None = None
+def parse_structure(lines: list[str]) -> list[dict]:
+    """Walk the README into an ordered H2 tree (each node records its line index)."""
+    sections: list[dict] = []
+    current: dict | None = None
     in_fence = False
-
-    for line in lines:
+    for idx, line in enumerate(lines):
         stripped = line.lstrip()
         if stripped.startswith("```") or stripped.startswith("~~~"):
             in_fence = not in_fence
-            if current is not None:
-                buffers[current].append(line)
             continue
+        if in_fence:
+            continue
+        m = HEADING_RE.match(line)
+        if not m:
+            continue
+        level = len(m.group(1))
+        title = m.group(2).strip()
+        if level == 2:
+            if title == "目录":
+                current = None
+                continue
+            current = {"level": 2, "title": title, "idx": idx, "children": []}
+            sections.append(current)
+        elif level == 3 and current is not None:
+            current["children"].append({"level": 3, "title": title, "idx": idx})
+    return sections
 
-        if not in_fence:
-            heading = match_heading(line)
-            if heading is not None:
-                target = resolve_target(*heading)
-                if target is not None:
-                    current = target
-                    if target not in buffers:
-                        buffers[target] = []
-                        order.append(target)
-                    buffers[current].append(line)
-                    continue
 
-        if current is not None:
-            buffers[current].append(line)
+def assign_targets(sections: list[dict]) -> None:
+    for sec in sections:
+        rule2 = find_rule(2, sec["title"])
+        if rule2:
+            sec["target"] = rule2
+        elif sec["children"]:
+            sec["target"] = f"{slugify(sec['title'])}/index.md"
+        else:
+            sec["target"] = f"{slugify(sec['title'])}.md"
+
+        for child in sec["children"]:
+            rule3 = find_rule(3, child["title"])
+            child["target"] = rule3 if rule3 else sec["target"]
+
+
+def build_buffers(lines: list[str], sections: list[dict]) -> tuple[dict[str, list[str]], list[str]]:
+    boundaries: list[tuple[int, str]] = []
+    for sec in sections:
+        boundaries.append((sec["idx"], sec["target"]))
+        for child in sec["children"]:
+            boundaries.append((child["idx"], child["target"]))
+    boundaries.sort()
+
+    buffers: dict[str, list[str]] = {}
+    order: list[str] = []
+    for i, (start, target) in enumerate(boundaries):
+        end = boundaries[i + 1][0] if i + 1 < len(boundaries) else len(lines)
+        if target not in buffers:
+            buffers[target] = []
+            order.append(target)
+        buffers[target].extend(lines[start:end])
+    return buffers, order
+
+
+def build_nav(sections: list[dict]) -> str:
+    def q(text: str) -> str:
+        return f'"{text}"'
+
+    lines = ["nav:", "  - 首页: index.md"]
+    for sec in sections:
+        subs = [c for c in sec["children"] if c["target"] != sec["target"]]
+        if subs:
+            lines.append(f"  - {q(sec['title'])}:")
+            for c in sec["children"]:
+                lines.append(f"      - {q(c['title'])}: {c['target']}")
+        else:
+            lines.append(f"  - {q(sec['title'])}: {sec['target']}")
+    return "\n".join(lines) + "\n"
+
+
+def clean_docs() -> None:
+    for p in DOCS.iterdir():
+        if p.name == "index.md":
+            continue
+        if p.is_dir():
+            shutil.rmtree(p, ignore_errors=True)
+        else:
+            p.unlink(missing_ok=True)
+
+
+def main() -> None:
+    clean_docs()
+    shutil.copytree(ROOT / "figs", DOCS / "assets")
+
+    lines = README.read_text(encoding="utf-8").splitlines(keepends=True)
+    sections = parse_structure(lines)
+    assign_targets(sections)
+    buffers, order = build_buffers(lines, sections)
 
     for target in order:
         body = "".join(buffers[target])
@@ -151,8 +217,10 @@ def main() -> None:
         out = DOCS / target
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(rendered, encoding="utf-8")
-        print(f"wrote {target} ({len(buffers[target])} lines)")
+        print(f"wrote {target}")
 
+    (DOCS / "nav.yml").write_text(build_nav(sections), encoding="utf-8")
+    print("wrote nav.yml")
     print("done")
 
 

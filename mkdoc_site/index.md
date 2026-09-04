@@ -15,6 +15,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![Workflow](https://img.shields.io/badge/Workflow-7%20Stages-0366d6)](https://github.com/MaybeBio/pyPaperFlow/blob/main/docs/Design.md)
+[![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv%20%2F%20medRxiv%20%2F%20chemRxiv-f59e0b)](#功能特性)
 [![PyPI version](https://img.shields.io/pypi/v/pyPaperFlow.svg?logo=pypi&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyPaperFlow.svg?logo=python&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Downloads](https://static.pepy.tech/badge/pyPaperFlow)](https://pepy.tech/project/pyPaperFlow)
@@ -46,8 +47,7 @@ paperflow --help
 - [功能特性](features.md)
 - [架构设计哲学](architecture.md)
 - [安装](installation.md)
-- 使用方法
-    - [模块概述](usage/index.md)
+- [使用方法](usage/index.md)
     - [1. 研究起点](usage/research-start.md)
     - [2. 文献检索（及元数据抓取）](usage/search.md)
     - [3. 文献获取（及全文下载）](usage/fetch.md)
@@ -59,10 +59,3 @@ paperflow --help
 - [测试示例](test-cases.md)
 - [一个完整的文献调研示例](full-survey.md)
 - [后续维护待办](todo.md)
-- 参考（在 GitHub 仓库中查看）
-    - [设计文档](https://github.com/MaybeBio/pyPaperFlow/blob/main/docs/Design.md)
-    - [测试用例](https://github.com/MaybeBio/pyPaperFlow/blob/main/docs/Cases.md)
-    - [Skills](https://github.com/MaybeBio/pyPaperFlow/blob/main/docs/Skills.md)
-    - [MinerU 解析](https://github.com/MaybeBio/pyPaperFlow/blob/main/docs/mineru_parse.md)
-    - [undetected 回退](https://github.com/MaybeBio/pyPaperFlow/blob/main/docs/undetected_fallback.md)
-    - [PaperDB 各数据库抓取笔记](https://github.com/MaybeBio/pyPaperFlow/tree/main/docs/PaperDB)
