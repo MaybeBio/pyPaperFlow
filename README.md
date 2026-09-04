@@ -19,6 +19,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/pyPaperFlow.svg?logo=pypi&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyPaperFlow.svg?logo=python&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Downloads](https://static.pepy.tech/badge/pyPaperFlow)](https://pepy.tech/project/pyPaperFlow)
+[![Docs](https://img.shields.io/badge/Docs-online_docs-2ea44f)](https://maybebio.github.io/pyPaperFlow/)
 
 <p>
   Document here 👉
@@ -150,6 +151,8 @@ flowchart TD
 
 ## 📦 Installation
 
+> ⚠️ For typical usage, you only need to install our tool, seen below:
+
 ```bash
 # 1. install our tool
 ## ✏️1️⃣ option1: Install via pip (Recommended)
@@ -159,9 +162,11 @@ pip install pyPaperFlow
 git clone https://github.com/MaybeBio/pyPaperFlow.git
 cd pyPaperFlow
 pip install -e .
+```
 
---------------------------------------------------------
+> Some optional dependencies, if you do not need to use the corresponding functional modules, you can ignore the installation. seen below:
 
+```bash
 # 2. install MinerU
 # follow the official installation guide: https://github.com/opendatalab/MinerU
 # verify installation: mineru --help
@@ -181,7 +186,6 @@ pip install openai anthropic
 pip install paperscraper
 ```
 
-> ⚠️ For typical usage, you only need to install the repository from source and MinerU, which are steps 1 and 2. You may even perform only Step 1 to install our software, since MinerU is irrelevant to the literature‑fetch workflow.
 
 ## 🛠️ Usage 
 

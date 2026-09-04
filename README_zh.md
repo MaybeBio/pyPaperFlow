@@ -188,7 +188,7 @@ pip install paperscraper
 
 ## 🛠️ 使用方法
 
-> 📌 **提示**：想直接上手的，参考使用示例 [Cases.md](./docs/Cases.md) 即可，以下内容均为理论流程分析，可跳过
+> 📌 **提示**：想直接上手的，参考使用示例 [Cases.md](./docs/Cases.md) 即可，以下内容均为流程细节展开分析部分，可跳过
 
 本工具 pyPaperFlow 专为学术研究打造，整体设计严格贴合科研人员开展`文献调研、文献研读、文献理解分析及文献语料复用`的真实工作逻辑。
 
@@ -528,6 +528,8 @@ pubmed-content 模块可帮助你下载 PMC 开放获取全文（若存在），
 
 此外，可采用元数据获取 + 全文下载的分步执行模式，建议两类操作分开处理。
 
+pubmed-all 模块可帮助你同时获取 PubMed 文献元数据和 PMC 开放获取全文（若存在），并将其保存到指定存储目录。
+
 ```python
 ❯ paperflow pubmed-all --help
                                                                                                                                                                   
@@ -556,6 +558,8 @@ pubmed-content 模块可帮助你下载 PMC 开放获取全文（若存在），
 
 
 对于无 PMC 全文的 PubMed 文献，或其他数据库来源的文献，若仅持有 DOI（pubmed‑meta 模块可确保获取 DOI 信息），可直接通过 DOI 下载开放获取全文。
+
+paper-fetch 模块可帮助你通过 DOI 下载开放获取的 PDF 文件。
 
 ```python 
 ❯ paperflow paper-fetch --help
@@ -611,7 +615,7 @@ examples:
 ```
 
 
-感谢[paper-fetch](https://github.com/Agents365-ai/paper-fetch)的工作！我们魔改并封装了其中的一个脚本。
+感谢[paper-fetch](https://github.com/Agents365-ai/paper-fetch)的工作！我们魔改并封装了其中的一个脚本，并且进一步增加了其他的回退来源。
 
 > 🔙 paper-fetch 模块的回滚边界：commit `bc8394c`（`update paper-fetch module according to upstream repo`）是**原始上游脚本**；commit `89eda06bac1f853254b04aee9e8916109c7771a1` 是对它的第一次本地**修改**。以后需要回滚到原始模块时，以 `89eda06` 为边界即可——例如 `git show 89eda06^:src/pyPaperFlow/integrations/pdf_fetch.py`（内容与 `bc8394c` 一致）。
 
@@ -709,6 +713,7 @@ PAPER_FETCH_CLOAK=1 paperflow paper-fetch 10.1126/sciadv.aee6105 --out ./pdfs
 ```
 
 > **实践要点（实测经验）**
+>
 > - Cloak **不是**付费墙绕过工具：只在"OA 论文下载被 Cloudflare 拦截"时触发。付费墙论文（无 OA 副本，如 `10.1016/j.cels.2025.101486`）根本到不了下载层，Cloak 永远不会被调用。
 > - `science.org` 属于"强挑战"，**headless 过不去**（会卡在 "Just a moment…"）——必须 `PAPER_FETCH_CLOAK_HEADED=1` + 真实显示环境（桌面；无桌面服务器可用 `xvfb-run` 包一层）。
 > - Cloak 只有在来源返回了直接 `url_for_pdf` 时才有 URL 可重试。仅有 PMC 副本（Unpaywall 只给落地页、无 `url_for_pdf`）的论文，上游原版脚本不会去尝试。
@@ -725,6 +730,7 @@ export PAPER_FETCH_INSTITUTIONAL=1   # 只有在机构网络内才有效
 ```
 
 > **关键前提（实测验证）：** 授权靠的是*调用方所处的网络*，不是脚本本身。只有机器位于**校园网或机构 VPN 内**，出版商直链才能成功——出版商识别的是你机构的 IP 段（或 Cookies / EZproxy）。若从机构外 IP（数据中心或家用网络）运行，URL 仍会正确构造，但出版商会回 `HTTP 403 Forbidden`，最终报 `download_network_error`（可重试）而不是 `not_found`——凭这个错误类型变化就能判断机构模式确实生效了。
+>
 > - 结果信封的 `auth_mode` 字段会显示 `"institutional"`（vs `"public"`）。
 > - 直链模板按 DOI 前缀匹配；Elsevier（`10.1016/`）还需经 Crossref 查询 PII 并落到 `sciencedirect.com/.../pdfft`——实测可用。支持的出版商：Nature、Science、Wiley、Springer、ACS、PNAS、NEJM、SAGE、Taylor & Francis、Elsevier、MDPI。
 > - 自动 **1 req/s** 限速以遵守出版商 ToS（保护你机构 IP 不被出版商限流）。
@@ -740,6 +746,7 @@ export CORE_API_KEY=your_core_api_key   # 免费申请：https://core.ac.uk/serv
 ```
 
 > **原理与要点**
+>
 > - CORE 是「仓库聚合器」而非单一出版商：它从机构库、学科库等海量 OA 来源汇总全文，能补上其他来源覆盖不到的仓库副本。
 > - 该来源**仅在**前面的 OA 来源（Unpaywall / Semantic Scholar / arXiv / PMC / bioRxiv）都未命中时才触发——不会干扰正常 OA 下载路径，因此常开无副作用。
 > - 需要免费 API key（Bearer 认证）；不设 `CORE_API_KEY` 时该来源静默跳过。
@@ -795,15 +802,15 @@ export PAPER_FETCH_INSTITUTIONAL=1       # 付费墙论文的出版商直链
 
 
 
-与 PMC 全文解析逻辑不同，非 PubMed 来源文献仅可通过 paper‑fetch 模块获取 PDF 格式原文。
+与 PMC 全文解析逻辑不同，非 PubMed 来源文献可通过 paper‑fetch 模块获取 PDF 格式原文（预印本则可通过相应*-fetch模块实现pdf下载）。
 
 建议统一将所有文献信息标准化为 Markdown 格式或 JSON 格式。
 
 鉴于后续需开展语段分割与信息提取，从编程调用便捷性角度，优先选用 JSON 格式作为中间转换载体。
 
-工具内置 pdf‑parser 模块，依托 MinerU 解析引擎将 PDF 文件解析为基础 Markdown 文件与结构化 JSON 文件。
+我们这里的实现是，工具内置 pdf‑parser 模块，依托 MinerU 解析引擎将 PDF 文件解析为基础 Markdown 文件与结构化 JSON 文件。
 
-具体规范参考 MinerU 官方文档。考虑到普通用户通常无 GPU 算力用于加速解析，本工具默认启用基础解析模式（即 pipeline 后端）。
+具体规范参考 MinerU 官方文档（https://github.com/opendatalab/mineru）。考虑到普通用户通常无 GPU 算力用于加速解析，本工具默认启用基础解析模式（即 pipeline 后端）。
 
 ```python
 ❯ paperflow pdf-parse --help
@@ -834,14 +841,14 @@ export PAPER_FETCH_INSTITUTIONAL=1       # 付费墙论文的出版商直链
 
 
 
-> 🌟 关于pdf文献获取模块，我们也提供了一系列脚本参考，你可以将其整合到 skill 中或独立实现: [Paper pdf fetch](./docs/Skills.md)
+> 🌟 关于pdf文献获取模块，我们也提供了一系列第三方skill/MCP工具参考，你可以将其整合到 skill 中或独立实现: [paper pdf fetch](./docs/Skills.md)
 
 
 ### 4. 文献内容提取与结构化处理
 
 在上一个阶段，我们获取了文献的元数据+文本内容：
 - 对于 pubmed文献：我们获取了元数据，并通过PMC下载了全文文本内容（如果有的话）, 然后解析输出为 markdown 和 json 格式
-- 对于非 pubmed 文献：我们通过 doi 获取了 pdf 文件，使用 mineru 解析引擎将其解析，输出格式也是统一到 markdown 和 json 格式
+- 对于非 pubmed 文献：我们通过 doi（对于预印本则是通过相应*-fetch模块） 获取了 pdf 文件，使用 mineru 解析引擎将其解析，输出格式也是统一到 markdown 和 json 格式
   
 这两者输出的 markdown 文件都可以作为全文文本内容替代，可以作为文献本体阅读使用，但是难以进行章节提取和规范化处理。
 
@@ -876,6 +883,8 @@ other
 为了后续数据资料的完整性（因为有些pubmed 文献没有 pmc 全文），我们设计了两个模块来结构化提取和表征一篇 pubmed 文献。
 
 首先是合并元数据和文本数据（如果有 pmc 的话），生成一个包含完整信息的 json 文件：
+
+pubmed-merge-json 模块可帮助你将指定文件夹下所有 pubmed 文献的元数据和文本内容进行合并，生成一个包含同一topic完整信息的 json/jsonl 文件。
 
 ```python
 ❯ paperflow pubmed-merge-json --help
@@ -916,6 +925,8 @@ other
 我们默认会对你所提供的输入文件夹下的所有 pubmed 文献进行独立的文献合并，并汇总你所指定清单范围内的 json 文件，进行二次合并为 1 个汇总的 json 文件（这通常发生在你希望将同一个研究主题的文献进行汇总/构造初步文献知识库的情况下）。
 
 而这个汇总的 json 文件，是我们下一步进行结构化归类提取的起点：
+
+pubmed-export-md 模块可帮助你将指定的汇总 json 文件，依据章节提取配置文件，批量导出并合并为一个规范化的 markdown 文件。
 
 ```python
 ❯ paperflow pubmed-export-md --help
@@ -1085,7 +1096,7 @@ flowchart TD
 ```
 
 
-以上是对pubmed 文献进行的结构化提取操作，但是对于非 pubmed 数据库，我们能够解析的起点是 mineru 解析引擎解析获取的初步 json 文件（`content_list_v2.json`）。
+以上是对pubmed 文献进行的结构化提取操作，但是对于非 pubmed 数据库，我们能够解析的起点是 mineru 解析引擎解析获取的初步 json 文件（`content_list_v2.json`，参考官方文档-输出格式部分：https://opendatalab.github.io/MinerU/reference/output_files/）。
 
 PDF 经 MinerU 处理后生成的 `content_list_v2.json` 以页面为单位组织数据——一个外层数组代表所有页面，
 每个元素是该页面的渲染块列表。这些块包含论文标题、段落、行间公式、图片/图表、表格、页眉、页脚、脚注等多种类型，
@@ -1269,7 +1280,9 @@ content_list_v2.json
 而修改时你可以全局定制你自己想要的章节模块分类，按照你自己实际文献阅读、下游分析处理的需求去对文章的任意语段内容进行个性化归类。
 
 > 🌟 所以这意味着我们的章节解析是高度个性化 的，理论上你可以依据你手头上的任意类型的文献定制任意章节类别以及解析逻辑
+
 ---
+
 **Config file layout / 配置文件结构：**
 
 | Section | Purpose |
@@ -1278,6 +1291,7 @@ content_list_v2.json
 | `canonical_order` | Which types exist + their output order |
 | `display_names` | Human-readable labels (can be Chinese, etc.) |
 | `aliases` | Matching rules: `strong` (exact), `weak` (regex), `context_keywords` |
+
 --- 
 
 **Common customization scenarios / 常见自定义场景：**
@@ -1292,8 +1306,9 @@ content_list_v2.json
 ---
 
 
- 比如说输出的 1 个典型的 json 文件如下：
- ```json
+比如说输出的 1 个典型的 json 文件如下：
+
+```json
 {
   "source": "mineru",
   "file": "paper_content_list_v2.json",
@@ -1389,6 +1404,7 @@ content_list_v2.json
 ```
 
 > 🌟 同样的，`mineru-export-md`模块也可以指定`-c`配置文件，请参考使用我们提供的模板文件[mineru export config file](./config/mineru_export_config.yaml)，按照你需要批量导出的章节进行设置，相关说明以及具体修改注意事项都可以在文件中进行查看。
+> 
 > ⚠️ 另外注意，该配置文件中的章节类型必须是在 mineru_config.yaml 的 canonical_order 中定义过的。如果你在解析阶段自定义了新类型（比如 - ethics），在这里才能引用它。换句话说，上游 parse 定义了什么类型，下游 export 才能选择什么。总之[mineru export config file](./config/mineru_export_config.yaml)和 [mineru config file](./config/mineru_config.yaml) 得对应。
 
 
@@ -1420,7 +1436,509 @@ mineru_config.yaml                mineru_export_config.yaml
 理论上一切基于DOI出发的文献处理流程，都可以按照上文我们提到的处理逻辑进行统一：
 `基于doi获取pdf -> pdf初步解析 -> 内容提取与结构化处理`。
 
-> ⚠️ `针对上述预印本平台的模块还在开发完善中，目前提供的预印本相关子命令仅测试使用`, 相关测试细节详情见[Cases](./docs/Cases.md)
+> ⚠️ `针对上述预印本平台的模块目前基本已经开发完毕，后续只对相关功能进行维护和优化`, 测试细节与pubmed合并，详情见[Cases](./docs/Cases.md)
+
+
+#### 1. 命令速查 (TL;DR)
+
+三个平台统一:搜索命令产出 ID 清单(txt),抓取命令既能按 query 搜,也能用 `--file` 承接清单或 `--id`/`--doi` 单个抓。
+
+**通用约定**
+
+- **query 写法**:空格 = AND(所有词都命中);`OR` 显式或;引号 `"..."` 短语。例:`zinc finger` = zinc 且 finger;`zinc OR finger` = 任一。
+- **搜索 vs 抓取**:`*-search` 只产出 ID 清单 txt;`*-fetch` 抓元数据(JSON)+ 可选 PDF。
+- **输出结构**:`{输出目录}/{source}/{year}/{source_id}/`(例:`./papers/biorxiv/2023/10.1101_2023.06.22.546069/`)。
+- **搜索默认不限量**;`--max-results` 限量;`--start-date/--end-date` 限日期;三者可叠加。
+- **抓取的 query 模式默认上限 100**(避免一次狂下 PDF);`--file`/`--id`/`--doi` 天然不限量。
+- **PDF 默认开启下载**(`--download-pdf`);只想拿元数据用 `--no-download-pdf`。
+
+**arXiv**
+
+```bash
+# 搜索:返回全部命中
+paperflow arxiv-search "protein folding" -o ./papers
+# 限量 / 限日期
+paperflow arxiv-search "protein folding" --max-results 50 -o ./papers
+paperflow arxiv-search "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers
+# → ./papers/searched_arxiv_ids.txt
+
+# 抓取:按 query(默认最多 100 条)
+paperflow arxiv-fetch "protein folding" --max-results 50 -o ./papers
+# 单个 ID(可重复 --id)
+paperflow arxiv-fetch --id 1706.03762 --no-download-pdf -o ./papers
+paperflow arxiv-fetch --id 1706.03762 --id 1602.02644 -o ./papers
+# 承接搜索输出的清单文件(全部下载 PDF)
+paperflow arxiv-fetch --file ./papers/searched_arxiv_ids.txt --download-pdf -o ./papers
+```
+
+**bioRxiv**
+
+```bash
+# 搜索:返回全部命中
+paperflow biorxiv-search "zinc finger" -o ./papers
+paperflow biorxiv-search "zinc finger" --max-results 20 -o ./papers
+paperflow biorxiv-search "zinc finger" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers
+# → ./papers/searched_biorxiv_ids.txt   (内容是 DOI)
+
+# 抓取:按 query
+paperflow biorxiv-fetch "zinc finger" --max-results 50 -o ./papers
+# 单个 DOI(可重复 --doi)
+paperflow biorxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./papers
+# 承接搜索输出的 DOI 清单
+paperflow biorxiv-fetch --file ./papers/searched_biorxiv_ids.txt --download-pdf -o ./papers
+```
+
+**medRxiv**
+
+```bash
+# 搜索:返回全部命中
+paperflow medrxiv-search "vaccine efficacy" -o ./papers
+paperflow medrxiv-search "vaccine efficacy" --start-date 2020-01-01 --end-date 2024-12-31 -o ./papers
+# → ./papers/searched_medrxiv_ids.txt
+
+# 抓取:按 query
+paperflow medrxiv-fetch "vaccine efficacy" --max-results 50 -o ./papers
+# 单个 DOI
+paperflow medrxiv-fetch --doi 10.1101/2020.03.20.20039555 --no-download-pdf -o ./papers
+# 承接搜索输出的 DOI 清单
+paperflow medrxiv-fetch --file ./papers/searched_medrxiv_ids.txt --download-pdf -o ./papers
+```
+
+**ChemRxiv**
+
+```bash
+# 搜索:返回全部命中(单一后端 Crossref,prefix 10.26434,无 Europe PMC 并集)
+paperflow chemrxiv-search "AI drug design" -o ./papers
+paperflow chemrxiv-search "AI drug design" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers
+# → ./papers/searched_chemrxiv_ids.txt   (内容是 DOI,前缀 10.26434/...)
+
+# 抓取:按 query(默认最多 100 条)
+paperflow chemrxiv-fetch "AI drug design" --max-results 50 -o ./papers
+# 单个 DOI
+paperflow chemrxiv-fetch --doi 10.26434/chemrxiv.15007590/v1 --no-download-pdf -o ./papers
+# 承接搜索输出的 DOI 清单
+paperflow chemrxiv-fetch --file ./papers/searched_chemrxiv_ids.txt --download-pdf -o ./papers
+```
+
+**检索并集(bioRxiv / medRxiv,默认开启)**
+
+`*-search` 与 `*-fetch` 的 **query 模式**现在默认 = Crossref(元数据相关性)∪ Europe PMC(预印本全文布尔 AND),按 DOI 去重。要点:
+
+1. **只有 query 模式走并集**:`--file` / `--doi` 是按 DOI 直接抓,不涉及搜索,行为不变。
+2. **裸词 = AND**:`zinc finger 263` → `zinc AND finger AND 263`;写 `AND/OR/NOT` 就原样透传给 Europe PMC。Crossref 侧仍按原有相关性 + 本地 AND。
+3. **日期依然生效**:`--start-date/--end-date` 同时约束两个后端;若某个日期窗口内 Europe PMC 全文无命中,结果就是 0(不是没生效)。
+4. 用 `--no-europepmc` 可回退到纯 Crossref。
+
+Europe PMC 走的是预印本全文,能补上 Crossref 只看标题摘要而漏掉的「基因缩写写法」(例:`Zfp263` vs `zinc finger 263`)。
+
+> 上面这套 **Crossref ∪ Europe PMC 并集只作用于 bioRxiv / medRxiv**。**ChemRxiv 是纯 Crossref 单后端**(prefix `10.26434`,publisher 记为 "American Chemical Society (ACS)",type `posted-content`),query 模式也**不并入 Europe PMC**。
+
+**注意点**
+
+1. **bioRxiv/medRxiv 的 DOI 都是 `10.1101/...`**,靠 6 位(bioRxiv) vs 8 位(medRxiv)accession 区分,所以 `--doi` 直接给 `10.1101/...` 即可,平台由命令本身决定。
+2. **PDF 403 反爬**:bioRxiv/medRxiv 对非浏览器客户端常返回 403,直连失败会自动走 CloakBrowser 回退——前提是设置 `PAPER_FETCH_CLOAK=1`(可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`)。arXiv 无此问题。
+3. **推荐工作流**:先 `*-search`(不限量拿全量清单)→ 人工筛选 → `*-fetch --file`(精确抓取元数据 + 下载 PDF),避免一次抓取过多。
+4. **排序说明**:并集结果中,Crossref 命中(相关性排序,`sort=relevance`)在前,Europe PMC 新增命中按其后端顺序追加。日期只能做过滤(`--start-date/--end-date`),不能"按日期排序+返回全部"(Crossref 限制日期排序不能配合 cursor 深度分页)。arXiv 按提交时间倒序。
+5. **ChemRxiv 检索走 Crossref,不用官方 API**:ChemRxiv 的公开 API(`chemrxiv.org/engage/chemrxiv/public-api/v1`)对非浏览器客户端(httpx/curl)返回 Cloudflare 403,而 Crossref 侧(prefix `10.26434`)是稳定、最全的元数据通道,故 `chemrxiv-*` 只查 Crossref(也不并入 Europe PMC)。⚠️ 代价见下(版本重复 / 新贴有入库延迟 / 只看标题摘要)。完整讨论见 README「注意点:为什么预印本检索走 Crossref 元数据」。
+6. **ChemRxiv PDF 直连可下**:PDF 端点固定为 `https://chemrxiv.org/doi/pdf/{doi}`,本网络实测经 httpx 直连即返回 `%PDF` 字节,**不需要** CloakBrowser / undetected_chromedriver 回退(与 bioRxiv/medRxiv 的 Cloudflare 403 相反)。万一某篇直连失败,`--download-pdf` 仍会自动走浏览器回退链。
+7. **版本重复(去重要手动)**:Crossref 把 ChemRxiv 每次改版都单独注册成一个 DOI work——`10.26434/chemrxiv-2025-tj4pr-v2` 与 `chemrxiv-2025-tj4pr`、`10.26434/chemrxiv.15007500/v2` 与 `/v1` 都会作为独立结果同时命中(见下方实测,3 条 DOI 实为 2 篇论文)。`chemrxiv-*` 不去重,用 `--file` 清单抓取前可自行剔除旧版 DOI。
+
+#### 2. 搜索并获取 arXiv 论文
+如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
+
+```bash
+paperflow arxiv-search "deep learning for biology" --max-results 10
+paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf
+paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pdf --backend paperscraper
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
+- `--backend`：可选 `native`（内置的 httpx 方案）或 `paperscraper`（安装了第三方包时可用, ⚠️ 暂时未测试paperscraper）。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+日期过滤示例：
+
+```bash
+paperflow arxiv-fetch "protein folding" --start-date 2024-01-01 --end-date 2024-12-31 -o ./papers/arxiv
+```
+
+搜索结果会保存为 `searched_arxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，PDF 则按可用情况尽量下载。
+
+
+**arXiv 命令变体与使用示例:**
+
+- **arxiv-search**: 仅检索匹配的 arXiv 记录并输出 ID 列表（不下载内容）。
+
+    用法示例：
+
+    ```bash
+    paperflow arxiv-search "protein folding" --max-results 50 --start-date 2024-01-01 --end-date 2024-12-31
+    # 将会在默认存储目录下生成 searched_arxiv_ids.txt，或使用 --output-dir 指定保存位置
+    ```
+
+    说明：`--max-results` 缺省为**不限量（返回该 query 全部命中）**，只有 `native` 后端支持不限量；`--backend paperscraper` 需要显式指定 `--max-results`。`--start-date` / `--end-date` 按 `YYYY-MM-DD` 限制提交时间范围。
+    
+- **arxiv-fetch**: 检索并保存每篇论文的标准化元数据（JSON），可选地下载 PDF 文件（默认开启）。
+
+    常用选项：
+    - `--download-pdf/--no-download-pdf`：是否下载 PDF（默认 `--download-pdf`）。
+    - `--backend`：`native`（默认，使用 arXiv Atom API）或 `paperscraper`（需安装 `paperscraper` 包）。
+    - `--output-dir`：指定保存结果的目录（默认使用全局存储目录）。
+    - `--start-date` / `--end-date`：按 `YYYY-MM-DD` 限制提交时间范围。
+
+    用法示例：
+
+    ```bash
+    # 仅保存元数据（不下载 PDF）
+    paperflow arxiv-fetch "deep learning for biology" --max-results 20 --no-download-pdf -o ./papers/arxiv
+
+    # 使用 paperscraper 后端并下载 PDF
+    paperflow arxiv-fetch "deep learning for biology" --max-results 20 --download-pdf --backend paperscraper -o ./papers/arxiv
+    ```
+
+- **按 ID / 文件抓取**：`arxiv-search` 输出的是 `searched_arxiv_ids.txt`（每行一个 arXiv ID），`arxiv-fetch` 支持直接消费这些 ID，无需重新搜索。query、`--file`、`--id` 三者互斥，取其一即可。
+
+    ```bash
+    # 单个 ID（可重复 --id）
+    paperflow arxiv-fetch --id 1706.03762 --no-download-pdf -o ./papers/arxiv
+    paperflow arxiv-fetch --id 1706.03762 --id 1602.02644 --no-download-pdf -o ./papers/arxiv
+
+    # 从 arxiv-search 生成的 ID 文件抓取
+    paperflow arxiv-fetch --file ./searched_arxiv_ids.txt --no-download-pdf -o ./papers/arxiv
+    ```
+
+- **输出与存储**：
+    - 元数据：每篇论文保存为 `{source_id}.json`，包含 `title`, `authors`, `abstract`, `published_date`, `landing_url`, `pdf_url` 等字段（存储路径示例：`{output_dir}/arxiv/2024/2301.01234v1/2301.01234v1.json`）。
+    - PDF：如果可用且下载成功，则保存为 `{source_id}.pdf`，并在对应 JSON 中更新 `pdf_downloaded` 和 `pdf_path` 字段。
+
+- **注意事项**：
+    - arXiv 的抓取流程只负责元数据标准化与 PDF 下载；当前仓库没有内建将 arXiv PDF 自动解析为 Markdown/结构化全文的步骤。若需后续文本解析，请在下载后接入 PDF 解析器（例如 `pdfplumber`、`minerU`、或 OCR/布局解析管线），并将解析结果保存为 `*_parsed.md` 或结构化 JSON，以便 `merge` 等下游工具使用。
+
+
+> ⚠️ 下面是 arxiv-* 模块实测用例
+
+```python
+❯ paperflow arxiv-search "zinc finger" --start-date 2025-01-01 --end-date 2026-12-31 -o ./test
+
+Found 2 arXiv papers.
+2507.06458v1
+2502.09135v1
+arXiv IDs saved to ./test/searched_arxiv_ids.txt.
+
+```
+
+此处可以查看 [searched_arxiv_ids.txt](./test/searched_arxiv_ids.txt)
+
+然后我们可以使用 `arxiv-fetch` 来抓取这些论文的元数据和 PDF：
+
+```python
+❯  paperflow arxiv-fetch -f ./test/searched_arxiv_ids.txt -o ./test --download-pdf
+
+Fetching 2 arXiv IDs from file /data2/pyPaperFlow/test/searched_arxiv_ids.txt.
+Fetched 2 arXiv papers.
+Saved to /data2/pyPaperFlow/test/arxiv
+```
+
+论文获取结果可以查看 [arxiv](./test/arxiv/)，可以发现每篇论文都按 `{source}/{year}/{source_id}/` 结构保存，包含 JSON 元数据和 PDF 文件。
+
+至于pdf文件，我们可以使用 MinerU 或其他 PDF 解析工具来进一步处理，提取结构化内容或转换为 Markdown，然后可以和前面的 PMC 论文处理流程结合，进行后续分析和整理。
+
+
+#### 3. 搜索并获取 bioRxiv 论文
+bioRxiv 的 query 检索(我们此处设计是)默认是**双后端并集**：Crossref（openRxiv，元数据相关性检索 + 本地 AND）∪ Europe PMC（预印本全文布尔 AND），按 DOI 去重。Europe PMC 走全文，能补上 Crossref 只看标题摘要而漏掉的「基因缩写写法」。用 `--no-europepmc` 可回退到纯 Crossref。若 query 本身是一个 DOI（如 `10.1101/2023.06.22.546069`），会直接走 `/works/{doi}` 精确取回该论文，不再做书目检索。
+
+```bash
+paperflow biorxiv-search "AlphaFold AND structure" --max-results 10
+paperflow biorxiv-fetch "AlphaFold AND structure" --start-date 2026-01-01 --end-date 2026-01-31 --download-pdf
+# 回退到纯 Crossref（不用 Europe PMC 全文）
+paperflow biorxiv-search "AlphaFold AND structure" --no-europepmc -o ./papers
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（对两个后端都生效）。
+- `--max-results`：限制返回条数；**缺省为不限量（返回该 query 全部命中）**。
+- `--europepmc` / `--no-europepmc`：是否并入 Europe PMC 全文检索（默认 `--europepmc`，开启并集）。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+兼容性说明：
+
+- `--window-days` 作为 CLI 兼容参数保留，但当前检索路径不会使用该参数。
+
+示例：  
+
+```bash
+paperflow biorxiv-fetch "protein interaction" --max-results 50 -o ./papers/biorxiv
+```
+
+搜索结果会保存为 `searched_biorxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存，包含 JSON 元数据，并在可用时下载 PDF。
+
+按 DOI / 文件抓取：`biorxiv-search` 输出的是 `searched_biorxiv_ids.txt`（每行一个 DOI），`biorxiv-fetch` 支持直接消费这些 DOI。query、`--file`、`--doi` 三者互斥，取其一即可。
+
+```bash
+# 单个 DOI（可重复 --doi）
+paperflow biorxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./papers/biorxiv
+
+# 从 biorxiv-search 生成的 DOI 文件抓取
+paperflow biorxiv-fetch --file ./searched_biorxiv_ids.txt --no-download-pdf -o ./papers/biorxiv
+```
+
+> ⚠️ 下面是 biorxiv-* 模块实测用例
+
+```python
+❯ paperflow biorxiv-search "zinc finger 263 OR zfp263 OR znf263" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test
+
+Found 18 bioRxiv papers.
+10.64898/2026.08.25.746729
+10.64898/2026.08.26.747357
+10.64898/2026.08.25.747015
+10.64898/2026.08.20.744945
+10.64898/2026.08.13.744650
+10.64898/2026.08.28.747767
+10.64898/2026.08.29.747956
+10.64898/2026.07.31.742039
+10.64898/2026.08.20.746118
+10.64898/2026.08.19.745795
+10.64898/2026.08.13.744713
+10.64898/2026.08.23.746472
+10.64898/2026.08.22.746471
+10.64898/2026.08.12.744261
+10.64898/2026.08.04.740911
+10.64898/2026.08.03.742597
+10.64898/2026.08.19.745709
+10.64898/2026.08.20.746080
+bioRxiv IDs saved to ./test/searched_biorxiv_ids.txt.
+
+```
+
+此处可以查看 [searched_biorxiv_ids.txt](./test/searched_biorxiv_ids.txt)
+
+然后我们可以使用 `biorxiv-fetch` 来抓取这些论文的元数据和 PDF：
+
+```python
+❯  paperflow biorxiv-fetch -f ./test/searched_biorxiv_ids.txt -o ./test --download-pdf
+
+Fetching 18 bioRxiv DOIs from file /data2/pyPaperFlow/test/searched_biorxiv_ids.txt.
+Fetched 18 bioRxiv papers.
+Saved to /data2/pyPaperFlow/test/biorxiv
+```
+
+获取的论文结果可以查看 [biorxiv](./test/biorxiv/)，可以发现每篇论文都按 `{source}/{year}/{source_id}/` 结构保存，包含 JSON 元数据。
+
+> 🌟 bioRxiv 因为有cloudflare验证，我们无法确保能够下载到pdf文件数据(尽管我们也设置了cloakbrowser)，目前测试数据一般都无法获取pdf文件。但是我们已经在 必然获取的json文件中 提供了pdf文件的url，所以`建议是人工复核下载`
+
+我们以 [10.64898_2026.07.31.742039.json](./test/biorxiv/2026/10.64898_2026.07.31.742039/10.64898_2026.07.31.742039.json) 为例
+
+```bash
+# 关于pdf路径的两个字段信息已经在json文件中提供了
+"landing_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.742039",
+"pdf_url": "https://www.biorxiv.org/content/10.64898/2026.07.31.742039.full.pdf"
+```
+
+目前使用 `--download-pdf` 选项下载pdf文件，会给出终端提醒
+```python 
+❯ paperflow biorxiv-fetch -f ./test/searched_biorxiv_ids.txt -o ./test --download-pdf
+Fetching 18 bioRxiv DOIs from file /data2/pyPaperFlow/test/searched_biorxiv_ids.txt.
+Fetched 18 bioRxiv papers.
+PDF download: 0/18 succeeded; 18 failed. bioRxiv serves PDFs behind Cloudflare bot protection — try a different network, or set PAPER_FETCH_CLOAK=1 (needs cloakbrowser) and retry.
+Saved to /data2/pyPaperFlow/test/biorxiv
+```
+
+> ⚠️ 2026-09-02 更新: 新增了 `PAPER_FETCH_UNDETECTED` 环境变量，用于启用 `undetected-chromedriver` 回退机制，以解决 Cloudflare 验证问题
+
+现在命令运行如下:
+
+```python
+# paperflow 需要在 安装 undetected-chromedriver 的环境中运行
+# 以下都可以直接在 ~/.bashrc 或 ~/.zshrc 中设置，或者在终端中直接 export
+export PAPER_FETCH_UNDETECTED=1
+export UNDETECTED_CHROME_PATH="$HOME/.local/chrome/opt/google/chrome/chrome"
+export UNDETECTED_DRIVER_PATH="$HOME/.local/bin/chromedriver"
+
+# 然后命令依旧
+# ⚠️ 注意该命令因为需要运行浏览器，所以运行时间会比较长
+paperflow biorxiv-fetch -f ./test/searched_biorxiv_ids.txt -o ./test --download-pdf      
+```
+
+现在是能够支持获取所有的biorxiv文献的pdf文件了
+```bash
+Fetching 18 bioRxiv DOIs from file /data2/pyPaperFlow/test/searched_biorxiv_ids.txt.
+Fetched 18 bioRxiv papers.
+Saved to /data2/pyPaperFlow/test/biorxiv
+```
+
+获取的论文结果可以查看 [biorxiv](./test/biorxiv/)，可以发现每篇论文都按 `{source}/{year}/{source_id}/` 结构保存，包含 JSON 元数据以及新增下载的 PDF 文件。
+
+另外一个biorxiv文献抓取示例，参考[2026年8-9月期间一个月的base-editing关键词文献](./test/base_editing/)
+
+#### 4. 搜索并获取 medRxiv 论文
+medRxiv 与 bioRxiv 共用同一套检索：默认是 Crossref（openRxiv，元数据相关性检索）∪ Europe PMC（预印本全文布尔 AND）的并集，按 DOI 去重；通过 DOI accession 位数（medRxiv 8 位 vs bioRxiv 6 位）区分平台，Europe PMC 结果同样按此过滤。query 为 DOI 时直接精确取回该论文。
+
+```bash
+paperflow medrxiv-search "vaccine AND efficacy" --max-results 10
+paperflow medrxiv-fetch "vaccine AND efficacy" --start-date 2024-01-01 --end-date 2024-12-31 --download-pdf
+# 回退到纯 Crossref（不用 Europe PMC 全文）
+paperflow medrxiv-search "vaccine AND efficacy" --no-europepmc -o ./papers
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（medRxiv 最早日期为 2019-06-01；对两个后端都生效）。
+- `--max-results`：限制返回条数；**缺省为不限量（返回该 query 全部命中）**。
+- `--europepmc` / `--no-europepmc`：是否并入 Europe PMC 全文检索（默认 `--europepmc`，开启并集）。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+示例：
+
+```bash
+paperflow medrxiv-fetch "long covid" --max-results 50 -o ./papers/medrxiv
+```
+
+搜索结果会保存为 `searched_medrxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存（`source` 为 `medrxiv`），包含 JSON 元数据，并在可用时下载 PDF。
+
+按 DOI / 文件抓取：`medrxiv-search` 输出的是 `searched_medrxiv_ids.txt`（每行一个 DOI），`medrxiv-fetch` 支持直接消费这些 DOI。query、`--file`、`--doi` 三者互斥，取其一即可。
+
+```bash
+# 单个 DOI（可重复 --doi）
+paperflow medrxiv-fetch --doi 10.1101/2023.06.22.546069 --no-download-pdf -o ./papers/medrxiv
+
+# 从 medrxiv-search 生成的 DOI 文件抓取
+paperflow medrxiv-fetch --file ./searched_medrxiv_ids.txt --no-download-pdf -o ./papers/medrxiv
+```
+
+
+> ⚠️ 下面是 medrxiv-* 模块实测用例
+
+```python 
+❯ paperflow medrxiv-search "base editing" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test/base_editing
+Found 9 medRxiv papers.
+10.64898/2026.08.11.26360004
+10.64898/2026.08.20.26360670
+10.64898/2026.08.24.26361180
+10.64898/2026.08.11.26360205
+10.64898/2026.07.30.26358885
+10.64898/2026.08.05.26359678
+10.64898/2026.08.03.26359558
+10.64898/2026.08.11.26360119
+10.64898/2026.08.10.26359569
+medRxiv IDs saved to ./test/base_editing/searched_medrxiv_ids.txt.
+
+```
+
+可以看到，基本上在这过去的一个月中，medRxiv 上关于 base editing 的预印本论文数量不多，只有 9 篇。
+
+我们紧接着进行抓取这些论文的元数据和 PDF：
+
+```python
+❯ paperflow medrxiv-fetch -f ./test/base_editing/searched_medrxiv_ids.txt  -o ./test/base_editing  --download-pdf
+Fetching 9 medRxiv DOIs from file /data2/pyPaperFlow/test/base_editing/searched_medrxiv_ids.txt.
+Fetched 9 medRxiv papers.
+Saved to /data2/pyPaperFlow/test/base_editing/medrxiv
+```
+
+对于下载下来的论文结果，可以查看 [medrxiv](./test/base_editing/medrxiv/)，可以发现每篇论文都按 `{source}/{year}/{source_id}/` 结构保存，包含 JSON 元数据以及新增下载的 PDF 文件。
+
+
+----
+
+> ⚠️ 注意：bioRxiv / medRxiv 的 PDF 由 `www.biorxiv.org` / `www.medrxiv.org` 提供，其 PDF 端点走 Cloudflare 反爬——**非浏览器客户端（curl / httpx / requests 等）或数据中心 IP 会拿到 403 挑战页或 429，而不是 PDF 字节**；换用 curl 也一样，因为 Cloudflare 校验的是浏览器 TLS 指纹 + JS 挑战执行，跟用哪个 HTTP 客户端无关。
+
+`--download-pdf` 会按顺序尝试以下回退链（实现见 `biorxiv_fetcher.py::_download_pdf`）：
+
+1. `{doi}.full.pdf`（无版本号）
+2. 通过 `api.biorxiv.org/details/{platform}/{doi}` 取精确版本号，构造 `{doi}v{version}.full.pdf`
+3. HighWire `early` 路径 `/content/{platform}/early/{y}/{m}/{d}/{accession}.full.pdf`
+4. 抓 landing 页的 `<meta name="citation_pdf_url">` 地址
+5. （仅当 `PAPER_FETCH_CLOAK=1`）用 CloakBrowser 回退重试（需 `cloakbrowser` 环境，可选 `CLOAKBROWSER_PYTHON` / `PAPER_FETCH_CLOAK_HEADED`）
+6. （仅当 `PAPER_FETCH_UNDETECTED=1`）用 undetected_chromedriver + Xvfb 有头 Chrome 回退，能真正解掉 Cloudflare 挑战并拿到 PDF 字节
+
+从被 Cloudflare 标记的 IP 出发，前 5 步（含 CloakBrowser 无头/有头）都可能拿到 403/429 或卡 "Just a moment…"。第 6 步是唯一经实测能稳定下载到 PDF 字节的解法，但需要额外装 Chrome + chromedriver + `undetected-chromedriver` + Xvfb。
+
+> **换机器 / 别人要用 biorxiv 或 medRxiv 的 PDF 下载，按这个做**：完整安装步骤、环境变量、以及调试手册见 [undetected_fallback.md](./docs/undetected_fallback.md)。简言之：
+>
+> 1. 装 Chrome（`dpkg -x` 解包到用户目录，零 sudo）+ 版本匹配的 chromedriver（Chrome for Testing）
+> 2. `pip install undetected-chromedriver`（装进跑 `paperflow` 的那个环境）
+> 3. 装 `xvfb`（Linux 无桌面时）
+> 4. 设环境变量：
+>    ```bash
+>    export PAPER_FETCH_UNDETECTED=1
+>    export UNDETECTED_CHROME_PATH="$HOME/.local/chrome/opt/google/chrome/chrome"
+>    export UNDETECTED_DRIVER_PATH="$HOME/.local/bin/chromedriver"
+>    ```
+>
+> 默认（不设 `PAPER_FETCH_UNDETECTED`）时，biorxiv/medrxiv 命令的行为与此功能加入前完全一致，无任何影响。
+
+#### 5. 搜索并获取 ChemRxiv 论文
+
+ChemRxiv 挂在 Cambridge "engage" 平台，官方有公开 API，但它的 endpoint（`chemrxiv.org/engage/chemrxiv/public-api/v1/items`）对非浏览器客户端是 **Cloudflare 403 墙**，httpx/curl 直接访问拿不到数据。ChemRxiv 的元数据会沉积到 Crossref（prefix `10.26434`，publisher 记为 "American Chemical Society (ACS)"，type `posted-content`），所以 `chemrxiv-*` 走**单一后端 = Crossref**（元数据 relevance 检索，`sort=relevance` + 本地布尔 AND），**不并入 Europe PMC**。query 为 DOI 时直接精确取回该论文。为什么用 Crossref 而不是官方 API，见 README「注意点」。
+
+```bash
+paperflow chemrxiv-search "base editing"
+paperflow chemrxiv-fetch "base editing" --start-date 2026-08-01 --end-date 2026-12-31 --download-pdf
+```
+
+常用参数：
+
+- `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围（ChemRxiv 最早日期为 2017-08-01）。
+- `--max-results`：限制返回条数；**缺省为不限量（返回该 query 全部命中）**。
+- `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
+- `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+示例：
+
+```bash
+paperflow chemrxiv-fetch "AI for drug design" --max-results 50 -o ./papers/chemrxiv
+```
+
+搜索结果会保存为 `searched_chemrxiv_ids.txt`。抓取结果会按 `source/year/source_id/` 结构保存（`source` 为 `chemrxiv`），包含 JSON 元数据，并在可用时下载 PDF。
+
+按 DOI / 文件抓取：`chemrxiv-search` 输出的是 `searched_chemrxiv_ids.txt`（每行一个 DOI，前缀 `10.26434/...`），`chemrxiv-fetch` 支持直接消费这些 DOI。query、`--file`、`--doi` 三者互斥，取其一即可。
+
+```bash
+# 单个 DOI（可重复 --doi）
+paperflow chemrxiv-fetch --doi 10.26434/chemrxiv.15007590/v1 --no-download-pdf -o ./papers/chemrxiv
+
+# 从 chemrxiv-search 生成的 DOI 文件抓取
+paperflow chemrxiv-fetch --file ./searched_chemrxiv_ids.txt --download-pdf -o ./papers/chemrxiv
+```
+
+
+> ⚠️ 下面是 chemrxiv-* 模块实测用例
+
+```python 
+❯ paperflow chemrxiv-search "base editing" --start-date 2026-08-01 --end-date 2026-12-31 -o ./test/base_editing
+Found 3 ChemRxiv papers.
+10.26434/chemrxiv.15007500/v1
+10.26434/chemrxiv.15007500/v2
+10.26434/chemrxiv.15007590/v1
+ChemRxiv IDs saved to ./test/base_editing/searched_chemrxiv_ids.txt.
+```
+
+可以看到，过去一个多月 ChemRxiv 上 "base editing" 的命中很少——但这 **3 条 DOI 实际只有 2 篇论文**：
+
+- `10.26434/chemrxiv.15007500/v1`（2026-08-17）与 `/v2`（2026-08-19）是**同一篇** *Phenonium-Ion-Mediated Skeletal Editing of Paracyclophanes*（作者更新后重新提交，Crossref 把 v1/v2 各自注册成独立的 DOI work）；
+- `10.26434/chemrxiv.15007590/v1`（2026-08-18）是另一篇 *Multicomponent Molecular Editing of Polybutadiene: From Design Space to Battery Function*。
+
+这就是上面注意点第 7 条说的**版本重复**：抓取前若只想留最新版，需自行剔除旧版 DOI。
+
+紧接着抓取这些论文的元数据和 PDF：
+
+```python
+❯ paperflow chemrxiv-fetch -f ./test/base_editing/searched_chemrxiv_ids.txt -o ./test/base_editing   --download-pdf
+Fetching 3 ChemRxiv DOIs from file /data2/pyPaperFlow/test/base_editing/searched_chemrxiv_ids.txt.
+Fetched 3 ChemRxiv papers.
+Saved to /data2/pyPaperFlow/test/base_editing/chemrxiv
+```
+
+> ✅ 与 bioRxiv/medRxiv 不同，这次 **3 份 PDF 全部经 `chemrxiv.org/doi/pdf/{doi}` httpx 直连下载成功**（返回 `%PDF` 字节），没遇到 Cloudflare 403，无需浏览器回退。
+
+下载下来的结果可查看 [chemrxiv](./test/base_editing/chemrxiv/)，每篇都按 `{source}/{year}/{source_id}/` 结构保存（目录名里 DOI 的 `/` 换成 `_`，如 `10.26434_chemrxiv.15007590_v1/`），包含 JSON 元数据以及新增下载的 PDF 文件。
+
 
 
 ### 6. 批判性阅读与知识图谱分析：下游终点
@@ -1434,11 +1952,11 @@ mineru_config.yaml                mineru_export_config.yaml
 
 ### 7. Reading与Coding的交点
 
-在我们整个文献处理的流程中，Reading和Coding并不是完全割裂的两个阶段，而是存在大量交集和反馈循环的。
+在我们整个文献处理的流程中，Reading和Coding并不是完全割裂的两个阶段，而是存在大量交集和反馈循环的，尤其是对于 生物医学+AI计算的交叉领域。
 
 文献是理论，代码项目是实践，两者相辅相成。
 
-对于github的CLI科研使用场景，参考[GhResearcher](https://github.com/MaybeBio/GhResearcher)
+> 📌 对于github CLI的科研使用场景，参考[GhResearcher](https://github.com/MaybeBio/GhResearcher)，下面的github-export模块是对GhResearcher parse模块固定子命令的简单封装，目前该项目基本定型，后续会依据具体使用需求进行优化与维护
 
 目前暂时提供从pubmed文献元数据中提取github链接的功能模块
 ```python
@@ -1566,6 +2084,7 @@ gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_a
 
 ### 1. 文献快速初筛阶段（过滤80%无关文献）
 ✅ **提取组合**：`abstract + keywords`
+
 - **为什么这么组合**：这是信息密度最高的两个章节，10秒就能判断一篇文献是否值得深入阅读
 - **批量处理技巧**：
   - 用keywords做初步主题聚类，快速排除跨领域文献
@@ -1574,6 +2093,7 @@ gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_a
 
 ### 2. 研究背景与现状梳理阶段（写综述第一章）
 ✅ **提取组合**：`abstract + introduction + keywords + references`
+
 - **原始逻辑**：introduction是唯一系统梳理领域历史和现状的章节，abstract是其浓缩版
 - **深度扩展用法**：
   - **历史背景**：提取introduction中"早期研究→里程碑工作→近期进展"的时间线句子
@@ -1583,6 +2103,7 @@ gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_a
 
 ### 3. 创新点挖掘与核心贡献分析阶段（写论文创新点部分）
 ✅ **提取组合**：`abstract + discussion + conclusion`
+
 - **原始逻辑**：这三个章节是作者"自我宣传"创新点的唯一地方
 - **深度扩展用法**：
   - **一级创新点**：从abstract中提取"we propose/novel/first time"开头的句子，这是作者最核心的贡献
@@ -1592,6 +2113,7 @@ gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_a
 
 ### 4. 方法创新出发点阶段（一般是我们最关心的核心模块）
 ✅ **提取组合**：`introduction（研究缺口） + methods（现有方法） + discussion（方法局限）`
+
 - **这是整个方案最有价值的组合**：绝大多数博士生的创新都来自于"改进现有方法的缺陷"，而这三个章节刚好构成了一个完整的"问题-方法-缺陷"闭环
 - **三维创新挖掘模型**：
   1. **从introduction找"问题"**：作者在introduction中指出的"现有方法无法解决XX问题"
@@ -1607,6 +2129,7 @@ gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_a
 
 ### 5. 研究不足与未来方向阶段（写论文展望部分）
 ✅ **提取组合**：`discussion + conclusion + references`
+
 - **深度扩展用法**：
   - **自我批判**：提取discussion中"limitation/shortcoming/we acknowledge that"开头的句子，这是最真实的研究不足
   - **未来方向**：提取conclusion中"future work/we plan to/it would be interesting to"开头的句子，这是作者自己想做但没做的工作
@@ -1614,6 +2137,7 @@ gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_a
 
 ### 6. 方法调研与复现阶段（做实验前的准备）
 ✅ **提取组合**：`methods + results + supplementary + availability`
+
 - **深度扩展用法**：
   - **方法细节**：methods是唯一详细描述实验步骤的章节，提取"we used/we implemented/we trained"开头的句子
   - **实验配置**：从supplementary中提取超参数、数据集划分、评估指标等细节（这些通常不会出现在正文中）
@@ -1621,17 +2145,18 @@ gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_a
   - **结果对比**：从results中提取所有表格和图的数值，建立自己的实验基准线
 
 总结来说就是：
+
 * 文献初筛：abstract + keywords
 * 研究背景：abstract + introduction
 * 创新点挖掘/我们的研究方向：discussion + conclusion
 * 方法细节/我们的研究方案：methods + supplementary + availability
 
-> 按照这4个层级去配套设置YAML提取文件，每个配置文件对应1个组合，这就是我们为什么强调章节模块化提取的原因了, YAML配置文件请参考[提取文件示例](./config/)
+> 按照这4个层级去配套设置YAML提取文件，每个配置文件对应1个组合，这就是我们为什么强调章节模块化提取的原因了, YAML配置文件请参考[提取文件示例](./config/)，我们也提供了配套的skill作为参考: [pyResearch-ReadingSkill](https://github.com/MaybeBio/pyResearch-ReadingSkill)
 
 
 ## 🔍 测试示例
 
-我们在[测试文档](./docs/Cases.md)中提供了一些测试示例，包含了不同类型的文献数据（pubmed、arxiv、biorxiv等），以及`非常详细的、按照文献调研逻辑顺序展开的逐步脚本执行示例记录`，你可以直接运行测试脚本来验证功能的正确性和完整性。
+我们在[测试文档/Cases](./docs/Cases.md)中提供了一些测试示例，包含了不同类型平台的文献数据（pubmed、arxiv、biorxiv、medrxiv、chemrxiv等），以及`非常详细的、按照文献调研逻辑顺序展开的逐步脚本执行示例记录`，你可以直接仿照测试文档输入命令来验证功能的正确性和完整性，并展开你自己的文献调研之旅。
 
 > 🌟 结合前面的`使用方法`和此处的`测试示例`, 用户能够很快上手我们的工具
 
@@ -1639,7 +2164,8 @@ gh repo view {modified/repo} >> /IDR_all_20260520/analysis/method/github_parse_a
 ## 👨‍🏫 一个完整的文献调研示例
 
 1️⃣ 文献调研的起点：2个来源获取文献
-- 先验文献：预先提供作为起点的文献，而非query检索获取的文献
+
+- 先验文献（我手头上预先有的关于这个topic的文献）：预先提供作为起点的文献，而非query检索获取的文献
   
 ```python
 paperflow paper-fetch  该文献的doi
@@ -1647,7 +2173,7 @@ paperflow pdf-parse -i 该文献pdf -o .  --clear
 ```
 
 
-- Query检索获取：利用本仓库的pubmed-query-builder skill来优化
+- Query检索获取（我手头上没有，想通过该工具到数据库中扩充的）：利用本仓库的pubmed-query-builder skill来优化
 
 ```python 
 # ⚠️ 3年研究，截止2026年5月20日，后续每周更新
@@ -1727,12 +2253,12 @@ paperflow pubmed-merge-json -i /paper/IDR_all_20260520   -o /paper/IDR_all_20260
 
 这个命令同时会输出PMC全文文本抓取不到的PMID清单(*_stats_*.json),
 
-对于这一部分文献我们可以走doi-based路线。
+对于这一部分文献我们可以走doi-based路线，或者看看预印本模块能不能抓取到这些文献的预印本版本。
 
 我们主要目的就是为了提取三部分章节
 ```python
 # 再导出
-# 对于pubmed，我提供了4个yaml配置文件，分别用于导出不同部分的内容，满足不同的需求
+# 对于pubmed，我们提供了4个yaml配置文件，分别用于导出不同部分的内容，满足不同的需求
 
 # 1️⃣ 首先是导出引言部分，用于背景调研(ab_intro)
 paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR_all_ab_intro_20260520.md -c ./config/pubmed_export_config_ab_intro.yaml
@@ -1750,9 +2276,10 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 对于先验文献，走doi-based或pubmed路线，对于获取的markdown文本内容，使用前面提到的ai4s-skill，单篇补充。
 
 对于批量提取文献，使用[pyResearch-ReadingSkill](https://github.com/MaybeBio/pyResearch-ReadingSkill)：
-- 1. 分析批量introduction: 输入pubmed-export-md导出的批量introduction md文件，使用intro-analysis skill，进行分析，确定领域内主题，有intro输出报告md文件
-- 2. 分析批量discussion+conclusion：输入pubmed-export-md导出的批量discussion+conclusion md文件，辅助输入intro输出报告md文件，以及用户自定义的研究主题(可以是intro中总结出来的主题选一，或杂糅主题)，使用dc-analysis skill，进行分析，确定领域内真正问题+潜在对应的创新点，有dc输出报告md文件
-- 3. 分析批量method：输入pubmed-export-md到处的批量method md文件，辅助输入dc输出报告md文件，以及从批量文献中提取的github仓库链接的说明文档md文件(目前github仓库两个来源: 文献元数据提取+gh repo search相关主题词, 导出为readme文档+浅层脚本文件组织结构，使用工具[GhResearcher](https://github.com/MaybeBio/GhResearcher))，以及用户自定义的研究问题(可以是dc中总结归纳出来的问题之一，或杂糅问题)，使用method-analysis skill，进行分析，确定当前研究问题的完整研究方案
+
+1. 分析批量introduction: 输入pubmed-export-md导出的批量introduction md文件，使用intro-analysis skill，进行分析，确定领域内主题，有intro输出报告md文件
+2. 分析批量discussion+conclusion：输入pubmed-export-md导出的批量discussion+conclusion md文件，辅助输入intro输出报告md文件，以及用户自定义的研究主题(可以是intro中总结出来的主题选一，或杂糅主题)，使用dc-analysis skill，进行分析，确定领域内真正问题+潜在对应的创新点，有dc输出报告md文件
+3. 分析批量method：输入pubmed-export-md到处的批量method md文件，辅助输入dc输出报告md文件，以及从批量文献中提取的github仓库链接的说明文档md文件(目前github仓库两个来源: 文献元数据提取+gh repo search相关主题词, 导出为readme文档+浅层脚本文件组织结构，使用工具[GhResearcher](https://github.com/MaybeBio/GhResearcher))，以及用户自定义的研究问题(可以是dc中总结归纳出来的问题之一，或杂糅问题)，使用method-analysis skill，进行分析，确定当前研究问题的完整研究方案
 
 > github仓库链接导出，参考新模块功能：`github-export`
   
@@ -1760,7 +2287,7 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 
 ## 📌 后续维护待办
 
-<details>
+<details markdown="1">
 <summary><b>1. 研究起点</b></summary>
 
 > - [ ] BrainStorm skill的补充，考虑如何可编程地融合背景先验知识
@@ -1768,7 +2295,7 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 </details>
 
 
-<details>
+<details markdown="1">
 <summary><b>2. 文献检索（及元数据抓取）</b></summary>
 
 > - [ ] 各文献数据库Query搜索语法的补充，尝试skill化，目前仅实现pubmed mesh部分语法先验结合
@@ -1777,7 +2304,7 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 </details>
 
 
-<details>
+<details markdown="1">
 <summary><b>3. 文献获取（及全文下载）</b></summary>
 
 > - [x] paper-fetch 模块的完善封装，目前参考[2026-05-08 封装paper-fetch](https://github.com/Agents365-ai/paper-fetch)，考虑加入或替换为更鲁棒、命中率更高的模块
@@ -1788,7 +2315,7 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 </details>
 
 
-<details>
+<details markdown="1">
 <summary><b>4. 文献内容提取与结构化处理</b></summary>
 
 > - [ ] PMC文本内容的json结构化解析（pubmed-export-md模块），尝试加强语义边界规范检测（即扩大正则匹配边界范围），或者尝试像mineru-export-md模块一样引入AI后端
@@ -1800,7 +2327,7 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 
 </details>
 
-<details>
+<details markdown="1">
 <summary><b>5. 其他文献数据平台的处理</b></summary>
 
 > - [x] 对于其他非pubmed数据库，也需要做一套`search-fetch-parse`解析方案，完善相应模块，可以参考一些开源实现[paperscraper](https://github.com/jannisborn/paperscraper)、[paper-tracker](https://github.com/RainerSeventeen/paper-tracker)
@@ -1811,7 +2338,7 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 
 </details>
 
-<details>
+<details markdown="1">
 <summary><b>6. 批判性阅读与知识图谱分析：下游终点</b></summary>
 
 > - [ ] 文献深度解析，考虑加入几个高度定制化的skill，最好是可以借下游流程
