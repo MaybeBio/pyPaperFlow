@@ -19,6 +19,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/pyPaperFlow.svg?logo=pypi&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyPaperFlow.svg?logo=python&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Downloads](https://static.pepy.tech/badge/pyPaperFlow)](https://pepy.tech/project/pyPaperFlow)
+[![Docs](https://img.shields.io/badge/Docs-在线文档-2ea44f)](https://maybebio.github.io/pyPaperFlow/)
 
 <p>
   文档阅读👉
@@ -149,6 +150,8 @@ flowchart TD
 
 ## 📦 安装
 
+> ⚠️ 正常使用情况下你只需要安装我们的工具即可，如下：
+
 ```bash
 # 1. 安装本仓库工具
 ## ✏️1️⃣ 方案1：通过pip（推荐）
@@ -158,9 +161,11 @@ pip install pyPaperFlow
 git clone https://github.com/MaybeBio/pyPaperFlow.git
 cd pyPaperFlow
 pip install -e .
+```
 
---------------------------------------------------------
+> 一些optional的依赖项，若你不需要使用对应功能模块，可忽略安装，如下：
 
+```bash 
 # 2. 如果你要使用 PDF 解析 / mineru-parse / pdf-parse 这一条链路，请额外安装 MinerU
 # 因为mineru安装依赖较多，且需要手动配置环境变量，不添加在pyproject.toml中
 # 参考官方文档：https://github.com/opendatalab/MinerU
@@ -181,10 +186,6 @@ pip install openai anthropic
 pip install paperscraper
 ```
 
-> ⚠️ 正常使用情况下你只需要源码安装本仓库+MinerU即可，也就是1、2两步。
-> 
-> 甚至你可以只做第 1 步，安装我们的软件，因为 mineru 与文献获取步骤无关
-
 ## 🛠️ 使用方法
 
 > 📌 **提示**：想直接上手的，参考使用示例 [Cases.md](./docs/Cases.md) 即可，以下内容均为理论流程分析，可跳过
@@ -201,41 +202,39 @@ pip install paperscraper
 
 ```python
 ❯ paperflow --help
-                                                                                                                                              
- Usage: paperflow [OPTIONS] COMMAND [ARGS]...                                                                                                 
-                                                                                                                                              
- pyPaperFlow CLI                                                                                                                              
-                                                                                                                                              
-╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --install-completion          Install completion for the current shell.                                                                    │
-│ --show-completion             Show completion for the current shell, to copy it or customize the installation.                             │
-│ --help                        Show this message and exit.                                                                                  │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ pubmed-search      Search PubMed using Your customized query and return PMIDs.                                                             │
-│ pubmed-meta        Fetch paper metadata from PubMed using Your customized query, pmid list file and save to storage.                       │
-│ pubmed-content     Download full text (PMC) for given PMIDs if the paper has a PMC ID.                                                     │
-│ pubmed-all         Fetch BOTH metadata and full text (if available) for papers.                                                            │
-│                    Also extracts URLs from full text and updates metadata links.                                                           │
-│ pubmed-merge-json  Create a merged JSON (or JSONL) file from PubMed paper directories.                                                     │
-│ pubmed-export-md   Export a single Markdown view from a merged JSON file using optional YAML config.                                       │
-│ arxiv-search       Search arXiv and write matching IDs to a text file.                                                                     │
-│ arxiv-fetch        Fetch arXiv metadata and attempt to download PDFs.                                                                      │
-│ biorxiv-search     Search bioRxiv and write matching IDs to a text file.                                                                   │
-│ biorxiv-fetch      Fetch bioRxiv metadata and attempt to download PDFs.                                                                    │
-│ medrxiv-search     Search medRxiv and write matching IDs to a text file.                                                                   │
-│ medrxiv-fetch      Fetch medRxiv metadata and attempt to download PDFs.                                                                    │
-│ chemrxiv-search    Search ChemRxiv and write matching IDs to a text file.                                                                  │
-│ chemrxiv-fetch     Fetch ChemRxiv metadata and attempt to download PDFs.                                                                   │
-│ paper-fetch        Fetch PDFs by DOI — passes through to the paper-fetch engine.                                                           │
-│ pdf-parse          Parse a PDF file using MinerU engine, and clean up the output directory.                                                │
-│ mineru-parse       Parse mineru output content_list_v2.json into canonical sectioned JSON.                                                 │
-│ mineru-export-md   Export structured mineru JSON to a clean Markdown file for LLM processing.                                              │
-│ github-export      Export GitHub links from merged PubMed JSON, validate accessibility,                                                    │
-│                    and aggregate `ghresearcher parse <owner/repo> --view` outputs into one markdown.                                       │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-
+                                                                                                                                                        
+ Usage: paperflow [OPTIONS] COMMAND [ARGS]...                                                                                                           
+                                                                                                                                                        
+ pyPaperFlow CLI                                                                                                                                        
+                                                                                                                                                        
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                                                                              │
+│ --show-completion             Show completion for the current shell, to copy it or customize the installation.                                       │
+│ --help                        Show this message and exit.                                                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ pubmed-search      Search PubMed using Your customized query and return PMIDs.                                                                       │
+│ pubmed-meta        Fetch paper metadata from PubMed using Your customized query, pmid list file and save to storage.                                 │
+│ pubmed-content     Download full text (PMC) for given PMIDs if the paper has a PMC ID.                                                               │
+│ pubmed-all         Fetch BOTH metadata and full text (if available) for papers.                                                                      │
+│                    Also extracts URLs from full text and updates metadata links.                                                                     │
+│ pubmed-merge-json  Create a merged JSON (or JSONL) file from PubMed paper directories.                                                               │
+│ pubmed-export-md   Export a single Markdown view from a merged JSON file using optional YAML config.                                                 │
+│ arxiv-search       Search arXiv and write matching IDs to a text file.                                                                               │
+│ arxiv-fetch        Fetch arXiv metadata and attempt to download PDFs.                                                                                │
+│ biorxiv-search     Search bioRxiv and write matching IDs to a text file.                                                                             │
+│ biorxiv-fetch      Fetch bioRxiv metadata and attempt to download PDFs.                                                                              │
+│ medrxiv-search     Search medRxiv and write matching IDs to a text file.                                                                             │
+│ medrxiv-fetch      Fetch medRxiv metadata and attempt to download PDFs.                                                                              │
+│ chemrxiv-search    Search ChemRxiv and write matching DOIs to a text file.                                                                           │
+│ chemrxiv-fetch     Fetch ChemRxiv metadata and attempt to download PDFs.                                                                             │
+│ paper-fetch        Fetch PDFs by DOI — passes through to the paper-fetch engine.                                                                     │
+│ pdf-parse          Parse a PDF file using MinerU engine, and clean up the output directory.                                                          │
+│ mineru-parse       Parse mineru output content_list_v2.json into canonical sectioned JSON.                                                           │
+│ mineru-export-md   Export structured mineru JSON to a clean Markdown file for LLM processing.                                                        │
+│ github-export      Export GitHub links from merged PubMed JSON, validate accessibility,                                                              │
+│                    and aggregate `ghresearcher parse <owner/repo> --view` outputs into one markdown.                                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 
@@ -303,7 +302,7 @@ ChemRxiv 相关模块：
 你可借助前沿大语言模型，结合你目前所掌握的所有资料信息，反复核验、探讨研究起点，直至其足够清晰具体，或满足进入下一步文献检索的条件。
 
 
-> 🌟 这里我们为你提供几个用于文献调研的brainstorm skill: [Research brainstorm skill](./docs/Skills.md)
+> 🌟 这里我们为你提供几个用于文献调研的brainstorm skill: [research brainstorm skill](./docs/Skills.md)
 
 
 ### 2. 文献检索（及元数据抓取）
@@ -336,7 +335,7 @@ ChemRxiv 相关模块：
 
 建议用户提前学习并熟练掌握上述数据库的检索语法，本工具内置搜索模块的运行逻辑与数据库网页端搜索框基本一致。
 
-> ✨ 这里我们为你提供了几个特定文献数据库构建搜索query的skill，[Paper query skill](./docs/Skills.md)
+> ✨ 这里我们为你提供了几个特定文献数据库构建搜索query的skill，[paper query skill](./docs/Skills.md)
 
 以 PubMed 为例，以下为一组典型且结构较复杂的检索式示例：
 
@@ -397,7 +396,9 @@ AND (
 """
 ```
 
-完成检索query构建后，即可开始检索文献，我们将以PubMed相关 API 为例进演示。
+完成检索query构建后，即可开始检索文献，我们将以PubMed相关 API 为例进行演示。
+
+pubmed-search 模块可帮助你快速检索 PubMed 文献，并返回符合条件的 PMIDs 列表。
 
 ```python
 ❯ paperflow pubmed-search --help
@@ -436,11 +437,13 @@ AND (
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-在本阶段，我们建议通过文献检索获取论文元数据（以摘要为主）。
+在本阶段，我们建议通过文献检索获取论文元数据（以摘要为主），而不急着下载全文。
 
-文献收集本质是一个迭代优化的过程：通常仅通过摘要即可筛选出目标文献，随后在下一步针对性下载所需论文；特殊情况下也可下载全部检索结果。
+> 因为文献收集本质是一个迭代优化的过程：通常仅通过摘要即可筛选出目标文献，随后在下一步针对性下载所需论文；特殊情况下也可下载全部检索结果。
 
 需要重点强调：`你可以在任意阶段重新开展头脑风暴。每个阶段的输出结果，均可作为后续文献调研的输入依据`。基于本阶段的产出，你可进一步完善研究起点，精准定义研究问题。
+
+pubmed-meta 模块接受用户自定义的检索 query 或者之前pubmed-search模块返回的 pmid 列表文件，获取 PubMed 文献元数据（以json格式存储），并保存到指定存储目录。
 
 ```python
 ❯ paperflow pubmed-meta --help
@@ -482,10 +485,11 @@ AND (
 
 一旦确定目标文献，或因检索阶段获取的元数据不足以支撑进一步筛选、需批量下载全文时，即可启动文献下载流程。
 
-以 PubMed 数据库为例：针对 PubMed 收录文献，优先下载 PMC 开放获取全文（若存在）；若无 PMC 全文资源，则仅抓取 PubMed 平台的元数据（以摘要为主）及基础文献信息。此外，我们还提供了一个文献 pdf 文件抓取模块作为文献获取兜底策略。只有上述手段获取 PubMed文献数据都失败了，我们才建议你通过人工手段去搜索并获取文献pdf 文本数据。
+以 PubMed 数据库为例：针对 PubMed 收录文献，优先下载 PMC 开放获取全文（若存在）；若无 PMC 全文资源，则仅抓取 PubMed 平台的元数据（以摘要为主）及基础文献信息。此外，我们还提供了一个文献 pdf 文件抓取模块（paper-fetch）作为文献获取兜底策略。只有上述手段获取 PubMed文献数据都失败了，我们才建议你通过人工手段去搜索并获取文献pdf 文本数据。
 
 pubmed 数据库输出文件支持 JSON 格式与 Markdown 格式两种，推荐采用JSON格式后续分析，markdown 格式为大语言模型（LLM）的输入数据，我们的工具会同时生成两类文件供选择。
 
+pubmed-content 模块可帮助你下载 PMC 开放获取全文（若存在），并将其保存到指定存储目录。
 
 ```python
 ❯ paperflow pubmed-content --help
@@ -502,7 +506,7 @@ pubmed 数据库输出文件支持 JSON 格式与 Markdown 格式两种，推荐
                                                                                                                                                                   
  Example usage:                                                                                                                                                   
  - 1. Download full text for PMIDs listed in a file:                                                                                                              
-   paperflow download-fulltext --file ./pmid_list.txt --email "YOUR_EMAIL@example" --api-key "YOUR_NCBI_API_KEY" --output-dir ./MyPapers                          
+   paperflow pubmed-content --file ./pmid_list.txt --email "YOUR_EMAIL@example" --api-key "YOUR_NCBI_API_KEY" --output-dir ./MyPapers                          
                                                                                                                                                                   
                                                                                                                                                                   
 ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
