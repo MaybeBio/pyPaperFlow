@@ -1,0 +1,71 @@
+site_name: pyPaperFlow 文档
+site_description: 面向科研工作者的自动化文献处理与知识发现平台
+site_url: https://maybebio.github.io/pyPaperFlow/
+repo_url: https://github.com/MaybeBio/pyPaperFlow
+repo_name: MaybeBio/pyPaperFlow
+docs_dir: mkdoc_site
+edit_uri: edit/main/mkdoc_site/
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换至深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换至浅色模式
+
+markdown_extensions:
+  - admonition
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+
+nav:
+  - 首页: index.md
+  - 简介: overview.md
+  - 功能特性: features.md
+  - 架构设计哲学: architecture.md
+  - 安装: installation.md
+  - 使用方法:
+      - 模块概述: usage/index.md
+      - 1. 研究起点: usage/research-start.md
+      - 2. 文献检索: usage/search.md
+      - 3. 文献获取: usage/fetch.md
+      - 4. 内容提取与结构化: usage/extraction.md
+      - 5. 其他文献数据平台: usage/other-databases.md
+      - 6. 批判性阅读与知识图谱: usage/downstream.md
+      - 7. Reading 与 Coding 的交点: usage/reading-coding.md
+  - 组合利用方案: combination.md
+  - 测试示例: test-cases.md
+  - 完整文献调研示例: full-survey.md
+  - 后续维护待办: todo.md

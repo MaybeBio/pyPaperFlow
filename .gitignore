@@ -7,9 +7,18 @@ build/
 __pycache__/
 *.py[cod]
 
-# environment 
+# environment
 .env
 venv/
-CLAUDE.md 
+CLAUDE.md
 pdfs/
 refers/
+
+# mkdocs build output
+site/
+.cache/
+
+# generated docs (from scripts/sync_docs.py)
+# ignore everything under mkdoc_site/ except the hand-written homepage
+mkdoc_site/*
+!mkdoc_site/index.md
