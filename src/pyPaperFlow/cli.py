@@ -189,7 +189,7 @@ def download_fulltext_cmd(
     \b
     Example usage:
     - 1. Download full text for PMIDs listed in a file:
-      paperflow download-fulltext --file ./pmid_list.txt --email "YOUR_EMAIL@example" --api-key "YOUR_NCBI_API_KEY" --output-dir ./MyPapers
+      paperflow pubmed-content --file ./pmid_list.txt --email "YOUR_EMAIL@example" --api-key "YOUR_NCBI_API_KEY" --output-dir ./MyPapers
       
     """
     fetcher = PubmedFetcher(root_dir=storage_dir, entrez_email=email, api_key=api_key or "", max_retries=max_retries)
