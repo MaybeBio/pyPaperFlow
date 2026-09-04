@@ -34,3 +34,11 @@ https://github.com/Dictation354/paper-fetch-skill
 https://github.com/Agents365-ai/paper-fetch
 
 paper-search-mcp：https://github.com/openags/paper-search-mcp
+
+# Step4. Read Papers (and Extract Knowledge)
+
+## 文献阅读和知识提取的skill/工具
+
+- 批量主题文献阅读与总结(本人开发，与 pyPaperFlow 结合使用)：https://github.com/MaybeBio/pyResearch-ReadingSkill
+- https://github.com/MaybeBio/ai4s-paper 
+
