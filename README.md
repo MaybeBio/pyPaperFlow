@@ -83,6 +83,7 @@ This tool is designed to `complement rather than replace` reference management s
 
 - **Automated Retrieval from Multiple Sources**: Automatically search and retrieve paper metadata and full-text records from `PubMed/Medline, arXiv, medRxiv, chemRxiv and bioRxiv`. The repository focuses primarily on biomedical research and computational interdisciplinary fields (`Biomedicine + Computational Biology`).
 - **Full-Text Access**: Enable automatic downloading of open-access full texts in XML/Text format from `PMC`. For preprints and other publications without accessible PMC full texts, alternative acquisition modules are integrated to fetch `original PDFs`, with `Sci-Hub` set as the fallback provider.
+- **Preprint Full-Text Fetch (no PDF parsing)**: For preprints without an OA PDF, dedicated methods return clean section-headed text directly — `ArxivFetcher.fetch_full_text(arxiv_id)` reads ar5iv-rendered HTML (arXiv LaTeX → HTML), and `BioRxivFetcher.fetch_full_text(doi)` / `EuropePMCFullText.full_text_xml(doi)` read JATS full-text XML from Europe PMC (bioRxiv / medRxiv and other DOI-indexed preprints).
 - **Structured Storage**:
   - **Metadata**: Preserved in well-structured detailed JSON files.
   - **Full Text**: Stored in multiple formats including parsed JSON and Markdown for versatile downstream usage — JSON for programmatic data analysis, and Markdown optimized for LLM comprehension and processing.
@@ -1420,6 +1421,31 @@ In theory, all DOI‑driven literature workflows can be standardised following t
 `Retrieve PDF via DOI → Preliminary PDF Parsing → Content Extraction and Structured Processing`
 
 > Modules dedicated to the aforementioned preprint platforms are still under development and refinement. Preprint‑related subcommands are provided for testing purposes only. For detailed test cases, refer to [Cases](./docs/Cases.md)
+
+#### Preprint full-text fetch (Python API)
+
+For preprints without an open-access PDF, each fetcher exposes a `fetch_full_text()` method that returns clean section-headed text without any PDF parsing:
+
+```python
+from pyPaperFlow.preprint.arxiv_fetcher import ArxivFetcher
+from pyPaperFlow.preprint.biorxiv_fetcher import BioRxivFetcher
+from pyPaperFlow.preprint.europepmc_fetcher import EuropePMCFullText
+
+# arXiv → ar5iv rendered HTML (LaTeX → HTML)
+arxiv = ArxivFetcher(root_dir="./papers")
+text = arxiv.fetch_full_text("1706.03762")            # "" on failure
+
+# bioRxiv / medRxiv → Europe PMC fullTextXML
+biorxiv = BioRxivFetcher(root_dir="./papers", platform="biorxiv")
+text = biorxiv.fetch_full_text("10.1101/2023.06.22.546069")
+
+# Any DOI-indexed preprint → Europe PMC fullTextXML directly
+epmc = EuropePMCFullText()
+xml = epmc.full_text_xml("10.1101/2023.06.22.546069")
+epmc.close()
+```
+
+All three return an empty string `""` on failure, so callers can gracefully fall back to the abstract. The returned text is section-headed (`## Section`) plain text ready for LLM input.
 
 ### 6. Critical Reading and Knowledge Graph Analysis: Downstream End‑Use
 

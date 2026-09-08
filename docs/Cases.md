@@ -22,6 +22,8 @@
 
 [Case8: Search and fetch papers on other databases](#-case-8-search-and-fetch-papers-on-other-databases-preprint)
 
+[Case9: Fetch full text for preprints via ar5iv and Europe PMC](#-case-9-fetch-full-text-for-preprints-via-ar5iv-and-europe-pmc)
+
 
 ## 🧬 Case 1: Get PMIDs from Query
 
@@ -1735,5 +1737,48 @@ Saved to /data2/pyPaperFlow/test/base_editing/chemrxiv
 > ✅ 与 bioRxiv/medRxiv 不同，这次 **3 份 PDF 全部经 `chemrxiv.org/doi/pdf/{doi}` httpx 直连下载成功**（返回 `%PDF` 字节），没遇到 Cloudflare 403，无需浏览器回退。
 
 下载下来的结果可查看 [chemrxiv](../test/base_editing/chemrxiv/)，每篇都按 `{source}/{year}/{source_id}/` 结构保存（目录名里 DOI 的 `/` 换成 `_`，如 `10.26434_chemrxiv.15007590_v1/`），包含 JSON 元数据以及新增下载的 PDF 文件。
+
+## 🧬 Case 9: Fetch full text for preprints via ar5iv and Europe PMC
+
+对于没有开放获取 PDF 的预印本，`ArxivFetcher` 与 `BioRxivFetcher` 各自新增了 `fetch_full_text()` 方法，免 PDF 解析直接返回带章节标题的纯文本；底层依赖 ar5iv（arXiv）与 Europe PMC fullTextXML（bioRxiv / medRxiv）。此外新增独立的 `EuropePMCFullText` 类，可对任意 DOI 收录的预印本直接取 JATS 全文 XML。
+
+三者失败时均返回空字符串 `""`，便于调用方回退到摘要。
+
+### 1. arXiv → ar5iv 渲染 HTML
+
+```python
+from pyPaperFlow.preprint.arxiv_fetcher import ArxivFetcher
+
+fetcher = ArxivFetcher(root_dir="./papers")
+text = fetcher.fetch_full_text("2301.00001v2")   # 版本后缀 v2 会被自动去掉
+print(text[:200])
+```
+
+ar5iv 把 arXiv 的 LaTeX 源码渲染成 HTML，`fetch_full_text` 抓取 `https://ar5iv.labs.arxiv.org/html/{id}` 后，用 `_html_to_text` 抽出 `<h1>/<h2>/<h3>` 作为 `## Section` 标题、`<p>` 作为正文，脚本/样式/导航节点会被剔除。
+
+### 2. bioRxiv / medRxiv → Europe PMC fullTextXML
+
+```python
+from pyPaperFlow.preprint.biorxiv_fetcher import BioRxivFetcher
+
+fetcher = BioRxivFetcher(root_dir="./papers", platform="biorxiv")   # 或 platform="medrxiv"
+text = fetcher.fetch_full_text("10.1101/2026.01.01.123456")
+```
+
+内部流程：DOI → Europe PMC 检索（`DOI:"..."`）解析出 pmcid/PPR id → 拉取 `{source}/{id}/fullTextXML` 的 JATS XML → `_jats_xml_to_text` 把每个 `<sec>` 的 `<title>` 转成 `## Section`、`<p>` 转成正文。
+
+### 3. 任意 DOI → EuropePMCFullText 直接取 XML
+
+```python
+from pyPaperFlow.preprint.europepmc_fetcher import EuropePMCFullText
+
+epmc = EuropePMCFullText()
+xml = epmc.full_text_xml("10.1101/2026.01.01.123456")
+epmc.close()
+```
+
+返回原始 JATS XML 字符串（未转文本）；如需带章节标题的纯文本，直接用 `BioRxivFetcher.fetch_full_text`（见第 2 节）即可。
+
+> ✅ 实测（单元测试 8/8 通过）：`_html_to_text` / `_jats_xml_to_text` 均正确抽出 `## Section` 标题与段落；`fetch_full_text` 对 200 返回正文、404/无结果/网络异常返回 `""`；版本后缀 `vN` 会被去掉。
 
 

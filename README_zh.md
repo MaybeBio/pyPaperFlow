@@ -82,6 +82,7 @@
 
 - **多来源自动检索**：自动从 `PubMed/Medline`、`arXiv`、`medRxiv`、`chemRxiv` 和 `bioRxiv` 搜索并获取论文元数据与全文记录。项目主要聚焦于生物医学与计算交叉领域（`Biomedicine + Computational Biology`）。
 - **全文获取**：支持自动从 `PMC` 下载开放获取的 XML/Text 全文。对于预印本及其他没有 PMC 全文的文献，集成了额外的获取模块以下载 `原始 PDF`，并将 `Sci-Hub` 作为兜底来源。
+- **预印本全文获取（免 PDF 解析）**：对于没有开放获取 PDF 的预印本，提供专用方法直接返回带章节标题的纯文本——`ArxivFetcher.fetch_full_text(arxiv_id)` 读取 ar5iv 渲染 HTML（arXiv LaTeX→HTML），`BioRxivFetcher.fetch_full_text(doi)` / `EuropePMCFullText.full_text_xml(doi)` 从 Europe PMC 读取 JATS 全文 XML（bioRxiv / medRxiv 及其它 DOI 收录预印本）。
 - **结构化存储**：
     - **元数据**：保存为结构清晰的详细 JSON 文件。
     - **全文**：保存为多种格式，包括解析后的 JSON 和 Markdown，方便下游使用。其中 JSON 适合程序化分析，Markdown 更适合 LLM 理解与处理。
@@ -1439,6 +1440,31 @@ mineru_config.yaml                mineru_export_config.yaml
 `基于doi获取pdf -> pdf初步解析 -> 内容提取与结构化处理`。
 
 > ⚠️ `针对上述预印本平台的模块目前基本已经开发完毕，后续只对相关功能进行维护和优化`, 测试细节与pubmed合并，详情见[Cases](./docs/Cases.md)
+
+#### 预印本全文获取（Python API）
+
+对于没有开放获取 PDF 的预印本，各 fetcher 提供 `fetch_full_text()` 方法，免 PDF 解析直接返回带章节标题的纯文本：
+
+```python
+from pyPaperFlow.preprint.arxiv_fetcher import ArxivFetcher
+from pyPaperFlow.preprint.biorxiv_fetcher import BioRxivFetcher
+from pyPaperFlow.preprint.europepmc_fetcher import EuropePMCFullText
+
+# arXiv → ar5iv 渲染 HTML（LaTeX → HTML）
+arxiv = ArxivFetcher(root_dir="./papers")
+text = arxiv.fetch_full_text("1706.03762")            # 失败时返回 ""
+
+# bioRxiv / medRxiv → Europe PMC fullTextXML
+biorxiv = BioRxivFetcher(root_dir="./papers", platform="biorxiv")
+text = biorxiv.fetch_full_text("10.1101/2023.06.22.546069")
+
+# 任意 DOI 收录预印本 → 直接取 Europe PMC fullTextXML
+epmc = EuropePMCFullText()
+xml = epmc.full_text_xml("10.1101/2023.06.22.546069")
+epmc.close()
+```
+
+三者失败时均返回空字符串 `""`，调用方可优雅回退到摘要。返回文本为带章节标题（`## Section`）的纯文本，可直接作为 LLM 输入。
 
 
 #### 1. 命令速查 (TL;DR)
