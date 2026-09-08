@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 import httpx
+from bs4 import BeautifulSoup
 
 from .source_models import SourcePaper
 from .source_utils import (
@@ -45,6 +46,25 @@ PAPERSCRAPER_FIELDS = [
 
 def _safe_lower(text: Any) -> str:
     return normalize_text(text).lower()
+
+
+def _html_to_text(html: str) -> str:
+    """Extract section headings + paragraphs from ar5iv HTML into Markdown-ish text."""
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup(["script", "style", "nav"]):
+        tag.decompose()
+    article = soup.find("article") or soup
+    parts: List[str] = []
+    for node in article.find_all(["h1", "h2", "h3", "section", "p"]):
+        if node.name in ("h1", "h2", "h3"):
+            title = normalize_text(node.get_text(" ", strip=True))
+            if title:
+                parts.append(f"\n## {title}")
+        elif node.name == "p":
+            text = normalize_text(node.get_text(" ", strip=True))
+            if text:
+                parts.append(text)
+    return "\n\n".join(parts).strip()
 
 
 class ArxivFetcher:
@@ -174,6 +194,24 @@ class ArxivFetcher:
                 self._save_record(record, output_dir=output_dir, download_pdf=download_pdf)
                 records.append(record)
         return records
+
+    def fetch_full_text(self, arxiv_id: str) -> str:
+        """Return full text from ar5iv HTML for an arXiv id, or "" on failure.
+
+        ar5iv renders arXiv LaTeX sources to HTML without the PDF parsing cost.
+        Falls back to "" so the caller can degrade to the abstract.
+        """
+        arxiv_id = re.sub(r"v\d+$", "", normalize_text(arxiv_id))
+        if not arxiv_id:
+            return ""
+        url = f"https://ar5iv.labs.arxiv.org/html/{arxiv_id}"
+        try:
+            response = self._get_http_client().get(url, follow_redirects=True)
+            if response.status_code != 200:
+                return ""
+            return _html_to_text(response.text)
+        except Exception:
+            return ""
 
     def close(self) -> None:
         if self._http_client is not None:

@@ -6,7 +6,10 @@ from typing import Any, Dict, List, Optional
 
 import httpx
 
+from .source_utils import normalize_text
+
 EUROPE_PMC_SEARCH_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+EUROPE_PMC_FULLTEXT_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/{source}/{id}/fullTextXML"
 EUROPE_PMC_PREPRINT_FILTER = "SRC:PPR"
 
 _BOOLEAN_TOKEN_RE = re.compile(r'"[^"]+"|\'[^\']+\'|\S+')
@@ -137,3 +140,65 @@ class EuropePMCSearch:
         if last_error is not None:
             raise last_error
         raise RuntimeError("Failed to query Europe PMC")
+
+
+class EuropePMCFullText:
+    """Fetch full-text JATS XML for a DOI from Europe PMC REST.
+
+    Mirrors EuropePMCSearch's trust_env=False because the local proxy often
+    times out on ebi.ac.uk.
+    """
+
+    def __init__(self, request_timeout: float = 60.0, max_retries: int = 3):
+        self.request_timeout = float(request_timeout)
+        self.max_retries = max(1, int(max_retries))
+        self.headers = {
+            "User-Agent": "pyPaperFlow/0.1.0 (+https://github.com/MaybeBio/pyPaperFlow)",
+            "Accept": "application/xml,text/xml,*/*",
+        }
+        self._client = httpx.Client(
+            headers=self.headers,
+            timeout=self.request_timeout,
+            follow_redirects=True,
+            trust_env=False,
+        )
+
+    def close(self) -> None:
+        self._client.close()
+
+    def full_text_xml(self, doi: str) -> str:
+        """Return the full-text XML string for a DOI, or "" on failure."""
+        doi = (doi or "").strip()
+        if not doi:
+            return ""
+        source_id = self._resolve_id(doi)
+        if not source_id:
+            return ""
+        source = "PPR" if source_id.startswith("PPR") else "PMC"
+        url = EUROPE_PMC_FULLTEXT_URL.format(source=source, id=source_id)
+        for attempt in range(self.max_retries):
+            try:
+                response = self._client.get(url)
+                response.raise_for_status()
+                return response.text
+            except Exception:
+                if attempt + 1 < self.max_retries:
+                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+        return ""
+
+    def _resolve_id(self, doi: str) -> str:
+        """Map a DOI to a Europe PMC id (prefer pmcid, then the PPR/PMC id)."""
+        params = {"query": f'DOI:"{doi}"', "format": "json", "pageSize": 1, "resultType": "core"}
+        for attempt in range(self.max_retries):
+            try:
+                response = self._client.get(EUROPE_PMC_SEARCH_URL, params=params)
+                response.raise_for_status()
+                items = (response.json().get("resultList") or {}).get("result") or []
+                if not items:
+                    return ""
+                record = items[0]
+                return normalize_text(record.get("pmcid") or record.get("id") or "")
+            except Exception:
+                if attempt + 1 < self.max_retries:
+                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+        return ""

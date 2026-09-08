@@ -35,6 +35,21 @@ MED_RXIV_LAUNCH_DATE = datetime(2019, 6, 1)
 
 DOI_RE = re.compile(r"^10\.\d{4,9}/[^\s]+$")
 
+
+def _jats_xml_to_text(xml: str) -> str:
+    """Convert JATS full-text XML to section-headed plain text."""
+    soup = BeautifulSoup(xml, "xml")
+    parts: List[str] = []
+    for sec in soup.find_all("sec"):
+        title_el = sec.find("title")
+        if title_el:
+            parts.append(f"\n## {normalize_text(title_el.get_text(' ', strip=True))}")
+        for p in sec.find_all("p"):
+            text = normalize_text(p.get_text(" ", strip=True))
+            if text:
+                parts.append(text)
+    return "\n\n".join(parts).strip()
+
 PLATFORM_CONFIG = {
     "biorxiv": {
         "journal": "bioRxiv",
@@ -381,6 +396,25 @@ class BioRxivFetcher:
             self._save_record(record, output_dir=output_dir, download_pdf=download_pdf)
             records.append(record)
         return records
+
+    def fetch_full_text(self, doi: str) -> str:
+        """Return full text for a bioRxiv/medRxiv preprint via Europe PMC, or ""."""
+        from .europepmc_fetcher import EuropePMCFullText
+
+        doi = normalize_text(doi)
+        if not doi:
+            return ""
+        fetcher = EuropePMCFullText(
+            request_timeout=self.request_timeout,
+            max_retries=self.max_retries,
+        )
+        try:
+            xml = fetcher.full_text_xml(doi)
+        finally:
+            fetcher.close()
+        if not xml:
+            return ""
+        return _jats_xml_to_text(xml)
 
     def _normalize_date_range(
         self,
