@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import random
 import sys
+import threading
 import time
 import re
 from datetime import datetime, timedelta
@@ -35,6 +37,22 @@ MED_RXIV_LAUNCH_DATE = datetime(2019, 6, 1)
 
 DOI_RE = re.compile(r"^10\.\d{4,9}/[^\s]+$")
 
+# bioRxiv/medRxiv return HTTP 429 for non-browser User-Agents on the .full-text
+# route; a browser UA is required to fetch rendered full text.
+_FULLTEXT_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+}
+
+# Rate-limit / bot-wall hygiene for the .full-text route. bioRxiv/medRxiv sit
+# behind a Cloudflare wall that 429s on rapid successive requests, so we (a)
+# space requests apart, and (b) back off exponentially on 429/403/5xx rather
+# than treating them like a missing article.
+_FULLTEXT_MIN_INTERVAL = 2.0  # seconds between .full-text requests (shared across instances)
+_FULLTEXT_BACKOFF_BASE = 3.0  # seconds; doubled per retry
+_FULLTEXT_BACKOFF_CAP = 20.0  # seconds; hard ceiling on a single backoff sleep
+_FULLTEXT_COOLDOWN = 30.0  # seconds to pause all requests after a 429/403
+
 
 def _jats_xml_to_text(xml: str) -> str:
     """Convert JATS full-text XML to section-headed plain text."""
@@ -46,6 +64,35 @@ def _jats_xml_to_text(xml: str) -> str:
             parts.append(f"\n## {normalize_text(title_el.get_text(' ', strip=True))}")
         for p in sec.find_all("p"):
             text = normalize_text(p.get_text(" ", strip=True))
+            if text:
+                parts.append(text)
+    return "\n\n".join(parts).strip()
+
+
+def _biorxiv_html_to_text(html: str) -> str:
+    """Convert bioRxiv/medRxiv full-text HTML to section-headed plain text.
+
+    Walks the article body in document order, emitting headings as ``## ...``
+    and paragraphs as body text. Stops at the "References" section and skips
+    figure/table caption paragraphs.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    article = soup.find("div", class_="fulltext-view") or soup
+    parts: List[str] = []
+    for node in article.find_all(["h1", "h2", "h3", "p"]):
+        if node.name in ("h1", "h2", "h3"):
+            text = normalize_text(node.get_text(" ", strip=True))
+            if not text:
+                continue
+            if text.lower() == "references":
+                break
+            parts.append(f"\n## {text}")
+        else:
+            parent = node.find_parent("div")
+            classes = set(parent.get("class") or []) if parent is not None else set()
+            if classes & {"fig-caption", "table-caption"}:
+                continue
+            text = normalize_text(node.get_text(" ", strip=True))
             if text:
                 parts.append(text)
     return "\n\n".join(parts).strip()
@@ -65,6 +112,12 @@ PLATFORM_CONFIG = {
 
 
 class BioRxivFetcher:
+    # Shared across instances so sequential fetches (even from separate
+    # BioRxivFetcher objects) never fire back-to-back .full-text requests.
+    _fulltext_last_request = 0.0
+    _fulltext_cooldown_until = 0.0
+    _fulltext_lock = threading.Lock()
+
     def __init__(
         self,
         root_dir: str,
@@ -88,11 +141,15 @@ class BioRxivFetcher:
             "Accept": "application/json,text/html;q=0.9,*/*;q=0.8",
         }
         self._http_client: Optional[httpx.Client] = None
+        self._fulltext_client: Optional[httpx.Client] = None
 
     def close(self) -> None:
         if self._http_client is not None:
             self._http_client.close()
             self._http_client = None
+        if self._fulltext_client is not None:
+            self._fulltext_client.close()
+            self._fulltext_client = None
 
     def __del__(self) -> None:
         try:
@@ -398,12 +455,86 @@ class BioRxivFetcher:
         return records
 
     def fetch_full_text(self, doi: str) -> str:
-        """Return full text for a bioRxiv/medRxiv preprint via Europe PMC, or ""."""
-        from .europepmc_fetcher import EuropePMCFullText
+        """Return full text for a bioRxiv/medRxiv preprint, or "" on failure.
 
-        doi = normalize_text(doi)
+        Primary route: the preprint's own full-text HTML on biorxiv.org /
+        medrxiv.org. Fallback: Europe PMC fullTextXML (only present once the
+        preprint is published into PMC).
+        """
+        doi = re.sub(r"v\d+$", "", normalize_text(doi))
         if not doi:
             return ""
+        text = self._fetch_full_text_html(doi)
+        if text:
+            return text
+        return self._fetch_full_text_europepmc(doi)
+
+    def _fulltext_http_client(self) -> httpx.Client:
+        if self._fulltext_client is None:
+            self._fulltext_client = httpx.Client(
+                headers=_FULLTEXT_HEADERS,
+                timeout=self.request_timeout,
+                follow_redirects=True,
+                trust_env=False,
+            )
+        return self._fulltext_client
+
+    @staticmethod
+    def _throttle_fulltext() -> None:
+        """Space .full-text requests so they don't trip the Cloudflare wall.
+
+        Waits out both the minimum inter-request gap and any active post-429
+        cooldown, so a rate-limited fetch pauses the whole batch rather than
+        hammering the wall request after request.
+        """
+        with BioRxivFetcher._fulltext_lock:
+            now = time.monotonic()
+            wait = max(
+                _FULLTEXT_MIN_INTERVAL - (now - BioRxivFetcher._fulltext_last_request),
+                BioRxivFetcher._fulltext_cooldown_until - now,
+            )
+            if wait > 0:
+                time.sleep(wait)
+            BioRxivFetcher._fulltext_last_request = time.monotonic()
+
+    @staticmethod
+    def _mark_fulltext_throttled() -> None:
+        with BioRxivFetcher._fulltext_lock:
+            BioRxivFetcher._fulltext_cooldown_until = time.monotonic() + _FULLTEXT_COOLDOWN
+
+    @staticmethod
+    def _backoff_seconds(attempt: int) -> float:
+        base = _FULLTEXT_BACKOFF_BASE * (2 ** attempt)
+        return min(_FULLTEXT_BACKOFF_CAP, base) + random.uniform(0, 1)
+
+    def _fetch_full_text_html(self, doi: str) -> str:
+        url = f"{self.landing_base}/{doi}.full-text"
+        client = self._fulltext_http_client()
+        for attempt in range(self.max_retries):
+            self._throttle_fulltext()
+            try:
+                response = client.get(url)
+            except Exception:
+                if attempt + 1 < self.max_retries:
+                    time.sleep(self._backoff_seconds(attempt))
+                continue
+            status = response.status_code
+            if status == 200:
+                return _biorxiv_html_to_text(response.text)
+            if status == 404:
+                # No full-text page for this DOI; don't burn retries.
+                return ""
+            # 429 / 403 / 5xx: transient (rate limit / bot wall / server error).
+            # Mark a global cooldown so the rest of the batch pauses, then back
+            # off and retry.
+            self._mark_fulltext_throttled()
+            if attempt + 1 < self.max_retries:
+                time.sleep(self._backoff_seconds(attempt))
+        return ""
+
+    def _fetch_full_text_europepmc(self, doi: str) -> str:
+        from .europepmc_fetcher import EuropePMCFullText
+
         fetcher = EuropePMCFullText(
             request_timeout=self.request_timeout,
             max_retries=self.max_retries,
