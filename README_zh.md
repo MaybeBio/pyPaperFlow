@@ -82,7 +82,7 @@
 
 - **多来源自动检索**：自动从 `PubMed/Medline`、`arXiv`、`medRxiv`、`chemRxiv` 和 `bioRxiv` 搜索并获取论文元数据与全文记录。项目主要聚焦于生物医学与计算交叉领域（`Biomedicine + Computational Biology`）。
 - **全文获取**：支持自动从 `PMC` 下载开放获取的 XML/Text 全文。对于预印本及其他没有 PMC 全文的文献，集成了额外的获取模块以下载 `原始 PDF`，并将 `Sci-Hub` 作为兜底来源。
-- **预印本全文获取（免 PDF 解析）**：对于没有开放获取 PDF 的预印本，提供专用方法直接返回带章节标题的纯文本——`ArxivFetcher.fetch_full_text(arxiv_id)` 读取 ar5iv 渲染 HTML（arXiv LaTeX→HTML），`BioRxivFetcher.fetch_full_text(doi)` / `EuropePMCFullText.full_text_xml(doi)` 从 Europe PMC 读取 JATS 全文 XML（bioRxiv / medRxiv 及其它 DOI 收录预印本）。
+- **预印本全文获取（免 PDF 解析）**：对于没有开放获取 PDF 的预印本，提供专用方法直接返回带章节标题的纯文本——`ArxivFetcher.fetch_full_text(arxiv_id)` 读取 ar5iv 渲染 HTML（arXiv LaTeX→HTML），`BioRxivFetcher.fetch_full_text(doi)` 优先读取 bioRxiv / medRxiv 原生全文 HTML（浏览器 User-Agent + 限流处理），再回退到 Europe PMC fullTextXML（已正式收录进 PMC 的预印本）；`EuropePMCFullText.full_text_xml(doi)` 从 Europe PMC 读取 JATS 全文 XML。
 - **结构化存储**：
     - **元数据**：保存为结构清晰的详细 JSON 文件。
     - **全文**：保存为多种格式，包括解析后的 JSON 和 Markdown，方便下游使用。其中 JSON 适合程序化分析，Markdown 更适合 LLM 理解与处理。
@@ -1454,7 +1454,7 @@ from pyPaperFlow.preprint.europepmc_fetcher import EuropePMCFullText
 arxiv = ArxivFetcher(root_dir="./papers")
 text = arxiv.fetch_full_text("1706.03762")            # 失败时返回 ""
 
-# bioRxiv / medRxiv → Europe PMC fullTextXML
+# bioRxiv / medRxiv → 原生全文 HTML 优先，Europe PMC fullTextXML 兜底
 biorxiv = BioRxivFetcher(root_dir="./papers", platform="biorxiv")
 text = biorxiv.fetch_full_text("10.1101/2023.06.22.546069")
 
@@ -1465,6 +1465,25 @@ epmc.close()
 ```
 
 三者失败时均返回空字符串 `""`，调用方可优雅回退到摘要。返回文本为带章节标题（`## Section`）的纯文本，可直接作为 LLM 输入。
+
+**bioRxiv / medRxiv 全文获取路径与限流处理**
+
+`BioRxivFetcher.fetch_full_text(doi)` 按以下顺序解析全文：
+
+1. **原生全文 HTML**（`{landing_base}/{doi}.full-text`）——预印本自身的渲染页面，解析为 `## Section` 纯文本（遇 References 停止，跳过图/表标题）。需要浏览器 `User-Agent`。
+2. **Europe PMC `fullTextXML`**——仅在预印本已正式收录进 PMC 后才存在；仍处于 PPR（预印本）阶段的记录在此返回 404。
+3. 否则返回 `""`（调用方回退到摘要）。
+
+由于 bioRxiv/medRxiv 位于 Cloudflare 防火墙之后，连续快速请求会触发 `429`，HTML 路径应用了多重保护，避免批量抓取被静默限流成 `""`：
+
+- **浏览器 User-Agent**——非浏览器 UA 在 `.full-text` 上恒为 429。
+- **连接复用 + `trust_env=False`**——减少握手、避免本地代理超时。
+- **请求间隔节流**（2 s，跨实例共享）——请求绝不背靠背连发。
+- **状态码分支**——`404` 立即返回（确实无全文）；仅 `429/403/5xx` 才重试。
+- **指数退避**（3/6/12 s，封顶 20 s，加抖动）——最多重试 `max_retries` 次。
+- **全局冷却**（30 s）——任一次 `429/403` 后，整批在下一次请求前暂停，而非继续撞击防火墙。
+
+典型耗时：成功约 2–4 s/篇，触发限流约 30–90 s——相对任何下游 LLM 步骤都只是零头，不构成流水线瓶颈。
 
 
 #### 1. 命令速查 (TL;DR)

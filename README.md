@@ -83,7 +83,7 @@ This tool is designed to `complement rather than replace` reference management s
 
 - **Automated Retrieval from Multiple Sources**: Automatically search and retrieve paper metadata and full-text records from `PubMed/Medline, arXiv, medRxiv, chemRxiv and bioRxiv`. The repository focuses primarily on biomedical research and computational interdisciplinary fields (`Biomedicine + Computational Biology`).
 - **Full-Text Access**: Enable automatic downloading of open-access full texts in XML/Text format from `PMC`. For preprints and other publications without accessible PMC full texts, alternative acquisition modules are integrated to fetch `original PDFs`, with `Sci-Hub` set as the fallback provider.
-- **Preprint Full-Text Fetch (no PDF parsing)**: For preprints without an OA PDF, dedicated methods return clean section-headed text directly — `ArxivFetcher.fetch_full_text(arxiv_id)` reads ar5iv-rendered HTML (arXiv LaTeX → HTML), and `BioRxivFetcher.fetch_full_text(doi)` / `EuropePMCFullText.full_text_xml(doi)` read JATS full-text XML from Europe PMC (bioRxiv / medRxiv and other DOI-indexed preprints).
+- **Preprint Full-Text Fetch (no PDF parsing)**: For preprints without an OA PDF, dedicated methods return clean section-headed text directly — `ArxivFetcher.fetch_full_text(arxiv_id)` reads ar5iv-rendered HTML (arXiv LaTeX → HTML), and `BioRxivFetcher.fetch_full_text(doi)` reads the native bioRxiv/medRxiv full-text HTML first (browser User-Agent + rate-limit handling), then falls back to Europe PMC fullTextXML for preprints already published into PMC.
 - **Structured Storage**:
   - **Metadata**: Preserved in well-structured detailed JSON files.
   - **Full Text**: Stored in multiple formats including parsed JSON and Markdown for versatile downstream usage — JSON for programmatic data analysis, and Markdown optimized for LLM comprehension and processing.
@@ -1435,7 +1435,7 @@ from pyPaperFlow.preprint.europepmc_fetcher import EuropePMCFullText
 arxiv = ArxivFetcher(root_dir="./papers")
 text = arxiv.fetch_full_text("1706.03762")            # "" on failure
 
-# bioRxiv / medRxiv → Europe PMC fullTextXML
+# bioRxiv / medRxiv → native full-text HTML first, then Europe PMC fullTextXML
 biorxiv = BioRxivFetcher(root_dir="./papers", platform="biorxiv")
 text = biorxiv.fetch_full_text("10.1101/2023.06.22.546069")
 
@@ -1446,6 +1446,25 @@ epmc.close()
 ```
 
 All three return an empty string `""` on failure, so callers can gracefully fall back to the abstract. The returned text is section-headed (`## Section`) plain text ready for LLM input.
+
+**bioRxiv / medRxiv full-text route & rate-limit handling**
+
+`BioRxivFetcher.fetch_full_text(doi)` resolves full text in this order:
+
+1. **Native full-text HTML** (`{landing_base}/{doi}.full-text`) — the preprint's own rendered page, parsed into `## Section` text (stops at References, skips figure/table captions). Requires a browser `User-Agent`.
+2. **Europe PMC `fullTextXML`** — only present once the preprint has been published into PMC; preprints still at the PPR (preprint) stage return 404 here.
+3. Otherwise `""` (caller falls back to the abstract).
+
+Because bioRxiv/medRxiv sit behind a Cloudflare wall that returns `429` on rapid successive requests, the HTML route applies several safeguards so a batch fetch does not get silently rate-limited into `""`:
+
+- **Browser User-Agent** — non-browser UAs are always 429 on `.full-text`.
+- **Connection reuse + `trust_env=False`** — fewer handshakes, avoids local-proxy timeouts.
+- **Inter-request throttle** (2 s, shared across instances) — requests are never fired back-to-back.
+- **Status-code branching** — `404` returns immediately (genuinely no full text); only `429/403/5xx` retry.
+- **Exponential backoff** (3/6/12 s, capped at 20 s, jittered) — retried up to `max_retries` times.
+- **Global cooldown** (30 s) — after any `429/403`, the whole batch pauses before the next request instead of hammering the wall.
+
+Typical cost: ~2–4 s per successful paper, ~30–90 s when a rate limit is hit — a small fraction of any downstream LLM step, so it is not the pipeline bottleneck.
 
 ### 6. Critical Reading and Knowledge Graph Analysis: Downstream End‑Use
 

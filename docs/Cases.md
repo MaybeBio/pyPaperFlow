@@ -1740,7 +1740,7 @@ Saved to /data2/pyPaperFlow/test/base_editing/chemrxiv
 
 ## 🧬 Case 9: Fetch full text for preprints via ar5iv and Europe PMC
 
-对于没有开放获取 PDF 的预印本，`ArxivFetcher` 与 `BioRxivFetcher` 各自新增了 `fetch_full_text()` 方法，免 PDF 解析直接返回带章节标题的纯文本；底层依赖 ar5iv（arXiv）与 Europe PMC fullTextXML（bioRxiv / medRxiv）。此外新增独立的 `EuropePMCFullText` 类，可对任意 DOI 收录的预印本直接取 JATS 全文 XML。
+对于没有开放获取 PDF 的预印本，`ArxivFetcher` 与 `BioRxivFetcher` 各自新增了 `fetch_full_text()` 方法，免 PDF 解析直接返回带章节标题的纯文本；底层依赖 ar5iv（arXiv），bioRxiv / medRxiv 则优先读原生全文 HTML、再回退 Europe PMC fullTextXML。此外新增独立的 `EuropePMCFullText` 类，可对任意 DOI 收录的预印本直接取 JATS 全文 XML。
 
 三者失败时均返回空字符串 `""`，便于调用方回退到摘要。
 
@@ -1756,7 +1756,7 @@ print(text[:200])
 
 ar5iv 把 arXiv 的 LaTeX 源码渲染成 HTML，`fetch_full_text` 抓取 `https://ar5iv.labs.arxiv.org/html/{id}` 后，用 `_html_to_text` 抽出 `<h1>/<h2>/<h3>` 作为 `## Section` 标题、`<p>` 作为正文，脚本/样式/导航节点会被剔除。
 
-### 2. bioRxiv / medRxiv → Europe PMC fullTextXML
+### 2. bioRxiv / medRxiv → 原生全文 HTML 优先，Europe PMC fullTextXML 兜底
 
 ```python
 from pyPaperFlow.preprint.biorxiv_fetcher import BioRxivFetcher
@@ -1765,7 +1765,10 @@ fetcher = BioRxivFetcher(root_dir="./papers", platform="biorxiv")   # 或 platfo
 text = fetcher.fetch_full_text("10.1101/2026.01.01.123456")
 ```
 
-内部流程：DOI → Europe PMC 检索（`DOI:"..."`）解析出 pmcid/PPR id → 拉取 `{source}/{id}/fullTextXML` 的 JATS XML → `_jats_xml_to_text` 把每个 `<sec>` 的 `<title>` 转成 `## Section`、`<p>` 转成正文。
+内部流程分两步：
+
+1. **原生全文 HTML**：`{landing_base}/{doi}.full-text` 直接抓预印本渲染页（需浏览器 User-Agent），`_html_to_text` 把 `h1/h2/h3` 转成 `## Section`、`p` 转成正文，遇 References 停止、跳过图/表标题。
+2. **Europe PMC fullTextXML 兜底**：原生 HTML 失败（404/无全文）时，DOI → Europe PMC 检索（`DOI:"..."`）解析出 pmcid/PPR id → 拉取 `{source}/{id}/fullTextXML` 的 JATS XML → `_jats_xml_to_text` 把每个 `<sec>` 的 `<title>` 转成 `## Section`、`<p>` 转成正文。仅在预印本已正式收录进 PMC 后才存在；PPR 阶段返回 404。
 
 ### 3. 任意 DOI → EuropePMCFullText 直接取 XML
 
@@ -1779,6 +1782,6 @@ epmc.close()
 
 返回原始 JATS XML 字符串（未转文本）；如需带章节标题的纯文本，直接用 `BioRxivFetcher.fetch_full_text`（见第 2 节）即可。
 
-> ✅ 实测（单元测试 8/8 通过）：`_html_to_text` / `_jats_xml_to_text` 均正确抽出 `## Section` 标题与段落；`fetch_full_text` 对 200 返回正文、404/无结果/网络异常返回 `""`；版本后缀 `vN` 会被去掉。
+> ✅ 实测（单元测试 14/14 通过）：`_html_to_text` / `_jats_xml_to_text` 均正确抽出 `## Section` 标题与段落；`fetch_full_text` 对 200 返回正文、404 立即返回 `""`、`429/403/5xx` 走退避重试直至 `max_retries`；版本后缀 `vN` 会被去掉。原生 HTML 路径内置 2 s 节流 + 指数退避（3/6/12 s，封顶 20 s，加抖动）+ 30 s 全局冷却，应对 Cloudflare 限流。
 
 
