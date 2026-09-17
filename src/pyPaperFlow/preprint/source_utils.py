@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timedelta
+import time
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
@@ -104,6 +106,48 @@ def download_binary(url: str, output_path: Path | str, headers: Optional[Dict[st
         return True
     except Exception:
         return False
+
+
+def retry_after_seconds(response: Optional[httpx.Response]) -> Optional[float]:
+    """Seconds to wait per the Retry-After header, or None when unusable."""
+    if response is None:
+        return None
+
+    raw_retry_after = normalize_text(response.headers.get("Retry-After", ""))
+    if not raw_retry_after:
+        return None
+
+    if raw_retry_after.isdigit():
+        return float(raw_retry_after)
+
+    try:
+        retry_after_dt = parsedate_to_datetime(raw_retry_after)
+    except (TypeError, ValueError, IndexError):
+        return None
+
+    if retry_after_dt.tzinfo is None:
+        retry_after_dt = retry_after_dt.replace(tzinfo=timezone.utc)
+    now = datetime.now(retry_after_dt.tzinfo)
+    return max(0.0, (retry_after_dt - now).total_seconds())
+
+
+# Default retry budget for every preprint fetcher. This is the interactive/tool
+# default: fail fast (~4.5s of backoff) so a human gets a quick answer plus the
+# degradation notice, instead of a ~22s silent stall. Unattended callers (e.g.
+# monitor.py) pass a larger max_retries explicitly.
+DEFAULT_MAX_RETRIES = 3
+
+
+def sleep_before_retry(response: Optional[httpx.Response], attempt: int) -> None:
+    """Back off between attempts, capped at 30s.
+
+    A 503 usually asks for a pause via Retry-After; otherwise back off
+    exponentially. A short linear cap cannot outlast a transient outage, which
+    pushes callers into whatever lossy fallback they have.
+    """
+    retry_after = retry_after_seconds(response)
+    delay = retry_after if retry_after is not None else min(30.0, 1.5 * (2**attempt))
+    time.sleep(max(0.0, delay))
 
 
 def parse_boolean_query(query: str) -> List[List[str]]:

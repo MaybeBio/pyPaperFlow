@@ -336,6 +336,8 @@ ChemRxiv 相关模块：
 >
 > 全库拉取对于轻量级的文献调研并不适用，除非你有明确的理由需要获取某一特定数据库的全部文献，而且每年每月更新的文献本身就具有一定的冗余性，所以从效率+数量上考虑，单纯相关性检索应该能够满足绝大多数科研工作者的文献调研需求(`因为真正重要的内容一定会反复出现，往往不需要担心全量遗漏`)。当然，对于全量拉取，可以参考其他开源工具如 [paperscraper](https://github.com/jannisborn/paperscraper) 等的实现。
 
+**重试与退避（所有预印本命令）。** 每个预印本 fetcher 在 HTTP 请求失败时都会按指数退避重试——延迟逐次翻倍（`1.5s → 3s → 6s → 12s → …`，上限 30s），并在服务器返回 `Retry-After` 头时优先遵循该头。默认预算是 **3 次重试（约 4.5s 退避）**，为交互式使用而调成"快速失败"，让你尽快得到结果，而不是静默卡住约 22s。可用每条命令的 `--max-retries` 参数覆盖（例如 `biorxiv-search ... --max-retries 5`）；无人值守任务（如 `monitor.py`）会显式传入更大的值。对 **bioRxiv / medRxiv** 而言，当 Europe PMC 全文支路不可达时（如上游临时故障），检索会降级为 Crossref 纯元数据匹配，并向 stderr 打印 `Warning: ... degraded ...` 提示——这是降级而非失败，但会丢失仅出现在正文中的词项命中，因此无人值守运行时务必留意该警告。
+
 建议用户提前学习并熟练掌握上述数据库的检索语法，本工具内置搜索模块的运行逻辑与数据库网页端搜索框基本一致。
 
 > ✨ 这里我们为你提供了几个特定文献数据库构建搜索query的skill，[paper query skill](./docs/Skills.md)
@@ -1589,6 +1591,8 @@ Europe PMC 走的是预印本全文,能补上 Crossref 只看标题摘要而漏�
 5. **ChemRxiv 检索走 Crossref,不用官方 API**:ChemRxiv 的公开 API(`chemrxiv.org/engage/chemrxiv/public-api/v1`)对非浏览器客户端(httpx/curl)返回 Cloudflare 403,而 Crossref 侧(prefix `10.26434`)是稳定、最全的元数据通道,故 `chemrxiv-*` 只查 Crossref(也不并入 Europe PMC)。⚠️ 代价见下(版本重复 / 新贴有入库延迟 / 只看标题摘要)。完整讨论见 README「注意点:为什么预印本检索走 Crossref 元数据」。
 6. **ChemRxiv PDF 直连可下**:PDF 端点固定为 `https://chemrxiv.org/doi/pdf/{doi}`,本网络实测经 httpx 直连即返回 `%PDF` 字节,**不需要** CloakBrowser / undetected_chromedriver 回退(与 bioRxiv/medRxiv 的 Cloudflare 403 相反)。万一某篇直连失败,`--download-pdf` 仍会自动走浏览器回退链。
 7. **版本重复(去重要手动)**:Crossref 把 ChemRxiv 每次改版都单独注册成一个 DOI work——`10.26434/chemrxiv-2025-tj4pr-v2` 与 `chemrxiv-2025-tj4pr`、`10.26434/chemrxiv.15007500/v2` 与 `/v1` 都会作为独立结果同时命中(见下方实测,3 条 DOI 实为 2 篇论文)。`chemrxiv-*` 不去重,用 `--file` 清单抓取前可自行剔除旧版 DOI。
+8. **重试与退避**:所有预印本命令(`arxiv-*` / `biorxiv-*` / `medrxiv-*` / `chemrxiv-*`)的 HTTP 请求失败都会按指数退避重试(延迟逐次翻倍 `1.5s→3s→6s→12s→…`,封顶 30s,并优先遵循 `Retry-After` 头)。默认 **3 次重试(约 4.5s)**,面向交互式使用快速失败;可用 `--max-retries` 覆盖(如 `biorxiv-search ... --max-retries 5`),无人值守任务(如 `monitor.py`)会显式传更大值。
+9. **bioRxiv/medRxiv 的 Europe PMC 降级**:当 Europe PMC 全文支路不可达(如上游临时 503)时,`biorxiv-*` / `medrxiv-*` 的搜索会自动降级为纯 Crossref 元数据匹配,并向 stderr 打印 `Warning: ... degraded ...`——这是降级而非失败,但会丢失仅出现在正文中的词项命中(如基因缩写),无人值守运行时务必留意该警告。
 
 #### 2. 搜索并获取 arXiv 论文
 如果你只想先拿到 ID，可以先搜索；如果想同时获取元数据和 PDF，可以直接 fetch。
@@ -2347,6 +2351,8 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 
 > - [ ] 各文献数据库Query搜索语法的补充，尝试skill化，目前仅实现pubmed mesh部分语法先验结合
 > - [ ] 从这一步开始，关于pubmed数据库解析部分，考虑BioPython库的更新与维护(E-utility的接口)。目前biopython version 1.87，详情参考[biopython仓库](https://github.com/biopython/biopython)
+> - [ ] Europe PMC 可能在 HTTP 200 响应体内返回错误（如 `{"errCode":404,...}` 或缺少 `resultList` 的裸 `{"version":"6.9"}`）；`EuropePMCSearch` 目前把这些当作"无结果"，形成第二条静默降级路径——`last_search_degraded` 仍为 `None`。应检测 `errCode` / 缺失的 `resultList`，并给出降级原因，而不是返回空结果集。
+> - [ ] `SourcePaper.version` 对 arXiv 有值（来自 `vN` 后缀），但对 bioRxiv/medRxiv/chemRxiv 硬编码为 `""`。应从 DOI 版本后缀（如 `.../v1`）推导，使版本去重（上文 ③）在各源间一致生效。
 
 </details>
 

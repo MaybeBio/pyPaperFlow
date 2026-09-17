@@ -5,7 +5,6 @@ import importlib
 import time
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timezone
-from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
@@ -14,12 +13,14 @@ from bs4 import BeautifulSoup
 
 from .source_models import SourcePaper
 from .source_utils import (
+    DEFAULT_MAX_RETRIES,
     build_source_record_dir,
     download_binary,
     extract_year,
     normalize_text,
     safe_filename,
     save_json,
+    sleep_before_retry,
 )
 
 
@@ -73,7 +74,7 @@ class ArxivFetcher:
         root_dir: str,
         backend: str = "native",
         batch_size: int = 100,
-        max_retries: int = 3,
+        max_retries: int = DEFAULT_MAX_RETRIES,
         request_timeout: float = 60.0,
     ):
         self.root_dir = root_dir
@@ -382,7 +383,7 @@ class ArxivFetcher:
                 if response.status_code == 429:
                     last_error = RuntimeError(f"arXiv API rate limited request for {description}")
                     if attempt + 1 < self.max_retries:
-                        self._sleep_before_retry(response, attempt)
+                        sleep_before_retry(response, attempt)
                         continue
                     break
                 response.raise_for_status()
@@ -391,19 +392,19 @@ class ArxivFetcher:
                 except ET.ParseError as exc:
                     last_error = exc
                     if attempt + 1 < self.max_retries:
-                        self._sleep_before_retry(response, attempt)
+                        sleep_before_retry(response, attempt)
                         continue
                     break
             except (httpx.HTTPStatusError, httpx.TimeoutException, httpx.TransportError) as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
-                    self._sleep_before_retry(response, attempt)
+                    sleep_before_retry(response, attempt)
                     continue
                 break
             except Exception as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
-                    self._sleep_before_retry(response, attempt)
+                    sleep_before_retry(response, attempt)
                     continue
                 break
 
@@ -425,32 +426,6 @@ class ArxivFetcher:
         except ImportError:
             self._http_client = httpx.Client(http2=False, **client_kwargs)
         return self._http_client
-
-    def _sleep_before_retry(self, response: Optional[httpx.Response], attempt: int) -> None:
-        retry_after = self._retry_after_seconds(response)
-        delay = retry_after if retry_after is not None else min(30.0, 1.5 * (2**attempt))
-        time.sleep(max(0.0, delay))
-
-    def _retry_after_seconds(self, response: Optional[httpx.Response]) -> Optional[float]:
-        if response is None:
-            return None
-
-        raw_retry_after = normalize_text(response.headers.get("Retry-After", ""))
-        if not raw_retry_after:
-            return None
-
-        if raw_retry_after.isdigit():
-            return float(raw_retry_after)
-
-        try:
-            retry_after_dt = parsedate_to_datetime(raw_retry_after)
-        except (TypeError, ValueError, IndexError):
-            return None
-
-        if retry_after_dt.tzinfo is None:
-            retry_after_dt = retry_after_dt.replace(tzinfo=timezone.utc)
-        now = datetime.now(retry_after_dt.tzinfo)
-        return max(0.0, (retry_after_dt - now).total_seconds())
 
     def _normalize_date_bounds(
         self,

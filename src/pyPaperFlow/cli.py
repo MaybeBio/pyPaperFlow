@@ -8,6 +8,7 @@ from .pubmed.pubmed_fetcher import PubmedFetcher
 from .preprint.arxiv_fetcher import ArxivFetcher
 from .preprint.biorxiv_fetcher import BioRxivFetcher
 from .preprint.chemrxiv_fetcher import ChemRxivFetcher
+from .preprint.source_utils import DEFAULT_MAX_RETRIES
 from .pubmed.pubmed_merger import PubmedMerger
 from .integrations import pdf_fetch
 from .integrations.github_export import run_github_export
@@ -20,6 +21,7 @@ opt_storage = typer.Option("./Papers", "--storage-dir", "-s", help="Directory in
 opt_email = typer.Option(..., "--email", help="Entrez Email.")
 opt_api_key = typer.Option(None, "--api-key", help="NCBI API Key (recommended).")
 opt_max_retries = typer.Option(3, "--max-retries", help="Maximum number of retries for Entrez API calls.")
+opt_preprint_max_retries = typer.Option(DEFAULT_MAX_RETRIES, "--max-retries", help="Maximum number of retries per request. Backoff is exponential, capped at 30s.")
 opt_batch_size = typer.Option(50, "--batch-size", "-b", help="Batch size for fetching.")
 opt_arxiv_backend = typer.Option("native", "--backend", help="arXiv backend: 'native' or 'paperscraper'.")
 
@@ -338,9 +340,10 @@ def arxiv_search_cmd(
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
     backend: str = opt_arxiv_backend,
+    max_retries: int = opt_preprint_max_retries,
 ):
     """Search arXiv and write matching IDs to a text file."""
-    fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend)
+    fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend, max_retries=max_retries)
     records = fetcher.search(query=query, max_results=max_results, start_date=start_date, end_date=end_date)
     typer.echo(f"Found {len(records)} arXiv papers.")
     if not records:
@@ -374,12 +377,13 @@ def arxiv_fetch_cmd(
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD (query mode only)."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
     backend: str = opt_arxiv_backend,
+    max_retries: int = opt_preprint_max_retries,
 ):
     """Fetch arXiv metadata and attempt to download PDFs.
 
     Provide one of: a positional query, --file, or one or more --id values.
     """
-    fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend)
+    fetcher = ArxivFetcher(root_dir=storage_dir, backend=backend, max_retries=max_retries)
     output = output_dir if output_dir else storage_dir
 
     provided = [name for name, value in (("query", query), ("--file", file), ("--id", arxiv_id)) if value]
@@ -426,6 +430,7 @@ def biorxiv_search_cmd(
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
     use_europepmc: bool = typer.Option(True, "--europepmc/--no-europepmc", help="Also search Europe PMC full text (boolean AND) and union with Crossref results. Default: enabled."),
+    max_retries: int = opt_preprint_max_retries,
 ):
     """Search bioRxiv and write matching IDs to a text file.
 
@@ -438,7 +443,7 @@ def biorxiv_search_cmd(
             fg=typer.colors.YELLOW,
         )
 
-    fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
+    fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days, max_retries=max_retries)
     records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results, use_europepmc=use_europepmc)
     typer.echo(f"Found {len(records)} bioRxiv papers.")
     for record in records:
@@ -462,6 +467,7 @@ def biorxiv_fetch_cmd(
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
     use_europepmc: bool = typer.Option(True, "--europepmc/--no-europepmc", help="In query mode, also search Europe PMC full text and union with Crossref results. Default: enabled."),
+    max_retries: int = opt_preprint_max_retries,
 ):
     """Fetch bioRxiv metadata and attempt to download PDFs.
 
@@ -475,7 +481,7 @@ def biorxiv_fetch_cmd(
             fg=typer.colors.YELLOW,
         )
 
-    fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days)
+    fetcher = BioRxivFetcher(root_dir=storage_dir, window_days=window_days, max_retries=max_retries)
     output = output_dir if output_dir else storage_dir
 
     provided = [name for name, value in (("query", query), ("--file", file), ("--doi", doi)) if value]
@@ -523,6 +529,7 @@ def medrxiv_search_cmd(
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
     use_europepmc: bool = typer.Option(True, "--europepmc/--no-europepmc", help="Also search Europe PMC full text (boolean AND) and union with Crossref results. Default: enabled."),
+    max_retries: int = opt_preprint_max_retries,
 ):
     """Search medRxiv and write matching IDs to a text file.
 
@@ -535,7 +542,7 @@ def medrxiv_search_cmd(
             fg=typer.colors.YELLOW,
         )
 
-    fetcher = BioRxivFetcher(root_dir=storage_dir, platform="medrxiv", window_days=window_days)
+    fetcher = BioRxivFetcher(root_dir=storage_dir, platform="medrxiv", window_days=window_days, max_retries=max_retries)
     records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results, use_europepmc=use_europepmc)
     typer.echo(f"Found {len(records)} medRxiv papers.")
     for record in records:
@@ -559,6 +566,7 @@ def medrxiv_fetch_cmd(
     window_days: int = typer.Option(365, "--window-days", help="Compatibility-only option. Retained for older scripts; not used by current Crossref-backed direct query path."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
     use_europepmc: bool = typer.Option(True, "--europepmc/--no-europepmc", help="In query mode, also search Europe PMC full text and union with Crossref results. Default: enabled."),
+    max_retries: int = opt_preprint_max_retries,
 ):
     """Fetch medRxiv metadata and attempt to download PDFs.
 
@@ -572,7 +580,7 @@ def medrxiv_fetch_cmd(
             fg=typer.colors.YELLOW,
         )
 
-    fetcher = BioRxivFetcher(root_dir=storage_dir, platform="medrxiv", window_days=window_days)
+    fetcher = BioRxivFetcher(root_dir=storage_dir, platform="medrxiv", window_days=window_days, max_retries=max_retries)
     output = output_dir if output_dir else storage_dir
 
     provided = [name for name, value in (("query", query), ("--file", file), ("--doi", doi)) if value]
@@ -618,13 +626,14 @@ def chemrxiv_search_cmd(
     output_dir: Optional[str] = typer.Option(None, "--output-dir", "-o", help="Directory to save searched ChemRxiv IDs."),
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD."),
+    max_retries: int = opt_preprint_max_retries,
 ):
     """Search ChemRxiv and write matching DOIs to a text file.
 
     Metadata is retrieved from Crossref over ChemRxiv records (prefix
     10.26434, publisher American Chemical Society (ACS)).
     """
-    fetcher = ChemRxivFetcher(root_dir=storage_dir)
+    fetcher = ChemRxivFetcher(root_dir=storage_dir, max_retries=max_retries)
     records = fetcher.search(query=query, start_date=start_date, end_date=end_date, max_results=max_results)
     typer.echo(f"Found {len(records)} ChemRxiv papers.")
     for record in records:
@@ -646,13 +655,14 @@ def chemrxiv_fetch_cmd(
     start_date: Optional[str] = typer.Option(None, "--start-date", help="Optional start date in YYYY-MM-DD (query mode only)."),
     end_date: Optional[str] = typer.Option(None, "--end-date", help="Optional end date in YYYY-MM-DD (query mode only)."),
     download_pdf: bool = typer.Option(True, "--download-pdf/--no-download-pdf", help="Download PDFs when available."),
+    max_retries: int = opt_preprint_max_retries,
 ):
     """Fetch ChemRxiv metadata and attempt to download PDFs.
 
     Metadata retrieval uses Crossref over ChemRxiv records (prefix 10.26434).
     Provide one of: a positional query, --file, or one or more --doi values.
     """
-    fetcher = ChemRxivFetcher(root_dir=storage_dir)
+    fetcher = ChemRxivFetcher(root_dir=storage_dir, max_retries=max_retries)
     output = output_dir if output_dir else storage_dir
 
     provided = [name for name, value in (("query", query), ("--file", file), ("--doi", doi)) if value]

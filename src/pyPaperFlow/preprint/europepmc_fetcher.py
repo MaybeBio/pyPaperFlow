@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 import re
-import time
 from typing import Any, Dict, List, Optional
 
 import httpx
 
-from .source_utils import normalize_text
+from .source_utils import DEFAULT_MAX_RETRIES, normalize_text, sleep_before_retry
 
 EUROPE_PMC_SEARCH_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 EUROPE_PMC_FULLTEXT_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/{source}/{id}/fullTextXML"
@@ -30,7 +29,7 @@ class EuropePMCSearch:
     def __init__(
         self,
         request_timeout: float = 60.0,
-        max_retries: int = 3,
+        max_retries: int = DEFAULT_MAX_RETRIES,
         page_size: int = 100,
     ):
         self.request_timeout = float(request_timeout)
@@ -129,6 +128,7 @@ class EuropePMCSearch:
         }
         last_error: Optional[Exception] = None
         for attempt in range(self.max_retries):
+            response: Optional[httpx.Response] = None
             try:
                 response = self._client.get(EUROPE_PMC_SEARCH_URL, params=params)
                 response.raise_for_status()
@@ -136,7 +136,7 @@ class EuropePMCSearch:
             except Exception as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
-                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+                    sleep_before_retry(response, attempt)
         if last_error is not None:
             raise last_error
         raise RuntimeError("Failed to query Europe PMC")
@@ -149,7 +149,7 @@ class EuropePMCFullText:
     times out on ebi.ac.uk.
     """
 
-    def __init__(self, request_timeout: float = 60.0, max_retries: int = 3):
+    def __init__(self, request_timeout: float = 60.0, max_retries: int = DEFAULT_MAX_RETRIES):
         self.request_timeout = float(request_timeout)
         self.max_retries = max(1, int(max_retries))
         self.headers = {
@@ -177,19 +177,21 @@ class EuropePMCFullText:
         source = "PPR" if source_id.startswith("PPR") else "PMC"
         url = EUROPE_PMC_FULLTEXT_URL.format(source=source, id=source_id)
         for attempt in range(self.max_retries):
+            response: Optional[httpx.Response] = None
             try:
                 response = self._client.get(url)
                 response.raise_for_status()
                 return response.text
             except Exception:
                 if attempt + 1 < self.max_retries:
-                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+                    sleep_before_retry(response, attempt)
         return ""
 
     def _resolve_id(self, doi: str) -> str:
         """Map a DOI to a Europe PMC id (prefer pmcid, then the PPR/PMC id)."""
         params = {"query": f'DOI:"{doi}"', "format": "json", "pageSize": 1, "resultType": "core"}
         for attempt in range(self.max_retries):
+            response: Optional[httpx.Response] = None
             try:
                 response = self._client.get(EUROPE_PMC_SEARCH_URL, params=params)
                 response.raise_for_status()
@@ -200,5 +202,5 @@ class EuropePMCFullText:
                 return normalize_text(record.get("pmcid") or record.get("id") or "")
             except Exception:
                 if attempt + 1 < self.max_retries:
-                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+                    sleep_before_retry(response, attempt)
         return ""

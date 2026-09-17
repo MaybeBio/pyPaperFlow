@@ -332,6 +332,8 @@ Our literature database primarily covers biomedical research and computational i
 >
 > **Difference vs. exhaustive full-corpus enumeration:** a relevance search is a heuristic over the deposited metadata. The "no-omission-by-construction" alternative is to list the *whole* platform corpus (`filter=prefix…` with no `query`, cursor-paging every record — ≈ 55k ChemRxiv / 436k openRxiv) and run the boolean AND locally, with no relevance engine in the loop; recall is then exactly "all records whose metadata fully matches the query" (a `--start/--end-date` window shrinks the pull). The cost is downloading the full corpus per search, and it still inherits the source-level boundaries above (deposit lag, metadata-only, version duplication). This tool's `search()` path is relevance-based today; the exhaustive mode is not currently exposed as a flag.
 
+**Retries & backoff (all preprint commands).** Every preprint fetcher retries failed HTTP requests with exponential backoff — the delay doubles per attempt (`1.5s → 3s → 6s → 12s → …`, capped at 30s) and honors the server's `Retry-After` header when present. The default budget is **3 retries (≈4.5s of backoff)**, tuned to fail fast for interactive use so you get a quick answer rather than a ~22s silent stall. Override it per command with the `--max-retries` flag (e.g. `biorxiv-search ... --max-retries 5`); unattended jobs (e.g. `monitor.py`) pass a larger value explicitly. For **bioRxiv / medRxiv**, when the Europe PMC full-text leg is unreachable (e.g. a transient upstream outage) the search degrades to Crossref-only metadata matching and prints a `Warning: ... degraded ...` notice to stderr — this is a fallback, not a failure, but it drops body-only-term matches, so watch for the warning on unattended runs.
+
 We recommend that you proactively learn and master the search syntax of these databases, as our built‑in search module functions similarly to the search bar on official web portals.
 
 For instance, here is a typical complex query example tailored for PubMed:
@@ -1499,6 +1501,8 @@ You may directly run the test scripts to verify the correctness and completeness
 
 > - [ ] Supplement query syntax for various literature databases and implement skill‑based support. Currently only partial MeSH‑aware syntax priors for PubMed are integrated.
 > - [ ] Maintain and update the BioPython library (E‑utilities API) for PubMed parsing from this stage onward. Current version: BioPython 1.87; see [biopython Repository](https://github.com/biopython/biopython) for details.
+> - [ ] Europe PMC can return errors inside an HTTP 200 body (e.g. `{"errCode":404,...}` or a bare `{"version":"6.9"}` with no `resultList`); `EuropePMCSearch` currently treats these as "no results", which is a second silent-degradation path — `last_search_degraded` stays `None`. Detect `errCode` / missing `resultList` and surface a degradation reason instead of an empty result set.
+> - [ ] `SourcePaper.version` is populated for arXiv (from the `vN` suffix) but hardcoded to `""` for bioRxiv/medRxiv/chemRxiv. Derive it from the DOI version suffix (e.g. `.../v1`) so version dedup (# ③ above) works uniformly across sources.
 
 </details>
 

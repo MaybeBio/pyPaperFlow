@@ -18,6 +18,7 @@ from ..integrations.undetected_fallback import is_undetected_enabled, undetected
 
 from .source_models import SourcePaper
 from .source_utils import (
+    DEFAULT_MAX_RETRIES,
     basic_boolean_text_match,
     build_source_record_dir,
     detect_platform_from_doi,
@@ -27,6 +28,7 @@ from .source_utils import (
     normalize_text,
     safe_filename,
     save_json,
+    sleep_before_retry,
 )
 
 
@@ -123,7 +125,7 @@ class BioRxivFetcher:
         root_dir: str,
         platform: str = "biorxiv",
         window_days: int = 365,
-        max_retries: int = 3,
+        max_retries: int = DEFAULT_MAX_RETRIES,
         request_timeout: float = 60.0,
     ):
         if platform not in PLATFORM_CONFIG:
@@ -136,6 +138,10 @@ class BioRxivFetcher:
         self.window_days = max(1, int(window_days))
         self.max_retries = max(1, int(max_retries))
         self.request_timeout = float(request_timeout)
+        # Set by search() when Europe PMC was unreachable, so the results came from
+        # Crossref alone. Returning [] there is indistinguishable from a genuine
+        # empty result, so callers need this to tell a lossy week from a quiet one.
+        self.last_search_degraded: Optional[str] = None
         self.headers = {
             "User-Agent": "pyPaperFlow/0.1.0 (+https://github.com/MaybeBio/pyPaperFlow)",
             "Accept": "application/json,text/html;q=0.9,*/*;q=0.8",
@@ -177,6 +183,8 @@ class BioRxivFetcher:
         query_text = normalize_text(query)
         if not query_text:
             raise ValueError("query must be non-empty")
+
+        self.last_search_degraded = None
 
         if DOI_RE.match(query_text):
             return self._search_by_doi(query_text)
@@ -262,6 +270,7 @@ class BioRxivFetcher:
         try:
             from .europepmc_fetcher import EuropePMCSearch
         except Exception:
+            self.last_search_degraded = "Europe PMC module unavailable"
             return []
 
         start_dt, end_dt = self._normalize_date_range(start_date, end_date)
@@ -280,8 +289,10 @@ class BioRxivFetcher:
                 max_results=max_results,
             )
         except Exception as exc:
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            self.last_search_degraded = f"Europe PMC unavailable ({f'HTTP {status}' if status else type(exc).__name__})"
             print(
-                f"[biorxiv] Europe PMC search failed ({exc}); returning Crossref-only results.",
+                f"[{self.platform}] Europe PMC search failed ({exc}); returning Crossref-only results.",
                 file=sys.stderr,
             )
             return []
@@ -398,6 +409,7 @@ class BioRxivFetcher:
         url = f"{BIO_RXIV_CROSSREF_API}/{quote(doi, safe='')}"
         last_error: Optional[Exception] = None
         for attempt in range(self.max_retries):
+            response: Optional[httpx.Response] = None
             try:
                 response = self._get_http_client().get(url)
                 if response.status_code == 404:
@@ -407,7 +419,7 @@ class BioRxivFetcher:
             except Exception as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
-                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+                    sleep_before_retry(response, attempt)
         if last_error is not None:
             raise last_error
         raise RuntimeError(f"Failed to fetch Crossref work for DOI {doi}")
@@ -591,6 +603,7 @@ class BioRxivFetcher:
         last_error: Optional[Exception] = None
 
         for attempt in range(self.max_retries):
+            response: Optional[httpx.Response] = None
             try:
                 response = self._get_http_client().get(BIO_RXIV_CROSSREF_API, params=params)
                 response.raise_for_status()
@@ -598,7 +611,7 @@ class BioRxivFetcher:
             except Exception as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
-                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+                    sleep_before_retry(response, attempt)
 
         if last_error is not None:
             raise last_error

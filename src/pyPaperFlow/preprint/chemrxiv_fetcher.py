@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-import time
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
@@ -15,6 +14,7 @@ from ..integrations.undetected_fallback import is_undetected_enabled, undetected
 
 from .source_models import SourcePaper
 from .source_utils import (
+    DEFAULT_MAX_RETRIES,
     basic_boolean_text_match,
     build_source_record_dir,
     download_binary,
@@ -22,6 +22,7 @@ from .source_utils import (
     normalize_text,
     safe_filename,
     save_json,
+    sleep_before_retry,
 )
 
 
@@ -48,7 +49,7 @@ class ChemRxivFetcher:
     def __init__(
         self,
         root_dir: str,
-        max_retries: int = 3,
+        max_retries: int = DEFAULT_MAX_RETRIES,
         request_timeout: float = 60.0,
     ):
         self.root_dir = root_dir
@@ -157,6 +158,7 @@ class ChemRxivFetcher:
         url = f"{CHEM_RXIV_CROSSREF_API}/{quote(doi, safe='')}"
         last_error: Optional[Exception] = None
         for attempt in range(self.max_retries):
+            response: Optional[httpx.Response] = None
             try:
                 response = self._get_http_client().get(url)
                 if response.status_code == 404:
@@ -166,7 +168,7 @@ class ChemRxivFetcher:
             except Exception as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
-                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+                    sleep_before_retry(response, attempt)
         if last_error is not None:
             raise last_error
         raise RuntimeError(f"Failed to fetch Crossref work for DOI {doi}")
@@ -254,6 +256,7 @@ class ChemRxivFetcher:
 
         last_error: Optional[Exception] = None
         for attempt in range(self.max_retries):
+            response: Optional[httpx.Response] = None
             try:
                 response = self._get_http_client().get(CHEM_RXIV_CROSSREF_API, params=params)
                 response.raise_for_status()
@@ -261,7 +264,7 @@ class ChemRxivFetcher:
             except Exception as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
-                    time.sleep(min(2.0, 0.5 * (attempt + 1)))
+                    sleep_before_retry(response, attempt)
 
         if last_error is not None:
             raise last_error
