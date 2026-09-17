@@ -23,7 +23,10 @@ class EuropePMCSearch:
     Crossref's metadata-only relevance search cannot.
 
     The client bypasses the local HTTP proxy via ``trust_env=False`` because
-    the proxy commonly times out (HTTP 504) on ``ebi.ac.uk``.
+    the proxy commonly times out (HTTP 504) on ``ebi.ac.uk``. Note that the
+    503s occasionally seen against this endpoint are an upstream EBI outage,
+    not the proxy: direct and proxied requests fail (and recover) together, and
+    ``trust_env=False`` only sidesteps the proxy's own 504 flakiness.
     """
 
     def __init__(
@@ -132,7 +135,9 @@ class EuropePMCSearch:
             try:
                 response = self._client.get(EUROPE_PMC_SEARCH_URL, params=params)
                 response.raise_for_status()
-                return response.json()
+                payload = response.json()
+                self._validate_payload(payload)
+                return payload
             except Exception as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
@@ -140,6 +145,24 @@ class EuropePMCSearch:
         if last_error is not None:
             raise last_error
         raise RuntimeError("Failed to query Europe PMC")
+
+    @staticmethod
+    def _validate_payload(payload: Any) -> None:
+        """Raise when Europe PMC returns an error inside an HTTP 200 body.
+
+        The REST API can answer with a bare ``{"version":"6.9"}`` (no
+        ``resultList``) or an ``errCode``/``errMessage`` envelope on a 200,
+        which ``raise_for_status`` cannot see. Treat those as failures so
+        callers degrade instead of silently returning an empty result set.
+        """
+        if not isinstance(payload, dict):
+            raise RuntimeError(f"Europe PMC returned a non-object payload: {type(payload).__name__}")
+        if "errCode" in payload:
+            raise RuntimeError(
+                f"Europe PMC error: errCode={payload.get('errCode')} errMessage={payload.get('errMessage', '')}"
+            )
+        if "resultList" not in payload:
+            raise RuntimeError("Europe PMC returned an unexpected payload without resultList")
 
 
 class EuropePMCFullText:

@@ -24,6 +24,7 @@ from .source_utils import (
     detect_platform_from_doi,
     download_binary,
     ensure_directory,
+    extract_version_from_doi,
     extract_year,
     normalize_text,
     safe_filename,
@@ -290,7 +291,12 @@ class BioRxivFetcher:
             )
         except Exception as exc:
             status = getattr(getattr(exc, "response", None), "status_code", None)
-            self.last_search_degraded = f"Europe PMC unavailable ({f'HTTP {status}' if status else type(exc).__name__})"
+            if status:
+                reason = f"HTTP {status}"
+            else:
+                message = str(exc).strip()
+                reason = message or type(exc).__name__
+            self.last_search_degraded = f"Europe PMC unavailable ({reason})"
             print(
                 f"[{self.platform}] Europe PMC search failed ({exc}); returning Crossref-only results.",
                 file=sys.stderr,
@@ -352,7 +358,7 @@ class BioRxivFetcher:
             landing_url=landing_url,
             pdf_url=pdf_url,
             query=query,
-            version="",
+            version=extract_version_from_doi(doi),
             keywords=[],
             extra={
                 "provider": "europepmc",
@@ -678,7 +684,7 @@ class BioRxivFetcher:
             landing_url=landing_url,
             pdf_url=pdf_url,
             query=query,
-            version="",
+            version=extract_version_from_doi(doi),
             keywords=keywords,
             extra={
                 "publisher": record.get("publisher", ""),

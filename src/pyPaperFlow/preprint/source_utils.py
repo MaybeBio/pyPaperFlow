@@ -14,6 +14,7 @@ import httpx
 BOOLEAN_OR_SPLIT_RE = re.compile(r"\s+OR\s+", re.IGNORECASE)
 BOOLEAN_AND_SPLIT_RE = re.compile(r"\s+AND\s+", re.IGNORECASE)
 TOKEN_RE = re.compile(r'"([^"]+)"|\'([^\']+)\'|(\S+)')
+VERSION_SUFFIX_RE = re.compile(r"v(\d+)$", re.IGNORECASE)
 
 
 def normalize_text(value: Any) -> str:
@@ -54,6 +55,21 @@ def detect_platform_from_doi(doi: Any) -> str:
     if len(digits) == 6:
         return "biorxiv"
     return ""
+
+
+def extract_version_from_doi(doi: Any) -> str:
+    """Return the ``N`` of a trailing ``vN`` DOI version suffix, else "".
+
+    bioRxiv/medRxiv and chemRxiv register each revision as its own DOI work
+    (e.g. ``10.1101/2023.06.22.546069v2`` or ``10.26434/chemrxiv-2025-tj4pr-v2``),
+    so the version is recoverable from the DOI itself. A DOI without a suffix
+    (or an explicit ``v1``) is the first version and yields "".
+    """
+    text = normalize_text(doi)
+    if not text:
+        return ""
+    match = VERSION_SUFFIX_RE.search(text)
+    return match.group(1) if match else ""
 
 
 def extract_year(date_text: Any) -> str:

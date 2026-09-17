@@ -1501,8 +1501,8 @@ You may directly run the test scripts to verify the correctness and completeness
 
 > - [ ] Supplement query syntax for various literature databases and implement skill‑based support. Currently only partial MeSH‑aware syntax priors for PubMed are integrated.
 > - [ ] Maintain and update the BioPython library (E‑utilities API) for PubMed parsing from this stage onward. Current version: BioPython 1.87; see [biopython Repository](https://github.com/biopython/biopython) for details.
-> - [ ] Europe PMC can return errors inside an HTTP 200 body (e.g. `{"errCode":404,...}` or a bare `{"version":"6.9"}` with no `resultList`); `EuropePMCSearch` currently treats these as "no results", which is a second silent-degradation path — `last_search_degraded` stays `None`. Detect `errCode` / missing `resultList` and surface a degradation reason instead of an empty result set.
-> - [ ] `SourcePaper.version` is populated for arXiv (from the `vN` suffix) but hardcoded to `""` for bioRxiv/medRxiv/chemRxiv. Derive it from the DOI version suffix (e.g. `.../v1`) so version dedup (# ③ above) works uniformly across sources.
+> - [x] Europe PMC can return errors inside an HTTP 200 body (e.g. `{"errCode":404,...}` or a bare `{"version":"6.9"}` with no `resultList`); `EuropePMCSearch` now raises on `errCode` / a missing `resultList` so `last_search_degraded` is set instead of silently returning an empty result set.
+> - [x] `SourcePaper.version` is populated for arXiv (from the `vN` suffix) and was hardcoded to `""` for bioRxiv/medRxiv/chemRxiv. Now derived from the DOI version suffix (e.g. `.../v2`) via `extract_version_from_doi`, so version dedup (# ③ above) works uniformly across sources.
 
 </details>
 
@@ -1541,6 +1541,13 @@ You may directly run the test scripts to verify the correctness and completeness
 
 > - [ ] Develop highly customized skills for in‑depth literature analysis, preferably integrated into downstream workflows.
 > - [ ] Introduce persistent databases to scale and deepen functionality beyond a pure Python‑based project.
+
+</details>
+
+<details>
+<summary><b>7. Testing & CI</b></summary>
+
+> - [ ] Add a pytest suite for pyPaperFlow itself. Regression coverage for the retry/backoff + degradation changes currently lives only in the monitor repo's `tests/test_backfill.py`; `test/` here holds sample output data, and CI (`docs.yml`) builds docs only.
 
 </details>
 

@@ -2351,8 +2351,8 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 
 > - [ ] 各文献数据库Query搜索语法的补充，尝试skill化，目前仅实现pubmed mesh部分语法先验结合
 > - [ ] 从这一步开始，关于pubmed数据库解析部分，考虑BioPython库的更新与维护(E-utility的接口)。目前biopython version 1.87，详情参考[biopython仓库](https://github.com/biopython/biopython)
-> - [ ] Europe PMC 可能在 HTTP 200 响应体内返回错误（如 `{"errCode":404,...}` 或缺少 `resultList` 的裸 `{"version":"6.9"}`）；`EuropePMCSearch` 目前把这些当作"无结果"，形成第二条静默降级路径——`last_search_degraded` 仍为 `None`。应检测 `errCode` / 缺失的 `resultList`，并给出降级原因，而不是返回空结果集。
-> - [ ] `SourcePaper.version` 对 arXiv 有值（来自 `vN` 后缀），但对 bioRxiv/medRxiv/chemRxiv 硬编码为 `""`。应从 DOI 版本后缀（如 `.../v1`）推导，使版本去重（上文 ③）在各源间一致生效。
+> - [x] Europe PMC 可能在 HTTP 200 响应体内返回错误（如 `{"errCode":404,...}` 或缺少 `resultList` 的裸 `{"version":"6.9"}`）；`EuropePMCSearch` 现对 `errCode` / 缺失 `resultList` 抛异常，从而设置 `last_search_degraded`，不再静默返回空结果集。
+> - [x] `SourcePaper.version` 对 arXiv 有值（来自 `vN` 后缀），但此前对 bioRxiv/medRxiv/chemRxiv 硬编码为 `""`。现通过 `extract_version_from_doi` 从 DOI 版本后缀（如 `.../v2`）推导，使版本去重（上文 ③）在各源间一致生效。
 
 </details>
 
@@ -2397,6 +2397,14 @@ paperflow pubmed-export-md -i IDR_all_20260520_2026-05-20_18-33-54.json -o ./IDR
 > - [ ] 文献深度解析，考虑加入几个高度定制化的skill，最好是可以借下游流程
 > - [ ] 考虑加入数据库，考虑做大做深，不局限于纯python项目
 
+
+</details>
+
+
+<details markdown="1">
+<summary><b>7. 测试与 CI</b></summary>
+
+> - [ ] 为 pyPaperFlow 本身补充 pytest 测试套件。目前退避/降级改动的回归覆盖只存在于 monitor 仓库的 `tests/test_backfill.py`；本仓库 `test/` 只有样例输出数据，CI（`docs.yml`）仅构建文档。
 
 </details>
 

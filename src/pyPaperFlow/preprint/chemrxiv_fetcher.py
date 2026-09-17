@@ -18,6 +18,7 @@ from .source_utils import (
     basic_boolean_text_match,
     build_source_record_dir,
     download_binary,
+    extract_version_from_doi,
     extract_year,
     normalize_text,
     safe_filename,
@@ -324,7 +325,7 @@ class ChemRxivFetcher:
             landing_url=landing_url,
             pdf_url=pdf_url,
             query=query,
-            version="",
+            version=extract_version_from_doi(doi),
             keywords=keywords,
             extra={
                 "publisher": record.get("publisher", ""),
