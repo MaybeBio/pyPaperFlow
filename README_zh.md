@@ -1606,9 +1606,11 @@ paperflow arxiv-fetch "deep learning for biology" --max-results 10 --download-pd
 常用参数：
 
 - `--start-date` / `--end-date`：按 `YYYY-MM-DD` 格式限制日期范围。
-- `--backend`：可选 `native`（内置的 httpx 方案）或 `paperscraper`（安装了第三方包时可用, ⚠️ 暂时未测试paperscraper）。
+- `--backend`：可选 `native`（内置的 requests 方案）或 `paperscraper`（安装了第三方包时可用, ⚠️ 暂时未测试paperscraper）。
 - `--output-dir`：把 ID 列表或抓取结果保存到其他目录。
 - `--no-download-pdf`：只保存元数据，不下载 PDF。
+
+> ⚠️ **为什么 `native` 用 `requests` 而非 `httpx`**：arXiv 的 `export.arxiv.org` API 在 Fastly CDN 后面，会对 `httpx` 的 TLS 指纹在**布尔查询**（任何带字段的 `OR` 或引号短语——也就是多词检索时 query builder 生成的形式）上返回 **HTTP 406**。`requests`（urllib3）和 `curl` 会经 Google 边缘节点返回 200。单个裸词恰好 `httpx` 也能通过，但真实布尔查询需要非 `httpx` 客户端。
 
 日期过滤示例：
 

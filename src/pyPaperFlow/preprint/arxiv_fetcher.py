@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 import httpx
+import requests
 from bs4 import BeautifulSoup
 
 from .source_models import SourcePaper
@@ -372,9 +373,12 @@ class ArxivFetcher:
         last_error: Optional[Exception] = None
 
         for attempt in range(self.max_retries):
-            response: Optional[httpx.Response] = None
+            response = None
             try:
-                response = self._get_http_client().get(
+                # arXiv's Fastly CDN returns 406 for httpx's TLS fingerprint on
+                # boolean queries (OR / quoted phrases). requests (urllib3) and
+                # curl pass through to Google's edge, so use requests here.
+                response = requests.get(
                     ARXIV_API_URL,
                     params=params,
                     headers=self.headers,
@@ -395,7 +399,7 @@ class ArxivFetcher:
                         sleep_before_retry(response, attempt)
                         continue
                     break
-            except (httpx.HTTPStatusError, httpx.TimeoutException, httpx.TransportError) as exc:
+            except requests.exceptions.RequestException as exc:
                 last_error = exc
                 if attempt + 1 < self.max_retries:
                     sleep_before_retry(response, attempt)

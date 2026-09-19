@@ -1424,6 +1424,8 @@ In theory, all DOI‑driven literature workflows can be standardised following t
 
 > Modules dedicated to the aforementioned preprint platforms are still under development and refinement. Preprint‑related subcommands are provided for testing purposes only. For detailed test cases, refer to [Cases](./docs/Cases.md)
 
+> **arXiv search backend note.** The `arxiv-search` / `arxiv-fetch` `native` backend talks to `export.arxiv.org` over `requests` (urllib3), not `httpx`: arXiv's Fastly CDN rejects `httpx`'s TLS fingerprint with HTTP 406 on boolean queries (fielded `OR` / quoted phrases), while `requests` and `curl` route through Google's edge and return 200. See [Cases](./docs/Cases.md) for details.
+
 #### Preprint full-text fetch (Python API)
 
 For preprints without an open-access PDF, each fetcher exposes a `fetch_full_text()` method that returns clean section-headed text without any PDF parsing:

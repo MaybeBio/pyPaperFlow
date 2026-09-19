@@ -1053,9 +1053,11 @@ Useful options:
 
 - `--max-results`: cap the number of results. Default is **no limit** (return all matches). Unlimited retrieval is supported by the `native` backend only; `--backend paperscraper` requires an explicit `--max-results`.
 - `--start-date` and `--end-date`: limit results to a date window in `YYYY-MM-DD` format.
-- `--backend`: choose `native` for the built-in httpx-backed arXiv API path, or `paperscraper` to use the optional third-party adapter when installed.
+- `--backend`: choose `native` for the built-in `requests`-backed arXiv API path, or `paperscraper` to use the optional third-party adapter when installed.
 - `--output-dir`: save the ID list or fetched records to a different directory.
 - `--no-download-pdf`: skip PDF download and save metadata only.
+
+> **Why `native` uses `requests`, not `httpx`.** arXiv's `export.arxiv.org` API sits behind a Fastly CDN that answers `httpx`'s TLS fingerprint with **HTTP 406** on boolean queries — any fielded `OR` or quoted phrase (which is exactly what the query builder emits for multi-term searches). `requests` (urllib3) and `curl` route through Google's edge and return 200. A single bare term happens to work over `httpx`, but real boolean queries need a non-`httpx` client.
 
 Example with a date filter:
 
