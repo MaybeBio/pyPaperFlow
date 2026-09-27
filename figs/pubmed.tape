@@ -3,12 +3,16 @@
 # Render from the repository root (needs vhs + ttyd + ffmpeg + a Chromium):
 #     http_proxy= https_proxy= vhs figs/pubmed.tape
 #
-# NCBI requires a contact email (--email). Replace the address below with your
-# own before recording — it is visible on screen. Adding --api-key raises the
-# rate limit from 3 to 10 requests/second and is recommended.
+# `paperflow` must be on PATH inside the recorded shell. The demo runs in a
+# scratch directory so nothing is written into the repository.
 #
-# NOT YET RECORDED: NCBI's E-utilities backend is currently returning HTTP 500.
-# This tape is ready to run once it recovers.
+# NCBI requires a contact email (--email). This tape uses a placeholder so no
+# real address appears on screen; substitute your own when running it yourself.
+# Adding --api-key raises the NCBI rate limit from 3 to 10 requests/second.
+#
+# The query is deliberately narrow: pubmed-search retrieves *every* matching
+# PMID (the -n option is the batch size, not a result cap), and pubmed-meta
+# fetches linked data per paper, so a broad query takes minutes.
 Output "figs/pubmed.gif"
 
 Set Shell "bash"
@@ -32,22 +36,21 @@ Enter
 Show
 Sleep 400ms
 
-Type "paperflow pubmed-search 'AlphaFold protein structure' --email luxunisgod123@gmail.com -n 5 -o ./out"
+Type "paperflow pubmed-search 'AlphaFold3 AND covalent AND inhibitor AND 2025[dp]' --email you@example.com -o ./out"
 Enter
-Sleep 20s
-
-# pubmed-search names its id file with a timestamp, so glob the newest one.
-Sleep 400ms
-Type "paperflow pubmed-meta --file $(ls -t ./out/pubmed_searched_ids_*.txt | head -1) --email luxunisgod123@gmail.com -s ./papers -o ./out"
-Enter
-Sleep 40s
+Sleep 8s
 
 Sleep 400ms
-Type "jq -r .title ./out/pubmed/*/*/*.json"
+Type "paperflow pubmed-meta --file ./out/pubmed_searched_ids_*.txt --email you@example.com -s ./papers -o ./out"
+Enter
+Sleep 24s
+
+Sleep 400ms
+Type "jq -r '.identity.title' ./out/pubmed/*/*/*_meta.json"
 Enter
 Sleep 3s
 
 Sleep 400ms
-Type "head -n 12 $(ls ./out/pubmed/*/*/*.json | head -1)"
+Type "head -n 14 $(ls ./out/pubmed/*/*/*_meta.json | head -1)"
 Enter
 Sleep 3s
