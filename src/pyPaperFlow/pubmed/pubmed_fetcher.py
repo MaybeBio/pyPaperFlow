@@ -393,6 +393,31 @@ class PubmedFetcher:
     #############################################################
 
 
+    def _check_batch_failures(
+        self, failed: List[tuple], total_batches: int, what: str
+    ) -> None:
+        """Report per-batch fetch failures after a batch loop finishes.
+
+        A failed batch means that slice of results is missing. That is survivable
+        while other batches succeeded -- the caller still gets usable data, so we
+        only warn. But when *every* batch fails the caller would otherwise get an
+        empty list that is indistinguishable from "nothing matched", and an NCBI
+        outage would be reported as a successful empty run.
+        """
+        if not failed:
+            return
+        if len(failed) >= total_batches:
+            raise PubMedSearchError(
+                f"All {total_batches} {what} batch(es) failed (NCBI error); "
+                f"no results were retrieved."
+            )
+        missing = ", ".join(f"{a}-{b}" for a, b in failed)
+        print(
+            f"Warning: {len(failed)} of {total_batches} {what} batch(es) failed "
+            f"(NCBI error); results are incomplete (missing index ranges: {missing})."
+        )
+
+
     def fetch_from_query(self, query_meta: Dict[str, Any], output_dir: str = None) -> List[Paper_MetaData]:
         """
         Description
@@ -422,6 +447,7 @@ class PubmedFetcher:
             return []
 
         all_parsed_articles = []
+        failed_batches: List[tuple] = []
 
         # Fetch in batches according to batch_size
         for start in range(0, count, self.batch_size):
@@ -515,9 +541,12 @@ class PubmedFetcher:
                     else:
                         print(f"Fetching articles {start + 1} to {end} failed after {self.max_retries} attempts: [{e}] at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                         traceback.print_exc()
-                        # Continue to next batch
-                        pass
-        
+                        failed_batches.append((start + 1, end))
+                        break
+
+        self._check_batch_failures(
+            failed_batches, len(range(0, count, self.batch_size)), "metadata fetch"
+        )
         return all_parsed_articles
 
     def fetch_from_pmid_list(self, pmid_list: List[str], output_dir: str = None) -> List[Paper_MetaData]:
@@ -549,6 +578,7 @@ class PubmedFetcher:
 
         print(f"Total PMIDs to fetch: {count} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
         all_parsed_articles = []
+        failed_batches: List[tuple] = []
 
         # Fetch in batches according to batch_size, same as fetch_from_query above
         for start in range(0, count, self.batch_size):
@@ -625,9 +655,12 @@ class PubmedFetcher:
                     else:
                         print(f"Fetching articles {start + 1} to {end} failed after {self.max_retries} attempts: [{e}] at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                         traceback.print_exc()
-                        # Continue to next batch
-                        pass
-        
+                        failed_batches.append((start + 1, end))
+                        break
+
+        self._check_batch_failures(
+            failed_batches, len(range(0, count, self.batch_size)), "metadata fetch"
+        )
         return all_parsed_articles
 
     def parse_medline_record(self, medline_record: Dict[str, Any]) -> Paper_MetaData:
@@ -1407,7 +1440,9 @@ class PubmedFetcher:
             pmid_list = [pmid_list]
             
         all_paper_text_data = []
-        failed_mapping_batches: List[List[str]] = []
+        total_batches = len(range(0, count, self.batch_size))
+        failed_mapping_batches: List[tuple] = []
+        failed_xml_batches: List[tuple] = []
 
         print(f"Fetching full text for {count} Pubmed articles at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
         
@@ -1463,7 +1498,7 @@ class PubmedFetcher:
                 # below, so an outage looked like a normal outcome and the CLI
                 # exited 0 having downloaded nothing for these PMIDs.
                 print(f"  -> [Error] Skipping batch {batch_pmids}: PMID->PMC mapping failed (NCBI error) at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
-                failed_mapping_batches.append(batch_pmids)
+                failed_mapping_batches.append((start + 1, end))
                 continue
 
             # Reason for Continue: If mapping fails entirely, we cannot fetch anything for this batch.
@@ -1475,6 +1510,7 @@ class PubmedFetcher:
             # Fectch Full Text for valid PMC IDs only
             print(f"  -> Mapped {len(valid_pmcids)} out of {len(batch_pmids)} PMIDs to valid PMC IDs. Downloading full text XML for these PMC IDs at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                 
+            xml_failed = False
             for attempt in range(self.max_retries):
                 try:
                     # db="pmc", retmode="xml" gets the full structured text
@@ -1491,8 +1527,16 @@ class PubmedFetcher:
                     else:
                         print(f"     [Error] EFetch full text XML failed after {self.max_retries} attempts: {e} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                         traceback.print_exc()
-                        # skip to next batch if fetching fails completely
-                        continue
+                        xml_failed = True
+                        break
+
+            if xml_failed:
+                # Skip the batch outright. Falling through (as the plain
+                # `continue` used to) would parse a stale pmc_full_xml left over
+                # from the previous batch -- or hit NameError on the first one.
+                print(f"  -> [Error] Skipping full text XML for batch {batch_pmids}: NCBI error at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                failed_xml_batches.append((start + 1, end))
+                continue
 
             # Parse Big XML using BeautifulSoup
             # This part handles the "Big XML" containing multiple articles.
@@ -1584,13 +1628,8 @@ class PubmedFetcher:
                 traceback.print_exc()
                 continue
                 
-        if failed_mapping_batches:
-            lost = sum(len(b) for b in failed_mapping_batches)
-            raise PubMedSearchError(
-                f"PMID->PMC mapping failed for {len(failed_mapping_batches)} batch(es) "
-                f"(NCBI error); full text for {lost} PMID(s) was not downloaded: "
-                f"{[p for b in failed_mapping_batches for p in b]}"
-            )
+        self._check_batch_failures(failed_mapping_batches, total_batches, "PMID->PMC mapping")
+        self._check_batch_failures(failed_xml_batches, total_batches, "full-text XML fetch")
 
         return all_paper_text_data
 

@@ -321,6 +321,10 @@ Our literature database primarily covers biomedical research and computational i
 
 **Per-platform demo — search → fetch metadata (and PDFs) → metadata display:**
 
+PubMed `pubmed-search` + `pubmed-meta`:
+
+![PubMed: search, fetch metadata, metadata display](./figs/pubmed.gif)
+
 arXiv `arxiv-search` + `arxiv-fetch`:
 
 ![arXiv: search, fetch metadata and all PDFs, metadata display](./figs/arxiv.gif)

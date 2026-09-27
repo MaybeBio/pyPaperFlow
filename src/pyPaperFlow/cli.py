@@ -158,11 +158,11 @@ def fetch_cmd(
         typer.echo(f"Fetching papers for query: {query}")
         try:
             query_meta = fetcher.query_search(query)
+            papers = fetcher.fetch_from_query(query_meta, output_dir=output_dir)
         except PubMedSearchError as exc:
             typer.secho(f"Error: {exc}", fg=typer.colors.RED, err=True)
             raise typer.Exit(code=1)
-        papers = fetcher.fetch_from_query(query_meta, output_dir=output_dir)
-        
+
     elif file:
         if not os.path.exists(file):
             typer.echo(f"Error: File {file} not found.")
@@ -170,7 +170,11 @@ def fetch_cmd(
         with open(file, 'r') as f:
             pmid_list = [line.strip() for line in f if line.strip()]
         typer.echo(f"Fetching {len(pmid_list)} papers from file {os.path.abspath(file)}.")
-        papers = fetcher.fetch_from_pmid_list(pmid_list, output_dir=output_dir)
+        try:
+            papers = fetcher.fetch_from_pmid_list(pmid_list, output_dir=output_dir)
+        except PubMedSearchError as exc:
+            typer.secho(f"Error: {exc}", fg=typer.colors.RED, err=True)
+            raise typer.Exit(code=1)
         
     else:
         typer.echo("Error: Must provide --query or --file.")
