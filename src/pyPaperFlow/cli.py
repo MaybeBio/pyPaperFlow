@@ -4,7 +4,7 @@ import os
 import json
 from pathlib import Path
 from typing import *
-from .pubmed.pubmed_fetcher import PubmedFetcher
+from .pubmed.pubmed_fetcher import PubmedFetcher, PubMedSearchError
 from .preprint.arxiv_fetcher import ArxivFetcher
 from .preprint.biorxiv_fetcher import BioRxivFetcher
 from .preprint.chemrxiv_fetcher import ChemRxivFetcher
@@ -94,8 +94,12 @@ def search_cmd(
     fetcher = PubmedFetcher(root_dir=storage_dir, entrez_email=email, api_key=api_key or "", max_retries=max_retries)
     
     # 1. Search
-    query_meta = fetcher.query_search(query)
-    
+    try:
+        query_meta = fetcher.query_search(query)
+    except PubMedSearchError as exc:
+        typer.secho(f"Error: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+
     # 2. Get PMIDs
     pmids = fetcher.get_pubmedIDs_from_query(query_meta, retmax=retmax)
     
@@ -152,7 +156,11 @@ def fetch_cmd(
     
     if query:
         typer.echo(f"Fetching papers for query: {query}")
-        query_meta = fetcher.query_search(query)
+        try:
+            query_meta = fetcher.query_search(query)
+        except PubMedSearchError as exc:
+            typer.secho(f"Error: {exc}", fg=typer.colors.RED, err=True)
+            raise typer.Exit(code=1)
         papers = fetcher.fetch_from_query(query_meta, output_dir=output_dir)
         
     elif file:
@@ -211,7 +219,11 @@ def download_fulltext_cmd(
         raise typer.Exit(code=1)
         
     typer.echo(f"Downloading full texts for {len(target_pmids)} PMIDs from file {os.path.abspath(file) if file else 'provided PMIDs'}.")
-    fetcher.fetch_pmc_full_text(target_pmids, output_dir=output_dir)
+    try:
+        fetcher.fetch_pmc_full_text(target_pmids, output_dir=output_dir)
+    except PubMedSearchError as exc:
+        typer.secho(f"Error: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
 
 @app.command("pubmed-all")
 def fetch_full_cmd(
@@ -252,7 +264,11 @@ def fetch_full_cmd(
          typer.echo("Error: Must provide --query, --file, or --pmid.")
          raise typer.Exit(code=1)
 
-    fetcher.fetch_and_save_full_papers(query=query, pmid_list=pmid_list if pmid_list else None, output_dir=output_dir)
+    try:
+        fetcher.fetch_and_save_full_papers(query=query, pmid_list=pmid_list if pmid_list else None, output_dir=output_dir)
+    except PubMedSearchError as exc:
+        typer.secho(f"Error: {exc}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
 
 
 @app.command("pubmed-merge-json")

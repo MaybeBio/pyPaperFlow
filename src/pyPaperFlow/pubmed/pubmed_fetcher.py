@@ -9,6 +9,12 @@ from dataclasses import dataclass, field, asdict
 from ..utils import extract_urls_from_text
 
 
+class PubMedSearchError(RuntimeError):
+    """A PubMed API call failed (search or full-text retrieval), as opposed to
+    the request legitimately finding nothing. Callers must not treat this as an
+    empty result set, or an outage gets reported as zero papers."""
+
+
 #############################################################
 #  1, Some pre-defined Data Classes for Paper Structure
 #############################################################
@@ -294,7 +300,13 @@ class PubmedFetcher:
                 else:
                     print(f"Search PubMed with query [{query}] failed after {self.max_retries} attempts: [{e}] at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                     traceback.print_exc()
-                    return {"count": 0}
+                    # Raising (rather than returning a zero-count record) keeps a
+                    # failed search distinguishable from a search that genuinely
+                    # matched nothing -- otherwise callers report "0 papers found"
+                    # and exit successfully while the API is simply down.
+                    raise PubMedSearchError(
+                        f"PubMed search failed after {self.max_retries} attempts: {e}"
+                    ) from e
     
 
     def get_pubmedIDs_from_query(self, query_meta: Dict[str, Any], retmax: int = 500) -> List[str]:
@@ -1395,6 +1407,7 @@ class PubmedFetcher:
             pmid_list = [pmid_list]
             
         all_paper_text_data = []
+        failed_mapping_batches: List[List[str]] = []
 
         print(f"Fetching full text for {count} Pubmed articles at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
         
@@ -1408,7 +1421,8 @@ class PubmedFetcher:
             # PMID -> PMCID Mapping (with Retry)
             pmid_to_pmcid = {}
             valid_pmcids = []
-            
+            mapping_failed = False
+
             # --- Retry Block for ELink ---
             for attempt in range(self.max_retries):
                 try:
@@ -1440,13 +1454,22 @@ class PubmedFetcher:
                     else:
                         print(f"     [Error] Map PMIDs to PMC IDs failed after {self.max_retries} attempts: {e} at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                         traceback.print_exc()
-                        # skip to next batch if mapping fails completely
-                        continue
-            
+                        mapping_failed = True
+                        break
+
+            if mapping_failed:
+                # An API failure is NOT the same as "this paper has no PMC full
+                # text". The two used to fall through to the same benign skip
+                # below, so an outage looked like a normal outcome and the CLI
+                # exited 0 having downloaded nothing for these PMIDs.
+                print(f"  -> [Error] Skipping batch {batch_pmids}: PMID->PMC mapping failed (NCBI error) at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                failed_mapping_batches.append(batch_pmids)
+                continue
+
             # Reason for Continue: If mapping fails entirely, we cannot fetch anything for this batch.
             # We skip to the next batch of PMIDs.
             if not valid_pmcids:
-                print(f"  -> No valid PMC IDs found for current batch of PMIDs: {batch_pmids}. Skipping full text fetching for this batch at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
+                print(f"  -> No PMC full text for this batch (no PMC ID for these papers): {batch_pmids}. Skipping at [{time.strftime('%Y-%m-%d %H:%M:%S')}] ...")
                 continue
 
             # Fectch Full Text for valid PMC IDs only
@@ -1561,8 +1584,16 @@ class PubmedFetcher:
                 traceback.print_exc()
                 continue
                 
+        if failed_mapping_batches:
+            lost = sum(len(b) for b in failed_mapping_batches)
+            raise PubMedSearchError(
+                f"PMID->PMC mapping failed for {len(failed_mapping_batches)} batch(es) "
+                f"(NCBI error); full text for {lost} PMID(s) was not downloaded: "
+                f"{[p for b in failed_mapping_batches for p in b]}"
+            )
+
         return all_paper_text_data
-    
+
 
     def _parse_soup_to_json(self, article_soup: Any) -> Dict[str, Any]:
         """
