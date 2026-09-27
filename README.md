@@ -15,7 +15,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![Workflow](https://img.shields.io/badge/Workflow-7%20Stages-0366d6)](docs/Design.md)
-[![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv%20%2F%20medRxiv%20%2F%20chemRxiv-f59e0b)](#features)
+[![Sources](https://img.shields.io/badge/Sources-PubMed%20%2F%20arXiv%20%2F%20bioRxiv%20%2F%20medRxiv%20%2F%20chemRxiv-f59e0b)](#-features)
 [![PyPI version](https://img.shields.io/pypi/v/pyPaperFlow.svg?logo=pypi&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyPaperFlow.svg?logo=python&logoColor=white)](https://pypi.org/project/pyPaperFlow/)
 [![Downloads](https://static.pepy.tech/badge/pyPaperFlow)](https://pepy.tech/project/pyPaperFlow)
@@ -318,6 +318,24 @@ Our literature database primarily covers biomedical research and computational i
 - PubMed/Medline
 - arXiv
 - bioRxiv，medRxiv，chemRxiv
+
+**Per-platform demo — search → fetch metadata (and PDFs) → metadata display:**
+
+arXiv `arxiv-search` + `arxiv-fetch`:
+
+![arXiv: search, fetch metadata and all PDFs, metadata display](./figs/arxiv.gif)
+
+bioRxiv `biorxiv-search` + `biorxiv-fetch`:
+
+![bioRxiv: search, fetch, metadata display](./figs/biorxiv.gif)
+
+medRxiv `medrxiv-search` + `medrxiv-fetch`:
+
+![medRxiv: search, fetch, metadata display](./figs/medrxiv.gif)
+
+ChemRxiv `chemrxiv-search` + `chemrxiv-fetch`:
+
+![ChemRxiv: search, fetch, metadata display](./figs/chemrxiv.gif)
 
 > **⚠️ — Preprint search = Crossref relevance search + local boolean re-check (not a full-corpus pull, and not each server's official API).** Each request asks Crossref to search ONLY that platform's prefix (`filter=prefix:10.64898 / 10.26434,type:posted-content`) — platform scoping happens server-side, not by post-filtering a global result set. bioRxiv and medRxiv share the openRxiv prefix `10.64898`, so those two are then told apart locally by DOI-accession digit count (6 = bioRxiv, 8 = medRxiv).
 >
