@@ -35,6 +35,7 @@
   <a href="./docs/Cases.md">Cases</a>
 </p>
 
+![All five platforms in one run: PubMed, arXiv, bioRxiv, medRxiv and ChemRxiv — each searched, fetched, and shown as structured metadata](./figs/all-platforms.gif)
 
 </div>
 

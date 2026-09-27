@@ -12,6 +12,8 @@
 
 ![](./figs/main.png)
 
+![五个平台一次跑通：PubMed、arXiv、bioRxiv、medRxiv、ChemRxiv —— 各自检索、抓取，并展示结构化元数据](./figs/all-platforms.gif)
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![Workflow](https://img.shields.io/badge/Workflow-7%20Stages-0366d6)](./docs/Design.md)
@@ -320,6 +322,28 @@ ChemRxiv 相关模块：
 - PubMed/Medline
 - arXiv
 - bioRxiv，medRxiv，chemRxiv 等预印本平台
+
+**分平台演示 —— 检索 → 抓取元数据（及 PDF）→ 元数据展示：**
+
+PubMed `pubmed-search` + `pubmed-meta`：
+
+![PubMed：检索、抓取元数据、元数据展示](./figs/pubmed.gif)
+
+arXiv `arxiv-search` + `arxiv-fetch`：
+
+![arXiv：检索、抓取元数据与全部 PDF、元数据展示](./figs/arxiv.gif)
+
+bioRxiv `biorxiv-search` + `biorxiv-fetch`：
+
+![bioRxiv：检索、抓取、元数据展示](./figs/biorxiv.gif)
+
+medRxiv `medrxiv-search` + `medrxiv-fetch`：
+
+![medRxiv：检索、抓取、元数据展示](./figs/medrxiv.gif)
+
+ChemRxiv `chemrxiv-search` + `chemrxiv-fetch`：
+
+![ChemRxiv：检索、抓取、元数据展示](./figs/chemrxiv.gif)
 
 > **⚠️：预印本检索 = Crossref 相关性检索 + 本地布尔复核（不是全库拉取，也不用各平台官方 API）。** 每次请求都会让 Crossref **只在其平台前缀内**检索（`filter=prefix:10.64898 / 10.26434,type:posted-content`）——平台圈定发生在服务端，而不是本地对全量结果再做前缀过滤。bioRxiv 与 medRxiv 共用 openRxiv 前缀 `10.64898`，故二者再用 DOI 编号位数（6 位 = bioRxiv、8 位 = medRxiv）在本地区分。
 >
