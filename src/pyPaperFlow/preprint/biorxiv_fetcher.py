@@ -221,16 +221,18 @@ class BioRxivFetcher:
         start_dt, end_dt = self._normalize_date_range(start_date, end_date)
 
         cursor = "*"
+        # Scan in full pages regardless of ``max_results``: the page size governs
+        # how much we scan, not how much we keep. Coupling it to the accepted
+        # count made the scan crawl one ``remaining``-sized slice per request
+        # whenever a page was rejected wholesale -- e.g. medRxiv, whose prefix is
+        # shared with the far larger bioRxiv -- so the exhaustion test below
+        # never fired and the scan never finished.
+        scan_page_size = 1000
         while True:
-            page_size = 1000
-            if max_results is not None:
-                remaining = max(1, int(max_results) - len(records))
-                page_size = min(page_size, remaining)
-
             payload = self._request_crossref_page(
                 query_text=query_text,
                 cursor=cursor,
-                page_size=page_size,
+                page_size=scan_page_size,
                 start_dt=start_dt,
                 end_dt=end_dt,
             )
@@ -251,7 +253,7 @@ class BioRxivFetcher:
                 if max_results is not None and len(records) >= max_results:
                     return records
 
-            if len(items) < page_size:
+            if len(items) < scan_page_size:
                 break
 
             next_cursor = normalize_text(message.get("next-cursor", ""))
