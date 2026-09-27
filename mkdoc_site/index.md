@@ -26,7 +26,7 @@
   <a href="https://github.com/MaybeBio/pyPaperFlow/blob/main/README_zh.md">中文 README</a>
 </p>
 
-![All five platforms in one run: PubMed, arXiv, bioRxiv, medRxiv and ChemRxiv — each searched, fetched, and shown as structured metadata](https://github.com/MaybeBio/pyPaperFlow/blob/main/figs/all-platforms.gif)
+![All five platforms in one run: PubMed, arXiv, bioRxiv, medRxiv and ChemRxiv — each searched, fetched, and shown as structured metadata](assets/all-platforms.gif)
 
 </div>
 
