@@ -12,7 +12,6 @@
 
 ![](./figs/main.png)
 
-![五个平台一次跑通：PubMed、arXiv、bioRxiv、medRxiv、ChemRxiv —— 各自检索、抓取，并展示结构化元数据](./figs/all-platforms.gif)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
@@ -36,6 +35,8 @@
   <a href="./docs/Design.md">设计文档</a> |
   <a href="./docs/Cases.md">测试示例</a>
 </p>
+
+![五个平台一次跑通：PubMed、arXiv、bioRxiv、medRxiv、ChemRxiv —— 各自检索、抓取，并展示结构化元数据](./figs/all-platforms.gif)
 
 </div>
 
@@ -323,7 +324,8 @@ ChemRxiv 相关模块：
 - arXiv
 - bioRxiv，medRxiv，chemRxiv 等预印本平台
 
-**分平台演示 —— 检索 → 抓取元数据（及 PDF）→ 元数据展示：**
+
+**`分平台演示 —— 检索 → 抓取元数据（及 PDF）→ 元数据展示：`**
 
 PubMed `pubmed-search` + `pubmed-meta`：
 

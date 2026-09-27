@@ -320,7 +320,7 @@ Our literature database primarily covers biomedical research and computational i
 - arXiv
 - bioRxiv，medRxiv，chemRxiv
 
-**Per-platform demo — search → fetch metadata (and PDFs) → metadata display:**
+**`Per-platform demo — search → fetch metadata (and PDFs) → metadata display:`**
 
 PubMed `pubmed-search` + `pubmed-meta`:
 
